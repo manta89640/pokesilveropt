@@ -2,8 +2,7 @@ BattleCommand_ThunderAccuracy:
 	ld a, BATTLE_VARS_MOVE_TYPE
 	call GetBattleVarAddr
 	inc hl
-	ld a, [wBattleWeather]
-	cp WEATHER_RAIN
+	call BattleCommand_CheckHit.shared3 ; ld a, [wBattleWeather] / cp WEATHER_RAIN
 	jr z, .rain
 	cp WEATHER_SUN
 	ret nz

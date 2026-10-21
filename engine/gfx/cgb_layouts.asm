@@ -89,18 +89,12 @@ _CGB_BattleColors:
 	push hl
 	call LoadPalette_White_Col1_Col2_Black ; PAL_BATTLE_BG_ENEMY
 	ld a, [wEnemyHPPal]
-	ld l, a
-	ld h, 0
-	add hl, hl
-	add hl, hl
+	call _CGB_BattleColors_Shared ; ld l, a / ld h, 0 / add hl, hl / ...
 	ld bc, HPBarPals
 	add hl, bc
 	call LoadPalette_White_Col1_Col2_Black ; PAL_BATTLE_BG_ENEMY_HP
 	ld a, [wPlayerHPPal]
-	ld l, a
-	ld h, 0
-	add hl, hl
-	add hl, hl
+	call _CGB_BattleColors_Shared ; ld l, a / ld h, 0 / add hl, hl / ...
 	ld bc, HPBarPals
 	add hl, bc
 	call LoadPalette_White_Col1_Col2_Black ; PAL_BATTLE_BG_PLAYER_HP
@@ -111,16 +105,14 @@ _CGB_BattleColors:
 	call LoadPalette_White_Col1_Col2_Black ; PAL_BATTLE_OB_ENEMY
 	pop hl
 	call LoadPalette_White_Col1_Col2_Black ; PAL_BATTLE_OB_PLAYER
-	ld a, SCGB_BATTLE_COLORS
-	ld [wDefaultSGBLayout], a
+	call SGBLayoutJumptable.shared3 ; ld a, SCGB_BATTLE_COLORS / ld [wDefaultSGBLayout], a
 	call ApplyPals
 _CGB_FinishBattleScreenLayout:
 	ld hl, TilesetBGPalette palette PAL_BATTLE_BG_TEXT
 	ld de, wBGPals1 palette PAL_BATTLE_BG_TEXT
 	ld bc, 1 palettes
 	call CopyBytes
-	hlcoord 0, 0, wAttrmap
-	ld bc, SCREEN_AREA
+	call _CGB_FinishBattleScreenLayout_Shared ; hlcoord 0, 0, wAttrmap / ld bc, SCREEN_AREA
 	ld a, PAL_BATTLE_BG_ENEMY_HP
 	call ByteFill
 	hlcoord 0, 4, wAttrmap
@@ -147,9 +139,7 @@ _CGB_FinishBattleScreenLayout:
 	ld bc, 6 * SCREEN_WIDTH
 	ld a, PAL_BATTLE_BG_TEXT
 	call ByteFill
-	ld hl, BattleObjectPals
-	ld de, wOBPals1 palette PAL_BATTLE_OB_GRAY
-	ld bc, 6 palettes
+	call _CGB_FinishBattleScreenLayout_Shared2 ; ld hl, BattleObjectPals / ld de, wOBPals1 palette PAL_BATTLE_OB_GRAY / ld bc, 6 palettes
 	call CopyBytes
 	jp ApplyAttrmap
 
@@ -165,15 +155,11 @@ _CGB_PokegearPals:
 _CGB_StatsScreenHPPals:
 	ld de, wBGPals1
 	ld a, [wCurHPPal]
-	ld l, a
-	ld h, 0
-	add hl, hl
-	add hl, hl
+	call _CGB_BattleColors_Shared ; ld l, a / ld h, 0 / add hl, hl / ...
 	ld bc, HPBarPals
 	add hl, bc
 	call LoadPalette_White_Col1_Col2_Black ; hp palette
-	ld a, [wCurPartySpecies]
-	ld bc, wTempMonDVs
+	call _CGB_StatsScreenHPPals_Shared ; ld a, [wCurPartySpecies] / ld bc, wTempMonDVs
 	call GetPlayerOrMonPalettePointer
 	call LoadPalette_White_Col1_Col2_Black ; mon palette
 	ld hl, ExpBarPalette
@@ -234,8 +220,7 @@ _CGB_Pokedex_5x5:
 	jr _CGB_Pokedex.tailmerge_229 ; same as there (tools/tailmerge.py)
 
 _CGB_Pokedex_Init:
-	ld de, wBGPals1
-	ld a, PREDEFPAL_POKEDEX
+	call _CGB_Pokedex_Init_Shared ; ld de, wBGPals1 / ld a, PREDEFPAL_POKEDEX
 	call GetPredefPal
 	call LoadHLPaletteIntoDE ; dex interface palette
 	ld a, [wCurPartySpecies]
@@ -268,8 +253,7 @@ PokedexQuestionMarkPalette:
 INCLUDE "gfx/pokedex/question_mark.pal"
 
 _CGB_BillsPC:
-	ld de, wBGPals1
-	ld a, PREDEFPAL_POKEDEX
+	call _CGB_Pokedex_Init_Shared ; ld de, wBGPals1 / ld a, PREDEFPAL_POKEDEX
 	call GetPredefPal
 	call LoadHLPaletteIntoDE
 	ld a, [wCurPartySpecies]
@@ -297,8 +281,7 @@ BillsPCOrangePalette:
 INCLUDE "gfx/pc/orange.pal"
 
 _CGB_PokedexUnownMode:
-	ld de, wBGPals1
-	ld a, PREDEFPAL_POKEDEX
+	call _CGB_Pokedex_Init_Shared ; ld de, wBGPals1 / ld a, PREDEFPAL_POKEDEX
 	call GetPredefPal
 	call LoadHLPaletteIntoDE
 	ld a, [wCurPartySpecies]
@@ -475,9 +458,7 @@ _CGB_Evolution:
 	ld a, [wPlayerHPPal]
 	call GetPlayerOrMonPalettePointer
 	call LoadPalette_White_Col1_Col2_Black
-	ld hl, BattleObjectPals
-	ld de, wOBPals1 palette PAL_BATTLE_OB_GRAY
-	ld bc, 6 palettes
+	call _CGB_FinishBattleScreenLayout_Shared2 ; ld hl, BattleObjectPals / ld de, wOBPals1 palette PAL_BATTLE_OB_GRAY / ld bc, 6 palettes
 	call CopyBytes
 
 .got_palette
@@ -546,8 +527,7 @@ _CGB_TrainerCard:
 	call LoadHLPaletteIntoDE
 
 	; card border
-	hlcoord 0, 0, wAttrmap
-	ld bc, SCREEN_AREA
+	call _CGB_FinishBattleScreenLayout_Shared ; hlcoord 0, 0, wAttrmap / ld bc, SCREEN_AREA
 	ld a, $1 ; falkner
 	call ByteFill
 	; trainer sprite area
@@ -594,10 +574,7 @@ _CGB_MoveList:
 	call GetPredefPal
 	call LoadHLPaletteIntoDE
 	ld a, [wPlayerHPPal]
-	ld l, a
-	ld h, 0
-	add hl, hl
-	add hl, hl
+	call _CGB_BattleColors_Shared ; ld l, a / ld h, 0 / add hl, hl / ...
 	ld bc, HPBarPals
 	add hl, bc
 	call LoadPalette_White_Col1_Col2_Black
@@ -615,8 +592,7 @@ _CGB_BetaPikachuMinigame:
 	jp _CGB_Pokedex_Resume.tailmerge_260 ; same as there (tools/tailmerge.py)
 
 _CGB_PokedexSearchOption:
-	ld de, wBGPals1
-	ld a, PREDEFPAL_POKEDEX
+	call _CGB_Pokedex_Init_Shared ; ld de, wBGPals1 / ld a, PREDEFPAL_POKEDEX
 	call GetPredefPal
 	call LoadHLPaletteIntoDE
 	call WipeAttrmap
@@ -722,8 +698,7 @@ _CGB_GamefreakLogo:
 
 _CGB_PlayerOrMonFrontpicPals:
 	ld de, wBGPals1
-	ld a, [wCurPartySpecies]
-	ld bc, wTempMonDVs
+	call _CGB_StatsScreenHPPals_Shared ; ld a, [wCurPartySpecies] / ld bc, wTempMonDVs
 	call GetPlayerOrMonPalettePointer
 	jp ApplyMonOrTrainerPals.tailmerge_226 ; same as there (tools/tailmerge.py)
 
@@ -747,15 +722,13 @@ _CGB_TradeTube:
 
 _CGB_TrainerOrMonFrontpicPals:
 	ld de, wBGPals1
-	ld a, [wCurPartySpecies]
-	ld bc, wTempMonDVs
+	call _CGB_StatsScreenHPPals_Shared ; ld a, [wCurPartySpecies] / ld bc, wTempMonDVs
 	call GetFrontpicPalettePointer
 	jp ApplyMonOrTrainerPals.tailmerge_226 ; same as there (tools/tailmerge.py)
 
 _CGB_MysteryGift:
 	ld hl, .MysteryGiftPalette
-	ld de, wBGPals1
-	ld bc, 1 palettes
+	call _CGB_MysteryGift_Shared ; ld de, wBGPals1 / ld bc, 1 palettes
 	call CopyBytes
 	call ApplyPals
 	call WipeAttrmap
@@ -763,3 +736,36 @@ _CGB_MysteryGift:
 
 .MysteryGiftPalette:
 INCLUDE "gfx/mystery_gift/mystery_gift.pal"
+
+_CGB_BattleColors_Shared: ; (tools/outline.py)
+	ld l, a
+	ld h, 0
+	add hl, hl
+	add hl, hl
+	ret
+
+_CGB_StatsScreenHPPals_Shared: ; (tools/outline.py)
+	ld a, [wCurPartySpecies]
+	ld bc, wTempMonDVs
+	ret
+
+_CGB_FinishBattleScreenLayout_Shared: ; (tools/outline.py)
+	hlcoord 0, 0, wAttrmap
+	ld bc, SCREEN_AREA
+	ret
+
+_CGB_FinishBattleScreenLayout_Shared2: ; (tools/outline.py)
+	ld hl, BattleObjectPals
+	ld de, wOBPals1 palette PAL_BATTLE_OB_GRAY
+	ld bc, 6 palettes
+	ret
+
+_CGB_Pokedex_Init_Shared: ; (tools/outline.py)
+	ld de, wBGPals1
+	ld a, PREDEFPAL_POKEDEX
+	ret
+
+_CGB_MysteryGift_Shared: ; (tools/outline.py)
+	ld de, wBGPals1
+	ld bc, 1 palettes
+	ret

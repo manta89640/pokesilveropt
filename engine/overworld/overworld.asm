@@ -251,10 +251,7 @@ GetSprite:
 
 	push hl
 	ld hl, OverworldSprites + SPRITEDATA_ADDR
-	dec a
-	ld c, a
-	ld b, 0
-	ld a, NUM_SPRITEDATA_FIELDS
+	call GetSprite_Shared ; dec a / ld c, a / ld b, 0 / ...
 	call AddNTimes
 	; load the address into de
 	ld a, [hli]
@@ -361,10 +358,7 @@ _DoesSpriteHaveFacings::
 	push hl
 	push bc
 	ld hl, OverworldSprites + SPRITEDATA_TYPE
-	dec a
-	ld c, a
-	ld b, 0
-	ld a, NUM_SPRITEDATA_FIELDS
+	call GetSprite_Shared ; dec a / ld c, a / ld b, 0 / ...
 	call AddNTimes
 	ld a, [hl]
 	pop bc
@@ -384,10 +378,7 @@ _GetSpritePalette::
 	jr c, .is_pokemon
 
 	ld hl, OverworldSprites + SPRITEDATA_PALETTE
-	dec a
-	ld c, a
-	ld b, 0
-	ld a, NUM_SPRITEDATA_FIELDS
+	call GetSprite_Shared ; dec a / ld c, a / ld b, 0 / ...
 	call AddNTimes
 	ld c, [hl]
 	ret
@@ -493,3 +484,10 @@ INCLUDE "data/sprites/sprite_mons.asm"
 INCLUDE "data/maps/outdoor_sprites.asm"
 
 INCLUDE "data/sprites/sprites.asm"
+
+GetSprite_Shared: ; (tools/outline.py)
+	dec a
+	ld c, a
+	ld b, 0
+	ld a, NUM_SPRITEDATA_FIELDS
+	ret

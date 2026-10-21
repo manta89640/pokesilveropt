@@ -66,6 +66,7 @@ FindPartyMonThatSpeciesYourTrainerID:
 	jr FoundOne
 
 FoundOne:
+.shared1: ; (tools/outline.py)
 	ld a, TRUE
 	ld [wScriptVar], a
 	ret
@@ -133,10 +134,7 @@ GetMysteryGiftItem:
 	ld a, BANK(sMysteryGiftItem)
 	call OpenSRAM
 	ld a, [sMysteryGiftItem]
-	ld [wCurItem], a
-	ld a, 1
-	ld [wItemQuantityChange], a
-	ld hl, wNumItems
+	call GetMysteryGiftItem_Shared ; ld [wCurItem], a / ld a, 1 / ld [wItemQuantityChange], a / ...
 	call ReceiveItem
 	jr nc, .no_room
 	xor a
@@ -147,9 +145,7 @@ GetMysteryGiftItem:
 	call GetItemName
 	ld hl, .ReceiveItemText
 	call PrintText
-	ld a, TRUE
-	ld [wScriptVar], a
-	ret
+	jp FoundOne.shared1 ; ld a, TRUE / ld [wScriptVar], a
 
 .no_room
 	call CloseSRAM
@@ -255,6 +251,7 @@ ScriptReturnCarry:
 	ld [wScriptVar], a
 	ret
 .carry
+.shared1: ; (tools/outline.py)
 	ld a, 1
 	ld [wScriptVar], a
 	ret
@@ -290,8 +287,7 @@ CheckSwarmFlag::
 	ret
 
 .clear_swarm
-	ld a, 1
-	ld [wScriptVar], a
+	call ScriptReturnCarry.shared1 ; ld a, 1 / ld [wScriptVar], a
 	xor a
 	ld [wFishingSwarmFlag], a
 	ld [wSwarmMapGroup], a
@@ -333,10 +329,7 @@ SelectApricornForKurt:
 	ld [wScriptVar], a
 	and a
 	ret z
-	ld [wCurItem], a
-	ld a, 1
-	ld [wItemQuantityChange], a
-	ld hl, wNumItems
+	call GetMysteryGiftItem_Shared ; ld [wCurItem], a / ld a, 1 / ld [wItemQuantityChange], a / ...
 	jp TossItem
 
 SnorlaxAwake:
@@ -439,3 +432,10 @@ TrainerHouse:
 	jp CheckMysteryGift.no ; same as there (tools/tailmerge.py)
 
 	nop ; unused
+
+GetMysteryGiftItem_Shared: ; (tools/outline.py)
+	ld [wCurItem], a
+	ld a, 1
+	ld [wItemQuantityChange], a
+	ld hl, wNumItems
+	ret

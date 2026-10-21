@@ -81,8 +81,7 @@ DoPlayerMovement::
 	ret c
 	call .CheckWarp
 	ret c
-	ld a, [wWalkingDirection]
-	cp STANDING
+	call DoPlayerMovement_Shared ; ld a, [wWalkingDirection] / cp STANDING
 	jr z, .HitWall
 	call .BumpSound
 .HitWall:
@@ -91,8 +90,7 @@ DoPlayerMovement::
 	ret
 
 .NotMoving:
-	ld a, [wWalkingDirection]
-	cp STANDING
+	call DoPlayerMovement_Shared ; ld a, [wWalkingDirection] / cp STANDING
 	jr z, .Standing
 
 ; Walking into an edge warp won't bump.
@@ -231,8 +229,7 @@ DoPlayerMovement::
 	ld a, [wPlayerTurningDirection]
 	cp 0
 	jr nz, .not_turning
-	ld a, [wWalkingDirection]
-	cp STANDING
+	call DoPlayerMovement_Shared ; ld a, [wWalkingDirection] / cp STANDING
 	jr z, .not_turning
 
 	ld e, a
@@ -404,8 +401,7 @@ DoPlayerMovement::
 
 	ld a, TRUE
 	ld [wWalkingIntoEdgeWarp], a
-	ld a, [wWalkingDirection]
-	cp STANDING
+	call DoPlayerMovement_Shared ; ld a, [wWalkingDirection] / cp STANDING
 	jr z, .not_warp
 
 	ld e, a
@@ -437,11 +433,7 @@ DoPlayerMovement::
 	ld e, a
 	ld d, 0
 	ld hl, .Steps
-	add hl, de
-	add hl, de
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
+	call Pack_GetJumptablePointer.shared1 ; add hl, de / add hl, de / ld a, [hli] / ...
 
 	ld a, [wWalkingDirection]
 	ld e, a
@@ -515,8 +507,7 @@ DoPlayerMovement::
 	db $80 | RIGHT
 
 .StandInPlace:
-	ld a, 0
-	ld [wPlayerTurningDirection], a
+	call StopPlayerForEvent.shared1 ; ld a, 0 / ld [wPlayerTurningDirection], a
 	ld a, movement_step_sleep
 .tailmerge_521: ; (tools/tailmerge.py)
 	ld [wMovementAnimation], a
@@ -524,8 +515,7 @@ DoPlayerMovement::
 	ret
 
 ._WalkInPlace:
-	ld a, 0
-	ld [wPlayerTurningDirection], a
+	call StopPlayerForEvent.shared1 ; ld a, 0 / ld [wPlayerTurningDirection], a
 	ld a, movement_step_bump
 	jr DoPlayerMovement.tailmerge_521 ; same as there (tools/tailmerge.py)
 
@@ -686,10 +676,7 @@ ENDM
 ; Return 0 if walking onto land and tile permissions allow it.
 ; Otherwise, return carry.
 
-	ld a, [wTilePermissions]
-	ld d, a
-	ld a, [wFacingDirection]
-	and d
+	call DoPlayerMovement_Shared2 ; ld a, [wTilePermissions] / ld d, a / ld a, [wFacingDirection] / ...
 	jr nz, .NotWalkable
 
 	ld a, [wWalkingTileCollision]
@@ -707,10 +694,7 @@ ENDM
 ; Return 0 if moving in water, or 1 if moving onto land.
 ; Otherwise, return carry.
 
-	ld a, [wTilePermissions]
-	ld d, a
-	ld a, [wFacingDirection]
-	and d
+	call DoPlayerMovement_Shared2 ; ld a, [wTilePermissions] / ld d, a / ld a, [wFacingDirection] / ...
 	jr nz, .NotSurfable
 
 	ld a, [wWalkingTileCollision]
@@ -809,6 +793,19 @@ StopPlayerForEvent::
 	ret z
 
 	ld [hl], a
+.shared1: ; (tools/outline.py)
 	ld a, 0
 	ld [wPlayerTurningDirection], a
+	ret
+
+DoPlayerMovement_Shared: ; (tools/outline.py)
+	ld a, [wWalkingDirection]
+	cp STANDING
+	ret
+
+DoPlayerMovement_Shared2: ; (tools/outline.py)
+	ld a, [wTilePermissions]
+	ld d, a
+	ld a, [wFacingDirection]
+	and d
 	ret

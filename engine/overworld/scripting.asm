@@ -505,9 +505,7 @@ Script_pokemart:
 	call GetScriptByte
 	ld e, a
 	call GetScriptByte
-	ld d, a
-	ld a, [wScriptBank]
-	ld b, a
+	call Script_pokemart_Shared ; ld d, a / ld a, [wScriptBank] / ld b, a
 	farcall OpenMartDialog
 	ret
 
@@ -517,13 +515,12 @@ Script_elevator:
 	call GetScriptByte
 	ld e, a
 	call GetScriptByte
-	ld d, a
-	ld a, [wScriptBank]
-	ld b, a
+	call Script_pokemart_Shared ; ld d, a / ld a, [wScriptBank] / ld b, a
 	farcall Elevator
 .tailmerge_529: ; (tools/tailmerge.py)
 	ret c
 .tailmerge_530: ; (tools/tailmerge.py)
+.shared1: ; (tools/outline.py)
 	ld a, TRUE
 	ld [wScriptVar], a
 	ret
@@ -538,9 +535,7 @@ Script_phonecall:
 	call GetScriptByte
 	ld e, a
 	call GetScriptByte
-	ld d, a
-	ld a, [wScriptBank]
-	ld b, a
+	call Script_pokemart_Shared ; ld d, a / ld a, [wScriptBank] / ld b, a
 	farcall PhoneCall
 	ret
 
@@ -647,8 +642,7 @@ Script_endifjustbattled:
 	jp Script_end
 
 Script_checkjustbattled:
-	ld a, TRUE
-	ld [wScriptVar], a
+	call Script_elevator.shared1 ; ld a, TRUE / ld [wScriptVar], a
 	ld a, [wRunningTrainerBattleScript]
 	and a
 	ret nz
@@ -1292,10 +1286,7 @@ Script_checkmapscene:
 	jr Script_checkscene.no_scene ; same as there (tools/tailmerge.py)
 
 Script_setscene:
-	ld a, [wMapGroup]
-	ld b, a
-	ld a, [wMapNumber]
-	ld c, a
+	call Script_setscene_Shared ; ld a, [wMapGroup] / ld b, a / ld a, [wMapNumber] / ...
 	jr DoScene
 
 Script_setmapscene:
@@ -1470,10 +1461,7 @@ Script_getitemname:
 	jr GetStringBuffer
 
 Script_getcurlandmarkname:
-	ld a, [wMapGroup]
-	ld b, a
-	ld a, [wMapNumber]
-	ld c, a
+	call Script_setscene_Shared ; ld a, [wMapGroup] / ld b, a / ld a, [wMapNumber] / ...
 	call GetWorldMapLocation
 	ld e, a
 	farcall GetLandmarkName
@@ -1551,9 +1539,7 @@ Script_checkpokemail:
 	call GetScriptByte
 	ld e, a
 	call GetScriptByte
-	ld d, a
-	ld a, [wScriptBank]
-	ld b, a
+	call Script_pokemart_Shared ; ld d, a / ld a, [wScriptBank] / ld b, a
 	farcall CheckPokeMail
 	ret
 
@@ -1569,9 +1555,7 @@ Script_giveitem:
 	ld hl, wNumItems
 	call ReceiveItem
 	jr nc, .full
-	ld a, TRUE
-	ld [wScriptVar], a
-	ret
+	jp Script_elevator.shared1 ; ld a, TRUE / ld [wScriptVar], a
 .full
 	xor a
 	ld [wScriptVar], a
@@ -1927,9 +1911,7 @@ Script_writecmdqueue:
 	call GetScriptByte
 	ld e, a
 	call GetScriptByte
-	ld d, a
-	ld a, [wScriptBank]
-	ld b, a
+	call Script_pokemart_Shared ; ld d, a / ld a, [wScriptBank] / ld b, a
 	farcall WriteCmdQueue ; no need to farcall
 	ret
 
@@ -2118,3 +2100,15 @@ ReturnFromCredits:
 	ld a, MAPSTATUS_DONE
 	jp Script_reloadmap.tailmerge_1085 ; same as there (tools/tailmerge.py)
 
+Script_pokemart_Shared: ; (tools/outline.py)
+	ld d, a
+	ld a, [wScriptBank]
+	ld b, a
+	ret
+
+Script_setscene_Shared: ; (tools/outline.py)
+	ld a, [wMapGroup]
+	ld b, a
+	ld a, [wMapNumber]
+	ld c, a
+	ret

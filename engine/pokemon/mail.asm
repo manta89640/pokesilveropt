@@ -12,9 +12,7 @@ SendMailToPC:
 	call AddNTimes
 	ld d, h
 	ld e, l
-	ld a, [wCurPartyMon]
-	ld bc, MAIL_STRUCT_LENGTH
-	ld hl, sPartyMail
+	call SendMailToPC_Shared ; ld a, [wCurPartyMon] / ld bc, MAIL_STRUCT_LENGTH / ld hl, sPartyMail
 	call AddNTimes
 	push hl
 	ld a, BANK(sMailboxCount)
@@ -90,9 +88,7 @@ MoveMailFromPCToParty:
 	ld hl, sMailboxes
 	call AddNTimes
 	push hl
-	ld a, [wCurPartyMon]
-	ld bc, MAIL_STRUCT_LENGTH
-	ld hl, sPartyMail
+	call SendMailToPC_Shared ; ld a, [wCurPartyMon] / ld bc, MAIL_STRUCT_LENGTH / ld hl, sPartyMail
 	call AddNTimes
 	ld d, h
 	ld e, l
@@ -105,8 +101,7 @@ MoveMailFromPCToParty:
 	add hl, de
 	ld d, [hl]
 	ld a, [wCurPartyMon]
-	ld hl, wPartyMon1Item
-	ld bc, PARTYMON_STRUCT_LENGTH
+	call MoveMailFromPCToParty_Shared ; ld hl, wPartyMon1Item / ld bc, PARTYMON_STRUCT_LENGTH
 	call AddNTimes
 	ld [hl], d
 	call CloseSRAM
@@ -128,8 +123,7 @@ CheckPokeMail::
 	jr c, .pop_return
 
 	ld a, [wCurPartyMon]
-	ld hl, wPartyMon1Item
-	ld bc, PARTYMON_STRUCT_LENGTH
+	call MoveMailFromPCToParty_Shared ; ld hl, wPartyMon1Item / ld bc, PARTYMON_STRUCT_LENGTH
 	call AddNTimes
 	ld d, [hl]
 	farcall ItemIsMail
@@ -193,8 +187,7 @@ GivePokeMail::
 	dec a
 	push af
 	push bc
-	ld hl, wPartyMon1Item
-	ld bc, PARTYMON_STRUCT_LENGTH
+	call MoveMailFromPCToParty_Shared ; ld hl, wPartyMon1Item / ld bc, PARTYMON_STRUCT_LENGTH
 	call AddNTimes
 	pop bc
 	ld [hl], b
@@ -564,3 +557,14 @@ MailboxPC:
 	db "PUT IN PACK@"
 	db "ATTACH MAIL@"
 	db "CANCEL@"
+
+SendMailToPC_Shared: ; (tools/outline.py)
+	ld a, [wCurPartyMon]
+	ld bc, MAIL_STRUCT_LENGTH
+	ld hl, sPartyMail
+	ret
+
+MoveMailFromPCToParty_Shared: ; (tools/outline.py)
+	ld hl, wPartyMon1Item
+	ld bc, PARTYMON_STRUCT_LENGTH
+	ret

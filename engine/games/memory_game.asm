@@ -250,18 +250,10 @@ MemoryGame_CheckMatch:
 	call MemoryGame_DeleteCard
 
 	ld a, [wMemoryGameCard1Location]
-	ld e, a
-	ld d, 0
-	ld hl, wMemoryGameCards
-	add hl, de
-	ld [hl], -1
+	call MemoryGame_CheckMatch_Shared ; ld e, a / ld d, 0 / ld hl, wMemoryGameCards / ...
 
 	ld a, [wMemoryGameCard2Location]
-	ld e, a
-	ld d, 0
-	ld hl, wMemoryGameCards
-	add hl, de
-	ld [hl], -1
+	call MemoryGame_CheckMatch_Shared ; ld e, a / ld d, 0 / ld hl, wMemoryGameCards / ...
 
 	ld hl, wMemoryGameLastMatches
 .find_empty_slot
@@ -433,8 +425,7 @@ MemoryGame_DeleteCard:
 	jr MemoryGame_PlaceCard.tailmerge_427 ; same as there (tools/tailmerge.py)
 
 MemoryGame_InitStrings:
-	hlcoord 0, 0
-	ld bc, SCREEN_AREA
+	call PrintDiplomaPage2_Shared ; hlcoord 0, 0 / ld bc, SCREEN_AREA
 	ld a, $1
 	call ByteFill
 	hlcoord 0, 0
@@ -523,9 +514,7 @@ MemoryGame_InterpretJoypad_AnimateCursor:
 	and a
 	ret z
 	sub 1 tiles
-	ld [hl], a
-	ld hl, SPRITEANIMSTRUCT_VAR1
-	add hl, bc
+	call MemoryGame_InterpretJoypad_AnimateCursor_Shared ; ld [hl], a / ld hl, SPRITEANIMSTRUCT_VAR1 / add hl, bc
 	dec [hl]
 	ret
 
@@ -536,9 +525,7 @@ MemoryGame_InterpretJoypad_AnimateCursor:
 	cp (9 - 1) tiles
 	ret z
 	add 1 tiles
-	ld [hl], a
-	ld hl, SPRITEANIMSTRUCT_VAR1
-	add hl, bc
+	call MemoryGame_InterpretJoypad_AnimateCursor_Shared ; ld [hl], a / ld hl, SPRITEANIMSTRUCT_VAR1 / add hl, bc
 	inc [hl]
 	ret
 
@@ -549,9 +536,7 @@ MemoryGame_InterpretJoypad_AnimateCursor:
 	and a
 	ret z
 	sub 1 tiles
-	ld [hl], a
-	ld hl, SPRITEANIMSTRUCT_VAR1
-	add hl, bc
+	call MemoryGame_InterpretJoypad_AnimateCursor_Shared ; ld [hl], a / ld hl, SPRITEANIMSTRUCT_VAR1 / add hl, bc
 	ld a, [hl]
 	sub 9
 	ld [hl], a
@@ -564,9 +549,7 @@ MemoryGame_InterpretJoypad_AnimateCursor:
 	cp (5 - 1) tiles
 	ret z
 	add 1 tiles
-	ld [hl], a
-	ld hl, SPRITEANIMSTRUCT_VAR1
-	add hl, bc
+	call MemoryGame_InterpretJoypad_AnimateCursor_Shared ; ld [hl], a / ld hl, SPRITEANIMSTRUCT_VAR1 / add hl, bc
 	ld a, [hl]
 	add 9
 	ld [hl], a
@@ -574,3 +557,17 @@ MemoryGame_InterpretJoypad_AnimateCursor:
 
 MemoryGameLZ:
 INCBIN "gfx/memory_game/memory_game.2bpp.lz"
+
+MemoryGame_CheckMatch_Shared: ; (tools/outline.py)
+	ld e, a
+	ld d, 0
+	ld hl, wMemoryGameCards
+	add hl, de
+	ld [hl], -1
+	ret
+
+MemoryGame_InterpretJoypad_AnimateCursor_Shared: ; (tools/outline.py)
+	ld [hl], a
+	ld hl, SPRITEANIMSTRUCT_VAR1
+	add hl, bc
+	ret

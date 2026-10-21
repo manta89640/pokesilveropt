@@ -32,10 +32,7 @@ _ReceiveItem::
 	jp PutItemInPocket
 
 .TMHM:
-	ld h, d
-	ld l, e
-	ld a, [wCurItem]
-	ld c, a
+	call _ReceiveItem_Shared ; ld h, d / ld l, e / ld a, [wCurItem] / ...
 	call GetTMHMNumber
 	jp ReceiveTMHM
 
@@ -63,10 +60,7 @@ _TossItem::
 	jp RemoveItemFromPocket
 
 .TMHM:
-	ld h, d
-	ld l, e
-	ld a, [wCurItem]
-	ld c, a
+	call _ReceiveItem_Shared ; ld h, d / ld l, e / ld a, [wCurItem] / ...
 	call GetTMHMNumber
 	jp TossTMHM
 
@@ -106,10 +100,7 @@ _CheckItem::
 	jp CheckTheItem
 
 .TMHM:
-	ld h, d
-	ld l, e
-	ld a, [wCurItem]
-	ld c, a
+	call _ReceiveItem_Shared ; ld h, d / ld l, e / ld a, [wCurItem] / ...
 	call GetTMHMNumber
 	jp CheckTMHM
 
@@ -190,10 +181,7 @@ PutItemInPocket:
 	ret
 
 .ok
-	ld h, d
-	ld l, e
-	ld a, [wCurItem]
-	ld c, a
+	call _ReceiveItem_Shared ; ld h, d / ld l, e / ld a, [wCurItem] / ...
 	ld a, [wItemQuantityChange]
 	ld [wItemQuantity], a
 .loop2
@@ -402,11 +390,7 @@ CheckKeyItems:
 	ret
 
 ReceiveTMHM:
-	dec c
-	ld b, 0
-	ld hl, wTMsHMs
-	add hl, bc
-	ld a, [wItemQuantityChange]
+	call ReceiveTMHM_Shared ; dec c / ld b, 0 / ld hl, wTMsHMs / ...
 	add [hl]
 	cp MAX_ITEM_STACK + 1
 	jr nc, .toomany
@@ -419,11 +403,7 @@ ReceiveTMHM:
 	ret
 
 TossTMHM:
-	dec c
-	ld b, 0
-	ld hl, wTMsHMs
-	add hl, bc
-	ld a, [wItemQuantityChange]
+	call ReceiveTMHM_Shared ; dec c / ld b, 0 / ld hl, wTMsHMs / ...
 	ld b, a
 	ld a, [hl]
 	sub b
@@ -575,4 +555,19 @@ GetItemPrice:
 	ld d, a
 	pop bc
 	pop hl
+	ret
+
+_ReceiveItem_Shared: ; (tools/outline.py)
+	ld h, d
+	ld l, e
+	ld a, [wCurItem]
+	ld c, a
+	ret
+
+ReceiveTMHM_Shared: ; (tools/outline.py)
+	dec c
+	ld b, 0
+	ld hl, wTMsHMs
+	add hl, bc
+	ld a, [wItemQuantityChange]
 	ret

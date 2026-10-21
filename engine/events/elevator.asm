@@ -28,10 +28,7 @@ Elevator::
 .LoadFloors:
 	ld de, wCurElevatorCount
 	ld bc, wElevatorDataEnd - wElevatorData
-	ld hl, wElevatorPointer
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
+	call Elevator_Shared ; ld hl, wElevatorPointer / ld a, [hli] / ld h, [hl] / ...
 	ld a, [wElevatorPointerBank]
 	call GetFarByte
 	inc hl
@@ -49,10 +46,7 @@ Elevator::
 	ret
 
 .FindCurrentFloor:
-	ld hl, wElevatorPointer
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
+	call Elevator_Shared ; ld hl, wElevatorPointer / ld a, [hli] / ld h, [hl] / ...
 	ld a, [wElevatorPointerBank]
 	call GetFarByte
 	ld c, a
@@ -98,10 +92,7 @@ Elevator::
 
 Elevator_GoToFloor:
 	push af
-	ld hl, wElevatorPointer
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
+	call Elevator_Shared ; ld hl, wElevatorPointer / ld a, [hli] / ld h, [hl] / ...
 	inc hl
 	pop af
 	ld bc, wElevatorDataEnd - wElevatorData
@@ -199,12 +190,15 @@ FloorToString:
 	ld e, a
 	ld d, 0
 	ld hl, ElevatorFloorNames
-	add hl, de
-	add hl, de
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
+	call Pack_GetJumptablePointer.shared1 ; add hl, de / add hl, de / ld a, [hli] / ...
 	pop de
 	ret
 
 INCLUDE "data/events/elevator_floors.asm"
+
+Elevator_Shared: ; (tools/outline.py)
+	ld hl, wElevatorPointer
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ret

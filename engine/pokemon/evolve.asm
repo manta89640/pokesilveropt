@@ -42,15 +42,7 @@ EvolveAfterBattle_MasterLoop:
 	jr z, EvolveAfterBattle_MasterLoop
 
 	ld a, [wEvolutionOldSpecies]
-	dec a
-	ld b, 0
-	ld c, a
-	ld hl, EvosAttacksPointers
-	add hl, bc
-	add hl, bc
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
+	call EvolveAfterBattle_MasterLoop_Shared ; dec a / ld b, 0 / ld c, a / ...
 
 	push hl
 	xor a
@@ -414,15 +406,7 @@ EvolvingText:
 LearnLevelMoves:
 	ld a, [wTempSpecies]
 	ld [wCurPartySpecies], a
-	dec a
-	ld b, 0
-	ld c, a
-	ld hl, EvosAttacksPointers
-	add hl, bc
-	add hl, bc
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
+	call EvolveAfterBattle_MasterLoop_Shared ; dec a / ld b, 0 / ld c, a / ...
 
 .skip_evos
 	ld a, [hli]
@@ -614,11 +598,7 @@ GetPreEvolution:
 .loop ; For each Pokemon...
 	ld hl, EvosAttacksPointers
 	ld b, 0
-	add hl, bc
-	add hl, bc
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
+	call EvolveAfterBattle_MasterLoop_Shared.shared1 ; add hl, bc / add hl, bc / ld a, [hli] / ...
 .loop2 ; For each evolution...
 	ld a, [hli]
 	and a
@@ -650,4 +630,17 @@ GetPreEvolution:
 	ld a, c
 	ld [wCurPartySpecies], a
 	scf
+	ret
+
+EvolveAfterBattle_MasterLoop_Shared: ; (tools/outline.py)
+	dec a
+	ld b, 0
+	ld c, a
+	ld hl, EvosAttacksPointers
+.shared1: ; (tools/outline.py)
+	add hl, bc
+	add hl, bc
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
 	ret

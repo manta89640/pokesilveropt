@@ -179,9 +179,7 @@ SwitchPartyMons:
 	xor a
 	ld [wPartyMenuActionText], a
 
-	farcall LoadPartyMenuGFX
-	farcall InitPartyMenuWithCancel
-	farcall InitPartyMenuGFX
+	call GiveItem_Shared ; farcall LoadPartyMenuGFX / farcall InitPartyMenuWithCancel / farcall InitPartyMenuGFX
 
 	ld a, 1
 	ret
@@ -204,9 +202,7 @@ GiveTakePartyMonItem:
 	jr c, .cancel
 
 	call GetCurNickname
-	ld hl, wStringBuffer1
-	ld de, wMonOrItemNameBuffer
-	ld bc, MON_NAME_LENGTH
+	call GiveItem_Shared2 ; ld hl, wStringBuffer1 / ld de, wMonOrItemNameBuffer / ld bc, MON_NAME_LENGTH
 	call CopyBytes
 	ld a, [wMenuCursorY]
 	cp 1
@@ -414,14 +410,12 @@ GetPartyItemLocation:
 
 ReceiveItemFromPokemon:
 	ld a, 1
-	ld [wItemQuantityChange], a
-	ld hl, wNumItems
+	call FindItemInBallScript_Shared ; ld [wItemQuantityChange], a / ld hl, wNumItems
 	jp ReceiveItem
 
 GiveItemToPokemon:
 	ld a, 1
-	ld [wItemQuantityChange], a
-	ld hl, wNumItems
+	call FindItemInBallScript_Shared ; ld [wItemQuantityChange], a / ld hl, wNumItems
 	jp TossItem
 
 StartMenuYesNo:
@@ -581,8 +575,7 @@ OpenPartyStats:
 
 MonMenu_Cut:
 	farcall CutFunction
-	ld a, [wFieldMoveSucceeded]
-	cp $1
+	call MonMenu_Cut_Shared ; ld a, [wFieldMoveSucceeded] / cp $1
 	jr nz, .Fail
 	ld b, $4
 	ld a, $2
@@ -617,8 +610,7 @@ MonMenu_Fly:
 
 MonMenu_Flash:
 	farcall FlashFunction
-	ld a, [wFieldMoveSucceeded]
-	cp $1
+	call MonMenu_Cut_Shared ; ld a, [wFieldMoveSucceeded] / cp $1
 	jr nz, .Fail
 	ld b, $4
 	ld a, $2
@@ -630,8 +622,7 @@ MonMenu_Flash:
 
 MonMenu_Strength:
 	farcall StrengthFunction
-	ld a, [wFieldMoveSucceeded]
-	cp $1
+	call MonMenu_Cut_Shared ; ld a, [wFieldMoveSucceeded] / cp $1
 	jr nz, .Fail
 	ld b, $4
 	ld a, $2
@@ -643,8 +634,7 @@ MonMenu_Strength:
 
 MonMenu_Whirlpool:
 	farcall WhirlpoolFunction
-	ld a, [wFieldMoveSucceeded]
-	cp $1
+	call MonMenu_Cut_Shared ; ld a, [wFieldMoveSucceeded] / cp $1
 	jr nz, .Fail
 	ld b, $4
 	ld a, $2
@@ -656,8 +646,7 @@ MonMenu_Whirlpool:
 
 MonMenu_Waterfall:
 	farcall WaterfallFunction
-	ld a, [wFieldMoveSucceeded]
-	cp $1
+	call MonMenu_Cut_Shared ; ld a, [wFieldMoveSucceeded] / cp $1
 	jr nz, .Fail
 	ld b, $4
 	ld a, $2
@@ -695,8 +684,7 @@ MonMenu_Surf:
 
 MonMenu_Dig:
 	farcall DigFunction
-	ld a, [wFieldMoveSucceeded]
-	cp $1
+	call MonMenu_Cut_Shared ; ld a, [wFieldMoveSucceeded] / cp $1
 	jr nz, .Fail
 	ld b, $4
 	ld a, $2
@@ -749,8 +737,7 @@ MonMenu_Softboiled_MilkDrink:
 
 MonMenu_Headbutt:
 	farcall HeadbuttFunction
-	ld a, [wFieldMoveSucceeded]
-	cp $1
+	call MonMenu_Cut_Shared ; ld a, [wFieldMoveSucceeded] / cp $1
 	jr nz, .Fail
 	ld b, $4
 	ld a, $2
@@ -762,8 +749,7 @@ MonMenu_Headbutt:
 
 MonMenu_RockSmash:
 	farcall RockSmashFunction
-	ld a, [wFieldMoveSucceeded]
-	cp $1
+	call MonMenu_Cut_Shared ; ld a, [wFieldMoveSucceeded] / cp $1
 	jr nz, .Fail
 	ld b, $4
 	ld a, $2
@@ -951,12 +937,7 @@ MoveScreenLoop:
 .cycle_right
 	ld a, [wCurPartyMon]
 	inc a
-	ld [wCurPartyMon], a
-	ld c, a
-	ld b, 0
-	ld hl, wPartySpecies
-	add hl, bc
-	ld a, [hl]
+	call MoveScreenLoop_Shared ; ld [wCurPartyMon], a / ld c, a / ld b, 0 / ...
 	cp -1
 	jr z, .cycle_left
 	cp EGG
@@ -970,12 +951,7 @@ MoveScreenLoop:
 .cycle_left_loop
 	ld a, [wCurPartyMon]
 	dec a
-	ld [wCurPartyMon], a
-	ld c, a
-	ld b, 0
-	ld hl, wPartySpecies
-	add hl, bc
-	ld a, [hl]
+	call MoveScreenLoop_Shared ; ld [wCurPartyMon], a / ld c, a / ld b, 0 / ...
 	cp EGG
 	ret nz
 	ld a, [wCurPartyMon]
@@ -995,9 +971,7 @@ MoveScreenLoop:
 	jp .moving_move
 
 .place_move
-	ld hl, wPartyMon1Moves
-	ld bc, PARTYMON_STRUCT_LENGTH
-	ld a, [wCurPartyMon]
+	call MoveScreenLoop_Shared2 ; ld hl, wPartyMon1Moves / ld bc, PARTYMON_STRUCT_LENGTH / ld a, [wCurPartyMon]
 	call AddNTimes
 	push hl
 	call .copy_move
@@ -1035,19 +1009,12 @@ MoveScreenLoop:
 
 .copy_move
 	push hl
-	ld a, [wMenuCursorY]
-	dec a
-	ld c, a
-	ld b, 0
-	add hl, bc
+	call MoveScreenLoop_Shared3 ; ld a, [wMenuCursorY] / dec a / ld c, a / ...
 	ld d, h
 	ld e, l
 	pop hl
 	ld a, [wSwappingMove]
-	dec a
-	ld c, a
-	ld b, 0
-	add hl, bc
+	call MoveScreenLoop_Shared3.shared1 ; dec a / ld c, a / ld b, 0 / ...
 	ld a, [de]
 	ld b, [hl]
 	ld [hl], a
@@ -1145,15 +1112,9 @@ SetUpMoveList:
 	jp Textbox
 
 PrepareToPlaceMoveData:
-	ld hl, wPartyMon1Moves
-	ld bc, PARTYMON_STRUCT_LENGTH
-	ld a, [wCurPartyMon]
+	call MoveScreenLoop_Shared2 ; ld hl, wPartyMon1Moves / ld bc, PARTYMON_STRUCT_LENGTH / ld a, [wCurPartyMon]
 	call AddNTimes
-	ld a, [wMenuCursorY]
-	dec a
-	ld c, a
-	ld b, 0
-	add hl, bc
+	call MoveScreenLoop_Shared3 ; ld a, [wMenuCursorY] / dec a / ld c, a / ...
 	ld a, [hl]
 	ld [wCurSpecies], a
 	hlcoord 1, 12
@@ -1272,4 +1233,33 @@ PlaceMoveScreenRightArrow:
 .legal
 	hlcoord 18, 0
 	ld [hl], '▶'
+	ret
+
+MonMenu_Cut_Shared: ; (tools/outline.py)
+	ld a, [wFieldMoveSucceeded]
+	cp $1
+	ret
+
+MoveScreenLoop_Shared: ; (tools/outline.py)
+	ld [wCurPartyMon], a
+	ld c, a
+	ld b, 0
+	ld hl, wPartySpecies
+	add hl, bc
+	ld a, [hl]
+	ret
+
+MoveScreenLoop_Shared2: ; (tools/outline.py)
+	ld hl, wPartyMon1Moves
+	ld bc, PARTYMON_STRUCT_LENGTH
+	ld a, [wCurPartyMon]
+	ret
+
+MoveScreenLoop_Shared3: ; (tools/outline.py)
+	ld a, [wMenuCursorY]
+.shared1: ; (tools/outline.py)
+	dec a
+	ld c, a
+	ld b, 0
+	add hl, bc
 	ret

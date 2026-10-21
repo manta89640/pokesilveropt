@@ -96,8 +96,7 @@ ScrollingMenuJoyAction:
 	dec a
 	ld [wScrollingMenuCursorPosition], a
 	ld [wCurItemQuantity], a
-	ld a, [wMenuSelection]
-	cp -1
+	call UpdateItemDescription_Shared ; ld a, [wMenuSelection] / cp -1
 	jr z, .b_button
 	ld a, PAD_A
 	scf
@@ -115,8 +114,7 @@ ScrollingMenuJoyAction:
 	ld a, [wMenuCursorY]
 	dec a
 	call ScrollingMenu_GetListItemCoordAndFunctionArgs
-	ld a, [wMenuSelection]
-	cp -1
+	call UpdateItemDescription_Shared ; ld a, [wMenuSelection] / cp -1
 	jp z, xor_a_dec_a
 	call ScrollingMenu_GetCursorPosition
 	dec a
@@ -134,8 +132,7 @@ ScrollingMenuJoyAction:
 	ret
 
 .d_left
-	ld hl, w2DMenuFlags2
-	bit _2DMENU_DISABLE_JOYPAD_FILTER_F, [hl]
+	call ScrollingMenuJoyAction_Shared ; ld hl, w2DMenuFlags2 / bit _2DMENU_DISABLE_JOYPAD_FILTER_F, [hl]
 	jp z, xor_a_dec_a
 	ld a, [wMenuDataFlags]
 	bit SCROLLINGMENU_ENABLE_LEFT_F, a
@@ -145,8 +142,7 @@ ScrollingMenuJoyAction:
 	ret
 
 .d_right
-	ld hl, w2DMenuFlags2
-	bit _2DMENU_DISABLE_JOYPAD_FILTER_F, [hl]
+	call ScrollingMenuJoyAction_Shared ; ld hl, w2DMenuFlags2 / bit _2DMENU_DISABLE_JOYPAD_FILTER_F, [hl]
 	jp z, xor_a_dec_a
 	ld a, [wMenuDataFlags]
 	bit SCROLLINGMENU_ENABLE_RIGHT_F, a
@@ -156,8 +152,7 @@ ScrollingMenuJoyAction:
 	ret
 
 .d_up
-	ld hl, w2DMenuFlags2
-	bit _2DMENU_DISABLE_JOYPAD_FILTER_F, [hl]
+	call ScrollingMenuJoyAction_Shared ; ld hl, w2DMenuFlags2 / bit _2DMENU_DISABLE_JOYPAD_FILTER_F, [hl]
 	jp z, xor_a
 	ld hl, wMenuScrollPosition
 	ld a, [hl]
@@ -170,8 +165,7 @@ ScrollingMenuJoyAction:
 	jp xor_a_dec_a
 
 .d_down
-	ld hl, w2DMenuFlags2
-	bit _2DMENU_DISABLE_JOYPAD_FILTER_F, [hl]
+	call ScrollingMenuJoyAction_Shared ; ld hl, w2DMenuFlags2 / bit _2DMENU_DISABLE_JOYPAD_FILTER_F, [hl]
 	jp z, xor_a
 	ld hl, wMenuScrollPosition
 	ld a, [wMenuData_ScrollingMenuHeight]
@@ -208,10 +202,7 @@ ScrollingMenu_ClearLeftColumn:
 	ret
 
 InitScrollingMenuCursor:
-	ld hl, wMenuData_ItemsPointerAddr
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
+	call SwitchItemsInBag_Shared ; ld hl, wMenuData_ItemsPointerAddr / ld a, [hli] / ld h, [hl] / ...
 	ld a, [wMenuData_ItemsPointerBank]
 	call GetFarByte
 	ld [wScrollingMenuListSize], a
@@ -322,8 +313,7 @@ ScrollingMenu_InitFlags:
 	ld a, 1
 	ld [wMenuCursorX], a
 	xor a
-	ld [wCursorCurrentTile], a
-	ld [wCursorCurrentTile + 1], a
+	call Init2DMenuCursorPosition.shared1 ; ld [wCursorCurrentTile], a / ld [wCursorCurrentTile + 1], a
 	ld [wCursorOffCharacter], a
 	ret
 
@@ -370,8 +360,7 @@ ScrollingMenu_UpdateDisplay:
 	ld [wScrollingMenuCursorPosition], a
 	ld a, c
 	call ScrollingMenu_GetListItemCoordAndFunctionArgs
-	ld a, [wMenuSelection]
-	cp -1
+	call UpdateItemDescription_Shared ; ld a, [wMenuSelection] / cp -1
 	jr z, .cancel
 	push bc
 	push hl
@@ -490,10 +479,7 @@ ScrollingMenu_GetListItemCoordAndFunctionArgs:
 	add e
 	ld e, a
 	ld d, 0
-	ld hl, wMenuData_ItemsPointerAddr
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
+	call SwitchItemsInBag_Shared ; ld hl, wMenuData_ItemsPointerAddr / ld a, [hli] / ld h, [hl] / ...
 	inc hl ; items
 	ld a, [wMenuData_ScrollingMenuItemFormat]
 	cp SCROLLINGMENU_ITEMS_NORMAL
@@ -514,4 +500,9 @@ ScrollingMenu_GetListItemCoordAndFunctionArgs:
 	ld [wMenuSelectionQuantity], a
 	pop hl
 	pop de
+	ret
+
+ScrollingMenuJoyAction_Shared: ; (tools/outline.py)
+	ld hl, w2DMenuFlags2
+	bit _2DMENU_DISABLE_JOYPAD_FILTER_F, [hl]
 	ret

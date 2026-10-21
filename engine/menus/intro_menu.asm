@@ -488,10 +488,7 @@ OakSpeech:
 
 	call RotateFourPalettesRight
 	call RotateThreePalettesRight
-	xor a
-	ld [wCurPartySpecies], a
-	ld a, POKEMON_PROF
-	ld [wTrainerClass], a
+	call OakSpeech_Shared ; xor a / ld [wCurPartySpecies], a / ld a, POKEMON_PROF / ...
 	call Intro_PrepTrainerPic
 
 	ld b, SCGB_TRAINER_OR_MON_FRONTPIC_PALS
@@ -527,10 +524,7 @@ OakSpeech:
 	call RotateThreePalettesRight
 	call ClearTilemap
 
-	xor a
-	ld [wCurPartySpecies], a
-	ld a, POKEMON_PROF
-	ld [wTrainerClass], a
+	call OakSpeech_Shared ; xor a / ld [wCurPartySpecies], a / ld a, POKEMON_PROF / ...
 	call Intro_PrepTrainerPic
 
 	ld b, SCGB_TRAINER_OR_MON_FRONTPIC_PALS
@@ -542,10 +536,7 @@ OakSpeech:
 	call RotateThreePalettesRight
 	call ClearTilemap
 
-	xor a
-	ld [wCurPartySpecies], a
-	ld a, CAL
-	ld [wTrainerClass], a
+	call OakSpeech_Shared2 ; xor a / ld [wCurPartySpecies], a / ld a, CAL / ...
 	call Intro_PrepTrainerPic
 
 	ld b, SCGB_TRAINER_OR_MON_FRONTPIC_PALS
@@ -614,10 +605,7 @@ NamePlayer:
 	call LoadFontsExtra
 	call WaitBGMap
 
-	xor a
-	ld [wCurPartySpecies], a
-	ld a, CAL
-	ld [wTrainerClass], a
+	call OakSpeech_Shared2 ; xor a / ld [wCurPartySpecies], a / ld a, CAL / ...
 	call Intro_PrepTrainerPic
 
 	ld b, SCGB_TRAINER_OR_MON_FRONTPIC_PALS
@@ -1100,3 +1088,17 @@ GameInit::
 	call ClearWindowData
 	farcall TryLoadSaveData
 	jp IntroSequence
+
+OakSpeech_Shared: ; (tools/outline.py)
+	xor a
+	ld [wCurPartySpecies], a
+	ld a, POKEMON_PROF
+	ld [wTrainerClass], a
+	ret
+
+OakSpeech_Shared2: ; (tools/outline.py)
+	xor a
+	ld [wCurPartySpecies], a
+	ld a, CAL
+	ld [wTrainerClass], a
+	ret

@@ -53,8 +53,7 @@ TryAddMonToParty:
 	ld a, [wMonType]
 	and a
 	jr nz, .skipnickname
-	ld a, [wCurPartySpecies]
-	ld [wNamedObjectIndex], a
+	call TryAddMonToParty_Shared ; ld a, [wCurPartySpecies] / ld [wNamedObjectIndex], a
 	call GetPokemonName
 	ld hl, wPartyMonNicknames
 	ldh a, [hMoveMon]
@@ -89,8 +88,7 @@ GeneratePartyMonStats:
 	push hl
 
 	; Initialize the species
-	ld a, [wCurPartySpecies]
-	ld [wCurSpecies], a
+	call RareCandy_StatBooster_GetParameters_Shared ; ld a, [wCurPartySpecies] / ld [wCurSpecies], a
 	call GetBaseData
 	ld a, [wBaseDexNo]
 	ld [de], a
@@ -394,33 +392,24 @@ FillPP:
 	ret
 
 AddTempmonToParty:
-	ld hl, wPartyCount
-	ld a, [hl]
-	cp PARTY_LENGTH
+	call AddTempmonToParty_Shared3 ; ld hl, wPartyCount / ld a, [hl] / cp PARTY_LENGTH
 	scf
 	ret z
 
-	inc a
-	ld [hl], a
-	ld c, a
-	ld b, 0
-	add hl, bc
+	call AddTempmonToParty_Shared4 ; inc a / ld [hl], a / ld c, a / ...
 	ld a, [wCurPartySpecies]
 	ld [hli], a
 	ld [hl], $ff
 
 	ld hl, wPartyMon1Species
-	ld a, [wPartyCount]
-	dec a
-	ld bc, PARTYMON_STRUCT_LENGTH
+	call AddTempmonToParty_Shared ; ld a, [wPartyCount] / dec a / ld bc, PARTYMON_STRUCT_LENGTH
 	call AddNTimes
 	ld e, l
 	ld d, h
 	ld hl, wTempMonSpecies
 	call CopyBytes
 
-	ld hl, wPartyMonOTs
-	ld a, [wPartyCount]
+	call AddTempmonToParty_Shared5 ; ld hl, wPartyMonOTs / ld a, [wPartyCount]
 	dec a
 	call SkipNames
 	ld d, h
@@ -431,8 +420,7 @@ AddTempmonToParty:
 	ld bc, NAME_LENGTH
 	call CopyBytes
 
-	ld hl, wPartyMonNicknames
-	ld a, [wPartyCount]
+	call AddTempmonToParty_Shared2 ; ld hl, wPartyMonNicknames / ld a, [wPartyCount]
 	dec a
 	call SkipNames
 	ld d, h
@@ -443,16 +431,13 @@ AddTempmonToParty:
 	ld bc, MON_NAME_LENGTH
 	call CopyBytes
 
-	ld a, [wCurPartySpecies]
-	ld [wNamedObjectIndex], a
+	call TryAddMonToParty_Shared ; ld a, [wCurPartySpecies] / ld [wNamedObjectIndex], a
 	cp EGG
 	jr z, .egg
 	dec a
 	call SetSeenAndCaughtMon
 	ld hl, wPartyMon1Happiness
-	ld a, [wPartyCount]
-	dec a
-	ld bc, PARTYMON_STRUCT_LENGTH
+	call AddTempmonToParty_Shared ; ld a, [wPartyCount] / dec a / ld bc, PARTYMON_STRUCT_LENGTH
 	call AddNTimes
 	ld [hl], BASE_HAPPINESS
 .egg
@@ -461,9 +446,7 @@ AddTempmonToParty:
 	cp UNOWN
 	jr nz, .done
 	ld hl, wPartyMon1DVs
-	ld a, [wPartyCount]
-	dec a
-	ld bc, PARTYMON_STRUCT_LENGTH
+	call AddTempmonToParty_Shared ; ld a, [wPartyCount] / dec a / ld bc, PARTYMON_STRUCT_LENGTH
 	call AddNTimes
 	predef GetUnownLetter
 	callfar UpdateUnownDex
@@ -504,17 +487,11 @@ SendGetMonIntoFromBox:
 	jp CloseSRAM_And_SetCarryFlag
 
 .check_IfPartyIsFull
-	ld hl, wPartyCount
-	ld a, [hl]
-	cp PARTY_LENGTH
+	call AddTempmonToParty_Shared3 ; ld hl, wPartyCount / ld a, [hl] / cp PARTY_LENGTH
 	jp z, CloseSRAM_And_SetCarryFlag
 
 .there_is_room
-	inc a
-	ld [hl], a
-	ld c, a
-	ld b, 0
-	add hl, bc
+	call AddTempmonToParty_Shared4 ; inc a / ld [hl], a / ld c, a / ...
 	ld a, [wPokemonWithdrawDepositParameter]
 	cp DAY_CARE_WITHDRAW
 	ld a, [wBreedMon1Species]
@@ -526,12 +503,10 @@ SendGetMonIntoFromBox:
 	ld [hl], $ff
 	ld a, [wPokemonWithdrawDepositParameter]
 	dec a
-	ld hl, wPartyMon1Species
-	ld bc, PARTYMON_STRUCT_LENGTH
+	call SendGetMonIntoFromBox_Shared ; ld hl, wPartyMon1Species / ld bc, PARTYMON_STRUCT_LENGTH
 	ld a, [wPartyCount]
 	jr nz, .okay2
-	ld hl, sBoxMon1Species
-	ld bc, BOXMON_STRUCT_LENGTH
+	call CopyBoxmonToTempMon_Shared ; ld hl, sBoxMon1Species / ld bc, BOXMON_STRUCT_LENGTH
 	ld a, [sBoxCount]
 
 .okay2
@@ -544,14 +519,12 @@ SendGetMonIntoFromBox:
 	ld d, h
 	ld a, [wPokemonWithdrawDepositParameter]
 	and a
-	ld hl, sBoxMon1Species
-	ld bc, BOXMON_STRUCT_LENGTH
+	call CopyBoxmonToTempMon_Shared ; ld hl, sBoxMon1Species / ld bc, BOXMON_STRUCT_LENGTH
 	jr z, .okay3
 	cp DAY_CARE_WITHDRAW
 	ld hl, wBreedMon1Species
 	jr z, .okay4
-	ld hl, wPartyMon1Species
-	ld bc, PARTYMON_STRUCT_LENGTH
+	call SendGetMonIntoFromBox_Shared ; ld hl, wPartyMon1Species / ld bc, PARTYMON_STRUCT_LENGTH
 
 .okay3
 	ld a, [wCurPartyMon]
@@ -565,8 +538,7 @@ SendGetMonIntoFromBox:
 	ld de, wBreedMon1OT
 	jr z, .okay5
 	dec a
-	ld hl, wPartyMonOTs
-	ld a, [wPartyCount]
+	call AddTempmonToParty_Shared5 ; ld hl, wPartyMonOTs / ld a, [wPartyCount]
 	jr nz, .okay6
 	ld hl, sBoxMonOTs
 	ld a, [sBoxCount]
@@ -599,8 +571,7 @@ SendGetMonIntoFromBox:
 	ld de, wBreedMon1Nickname
 	jr z, .okay9
 	dec a
-	ld hl, wPartyMonNicknames
-	ld a, [wPartyCount]
+	call AddTempmonToParty_Shared2 ; ld hl, wPartyMonNicknames / ld a, [wPartyCount]
 	jr nz, .okay10
 	ld hl, sBoxMonNicknames
 	ld a, [sBoxCount]
@@ -710,8 +681,7 @@ CloseSRAM_And_SetCarryFlag:
 
 RestorePPOfDepositedPokemon:
 	ld a, b
-	ld hl, sBoxMons
-	ld bc, BOXMON_STRUCT_LENGTH
+	call RestorePPOfDepositedPokemon_Shared ; ld hl, sBoxMons / ld bc, BOXMON_STRUCT_LENGTH
 	call AddNTimes
 	ld b, h
 	ld c, l
@@ -779,10 +749,7 @@ RetrieveMonFromDayCareMan:
 	call PlaySFX
 	call WaitSFX
 	call GetBreedMon1LevelGrowth
-	ld a, b
-	ld [wPrevPartyLevel], a
-	ld a, e
-	ld [wCurPartyLevel], a
+	call RetrieveMonFromDayCareMan_Shared ; ld a, b / ld [wPrevPartyLevel], a / ld a, e / ...
 	xor a
 .tailmerge_787: ; (tools/tailmerge.py)
 	ld [wPokemonWithdrawDepositParameter], a
@@ -795,27 +762,18 @@ RetrieveMonFromDayCareLady:
 	call PlaySFX
 	call WaitSFX
 	call GetBreedMon2LevelGrowth
-	ld a, b
-	ld [wPrevPartyLevel], a
-	ld a, e
-	ld [wCurPartyLevel], a
+	call RetrieveMonFromDayCareMan_Shared ; ld a, b / ld [wPrevPartyLevel], a / ld a, e / ...
 	ld a, PC_DEPOSIT
 	jr RetrieveMonFromDayCareMan.tailmerge_787 ; same as there (tools/tailmerge.py)
 
 RetrieveBreedmon:
-	ld hl, wPartyCount
-	ld a, [hl]
-	cp PARTY_LENGTH
+	call AddTempmonToParty_Shared3 ; ld hl, wPartyCount / ld a, [hl] / cp PARTY_LENGTH
 	jr nz, .room_in_party
 	scf
 	ret
 
 .room_in_party
-	inc a
-	ld [hl], a
-	ld c, a
-	ld b, 0
-	add hl, bc
+	call AddTempmonToParty_Shared4 ; inc a / ld [hl], a / ld c, a / ...
 	ld a, [wPokemonWithdrawDepositParameter]
 	and a
 	ld a, [wBreedMon1Species]
@@ -829,8 +787,7 @@ RetrieveBreedmon:
 	ld [wCurSpecies], a
 	ld a, $ff
 	ld [hl], a
-	ld hl, wPartyMonNicknames
-	ld a, [wPartyCount]
+	call AddTempmonToParty_Shared2 ; ld hl, wPartyMonNicknames / ld a, [wPartyCount]
 	dec a
 	call SkipNames
 	push hl
@@ -839,8 +796,7 @@ RetrieveBreedmon:
 	pop de
 	call CopyBytes
 	push hl
-	ld hl, wPartyMonOTs
-	ld a, [wPartyCount]
+	call AddTempmonToParty_Shared5 ; ld hl, wPartyMonOTs / ld a, [wPartyCount]
 	dec a
 	call SkipNames
 	ld d, h
@@ -870,9 +826,7 @@ RetrieveBreedmon:
 	ld b, TRUE
 	call CalcMonStats
 	ld hl, wPartyMon1Moves
-	ld a, [wPartyCount]
-	dec a
-	ld bc, PARTYMON_STRUCT_LENGTH
+	call AddTempmonToParty_Shared ; ld a, [wPartyCount] / dec a / ld bc, PARTYMON_STRUCT_LENGTH
 	call AddNTimes
 	ld d, h
 	ld e, l
@@ -902,8 +856,7 @@ RetrieveBreedmon:
 GetLastPartyMon:
 	ld a, [wPartyCount]
 	dec a
-	ld hl, wPartyMon1Species
-	ld bc, PARTYMON_STRUCT_LENGTH
+	call SendGetMonIntoFromBox_Shared ; ld hl, wPartyMon1Species / ld bc, PARTYMON_STRUCT_LENGTH
 	call AddNTimes
 	ld d, h
 	ld e, l
@@ -931,8 +884,7 @@ DepositBreedmon:
 	call SkipNames
 	call CopyBytes
 	ld a, [wCurPartyMon]
-	ld hl, wPartyMon1Species
-	ld bc, PARTYMON_STRUCT_LENGTH
+	call SendGetMonIntoFromBox_Shared ; ld hl, wPartyMon1Species / ld bc, PARTYMON_STRUCT_LENGTH
 	call AddNTimes
 	ld bc, BOXMON_STRUCT_LENGTH
 	jp CopyBytes
@@ -949,8 +901,7 @@ SendMonIntoBox:
 	inc a
 	ld [de], a
 
-	ld a, [wCurPartySpecies]
-	ld [wCurSpecies], a
+	call RareCandy_StatBooster_GetParameters_Shared ; ld a, [wCurPartySpecies] / ld [wCurSpecies], a
 	ld c, a
 .loop
 	inc de
@@ -970,8 +921,7 @@ SendMonIntoBox:
 	ld bc, NAME_LENGTH
 	call CopyBytes
 
-	ld a, [wCurPartySpecies]
-	ld [wNamedObjectIndex], a
+	call TryAddMonToParty_Shared ; ld a, [wCurPartySpecies] / ld [wNamedObjectIndex], a
 	call GetPokemonName
 
 	ld de, sBoxMonNicknames
@@ -1074,8 +1024,7 @@ ShiftBoxMon:
 	ld bc, MON_NAME_LENGTH
 	call .shift
 
-	ld hl, sBoxMons
-	ld bc, BOXMON_STRUCT_LENGTH
+	call RestorePPOfDepositedPokemon_Shared ; ld hl, sBoxMons / ld bc, BOXMON_STRUCT_LENGTH
 
 .shift
 	ld a, [sBoxCount]
@@ -1166,9 +1115,7 @@ GiveEgg::
 .skip_seen_flag
 	pop af
 	ld [wCurPartySpecies], a
-	ld a, [wPartyCount]
-	dec a
-	ld bc, PARTYMON_STRUCT_LENGTH
+	call AddTempmonToParty_Shared ; ld a, [wPartyCount] / dec a / ld bc, PARTYMON_STRUCT_LENGTH
 	ld hl, wPartyMon1Species
 	call AddNTimes
 	ld a, [wCurPartySpecies]
@@ -1279,8 +1226,7 @@ RemoveMonFromPartyOrBox:
 	ld a, [wPokemonWithdrawDepositParameter]
 	and a
 	jr z, .party4
-	ld hl, sBoxMons
-	ld bc, BOXMON_STRUCT_LENGTH
+	call RestorePPOfDepositedPokemon_Shared ; ld hl, sBoxMons / ld bc, BOXMON_STRUCT_LENGTH
 .party4
 	ld a, [wCurPartyMon]
 	call AddNTimes
@@ -1630,8 +1576,7 @@ GivePoke::
 	ld [wMonType], a
 	call TryAddMonToParty
 	jr nc, .failed
-	ld hl, wPartyMonNicknames
-	ld a, [wPartyCount]
+	call AddTempmonToParty_Shared2 ; ld hl, wPartyMonNicknames / ld a, [wPartyCount]
 	dec a
 	ld [wCurPartyMon], a
 	call SkipNames
@@ -1678,8 +1623,7 @@ GivePoke::
 	ld [sBoxMon1Item], a
 
 .done
-	ld a, [wCurPartySpecies]
-	ld [wNamedObjectIndex], a
+	call TryAddMonToParty_Shared ; ld a, [wCurPartySpecies] / ld [wNamedObjectIndex], a
 	ld [wTempEnemyMonSpecies], a
 	call GetPokemonName
 	ld hl, wStringBuffer1
@@ -1792,4 +1736,56 @@ InitNickname:
 	ld a, $4 ; ExitAllMenus is in bank 0; maybe it used to be in bank 4
 	ld hl, ExitAllMenus
 	rst FarCall
+	ret
+
+AddTempmonToParty_Shared: ; (tools/outline.py)
+	ld a, [wPartyCount]
+	dec a
+	ld bc, PARTYMON_STRUCT_LENGTH
+	ret
+
+TryAddMonToParty_Shared: ; (tools/outline.py)
+	ld a, [wCurPartySpecies]
+	ld [wNamedObjectIndex], a
+	ret
+
+AddTempmonToParty_Shared2: ; (tools/outline.py)
+	ld hl, wPartyMonNicknames
+	ld a, [wPartyCount]
+	ret
+
+SendGetMonIntoFromBox_Shared: ; (tools/outline.py)
+	ld hl, wPartyMon1Species
+	ld bc, PARTYMON_STRUCT_LENGTH
+	ret
+
+AddTempmonToParty_Shared3: ; (tools/outline.py)
+	ld hl, wPartyCount
+	ld a, [hl]
+	cp PARTY_LENGTH
+	ret
+
+AddTempmonToParty_Shared4: ; (tools/outline.py)
+	inc a
+	ld [hl], a
+	ld c, a
+	ld b, 0
+	add hl, bc
+	ret
+
+AddTempmonToParty_Shared5: ; (tools/outline.py)
+	ld hl, wPartyMonOTs
+	ld a, [wPartyCount]
+	ret
+
+RestorePPOfDepositedPokemon_Shared: ; (tools/outline.py)
+	ld hl, sBoxMons
+	ld bc, BOXMON_STRUCT_LENGTH
+	ret
+
+RetrieveMonFromDayCareMan_Shared: ; (tools/outline.py)
+	ld a, b
+	ld [wPrevPartyLevel], a
+	ld a, e
+	ld [wCurPartyLevel], a
 	ret

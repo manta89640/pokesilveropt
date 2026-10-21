@@ -60,19 +60,12 @@ CanObjectMoveInDirection:
 WillObjectBumpIntoWater:
 	call CanObjectLeaveTile
 	ret c
-	ld hl, OBJECT_MAP_X
-	add hl, bc
-	ld d, [hl]
-	ld hl, OBJECT_MAP_Y
-	add hl, bc
-	ld e, [hl]
+	call WillObjectBumpIntoWater_Shared ; ld hl, OBJECT_MAP_X / add hl, bc / ld d, [hl] / ...
 	ld hl, OBJECT_PALETTE
 	add hl, bc
 	bit B_OAM_PRIO, [hl]
 	jp nz, WillObjectRemainOnWater
-	ld hl, OBJECT_TILE_COLLISION
-	add hl, bc
-	ld a, [hl]
+	call NormalStep_Shared2 ; ld hl, OBJECT_TILE_COLLISION / add hl, bc / ld a, [hl]
 	ld d, a
 	call GetTilePermission
 	and a ; LAND_TILE
@@ -83,9 +76,7 @@ WillObjectBumpIntoWater:
 WillObjectBumpIntoLand:
 	call CanObjectLeaveTile
 	ret c
-	ld hl, OBJECT_TILE_COLLISION
-	add hl, bc
-	ld a, [hl]
+	call NormalStep_Shared2 ; ld hl, OBJECT_TILE_COLLISION / add hl, bc / ld a, [hl]
 	call GetTilePermission
 	cp WATER_TILE
 	jr z, WillObjectBumpIntoTile
@@ -93,9 +84,7 @@ WillObjectBumpIntoLand:
 	ret
 
 WillObjectBumpIntoTile:
-	ld hl, OBJECT_TILE_COLLISION
-	add hl, bc
-	ld a, [hl]
+	call NormalStep_Shared2 ; ld hl, OBJECT_TILE_COLLISION / add hl, bc / ld a, [hl]
 	call GetSideWallDirectionMask
 	ret nc
 	push af
@@ -266,12 +255,7 @@ CheckFacingObject::
 	ret
 
 WillObjectBumpIntoSomeoneElse:
-	ld hl, OBJECT_MAP_X
-	add hl, bc
-	ld d, [hl]
-	ld hl, OBJECT_MAP_Y
-	add hl, bc
-	ld e, [hl]
+	call WillObjectBumpIntoWater_Shared ; ld hl, OBJECT_MAP_X / add hl, bc / ld d, [hl] / ...
 	jr IsNPCAtCoord
 
 
@@ -458,4 +442,13 @@ WillObjectIntersectBigObject:
 
 .nope
 	and a
+	ret
+
+WillObjectBumpIntoWater_Shared: ; (tools/outline.py)
+	ld hl, OBJECT_MAP_X
+	add hl, bc
+	ld d, [hl]
+	ld hl, OBJECT_MAP_Y
+	add hl, bc
+	ld e, [hl]
 	ret

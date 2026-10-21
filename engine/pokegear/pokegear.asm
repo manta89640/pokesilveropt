@@ -166,6 +166,7 @@ AnimatePokegearModeIndicatorArrow:
 	ld hl, .XCoords
 	add hl, de
 	ld a, [hl]
+.shared1: ; (tools/outline.py)
 	ld hl, SPRITEANIMSTRUCT_XOFFSET
 	add hl, bc
 	ld [hl], a
@@ -178,33 +179,21 @@ AnimatePokegearModeIndicatorArrow:
 	db $30 ; POKEGEARCARD_RADIO
 
 TownMap_GetCurrentLandmark:
-	ld a, [wMapGroup]
-	ld b, a
-	ld a, [wMapNumber]
-	ld c, a
+	call RegionCheck_Shared ; ld a, [wMapGroup] / ld b, a / ld a, [wMapNumber] / ...
 	call GetWorldMapLocation
 	cp LANDMARK_SPECIAL
 	ret nz
-	ld a, [wBackupMapGroup]
-	ld b, a
-	ld a, [wBackupMapNumber]
-	ld c, a
+	call RegionCheck_Shared2 ; ld a, [wBackupMapGroup] / ld b, a / ld a, [wBackupMapNumber] / ...
 	jp GetWorldMapLocation
 
 TownMap_InitCursorAndPlayerIconPositions:
-	ld a, [wMapGroup]
-	ld b, a
-	ld a, [wMapNumber]
-	ld c, a
+	call RegionCheck_Shared ; ld a, [wMapGroup] / ld b, a / ld a, [wMapNumber] / ...
 	call GetWorldMapLocation
 	cp LANDMARK_FAST_SHIP
 	jr z, .FastShip
 	cp LANDMARK_SPECIAL
 	jr nz, .LoadLandmark
-	ld a, [wBackupMapGroup]
-	ld b, a
-	ld a, [wBackupMapNumber]
-	ld c, a
+	call RegionCheck_Shared2 ; ld a, [wBackupMapGroup] / ld b, a / ld a, [wBackupMapNumber] / ...
 	call GetWorldMapLocation
 .LoadLandmark:
 	ld [wPokegearMapPlayerIconLandmark], a
@@ -582,9 +571,7 @@ PokegearMap_ContinueMap:
 	jp PokegearClock_Joypad.quit ; same as there (tools/tailmerge.py)
 
 .DPad:
-	ld hl, hJoyLast
-	ld a, [hl]
-	and PAD_UP
+	call PokegearMap_ContinueMap_Shared ; ld hl, hJoyLast / ld a, [hl] / and PAD_UP
 	jr nz, .up
 	ld a, [hl]
 	and PAD_DOWN
@@ -654,9 +641,7 @@ PokegearMap_InitCursor:
 	ld hl, SPRITEANIMSTRUCT_TILE_ID
 	add hl, bc
 	ld [hl], $04
-	ld hl, SPRITEANIMSTRUCT_ANIM_SEQ_ID
-	add hl, bc
-	ld [hl], SPRITE_ANIM_FUNC_NULL
+	call TownMapMon.shared1 ; ld hl, SPRITEANIMSTRUCT_ANIM_SEQ_ID / add hl, bc / ld [hl], SPRITE_ANIM_FUNC_NULL
 	pop af
 	push bc
 	call PokegearMap_UpdateCursorPosition
@@ -804,15 +789,7 @@ PokegearPhone_Joypad:
 	jp PokegearClock_Joypad.quit ; same as there (tools/tailmerge.py)
 
 .a
-	ld hl, wPhoneList
-	ld a, [wPokegearPhoneScrollPosition]
-	ld e, a
-	ld d, 0
-	add hl, de
-	ld a, [wPokegearPhoneCursorPosition]
-	ld e, a
-	ld d, 0
-	add hl, de
+	call PokegearPhone_Joypad_Shared ; ld hl, wPhoneList / ld a, [wPokegearPhoneScrollPosition] / ld e, a / ...
 	ld a, [hl]
 	and a
 	ret z
@@ -829,6 +806,7 @@ PokegearPhone_Joypad:
 	ret
 
 .quit_submenu
+.shared2: ; (tools/outline.py)
 	ld a, POKEGEARSTATE_PHONEJOYPAD
 	ld [wJumptableIndex], a
 	ret
@@ -869,8 +847,7 @@ PokegearPhone_MakePhoneCall:
 	farcall Phone_NoSignal
 	ld hl, .GearOutOfServiceText
 	call PrintText
-	ld a, POKEGEARSTATE_PHONEJOYPAD
-	ld [wJumptableIndex], a
+	call PokegearPhone_Joypad.shared2 ; ld a, POKEGEARSTATE_PHONEJOYPAD / ld [wJumptableIndex], a
 	ld hl, PokegearAskWhoCallText
 	jp PrintText
 
@@ -887,14 +864,11 @@ PokegearPhone_FinishPhoneCall:
 	and PAD_A | PAD_B
 	ret z
 	farcall HangUp
-	ld a, POKEGEARSTATE_PHONEJOYPAD
-	ld [wJumptableIndex], a
+	call PokegearPhone_Joypad.shared2 ; ld a, POKEGEARSTATE_PHONEJOYPAD / ld [wJumptableIndex], a
 	jp PokegearPhone_Init.tailmerge_769 ; same as there (tools/tailmerge.py)
 
 PokegearPhone_GetDPad:
-	ld hl, hJoyLast
-	ld a, [hl]
-	and PAD_UP
+	call PokegearMap_ContinueMap_Shared ; ld hl, hJoyLast / ld a, [hl] / and PAD_UP
 	jr nz, .up
 	ld a, [hl]
 	and PAD_DOWN
@@ -1001,15 +975,7 @@ PokegearPhone_UpdateDisplayList:
 	jr PokegearPhone_UpdateCursor
 
 PokegearPhone_DeletePhoneNumber:
-	ld hl, wPhoneList
-	ld a, [wPokegearPhoneScrollPosition]
-	ld e, a
-	ld d, 0
-	add hl, de
-	ld a, [wPokegearPhoneCursorPosition]
-	ld e, a
-	ld d, 0
-	add hl, de
+	call PokegearPhone_Joypad_Shared ; ld hl, wPhoneList / ld a, [wPokegearPhoneScrollPosition] / ld e, a / ...
 	ld [hl], 0
 	ld hl, wPhoneList
 	ld c, CONTACT_LIST_SIZE
@@ -1298,10 +1264,7 @@ AnimateTuningKnob:
 	call .TuningKnob
 	pop bc
 	ld a, [wRadioTuningKnob]
-	ld hl, SPRITEANIMSTRUCT_XOFFSET
-	add hl, bc
-	ld [hl], a
-	ret
+	jp AnimatePokegearModeIndicatorArrow.shared1 ; ld hl, SPRITEANIMSTRUCT_XOFFSET / add hl, bc / ld [hl], a
 
 .TuningKnob:
 	ld hl, hJoyLast
@@ -1460,42 +1423,28 @@ RadioChannels:
 LoadStation_OaksPokemonTalk:
 	xor a ; OAKS_POKEMON_TALK
 	ld [wCurRadioLine], a
-	ld [wNumRadioLinesPrinted], a
-	ld a, BANK(PlayRadioShow)
-	ld hl, PlayRadioShow
+	call LoadStation_PokedexShow_Shared.shared1 ; ld [wNumRadioLinesPrinted], a / ld a, BANK(PlayRadioShow) / ld hl, PlayRadioShow
 	call Radio_BackUpFarCallParams
 	ld de, OaksPKMNTalkName
 	ret
 
 LoadStation_PokedexShow:
 	ld a, POKEDEX_SHOW
-	ld [wCurRadioLine], a
-	xor a
-	ld [wNumRadioLinesPrinted], a
-	ld a, BANK(PlayRadioShow)
-	ld hl, PlayRadioShow
+	call LoadStation_PokedexShow_Shared ; ld [wCurRadioLine], a / xor a / ld [wNumRadioLinesPrinted], a / ...
 	call Radio_BackUpFarCallParams
 	ld de, PokedexShowName
 	ret
 
 LoadStation_PokemonMusic:
 	ld a, POKEMON_MUSIC
-	ld [wCurRadioLine], a
-	xor a
-	ld [wNumRadioLinesPrinted], a
-	ld a, BANK(PlayRadioShow)
-	ld hl, PlayRadioShow
+	call LoadStation_PokedexShow_Shared ; ld [wCurRadioLine], a / xor a / ld [wNumRadioLinesPrinted], a / ...
 	call Radio_BackUpFarCallParams
 	ld de, PokemonMusicName
 	ret
 
 LoadStation_LuckyChannel:
 	ld a, LUCKY_CHANNEL
-	ld [wCurRadioLine], a
-	xor a
-	ld [wNumRadioLinesPrinted], a
-	ld a, BANK(PlayRadioShow)
-	ld hl, PlayRadioShow
+	call LoadStation_PokedexShow_Shared ; ld [wCurRadioLine], a / xor a / ld [wNumRadioLinesPrinted], a / ...
 	call Radio_BackUpFarCallParams
 	ld de, LuckyChannelName
 	ret
@@ -1503,22 +1452,14 @@ LoadStation_LuckyChannel:
 LoadStation_UnownRadio:
 	ld a, UNOWN_RADIO
 .tailmerge_1516: ; (tools/tailmerge.py)
-	ld [wCurRadioLine], a
-	xor a
-	ld [wNumRadioLinesPrinted], a
-	ld a, BANK(PlayRadioShow)
-	ld hl, PlayRadioShow
+	call LoadStation_PokedexShow_Shared ; ld [wCurRadioLine], a / xor a / ld [wNumRadioLinesPrinted], a / ...
 	call Radio_BackUpFarCallParams
 	ld de, UnownStationName
 	ret
 
 LoadStation_PlacesAndPeople:
 	ld a, PLACES_AND_PEOPLE
-	ld [wCurRadioLine], a
-	xor a
-	ld [wNumRadioLinesPrinted], a
-	ld a, BANK(PlayRadioShow)
-	ld hl, PlayRadioShow
+	call LoadStation_PokedexShow_Shared ; ld [wCurRadioLine], a / xor a / ld [wNumRadioLinesPrinted], a / ...
 	call Radio_BackUpFarCallParams
 	ld de, PlacesAndPeopleName
 	ret
@@ -1526,11 +1467,7 @@ LoadStation_PlacesAndPeople:
 LoadStation_LetsAllSing:
 	ld a, LETS_ALL_SING
 .tailmerge_1538: ; (tools/tailmerge.py)
-	ld [wCurRadioLine], a
-	xor a
-	ld [wNumRadioLinesPrinted], a
-	ld a, BANK(PlayRadioShow)
-	ld hl, PlayRadioShow
+	call LoadStation_PokedexShow_Shared ; ld [wCurRadioLine], a / xor a / ld [wNumRadioLinesPrinted], a / ...
 	call Radio_BackUpFarCallParams
 	ld de, LetsAllSingName
 	ret
@@ -1541,11 +1478,7 @@ LoadStation_RocketRadio:
 
 LoadStation_PokeFluteRadio:
 	ld a, POKE_FLUTE_RADIO
-	ld [wCurRadioLine], a
-	xor a
-	ld [wNumRadioLinesPrinted], a
-	ld a, BANK(PlayRadioShow)
-	ld hl, PlayRadioShow
+	call LoadStation_PokedexShow_Shared ; ld [wCurRadioLine], a / xor a / ld [wNumRadioLinesPrinted], a / ...
 	call Radio_BackUpFarCallParams
 	ld de, PokeFluteStationName
 	ret
@@ -1697,9 +1630,7 @@ _TownMap:
 	and PAD_B
 	ret nz
 
-	ld hl, hJoyLast
-	ld a, [hl]
-	and PAD_UP
+	call PokegearMap_ContinueMap_Shared ; ld hl, hJoyLast / ld a, [hl] / and PAD_UP
 	jr nz, .pressed_up
 
 	ld a, [hl]
@@ -2040,26 +1971,14 @@ TownMapBubble:
 
 .Name:
 ; We need the map location of the default flypoint
-	ld a, [wTownMapPlayerIconLandmark]
-	ld l, a
-	ld h, 0
-	add hl, hl ; two bytes per flypoint
-	ld de, Flypoints
-	add hl, de
-	ld e, [hl]
+	call TownMapBubble_Shared ; ld a, [wTownMapPlayerIconLandmark] / ld l, a / ld h, 0 / ...
 	farcall GetLandmarkName
 	hlcoord 2, 1
 	ld de, wStringBuffer1
 	jp PlaceString
 
 GetMapCursorCoordinates:
-	ld a, [wTownMapPlayerIconLandmark]
-	ld l, a
-	ld h, 0
-	add hl, hl
-	ld de, Flypoints
-	add hl, de
-	ld e, [hl]
+	call TownMapBubble_Shared ; ld a, [wTownMapPlayerIconLandmark] / ld l, a / ld h, 0 / ...
 	farcall GetLandmarkCoords
 	ld a, [wTownMapCursorCoordinates]
 	ld c, a
@@ -2106,19 +2025,13 @@ Pokegear_DummyFunction:
 	ret
 
 FlyMap:
-	ld a, [wMapGroup]
-	ld b, a
-	ld a, [wMapNumber]
-	ld c, a
+	call RegionCheck_Shared ; ld a, [wMapGroup] / ld b, a / ld a, [wMapNumber] / ...
 	call GetWorldMapLocation
 ; If we're not in a valid location, i.e. Pokecenter floor 2F,
 ; the backup map information is used.
 	cp LANDMARK_SPECIAL
 	jr nz, .CheckRegion
-	ld a, [wBackupMapGroup]
-	ld b, a
-	ld a, [wBackupMapNumber]
-	ld c, a
+	call RegionCheck_Shared2 ; ld a, [wBackupMapGroup] / ld b, a / ld a, [wBackupMapNumber] / ...
 	call GetWorldMapLocation
 .CheckRegion:
 ; The first 46 locations are part of Johto. The rest are in Kanto.
@@ -2127,11 +2040,7 @@ FlyMap:
 ; Johto fly map
 ; Note that .NoKanto should be modified in tandem with this branch
 	push af
-	ld a, JOHTO_FLYPOINT ; first Johto flypoint
-	ld [wTownMapPlayerIconLandmark], a ; first one is default (New Bark Town)
-	ld [wStartFlypoint], a
-	ld a, KANTO_FLYPOINT - 1 ; last Johto flypoint
-	ld [wEndFlypoint], a
+	call FlyMap_Shared ; ld a, JOHTO_FLYPOINT / ld [wTownMapPlayerIconLandmark], a / ld [wStartFlypoint], a / ...
 ; Fill out the map
 	call FillJohtoMap
 	call .MapHud
@@ -2166,11 +2075,7 @@ FlyMap:
 
 .NoKanto:
 ; If Indigo Plateau hasn't been visited, we use Johto's map instead
-	ld a, JOHTO_FLYPOINT ; first Johto flypoint
-	ld [wTownMapPlayerIconLandmark], a ; first one is default (New Bark Town)
-	ld [wStartFlypoint], a
-	ld a, KANTO_FLYPOINT - 1 ; last Johto flypoint
-	ld [wEndFlypoint], a
+	call FlyMap_Shared ; ld a, JOHTO_FLYPOINT / ld [wTownMapPlayerIconLandmark], a / ld [wStartFlypoint], a / ...
 	call FillJohtoMap
 	pop af
 .MapHud:
@@ -2566,6 +2471,7 @@ TownMapMon:
 	ld hl, SPRITEANIMSTRUCT_TILE_ID
 	add hl, bc
 	ld [hl], $08
+.shared1: ; (tools/outline.py)
 	ld hl, SPRITEANIMSTRUCT_ANIM_SEQ_ID
 	add hl, bc
 	ld [hl], SPRITE_ANIM_FUNC_NULL
@@ -2606,3 +2512,47 @@ INCBIN "gfx/pokegear/dexmap_nest_icon.2bpp"
 FlyMapLabelBorderGFX:
 INCBIN "gfx/pokegear/flymap_label_border.1bpp"
 
+LoadStation_PokedexShow_Shared: ; (tools/outline.py)
+	ld [wCurRadioLine], a
+	xor a
+.shared1: ; (tools/outline.py)
+	ld [wNumRadioLinesPrinted], a
+	ld a, BANK(PlayRadioShow)
+	ld hl, PlayRadioShow
+	ret
+
+PokegearPhone_Joypad_Shared: ; (tools/outline.py)
+	ld hl, wPhoneList
+	ld a, [wPokegearPhoneScrollPosition]
+	ld e, a
+	ld d, 0
+	add hl, de
+	ld a, [wPokegearPhoneCursorPosition]
+	ld e, a
+	ld d, 0
+	add hl, de
+	ret
+
+PokegearMap_ContinueMap_Shared: ; (tools/outline.py)
+	ld hl, hJoyLast
+	ld a, [hl]
+	and PAD_UP
+	ret
+
+FlyMap_Shared: ; (tools/outline.py)
+	ld a, JOHTO_FLYPOINT ; first Johto flypoint
+	ld [wTownMapPlayerIconLandmark], a ; first one is default (New Bark Town)
+	ld [wStartFlypoint], a
+	ld a, KANTO_FLYPOINT - 1 ; last Johto flypoint
+	ld [wEndFlypoint], a
+	ret
+
+TownMapBubble_Shared: ; (tools/outline.py)
+	ld a, [wTownMapPlayerIconLandmark]
+	ld l, a
+	ld h, 0
+	add hl, hl ; two bytes per flypoint
+	ld de, Flypoints
+	add hl, de
+	ld e, [hl]
+	ret

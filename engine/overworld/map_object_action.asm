@@ -51,9 +51,7 @@ SetFacingStepAction:
 	bit SLIDING_F, [hl]
 	jr nz, SetFacingCurrent
 
-	ld hl, OBJECT_STEP_FRAME
-	add hl, bc
-	ld a, [hl]
+	call SetFacingStepAction_Shared ; ld hl, OBJECT_STEP_FRAME / add hl, bc / ld a, [hl]
 	inc a
 	and %00001111
 	ld [hl], a
@@ -102,9 +100,7 @@ CounterclockwiseSpinAction:
 ; using only bits 0,1 and 4,5.
 ; bits 0,1 is a timer (4 overworld frames)
 ; bits 4,5 determines the facing - the direction is counterclockwise.
-	ld hl, OBJECT_STEP_FRAME
-	add hl, bc
-	ld a, [hl]
+	call SetFacingStepAction_Shared ; ld hl, OBJECT_STEP_FRAME / add hl, bc / ld a, [hl]
 	and %11110000
 	ld e, a
 
@@ -131,6 +127,7 @@ CounterclockwiseSpinAction:
 	ld hl, .facings
 	add hl, de
 	ld a, [hl]
+.shared1: ; (tools/outline.py)
 	ld hl, OBJECT_DIRECTION
 	add hl, bc
 	ld [hl], a
@@ -168,9 +165,7 @@ SetFacingBigDollSym:
 	ret
 
 SetFacingBounce:
-	ld hl, OBJECT_STEP_FRAME
-	add hl, bc
-	ld a, [hl]
+	call SetFacingStepAction_Shared ; ld hl, OBJECT_STEP_FRAME / add hl, bc / ld a, [hl]
 	inc a
 	and %00001111
 	ld [hl], a
@@ -188,9 +183,7 @@ SetFacingFreezeBounce:
 	ret
 
 SetFacingWeirdTree:
-	ld hl, OBJECT_STEP_FRAME
-	add hl, bc
-	ld a, [hl]
+	call SetFacingStepAction_Shared ; ld hl, OBJECT_STEP_FRAME / add hl, bc / ld a, [hl]
 	inc a
 	ld [hl], a
 	maskbits NUM_DIRECTIONS, 2
@@ -221,13 +214,7 @@ SetFacingBigDoll:
 	ret
 
 SetFacingBoulderDust:
-	ld hl, OBJECT_STEP_FRAME
-	add hl, bc
-	inc [hl]
-	ld a, [hl]
-
-	ld hl, OBJECT_FACING
-	add hl, bc
+	call SetFacingBoulderDust_Shared ; ld hl, OBJECT_STEP_FRAME / add hl, bc / inc [hl] / ...
 	and 2
 	ld a, FACING_BOULDER_DUST_1
 	jr z, .ok
@@ -238,12 +225,7 @@ SetFacingBoulderDust:
 	ret
 
 SetFacingGrassShake:
-	ld hl, OBJECT_STEP_FRAME
-	add hl, bc
-	inc [hl]
-	ld a, [hl]
-	ld hl, OBJECT_FACING
-	add hl, bc
+	call SetFacingBoulderDust_Shared ; ld hl, OBJECT_STEP_FRAME / add hl, bc / inc [hl] / ...
 	and 4
 	ld a, FACING_GRASS_1
 	jr z, .ok
@@ -251,4 +233,19 @@ SetFacingGrassShake:
 	inc a
 .ok
 	ld [hl], a
+	ret
+
+SetFacingBoulderDust_Shared: ; (tools/outline.py)
+	ld hl, OBJECT_STEP_FRAME
+	add hl, bc
+	inc [hl]
+	ld a, [hl]
+	ld hl, OBJECT_FACING
+	add hl, bc
+	ret
+
+SetFacingStepAction_Shared: ; (tools/outline.py)
+	ld hl, OBJECT_STEP_FRAME
+	add hl, bc
+	ld a, [hl]
 	ret

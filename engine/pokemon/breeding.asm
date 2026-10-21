@@ -2,15 +2,7 @@ CheckBreedmonCompatibility:
 	call .CheckBreedingGroupCompatibility
 	ld c, $0
 	jp nc, .done
-	ld a, [wBreedMon1Species]
-	ld [wCurPartySpecies], a
-	ld a, [wBreedMon1DVs]
-	ld [wTempMonDVs], a
-	ld a, [wBreedMon1DVs + 1]
-	ld [wTempMonDVs + 1], a
-	ld a, TEMPMON
-	ld [wMonType], a
-	predef GetGender
+	call CheckBreedmonCompatibility_Shared ; ld a, [wBreedMon1Species] / ld [wCurPartySpecies], a / ld a, [wBreedMon1DVs] / ...
 	jr c, .genderless
 	ld b, $1
 	jr nz, .breedmon2
@@ -18,15 +10,7 @@ CheckBreedmonCompatibility:
 
 .breedmon2
 	push bc
-	ld a, [wBreedMon2Species]
-	ld [wCurPartySpecies], a
-	ld a, [wBreedMon2DVs]
-	ld [wTempMonDVs], a
-	ld a, [wBreedMon2DVs + 1]
-	ld [wTempMonDVs + 1], a
-	ld a, TEMPMON
-	ld [wMonType], a
-	predef GetGender
+	call CheckBreedmonCompatibility_Shared2 ; ld a, [wBreedMon2Species] / ld [wCurPartySpecies], a / ld a, [wBreedMon2DVs] / ...
 	pop bc
 	jr c, .genderless
 	ld a, $1
@@ -39,17 +23,14 @@ CheckBreedmonCompatibility:
 
 .genderless
 	ld c, $0
-	ld a, [wBreedMon1Species]
-	cp DITTO
+	call DayCare_InitBreeding_Shared2 ; ld a, [wBreedMon1Species] / cp DITTO
 	jr z, .ditto1
-	ld a, [wBreedMon2Species]
-	cp DITTO
+	call DayCare_InitBreeding_Shared ; ld a, [wBreedMon2Species] / cp DITTO
 	jr nz, .done
 	jr .compute
 
 .ditto1
-	ld a, [wBreedMon2Species]
-	cp DITTO
+	call DayCare_InitBreeding_Shared ; ld a, [wBreedMon2Species] / cp DITTO
 	jr z, .done
 
 .compute
@@ -121,8 +102,7 @@ CheckBreedmonCompatibility:
 
 ; Ditto is automatically compatible with everything.
 ; If not Ditto, load the breeding groups into b/c and d/e.
-	ld a, [wBreedMon2Species]
-	cp DITTO
+	call DayCare_InitBreeding_Shared ; ld a, [wBreedMon2Species] / cp DITTO
 	jr z, .Compatible
 	ld [wCurSpecies], a
 	call GetBaseData
@@ -135,8 +115,7 @@ CheckBreedmonCompatibility:
 	swap a
 	ld c, a
 
-	ld a, [wBreedMon1Species]
-	cp DITTO
+	call DayCare_InitBreeding_Shared2 ; ld a, [wBreedMon1Species] / cp DITTO
 	jr z, .Compatible
 	ld [wCurSpecies], a
 	push bc
@@ -255,8 +234,7 @@ HatchEggs:
 	ld [wUnusedEggHatchFlag], a
 	call GetBaseData
 	ld a, [wCurPartyMon]
-	ld hl, wPartyMon1
-	ld bc, PARTYMON_STRUCT_LENGTH
+	call DayCare_GiveEgg_Shared ; ld hl, wPartyMon1 / ld bc, PARTYMON_STRUCT_LENGTH
 	call AddNTimes
 	push hl
 	ld bc, MON_MAXHP
@@ -296,10 +274,7 @@ HatchEggs:
 	ld [hl], a
 	ld hl, MON_OT_ID
 	add hl, bc
-	ld a, [wPlayerID]
-	ld [hli], a
-	ld a, [wPlayerID + 1]
-	ld [hl], a
+	call DayCare_InitBreeding_Shared4 ; ld a, [wPlayerID] / ld [hli], a / ld a, [wPlayerID + 1] / ...
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMonOTs
 	ld bc, NAME_LENGTH
@@ -537,20 +512,16 @@ LoadEggMove:
 .done
 	dec hl
 	ld [hl], b
-	ld hl, wEggMonMoves
-	ld de, wEggMonPP
-	predef FillPP
+	call DayCare_InitBreeding_Shared5 ; ld hl, wEggMonMoves / ld de, wEggMonPP / predef FillPP
 	pop bc
 	pop de
 	ret
 
 GetHeritableMoves:
 	ld hl, wBreedMon2Moves
-	ld a, [wBreedMon1Species]
-	cp DITTO
+	call DayCare_InitBreeding_Shared2 ; ld a, [wBreedMon1Species] / cp DITTO
 	jr z, .ditto1
-	ld a, [wBreedMon2Species]
-	cp DITTO
+	call DayCare_InitBreeding_Shared ; ld a, [wBreedMon2Species] / cp DITTO
 	jr z, .ditto2
 	ld a, [wBreedMotherOrNonDitto]
 	and a
@@ -561,15 +532,7 @@ GetHeritableMoves:
 .ditto1
 	ld a, [wCurPartySpecies]
 	push af
-	ld a, [wBreedMon2Species]
-	ld [wCurPartySpecies], a
-	ld a, [wBreedMon2DVs]
-	ld [wTempMonDVs], a
-	ld a, [wBreedMon2DVs + 1]
-	ld [wTempMonDVs + 1], a
-	ld a, TEMPMON
-	ld [wMonType], a
-	predef GetGender
+	call CheckBreedmonCompatibility_Shared2 ; ld a, [wBreedMon2Species] / ld [wCurPartySpecies], a / ld a, [wBreedMon2DVs] / ...
 	jr c, .inherit_mon2_moves
 	jr nz, .inherit_mon2_moves
 	jr .inherit_mon1_moves
@@ -577,15 +540,7 @@ GetHeritableMoves:
 .ditto2
 	ld a, [wCurPartySpecies]
 	push af
-	ld a, [wBreedMon1Species]
-	ld [wCurPartySpecies], a
-	ld a, [wBreedMon1DVs]
-	ld [wTempMonDVs], a
-	ld a, [wBreedMon1DVs + 1]
-	ld [wTempMonDVs + 1], a
-	ld a, TEMPMON
-	ld [wMonType], a
-	predef GetGender
+	call CheckBreedmonCompatibility_Shared ; ld a, [wBreedMon1Species] / ld [wCurPartySpecies], a / ld a, [wBreedMon1DVs] / ...
 	jr c, .inherit_mon1_moves
 	jr nz, .inherit_mon1_moves
 
@@ -602,11 +557,9 @@ GetHeritableMoves:
 
 GetBreedmonMovePointer:
 	ld hl, wBreedMon1Moves
-	ld a, [wBreedMon1Species]
-	cp DITTO
+	call DayCare_InitBreeding_Shared2 ; ld a, [wBreedMon1Species] / cp DITTO
 	ret z
-	ld a, [wBreedMon2Species]
-	cp DITTO
+	call DayCare_InitBreeding_Shared ; ld a, [wBreedMon2Species] / cp DITTO
 	jr z, .ditto
 	ld a, [wBreedMotherOrNonDitto]
 	and a
@@ -632,18 +585,14 @@ Hatch_UpdateFrontpicBGMapCenter:
 	call WaitTop
 	push hl
 	push bc
-	hlcoord 0, 0
-	ld bc, SCREEN_AREA
-	ld a, ' '
+	call PlaceUnownPrinterFrontpic_Shared ; hlcoord 0, 0 / ld bc, SCREEN_AREA / ld a, ' '
 	call ByteFill
 	pop bc
 	pop hl
 	ld a, b
 	ldh [hBGMapAddress + 1], a
 	ld a, c
-	ldh [hGraphicStartTile], a
-	lb bc, 7, 7
-	predef PlaceGraphic
+	call PlaceUnownPrinterFrontpic.shared2 ; ldh [hGraphicStartTile], a / lb bc, 7, 7 / predef PlaceGraphic
 	pop af
 	call Hatch_LoadFrontpicPal
 	call SetDefaultBGPAndOBP
@@ -883,8 +832,7 @@ LeftWithDayCareManText:
 
 DayCareMonCompatibilityText:
 	push bc
-	ld de, wStringBuffer1
-	ld bc, NAME_LENGTH
+	call GetPriceToRetrieveBreedmon_Shared ; ld de, wStringBuffer1 / ld bc, NAME_LENGTH
 	call CopyBytes
 	call CheckBreedmonCompatibility
 	pop bc
@@ -926,3 +874,21 @@ DayCareMonCompatibilityText:
 	text_far _BreedShowsInterestText
 	text_end
 
+CheckBreedmonCompatibility_Shared: ; (tools/outline.py)
+	ld a, [wBreedMon1Species]
+	ld [wCurPartySpecies], a
+	call DayCare_InitBreeding_Shared3 ; ld a, [wBreedMon1DVs] / ld [wTempMonDVs], a / ld a, [wBreedMon1DVs + 1]
+.shared1: ; (tools/outline.py)
+	ld [wTempMonDVs + 1], a
+	ld a, TEMPMON
+	ld [wMonType], a
+	predef GetGender
+	ret
+
+CheckBreedmonCompatibility_Shared2: ; (tools/outline.py)
+	ld a, [wBreedMon2Species]
+	ld [wCurPartySpecies], a
+	ld a, [wBreedMon2DVs]
+	ld [wTempMonDVs], a
+	ld a, [wBreedMon2DVs + 1]
+	jr CheckBreedmonCompatibility_Shared.shared1 ; ld [wTempMonDVs + 1], a / ld a, TEMPMON / ld [wMonType], a / ...

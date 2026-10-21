@@ -188,9 +188,7 @@ GetTextSpeed:
 	ret
 
 Options_BattleScene:
-	ld hl, wOptions
-	ldh a, [hJoyPressed]
-	bit B_PAD_LEFT, a
+	call Options_BattleScene_Shared ; ld hl, wOptions / ldh a, [hJoyPressed] / bit B_PAD_LEFT, a
 	jr nz, .LeftPressed
 	bit B_PAD_RIGHT, a
 	jr z, .NonePressed
@@ -228,9 +226,7 @@ Options_BattleScene:
 .Off: db "OFF@"
 
 Options_BattleStyle:
-	ld hl, wOptions
-	ldh a, [hJoyPressed]
-	bit B_PAD_LEFT, a
+	call Options_BattleScene_Shared ; ld hl, wOptions / ldh a, [hJoyPressed] / bit B_PAD_LEFT, a
 	jr nz, .LeftPressed
 	bit B_PAD_RIGHT, a
 	jr z, .NonePressed
@@ -264,9 +260,7 @@ Options_BattleStyle:
 .Set:   db "SET  @"
 
 Options_Sound:
-	ld hl, wOptions
-	ldh a, [hJoyPressed]
-	bit B_PAD_LEFT, a
+	call Options_BattleScene_Shared ; ld hl, wOptions / ldh a, [hJoyPressed] / bit B_PAD_LEFT, a
 	jr nz, .LeftPressed
 	bit B_PAD_RIGHT, a
 	jr z, .NonePressed
@@ -548,4 +542,10 @@ Options_UpdateCursorPosition:
 	ld a, [wJumptableIndex]
 	call AddNTimes
 	ld [hl], '▶'
+	ret
+
+Options_BattleScene_Shared: ; (tools/outline.py)
+	ld hl, wOptions
+	ldh a, [hJoyPressed]
+	bit B_PAD_LEFT, a
 	ret

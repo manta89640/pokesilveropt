@@ -10,8 +10,7 @@ DrawHP:
 	push hl
 	push bc
 	; box mons have full HP
-	ld a, [wMonType]
-	cp BOXMON
+	call DrawHP_Shared ; ld a, [wMonType] / cp BOXMON
 	jr z, .at_least_1_hp
 
 	ld a, [wTempMonHP]
@@ -35,8 +34,7 @@ DrawHP:
 	ld d, a
 	ld a, [wTempMonMaxHP + 1]
 	ld e, a
-	ld a, [wMonType]
-	cp BOXMON
+	call DrawHP_Shared ; ld a, [wMonType] / cp BOXMON
 	jr nz, .not_boxmon
 
 	ld b, d
@@ -63,8 +61,7 @@ DrawHP:
 	bccoord 1, 1, 0
 	add hl, bc
 	ld de, wTempMonHP
-	ld a, [wMonType]
-	cp BOXMON
+	call DrawHP_Shared ; ld a, [wMonType] / cp BOXMON
 	jr nz, .not_boxmon_2
 	ld de, wTempMonMaxHP
 .not_boxmon_2
@@ -173,8 +170,7 @@ GetGender:
 
 .DVs:
 ; sBoxMon data is read directly from SRAM.
-	ld a, [wMonType]
-	cp BOXMON
+	call DrawHP_Shared ; ld a, [wMonType] / cp BOXMON
 	ld a, BANK(sBox)
 	call z, OpenSRAM
 
@@ -192,8 +188,7 @@ GetGender:
 	ld b, a
 
 ; Close SRAM if we were dealing with a sBoxMon.
-	ld a, [wMonType]
-	cp BOXMON
+	call DrawHP_Shared ; ld a, [wMonType] / cp BOXMON
 	call z, CloseSRAM
 
 ; We need the gender ratio to do anything with this.
@@ -335,8 +330,7 @@ Unused_PlaceEnemyHPLevel:
 	call PlaceString
 	call CopyMonToTempMon
 	pop hl
-	ld a, [wCurPartySpecies]
-	cp EGG
+	call Unused_PlaceEnemyHPLevel_Shared ; ld a, [wCurPartySpecies] / cp EGG
 	ret z
 	push hl
 	ld bc, -12
@@ -473,4 +467,14 @@ ListMoves:
 	jr nz, .nonmove_loop
 
 .done
+	ret
+
+DrawHP_Shared: ; (tools/outline.py)
+	ld a, [wMonType]
+	cp BOXMON
+	ret
+
+Unused_PlaceEnemyHPLevel_Shared: ; (tools/outline.py)
+	ld a, [wCurPartySpecies]
+	cp EGG
 	ret

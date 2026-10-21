@@ -4,9 +4,7 @@ GetTrainerClassName:
 	cp RIVAL1
 	jr z, .rival
 
-	ld [wCurSpecies], a
-	ld a, TRAINER_NAME
-	ld [wNamedObjectType], a
+	call GetTrainerClassName_Shared ; ld [wCurSpecies], a / ld a, TRAINER_NAME / ld [wNamedObjectType], a
 	call GetName
 	ld de, wStringBuffer1
 	ret
@@ -31,9 +29,7 @@ GetOTName:
 	cp RIVAL1
 	jr z, .ok
 
-	ld [wCurSpecies], a
-	ld a, TRAINER_NAME
-	ld [wNamedObjectType], a
+	call GetTrainerClassName_Shared ; ld [wCurSpecies], a / ld a, TRAINER_NAME / ld [wNamedObjectType], a
 	call GetName
 	ld hl, wStringBuffer1
 
@@ -63,3 +59,9 @@ GetTrainerAttributes:
 	ret
 
 INCLUDE "data/trainers/attributes.asm"
+
+GetTrainerClassName_Shared: ; (tools/outline.py)
+	ld [wCurSpecies], a
+	ld a, TRAINER_NAME
+	ld [wNamedObjectType], a
+	ret

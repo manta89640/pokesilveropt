@@ -216,8 +216,7 @@ TrainerCard_PrintTopHalfOfCard:
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 5
 	call PrintNum
 	hlcoord 7, 6
-	ld de, wMoney
-	lb bc, PRINTNUM_MONEY | 3, 6
+	call PlaceMoneyTextbox_Shared ; ld de, wMoney / lb bc, PRINTNUM_MONEY | 3, 6
 	call PrintNum
 	hlcoord 1, 3
 	ld de, .HorizontalDivider
@@ -400,22 +399,8 @@ TrainerCard_Page2_3_PlaceLeadersFaces:
 	push hl
 	ld [hli], a
 	inc a
-	ld [hli], a
-	inc a
-	ld [hli], a
-	inc a
-	ld [hli], a
-	inc a
-	ld de, SCREEN_WIDTH - 3
-	add hl, de
-	ld [hli], a
-	inc a
-	ld [hli], a
-	inc a
-	ld [hli], a
-	inc a
-	ld de, SCREEN_WIDTH - 3
-	add hl, de
+	call TrainerCard_Page2_3_PlaceLeadersFaces_Shared ; ld [hli], a / inc a / ld [hli], a / ...
+	call TrainerCard_Page2_3_PlaceLeadersFaces_Shared ; ld [hli], a / inc a / ld [hli], a / ...
 	ld [hli], a
 	inc a
 	ld [hli], a
@@ -621,3 +606,14 @@ ChrisPicAndTrainerCardGFX: INCBIN "gfx/trainer_card/chris_and_card.2bpp.lz"
 ; Page 1 loads 86 tiles of the card status, which go on into the leaders
 CardStatusAndLeaderGFX: INCBIN "gfx/trainer_card/status_and_leaders.2bpp.lz"
 BadgeGFX: INCBIN "gfx/trainer_card/badges.2bpp.lz"
+
+TrainerCard_Page2_3_PlaceLeadersFaces_Shared: ; (tools/outline.py)
+	ld [hli], a
+	inc a
+	ld [hli], a
+	inc a
+	ld [hli], a
+	inc a
+	ld de, SCREEN_WIDTH - 3
+	add hl, de
+	ret

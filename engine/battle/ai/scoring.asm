@@ -6,8 +6,7 @@ AI_Basic:
 ;  -Using status-only moves if the player can't be statused
 ;  -Using moves that fail if they've already been used
 
-	ld hl, wEnemyAIMoveScores - 1
-	ld de, wEnemyMonMoves
+	call AI_Basic_Shared ; ld hl, wEnemyAIMoveScores - 1 / ld de, wEnemyMonMoves
 	ld b, NUM_MOVES + 1
 .checkmove
 	dec b
@@ -73,8 +72,7 @@ AI_Setup:
 ; 50% chance to greatly encourage stat-down moves during the first turn of player's Pokemon.
 ; Almost 90% chance to greatly discourage stat-modifying moves otherwise.
 
-	ld hl, wEnemyAIMoveScores - 1
-	ld de, wEnemyMonMoves
+	call AI_Basic_Shared ; ld hl, wEnemyAIMoveScores - 1 / ld de, wEnemyMonMoves
 	ld b, NUM_MOVES + 1
 .checkmove
 	dec b
@@ -147,8 +145,7 @@ AI_Types:
 ; Discourage not very effective moves unless
 ; all damaging moves are of the same type.
 
-	ld hl, wEnemyAIMoveScores - 1
-	ld de, wEnemyMonMoves
+	call AI_Basic_Shared ; ld hl, wEnemyAIMoveScores - 1 / ld de, wEnemyMonMoves
 	ld b, NUM_MOVES + 1
 .checkmove
 	dec b
@@ -165,9 +162,7 @@ AI_Types:
 	push hl
 	push bc
 	push de
-	ld a, 1
-	ldh [hBattleTurn], a
-	callfar BattleCheckTypeMatchup
+	call AI_Types_Shared ; ld a, 1 / ldh [hBattleTurn], a / callfar BattleCheckTypeMatchup
 	pop de
 	pop bc
 	pop hl
@@ -233,8 +228,7 @@ AI_Types:
 AI_Offensive:
 ; Greatly discourage non-damaging moves.
 
-	ld hl, wEnemyAIMoveScores - 1
-	ld de, wEnemyMonMoves
+	call AI_Basic_Shared ; ld hl, wEnemyAIMoveScores - 1 / ld de, wEnemyMonMoves
 	ld b, NUM_MOVES + 1
 .checkmove
 	dec b
@@ -409,14 +403,11 @@ AI_Smart_Sleep:
 
 AI_Smart_LeechHit:
 	push hl
-	ld a, 1
-	ldh [hBattleTurn], a
-	callfar BattleCheckTypeMatchup
+	call AI_Types_Shared ; ld a, 1 / ldh [hBattleTurn], a / callfar BattleCheckTypeMatchup
 	pop hl
 
 ; 60% chance to discourage this move if not very effective.
-	ld a, [wTypeMatchup]
-	cp EFFECTIVE
+	call AI_Smart_LeechHit_Shared ; ld a, [wTypeMatchup] / cp EFFECTIVE
 	jr c, .discourage
 
 ; Do nothing if effectiveness is neutral.
@@ -491,8 +482,7 @@ AI_Smart_LockOn:
 	push hl
 	push bc
 	farcall BattleCheckTypeMatchup
-	ld a, [wTypeMatchup]
-	cp EFFECTIVE
+	call AI_Smart_LeechHit_Shared ; ld a, [wTypeMatchup] / cp EFFECTIVE
 	pop bc
 	pop hl
 	jr c, .checkmove
@@ -512,8 +502,7 @@ AI_Smart_LockOn:
 
 .player_locked_on
 	push hl
-	ld hl, wEnemyAIMoveScores - 1
-	ld de, wEnemyMonMoves
+	call AI_Basic_Shared ; ld hl, wEnemyAIMoveScores - 1 / ld de, wEnemyMonMoves
 	ld c, NUM_MOVES + 1
 
 .checkmove2
@@ -587,8 +576,7 @@ AI_Smart_EvasionUp:
 	jr nc, .hp_mismatch_1
 
 ; ...greatly encourage this move if player is badly poisoned.
-	ld a, [wPlayerSubStatus5]
-	bit SUBSTATUS_TOXIC, a
+	call AI_Smart_EvasionUp_Shared ; ld a, [wPlayerSubStatus5] / bit SUBSTATUS_TOXIC, a
 	jr nz, .greatly_encourage
 
 ; ...70% chance to greatly encourage this move if player is not badly poisoned.
@@ -636,8 +624,7 @@ AI_Smart_EvasionUp:
 ; 100% chance to end up here if enemy's HP is below 25%.
 ; In other words, we only end up here if the move has not been encouraged or dismissed.
 .not_encouraged
-	ld a, [wPlayerSubStatus5]
-	bit SUBSTATUS_TOXIC, a
+	call AI_Smart_EvasionUp_Shared ; ld a, [wPlayerSubStatus5] / bit SUBSTATUS_TOXIC, a
 	jr nz, .maybe_greatly_encourage
 
 	ld a, [wPlayerSubStatus4]
@@ -645,10 +632,7 @@ AI_Smart_EvasionUp:
 	jr nz, .maybe_encourage
 
 ; Discourage this move if enemy's evasion level is higher than player's accuracy level.
-	ld a, [wEnemyEvaLevel]
-	ld b, a
-	ld a, [wPlayerAccLevel]
-	cp b
+	call AI_Smart_EvasionUp_Shared2 ; ld a, [wEnemyEvaLevel] / ld b, a / ld a, [wPlayerAccLevel] / ...
 	jr c, .discourage
 
 ; Greatly encourage this move if the player is in the middle of Fury Cutter or Rollout.
@@ -723,8 +707,7 @@ AI_Smart_MirrorMove:
 ; If the player did use a move last turn...
 .usedmove
 	push hl
-	ld hl, UsefulMoves
-	ld de, 1
+	call AI_Smart_MirrorMove_Shared ; ld hl, UsefulMoves / ld de, 1
 	call IsInArray
 	pop hl
 
@@ -758,8 +741,7 @@ AI_Smart_AccuracyDown:
 	jr nc, .hp_mismatch_1
 
 ; ...greatly encourage this move if player is badly poisoned.
-	ld a, [wPlayerSubStatus5]
-	bit SUBSTATUS_TOXIC, a
+	call AI_Smart_EvasionUp_Shared ; ld a, [wPlayerSubStatus5] / bit SUBSTATUS_TOXIC, a
 	jr nz, .greatly_encourage
 
 ; ...70% chance to greatly encourage this move if player is not badly poisoned.
@@ -803,8 +785,7 @@ AI_Smart_AccuracyDown:
 
 ; We only end up here if the move has not been already encouraged.
 .not_encouraged
-	ld a, [wPlayerSubStatus5]
-	bit SUBSTATUS_TOXIC, a
+	call AI_Smart_EvasionUp_Shared ; ld a, [wPlayerSubStatus5] / bit SUBSTATUS_TOXIC, a
 	jr nz, .maybe_greatly_encourage
 
 	ld a, [wPlayerSubStatus4]
@@ -812,10 +793,7 @@ AI_Smart_AccuracyDown:
 	jr nz, .encourage
 
 ; Discourage this move if enemy's evasion level is higher than player's accuracy level.
-	ld a, [wEnemyEvaLevel]
-	ld b, a
-	ld a, [wPlayerAccLevel]
-	cp b
+	call AI_Smart_EvasionUp_Shared2 ; ld a, [wEnemyEvaLevel] / ld b, a / ld a, [wPlayerAccLevel] / ...
 	jr c, .discourage
 
 ; Greatly encourage this move if the player is in the middle of Fury Cutter or Rollout.
@@ -978,8 +956,7 @@ AI_Smart_TrapTarget:
 
 ; 50% chance to greatly encourage this move if player is either
 ; badly poisoned, in love, identified, stuck in Rollout, or has a Nightmare.
-	ld a, [wPlayerSubStatus5]
-	bit SUBSTATUS_TOXIC, a
+	call AI_Smart_EvasionUp_Shared ; ld a, [wPlayerSubStatus5] / bit SUBSTATUS_TOXIC, a
 	jr nz, .encourage
 
 	ld a, [wPlayerSubStatus1]
@@ -1246,12 +1223,9 @@ AI_Smart_Mimic:
 	ld a, [wLastPlayerCounterMove]
 	call AIGetEnemyMove
 
-	ld a, 1
-	ldh [hBattleTurn], a
-	callfar BattleCheckTypeMatchup
+	call AI_Types_Shared ; ld a, 1 / ldh [hBattleTurn], a / callfar BattleCheckTypeMatchup
 
-	ld a, [wTypeMatchup]
-	cp EFFECTIVE
+	call AI_Smart_LeechHit_Shared ; ld a, [wTypeMatchup] / cp EFFECTIVE
 	pop hl
 	jr c, .discourage
 	jr z, .encourage
@@ -1264,8 +1238,7 @@ AI_Smart_Mimic:
 .encourage
 	ld a, [wLastPlayerCounterMove]
 	push hl
-	ld hl, UsefulMoves
-	ld de, 1
+	call AI_Smart_MirrorMove_Shared ; ld hl, UsefulMoves / ld de, 1
 	call IsInArray
 
 	pop hl
@@ -1298,8 +1271,7 @@ AI_Smart_Counter:
 	and a
 	jr z, .skipmove
 
-	ld a, [wEnemyMoveStruct + MOVE_TYPE]
-	cp SPECIAL
+	call AI_Smart_Counter_Shared ; ld a, [wEnemyMoveStruct + MOVE_TYPE] / cp SPECIAL
 	jr nc, .skipmove
 
 	inc b
@@ -1326,8 +1298,7 @@ AI_Smart_Counter:
 	and a
 	ret z
 
-	ld a, [wEnemyMoveStruct + MOVE_TYPE]
-	cp SPECIAL
+	call AI_Smart_Counter_Shared ; ld a, [wEnemyMoveStruct + MOVE_TYPE] / cp SPECIAL
 	ret nc
 
 .encourage
@@ -1364,8 +1335,7 @@ AI_Smart_Encore:
 	predef CheckTypeMatchup
 
 	pop hl
-	ld a, [wTypeMatchup]
-	cp EFFECTIVE
+	call AI_Smart_LeechHit_Shared ; ld a, [wTypeMatchup] / cp EFFECTIVE
 	jr nc, .weakmove
 
 	and a
@@ -1399,11 +1369,7 @@ AI_Smart_PainSplit:
 
 	push hl
 	ld hl, wEnemyMonHP
-	ld b, [hl]
-	inc hl
-	ld c, [hl]
-	sla c
-	rl b
+	call AI_Smart_PainSplit_Shared ; ld b, [hl] / inc hl / ld c, [hl] / ...
 	ld hl, wBattleMonHP + 1
 	ld a, [hld]
 	cp c
@@ -1579,9 +1545,7 @@ AI_Smart_PriorityHit:
 	ld a, 1
 	ldh [hBattleTurn], a
 	push hl
-	callfar EnemyAttackDamage
-	callfar BattleCommand_DamageCalc
-	callfar BattleCommand_Stab
+	call AIDamageCalc.shared1 ; callfar EnemyAttackDamage / callfar BattleCommand_DamageCalc / callfar BattleCommand_Stab
 	pop hl
 	ld a, [wCurDamage + 1]
 	ld c, a
@@ -1622,8 +1586,7 @@ AI_Smart_Conversion2:
 
 	callfar BattleCheckTypeMatchup
 
-	ld a, [wTypeMatchup]
-	cp EFFECTIVE
+	call AI_Smart_LeechHit_Shared ; ld a, [wTypeMatchup] / cp EFFECTIVE
 	pop hl
 	jr c, .discourage
 	ret z
@@ -1644,8 +1607,7 @@ AI_Smart_Disable:
 
 	push hl
 	ld a, [wLastPlayerCounterMove]
-	ld hl, UsefulMoves
-	ld de, 1
+	call AI_Smart_MirrorMove_Shared ; ld hl, UsefulMoves / ld de, 1
 	call IsInArray
 
 	pop hl
@@ -1823,8 +1785,7 @@ AI_Smart_Protect:
 	jr nz, .encourage
 
 ; Encourage this move if the player is affected by Toxic, Leech Seed, or Curse.
-	ld a, [wPlayerSubStatus5]
-	bit SUBSTATUS_TOXIC, a
+	call AI_Smart_EvasionUp_Shared ; ld a, [wPlayerSubStatus5] / bit SUBSTATUS_TOXIC, a
 	jr nz, .encourage
 	ld a, [wPlayerSubStatus4]
 	bit SUBSTATUS_LEECH_SEED, a
@@ -2170,8 +2131,7 @@ AI_Smart_HiddenPower:
 	pop hl
 
 ; Discourage Hidden Power if not very effective.
-	ld a, [wTypeMatchup]
-	cp EFFECTIVE
+	call AI_Smart_LeechHit_Shared ; ld a, [wTypeMatchup] / cp EFFECTIVE
 	jr c, .bad
 
 ; Discourage Hidden Power if its base power is lower than 50.
@@ -2377,8 +2337,7 @@ AI_Smart_MirrorCoat:
 	and a
 	jr z, .skipmove
 
-	ld a, [wEnemyMoveStruct + MOVE_TYPE]
-	cp SPECIAL
+	call AI_Smart_Counter_Shared ; ld a, [wEnemyMoveStruct + MOVE_TYPE] / cp SPECIAL
 	jr c, .skipmove
 
 	inc b
@@ -2405,8 +2364,7 @@ AI_Smart_MirrorCoat:
 	and a
 	ret z
 
-	ld a, [wEnemyMoveStruct + MOVE_TYPE]
-	cp SPECIAL
+	call AI_Smart_Counter_Shared ; ld a, [wEnemyMoveStruct + MOVE_TYPE] / cp SPECIAL
 	ret c
 
 .encourage
@@ -2563,14 +2521,7 @@ AICheckPlayerHalfHP:
 	inc hl
 	ld c, [hl]
 .tailmerge_2621: ; (tools/tailmerge.py)
-	sla c
-	rl b
-	inc hl
-	inc hl
-	ld a, [hld]
-	cp c
-	ld a, [hl]
-	sbc b
+	call AICheckPlayerHalfHP_Shared ; sla c / rl b / inc hl / ...
 	pop hl
 	ret
 
@@ -2583,14 +2534,7 @@ AICheckEnemyHalfHP:
 	inc hl
 	ld c, [hl]
 .tailmerge_2640: ; (tools/tailmerge.py)
-	sla c
-	rl b
-	inc hl
-	inc hl
-	ld a, [hld]
-	cp c
-	ld a, [hl]
-	sbc b
+	call AICheckPlayerHalfHP_Shared ; sla c / rl b / inc hl / ...
 	pop bc
 	pop de
 	pop hl
@@ -2601,21 +2545,13 @@ AICheckEnemyQuarterHP:
 	push de
 	push bc
 	ld hl, wEnemyMonHP
-	ld b, [hl]
-	inc hl
-	ld c, [hl]
-	sla c
-	rl b
+	call AI_Smart_PainSplit_Shared ; ld b, [hl] / inc hl / ld c, [hl] / ...
 	jr AICheckEnemyHalfHP.tailmerge_2640 ; same as there (tools/tailmerge.py)
 
 AICheckPlayerQuarterHP:
 	push hl
 	ld hl, wBattleMonHP
-	ld b, [hl]
-	inc hl
-	ld c, [hl]
-	sla c
-	rl b
+	call AI_Smart_PainSplit_Shared ; ld b, [hl] / inc hl / ld c, [hl] / ...
 	jr AICheckPlayerHalfHP.tailmerge_2621 ; same as there (tools/tailmerge.py)
 
 AIHasMoveEffect:
@@ -2700,8 +2636,7 @@ AI_Opportunist:
 	ret c
 
 .lowhp
-	ld hl, wEnemyAIMoveScores - 1
-	ld de, wEnemyMonMoves
+	call AI_Basic_Shared ; ld hl, wEnemyAIMoveScores - 1 / ld de, wEnemyMonMoves
 	ld c, NUM_MOVES + 1
 .checkmove
 	inc hl
@@ -2774,10 +2709,7 @@ AI_Aggressive:
 	sbc d
 	jr c, .checkmove
 
-	ld a, [wCurDamage + 1]
-	ld e, a
-	ld a, [wCurDamage]
-	ld d, a
+	call AI_Aggressive_Shared ; ld a, [wCurDamage + 1] / ld e, a / ld a, [wCurDamage] / ...
 	ld c, b
 	jr .checkmove
 
@@ -2794,8 +2726,7 @@ AI_Aggressive:
 	ret z
 
 ; Discourage moves that do less damage unless they're reckless too.
-	ld hl, wEnemyAIMoveScores - 1
-	ld de, wEnemyMonMoves
+	call AI_Basic_Shared ; ld hl, wEnemyAIMoveScores - 1 / ld de, wEnemyMonMoves
 	ld b, 0
 .checkmove2
 	inc b
@@ -2853,6 +2784,7 @@ AIDamageCalc:
 	ret
 
 .notconstant
+.shared1: ; (tools/outline.py)
 	callfar EnemyAttackDamage
 	callfar BattleCommand_DamageCalc
 	callfar BattleCommand_Stab
@@ -2867,8 +2799,7 @@ AI_Cautious:
 	and a
 	ret z
 
-	ld hl, wEnemyAIMoveScores - 1
-	ld de, wEnemyMonMoves
+	call AI_Basic_Shared ; ld hl, wEnemyAIMoveScores - 1 / ld de, wEnemyMonMoves
 	ld c, NUM_MOVES + 1
 .loop
 	inc hl
@@ -2905,8 +2836,7 @@ INCLUDE "data/battle/ai/residual_moves.asm"
 AI_Status:
 ; Dismiss status moves that don't affect the player.
 
-	ld hl, wEnemyAIMoveScores - 1
-	ld de, wEnemyMonMoves
+	call AI_Basic_Shared ; ld hl, wEnemyAIMoveScores - 1 / ld de, wEnemyMonMoves
 	ld b, NUM_MOVES + 1
 .checkmove
 	dec b
@@ -2948,9 +2878,7 @@ AI_Status:
 	push hl
 	push bc
 	push de
-	ld a, 1
-	ldh [hBattleTurn], a
-	callfar BattleCheckTypeMatchup
+	call AI_Types_Shared ; ld a, 1 / ldh [hBattleTurn], a / callfar BattleCheckTypeMatchup
 	pop de
 	pop bc
 	pop hl
@@ -2968,8 +2896,7 @@ AI_Risky:
 ; Use any move that will KO the target.
 ; Risky moves will often be an exception (see below).
 
-	ld hl, wEnemyAIMoveScores - 1
-	ld de, wEnemyMonMoves
+	call AI_Basic_Shared ; ld hl, wEnemyAIMoveScores - 1 / ld de, wEnemyMonMoves
 	ld c, NUM_MOVES + 1
 .checkmove
 	inc hl
@@ -3008,10 +2935,7 @@ AI_Risky:
 .checkko
 	call AIDamageCalc
 
-	ld a, [wCurDamage + 1]
-	ld e, a
-	ld a, [wCurDamage]
-	ld d, a
+	call AI_Aggressive_Shared ; ld a, [wCurDamage + 1] / ld e, a / ld a, [wCurDamage] / ...
 	ld a, [wBattleMonHP + 1]
 	cp e
 	ld a, [wBattleMonHP]
@@ -3070,4 +2994,68 @@ AI_80_20:
 AI_50_50:
 	call Random
 	cp 50 percent + 1
+	ret
+
+AI_Basic_Shared: ; (tools/outline.py)
+	ld hl, wEnemyAIMoveScores - 1
+	ld de, wEnemyMonMoves
+	ret
+
+AI_Smart_LeechHit_Shared: ; (tools/outline.py)
+	ld a, [wTypeMatchup]
+	cp EFFECTIVE
+	ret
+
+AI_Smart_EvasionUp_Shared: ; (tools/outline.py)
+	ld a, [wPlayerSubStatus5]
+	bit SUBSTATUS_TOXIC, a
+	ret
+
+AI_Types_Shared: ; (tools/outline.py)
+	ld a, 1
+	ldh [hBattleTurn], a
+	callfar BattleCheckTypeMatchup
+	ret
+
+AI_Smart_PainSplit_Shared: ; (tools/outline.py)
+	ld b, [hl]
+	inc hl
+	ld c, [hl]
+	sla c
+	rl b
+	ret
+
+AICheckPlayerHalfHP_Shared: ; (tools/outline.py)
+	sla c
+	rl b
+	inc hl
+	inc hl
+	ld a, [hld]
+	cp c
+	ld a, [hl]
+	sbc b
+	ret
+
+AI_Smart_MirrorMove_Shared: ; (tools/outline.py)
+	ld hl, UsefulMoves
+	ld de, 1
+	ret
+
+AI_Smart_Counter_Shared: ; (tools/outline.py)
+	ld a, [wEnemyMoveStruct + MOVE_TYPE]
+	cp SPECIAL
+	ret
+
+AI_Smart_EvasionUp_Shared2: ; (tools/outline.py)
+	ld a, [wEnemyEvaLevel]
+	ld b, a
+	ld a, [wPlayerAccLevel]
+	cp b
+	ret
+
+AI_Aggressive_Shared: ; (tools/outline.py)
+	ld a, [wCurDamage + 1]
+	ld e, a
+	ld a, [wCurDamage]
+	ld d, a
 	ret

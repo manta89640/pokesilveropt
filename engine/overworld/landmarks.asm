@@ -49,10 +49,7 @@ RegionCheck:
 ; Checks if the player is in Kanto or Johto.
 ; If in Johto, returns 0 in e.
 ; If in Kanto, returns 1 in e.
-	ld a, [wMapGroup]
-	ld b, a
-	ld a, [wMapNumber]
-	ld c, a
+	call RegionCheck_Shared ; ld a, [wMapGroup] / ld b, a / ld a, [wMapNumber] / ...
 	call GetWorldMapLocation
 	cp LANDMARK_FAST_SHIP ; S.S. Aqua
 	jr z, .johto
@@ -60,10 +57,7 @@ RegionCheck:
 	jr nz, .checkagain
 
 ; In a special map, get the backup map group / map id
-	ld a, [wBackupMapGroup]
-	ld b, a
-	ld a, [wBackupMapNumber]
-	ld c, a
+	call RegionCheck_Shared2 ; ld a, [wBackupMapGroup] / ld b, a / ld a, [wBackupMapNumber] / ...
 	call GetWorldMapLocation
 
 .checkagain
@@ -79,4 +73,18 @@ RegionCheck:
 	ret
 .kanto
 	ld e, KANTO_REGION
+	ret
+
+RegionCheck_Shared: ; (tools/outline.py)
+	ld a, [wMapGroup]
+	ld b, a
+	ld a, [wMapNumber]
+	ld c, a
+	ret
+
+RegionCheck_Shared2: ; (tools/outline.py)
+	ld a, [wBackupMapGroup]
+	ld b, a
+	ld a, [wBackupMapNumber]
+	ld c, a
 	ret

@@ -67,14 +67,7 @@ CheckBalance_MomItem2:
 	jr nc, .nope
 	call GetItemFromMom
 	assert MOMITEM_TRIGGER == 0
-	ld a, [hli]
-	ldh [hMoneyTemp], a
-	ld a, [hli]
-	ldh [hMoneyTemp + 1], a
-	ld a, [hli]
-	ldh [hMoneyTemp + 2], a
-	ld de, wMomsMoney
-	ld bc, hMoneyTemp
+	call CheckBalance_MomItem2_Shared ; ld a, [hli] / ldh [hMoneyTemp], a / ld a, [hli] / ...
 	farcall CompareMoney
 	jr nc, .have_enough_money
 
@@ -124,14 +117,7 @@ MomBuysItem_DeductFunds:
 	call GetItemFromMom
 	ld de, MOMITEM_COST
 	add hl, de
-	ld a, [hli]
-	ldh [hMoneyTemp], a
-	ld a, [hli]
-	ldh [hMoneyTemp + 1], a
-	ld a, [hli]
-	ldh [hMoneyTemp + 2], a
-	ld de, wMomsMoney
-	ld bc, hMoneyTemp
+	call CheckBalance_MomItem2_Shared ; ld a, [hli] / ldh [hMoneyTemp], a / ld a, [hli] / ...
 	farcall TakeMoney
 	ret
 
@@ -235,3 +221,14 @@ MomFoundADollText:
 MomItsInYourRoomText:
 	text_far _MomItsInYourRoomText
 	text_end
+
+CheckBalance_MomItem2_Shared: ; (tools/outline.py)
+	ld a, [hli]
+	ldh [hMoneyTemp], a
+	ld a, [hli]
+	ldh [hMoneyTemp + 1], a
+	ld a, [hli]
+	ldh [hMoneyTemp + 2], a
+	ld de, wMomsMoney
+	ld bc, hMoneyTemp
+	ret

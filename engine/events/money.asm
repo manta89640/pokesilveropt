@@ -10,6 +10,7 @@ GiveMoney::
 	ld a, [hli]
 	ld [de], a
 	inc de
+.shared1: ; (tools/outline.py)
 	ld a, [hli]
 	ld [de], a
 	inc de
@@ -171,13 +172,7 @@ GiveCoins::
 	call CompareFunds
 	jr c, .not_maxed
 	ld hl, .maxcoins
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hli]
-	ld [de], a
-	scf
-	ret
+	jp GiveMoney.shared1 ; ld a, [hli] / ld [de], a / inc de / ...
 
 .not_maxed
 	and a

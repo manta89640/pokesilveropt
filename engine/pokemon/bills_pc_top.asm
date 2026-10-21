@@ -197,8 +197,7 @@ ClearPCItemScreen:
 
 CopyBoxmonToTempMon:
 	ld a, [wCurPartyMon]
-	ld hl, sBoxMon1Species
-	ld bc, BOXMON_STRUCT_LENGTH
+	call CopyBoxmonToTempMon_Shared ; ld hl, sBoxMon1Species / ld bc, BOXMON_STRUCT_LENGTH
 	call AddNTimes
 	ld de, wTempMonSpecies
 	ld bc, BOXMON_STRUCT_LENGTH
@@ -207,3 +206,7 @@ CopyBoxmonToTempMon:
 	call CopyBytes
 	jp CloseSRAM
 
+CopyBoxmonToTempMon_Shared: ; (tools/outline.py)
+	ld hl, sBoxMon1Species
+	ld bc, BOXMON_STRUCT_LENGTH
+	ret

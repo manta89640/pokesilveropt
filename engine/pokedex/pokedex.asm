@@ -221,8 +221,7 @@ Pokedex_InitMainScreen:
 	ld bc, SCREEN_AREA
 	call ByteFill
 	farcall DrawPokedexListWindow
-	hlcoord 0, 17
-	ld de, String_START_SEARCH
+	call Pokedex_InitMainScreen_Shared3 ; hlcoord 0, 17 / ld de, String_START_SEARCH
 	call Pokedex_PlaceString
 	ld a, 7
 	ld [wDexListingHeight], a
@@ -233,8 +232,7 @@ Pokedex_InitMainScreen:
 	ld a, POKEDEX_SCX
 	ldh [hSCX], a
 
-	ld a, [wCurDexMode]
-	cp DEXMODE_OLD
+	call Pokedex_InitMainScreen_Shared ; ld a, [wCurDexMode] / cp DEXMODE_OLD
 	ld a, $4a
 	jr z, .okay
 	ld a, $47
@@ -246,13 +244,11 @@ Pokedex_InitMainScreen:
 
 	call Pokedex_ResetBGMapMode
 	ld a, -1
-	ld [wCurPartySpecies], a
-	ld a, SCGB_POKEDEX
+	call Pokedex_InitMainScreen_Shared2 ; ld [wCurPartySpecies], a / ld a, SCGB_POKEDEX
 	call Pokedex_GetSGBLayout
 	call Pokedex_UpdateCursorOAM
 	farcall DrawPokedexListWindow
-	hlcoord 0, 17
-	ld de, String_START_SEARCH
+	call Pokedex_InitMainScreen_Shared3 ; hlcoord 0, 17 / ld de, String_START_SEARCH
 	call Pokedex_PlaceString
 	ld a, 7
 	ld [wDexListingHeight], a
@@ -296,11 +292,7 @@ Pokedex_UpdateMainScreen:
 	call Pokedex_BlackOutBG
 	ld a, DEXSTATE_OPTION_SCR
 .tailmerge_298: ; (tools/tailmerge.py)
-	ld [wJumptableIndex], a
-	xor a
-	ldh [hSCX], a
-	ld a, $a7
-	ldh [hWX], a
+	call Pokedex_UpdateSearchResultsScreen.shared1 ; ld [wJumptableIndex], a / xor a / ldh [hSCX], a / ...
 	jp DelayFrame
 
 .start
@@ -331,8 +323,7 @@ Pokedex_InitDexEntryScreen:
 	ld a, $a7
 	ldh [hWX], a
 	call Pokedex_GetSelectedMon
-	ld [wCurPartySpecies], a
-	ld a, SCGB_POKEDEX
+	call Pokedex_InitMainScreen_Shared2 ; ld [wCurPartySpecies], a / ld a, SCGB_POKEDEX
 	call Pokedex_GetSGBLayout
 	ld a, [wCurPartySpecies]
 	call PlayMonCry
@@ -398,8 +389,7 @@ Pokedex_ReinitDexEntryScreen:
 	call Pokedex_LoadSelectedMonTiles
 	call WaitBGMap
 	call Pokedex_GetSelectedMon
-	ld [wCurPartySpecies], a
-	ld a, SCGB_POKEDEX
+	call Pokedex_InitMainScreen_Shared2 ; ld [wCurPartySpecies], a / ld a, SCGB_POKEDEX
 	call Pokedex_GetSGBLayout
 	ld a, [wCurPartySpecies]
 	call PlayMonCry
@@ -446,8 +436,7 @@ DexEntryScreen_MenuActionJumptable:
 	call Pokedex_LoadSelectedMonTiles
 	call WaitBGMap
 	call Pokedex_GetSelectedMon
-	ld [wCurPartySpecies], a
-	ld a, SCGB_POKEDEX
+	call Pokedex_InitMainScreen_Shared2 ; ld [wCurPartySpecies], a / ld a, SCGB_POKEDEX
 	jp Pokedex_GetSGBLayout
 
 .Cry:
@@ -715,8 +704,7 @@ Pokedex_InitSearchResultsScreen:
 	call Pokedex_PlaceSearchResultsTypeStrings
 	call Pokedex_UpdateSearchResultsCursorOAM
 	ld a, -1
-	ld [wCurPartySpecies], a
-	ld a, SCGB_POKEDEX
+	call Pokedex_InitMainScreen_Shared2 ; ld [wCurPartySpecies], a / ld a, SCGB_POKEDEX
 	jp Pokedex_InitOptionScreen.tailmerge_511 ; same as there (tools/tailmerge.py)
 
 Pokedex_UpdateSearchResultsScreen:
@@ -757,6 +745,7 @@ Pokedex_UpdateSearchResultsScreen:
 	call ClearSprites
 	call Pokedex_OrderMonsByMode
 	ld a, DEXSTATE_SEARCH_SCR
+.shared1: ; (tools/outline.py)
 	ld [wJumptableIndex], a
 	xor a
 	ldh [hSCX], a
@@ -883,10 +872,7 @@ Pokedex_NextOrPreviousDexEntry:
 	ret
 
 .up
-	ld a, [wDexListingHeight]
-	ld d, a
-	ld a, [wDexListingEnd]
-	ld e, a
+	call Pokedex_NextOrPreviousDexEntry_Shared ; ld a, [wDexListingHeight] / ld d, a / ld a, [wDexListingEnd] / ...
 	call Pokedex_ListingMoveCursorUp
 	jr nc, .nope
 	call Pokedex_GetSelectedMon
@@ -895,10 +881,7 @@ Pokedex_NextOrPreviousDexEntry:
 	jr .up
 
 .down
-	ld a, [wDexListingHeight]
-	ld d, a
-	ld a, [wDexListingEnd]
-	ld e, a
+	call Pokedex_NextOrPreviousDexEntry_Shared ; ld a, [wDexListingHeight] / ld d, a / ld a, [wDexListingEnd] / ...
 	call Pokedex_ListingMoveCursorDown
 	jr nc, .nope
 	call Pokedex_GetSelectedMon
@@ -920,10 +903,7 @@ Pokedex_NextOrPreviousDexEntry:
 
 Pokedex_ListingHandleDPadInput:
 ; Handles D-pad input for a list of Pokémon.
-	ld a, [wDexListingHeight]
-	ld d, a
-	ld a, [wDexListingEnd]
-	ld e, a
+	call Pokedex_NextOrPreviousDexEntry_Shared ; ld a, [wDexListingHeight] / ld d, a / ld a, [wDexListingEnd] / ...
 	ld hl, hJoyLast
 	ld a, [hl]
 	and PAD_UP
@@ -1034,8 +1014,7 @@ Pokedex_FillColumn:
 
 Pokedex_DrawMainScreenBG:
 ; Draws the left sidebar and the bottom bar on the main screen.
-	hlcoord 0, 17
-	ld de, String_START_SEARCH
+	call Pokedex_InitMainScreen_Shared3 ; hlcoord 0, 17 / ld de, String_START_SEARCH
 	call Pokedex_PlaceString
 	ld a, $32
 	hlcoord 0, 0
@@ -1080,9 +1059,7 @@ Pokedex_DrawMainScreenBG:
 	call Pokedex_FillColumn
 	hlcoord 8, 0
 	ld [hl], $59
-	hlcoord 8, 8
-	ld [hl], $53
-	hlcoord 8, 9
+	call Pokedex_DrawMainScreenBG_Shared ; hlcoord 8, 8 / ld [hl], $53 / hlcoord 8, 9
 	ld [hl], $54
 	hlcoord 8, 16
 	ld [hl], $5b
@@ -1143,8 +1120,7 @@ Pokedex_DrawOptionScreenBG:
 	hlcoord 0, 2
 	lb bc, 8, 18
 	call Pokedex_PlaceBorder
-	hlcoord 0, 12
-	lb bc, 4, 18
+	call Pokedex_DisplayModeDescription_Shared.shared1 ; hlcoord 0, 12 / lb bc, 4, 18
 	call Pokedex_PlaceBorder
 	hlcoord 0, 1
 	ld de, .Title
@@ -1229,9 +1205,7 @@ Pokedex_DrawSearchResultsScreenBG:
 	ld b, 7
 	ld a, $5a
 	call Pokedex_FillColumn
-	hlcoord 8, 8
-	ld [hl], $53
-	hlcoord 8, 9
+	call Pokedex_DrawMainScreenBG_Shared ; hlcoord 8, 8 / ld [hl], $53 / hlcoord 8, 9
 	ld [hl], $69
 	hlcoord 8, 10
 	ld [hl], $6a
@@ -1418,8 +1392,7 @@ Pokedex_PrintListing:
 ; Prints the list of Pokémon on the main Pokédex screen.
 
 ; This check is completely useless.
-	ld a, [wCurDexMode]
-	cp DEXMODE_OLD
+	call Pokedex_InitMainScreen_Shared ; ld a, [wCurDexMode] / cp DEXMODE_OLD
 	jr z, .okay
 	ld c, 11
 	jr .resume
@@ -1479,8 +1452,7 @@ Pokedex_PrintListing:
 	jp PlaceString
 
 Pokedex_PrintNumberIfOldMode:
-	ld a, [wCurDexMode]
-	cp DEXMODE_OLD
+	call Pokedex_InitMainScreen_Shared ; ld a, [wCurDexMode] / cp DEXMODE_OLD
 	jr z, .printnum
 	ret
 
@@ -1661,10 +1633,7 @@ INCLUDE "data/pokemon/dex_order_alpha.asm"
 INCLUDE "data/pokemon/dex_order_new.asm"
 
 Pokedex_DisplayModeDescription:
-	xor a
-	ldh [hBGMapMode], a
-	hlcoord 0, 12
-	lb bc, 4, 18
+	call Pokedex_DisplayModeDescription_Shared ; xor a / ldh [hBGMapMode], a / hlcoord 0, 12 / ...
 	call Pokedex_PlaceBorder
 	ld a, [wDexArrowCursorPosIndex]
 	ld hl, .Modes
@@ -1700,10 +1669,7 @@ Pokedex_DisplayModeDescription:
 	next "in catching order.@"
 
 Pokedex_DisplayChangingModesMessage:
-	xor a
-	ldh [hBGMapMode], a
-	hlcoord 0, 12
-	lb bc, 4, 18
+	call Pokedex_DisplayModeDescription_Shared ; xor a / ldh [hBGMapMode], a / hlcoord 0, 12 / ...
 	call Pokedex_PlaceBorder
 	ld de, String_ChangingModesPleaseWait
 	hlcoord 1, 14
@@ -1902,10 +1868,7 @@ Pokedex_SearchForMons:
 INCLUDE "data/types/search_types.asm"
 
 Pokedex_DisplayTypeNotFoundMessage:
-	xor a
-	ldh [hBGMapMode], a
-	hlcoord 0, 12
-	lb bc, 4, 18
+	call Pokedex_DisplayModeDescription_Shared ; xor a / ldh [hBGMapMode], a / hlcoord 0, 12 / ...
 	call Pokedex_PlaceBorder
 	ld de, .TypeNotFound
 	hlcoord 1, 14
@@ -1920,8 +1883,7 @@ Pokedex_DisplayTypeNotFoundMessage:
 	next "was not found.@"
 
 Pokedex_UpdateCursorOAM:
-	ld a, [wCurDexMode]
-	cp DEXMODE_OLD
+	call Pokedex_InitMainScreen_Shared ; ld a, [wCurDexMode] / cp DEXMODE_OLD
 	jr z, Pokedex_PutOldModeCursorOAM
 	call Pokedex_PutNewModeABCModeCursorOAM
 	jp Pokedex_PutScrollbarOAM
@@ -2019,8 +1981,7 @@ Pokedex_PutNewModeABCModeCursorOAM:
 	db -1
 
 Pokedex_UpdateSearchResultsCursorOAM:
-	ld a, [wCurDexMode]
-	cp DEXMODE_OLD
+	call Pokedex_InitMainScreen_Shared ; ld a, [wCurDexMode] / cp DEXMODE_OLD
 	jp z, Pokedex_PutOldModeCursorOAM
 	ld hl, .CursorOAM
 	jr Pokedex_LoadCursorOAM
@@ -2510,4 +2471,40 @@ Pokedex_SetBGMapMode_3ifDMG_4ifCGB:
 Pokedex_ResetBGMapMode:
 	xor a
 	ldh [hBGMapMode], a
+	ret
+
+Pokedex_DisplayModeDescription_Shared: ; (tools/outline.py)
+	xor a
+	ldh [hBGMapMode], a
+.shared1: ; (tools/outline.py)
+	hlcoord 0, 12
+	lb bc, 4, 18
+	ret
+
+Pokedex_NextOrPreviousDexEntry_Shared: ; (tools/outline.py)
+	ld a, [wDexListingHeight]
+	ld d, a
+	ld a, [wDexListingEnd]
+	ld e, a
+	ret
+
+Pokedex_InitMainScreen_Shared: ; (tools/outline.py)
+	ld a, [wCurDexMode]
+	cp DEXMODE_OLD
+	ret
+
+Pokedex_InitMainScreen_Shared2: ; (tools/outline.py)
+	ld [wCurPartySpecies], a
+	ld a, SCGB_POKEDEX
+	ret
+
+Pokedex_InitMainScreen_Shared3: ; (tools/outline.py)
+	hlcoord 0, 17
+	ld de, String_START_SEARCH
+	ret
+
+Pokedex_DrawMainScreenBG_Shared: ; (tools/outline.py)
+	hlcoord 8, 8
+	ld [hl], $53
+	hlcoord 8, 9
 	ret

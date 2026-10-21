@@ -71,14 +71,7 @@ LoadContestantName:
 	dec a
 	jr z, .player
 ; Find the pointer for the trainer class of the Bug Catching Contestant whose ID is in a.
-	ld c, a
-	ld b, 0
-	ld hl, BugContestantPointers
-	add hl, bc
-	add hl, bc
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
+	call LoadContestantName_Shared ; ld c, a / ld b, 0 / ld hl, BugContestantPointers / ...
 ; Copy the Trainer Class to c.
 	ld a, [hli]
 	ld c, a
@@ -169,9 +162,7 @@ DetermineContestWinners:
 	ld c, 2
 	call CompareBytes
 	jr c, .not_first_place
-	ld hl, wBugContestSecondPlaceWinnerID
-	ld de, wBugContestThirdPlaceWinnerID
-	ld bc, BUG_CONTESTANT_SIZE
+	call DetermineContestWinners_Shared ; ld hl, wBugContestSecondPlaceWinnerID / ld de, wBugContestThirdPlaceWinnerID / ld bc, BUG_CONTESTANT_SIZE
 	call CopyBytes
 	ld hl, wBugContestFirstPlaceWinnerID
 	ld de, wBugContestSecondPlaceWinnerID
@@ -186,9 +177,7 @@ DetermineContestWinners:
 	ld c, 2
 	call CompareBytes
 	jr c, .not_second_place
-	ld hl, wBugContestSecondPlaceWinnerID
-	ld de, wBugContestThirdPlaceWinnerID
-	ld bc, BUG_CONTESTANT_SIZE
+	call DetermineContestWinners_Shared ; ld hl, wBugContestSecondPlaceWinnerID / ld de, wBugContestThirdPlaceWinnerID / ld bc, BUG_CONTESTANT_SIZE
 	call CopyBytes
 	ld hl, wBugContestSecondPlaceWinnerID
 	jr CopyTempContestant
@@ -230,14 +219,7 @@ ComputeAIContestantScores:
 	inc a
 	ld [wBugContestTempWinnerID], a
 	dec a
-	ld c, a
-	ld b, 0
-	ld hl, BugContestantPointers
-	add hl, bc
-	add hl, bc
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
+	call LoadContestantName_Shared ; ld c, a / ld b, 0 / ld hl, BugContestantPointers / ...
 	inc hl
 	inc hl
 .loop2
@@ -345,9 +327,7 @@ ContestScore:
 
 	; Remaining HP / 8
 	ld a, [wContestMonHP + 1]
-	srl a
-	srl a
-	srl a
+	call ContestScore_Shared ; srl a / srl a / srl a
 	call .AddContestStat
 
 	; Whether it's holding an item
@@ -368,4 +348,27 @@ ContestScore:
 	ret nc
 	dec hl
 	inc [hl]
+	ret
+
+LoadContestantName_Shared: ; (tools/outline.py)
+	ld c, a
+	ld b, 0
+	ld hl, BugContestantPointers
+	add hl, bc
+	add hl, bc
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ret
+
+DetermineContestWinners_Shared: ; (tools/outline.py)
+	ld hl, wBugContestSecondPlaceWinnerID
+	ld de, wBugContestThirdPlaceWinnerID
+	ld bc, BUG_CONTESTANT_SIZE
+	ret
+
+ContestScore_Shared: ; (tools/outline.py)
+	srl a
+	srl a
+	srl a
 	ret

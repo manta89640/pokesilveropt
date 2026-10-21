@@ -313,12 +313,7 @@ _CalcDaysSince:
 	ret
 
 CopyDayHourMinSecToHL:
-	ld a, [wCurDay]
-	ld [hli], a
-	ldh a, [hHours]
-	ld [hli], a
-	ldh a, [hMinutes]
-	ld [hli], a
+	call CopyDayHourMinToHL.shared1 ; ld a, [wCurDay] / ld [hli], a / ldh a, [hHours] / ...
 	ldh a, [hSeconds]
 	ld [hli], a
 	ret
@@ -330,6 +325,7 @@ CopyDayToHL:
 
 
 CopyDayHourMinToHL:
+.shared1: ; (tools/outline.py)
 	ld a, [wCurDay]
 	ld [hli], a
 	ldh a, [hHours]

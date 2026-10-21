@@ -1,12 +1,7 @@
 PrintMoveDescription:
 	push hl
 	ld hl, MoveDescriptions
-	ld a, [wCurSpecies]
-	dec a
-	ld c, a
-	ld b, 0
-	add hl, bc
-	add hl, bc
+	call PrintItemDescription_Shared ; ld a, [wCurSpecies] / dec a / ld c, a / ...
 	ld a, BANK(MoveDescriptions)
 	call GetFarWord
 	ld d, h

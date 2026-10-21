@@ -5,10 +5,7 @@ _Multiply::
 
 	xor a
 	ldh [hMultiplicand - 1], a
-	ldh [hMathBuffer + 1], a
-	ldh [hMathBuffer + 2], a
-	ldh [hMathBuffer + 3], a
-	ldh [hMathBuffer + 4], a
+	call _Multiply_Shared ; ldh [hMathBuffer + 1], a / ldh [hMathBuffer + 2], a / ldh [hMathBuffer + 3], a / ...
 
 .loop
 	ldh a, [hMultiplier]
@@ -82,10 +79,7 @@ _Multiply::
 _Divide::
 	xor a
 	ldh [hMathBuffer + 0], a
-	ldh [hMathBuffer + 1], a
-	ldh [hMathBuffer + 2], a
-	ldh [hMathBuffer + 3], a
-	ldh [hMathBuffer + 4], a
+	call _Multiply_Shared ; ldh [hMathBuffer + 1], a / ldh [hMathBuffer + 2], a / ldh [hMathBuffer + 3], a / ...
 
 	ld a, 9
 	ld e, a
@@ -186,4 +180,11 @@ _Divide::
 	ldh a, [hMathBuffer + 1]
 	ldh [hQuotient + 0], a
 
+	ret
+
+_Multiply_Shared: ; (tools/outline.py)
+	ldh [hMathBuffer + 1], a
+	ldh [hMathBuffer + 2], a
+	ldh [hMathBuffer + 3], a
+	ldh [hMathBuffer + 4], a
 	ret

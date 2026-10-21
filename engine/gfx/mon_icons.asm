@@ -44,10 +44,7 @@ PartyMenu_InitAnimatedMonIcon:
 	push af
 	ldh a, [hObjectStructIndex]
 	ld hl, wPartySpecies
-	ld e, a
-	ld d, 0
-	add hl, de
-	ld a, [hl]
+	call ReadMonMenuIcon.shared1 ; ld e, a / ld d, 0 / add hl, de / ...
 	call ReadMonMenuIcon
 	ld [wCurIcon], a
 	call GetMemIconGFX
@@ -241,10 +238,7 @@ FreezeMonIcons:
 
 .ok
 	push hl
-	ld c, l
-	ld b, h
-	ld hl, SPRITEANIMSTRUCT_ANIM_SEQ_ID
-	add hl, bc
+	call FreezeMonIcons_Shared ; ld c, l / ld b, h / ld hl, SPRITEANIMSTRUCT_ANIM_SEQ_ID / ...
 	ld [hl], a
 	pop hl
 
@@ -263,10 +257,7 @@ UnfreezeMonIcons:
 	and a
 	jr z, .next
 	push hl
-	ld c, l
-	ld b, h
-	ld hl, SPRITEANIMSTRUCT_ANIM_SEQ_ID
-	add hl, bc
+	call FreezeMonIcons_Shared ; ld c, l / ld b, h / ld hl, SPRITEANIMSTRUCT_ANIM_SEQ_ID / ...
 	ld [hl], SPRITE_ANIM_FUNC_PARTY_MON
 	pop hl
 .next
@@ -294,10 +285,7 @@ HoldSwitchmonIcon:
 	ld a, SPRITE_ANIM_FUNC_PARTY_MON_SWITCH
 .join_back
 	push hl
-	ld c, l
-	ld b, h
-	ld hl, SPRITEANIMSTRUCT_ANIM_SEQ_ID
-	add hl, bc
+	call FreezeMonIcons_Shared ; ld c, l / ld b, h / ld hl, SPRITEANIMSTRUCT_ANIM_SEQ_ID / ...
 	ld [hl], a
 	pop hl
 .next
@@ -312,6 +300,7 @@ ReadMonMenuIcon:
 	jr z, .egg
 	dec a
 	ld hl, MonMenuIcons
+.shared1: ; (tools/outline.py)
 	ld e, a
 	ld d, 0
 	add hl, de
@@ -326,3 +315,10 @@ INCLUDE "data/pokemon/menu_icons.asm"
 INCLUDE "data/icon_pointers.asm"
 
 INCLUDE "gfx/icons.asm"
+
+FreezeMonIcons_Shared: ; (tools/outline.py)
+	ld c, l
+	ld b, h
+	ld hl, SPRITEANIMSTRUCT_ANIM_SEQ_ID
+	add hl, bc
+	ret

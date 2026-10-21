@@ -3,23 +3,17 @@ InsertPokemonIntoBox:
 	call OpenSRAM
 	ld hl, sBoxCount
 	call InsertSpeciesIntoBoxOrParty
-	ld a, [sBoxCount]
-	dec a
-	ld [wNextBoxOrPartyIndex], a
+	call InsertPokemonIntoBox_Shared ; ld a, [sBoxCount] / dec a / ld [wNextBoxOrPartyIndex], a
 	ld hl, sBoxMonNicknames
 	ld bc, MON_NAME_LENGTH
 	ld de, wBufferMonNickname
 	call InsertDataIntoBoxOrParty
-	ld a, [sBoxCount]
-	dec a
-	ld [wNextBoxOrPartyIndex], a
+	call InsertPokemonIntoBox_Shared ; ld a, [sBoxCount] / dec a / ld [wNextBoxOrPartyIndex], a
 	ld hl, sBoxMonOTs
 	ld bc, NAME_LENGTH
 	ld de, wBufferMonOT
 	call InsertDataIntoBoxOrParty
-	ld a, [sBoxCount]
-	dec a
-	ld [wNextBoxOrPartyIndex], a
+	call InsertPokemonIntoBox_Shared ; ld a, [sBoxCount] / dec a / ld [wNextBoxOrPartyIndex], a
 	ld hl, sBoxMons
 	ld bc, BOXMON_STRUCT_LENGTH
 	ld de, wBufferMon
@@ -40,23 +34,17 @@ InsertPokemonIntoBox:
 InsertPokemonIntoParty:
 	ld hl, wPartyCount
 	call InsertSpeciesIntoBoxOrParty
-	ld a, [wPartyCount]
-	dec a
-	ld [wNextBoxOrPartyIndex], a
+	call InsertPokemonIntoParty_Shared ; ld a, [wPartyCount] / dec a / ld [wNextBoxOrPartyIndex], a
 	ld hl, wPartyMonNicknames
 	ld bc, MON_NAME_LENGTH
 	ld de, wBufferMonNickname
 	call InsertDataIntoBoxOrParty
-	ld a, [wPartyCount]
-	dec a
-	ld [wNextBoxOrPartyIndex], a
+	call InsertPokemonIntoParty_Shared ; ld a, [wPartyCount] / dec a / ld [wNextBoxOrPartyIndex], a
 	ld hl, wPartyMonOTs
 	ld bc, NAME_LENGTH
 	ld de, wBufferMonOT
 	call InsertDataIntoBoxOrParty
-	ld a, [wPartyCount]
-	dec a
-	ld [wNextBoxOrPartyIndex], a
+	call InsertPokemonIntoParty_Shared ; ld a, [wPartyCount] / dec a / ld [wNextBoxOrPartyIndex], a
 	ld hl, wPartyMons
 	ld bc, PARTYMON_STRUCT_LENGTH
 	ld de, wBufferMon
@@ -129,3 +117,15 @@ InsertDataIntoBoxOrParty:
 	ld e, l
 	pop hl
 	jp CopyBytes
+
+InsertPokemonIntoBox_Shared: ; (tools/outline.py)
+	ld a, [sBoxCount]
+	dec a
+	ld [wNextBoxOrPartyIndex], a
+	ret
+
+InsertPokemonIntoParty_Shared: ; (tools/outline.py)
+	ld a, [wPartyCount]
+	dec a
+	ld [wNextBoxOrPartyIndex], a
+	ret

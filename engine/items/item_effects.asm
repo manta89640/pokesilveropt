@@ -1242,8 +1242,7 @@ StatExpItemPointerOffsets:
 	db CALCIUM, MON_SPC_EXP - MON_STAT_EXP
 
 RareCandy_StatBooster_GetParameters:
-	ld a, [wCurPartySpecies]
-	ld [wCurSpecies], a
+	call RareCandy_StatBooster_GetParameters_Shared ; ld a, [wCurPartySpecies] / ld [wCurSpecies], a
 	ld [wTempSpecies], a
 	ld a, MON_LEVEL
 	call GetPartyParamLocation
@@ -2271,8 +2270,7 @@ RestorePPEffect:
 	ld a, b
 	ld [wCurMoveNum], a
 	jr nz, .loop
-	ld hl, wPartyMon1Moves
-	ld bc, PARTYMON_STRUCT_LENGTH
+	call RestorePPEffect_Shared ; ld hl, wPartyMon1Moves / ld bc, PARTYMON_STRUCT_LENGTH
 	call GetMthMoveOfNthPartymon
 
 	push hl
@@ -2339,8 +2337,7 @@ BattleRestorePP:
 
 .UpdateBattleMonPP:
 	ld a, [wCurPartyMon]
-	ld hl, wPartyMon1Moves
-	ld bc, PARTYMON_STRUCT_LENGTH
+	call RestorePPEffect_Shared ; ld hl, wPartyMon1Moves / ld bc, PARTYMON_STRUCT_LENGTH
 	call AddNTimes
 	ld de, wBattleMonMoves
 	ld b, NUM_MOVES
@@ -2386,8 +2383,7 @@ Elixer_RestorePPofAllMoves:
 	ld b, NUM_MOVES
 .moveLoop
 	push bc
-	ld hl, wPartyMon1Moves
-	ld bc, PARTYMON_STRUCT_LENGTH
+	call RestorePPEffect_Shared ; ld hl, wPartyMon1Moves / ld bc, PARTYMON_STRUCT_LENGTH
 	call GetMthMoveOfNthPartymon
 	ld a, [hl]
 	and a
@@ -2757,8 +2753,7 @@ GetMaxPPOfMove:
 	ld a, [wMonType]
 	and a
 
-	ld hl, wPartyMon1Moves
-	ld bc, PARTYMON_STRUCT_LENGTH
+	call RestorePPEffect_Shared ; ld hl, wPartyMon1Moves / ld bc, PARTYMON_STRUCT_LENGTH
 	jr z, .got_partymon ; PARTYMON
 
 	ld hl, wOTPartyMon1Moves
@@ -2835,4 +2830,14 @@ GetMthMoveOfCurrentMon:
 	ld c, a
 	ld b, 0
 	add hl, bc
+	ret
+
+RestorePPEffect_Shared: ; (tools/outline.py)
+	ld hl, wPartyMon1Moves
+	ld bc, PARTYMON_STRUCT_LENGTH
+	ret
+
+RareCandy_StatBooster_GetParameters_Shared: ; (tools/outline.py)
+	ld a, [wCurPartySpecies]
+	ld [wCurSpecies], a
 	ret

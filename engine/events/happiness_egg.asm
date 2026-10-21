@@ -1,6 +1,5 @@
 GetFirstPokemonHappiness:
-	ld hl, wPartyMon1Happiness
-	ld bc, PARTYMON_STRUCT_LENGTH
+	call GetFirstPokemonHappiness_Shared ; ld hl, wPartyMon1Happiness / ld bc, PARTYMON_STRUCT_LENGTH
 	ld de, wPartySpecies
 .loop
 	ld a, [de]
@@ -44,8 +43,7 @@ ChangeHappiness:
 	ret z
 
 	push bc
-	ld hl, wPartyMon1Happiness
-	ld bc, PARTYMON_STRUCT_LENGTH
+	call GetFirstPokemonHappiness_Shared ; ld hl, wPartyMon1Happiness / ld bc, PARTYMON_STRUCT_LENGTH
 	ld a, [wCurPartyMon]
 	call AddNTimes
 	pop bc
@@ -217,4 +215,9 @@ DayCareStep::
 	ld hl, wDayCareMan
 	res DAYCAREMAN_MONS_COMPATIBLE_F, [hl]
 	set DAYCAREMAN_HAS_EGG_F, [hl]
+	ret
+
+GetFirstPokemonHappiness_Shared: ; (tools/outline.py)
+	ld hl, wPartyMon1Happiness
+	ld bc, PARTYMON_STRUCT_LENGTH
 	ret

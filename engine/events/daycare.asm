@@ -226,8 +226,7 @@ GetPriceToRetrieveBreedmon:
 	ld [wStringBuffer2], a
 	ld a, d
 	ld [wStringBuffer2 + 1], a
-	ld de, wStringBuffer1
-	ld bc, NAME_LENGTH
+	call GetPriceToRetrieveBreedmon_Shared ; ld de, wStringBuffer1 / ld bc, NAME_LENGTH
 	call CopyBytes
 	ld hl, 0
 	ld bc, 100
@@ -458,8 +457,7 @@ DayCare_GiveEgg:
 	ld hl, wEggMonOT
 	call CopyBytes
 
-	ld hl, wPartyMon1
-	ld bc, PARTYMON_STRUCT_LENGTH
+	call DayCare_GiveEgg_Shared ; ld hl, wPartyMon1 / ld bc, PARTYMON_STRUCT_LENGTH
 	call DayCare_GetCurrentPartyMember
 	ld hl, wEggMon
 	ld bc, BOXMON_STRUCT_LENGTH
@@ -468,8 +466,7 @@ DayCare_GiveEgg:
 	call GetBaseData
 	ld a, [wPartyCount]
 	dec a
-	ld hl, wPartyMon1
-	ld bc, PARTYMON_STRUCT_LENGTH
+	call DayCare_GiveEgg_Shared ; ld hl, wPartyMon1 / ld bc, PARTYMON_STRUCT_LENGTH
 	call AddNTimes
 	ld b, h
 	ld c, l
@@ -538,20 +535,16 @@ DayCare_InitBreeding:
 	ld hl, wEggMonOT
 	ld bc, NAME_LENGTH
 	call ByteFill
-	ld a, [wBreedMon1DVs]
-	ld [wTempMonDVs], a
-	ld a, [wBreedMon1DVs + 1]
+	call DayCare_InitBreeding_Shared3 ; ld a, [wBreedMon1DVs] / ld [wTempMonDVs], a / ld a, [wBreedMon1DVs + 1]
 	ld [wTempMonDVs + 1], a
 	ld a, [wBreedMon1Species]
 	ld [wCurPartySpecies], a
 	ld a, TEMPMON
 	ld [wMonType], a
-	ld a, [wBreedMon1Species]
-	cp DITTO
+	call DayCare_InitBreeding_Shared2 ; ld a, [wBreedMon1Species] / cp DITTO
 	ld a, $1
 	jr z, .LoadWhichBreedmonIsTheMother
-	ld a, [wBreedMon2Species]
-	cp DITTO
+	call DayCare_InitBreeding_Shared ; ld a, [wBreedMon2Species] / cp DITTO
 	ld a, $0
 	jr z, .LoadWhichBreedmonIsTheMother
 	farcall GetGender
@@ -603,10 +596,7 @@ DayCare_InitBreeding:
 	predef FillMoves
 	farcall InitEggMoves
 	ld hl, wEggMonID
-	ld a, [wPlayerID]
-	ld [hli], a
-	ld a, [wPlayerID + 1]
-	ld [hl], a
+	call DayCare_InitBreeding_Shared4 ; ld a, [wPlayerID] / ld [hli], a / ld a, [wPlayerID + 1] / ...
 	ld a, [wCurPartyLevel]
 	ld d, a
 	callfar CalcExpAtLevel
@@ -632,12 +622,10 @@ DayCare_InitBreeding:
 	ld [hld], a
 	ld [wTempMonDVs + 1], a
 	ld de, wBreedMon1DVs
-	ld a, [wBreedMon1Species]
-	cp DITTO
+	call DayCare_InitBreeding_Shared2 ; ld a, [wBreedMon1Species] / cp DITTO
 	jr z, .GotDVs
 	ld de, wBreedMon2DVs
-	ld a, [wBreedMon2Species]
-	cp DITTO
+	call DayCare_InitBreeding_Shared ; ld a, [wBreedMon2Species] / cp DITTO
 	jr z, .GotDVs
 	ld a, TEMPMON
 	ld [wMonType], a
@@ -684,12 +672,9 @@ DayCare_InitBreeding:
 	ld de, wMonOrItemNameBuffer
 	ld bc, NAME_LENGTH
 	call CopyBytes
-	ld hl, wEggMonMoves
-	ld de, wEggMonPP
-	predef FillPP
+	call DayCare_InitBreeding_Shared5 ; ld hl, wEggMonMoves / ld de, wEggMonPP / predef FillPP
 	ld hl, wMonOrItemNameBuffer
-	ld de, wStringBuffer1
-	ld bc, NAME_LENGTH
+	call GetPriceToRetrieveBreedmon_Shared ; ld de, wStringBuffer1 / ld bc, NAME_LENGTH
 	call CopyBytes
 	ld a, [wBaseEggSteps]
 	ld hl, wEggMonHappiness
@@ -704,3 +689,42 @@ DayCare_InitBreeding:
 
 .String_EGG:
 	db "EGG@"
+
+DayCare_InitBreeding_Shared: ; (tools/outline.py)
+	ld a, [wBreedMon2Species]
+	cp DITTO
+	ret
+
+DayCare_InitBreeding_Shared2: ; (tools/outline.py)
+	ld a, [wBreedMon1Species]
+	cp DITTO
+	ret
+
+GetPriceToRetrieveBreedmon_Shared: ; (tools/outline.py)
+	ld de, wStringBuffer1
+	ld bc, NAME_LENGTH
+	ret
+
+DayCare_GiveEgg_Shared: ; (tools/outline.py)
+	ld hl, wPartyMon1
+	ld bc, PARTYMON_STRUCT_LENGTH
+	ret
+
+DayCare_InitBreeding_Shared3: ; (tools/outline.py)
+	ld a, [wBreedMon1DVs]
+	ld [wTempMonDVs], a
+	ld a, [wBreedMon1DVs + 1]
+	ret
+
+DayCare_InitBreeding_Shared4: ; (tools/outline.py)
+	ld a, [wPlayerID]
+	ld [hli], a
+	ld a, [wPlayerID + 1]
+	ld [hl], a
+	ret
+
+DayCare_InitBreeding_Shared5: ; (tools/outline.py)
+	ld hl, wEggMonMoves
+	ld de, wEggMonPP
+	predef FillPP
+	ret

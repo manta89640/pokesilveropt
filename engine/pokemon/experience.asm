@@ -81,11 +81,7 @@ CalcExpAtLevel:
 	ld a, [hli]
 	push af
 ; Multiply the level by d
-	xor a
-	ldh [hMultiplicand + 0], a
-	ldh [hMultiplicand + 1], a
-	ld a, d
-	ldh [hMultiplicand + 2], a
+	call CalcExpAtLevel_Shared ; xor a / ldh [hMultiplicand + 0], a / ldh [hMultiplicand + 1], a / ...
 	ld a, [hli]
 	ldh [hMultiplier], a
 	call Multiply
@@ -115,9 +111,7 @@ CalcExpAtLevel:
 	adc b
 	ldh [hMultiplicand + 1], a
 	pop bc
-	ldh a, [hProduct + 1]
-	adc b
-	ldh [hMultiplicand], a
+	call CalcExpAtLevel.shared2 ; ldh a, [hProduct + 1] / adc b / ldh [hMultiplicand], a
 	jr .done_quadratic
 
 .subtract
@@ -146,18 +140,23 @@ CalcExpAtLevel:
 	adc b
 	ldh [hMultiplicand + 1], a
 	pop bc
+.shared2: ; (tools/outline.py)
 	ldh a, [hProduct + 1]
 	adc b
 	ldh [hMultiplicand], a
 	ret
 
 .LevelSquared:
+	call CalcExpAtLevel_Shared ; xor a / ldh [hMultiplicand + 0], a / ldh [hMultiplicand + 1], a / ...
+	ldh [hMultiplier], a
+	jp Multiply
+
+INCLUDE "data/growth_rates.asm"
+
+CalcExpAtLevel_Shared: ; (tools/outline.py)
 	xor a
 	ldh [hMultiplicand + 0], a
 	ldh [hMultiplicand + 1], a
 	ld a, d
 	ldh [hMultiplicand + 2], a
-	ldh [hMultiplier], a
-	jp Multiply
-
-INCLUDE "data/growth_rates.asm"
+	ret

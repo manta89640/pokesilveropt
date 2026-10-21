@@ -34,11 +34,9 @@ StatsScreenMain:
 
 .not_tempmon
 	call CopyMonToTempMon
-	ld a, [wCurPartySpecies]
-	cp EGG
+	call Unused_PlaceEnemyHPLevel_Shared ; ld a, [wCurPartySpecies] / cp EGG
 	jr z, .got_stats
-	ld a, [wMonType]
-	cp BOXMON
+	call DrawHP_Shared ; ld a, [wMonType] / cp BOXMON
 	jr c, .got_stats
 	call CalcTempmonStats
 
@@ -49,8 +47,7 @@ StatsScreenMain:
 	callfar StatsScreen_LoadFont
 
 	pop bc
-	ld a, [wCurPartySpecies]
-	cp EGG
+	call Unused_PlaceEnemyHPLevel_Shared ; ld a, [wCurPartySpecies] / cp EGG
 	jp z, EggStatsInit
 	call StatsScreen_InitUpperHalf
 	ld b, 0
@@ -216,8 +213,7 @@ StatsScreen_Exit:
 	jp ClearTilemap
 
 EggStats_DownAction:
-	ld a, [wMonType]
-	cp BOXMON
+	call DrawHP_Shared ; ld a, [wMonType] / cp BOXMON
 	jr nc, EggStats_JoypadLoop
 	and a
 	ld a, [wPartyCount]
@@ -229,10 +225,7 @@ EggStats_DownAction:
 	inc a
 	cp b
 	jr z, EggStats_JoypadLoop
-	ld [wCurPartyMon], a
-	ld b, a
-	ld a, [wMonType]
-	and a
+	call EggStats_DownAction_Shared ; ld [wCurPartyMon], a / ld b, a / ld a, [wMonType] / ...
 	jr nz, EggStats_ScrollToLoadMon
 	ld a, b
 	inc a
@@ -244,10 +237,7 @@ EggStats_UpAction:
 	and a
 	jr z, EggStats_JoypadLoop
 	dec a
-	ld [wCurPartyMon], a
-	ld b, a
-	ld a, [wMonType]
-	and a
+	call EggStats_DownAction_Shared ; ld [wCurPartyMon], a / ld b, a / ld a, [wMonType] / ...
 	jr nz, EggStats_ScrollToLoadMon
 	ld a, b
 	inc a
@@ -267,11 +257,7 @@ StatsScreen_LoadPageJumptable:
 
 StatsScreen_InitUpperHalf:
 	push bc
-	xor a
-	ldh [hBGMapMode], a
-	ld a, [wBaseDexNo]
-	ld [wTextDecimalByte], a
-	ld [wCurSpecies], a
+	call StatsScreen_InitUpperHalf_Shared ; xor a / ldh [hBGMapMode], a / ld a, [wBaseDexNo] / ...
 	hlcoord 8, 0
 	ld [hl], '№'
 	inc hl
@@ -285,16 +271,14 @@ StatsScreen_InitUpperHalf:
 	ld hl, .NicknamePointers
 	call GetNicknamePointer
 ; Nickname
-	ld a, [wMonType]
-	cp BOXMON
+	call DrawHP_Shared ; ld a, [wMonType] / cp BOXMON
 	ld a, BANK(sBoxMonNicknames)
 	call z, OpenSRAM
 	ld d, h
 	ld e, l
 	hlcoord 8, 2
 	call PlaceString
-	ld a, [wMonType]
-	cp BOXMON
+	call DrawHP_Shared ; ld a, [wMonType] / cp BOXMON
 	call z, CloseSRAM
 ; Gender character
 	call GetGender
@@ -342,17 +326,12 @@ StatsScreen_InitUpperHalf:
 LoadPinkPage:
 	push bc
 	push bc
-	xor a
-	ldh [hBGMapMode], a
-	ld a, [wBaseDexNo]
-	ld [wTextDecimalByte], a
-	ld [wCurSpecies], a
+	call StatsScreen_InitUpperHalf_Shared ; xor a / ldh [hBGMapMode], a / ld a, [wBaseDexNo] / ...
 	ld b, PINK_PAGE
 	call StatsScreen_LoadPageIndicators
 
 ; Load graphics
-	hlcoord 0, 8
-	lb bc, 10, 20
+	call LoadPinkPage_Shared ; hlcoord 0, 8 / lb bc, 10, 20
 	call ClearBox
 	hlcoord 0, 9
 	ld b, $0
@@ -372,8 +351,7 @@ LoadPinkPage:
 	hlcoord 8, 8
 	ld [hl], '.' ; Pokérus immunity dot
 .NotImmuneToPkrs:
-	ld a, [wMonType]
-	cp BOXMON
+	call DrawHP_Shared ; ld a, [wMonType] / cp BOXMON
 	jr z, .StatusOK
 	hlcoord 6, 13
 	push hl
@@ -546,8 +524,7 @@ LoadGreenPage:
 	call StatsScreen_LoadPageIndicators
 
 ; Load graphics
-	hlcoord 0, 8
-	lb bc, 10, 20
+	call LoadPinkPage_Shared ; hlcoord 0, 8 / lb bc, 10, 20
 	call ClearBox
 ; item info
 	hlcoord 0, 8
@@ -612,8 +589,7 @@ LoadBluePage:
 	call StatsScreen_LoadPageIndicators
 
 ; Load graphics
-	hlcoord 0, 8
-	lb bc, 10, 20
+	call LoadPinkPage_Shared ; hlcoord 0, 8 / lb bc, 10, 20
 	call ClearBox
 	call .PlaceOTInfo
 	hlcoord 10, 8
@@ -655,8 +631,7 @@ LoadBluePage:
 	ld hl, .OTNamePointers
 	call GetNicknamePointer
 ; OT name
-	ld a, [wMonType]
-	cp BOXMON
+	call DrawHP_Shared ; ld a, [wMonType] / cp BOXMON
 	ld a, BANK(sBoxMonOTs)
 	call z, OpenSRAM
 	ld de, wStringBuffer1
@@ -664,8 +639,7 @@ LoadBluePage:
 	ld bc, NAME_LENGTH
 	call CopyBytes
 	pop de
-	ld a, [wMonType]
-	cp BOXMON
+	call DrawHP_Shared ; ld a, [wMonType] / cp BOXMON
 	call z, CloseSRAM
 	callfar CorrectNickErrors
 	push de
@@ -851,3 +825,23 @@ GetNicknamePointer:
 	ret z
 	ld a, [wCurPartyMon]
 	jp SkipNames
+
+StatsScreen_InitUpperHalf_Shared: ; (tools/outline.py)
+	xor a
+	ldh [hBGMapMode], a
+	ld a, [wBaseDexNo]
+	ld [wTextDecimalByte], a
+	ld [wCurSpecies], a
+	ret
+
+LoadPinkPage_Shared: ; (tools/outline.py)
+	hlcoord 0, 8
+	lb bc, 10, 20
+	ret
+
+EggStats_DownAction_Shared: ; (tools/outline.py)
+	ld [wCurPartyMon], a
+	ld b, a
+	ld a, [wMonType]
+	and a
+	ret

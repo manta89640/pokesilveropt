@@ -1,9 +1,7 @@
 DEF MAX_ROLLOUT_COUNT EQU 5
 
 BattleCommand_CheckRollout:
-	ld de, wPlayerRolloutCount
-	ldh a, [hBattleTurn]
-	and a
+	call BattleCommand_CheckRampage_Shared ; ld de, wPlayerRolloutCount / ldh a, [hBattleTurn] / and a
 	jr z, .ok
 	ld de, wEnemyRolloutCount
 .ok
@@ -26,9 +24,7 @@ BattleCommand_RolloutPower:
 	and SLP_MASK
 	ret nz
 
-	ld hl, wPlayerRolloutCount
-	ldh a, [hBattleTurn]
-	and a
+	call BattleCommand_StartLoop_Shared ; ld hl, wPlayerRolloutCount / ldh a, [hBattleTurn] / and a
 	jr z, .got_rollout_count
 	ld hl, wEnemyRolloutCount
 
@@ -36,8 +32,7 @@ BattleCommand_RolloutPower:
 	ld a, [hl]
 	and a
 	jr nz, .skip_set_rampage
-	ld a, 1
-	ld [wSomeoneIsRampaging], a
+	call BattleCommand_Rampage.shared1 ; ld a, 1 / ld [wSomeoneIsRampaging], a
 
 .skip_set_rampage
 	ld a, [wAttackMissed]
@@ -77,10 +72,7 @@ BattleCommand_RolloutPower:
 	dec b
 	ret z
 
-	ld hl, wCurDamage + 1
-	sla [hl]
-	dec hl
-	rl [hl]
+	call DoubleDamage_Shared ; ld hl, wCurDamage + 1 / sla [hl] / dec hl / ...
 	jr nc, .loop
 
 	ld a, $ff

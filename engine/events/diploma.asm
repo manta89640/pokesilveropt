@@ -52,8 +52,7 @@ PlaceDiplomaOnScreen:
 	db   "@"
 
 PrintDiplomaPage2:
-	hlcoord 0, 0
-	ld bc, SCREEN_AREA
+	call PrintDiplomaPage2_Shared ; hlcoord 0, 0 / ld bc, SCREEN_AREA
 	ld a, ' '
 	call ByteFill
 	ld hl, DiplomaPage2Tilemap
@@ -87,3 +86,8 @@ INCBIN "gfx/diploma/page1.tilemap"
 
 DiplomaPage2Tilemap:
 INCBIN "gfx/diploma/page2.tilemap"
+
+PrintDiplomaPage2_Shared: ; (tools/outline.py)
+	hlcoord 0, 0
+	ld bc, SCREEN_AREA
+	ret

@@ -291,9 +291,7 @@ PlacePartyMonTMHMCompatibility:
 	ld a, [wPartyCount]
 	and a
 	ret z
-	ld c, a
-	ld b, 0
-	hlcoord 12, 2
+	call PlacePartyMonTMHMCompatibility_Shared ; ld c, a / ld b, 0 / hlcoord 12, 2
 .loop
 	push bc
 	push hl
@@ -342,9 +340,7 @@ PlacePartyMonEvoStoneCompatibility:
 	ld a, [wPartyCount]
 	and a
 	ret z
-	ld c, a
-	ld b, 0
-	hlcoord 12, 2
+	call PlacePartyMonTMHMCompatibility_Shared ; ld c, a / ld b, 0 / hlcoord 12, 2
 .loop
 	push bc
 	push hl
@@ -423,9 +419,7 @@ PlacePartyMonGender:
 	ld a, [wPartyCount]
 	and a
 	ret z
-	ld c, a
-	ld b, 0
-	hlcoord 12, 2
+	call PlacePartyMonTMHMCompatibility_Shared ; ld c, a / ld b, 0 / hlcoord 12, 2
 .loop
 	push bc
 	push hl
@@ -487,6 +481,7 @@ GetPartyMenuQualityIndexes:
 	ld e, a
 	ld d, 0
 	ld hl, PartyMenuQualityPointers
+.shared1: ; (tools/outline.py)
 	add hl, de
 	add hl, de
 	ld a, [hli]
@@ -743,14 +738,16 @@ PrintPartyMenuActionText:
 .PrintText:
 	ld e, a
 	ld d, 0
-	add hl, de
-	add hl, de
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
+	call GetPartyMenuQualityIndexes.shared1 ; add hl, de / add hl, de / ld a, [hli] / ...
 	ld a, [wOptions]
 	push af
 	set NO_TEXT_SCROLL, a
 	ld [wOptions], a
 	call PrintText
 	jp WritePartyMenuTilemap.end ; same as there (tools/tailmerge.py)
+
+PlacePartyMonTMHMCompatibility_Shared: ; (tools/outline.py)
+	ld c, a
+	ld b, 0
+	hlcoord 12, 2
+	ret

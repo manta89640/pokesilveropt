@@ -1,7 +1,5 @@
 TreeMonEncounter:
-	xor a
-	ld [wTempWildMonSpecies], a
-	ld [wCurPartyLevel], a
+	call NoTreeMon.shared1 ; xor a / ld [wTempWildMonSpecies], a / ld [wCurPartyLevel], a
 
 	ld hl, TreeMonMaps
 	call GetTreeMonSet
@@ -25,9 +23,7 @@ TreeMonEncounter:
 	ret
 
 RockMonEncounter:
-	xor a
-	ld [wTempWildMonSpecies], a
-	ld [wCurPartyLevel], a
+	call NoTreeMon.shared1 ; xor a / ld [wTempWildMonSpecies], a / ld [wCurPartyLevel], a
 
 	ld hl, RockMonMaps
 	call GetTreeMonSet
@@ -108,12 +104,7 @@ GetTreeMons:
 	ld e, a
 	ld d, 0
 	ld hl, TreeMons
-	add hl, de
-	add hl, de
-
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
+	call GetTreeMons_Shared ; add hl, de / add hl, de / ld a, [hli] / ...
 
 	scf
 	ret
@@ -191,6 +182,7 @@ SelectTreeMon:
 	ret
 
 NoTreeMon:
+.shared1: ; (tools/outline.py)
 	xor a
 	ld [wTempWildMonSpecies], a
 	ld [wCurPartyLevel], a
@@ -269,3 +261,11 @@ GetTreeScore:
 	ldh [hDividend], a
 	ld a, [wPlayerID + 1]
 	jr GetTreeScore.tailmerge_257 ; same as there (tools/tailmerge.py)
+
+GetTreeMons_Shared: ; (tools/outline.py)
+	add hl, de
+	add hl, de
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ret

@@ -11,10 +11,7 @@ BattleCommand_Pursuit:
 	and a
 	ret z
 
-	ld hl, wCurDamage + 1
-	sla [hl]
-	dec hl
-	rl [hl]
+	call DoubleDamage_Shared ; ld hl, wCurDamage + 1 / sla [hl] / dec hl / ...
 	ret nc
 
 	ld a, $ff

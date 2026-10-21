@@ -500,9 +500,7 @@ StartMenu_Pokemon:
 	call ClearBGPalettes
 
 .menu
-	farcall LoadPartyMenuGFX
-	farcall InitPartyMenuWithCancel
-	farcall InitPartyMenuGFX
+	call GiveItem_Shared ; farcall LoadPartyMenuGFX / farcall InitPartyMenuWithCancel / farcall InitPartyMenuGFX
 
 .menunoreload
 	farcall WritePartyMenuTilemap

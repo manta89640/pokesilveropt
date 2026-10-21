@@ -6,6 +6,7 @@ _SacredAsh:
 
 	ld hl, SacredAshScript
 	call QueueScript
+.shared1: ; (tools/outline.py)
 	ld a, $1
 	ld [wItemEffectSucceeded], a
 	ret

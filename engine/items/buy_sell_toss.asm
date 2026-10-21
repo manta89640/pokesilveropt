@@ -5,20 +5,12 @@ SelectQuantityToToss:
 	jr Toss_Sell_Loop
 
 SelectQuantityToBuy:
-	farcall GetItemPrice
-	ld a, d
-	ld [wBuySellItemPrice + 0], a
-	ld a, e
-	ld [wBuySellItemPrice + 1], a
+	call SelectQuantityToBuy_Shared ; farcall GetItemPrice / ld a, d / ld [wBuySellItemPrice + 0], a / ...
 	ld hl, BuyItem_MenuHeader
 	jr SelectQuantityToToss.tailmerge_3 ; same as there (tools/tailmerge.py)
 
 SelectQuantityToSell:
-	farcall GetItemPrice
-	ld a, d
-	ld [wBuySellItemPrice + 0], a
-	ld a, e
-	ld [wBuySellItemPrice + 1], a
+	call SelectQuantityToBuy_Shared ; farcall GetItemPrice / ld a, d / ld [wBuySellItemPrice + 0], a / ...
 	ld hl, SellItem_MenuHeader
 	jr SelectQuantityToToss.tailmerge_3 ; same as there (tools/tailmerge.py)
 
@@ -117,10 +109,7 @@ BuySellToss_InterpretJoypad:
 BuySellToss_UpdateQuantityDisplay:
 	call MenuBox
 	call MenuBoxCoord2Tile
-	ld de, SCREEN_WIDTH + 1
-	add hl, de
-	ld [hl], '×'
-	inc hl
+	call BuySellToss_UpdateQuantityDisplay_Shared ; ld de, SCREEN_WIDTH + 1 / add hl, de / ld [hl], '×' / ...
 	ld de, wItemQuantityChange
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
 	call PrintNum
@@ -206,3 +195,18 @@ SellItem_MenuHeader:
 	menu_coords 7, 15, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1
 	dw DisplaySellingPrice
 	db 0 ; default option
+
+SelectQuantityToBuy_Shared: ; (tools/outline.py)
+	farcall GetItemPrice
+	ld a, d
+	ld [wBuySellItemPrice + 0], a
+	ld a, e
+	ld [wBuySellItemPrice + 1], a
+	ret
+
+BuySellToss_UpdateQuantityDisplay_Shared: ; (tools/outline.py)
+	ld de, SCREEN_WIDTH + 1
+	add hl, de
+	ld [hl], '×'
+	inc hl
+	ret

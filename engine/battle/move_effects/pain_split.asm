@@ -17,10 +17,7 @@ BattleCommand_PainSplit:
 	ld [wHPBuffer2 + 1], a
 	ld a, [hli]
 	ld [wHPBuffer2], a
-	ld a, [hli]
-	ld [wHPBuffer1 + 1], a
-	ld a, [hl]
-	ld [wHPBuffer1], a
+	call DoEnemyDamage_Shared ; ld a, [hli] / ld [wHPBuffer1 + 1], a / ld a, [hl] / ...
 	call .EnemyShareHP
 	xor a
 	ld [wWhichHPBar], a
@@ -32,10 +29,7 @@ BattleCommand_PainSplit:
 	jp StdBattleTextbox
 
 .PlayerShareHP:
-	ld a, [hld]
-	ld [wHPBuffer1], a
-	ld a, [hld]
-	ld [wHPBuffer1 + 1], a
+	call BattleCommand_CheckFaint_Shared2 ; ld a, [hld] / ld [wHPBuffer1], a / ld a, [hld] / ...
 	ld a, [hld]
 	ld b, a
 	ld [wHPBuffer2], a
@@ -73,10 +67,7 @@ BattleCommand_PainSplit:
 	sbc b
 	jr nc, .skip
 
-	ld a, [wCurDamage]
-	ld b, a
-	ld a, [wCurDamage + 1]
-	ld c, a
+	call BattleCommand_Recoil_Shared ; ld a, [wCurDamage] / ld b, a / ld a, [wCurDamage + 1] / ...
 .skip
 	ld a, c
 	ld [hld], a

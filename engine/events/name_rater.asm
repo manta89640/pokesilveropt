@@ -44,9 +44,7 @@ _NameRater:
 	ld hl, NameRaterSameNameText
 	jr c, .samename
 ; Copy the new name from wStringBuffer2
-	ld hl, wPartyMonNicknames
-	ld bc, MON_NAME_LENGTH
-	ld a, [wCurPartyMon]
+	call _NameRater_Shared ; ld hl, wPartyMonNicknames / ld bc, MON_NAME_LENGTH / ld a, [wCurPartyMon]
 	call AddNTimes
 	ld e, l
 	ld d, h
@@ -132,9 +130,7 @@ IsNewNameEmpty:
 
 CompareNewToOld:
 ; Compares the nickname in wStringBuffer2 to the previous nickname.  If they are the same, return carry.
-	ld hl, wPartyMonNicknames
-	ld bc, MON_NAME_LENGTH
-	ld a, [wCurPartyMon]
+	call _NameRater_Shared ; ld hl, wPartyMonNicknames / ld bc, MON_NAME_LENGTH / ld a, [wCurPartyMon]
 	call AddNTimes
 	push hl
 	call GetNicknameLength
@@ -216,3 +212,9 @@ NameRaterSameNameText:
 NameRaterNamedText:
 	text_far _NameRaterNamedText
 	text_end
+
+_NameRater_Shared: ; (tools/outline.py)
+	ld hl, wPartyMonNicknames
+	ld bc, MON_NAME_LENGTH
+	ld a, [wCurPartyMon]
+	ret

@@ -121,12 +121,7 @@ Movement_step_dig:
 	add hl, bc
 	ld [hl], OBJECT_ACTION_SPIN
 	call JumpMovementPointer
-	ld hl, OBJECT_STEP_DURATION
-	add hl, bc
-	ld [hl], a
-	ld hl, OBJECT_STEP_TYPE
-	add hl, bc
-	ld [hl], STEP_TYPE_SLEEP
+	call Movement_step_dig_Shared ; ld hl, OBJECT_STEP_DURATION / add hl, bc / ld [hl], a / ...
 	jp EndSpriteMovement.tailmerge_275 ; same as there (tools/tailmerge.py)
 
 Movement_return_dig:
@@ -137,9 +132,7 @@ Movement_return_dig:
 	add hl, bc
 	ld [hl], a
 	call JumpMovementPointer
-	ld hl, OBJECT_STEP_DURATION
-	add hl, bc
-	ld [hl], a
+	call Movement_return_dig_Shared ; ld hl, OBJECT_STEP_DURATION / add hl, bc / ld [hl], a
 	ld hl, OBJECT_WALKING
 	add hl, bc
 	ld [hl], STANDING
@@ -159,12 +152,8 @@ Movement_fish_got_bite:
 
 Movement_rock_smash:
 	call JumpMovementPointer
-	ld hl, OBJECT_STEP_DURATION
-	add hl, bc
-	ld [hl], a
-	ld hl, OBJECT_ACTION
-	add hl, bc
-	ld [hl], OBJECT_ACTION_STAND
+	call Movement_return_dig_Shared ; ld hl, OBJECT_STEP_DURATION / add hl, bc / ld [hl], a
+	call Movement_rock_smash_Shared ; ld hl, OBJECT_ACTION / add hl, bc / ld [hl], OBJECT_ACTION_STAND
 	ld hl, OBJECT_STEP_TYPE
 	add hl, bc
 	ld [hl], STEP_TYPE_ROCK_SMASH
@@ -177,46 +166,26 @@ Movement_fish_cast_rod:
 	jp StepFunction_Reset.tailmerge_480 ; same as there (tools/tailmerge.py)
 
 Movement_step_loop:
-	ld hl, OBJECT_MOVEMENT_INDEX
-	add hl, bc
-	ld [hl], $0
+	call Movement_step_end_Shared.shared1 ; ld hl, OBJECT_MOVEMENT_INDEX / add hl, bc / ld [hl], $0
 	jp ContinueReadingMovement
 
 Movement_step_end:
 	call RestoreDefaultMovement
-	ld hl, OBJECT_MOVEMENT_TYPE
-	add hl, bc
-	ld [hl], a
+	call Movement_step_end_Shared ; ld hl, OBJECT_MOVEMENT_TYPE / add hl, bc / ld [hl], a / ...
 
-	ld hl, OBJECT_MOVEMENT_INDEX
-	add hl, bc
-	ld [hl], $0
-
-	ld hl, wStateFlags
-	res SCRIPTED_MOVEMENT_STATE_F, [hl]
+	call Movement_step_wait_end.shared1 ; ld hl, wStateFlags / res SCRIPTED_MOVEMENT_STATE_F, [hl]
 
 	jp StepFunction_Reset.tailmerge_480 ; same as there (tools/tailmerge.py)
 
 Movement_step_wait_end:
 	call RestoreDefaultMovement
-	ld hl, OBJECT_MOVEMENT_TYPE
-	add hl, bc
-	ld [hl], a
-
-	ld hl, OBJECT_MOVEMENT_INDEX
-	add hl, bc
-	ld [hl], $0
+	call Movement_step_end_Shared ; ld hl, OBJECT_MOVEMENT_TYPE / add hl, bc / ld [hl], a / ...
 
 	call JumpMovementPointer
-	ld hl, OBJECT_STEP_DURATION
-	add hl, bc
-	ld [hl], a
-
-	ld hl, OBJECT_STEP_TYPE
-	add hl, bc
-	ld [hl], STEP_TYPE_SLEEP
+	call Movement_step_dig_Shared ; ld hl, OBJECT_STEP_DURATION / add hl, bc / ld [hl], a / ...
 
 .tailmerge_228: ; (tools/tailmerge.py)
+.shared1: ; (tools/outline.py)
 	ld hl, wStateFlags
 	res SCRIPTED_MOVEMENT_STATE_F, [hl]
 	ret
@@ -233,9 +202,7 @@ Movement_remove_object:
 	jr Movement_step_wait_end.tailmerge_228 ; same as there (tools/tailmerge.py)
 
 Movement_step_stop:
-	ld hl, OBJECT_ACTION
-	add hl, bc
-	ld [hl], OBJECT_ACTION_STAND
+	call Movement_rock_smash_Shared ; ld hl, OBJECT_ACTION / add hl, bc / ld [hl], OBJECT_ACTION_STAND
 
 	ld hl, OBJECT_STEP_TYPE
 	add hl, bc
@@ -283,26 +250,16 @@ Movement_step_sleep:
 	jr Movement_step_sleep_common
 
 Movement_step_sleep_common:
-	ld hl, OBJECT_STEP_DURATION
-	add hl, bc
-	ld [hl], a
-
-	ld hl, OBJECT_STEP_TYPE
-	add hl, bc
-	ld [hl], STEP_TYPE_SLEEP
+	call Movement_step_dig_Shared ; ld hl, OBJECT_STEP_DURATION / add hl, bc / ld [hl], a / ...
 
 .tailmerge_294: ; (tools/tailmerge.py)
-	ld hl, OBJECT_ACTION
-	add hl, bc
-	ld [hl], OBJECT_ACTION_STAND
+	call Movement_rock_smash_Shared ; ld hl, OBJECT_ACTION / add hl, bc / ld [hl], OBJECT_ACTION_STAND
 
 	jp EndSpriteMovement.tailmerge_275 ; same as there (tools/tailmerge.py)
 
 Movement_step_bump:
 	ld a, 1
-	ld hl, OBJECT_STEP_DURATION
-	add hl, bc
-	ld [hl], a
+	call Movement_return_dig_Shared ; ld hl, OBJECT_STEP_DURATION / add hl, bc / ld [hl], a
 
 	ld hl, OBJECT_STEP_TYPE
 	add hl, bc
@@ -316,13 +273,7 @@ Movement_step_bump:
 
 Movement_tree_shake:
 	ld a, 24
-	ld hl, OBJECT_STEP_DURATION
-	add hl, bc
-	ld [hl], a
-
-	ld hl, OBJECT_STEP_TYPE
-	add hl, bc
-	ld [hl], STEP_TYPE_SLEEP
+	call Movement_step_dig_Shared ; ld hl, OBJECT_STEP_DURATION / add hl, bc / ld [hl], a / ...
 
 	ld hl, OBJECT_ACTION
 	add hl, bc
@@ -399,9 +350,7 @@ Movement_turn_head_right:
 	jr TurnHead
 
 TurnHead:
-	ld hl, OBJECT_DIRECTION
-	add hl, bc
-	ld [hl], a
+	call CounterclockwiseSpinAction.shared1 ; ld hl, OBJECT_DIRECTION / add hl, bc / ld [hl], a
 
 	jp Movement_step_sleep_common.tailmerge_294 ; same as there (tools/tailmerge.py)
 
@@ -618,9 +567,7 @@ TurnStep:
 	add hl, bc
 	ld [hl], a
 
-	ld hl, OBJECT_ACTION
-	add hl, bc
-	ld [hl], OBJECT_ACTION_STEP
+	call TurnStep_Shared ; ld hl, OBJECT_ACTION / add hl, bc / ld [hl], OBJECT_ACTION_STEP
 
 	ld hl, OBJECT_STEP_TYPE
 	add hl, bc
@@ -630,13 +577,9 @@ TurnStep:
 NormalStep:
 	call InitStep
 	call UpdateTallGrassFlags
-	ld hl, OBJECT_ACTION
-	add hl, bc
-	ld [hl], OBJECT_ACTION_STEP
+	call TurnStep_Shared ; ld hl, OBJECT_ACTION / add hl, bc / ld [hl], OBJECT_ACTION_STEP
 
-	ld hl, OBJECT_TILE_COLLISION
-	add hl, bc
-	ld a, [hl]
+	call NormalStep_Shared2 ; ld hl, OBJECT_TILE_COLLISION / add hl, bc / ld a, [hl]
 	call CheckSuperTallGrassTile
 	jr z, .shake_grass
 
@@ -647,11 +590,10 @@ NormalStep:
 	call ShakeGrass
 
 .skip_grass
-	ld hl, wCenteredObject
-	ldh a, [hMapObjectIndex]
-	cp [hl]
+	call NormalStep_Shared ; ld hl, wCenteredObject / ldh a, [hMapObjectIndex] / cp [hl]
 	jr z, .player
 
+.shared3: ; (tools/outline.py)
 	ld hl, OBJECT_STEP_TYPE
 	add hl, bc
 	ld [hl], STEP_TYPE_NPC_WALK
@@ -668,15 +610,10 @@ TurningStep:
 	add hl, bc
 	ld [hl], OBJECT_ACTION_SPIN
 
-	ld hl, wCenteredObject
-	ldh a, [hMapObjectIndex]
-	cp [hl]
+	call NormalStep_Shared ; ld hl, wCenteredObject / ldh a, [hMapObjectIndex] / cp [hl]
 	jr z, .player
 
-	ld hl, OBJECT_STEP_TYPE
-	add hl, bc
-	ld [hl], STEP_TYPE_NPC_WALK
-	ret
+	jr NormalStep.shared3 ; ld hl, OBJECT_STEP_TYPE / add hl, bc / ld [hl], STEP_TYPE_NPC_WALK
 
 .player
 	jp _RandomWalkContinue.centered ; same as there (tools/tailmerge.py)
@@ -685,19 +622,12 @@ SlideStep:
 	call InitStep
 	call UpdateTallGrassFlags
 
-	ld hl, OBJECT_ACTION
-	add hl, bc
-	ld [hl], OBJECT_ACTION_STAND
+	call Movement_rock_smash_Shared ; ld hl, OBJECT_ACTION / add hl, bc / ld [hl], OBJECT_ACTION_STAND
 
-	ld hl, wCenteredObject
-	ldh a, [hMapObjectIndex]
-	cp [hl]
+	call NormalStep_Shared ; ld hl, wCenteredObject / ldh a, [hMapObjectIndex] / cp [hl]
 	jr z, .player
 
-	ld hl, OBJECT_STEP_TYPE
-	add hl, bc
-	ld [hl], STEP_TYPE_NPC_WALK
-	ret
+	jr NormalStep.shared3 ; ld hl, OBJECT_STEP_TYPE / add hl, bc / ld [hl], STEP_TYPE_NPC_WALK
 
 .player
 	jp _RandomWalkContinue.centered ; same as there (tools/tailmerge.py)
@@ -712,15 +642,11 @@ JumpStep:
 	add hl, bc
 	res IN_GRASS_F, [hl]
 
-	ld hl, OBJECT_ACTION
-	add hl, bc
-	ld [hl], OBJECT_ACTION_STEP
+	call TurnStep_Shared ; ld hl, OBJECT_ACTION / add hl, bc / ld [hl], OBJECT_ACTION_STEP
 
 	call SpawnShadow
 
-	ld hl, wCenteredObject
-	ldh a, [hMapObjectIndex]
-	cp [hl]
+	call NormalStep_Shared ; ld hl, wCenteredObject / ldh a, [hMapObjectIndex] / cp [hl]
 	jr z, .player
 
 	ld hl, OBJECT_STEP_TYPE
@@ -732,4 +658,51 @@ JumpStep:
 	ld hl, OBJECT_STEP_TYPE
 	add hl, bc
 	ld [hl], STEP_TYPE_PLAYER_JUMP
+	ret
+
+Movement_step_dig_Shared: ; (tools/outline.py)
+	call Movement_return_dig_Shared ; ld hl, OBJECT_STEP_DURATION / add hl, bc / ld [hl], a
+	ld hl, OBJECT_STEP_TYPE
+	add hl, bc
+	ld [hl], STEP_TYPE_SLEEP
+	ret
+
+Movement_rock_smash_Shared: ; (tools/outline.py)
+	ld hl, OBJECT_ACTION
+	add hl, bc
+	ld [hl], OBJECT_ACTION_STAND
+	ret
+
+Movement_step_end_Shared: ; (tools/outline.py)
+	ld hl, OBJECT_MOVEMENT_TYPE
+	add hl, bc
+	ld [hl], a
+.shared1: ; (tools/outline.py)
+	ld hl, OBJECT_MOVEMENT_INDEX
+	add hl, bc
+	ld [hl], $0
+	ret
+
+NormalStep_Shared: ; (tools/outline.py)
+	ld hl, wCenteredObject
+	ldh a, [hMapObjectIndex]
+	cp [hl]
+	ret
+
+TurnStep_Shared: ; (tools/outline.py)
+	ld hl, OBJECT_ACTION
+	add hl, bc
+	ld [hl], OBJECT_ACTION_STEP
+	ret
+
+Movement_return_dig_Shared: ; (tools/outline.py)
+	ld hl, OBJECT_STEP_DURATION
+	add hl, bc
+	ld [hl], a
+	ret
+
+NormalStep_Shared2: ; (tools/outline.py)
+	ld hl, OBJECT_TILE_COLLISION
+	add hl, bc
+	ld a, [hl]
 	ret

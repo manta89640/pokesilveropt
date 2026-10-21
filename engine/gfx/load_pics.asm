@@ -80,10 +80,7 @@ GetFrontpic:
 
 	; These are assumed to be at the same address in their respective banks.
 	assert PokemonPicPointers == UnownPicPointers
-	ld hl, PokemonPicPointers
-	ld a, [wCurPartySpecies]
-	ld d, BANK(PokemonPicPointers)
-	cp UNOWN
+	call GetFrontpic_Shared ; ld hl, PokemonPicPointers / ld a, [wCurPartySpecies] / ld d, BANK(PokemonPicPointers) / ...
 	jr z, .unown
 	cp EGG
 	jr nz, .not_egg
@@ -142,10 +139,7 @@ GetMonBackpic:
 
 	; These are assumed to be at the same address in their respective banks.
 	assert PokemonPicPointers == UnownPicPointers
-	ld hl, PokemonPicPointers
-	ld a, [wCurPartySpecies]
-	ld d, BANK(PokemonPicPointers)
-	cp UNOWN
+	call GetFrontpic_Shared ; ld hl, PokemonPicPointers / ld a, [wCurPartySpecies] / ld d, BANK(PokemonPicPointers) / ...
 	jr nz, .ok
 	ld a, [wUnownLetter]
 	ld d, BANK(UnownPicPointers)
@@ -419,4 +413,11 @@ endr
 	dec c
 	jr nz, .right_loop
 	pop bc
+	ret
+
+GetFrontpic_Shared: ; (tools/outline.py)
+	ld hl, PokemonPicPointers
+	ld a, [wCurPartySpecies]
+	ld d, BANK(PokemonPicPointers)
+	cp UNOWN
 	ret

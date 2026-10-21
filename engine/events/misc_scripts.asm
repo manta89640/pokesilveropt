@@ -46,10 +46,15 @@ FindItemInBallScript::
 	ld a, [wItemBallItemID]
 	ld [wCurItem], a
 	ld a, [wItemBallQuantity]
-	ld [wItemQuantityChange], a
-	ld hl, wNumItems
+	call FindItemInBallScript_Shared ; ld [wItemQuantityChange], a / ld hl, wNumItems
 	call ReceiveItem
 	ret nc
+.shared2: ; (tools/outline.py)
 	ld a, $1
 	ld [wScriptVar], a
+	ret
+
+FindItemInBallScript_Shared: ; (tools/outline.py)
+	ld [wItemQuantityChange], a
+	ld hl, wNumItems
 	ret

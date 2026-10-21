@@ -32,11 +32,7 @@ HealMachineAnim:
 	ld e, a
 	ld d, 0
 	ld hl, .Pointers
-	add hl, de
-	add hl, de
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
+	call Pack_GetJumptablePointer.shared1 ; add hl, de / add hl, de / ld a, [hli] / ...
 	ld a, [wHealMachineAnimState]
 	ld e, a
 	inc a

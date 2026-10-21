@@ -24,9 +24,7 @@ ShowPlayerMonsRemaining:
 	ld hl, wPlaceBallsX
 	ld [hli], a
 	ld [hl], a
-	ld a, TILE_WIDTH
-	ld [wPlaceBallsDirection], a
-	ld hl, wShadowOAMSprite00
+	call ShowPlayerMonsRemaining_Shared ; ld a, TILE_WIDTH / ld [wPlaceBallsDirection], a / ld hl, wShadowOAMSprite00
 	jp LoadTrainerHudOAM
 
 ShowOTTrainerMonsRemaining:
@@ -185,9 +183,7 @@ LinkBattle_TrainerHuds:
 	ld a, 10 * TILE_WIDTH
 	ld [hli], a
 	ld [hl], 8 * TILE_WIDTH
-	ld a, TILE_WIDTH
-	ld [wPlaceBallsDirection], a
-	ld hl, wShadowOAMSprite00
+	call ShowPlayerMonsRemaining_Shared ; ld a, TILE_WIDTH / ld [wPlaceBallsDirection], a / ld hl, wShadowOAMSprite00
 	call LoadTrainerHudOAM
 
 	ld hl, wOTPartyMon1HP
@@ -255,3 +251,9 @@ _ShowLinkBattleParticipants:
 	ldh [rOBP0], a
 	ld c, 150
 	jp DelayFrames
+
+ShowPlayerMonsRemaining_Shared: ; (tools/outline.py)
+	ld a, TILE_WIDTH
+	ld [wPlaceBallsDirection], a
+	ld hl, wShadowOAMSprite00
+	ret

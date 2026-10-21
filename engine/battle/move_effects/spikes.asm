@@ -1,7 +1,5 @@
 BattleCommand_Spikes:
-	ld hl, wEnemyScreens
-	ldh a, [hBattleTurn]
-	and a
+	call SafeCheckSafeguard_Shared ; ld hl, wEnemyScreens / ldh a, [hBattleTurn] / and a
 	jr z, .got_screens
 	ld hl, wPlayerScreens
 .got_screens

@@ -1,22 +1,16 @@
 StopRTC: ; unreferenced
-	ld a, RAMG_SRAM_ENABLE
-	ld [rRAMG], a
+	call StopRTC_Shared2 ; ld a, RAMG_SRAM_ENABLE / ld [rRAMG], a
 	call LatchClock
-	ld a, RAMB_RTC_DH
-	ld [rRAMB], a
-	ld a, [rRTCREG]
+	call StopRTC_Shared ; ld a, RAMB_RTC_DH / ld [rRAMB], a / ld a, [rRTCREG]
 	set B_RTCREG_DH_HALT, a
 .tailmerge_9: ; (tools/tailmerge.py)
 	ld [rRTCREG], a
 	jp CloseSRAM
 
 StartRTC:
-	ld a, RAMG_SRAM_ENABLE
-	ld [rRAMG], a
+	call StopRTC_Shared2 ; ld a, RAMG_SRAM_ENABLE / ld [rRAMG], a
 	call LatchClock
-	ld a, RAMB_RTC_DH
-	ld [rRAMB], a
-	ld a, [rRTCREG]
+	call StopRTC_Shared ; ld a, RAMB_RTC_DH / ld [rRAMB], a / ld a, [rRTCREG]
 	res B_RTCREG_DH_HALT, a
 	jr StopRTC.tailmerge_9 ; same as there (tools/tailmerge.py)
 
@@ -67,8 +61,7 @@ StageRTCTimeForSave:
 	ret
 
 SaveRTC:
-	ld a, RAMG_SRAM_ENABLE
-	ld [rRAMG], a
+	call StopRTC_Shared2 ; ld a, RAMG_SRAM_ENABLE / ld [rRAMG], a
 	call LatchClock
 	ld hl, rRTCREG
 	ld a, RAMB_RTC_DH
@@ -105,12 +98,9 @@ _FixDays:
 	jp RecordRTCStatus
 
 _GetClock:
-	ld a, RAMG_SRAM_ENABLE
-	ld [rRAMG], a
+	call StopRTC_Shared2 ; ld a, RAMG_SRAM_ENABLE / ld [rRAMG], a
 	call LatchClock
-	ld a, RAMB_RTC_DH
-	ld [rRAMB], a
-	ld a, [rRTCREG]
+	call StopRTC_Shared ; ld a, RAMB_RTC_DH / ld [rRAMB], a / ld a, [rRTCREG]
 	push af
 	call CloseSRAM
 	pop af
@@ -193,4 +183,15 @@ _InitTime::
 
 .okay_days
 	ld [de], a
+	ret
+
+StopRTC_Shared: ; (tools/outline.py)
+	ld a, RAMB_RTC_DH
+	ld [rRAMB], a
+	ld a, [rRTCREG]
+	ret
+
+StopRTC_Shared2: ; (tools/outline.py)
+	ld a, RAMG_SRAM_ENABLE
+	ld [rRAMG], a
 	ret

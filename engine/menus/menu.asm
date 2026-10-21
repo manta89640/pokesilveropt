@@ -149,6 +149,7 @@ Init2DMenuCursorPosition:
 	ld [wMenuCursorY], a
 	xor a
 	ld [wCursorOffCharacter], a
+.shared1: ; (tools/outline.py)
 	ld [wCursorCurrentTile], a
 	ld [wCursorCurrentTile + 1], a
 	ret

@@ -518,12 +518,7 @@ CheckEnemyTurn:
 	call BattleCommand_DamageCalc
 	call BattleCommand_LowerSub
 
-	xor a
-	ld [wBattleAfterAnim], a
-
-	; Flicker the monster pic unless flying or underground.
-	ld de, ANIM_HIT_CONFUSION
-	ld a, BATTLE_VARS_SUBSTATUS3_OPP
+	call CheckEnemyTurn_Shared ; xor a / ld [wBattleAfterAnim], a / ld de, ANIM_HIT_CONFUSION / ...
 	call GetBattleVar
 	and 1 << SUBSTATUS_FLYING | 1 << SUBSTATUS_UNDERGROUND
 	call z, PlayFXAnimID
@@ -621,12 +616,7 @@ HitConfusion:
 	call BattleCommand_DamageCalc
 	call BattleCommand_LowerSub
 
-	xor a
-	ld [wBattleAfterAnim], a
-
-	; Flicker the monster pic unless flying or underground.
-	ld de, ANIM_HIT_CONFUSION
-	ld a, BATTLE_VARS_SUBSTATUS3_OPP
+	call CheckEnemyTurn_Shared ; xor a / ld [wBattleAfterAnim], a / ld de, ANIM_HIT_CONFUSION / ...
 	call GetBattleVar
 	and 1 << SUBSTATUS_FLYING | 1 << SUBSTATUS_UNDERGROUND
 	call z, PlayFXAnimID
@@ -1280,10 +1270,7 @@ BattleCommand_Stab:
 	rr c
 	add hl, bc
 
-	ld a, h
-	ld [wCurDamage], a
-	ld a, l
-	ld [wCurDamage + 1], a
+	call BattleCommand_RageDamage.shared1 ; ld a, h / ld [wCurDamage], a / ld a, l / ...
 
 	ld hl, wTypeModifier
 	set STAB_DAMAGE_F, [hl]
@@ -1520,9 +1507,7 @@ BattleCommand_DamageVariation:
 	ldh [hMultiplicand + 0], a
 	dec hl
 	ld a, [hli]
-	ldh [hMultiplicand + 1], a
-	ld a, [hl]
-	ldh [hMultiplicand + 2], a
+	call BattleCommand_CheckHit_Shared.shared1 ; ldh [hMultiplicand + 1], a / ld a, [hl] / ldh [hMultiplicand + 2], a
 
 ; Multiply by 85-100%...
 .loop
@@ -1623,6 +1608,7 @@ BattleCommand_CheckHit:
 	call ResetDamage
 
 .Missed:
+.shared2: ; (tools/outline.py)
 	ld a, 1
 	ld [wAttackMissed], a
 	ret
@@ -1748,6 +1734,7 @@ BattleCommand_CheckHit:
 	cp EFFECT_THUNDER
 	ret nz
 
+.shared3: ; (tools/outline.py)
 	ld a, [wBattleWeather]
 	cp WEATHER_RAIN
 	ret
@@ -1794,11 +1781,7 @@ BattleCommand_CheckHit:
 	sub c
 	ld c, a
 	; store the base move accuracy for math ops
-	xor a
-	ldh [hMultiplicand + 0], a
-	ldh [hMultiplicand + 1], a
-	ld a, [hl]
-	ldh [hMultiplicand + 2], a
+	call BattleCommand_CheckHit_Shared ; xor a / ldh [hMultiplicand + 0], a / ldh [hMultiplicand + 1], a / ...
 	push hl
 	ld d, 2 ; do this twice, once for the user's accuracy and once for the target's evasion
 
@@ -1915,9 +1898,7 @@ BattleCommand_LowerSub:
 	add a
 	jr c, .mimic_anims
 
-	xor a
-	ld [wBattleAfterAnim], a
-	ld [wFXAnimID + 1], a
+	call BattleCommand_LowerSub_Shared ; xor a / ld [wBattleAfterAnim], a / ld [wFXAnimID + 1], a
 	inc a
 	ld [wBattleAnimParam], a
 	ld a, SUBSTITUTE
@@ -2063,9 +2044,7 @@ BattleCommand_RaiseSub:
 	add a
 	jp c, BattleCommand_RaiseSubNoAnim
 
-	xor a
-	ld [wBattleAfterAnim], a
-	ld [wFXAnimID + 1], a
+	call BattleCommand_LowerSub_Shared ; xor a / ld [wBattleAfterAnim], a / ld [wFXAnimID + 1], a
 	ld a, $2
 	ld [wBattleAnimParam], a
 	ld a, SUBSTITUTE
@@ -2196,6 +2175,7 @@ BattleCommand_ApplyDamage:
 	adc b
 	ld [de], a
 	ret nc
+.shared1: ; (tools/outline.py)
 	ld a, $ff
 	ld [de], a
 	inc de
@@ -2205,8 +2185,7 @@ BattleCommand_ApplyDamage:
 GetFailureResultText:
 	ld hl, DoesntAffectText
 	ld de, DoesntAffectText
-	ld a, [wTypeModifier]
-	and EFFECTIVENESS_MASK
+	call GetFailureResultText_Shared ; ld a, [wTypeModifier] / and EFFECTIVENESS_MASK
 	jr z, .got_text
 	ld a, BATTLE_VARS_MOVE_EFFECT
 	call GetBattleVar
@@ -2230,8 +2209,7 @@ GetFailureResultText:
 	cp EFFECT_JUMP_KICK
 	ret nz
 
-	ld a, [wTypeModifier]
-	and EFFECTIVENESS_MASK
+	call GetFailureResultText_Shared ; ld a, [wTypeModifier] / and EFFECTIVENESS_MASK
 	ret z
 
 	ld hl, wCurDamage
@@ -2275,8 +2253,7 @@ BattleCommand_BideFailText:
 	and a
 	ret z
 
-	ld a, [wTypeModifier]
-	and EFFECTIVENESS_MASK
+	call GetFailureResultText_Shared ; ld a, [wTypeModifier] / and EFFECTIVENESS_MASK
 	jp z, PrintDoesntAffect
 	jp PrintButItFailed
 
@@ -2311,9 +2288,7 @@ BattleCommand_CriticalText:
 	dw OneHitKOText
 
 BattleCommand_StartLoop:
-	ld hl, wPlayerRolloutCount
-	ldh a, [hBattleTurn]
-	and a
+	call BattleCommand_StartLoop_Shared ; ld hl, wPlayerRolloutCount / ldh a, [hBattleTurn] / and a
 	jr z, .ok
 	ld hl, wEnemyRolloutCount
 .ok
@@ -2330,8 +2305,7 @@ BattleCommand_SuperEffectiveLoopText:
 	; fallthrough
 
 BattleCommand_SuperEffectiveText:
-	ld a, [wTypeModifier]
-	and EFFECTIVENESS_MASK
+	call GetFailureResultText_Shared ; ld a, [wTypeModifier] / and EFFECTIVENESS_MASK
 	cp EFFECTIVE
 	ret z
 	ld hl, SuperEffectiveText
@@ -2345,9 +2319,7 @@ BattleCommand_CheckFaint:
 ;  and faint the user along with it if it used Destiny Bond.
 ; Ends the move effect if the opponent faints.
 
-	ld hl, wEnemyMonHP
-	ldh a, [hBattleTurn]
-	and a
+	call BattleCommand_CheckFaint_Shared ; ld hl, wEnemyMonHP / ldh a, [hBattleTurn] / and a
 	jr z, .got_hp
 	ld hl, wBattleMonHP
 
@@ -2376,10 +2348,7 @@ BattleCommand_CheckFaint:
 
 .got_max_hp
 	ld [wWhichHPBar], a
-	ld a, [hld]
-	ld [wHPBuffer1], a
-	ld a, [hld]
-	ld [wHPBuffer1 + 1], a
+	call BattleCommand_CheckFaint_Shared2 ; ld a, [hld] / ld [wHPBuffer1], a / ld a, [hld] / ...
 	ld a, [hl]
 	ld [wHPBuffer2], a
 	xor a
@@ -2396,9 +2365,7 @@ BattleCommand_CheckFaint:
 	call RefreshBattleHuds
 
 	call BattleCommand_SwitchTurn
-	xor a
-	ld [wBattleAfterAnim], a
-	ld [wFXAnimID + 1], a
+	call BattleCommand_LowerSub_Shared ; xor a / ld [wBattleAfterAnim], a / ld [wFXAnimID + 1], a
 	inc a
 	ld [wBattleAnimParam], a
 	ld a, DESTINY_BOND
@@ -2476,6 +2443,7 @@ BattleCommand_RageDamage:
 	jr nc, .rage_loop
 	ld hl, $ffff
 .done
+.shared1: ; (tools/outline.py)
 	ld a, h
 	ld [wCurDamage], a
 	ld a, l
@@ -2627,10 +2595,7 @@ TruncateHL_BC:
 	or b
 	jr z, .done
 
-	srl b
-	rr c
-	srl b
-	rr c
+	call TruncateHL_BC_Shared ; srl b / rr c / srl b / ...
 
 	ld a, c
 	or b
@@ -3160,9 +3125,7 @@ BattleCommand_ConstantDamage:
 	jr .got_power
 
 .super_fang
-	ld hl, wEnemyMonHP
-	ldh a, [hBattleTurn]
-	and a
+	call BattleCommand_CheckFaint_Shared ; ld hl, wEnemyMonHP / ldh a, [hBattleTurn] / and a
 	jr z, .got_hp
 	ld hl, wBattleMonHP
 .got_hp
@@ -3330,10 +3293,7 @@ FarPlayBattleAnimation:
 	; fallthrough
 
 PlayFXAnimID:
-	ld a, e
-	ld [wFXAnimID], a
-	ld a, d
-	ld [wFXAnimID + 1], a
+	call PlayFXAnimID_Shared ; ld a, e / ld [wFXAnimID], a / ld a, d / ...
 
 	ld c, 3
 	call DelayFrames
@@ -3372,21 +3332,14 @@ DoEnemyDamage:
 	ld [wEnemyMonHP], a
 	jr nc, .no_underflow
 
-	ld a, [wHPBuffer2 + 1]
-	ld [hli], a
-	ld a, [wHPBuffer2]
-	ld [hl], a
-	xor a
+	call DoEnemyDamage_Shared2 ; ld a, [wHPBuffer2 + 1] / ld [hli], a / ld a, [wHPBuffer2] / ...
 	ld hl, wEnemyMonHP
 	ld [hli], a
 	ld [hl], a
 
 .no_underflow
 	ld hl, wEnemyMonMaxHP
-	ld a, [hli]
-	ld [wHPBuffer1 + 1], a
-	ld a, [hl]
-	ld [wHPBuffer1], a
+	call DoEnemyDamage_Shared ; ld a, [hli] / ld [wHPBuffer1 + 1], a / ld a, [hl] / ...
 	ld hl, wEnemyMonHP
 	ld a, [hli]
 	ld [wHPBuffer3 + 1], a
@@ -3395,8 +3348,7 @@ DoEnemyDamage:
 
 	hlcoord 2, 2
 	xor a
-	ld [wWhichHPBar], a
-	predef AnimateHPBar
+	call DoEnemyDamage_Shared3 ; ld [wWhichHPBar], a / predef AnimateHPBar
 .did_no_damage
 	jp RefreshBattleHuds
 
@@ -3434,11 +3386,7 @@ DoPlayerDamage:
 	ld [wHPBuffer3 + 1], a
 	jr nc, .no_underflow
 
-	ld a, [wHPBuffer2 + 1]
-	ld [hli], a
-	ld a, [wHPBuffer2]
-	ld [hl], a
-	xor a
+	call DoEnemyDamage_Shared2 ; ld a, [wHPBuffer2 + 1] / ld [hli], a / ld a, [wHPBuffer2] / ...
 	ld hl, wBattleMonHP
 	ld [hli], a
 	ld [hl], a
@@ -3448,15 +3396,11 @@ DoPlayerDamage:
 
 .no_underflow
 	ld hl, wBattleMonMaxHP
-	ld a, [hli]
-	ld [wHPBuffer1 + 1], a
-	ld a, [hl]
-	ld [wHPBuffer1], a
+	call DoEnemyDamage_Shared ; ld a, [hli] / ld [wHPBuffer1 + 1], a / ld a, [hl] / ...
 
 	hlcoord 10, 9
 	ld a, 1
-	ld [wWhichHPBar], a
-	predef AnimateHPBar
+	call DoEnemyDamage_Shared3 ; ld [wWhichHPBar], a / predef AnimateHPBar
 .did_no_damage
 	jp RefreshBattleHuds
 
@@ -3607,8 +3551,7 @@ BattleCommand_SleepTarget:
 	jr nz, .dont_fail
 
 	; Not locked-on by the enemy
-	ld a, [wPlayerSubStatus5]
-	bit SUBSTATUS_LOCK_ON, a
+	call BattleCommand_SleepTarget_Shared ; ld a, [wPlayerSubStatus5] / bit SUBSTATUS_LOCK_ON, a
 	jr nz, .dont_fail
 
 	call BattleRandom
@@ -3626,8 +3569,7 @@ BattleCommand_PoisonTarget:
 	call GetBattleVarAddr
 	and a
 	ret nz
-	ld a, [wTypeModifier]
-	and EFFECTIVENESS_MASK
+	call GetFailureResultText_Shared ; ld a, [wTypeModifier] / and EFFECTIVENESS_MASK
 	ret z
 	call CheckIfTargetIsPoisonType
 	ret z
@@ -3655,8 +3597,7 @@ BattleCommand_PoisonTarget:
 
 BattleCommand_Poison:
 	ld hl, DoesntAffectText
-	ld a, [wTypeModifier]
-	and EFFECTIVENESS_MASK
+	call GetFailureResultText_Shared ; ld a, [wTypeModifier] / and EFFECTIVENESS_MASK
 	jr z, .failed
 
 	call CheckIfTargetIsPoisonType
@@ -3694,8 +3635,7 @@ BattleCommand_Poison:
 	and a
 	jr nz, .dont_sample_failure
 
-	ld a, [wPlayerSubStatus5]
-	bit SUBSTATUS_LOCK_ON, a
+	call BattleCommand_SleepTarget_Shared ; ld a, [wPlayerSubStatus5] / bit SUBSTATUS_LOCK_ON, a
 	jr nz, .dont_sample_failure
 
 	call BattleRandom
@@ -3870,8 +3810,7 @@ SapHealth:
 	hlcoord 2, 2
 	xor a
 .hp_bar
-	ld [wWhichHPBar], a
-	predef AnimateHPBar
+	call DoEnemyDamage_Shared3 ; ld [wWhichHPBar], a / predef AnimateHPBar
 	call RefreshBattleHuds
 	jp UpdateBattleMonInParty
 
@@ -3884,8 +3823,7 @@ BattleCommand_BurnTarget:
 	call GetBattleVarAddr
 	and a
 	jr nz, Defrost
-	ld a, [wTypeModifier]
-	and EFFECTIVENESS_MASK
+	call GetFailureResultText_Shared ; ld a, [wTypeModifier] / and EFFECTIVENESS_MASK
 	ret z
 	call CheckMoveTypeMatchesTarget ; Don't burn a Fire-type
 	ret z
@@ -3945,8 +3883,7 @@ BattleCommand_FreezeTarget:
 	call GetBattleVarAddr
 	and a
 	ret nz
-	ld a, [wTypeModifier]
-	and EFFECTIVENESS_MASK
+	call GetFailureResultText_Shared ; ld a, [wTypeModifier] / and EFFECTIVENESS_MASK
 	ret z
 	ld a, [wBattleWeather]
 	cp WEATHER_SUN
@@ -3996,8 +3933,7 @@ BattleCommand_ParalyzeTarget:
 	call GetBattleVarAddr
 	and a
 	ret nz
-	ld a, [wTypeModifier]
-	and EFFECTIVENESS_MASK
+	call GetFailureResultText_Shared ; ld a, [wTypeModifier] / and EFFECTIVENESS_MASK
 	ret z
 	call GetOpponentItem
 	ld a, b
@@ -4086,10 +4022,7 @@ BattleCommand_StatUp:
 
 RaiseStat:
 	ld a, b
-	ld [wLoweredStat], a
-	ld hl, wPlayerStatLevels
-	ldh a, [hBattleTurn]
-	and a
+	call RaiseStat_Shared3 ; ld [wLoweredStat], a / ld hl, wPlayerStatLevels / ldh a, [hBattleTurn] / ...
 	jr z, .got_stat_levels
 	ld hl, wEnemyStatLevels
 .got_stat_levels
@@ -4099,18 +4032,12 @@ RaiseStat:
 	ld a, [wEffectFailed]
 	and a
 	jr nz, .stat_raise_failed
-	ld a, [wLoweredStat]
-	and $f
-	ld c, a
-	ld b, 0
-	add hl, bc
-	ld b, [hl]
+	call RaiseStat_Shared ; ld a, [wLoweredStat] / and $f / ld c, a / ...
 	inc b
 	ld a, MAX_STAT_LEVEL
 	cp b
 	jr c, .cant_raise_stat
-	ld a, [wLoweredStat]
-	and $f0
+	call RaiseStat_Shared2 ; ld a, [wLoweredStat] / and $f0
 	jr z, .got_num_stages
 	inc b
 	ld a, MAX_STAT_LEVEL
@@ -4123,21 +4050,13 @@ RaiseStat:
 	ld a, c
 	cp ACCURACY
 	jr nc, .done_calcing_stats
-	ld hl, wBattleMonStats + 1
-	ld de, wPlayerStats
-	ldh a, [hBattleTurn]
-	and a
+	call RaiseStat_Shared4 ; ld hl, wBattleMonStats + 1 / ld de, wPlayerStats / ldh a, [hBattleTurn] / ...
 	jr z, .got_stats_pointer
 	ld hl, wEnemyMonStats + 1
 	ld de, wEnemyStats
 .got_stats_pointer
 	push bc
-	sla c
-	ld b, 0
-	add hl, bc
-	ld a, c
-	add e
-	ld e, a
+	call RaiseStat_Shared5 ; sla c / ld b, 0 / add hl, bc / ...
 	jr nc, .no_carry
 	inc d
 .no_carry
@@ -4172,6 +4091,7 @@ RaiseStat:
 	ld a, $2
 	ld [wFailedMessage], a
 .tailmerge_4182: ; (tools/tailmerge.py)
+.shared6: ; (tools/outline.py)
 	ld a, $1
 	ld [wAttackMissed], a
 	ret
@@ -4279,18 +4199,12 @@ BattleCommand_StatDown:
 
 .GetStatLevel:
 ; Attempt to lower the stat.
-	ld a, [wLoweredStat]
-	and $f
-	ld c, a
-	ld b, 0
-	add hl, bc
-	ld b, [hl]
+	call RaiseStat_Shared ; ld a, [wLoweredStat] / and $f / ld c, a / ...
 	dec b
 	jr z, .CantLower
 
 ; Sharply lower the stat if applicable.
-	ld a, [wLoweredStat]
-	and $f0
+	call RaiseStat_Shared2 ; ld a, [wLoweredStat] / and $f0
 	jr z, .ComputerMiss
 	dec b
 	jr nz, .ComputerMiss
@@ -4307,8 +4221,7 @@ BattleCommand_StatDown:
 	jr nz, .DidntMiss
 
 ; Lock-On still always works.
-	ld a, [wPlayerSubStatus5]
-	bit SUBSTATUS_LOCK_ON, a
+	call BattleCommand_SleepTarget_Shared ; ld a, [wPlayerSubStatus5] / bit SUBSTATUS_LOCK_ON, a
 	jr nz, .DidntMiss
 
 ; Attacking moves that also lower accuracy are unaffected.
@@ -4407,10 +4320,7 @@ BattleCommand_StatUpMessage:
 	ld a, [wFailedMessage]
 	and a
 	ret nz
-	ld a, [wLoweredStat]
-	and $f
-	ld b, a
-	inc b
+	call BattleCommand_StatUpMessage_Shared ; ld a, [wLoweredStat] / and $f / ld b, a / ...
 	call GetStatName
 	ld hl, .stat
 	jp PrintText
@@ -4419,8 +4329,7 @@ BattleCommand_StatUpMessage:
 	text_far Text_BattleEffectActivate
 	text_asm
 	ld hl, .BattleStatWentUpText
-	ld a, [wLoweredStat]
-	and $f0
+	call RaiseStat_Shared2 ; ld a, [wLoweredStat] / and $f0
 	ret z
 	ld hl, .BattleStatWentWayUpText
 	ret
@@ -4437,10 +4346,7 @@ BattleCommand_StatDownMessage:
 	ld a, [wFailedMessage]
 	and a
 	ret nz
-	ld a, [wLoweredStat]
-	and $f
-	ld b, a
-	inc b
+	call BattleCommand_StatUpMessage_Shared ; ld a, [wLoweredStat] / and $f / ld b, a / ...
 	call GetStatName
 	ld hl, .stat
 	jp PrintText
@@ -4449,8 +4355,7 @@ BattleCommand_StatDownMessage:
 	text_far Text_BattleFoeEffectActivate
 	text_asm
 	ld hl, .BattleStatFellText
-	ld a, [wLoweredStat]
-	and $f0
+	call RaiseStat_Shared2 ; ld a, [wLoweredStat] / and $f0
 	ret z
 	ld hl, .BattleStatSharplyFellText
 	ret
@@ -4467,13 +4372,7 @@ TryLowerStat:
 ; Lower stat c from stat struct hl (buffer de).
 
 	push bc
-	sla c
-	ld b, 0
-	add hl, bc
-	; add de, c
-	ld a, c
-	add e
-	ld e, a
+	call RaiseStat_Shared5 ; sla c / ld b, 0 / add hl, bc / ...
 	jr nc, .no_carry
 	inc d
 .no_carry
@@ -4513,10 +4412,7 @@ BattleCommand_StatUpFailText:
 	pop af
 	dec a
 	jp z, TryPrintButItFailed
-	ld a, [wLoweredStat]
-	and $f
-	ld b, a
-	inc b
+	call BattleCommand_StatUpMessage_Shared ; ld a, [wLoweredStat] / and $f / ld b, a / ...
 	call GetStatName
 .tailmerge_4532: ; (tools/tailmerge.py)
 	ld hl, WontRiseAnymoreText
@@ -4534,10 +4430,7 @@ BattleCommand_StatDownFailText:
 	dec a
 	ld hl, ProtectedByMistText
 	jp z, StdBattleTextbox
-	ld a, [wLoweredStat]
-	and $f
-	ld b, a
-	inc b
+	call BattleCommand_StatUpMessage_Shared ; ld a, [wLoweredStat] / and $f / ld b, a / ...
 	call GetStatName
 	ld hl, WontDropAnymoreText
 	jp StdBattleTextbox
@@ -4594,26 +4487,16 @@ ResetMiss:
 	jp BattleCommand_Counter.capped ; same as there (tools/tailmerge.py)
 
 LowerStat:
-	ld [wLoweredStat], a
-
-	ld hl, wPlayerStatLevels
-	ldh a, [hBattleTurn]
-	and a
+	call RaiseStat_Shared3 ; ld [wLoweredStat], a / ld hl, wPlayerStatLevels / ldh a, [hBattleTurn] / ...
 	jr z, .got_target
 	ld hl, wEnemyStatLevels
 
 .got_target
-	ld a, [wLoweredStat]
-	and $f
-	ld c, a
-	ld b, 0
-	add hl, bc
-	ld b, [hl]
+	call RaiseStat_Shared ; ld a, [wLoweredStat] / and $f / ld c, a / ...
 	dec b
 	jr z, .cant_lower_anymore
 
-	ld a, [wLoweredStat]
-	and $f0
+	call RaiseStat_Shared2 ; ld a, [wLoweredStat] / and $f0
 	jr z, .got_num_stages
 	dec b
 	jr nz, .got_num_stages
@@ -4626,10 +4509,7 @@ LowerStat:
 	jr nc, .accuracy_evasion
 
 	push hl
-	ld hl, wBattleMonStats + 1
-	ld de, wPlayerStats
-	ldh a, [hBattleTurn]
-	and a
+	call RaiseStat_Shared4 ; ld hl, wBattleMonStats + 1 / ld de, wPlayerStats / ldh a, [hBattleTurn] / ...
 	jr z, .got_target_2
 	ld hl, wEnemyMonStats + 1
 	ld de, wEnemyStats
@@ -4811,9 +4691,7 @@ CalcBattleStats:
 INCLUDE "engine/battle/move_effects/bide.asm"
 
 BattleCommand_CheckRampage:
-	ld de, wPlayerRolloutCount
-	ldh a, [hBattleTurn]
-	and a
+	call BattleCommand_CheckRampage_Shared ; ld de, wPlayerRolloutCount / ldh a, [hBattleTurn] / and a
 	jr z, .player
 	ld de, wEnemyRolloutCount
 .player
@@ -4852,9 +4730,7 @@ BattleCommand_Rampage:
 	and SLP_MASK
 	ret nz
 
-	ld de, wPlayerRolloutCount
-	ldh a, [hBattleTurn]
-	and a
+	call BattleCommand_CheckRampage_Shared ; ld de, wPlayerRolloutCount / ldh a, [hBattleTurn] / and a
 	jr z, .ok
 	ld de, wEnemyRolloutCount
 .ok
@@ -4866,6 +4742,7 @@ BattleCommand_Rampage:
 	and %00000001
 	inc a
 	ld [de], a
+.shared1: ; (tools/outline.py)
 	ld a, 1
 	ld [wSomeoneIsRampaging], a
 	ret
@@ -4887,10 +4764,7 @@ BattleCommand_ForceSwitch:
 	ld a, [wBattleMode]
 	dec a
 	jr nz, .trainer
-	ld a, [wCurPartyLevel]
-	ld b, a
-	ld a, [wBattleMonLevel]
-	cp b
+	call BattleCommand_ForceSwitch_Shared4 ; ld a, [wCurPartyLevel] / ld b, a / ld a, [wBattleMonLevel] / ...
 	jr nc, .wild_force_flee
 	add b
 	ld c, a
@@ -4899,21 +4773,14 @@ BattleCommand_ForceSwitch:
 	call BattleRandom
 	cp c
 	jr nc, .random_loop_wild
-	srl b
-	srl b
-	cp b
+	call BattleCommand_ForceSwitch_Shared3 ; srl b / srl b / cp b
 	jr nc, .wild_force_flee
 .missed
 	jp .fail
 
 .wild_force_flee
 	call UpdateBattleMonInParty
-	xor a
-	ld [wBattleAfterAnim], a
-	inc a ; TRUE
-	ld [wForcedSwitch], a
-	inc a ; DRAW
-	ld [wBattleResult], a
+	call BattleCommand_ForceSwitch_Shared ; xor a / ld [wBattleAfterAnim], a / inc a / ...
 	ld a, [wPlayerMoveStructAnimation]
 	jp .succeed
 
@@ -4924,8 +4791,7 @@ BattleCommand_ForceSwitch:
 	and a
 	jr z, .switch_fail
 	call UpdateEnemyMonInParty
-	ld a, $1
-	ld [wBattleAnimParam], a
+	call BattleCommand_ForceSwitch_Shared2 ; ld a, $1 / ld [wBattleAnimParam], a
 	call AnimateCurrentMove
 	ld c, $14
 	call DelayFrames
@@ -4978,10 +4844,7 @@ BattleCommand_ForceSwitch:
 	dec a
 	jr nz, .vs_trainer
 
-	ld a, [wBattleMonLevel]
-	ld b, a
-	ld a, [wCurPartyLevel]
-	cp b
+	call BattleCommand_ForceSwitch_Shared5 ; ld a, [wBattleMonLevel] / ld b, a / ld a, [wCurPartyLevel] / ...
 	jr nc, .wild_succeed_playeristarget
 
 	add b
@@ -4992,9 +4855,7 @@ BattleCommand_ForceSwitch:
 	cp c
 	jr nc, .wild_random_loop_playeristarget
 
-	srl b
-	srl b
-	cp b
+	call BattleCommand_ForceSwitch_Shared3 ; srl b / srl b / cp b
 	jr nc, .wild_succeed_playeristarget
 
 .player_miss
@@ -5002,12 +4863,7 @@ BattleCommand_ForceSwitch:
 
 .wild_succeed_playeristarget
 	call UpdateBattleMonInParty
-	xor a
-	ld [wBattleAfterAnim], a
-	inc a ; TRUE
-	ld [wForcedSwitch], a
-	inc a ; DRAW
-	ld [wBattleResult], a
+	call BattleCommand_ForceSwitch_Shared ; xor a / ld [wBattleAfterAnim], a / inc a / ...
 	ld a, [wEnemyMoveStructAnimation]
 	jr .succeed
 
@@ -5020,8 +4876,7 @@ BattleCommand_ForceSwitch:
 	jr z, .switch_fail
 
 	call UpdateBattleMonInParty
-	ld a, $1
-	ld [wBattleAnimParam], a
+	call BattleCommand_ForceSwitch_Shared2 ; ld a, $1 / ld [wBattleAnimParam], a
 	call AnimateCurrentMove
 	ld c, 20
 	call DelayFrames
@@ -5071,8 +4926,7 @@ BattleCommand_ForceSwitch:
 	push af
 	ld a, DRAW
 	ld [wBattleResult], a
-	ld a, $1
-	ld [wBattleAnimParam], a
+	call BattleCommand_ForceSwitch_Shared2 ; ld a, $1 / ld [wBattleAnimParam], a
 	call AnimateCurrentMove
 	ld c, 20
 	call DelayFrames
@@ -5237,15 +5091,13 @@ BattleCommand_EndLoop:
 	ret
 
 .loop_back_to_critical
-	ld a, [wBattleScriptBufferAddress + 1]
-	ld h, a
-	ld a, [wBattleScriptBufferAddress]
-	ld l, a
+	call BattleCommand_EndLoop_Shared ; ld a, [wBattleScriptBufferAddress + 1] / ld h, a / ld a, [wBattleScriptBufferAddress] / ...
 .not_critical
 	ld a, [hld]
 	cp critical_command
 	jr nz, .not_critical
 	inc hl
+.shared2: ; (tools/outline.py)
 	ld a, h
 	ld [wBattleScriptBufferAddress + 1], a
 	ld a, l
@@ -5336,8 +5188,7 @@ BattleCommand_HeldFlinch:
 
 BattleCommand_OHKO:
 	call ResetDamage
-	ld a, [wTypeModifier]
-	and EFFECTIVENESS_MASK
+	call GetFailureResultText_Shared ; ld a, [wTypeModifier] / and EFFECTIVENESS_MASK
 	jr z, .no_effect
 	ld hl, wEnemyMonLevel
 	ld de, wBattleMonLevel
@@ -5594,23 +5445,14 @@ BattleCommand_Recoil:
 	call GetBattleVar
 	ld d, a
 ; get 1/4 damage or 1 HP, whichever is higher
-	ld a, [wCurDamage]
-	ld b, a
-	ld a, [wCurDamage + 1]
-	ld c, a
-	srl b
-	rr c
-	srl b
-	rr c
+	call BattleCommand_Recoil_Shared ; ld a, [wCurDamage] / ld b, a / ld a, [wCurDamage + 1] / ...
+	call TruncateHL_BC_Shared ; srl b / rr c / srl b / ...
 	ld a, b
 	or c
 	jr nz, .min_damage
 	inc c
 .min_damage
-	ld a, [hli]
-	ld [wHPBuffer1 + 1], a
-	ld a, [hl]
-	ld [wHPBuffer1], a
+	call DoEnemyDamage_Shared ; ld a, [hli] / ld [wHPBuffer1 + 1], a / ld a, [hl] / ...
 	dec hl
 	dec hl
 	ld a, [hl]
@@ -5639,8 +5481,7 @@ BattleCommand_Recoil:
 	hlcoord 2, 2
 	xor a
 .animate_hp_bar
-	ld [wWhichHPBar], a
-	predef AnimateHPBar
+	call DoEnemyDamage_Shared3 ; ld [wWhichHPBar], a / predef AnimateHPBar
 	call RefreshBattleHuds
 	ld hl, RecoilText
 	jp StdBattleTextbox
@@ -5749,8 +5590,7 @@ BattleCommand_Paralyze:
 	call GetBattleVar
 	bit PAR, a
 	jr nz, .paralyzed
-	ld a, [wTypeModifier]
-	and EFFECTIVENESS_MASK
+	call GetFailureResultText_Shared ; ld a, [wTypeModifier] / and EFFECTIVENESS_MASK
 	jr z, .didnt_affect
 	call GetOpponentItem
 	ld a, b
@@ -5772,8 +5612,7 @@ BattleCommand_Paralyze:
 	and a
 	jr nz, .dont_sample_failure
 
-	ld a, [wPlayerSubStatus5]
-	bit SUBSTATUS_LOCK_ON, a
+	call BattleCommand_SleepTarget_Shared ; ld a, [wPlayerSubStatus5] / bit SUBSTATUS_LOCK_ON, a
 	jr nz, .dont_sample_failure
 
 	call BattleRandom
@@ -5887,10 +5726,7 @@ BattleCommand_DoubleUndergroundDamage:
 	; fallthrough
 
 DoubleDamage:
-	ld hl, wCurDamage + 1
-	sla [hl]
-	dec hl
-	rl [hl]
+	call DoubleDamage_Shared ; ld hl, wCurDamage + 1 / sla [hl] / dec hl / ...
 	ret nc
 
 	ld a, $ff
@@ -6281,9 +6117,7 @@ INCLUDE "engine/battle/move_effects/safeguard.asm"
 
 SafeCheckSafeguard:
 	push hl
-	ld hl, wEnemyScreens
-	ldh a, [hBattleTurn]
-	and a
+	call SafeCheckSafeguard_Shared ; ld hl, wEnemyScreens / ldh a, [hBattleTurn] / and a
 	jr z, .got_turn
 	ld hl, wPlayerScreens
 
@@ -6293,16 +6127,13 @@ SafeCheckSafeguard:
 	ret
 
 BattleCommand_CheckSafeguard:
-	ld hl, wEnemyScreens
-	ldh a, [hBattleTurn]
-	and a
+	call SafeCheckSafeguard_Shared ; ld hl, wEnemyScreens / ldh a, [hBattleTurn] / and a
 	jr z, .got_turn
 	ld hl, wPlayerScreens
 .got_turn
 	bit SCREENS_SAFEGUARD, [hl]
 	ret z
-	ld a, 1
-	ld [wAttackMissed], a
+	call BattleCommand_CheckHit.shared2 ; ld a, 1 / ld [wAttackMissed], a
 	call BattleCommand_MoveDelay
 	ld hl, SafeguardProtectText
 	jp BattleCommand_StoreEnergy.tailmerge_67 ; same as there (tools/tailmerge.py)
@@ -6538,9 +6369,7 @@ PlayDamageAnim:
 	jr PlayUserBattleAnim
 
 LoadMoveAnim:
-	xor a
-	ld [wBattleAfterAnim], a
-	ld [wFXAnimID + 1], a
+	call BattleCommand_LowerSub_Shared ; xor a / ld [wBattleAfterAnim], a / ld [wFXAnimID + 1], a
 
 	ld a, BATTLE_VARS_MOVE_ANIM
 	call GetBattleVar
@@ -6565,10 +6394,7 @@ PlayUserBattleAnim:
 	ret
 
 PlayOpponentBattleAnim:
-	ld a, e
-	ld [wFXAnimID], a
-	ld a, d
-	ld [wFXAnimID + 1], a
+	call PlayFXAnimID_Shared ; ld a, e / ld [wFXAnimID], a / ld a, d / ...
 	xor a
 	ld [wBattleAfterAnim], a
 
@@ -6610,20 +6436,13 @@ BattleCommand_ClearText:
 
 SkipToBattleCommand:
 ; Skip over commands until reaching command b.
-	ld a, [wBattleScriptBufferAddress + 1]
-	ld h, a
-	ld a, [wBattleScriptBufferAddress]
-	ld l, a
+	call BattleCommand_EndLoop_Shared ; ld a, [wBattleScriptBufferAddress + 1] / ld h, a / ld a, [wBattleScriptBufferAddress] / ...
 .loop
 	ld a, [hli]
 	cp b
 	jr nz, .loop
 
-	ld a, h
-	ld [wBattleScriptBufferAddress + 1], a
-	ld a, l
-	ld [wBattleScriptBufferAddress], a
-	ret
+	jp BattleCommand_EndLoop.shared2 ; ld a, h / ld [wBattleScriptBufferAddress + 1], a / ld a, l / ...
 
 GetMoveAttr:
 ; Assuming hl = Moves + x, return attribute x of move a.
@@ -6656,4 +6475,200 @@ AppearUserLowerSub:
 
 AppearUserRaiseSub:
 	farcall _AppearUserRaiseSub
+	ret
+
+BattleCommand_LowerSub_Shared: ; (tools/outline.py)
+	xor a
+	ld [wBattleAfterAnim], a
+	ld [wFXAnimID + 1], a
+	ret
+
+GetFailureResultText_Shared: ; (tools/outline.py)
+	ld a, [wTypeModifier]
+	and EFFECTIVENESS_MASK
+	ret
+
+BattleCommand_ForceSwitch_Shared: ; (tools/outline.py)
+	xor a
+	ld [wBattleAfterAnim], a
+	inc a ; TRUE
+	ld [wForcedSwitch], a
+	inc a ; DRAW
+	ld [wBattleResult], a
+	ret
+
+DoEnemyDamage_Shared: ; (tools/outline.py)
+	ld a, [hli]
+	ld [wHPBuffer1 + 1], a
+	ld a, [hl]
+	ld [wHPBuffer1], a
+	ret
+
+DoubleDamage_Shared: ; (tools/outline.py)
+	ld hl, wCurDamage + 1
+	sla [hl]
+	dec hl
+	rl [hl]
+	ret
+
+RaiseStat_Shared: ; (tools/outline.py)
+	ld a, [wLoweredStat]
+	and $f
+	ld c, a
+	ld b, 0
+	add hl, bc
+	ld b, [hl]
+	ret
+
+BattleCommand_StatUpMessage_Shared: ; (tools/outline.py)
+	ld a, [wLoweredStat]
+	and $f
+	ld b, a
+	inc b
+	ret
+
+BattleCommand_ForceSwitch_Shared2: ; (tools/outline.py)
+	ld a, $1
+	ld [wBattleAnimParam], a
+	ret
+
+RaiseStat_Shared2: ; (tools/outline.py)
+	ld a, [wLoweredStat]
+	and $f0
+	ret
+
+CheckEnemyTurn_Shared: ; (tools/outline.py)
+	xor a
+	ld [wBattleAfterAnim], a
+	ld de, ANIM_HIT_CONFUSION
+	ld a, BATTLE_VARS_SUBSTATUS3_OPP
+	ret
+
+BattleCommand_StartLoop_Shared: ; (tools/outline.py)
+	ld hl, wPlayerRolloutCount
+	ldh a, [hBattleTurn]
+	and a
+	ret
+
+BattleCommand_CheckFaint_Shared: ; (tools/outline.py)
+	ld hl, wEnemyMonHP
+	ldh a, [hBattleTurn]
+	and a
+	ret
+
+DoEnemyDamage_Shared2: ; (tools/outline.py)
+	ld a, [wHPBuffer2 + 1]
+	ld [hli], a
+	ld a, [wHPBuffer2]
+	ld [hl], a
+	xor a
+	ret
+
+DoEnemyDamage_Shared3: ; (tools/outline.py)
+	ld [wWhichHPBar], a
+	predef AnimateHPBar
+	ret
+
+BattleCommand_SleepTarget_Shared: ; (tools/outline.py)
+	ld a, [wPlayerSubStatus5]
+	bit SUBSTATUS_LOCK_ON, a
+	ret
+
+RaiseStat_Shared3: ; (tools/outline.py)
+	ld [wLoweredStat], a
+	ld hl, wPlayerStatLevels
+	ldh a, [hBattleTurn]
+	and a
+	ret
+
+RaiseStat_Shared4: ; (tools/outline.py)
+	ld hl, wBattleMonStats + 1
+	ld de, wPlayerStats
+	ldh a, [hBattleTurn]
+	and a
+	ret
+
+BattleCommand_CheckRampage_Shared: ; (tools/outline.py)
+	ld de, wPlayerRolloutCount
+	ldh a, [hBattleTurn]
+	and a
+	ret
+
+BattleCommand_ForceSwitch_Shared3: ; (tools/outline.py)
+	srl b
+	srl b
+	cp b
+	ret
+
+SafeCheckSafeguard_Shared: ; (tools/outline.py)
+	ld hl, wEnemyScreens
+	ldh a, [hBattleTurn]
+	and a
+	ret
+
+BattleCommand_CheckHit_Shared: ; (tools/outline.py)
+	xor a
+	ldh [hMultiplicand + 0], a
+.shared1: ; (tools/outline.py)
+	ldh [hMultiplicand + 1], a
+	ld a, [hl]
+	ldh [hMultiplicand + 2], a
+	ret
+
+BattleCommand_CheckFaint_Shared2: ; (tools/outline.py)
+	ld a, [hld]
+	ld [wHPBuffer1], a
+	ld a, [hld]
+	ld [wHPBuffer1 + 1], a
+	ret
+
+TruncateHL_BC_Shared: ; (tools/outline.py)
+	srl b
+	rr c
+	srl b
+	rr c
+	ret
+
+PlayFXAnimID_Shared: ; (tools/outline.py)
+	ld a, e
+	ld [wFXAnimID], a
+	ld a, d
+	ld [wFXAnimID + 1], a
+	ret
+
+RaiseStat_Shared5: ; (tools/outline.py)
+	sla c
+	ld b, 0
+	add hl, bc
+	ld a, c
+	add e
+	ld e, a
+	ret
+
+BattleCommand_ForceSwitch_Shared4: ; (tools/outline.py)
+	ld a, [wCurPartyLevel]
+	ld b, a
+	ld a, [wBattleMonLevel]
+	cp b
+	ret
+
+BattleCommand_ForceSwitch_Shared5: ; (tools/outline.py)
+	ld a, [wBattleMonLevel]
+	ld b, a
+	ld a, [wCurPartyLevel]
+	cp b
+	ret
+
+BattleCommand_EndLoop_Shared: ; (tools/outline.py)
+	ld a, [wBattleScriptBufferAddress + 1]
+	ld h, a
+	ld a, [wBattleScriptBufferAddress]
+	ld l, a
+	ret
+
+BattleCommand_Recoil_Shared: ; (tools/outline.py)
+	ld a, [wCurDamage]
+	ld b, a
+	ld a, [wCurDamage + 1]
+	ld c, a
 	ret

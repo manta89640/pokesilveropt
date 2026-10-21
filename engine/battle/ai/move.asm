@@ -108,9 +108,7 @@ AIChooseMove:
 
 ; Decrement the scores of all moves one by one until one reaches 0.
 .DecrementScores:
-	ld hl, wEnemyAIMoveScores
-	ld de, wEnemyMonMoves
-	ld c, NUM_MOVES
+	call AIChooseMove_Shared ; ld hl, wEnemyAIMoveScores / ld de, wEnemyMonMoves / ld c, NUM_MOVES
 
 .DecrementNextScore:
 	; If the enemy has no moves, this will infinite.
@@ -143,9 +141,7 @@ AIChooseMove:
 	cp NUM_MOVES + 1
 	jr nz, .move_loop
 
-	ld hl, wEnemyAIMoveScores
-	ld de, wEnemyMonMoves
-	ld c, NUM_MOVES
+	call AIChooseMove_Shared ; ld hl, wEnemyAIMoveScores / ld de, wEnemyMonMoves / ld c, NUM_MOVES
 
 ; Give a score of 0 to a blank move
 .loop2
@@ -206,3 +202,9 @@ AIScoringPointers:
 	dw AI_None
 	dw AI_None
 	dw AI_None
+
+AIChooseMove_Shared: ; (tools/outline.py)
+	ld hl, wEnemyAIMoveScores
+	ld de, wEnemyMonMoves
+	ld c, NUM_MOVES
+	ret

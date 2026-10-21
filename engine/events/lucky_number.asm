@@ -109,8 +109,7 @@ CheckForLuckyNumberWinners:
 	ld a, [wTempByteValue]
 	and a
 	push af
-	ld a, [wCurPartySpecies]
-	ld [wNamedObjectIndex], a
+	call CheckForLuckyNumberWinners_Shared ; ld a, [wCurPartySpecies] / ld [wNamedObjectIndex], a
 	call GetPokemonName
 	ld hl, .LuckyNumberMatchPartyText
 	pop af
@@ -213,4 +212,9 @@ PrintTodaysLuckyNumber:
 	call PrintNum
 	ld a, '@'
 	ld [wStringBuffer3 + 5], a
+	ret
+
+CheckForLuckyNumberWinners_Shared: ; (tools/outline.py)
+	ld a, [wCurPartySpecies]
+	ld [wNamedObjectIndex], a
 	ret

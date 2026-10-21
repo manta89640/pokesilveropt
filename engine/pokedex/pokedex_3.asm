@@ -31,9 +31,7 @@ DrawPokedexListWindow:
 	hlcoord 0, 1
 	lb bc, 15, 11
 	call ClearBox
-	ld a, $34
-	hlcoord 0, 0
-	ld bc, 11
+	call DrawPokedexListWindow_Shared2 ; ld a, $34 / hlcoord 0, 0 / ld bc, 11
 	call ByteFill
 	ld a, $39
 	hlcoord 0, 16
@@ -58,10 +56,7 @@ DrawPokedexListWindow:
 
 .OldMode:
 ; no scroll bar
-	hlcoord 11, 0
-	ld [hl], $66
-	ld a, $67
-	hlcoord 11, 1
+	call DrawPokedexListWindow_Shared ; hlcoord 11, 0 / ld [hl], $66 / ld a, $67 / ...
 	ld b, SCREEN_HEIGHT - 3
 	call Pokedex_FillColumn2
 	ld [hl], $68
@@ -69,9 +64,7 @@ DrawPokedexListWindow:
 	ret
 
 DrawPokedexSearchResultsWindow:
-	ld a, $34
-	hlcoord 0, 0
-	ld bc, 11
+	call DrawPokedexListWindow_Shared2 ; ld a, $34 / hlcoord 0, 0 / ld bc, 11
 	call ByteFill
 	ld a, $39
 	hlcoord 0, 10
@@ -81,10 +74,7 @@ DrawPokedexSearchResultsWindow:
 	ld [hl], $3f
 	hlcoord 5, 10
 	ld [hl], $40
-	hlcoord 11, 0
-	ld [hl], $66
-	ld a, $67
-	hlcoord 11, 1
+	call DrawPokedexListWindow_Shared ; hlcoord 11, 0 / ld [hl], $66 / ld a, $67 / ...
 	ld b, SCREEN_HEIGHT / 2
 	call Pokedex_FillColumn2
 	ld [hl], $68
@@ -124,10 +114,7 @@ DrawDexEntryScreenRightEdge:
 	ld h, a
 	push hl
 	inc hl
-	ld a, l
-	ldh [hBGMapAddress], a
-	ld a, h
-	ldh [hBGMapAddress + 1], a
+	call DrawDexEntryScreenRightEdge.shared1 ; ld a, l / ldh [hBGMapAddress], a / ld a, h / ...
 	hlcoord 19, 0
 	ld [hl], $66
 	hlcoord 19, 1
@@ -143,6 +130,7 @@ DrawDexEntryScreenRightEdge:
 	call Pokedex_FillColumn2
 	call WaitBGMap2
 	pop hl
+.shared1: ; (tools/outline.py)
 	ld a, l
 	ldh [hBGMapAddress], a
 	ld a, h
@@ -159,4 +147,17 @@ Pokedex_FillColumn2:
 	dec b
 	jr nz, .loop
 	pop de
+	ret
+
+DrawPokedexListWindow_Shared: ; (tools/outline.py)
+	hlcoord 11, 0
+	ld [hl], $66
+	ld a, $67
+	hlcoord 11, 1
+	ret
+
+DrawPokedexListWindow_Shared2: ; (tools/outline.py)
+	ld a, $34
+	hlcoord 0, 0
+	ld bc, 11
 	ret

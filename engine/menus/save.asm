@@ -87,10 +87,7 @@ MoveMonWOMail_InsertMon_SaveGame:
 	pop de
 	ld a, e
 	ld [wCurBox], a
-	ld a, TRUE
-	ld [wSaveFileExists], a
-	farcall StageRTCTimeForSave
-	farcall BackupMysteryGift
+	call MoveMonWOMail_InsertMon_SaveGame_Shared ; ld a, TRUE / ld [wSaveFileExists], a / farcall StageRTCTimeForSave / ...
 	call ValidateSave
 	call SaveOptions
 	call SavePlayerData
@@ -265,10 +262,7 @@ SavingDontTurnOffThePower:
 	jp DelayFrames
 
 _SaveGameData:
-	ld a, TRUE
-	ld [wSaveFileExists], a
-	farcall StageRTCTimeForSave
-	farcall BackupMysteryGift
+	call MoveMonWOMail_InsertMon_SaveGame_Shared ; ld a, TRUE / ld [wSaveFileExists], a / farcall StageRTCTimeForSave / ...
 	call ValidateSave
 	call SaveOptions
 	call SavePlayerData
@@ -408,9 +402,7 @@ SaveBox:
 	jp SaveBoxAddress
 
 SaveChecksum:
-	ld hl, sGameData
-	ld bc, sGameDataEnd - sGameData
-	ld a, BANK(sGameData)
+	call SaveChecksum_Shared ; ld hl, sGameData / ld bc, sGameDataEnd - sGameData / ld a, BANK(sGameData)
 	call OpenSRAM
 	call Checksum
 	ld a, e
@@ -588,8 +580,7 @@ TryLoadSaveData:
 
 .corrupt
 	ld hl, DefaultOptions
-	ld de, wOptions
-	ld bc, wOptionsEnd - wOptions
+	call TryLoadSaveData_Shared ; ld de, wOptions / ld bc, wOptionsEnd - wOptions
 	call CopyBytes
 	jp ClearClock
 
@@ -605,8 +596,7 @@ CheckPrimarySaveFile:
 	cp SAVE_CHECK_VALUE_2
 	jr nz, .nope
 	ld hl, sOptions
-	ld de, wOptions
-	ld bc, wOptionsEnd - wOptions
+	call TryLoadSaveData_Shared ; ld de, wOptions / ld bc, wOptionsEnd - wOptions
 	call CopyBytes
 	call CloseSRAM
 	call CheckTextDelay
@@ -626,8 +616,7 @@ CheckBackupSaveFile:
 	cp SAVE_CHECK_VALUE_2
 	jr nz, .nope
 	ld hl, sBackupOptions
-	ld de, wOptions
-	ld bc, wOptionsEnd - wOptions
+	call TryLoadSaveData_Shared ; ld de, wOptions / ld bc, wOptionsEnd - wOptions
 	call CopyBytes
 	call CheckTextDelay
 	ld a, $2
@@ -679,9 +668,7 @@ LoadBox:
 	jp LoadBoxAddress
 
 VerifyChecksum:
-	ld hl, sGameData
-	ld bc, sGameDataEnd - sGameData
-	ld a, BANK(sGameData)
+	call SaveChecksum_Shared ; ld hl, sGameData / ld bc, sGameDataEnd - sGameData / ld a, BANK(sGameData)
 	call OpenSRAM
 	call Checksum
 	ld a, [sChecksum + 0]
@@ -815,8 +802,7 @@ SaveBoxAddress:
 	ld a, BANK(sBox)
 	call OpenSRAM
 	ld hl, sBox
-	ld de, wBoxPartialData
-	ld bc, (wBoxPartialDataEnd - wBoxPartialData)
+	call SaveBoxAddress_Shared ; ld de, wBoxPartialData / ld bc, (wBoxPartialDataEnd - wBoxPartialData)
 	call CopyBytes
 	call CloseSRAM
 	pop de
@@ -834,8 +820,7 @@ SaveBoxAddress:
 	ld a, BANK(sBox)
 	call OpenSRAM
 	ld hl, sBox + (wBoxPartialDataEnd - wBoxPartialData)
-	ld de, wBoxPartialData
-	ld bc, (wBoxPartialDataEnd - wBoxPartialData)
+	call SaveBoxAddress_Shared ; ld de, wBoxPartialData / ld bc, (wBoxPartialDataEnd - wBoxPartialData)
 	call CopyBytes
 	call CloseSRAM
 	pop de
@@ -891,8 +876,7 @@ LoadBoxAddress:
 	push af
 	push hl
 	call OpenSRAM
-	ld de, wBoxPartialData
-	ld bc, (wBoxPartialDataEnd - wBoxPartialData)
+	call SaveBoxAddress_Shared ; ld de, wBoxPartialData / ld bc, (wBoxPartialDataEnd - wBoxPartialData)
 	call CopyBytes
 	call CloseSRAM
 	ld a, BANK(sBox)
@@ -911,8 +895,7 @@ LoadBoxAddress:
 	push af
 	push hl
 	call OpenSRAM
-	ld de, wBoxPartialData
-	ld bc, (wBoxPartialDataEnd - wBoxPartialData)
+	call SaveBoxAddress_Shared ; ld de, wBoxPartialData / ld bc, (wBoxPartialDataEnd - wBoxPartialData)
 	call CopyBytes
 	call CloseSRAM
 	ld a, BANK(sBox)
@@ -1033,3 +1016,26 @@ ChangeBoxSaveText:
 MoveMonWOMailSaveText:
 	text_far _MoveMonWOMailSaveText
 	text_end
+
+SaveBoxAddress_Shared: ; (tools/outline.py)
+	ld de, wBoxPartialData
+	ld bc, (wBoxPartialDataEnd - wBoxPartialData)
+	ret
+
+MoveMonWOMail_InsertMon_SaveGame_Shared: ; (tools/outline.py)
+	ld a, TRUE
+	ld [wSaveFileExists], a
+	farcall StageRTCTimeForSave
+	farcall BackupMysteryGift
+	ret
+
+TryLoadSaveData_Shared: ; (tools/outline.py)
+	ld de, wOptions
+	ld bc, wOptionsEnd - wOptions
+	ret
+
+SaveChecksum_Shared: ; (tools/outline.py)
+	ld hl, sGameData
+	ld bc, sGameDataEnd - sGameData
+	ld a, BANK(sGameData)
+	ret

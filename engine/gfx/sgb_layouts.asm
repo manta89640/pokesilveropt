@@ -67,44 +67,24 @@ SGBLayoutJumptable:
 	ld hl, BlkPacket_Battle
 	call PushSGBPals
 
-	ld hl, PalPacket_Pal01
-	ld de, wSGBPals
-	ld bc, PALPACKET_LENGTH
+	call SGB_ApplyCreditsPals_Shared ; ld hl, PalPacket_Pal01 / ld de, wSGBPals / ld bc, PALPACKET_LENGTH
 	call CopyBytes
 
 	ld a, [wPlayerHPPal]
-	ld l, a
-	ld h, 0
-	add hl, hl
-	add hl, hl
+	call _CGB_BattleColors_Shared ; ld l, a / ld h, 0 / add hl, hl / ...
 	ld de, HPBarPals
 	add hl, de
 
-	ld a, [hli]
-	ld [wSGBPals + 3], a
-	ld a, [hli]
-	ld [wSGBPals + 4], a
-	ld a, [hli]
-	ld [wSGBPals + 5], a
+	call Intro_LoadMonPalette_Shared ; ld a, [hli] / ld [wSGBPals + 3], a / ld a, [hli] / ...
 	ld a, [hl]
 	ld [wSGBPals + 6], a
 
 	ld a, [wEnemyHPPal]
-	ld l, a
-	ld h, 0
-	add hl, hl
-	add hl, hl
+	call _CGB_BattleColors_Shared ; ld l, a / ld h, 0 / add hl, hl / ...
 
 	ld de, HPBarPals
 	add hl, de
-	ld a, [hli]
-	ld [wSGBPals + 9], a
-	ld a, [hli]
-	ld [wSGBPals + 10], a
-	ld a, [hli]
-	ld [wSGBPals + 11], a
-	ld a, [hl]
-	ld [wSGBPals + 12], a
+	call SGBLayoutJumptable_Shared ; ld a, [hli] / ld [wSGBPals + 9], a / ld a, [hli] / ...
 
 	ld hl, PalPacket_Pal23
 	ld de, wSGBPals + PALPACKET_LENGTH
@@ -133,14 +113,14 @@ SGBLayoutJumptable:
 
 	ld hl, wSGBPals
 	ld de, wSGBPals + PALPACKET_LENGTH
+.shared3: ; (tools/outline.py)
 	ld a, SCGB_BATTLE_COLORS
 	ld [wDefaultSGBLayout], a
 	ret
 
 .SGB_MoveList:
 	ld hl, PalPacket_AllPal0
-	ld de, wSGBPals
-	ld bc, PALPACKET_LENGTH
+	call SGB_ApplyCreditsPals_Shared.shared1 ; ld de, wSGBPals / ld bc, PALPACKET_LENGTH
 	call CopyBytes
 
 	ld hl, wSGBPals + 1
@@ -161,36 +141,18 @@ SGBLayoutJumptable:
 	ret
 
 .SGB_StatsScreenHPPals:
-	ld hl, PalPacket_Pal01
-	ld de, wSGBPals
-	ld bc, PALPACKET_LENGTH
+	call SGB_ApplyCreditsPals_Shared ; ld hl, PalPacket_Pal01 / ld de, wSGBPals / ld bc, PALPACKET_LENGTH
 	call CopyBytes
 	ld a, [wCurHPPal]
-	ld l, a
-	ld h, 0
-	add hl, hl
-	add hl, hl
+	call _CGB_BattleColors_Shared ; ld l, a / ld h, 0 / add hl, hl / ...
 	ld de, HPBarPals
 	add hl, de
-	ld a, [hli]
-	ld [wSGBPals + 3], a
-	ld a, [hli]
-	ld [wSGBPals + 4], a
-	ld a, [hli]
-	ld [wSGBPals + 5], a
+	call Intro_LoadMonPalette_Shared ; ld a, [hli] / ld [wSGBPals + 3], a / ld a, [hli] / ...
 	ld a, [hl]
 	ld [wSGBPals + 6], a
-	ld a, [wCurPartySpecies]
-	ld bc, wTempMonDVs
+	call _CGB_StatsScreenHPPals_Shared ; ld a, [wCurPartySpecies] / ld bc, wTempMonDVs
 	call GetPlayerOrMonPalettePointer
-	ld a, [hli]
-	ld [wSGBPals + 9], a
-	ld a, [hli]
-	ld [wSGBPals + 10], a
-	ld a, [hli]
-	ld [wSGBPals + 11], a
-	ld a, [hl]
-	ld [wSGBPals + 12], a
+	call SGBLayoutJumptable_Shared ; ld a, [hli] / ld [wSGBPals + 9], a / ld a, [hli] / ...
 	ld hl, wSGBPals
 	ld de, BlkPacket_StatsScreen
 	ret
@@ -201,28 +163,12 @@ SGBLayoutJumptable:
 	ret
 
 .SGB_Pokedex:
-	ld hl, PalPacket_Pal01
-	ld de, wSGBPals
-	ld bc, PALPACKET_LENGTH
+	call SGB_ApplyCreditsPals_Shared ; ld hl, PalPacket_Pal01 / ld de, wSGBPals / ld bc, PALPACKET_LENGTH
 	call CopyBytes
-	ld hl, wSGBPals + 3
-	ld [hl], LOW(palred 31 + palgreen 20 + palblue 10)
-	inc hl
-	ld [hl], HIGH(palred 31 + palgreen 20 + palblue 10)
-	inc hl
-	ld [hl], LOW(palred 26 + palgreen 10 + palblue 6)
-	inc hl
-	ld [hl], HIGH(palred 26 + palgreen 10 + palblue 6)
+	call SGBLayoutJumptable_Shared2 ; ld hl, wSGBPals + 3 / ld [hl], LOW(palred 31 + palgreen 20 + palblue 10) / inc hl / ...
 	ld a, [wCurPartySpecies]
 	call GetMonPalettePointer
-	ld a, [hli]
-	ld [wSGBPals + 9], a
-	ld a, [hli]
-	ld [wSGBPals + 10], a
-	ld a, [hli]
-	ld [wSGBPals + 11], a
-	ld a, [hl]
-	ld [wSGBPals + 12], a
+	call SGBLayoutJumptable_Shared ; ld a, [hli] / ld [wSGBPals + 9], a / ld a, [hli] / ...
 	ld hl, wSGBPals
 	ld de, BlkPacket_Pokedex_PC
 	ret
@@ -233,29 +179,12 @@ SGBLayoutJumptable:
 	ret
 
 .SGB_BillsPC:
-	ld hl, PalPacket_Pal01
-	ld de, wSGBPals
-	ld bc, PALPACKET_LENGTH
+	call SGB_ApplyCreditsPals_Shared ; ld hl, PalPacket_Pal01 / ld de, wSGBPals / ld bc, PALPACKET_LENGTH
 	call CopyBytes
-	ld hl, wSGBPals + 3
-	ld [hl], LOW(palred 31 + palgreen 20 + palblue 10)
-	inc hl
-	ld [hl], HIGH(palred 31 + palgreen 20 + palblue 10)
-	inc hl
-	ld [hl], LOW(palred 26 + palgreen 10 + palblue 6)
-	inc hl
-	ld [hl], HIGH(palred 26 + palgreen 10 + palblue 6)
-	ld a, [wCurPartySpecies]
-	ld bc, wTempMonDVs
+	call SGBLayoutJumptable_Shared2 ; ld hl, wSGBPals + 3 / ld [hl], LOW(palred 31 + palgreen 20 + palblue 10) / inc hl / ...
+	call _CGB_StatsScreenHPPals_Shared ; ld a, [wCurPartySpecies] / ld bc, wTempMonDVs
 	call GetPlayerOrMonPalettePointer
-	ld a, [hli]
-	ld [wSGBPals + 9], a
-	ld a, [hli]
-	ld [wSGBPals + 10], a
-	ld a, [hli]
-	ld [wSGBPals + 11], a
-	ld a, [hl]
-	ld [wSGBPals + 12], a
+	call SGBLayoutJumptable_Shared ; ld a, [hli] / ld [wSGBPals + 9], a / ld a, [hli] / ...
 	ld hl, wSGBPals
 	ld de, BlkPacket_Bills_PC
 	ret
@@ -266,18 +195,9 @@ SGBLayoutJumptable:
 	ret
 
 .SGB_PokedexSearchOption:
-	ld hl, PalPacket_Pal01
-	ld de, wSGBPals
-	ld bc, PALPACKET_LENGTH
+	call SGB_ApplyCreditsPals_Shared ; ld hl, PalPacket_Pal01 / ld de, wSGBPals / ld bc, PALPACKET_LENGTH
 	call CopyBytes
-	ld hl, wSGBPals + 3
-	ld [hl], LOW(palred 31 + palgreen 20 + palblue 10)
-	inc hl
-	ld [hl], HIGH(palred 31 + palgreen 20 + palblue 10)
-	inc hl
-	ld [hl], LOW(palred 26 + palgreen 10 + palblue 6)
-	inc hl
-	ld [hl], HIGH(palred 26 + palgreen 10 + palblue 6)
+	call SGBLayoutJumptable_Shared2 ; ld hl, wSGBPals + 3 / ld [hl], LOW(palred 31 + palgreen 20 + palblue 10) / inc hl / ...
 .tailmerge_281: ; (tools/tailmerge.py)
 	ld hl, wSGBPals
 	ld de, BlkPacket_AllPal0
@@ -554,3 +474,25 @@ _LoadSGBLayout_ReturnFromJumptable:
 	call PushSGBPals
 	pop hl
 	jp PushSGBPals
+
+SGBLayoutJumptable_Shared: ; (tools/outline.py)
+	ld a, [hli]
+	ld [wSGBPals + 9], a
+	ld a, [hli]
+	ld [wSGBPals + 10], a
+	ld a, [hli]
+	ld [wSGBPals + 11], a
+	ld a, [hl]
+	ld [wSGBPals + 12], a
+	ret
+
+SGBLayoutJumptable_Shared2: ; (tools/outline.py)
+	ld hl, wSGBPals + 3
+	ld [hl], LOW(palred 31 + palgreen 20 + palblue 10)
+	inc hl
+	ld [hl], HIGH(palred 31 + palgreen 20 + palblue 10)
+	inc hl
+	ld [hl], LOW(palred 26 + palgreen 10 + palblue 6)
+	inc hl
+	ld [hl], HIGH(palred 26 + palgreen 10 + palblue 6)
+	ret

@@ -118,6 +118,7 @@ PrintRadioLine:
 .skip
 	ld a, RADIO_SCROLL
 .tailmerge_120: ; (tools/tailmerge.py)
+.shared1: ; (tools/outline.py)
 	ld [wCurRadioLine], a
 	ld a, 100
 	ld [wRadioTextDelay], a
@@ -165,10 +166,7 @@ OaksPKMNTalk4:
 	cp (OaksPKMNTalkRoutes.End - OaksPKMNTalkRoutes) / 2
 	jr nc, .sample
 	ld hl, OaksPKMNTalkRoutes
-	ld c, a
-	ld b, 0
-	add hl, bc
-	add hl, bc
+	call OaksPKMNTalk4_Shared ; ld c, a / ld b, 0 / add hl, bc / ...
 	ld b, [hl]
 	inc hl
 	ld c, [hl]
@@ -305,11 +303,7 @@ OaksPKMNTalk8:
 	ld e, a
 	ld d, 0
 	ld hl, .Adverbs
-	add hl, de
-	add hl, de
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
+	call GetTreeMons_Shared ; add hl, de / add hl, de / ld a, [hli] / ...
 	ld a, OAKS_POKEMON_TALK_9
 	jp NextRadioLine
 
@@ -406,11 +400,7 @@ OaksPKMNTalk9:
 	ld e, a
 	ld d, 0
 	ld hl, .Adjectives
-	add hl, de
-	add hl, de
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
+	call GetTreeMons_Shared ; add hl, de / add hl, de / ld a, [hli] / ...
 	ld a, [wOaksPKMNTalkSegmentCounter]
 	dec a
 	ld [wOaksPKMNTalkSegmentCounter], a
@@ -581,9 +571,7 @@ OaksPKMNTalk14:
 	db "@"
 
 PlaceRadioString:
-	ld [wCurRadioLine], a
-	ld a, 100
-	ld [wRadioTextDelay], a
+	call PrintRadioLine.shared1 ; ld [wCurRadioLine], a / ld a, 100 / ld [wRadioTextDelay], a
 	jp PlaceString
 
 CopyBottomLineToTopLine:
@@ -627,10 +615,7 @@ PokedexShow2:
 	ld a, [wCurPartySpecies]
 	dec a
 	ld hl, PokedexDataPointerTable
-	ld c, a
-	ld b, 0
-	add hl, bc
-	add hl, bc
+	call OaksPKMNTalk4_Shared ; ld c, a / ld b, 0 / add hl, bc / ...
 	rlca
 	rlca
 	maskbits NUM_DEX_ENTRY_BANKS
@@ -1083,11 +1068,7 @@ PeoplePlaces5:
 	ld e, a
 	ld d, 0
 	ld hl, .Adjectives
-	add hl, de
-	add hl, de
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
+	call GetTreeMons_Shared ; add hl, de / add hl, de / ld a, [hli] / ...
 	call Random
 	cp 4 percent
 	ld a, PLACES_AND_PEOPLE
@@ -1189,10 +1170,7 @@ PeoplePlaces6: ; Places
 	cp (PnP_Places.End - PnP_Places) / 2
 	jr nc, PeoplePlaces6
 	ld hl, PnP_Places
-	ld c, a
-	ld b, 0
-	add hl, bc
-	add hl, bc
+	call OaksPKMNTalk4_Shared ; ld c, a / ld b, 0 / add hl, bc / ...
 	ld b, [hl]
 	inc hl
 	ld c, [hl]
@@ -1218,11 +1196,7 @@ PeoplePlaces7:
 	ld e, a
 	ld d, 0
 	ld hl, .Adjectives
-	add hl, de
-	add hl, de
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
+	call GetTreeMons_Shared ; add hl, de / add hl, de / ld a, [hli] / ...
 	call CopyRadioTextToRAM
 	call Random
 	cp 4 percent
@@ -1375,10 +1349,7 @@ StartRadioStation:
 	call PrintText
 	ld hl, RadioChannelSongs
 	ld a, [wCurRadioLine]
-	ld c, a
-	ld b, 0
-	add hl, bc
-	add hl, bc
+	call OaksPKMNTalk4_Shared ; ld c, a / ld b, 0 / add hl, bc / ...
 	ld e, [hl]
 	inc hl
 	ld d, [hl]
@@ -1391,3 +1362,10 @@ NextRadioLine:
 	call CopyRadioTextToRAM
 	pop af
 	jp PrintRadioLine
+
+OaksPKMNTalk4_Shared: ; (tools/outline.py)
+	ld c, a
+	ld b, 0
+	add hl, bc
+	add hl, bc
+	ret

@@ -15,10 +15,7 @@ PlaceMenuItemQuantity:
 	pop hl
 	and a
 	ret nz
-	ld de, SCREEN_WIDTH + 1
-	add hl, de
-	ld [hl], '×'
-	inc hl
+	call BuySellToss_UpdateQuantityDisplay_Shared ; ld de, SCREEN_WIDTH + 1 / add hl, de / ld [hl], '×' / ...
 	ld de, wMenuSelectionQuantity
 	lb bc, 1, 2
 	call PrintNum
@@ -46,8 +43,7 @@ PlaceMoneyTextbox:
 	call MenuBoxCoord2Tile
 	ld de, SCREEN_WIDTH + 1
 	add hl, de
-	ld de, wMoney
-	lb bc, PRINTNUM_MONEY | 3, 6
+	call PlaceMoneyTextbox_Shared ; ld de, wMoney / lb bc, PRINTNUM_MONEY | 3, 6
 	jp PrintNum
 
 MoneyTopRightMenuHeader:
@@ -86,8 +82,7 @@ DisplayMoneyAndCoinBalance:
 	ld de, MoneyString
 	call PlaceString
 	hlcoord 12, 1
-	ld de, wMoney
-	lb bc, PRINTNUM_MONEY | 3, 6
+	call PlaceMoneyTextbox_Shared ; ld de, wMoney / lb bc, PRINTNUM_MONEY | 3, 6
 	call PrintNum
 	hlcoord 6, 3
 	ld de, CoinString
@@ -248,11 +243,13 @@ FindApricornsInBag:
 	push hl
 	ld hl, wKurtApricornCount
 	inc [hl]
-	ld e, [hl]
-	ld d, 0
-	add hl, de
-	ld [hl], a
+	call _PlayerDecorationMenu.shared1 ; ld e, [hl] / ld d, 0 / add hl, de / ...
 	pop hl
 	ret
 
 INCLUDE "data/items/apricorn_balls.asm"
+
+PlaceMoneyTextbox_Shared: ; (tools/outline.py)
+	ld de, wMoney
+	lb bc, PRINTNUM_MONEY | 3, 6
+	ret

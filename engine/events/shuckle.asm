@@ -52,9 +52,7 @@ GiveShuckle:
 ; Engine flag for this event.
 	ld hl, wDailyFlags1
 	set DAILYFLAGS1_GOT_SHUCKIE_TODAY_F, [hl]
-	ld a, 1
-	ld [wScriptVar], a
-	ret
+	jp HaircutOrGrooming.shared1 ; ld a, 1 / ld [wScriptVar], a
 
 .NotGiven:
 	xor a
@@ -107,8 +105,7 @@ ReturnShuckie:
 	farcall CheckCurPartyMonFainted
 	jr c, .fainted
 	ld a, [wCurPartyMon]
-	ld hl, wPartyMon1Happiness
-	ld bc, PARTYMON_STRUCT_LENGTH
+	call GetFirstPokemonHappiness_Shared ; ld hl, wPartyMon1Happiness / ld bc, PARTYMON_STRUCT_LENGTH
 	call AddNTimes
 	ld a, [hl]
 	cp 150

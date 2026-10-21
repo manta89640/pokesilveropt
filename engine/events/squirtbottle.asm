@@ -1,9 +1,7 @@
 _Squirtbottle:
 	ld hl, .SquirtbottleScript
 	call QueueScript
-	ld a, $1
-	ld [wItemEffectSucceeded], a
-	ret
+	jp _SacredAsh.shared1 ; ld a, $1 / ld [wItemEffectSucceeded], a
 
 .SquirtbottleScript:
 	refreshmap

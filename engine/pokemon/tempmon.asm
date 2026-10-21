@@ -57,8 +57,7 @@ _TempMonStatsCalculation:
 	add hl, bc
 	ld d, h
 	ld e, l
-	ld a, [wCurPartySpecies]
-	cp EGG
+	call Unused_PlaceEnemyHPLevel_Shared ; ld a, [wCurPartySpecies] / cp EGG
 	jr nz, .not_egg
 	xor a
 	ld [de], a

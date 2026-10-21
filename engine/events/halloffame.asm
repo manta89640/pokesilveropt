@@ -33,16 +33,7 @@ HallOfFame::
 	jp Credits
 
 RedCredits::
-	ld a, LOW(MUSIC_NONE)
-	ld [wMusicFadeID], a
-	ld a, HIGH(MUSIC_NONE)
-	ld [wMusicFadeID + 1], a
-	ld a, 10
-	ld [wMusicFade], a
-	farcall FadeOutToWhite
-	xor a
-	ld [wStateFlags], a
-	ldh [hMapAnims], a
+	call RedCredits_Shared ; ld a, LOW(MUSIC_NONE) / ld [wMusicFadeID], a / ld a, HIGH(MUSIC_NONE) / ...
 	farcall InitDisplayForRedCredits
 	ld c, 8
 	call DelayFrames
@@ -53,16 +44,7 @@ RedCredits::
 	jp Credits
 
 HallOfFame_FadeOutMusic:
-	ld a, LOW(MUSIC_NONE)
-	ld [wMusicFadeID], a
-	ld a, HIGH(MUSIC_NONE)
-	ld [wMusicFadeID + 1], a
-	ld a, 10
-	ld [wMusicFade], a
-	farcall FadeOutToWhite
-	xor a
-	ld [wStateFlags], a
-	ldh [hMapAnims], a
+	call RedCredits_Shared ; ld a, LOW(MUSIC_NONE) / ld [wMusicFadeID], a / ld a, HIGH(MUSIC_NONE) / ...
 	farcall InitDisplayForHallOfFame
 	ld c, 100
 	jp DelayFrames
@@ -603,3 +585,16 @@ HOF_AnimatePlayerPic:
 
 .PlayTime:
 	db "PLAY TIME@"
+
+RedCredits_Shared: ; (tools/outline.py)
+	ld a, LOW(MUSIC_NONE)
+	ld [wMusicFadeID], a
+	ld a, HIGH(MUSIC_NONE)
+	ld [wMusicFadeID + 1], a
+	ld a, 10
+	ld [wMusicFade], a
+	farcall FadeOutToWhite
+	xor a
+	ld [wStateFlags], a
+	ldh [hMapAnims], a
+	ret

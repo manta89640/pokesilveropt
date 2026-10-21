@@ -80,11 +80,7 @@ GetTypeName:
 	ld hl, TypeNames
 	ld e, a
 	ld d, 0
-	add hl, de
-	add hl, de
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
+	call GetPartyMenuQualityIndexes.shared1 ; add hl, de / add hl, de / ld a, [hli] / ...
 	ld de, wStringBuffer1
 	ld bc, MOVE_NAME_LENGTH
 	jp CopyBytes

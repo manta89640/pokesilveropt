@@ -64,6 +64,7 @@ BankOfMom:
 	ld [wMomSavingMoney], a
 	ld hl, MomLeavingText3
 	call PrintText
+.shared3: ; (tools/outline.py)
 	ld a, $8
 	ld [wJumptableIndex], a
 	ret
@@ -121,13 +122,7 @@ BankOfMom:
 .StoreMoney:
 	ld hl, MomStoreMoneyText
 	call PrintText
-	xor a
-	ld hl, wStringBuffer2
-	ld [hli], a
-	ld [hli], a
-	ld [hl], a
-	ld a, 5
-	ld [wMomBankDigitCursorPosition], a
+	call BankOfMom_Shared ; xor a / ld hl, wStringBuffer2 / ld [hli], a / ...
 	call LoadStandardMenuHeader
 	call Mom_SetUpDepositMenu
 	call Mom_Wait10Frames
@@ -144,13 +139,10 @@ BankOfMom:
 	ld bc, wStringBuffer2
 	farcall CompareMoney
 	jr c, .InsufficientFundsInWallet
-	ld hl, wStringBuffer2
-	ld de, wStringBuffer2 + 3
-	ld bc, 3
+	call BankOfMom_Shared2 ; ld hl, wStringBuffer2 / ld de, wStringBuffer2 + 3 / ld bc, 3
 	call CopyBytes
 	ld bc, wMomsMoney
-	ld de, wStringBuffer2
-	farcall GiveMoney
+	call Mom_WithdrawDepositMenuJoypad.shared1 ; ld de, wStringBuffer2 / farcall GiveMoney
 	jr c, .NotEnoughRoomInBank
 	ld bc, wStringBuffer2 + 3
 	ld de, wMoney
@@ -184,13 +176,7 @@ BankOfMom:
 .TakeMoney:
 	ld hl, MomTakeMoneyText
 	call PrintText
-	xor a
-	ld hl, wStringBuffer2
-	ld [hli], a
-	ld [hli], a
-	ld [hl], a
-	ld a, 5
-	ld [wMomBankDigitCursorPosition], a
+	call BankOfMom_Shared ; xor a / ld hl, wStringBuffer2 / ld [hli], a / ...
 	call LoadStandardMenuHeader
 	call Mom_SetUpWithdrawMenu
 	call Mom_Wait10Frames
@@ -203,17 +189,14 @@ BankOfMom:
 	inc hl
 	or [hl]
 	jr z, .CancelWithdraw
-	ld hl, wStringBuffer2
-	ld de, wStringBuffer2 + 3
-	ld bc, 3
+	call BankOfMom_Shared2 ; ld hl, wStringBuffer2 / ld de, wStringBuffer2 + 3 / ld bc, 3
 	call CopyBytes
 	ld de, wMomsMoney
 	ld bc, wStringBuffer2
 	farcall CompareMoney
 	jr c, .InsufficientFundsInBank
 	ld bc, wMoney
-	ld de, wStringBuffer2
-	farcall GiveMoney
+	call Mom_WithdrawDepositMenuJoypad.shared1 ; ld de, wStringBuffer2 / farcall GiveMoney
 	jr c, .NotEnoughRoomInWallet
 	ld bc, wStringBuffer2 + 3
 	ld de, wMomsMoney
@@ -253,9 +236,7 @@ BankOfMom:
 	ld [wMomSavingMoney], a
 	ld hl, MomStartSavingMoneyText
 	call PrintText
-	ld a, $8
-	ld [wJumptableIndex], a
-	ret
+	jp BankOfMom.shared3 ; ld a, $8 / ld [wJumptableIndex], a
 
 .StopSavingMoney:
 	ld a, 1 << MOM_ACTIVE_F
@@ -365,8 +346,7 @@ DSTChecks:
 	ret
 
 .ClearBox:
-	hlcoord 1, 14
-	lb bc, 3, 18
+	call DSTChecks_Shared ; hlcoord 1, 14 / lb bc, 3, 18
 	jp ClearBox
 
 .TimesetAskAdjustDSTText:
@@ -423,9 +403,7 @@ Mom_ContinueMenuSetup:
 	hlcoord 1, 6
 	pop de
 	call PlaceString
-	hlcoord 12, 6
-	ld de, wStringBuffer2
-	lb bc, PRINTNUM_MONEY | PRINTNUM_LEADINGZEROS | 3, 6
+	call Mom_ContinueMenuSetup_Shared ; hlcoord 12, 6 / ld de, wStringBuffer2 / lb bc, PRINTNUM_MONEY | PRINTNUM_LEADINGZEROS | 3, 6
 	call PrintNum
 	call UpdateSprites
 	jp CGBOnly_CopyTilemapAtOnce
@@ -451,9 +429,7 @@ Mom_WithdrawDepositMenuJoypad:
 	ld bc, 7
 	ld a, ' '
 	call ByteFill
-	hlcoord 12, 6
-	ld de, wStringBuffer2
-	lb bc, PRINTNUM_MONEY | PRINTNUM_LEADINGZEROS | 3, 6
+	call Mom_ContinueMenuSetup_Shared ; hlcoord 12, 6 / ld de, wStringBuffer2 / lb bc, PRINTNUM_MONEY | PRINTNUM_LEADINGZEROS | 3, 6
 	call PrintNum
 	ldh a, [hVBlankCounter]
 	and $10
@@ -515,6 +491,7 @@ Mom_WithdrawDepositMenuJoypad:
 	call .getdigitquantity
 	ld c, l
 	ld b, h
+.shared1: ; (tools/outline.py)
 	ld de, wStringBuffer2
 	farcall GiveMoney
 	ret
@@ -639,3 +616,30 @@ BankOfMom_MenuHeader:
 	db "SAVE@"
 	db "CHANGE@"
 	db "CANCEL@"
+
+BankOfMom_Shared: ; (tools/outline.py)
+	xor a
+	ld hl, wStringBuffer2
+	ld [hli], a
+	ld [hli], a
+	ld [hl], a
+	ld a, 5
+	ld [wMomBankDigitCursorPosition], a
+	ret
+
+BankOfMom_Shared2: ; (tools/outline.py)
+	ld hl, wStringBuffer2
+	ld de, wStringBuffer2 + 3
+	ld bc, 3
+	ret
+
+DSTChecks_Shared: ; (tools/outline.py)
+	hlcoord 1, 14
+	lb bc, 3, 18
+	ret
+
+Mom_ContinueMenuSetup_Shared: ; (tools/outline.py)
+	hlcoord 12, 6
+	ld de, wStringBuffer2
+	lb bc, PRINTNUM_MONEY | PRINTNUM_LEADINGZEROS | 3, 6
+	ret

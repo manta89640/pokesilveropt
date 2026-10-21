@@ -1,7 +1,5 @@
 ClearCmdQueue::
-	ld hl, wCmdQueue
-	ld de, CMDQUEUE_ENTRY_SIZE
-	ld c, CMDQUEUE_CAPACITY
+	call ClearCmdQueue_Shared ; ld hl, wCmdQueue / ld de, CMDQUEUE_ENTRY_SIZE / ld c, CMDQUEUE_CAPACITY
 	xor a
 .loop
 	ld [hl], a
@@ -51,9 +49,7 @@ WriteCmdQueue::
 	ret
 
 .GetNextEmptyEntry:
-	ld hl, wCmdQueue
-	ld de, CMDQUEUE_ENTRY_SIZE
-	ld c, CMDQUEUE_CAPACITY
+	call ClearCmdQueue_Shared ; ld hl, wCmdQueue / ld de, CMDQUEUE_ENTRY_SIZE / ld c, CMDQUEUE_CAPACITY
 .loop
 	ld a, [hl]
 	and a
@@ -71,9 +67,7 @@ WriteCmdQueue::
 	ret
 
 DelCmdQueue::
-	ld hl, wCmdQueue
-	ld de, CMDQUEUE_ENTRY_SIZE
-	ld c, CMDQUEUE_CAPACITY
+	call ClearCmdQueue_Shared ; ld hl, wCmdQueue / ld de, CMDQUEUE_ENTRY_SIZE / ld c, CMDQUEUE_CAPACITY
 .loop
 	ld a, [hl]
 	cp b
@@ -239,4 +233,10 @@ CmdQueue_StoneTable:
 
 .fall_down_hole
 	pop af
+	ret
+
+ClearCmdQueue_Shared: ; (tools/outline.py)
+	ld hl, wCmdQueue
+	ld de, CMDQUEUE_ENTRY_SIZE
+	ld c, CMDQUEUE_CAPACITY
 	ret

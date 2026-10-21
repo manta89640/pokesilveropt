@@ -18,6 +18,7 @@ _BasementKey:
 ; Let's use the Basement Key
 	ld hl, .BasementKeyScript
 	call QueueScript
+.shared1: ; (tools/outline.py)
 	ld a, TRUE
 	ld [wItemEffectSucceeded], a
 	ret

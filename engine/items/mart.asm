@@ -191,10 +191,7 @@ StandardMart:
 	jr StandardMart.tailmerge_142 ; same as there (tools/tailmerge.py)
 
 FarReadMart:
-	ld hl, wMartPointer
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
+	call FarReadMart_Shared ; ld hl, wMartPointer / ld a, [hli] / ld h, [hl] / ...
 	ld de, wCurMartCount
 .CopyMart:
 	ld a, [wMartPointerBank]
@@ -265,10 +262,7 @@ GetMartPrice:
 
 ReadMart:
 ; Load the mart pointer.  Mart data is local (no need for bank).
-	ld hl, wMartPointer
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
+	call FarReadMart_Shared ; ld hl, wMartPointer / ld a, [hli] / ld h, [hl] / ...
 	push hl
 ; set hl to the first item
 	inc hl
@@ -423,23 +417,19 @@ BuyMenuLoop:
 	jr c, .cancel
 	call MartConfirmPurchase
 	jr c, .cancel
-	ld de, wMoney
-	ld bc, hMoneyTemp
+	call BuyMenuLoop_Shared ; ld de, wMoney / ld bc, hMoneyTemp
 	ld a, 3 ; useless load
 	call CompareMoney
 	jr c, .insufficient_funds
 	ld hl, wNumItems
 	call ReceiveItem
 	jr nc, .insufficient_bag_space
-	ld a, [wMartItemID]
-	ld e, a
-	ld d, 0
+	call BuyMenuLoop_Shared2 ; ld a, [wMartItemID] / ld e, a / ld d, 0
 	ld b, SET_FLAG
 	ld hl, wBargainShopFlags
 	call FlagAction
 	call PlayTransactionSound
-	ld de, wMoney
-	ld bc, hMoneyTemp
+	call BuyMenuLoop_Shared ; ld de, wMoney / ld bc, hMoneyTemp
 	call TakeMoney
 	ld a, MARTTEXT_HERE_YOU_GO
 	call LoadBuyMenuText
@@ -483,22 +473,15 @@ MartConfirmPurchase:
 BargainShopAskPurchaseQuantity:
 	ld a, 1
 	ld [wItemQuantityChange], a
-	ld a, [wMartItemID]
-	ld e, a
-	ld d, 0
+	call BuyMenuLoop_Shared2 ; ld a, [wMartItemID] / ld e, a / ld d, 0
 	ld b, CHECK_FLAG
 	ld hl, wBargainShopFlags
 	call FlagAction
 	ld a, c
 	and a
 	jr nz, .SoldOut
-	ld a, [wMartItemID]
-	ld e, a
-	ld d, 0
-	ld hl, wMartPointer
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
+	call BuyMenuLoop_Shared2 ; ld a, [wMartItemID] / ld e, a / ld d, 0
+	call FarReadMart_Shared ; ld hl, wMartPointer / ld a, [hli] / ld h, [hl] / ...
 	inc hl
 	add hl, de
 	add hl, de
@@ -690,9 +673,7 @@ SellMenu:
 	ret
 
 .try_sell
-	farcall _CheckTossableItem
-	ld a, [wItemAttributeValue]
-	and a
+	call PlayerWithdrawItemMenu_Shared3 ; farcall _CheckTossableItem / ld a, [wItemAttributeValue] / and a
 	jr z, .okay_to_sell
 	ld hl, MartCantBuyText
 	call PrintText
@@ -706,22 +687,19 @@ SellMenu:
 	farcall SelectQuantityToSell
 	call ExitMenu
 	jr c, .declined
-	hlcoord 1, 14
-	lb bc, 3, 18
+	call DSTChecks_Shared ; hlcoord 1, 14 / lb bc, 3, 18
 	call ClearBox
 	ld hl, MartSellPriceText
 	call PrintTextboxText
 	call YesNoBox
 	jr c, .declined
-	ld de, wMoney
-	ld bc, hMoneyTemp
+	call BuyMenuLoop_Shared ; ld de, wMoney / ld bc, hMoneyTemp
 	call GiveMoney
 	ld a, [wMartItemID]
 	ld hl, wNumItems
 	call TossItem
 	predef PartyMonItemName
-	hlcoord 1, 14
-	lb bc, 3, 18
+	call DSTChecks_Shared ; hlcoord 1, 14 / lb bc, 3, 18
 	call ClearBox
 	ld hl, MartBoughtText
 	call PrintTextboxText
@@ -797,3 +775,21 @@ MartTextbox:
 	call MenuTextbox
 	call JoyWaitAorB
 	jp ExitMenu
+
+FarReadMart_Shared: ; (tools/outline.py)
+	ld hl, wMartPointer
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ret
+
+BuyMenuLoop_Shared: ; (tools/outline.py)
+	ld de, wMoney
+	ld bc, hMoneyTemp
+	ret
+
+BuyMenuLoop_Shared2: ; (tools/outline.py)
+	ld a, [wMartItemID]
+	ld e, a
+	ld d, 0
+	ret

@@ -23,9 +23,7 @@ _CardKey:
 ; Let's use the Card Key.
 	ld hl, .CardKeyScript
 	call QueueScript
-	ld a, TRUE
-	ld [wItemEffectSucceeded], a
-	ret
+	jr _BasementKey.shared1 ; ld a, TRUE / ld [wItemEffectSucceeded], a
 
 .nope
 	ld a, FALSE

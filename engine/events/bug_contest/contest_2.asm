@@ -91,9 +91,7 @@ ContestDropOffMons:
 	ret
 
 .fainted
-	ld a, $1
-	ld [wScriptVar], a
-	ret
+	jp FindItemInBallScript.shared2 ; ld a, $1 / ld [wScriptVar], a
 
 ContestReturnMons:
 ; Restore the species of the second mon.

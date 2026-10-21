@@ -117,6 +117,7 @@ CutFunction:
 	ld hl, .Jumptable
 	call FieldMoveJumptable
 	jr nc, .loop
+.shared1: ; (tools/outline.py)
 	and JUMPTABLE_INDEX_MASK
 	ld [wFieldMoveSucceeded], a
 	ret
@@ -183,6 +184,7 @@ CheckMapForSomethingToCut:
 	pop hl
 	jr nc, .fail
 	; Save the Cut field move data
+.shared1: ; (tools/outline.py)
 	ld a, l
 	ld [wCutWhirlpoolOverworldBlockAddr], a
 	ld a, h
@@ -211,14 +213,7 @@ Script_Cut:
 	end
 
 CutDownTreeOrGrass:
-	ld hl, wCutWhirlpoolOverworldBlockAddr
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	ld a, [wCutWhirlpoolReplacementBlock]
-	ld [hl], a
-	xor a
-	ldh [hBGMapMode], a
+	call CutDownTreeOrGrass_Shared ; ld hl, wCutWhirlpoolOverworldBlockAddr / ld a, [hli] / ld h, [hl] / ...
 	call LoadOverworldTilemapAndAttrmapPals
 	call UpdateSprites
 	call DelayFrame
@@ -269,9 +264,7 @@ INCLUDE "data/collision/field_move_blocks.asm"
 
 FlashFunction:
 	call .CheckUseFlash
-	and JUMPTABLE_INDEX_MASK
-	ld [wFieldMoveSucceeded], a
-	ret
+	jp CutFunction.shared1 ; and JUMPTABLE_INDEX_MASK / ld [wFieldMoveSucceeded], a
 
 .CheckUseFlash:
 	ld de, ENGINE_ZEPHYRBADGE
@@ -324,9 +317,7 @@ SurfFunction:
 	ld hl, .Jumptable
 	call FieldMoveJumptable
 	jr nc, .loop
-	and JUMPTABLE_INDEX_MASK
-	ld [wFieldMoveSucceeded], a
-	ret
+	jp CutFunction.shared1 ; and JUMPTABLE_INDEX_MASK / ld [wFieldMoveSucceeded], a
 
 .Jumptable:
 	dw .TrySurf
@@ -415,13 +406,7 @@ GetSurfType:
 ; Surfing on Pikachu uses an alternate sprite.
 ; This is done by using a separate movement type.
 
-	ld a, [wCurPartyMon]
-	ld e, a
-	ld d, 0
-	ld hl, wPartySpecies
-	add hl, de
-
-	ld a, [hl]
+	call GetSurfType_Shared ; ld a, [wCurPartyMon] / ld e, a / ld d, 0 / ...
 	cp PIKACHU
 	ld a, PLAYER_SURF_PIKA
 	ret z
@@ -525,9 +510,7 @@ FlyFunction:
 	ld hl, .Jumptable
 	call FieldMoveJumptable
 	jr nc, .loop
-	and JUMPTABLE_INDEX_MASK
-	ld [wFieldMoveSucceeded], a
-	ret
+	jp CutFunction.shared1 ; and JUMPTABLE_INDEX_MASK / ld [wFieldMoveSucceeded], a
 
 .Jumptable:
 	dw .TryFly
@@ -603,9 +586,7 @@ FlyFunction:
 
 WaterfallFunction:
 	call .TryWaterfall
-	and JUMPTABLE_INDEX_MASK
-	ld [wFieldMoveSucceeded], a
-	ret
+	jp CutFunction.shared1 ; and JUMPTABLE_INDEX_MASK / ld [wFieldMoveSucceeded], a
 
 .TryWaterfall:
 	ld de, ENGINE_RISINGBADGE
@@ -728,9 +709,7 @@ EscapeRopeOrDig:
 	ld hl, .DigTable
 	call FieldMoveJumptable
 	jr nc, .loop
-	and JUMPTABLE_INDEX_MASK
-	ld [wFieldMoveSucceeded], a
-	ret
+	jp CutFunction.shared1 ; and JUMPTABLE_INDEX_MASK / ld [wFieldMoveSucceeded], a
 
 .DigTable:
 	dw .CheckCanDig
@@ -846,9 +825,7 @@ TeleportFunction:
 	ld hl, .Jumptable
 	call FieldMoveJumptable
 	jr nc, .loop
-	and JUMPTABLE_INDEX_MASK
-	ld [wFieldMoveSucceeded], a
-	ret
+	jp CutFunction.shared1 ; and JUMPTABLE_INDEX_MASK / ld [wFieldMoveSucceeded], a
 
 .Jumptable:
 	dw .TryTeleport
@@ -925,9 +902,7 @@ TeleportFunction:
 
 StrengthFunction:
 	call .TryStrength
-	and JUMPTABLE_INDEX_MASK
-	ld [wFieldMoveSucceeded], a
-	ret
+	jp CutFunction.shared1 ; and JUMPTABLE_INDEX_MASK / ld [wFieldMoveSucceeded], a
 
 .TryStrength:
 	ld de, ENGINE_PLAINBADGE
@@ -956,12 +931,7 @@ StrengthFunction:
 SetStrengthFlag:
 	ld hl, wBikeFlags
 	set BIKEFLAGS_STRENGTH_ACTIVE_F, [hl]
-	ld a, [wCurPartyMon]
-	ld e, a
-	ld d, 0
-	ld hl, wPartySpecies
-	add hl, de
-	ld a, [hl]
+	call GetSurfType_Shared ; ld a, [wCurPartyMon] / ld e, a / ld d, 0 / ...
 	ld [wStrengthSpecies], a
 	jp GetPartyNickname
 
@@ -1052,9 +1022,7 @@ WhirlpoolFunction:
 	ld hl, .Jumptable
 	call FieldMoveJumptable
 	jr nc, .loop
-	and JUMPTABLE_INDEX_MASK
-	ld [wFieldMoveSucceeded], a
-	ret
+	jp CutFunction.shared1 ; and JUMPTABLE_INDEX_MASK / ld [wFieldMoveSucceeded], a
 
 .Jumptable:
 	dw .TryWhirlpool
@@ -1104,16 +1072,7 @@ TryWhirlpoolMenu:
 	pop hl
 	jr nc, .failed
 	; Save the Whirlpool field move data
-	ld a, l
-	ld [wCutWhirlpoolOverworldBlockAddr], a
-	ld a, h
-	ld [wCutWhirlpoolOverworldBlockAddr + 1], a
-	ld a, b
-	ld [wCutWhirlpoolReplacementBlock], a
-	ld a, c
-	ld [wCutWhirlpoolAnimationType], a
-	xor a
-	ret
+	jp CheckMapForSomethingToCut.shared1 ; ld a, l / ld [wCutWhirlpoolOverworldBlockAddr], a / ld a, h / ...
 
 .failed
 	scf
@@ -1132,14 +1091,7 @@ Script_UsedWhirlpool:
 	end
 
 DisappearWhirlpool:
-	ld hl, wCutWhirlpoolOverworldBlockAddr
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	ld a, [wCutWhirlpoolReplacementBlock]
-	ld [hl], a
-	xor a
-	ldh [hBGMapMode], a
+	call CutDownTreeOrGrass_Shared ; ld hl, wCutWhirlpoolOverworldBlockAddr / ld a, [hli] / ld h, [hl] / ...
 	call LoadOverworldTilemapAndAttrmapPals
 	ld a, [wCutWhirlpoolAnimationType]
 	ld e, a
@@ -1188,9 +1140,7 @@ AskWhirlpoolText:
 HeadbuttFunction:
 	call TryHeadbuttFromMenu
 .tailmerge_1199: ; (tools/tailmerge.py)
-	and JUMPTABLE_INDEX_MASK
-	ld [wFieldMoveSucceeded], a
-	ret
+	jp CutFunction.shared1 ; and JUMPTABLE_INDEX_MASK / ld [wFieldMoveSucceeded], a
 
 TryHeadbuttFromMenu:
 	call GetFacingTileCoord
@@ -1381,9 +1331,7 @@ FishFunction:
 	ld hl, .FishTable
 	call FieldMoveJumptable
 	jr nc, .loop
-	and JUMPTABLE_INDEX_MASK
-	ld [wFieldMoveSucceeded], a
-	ret
+	jp CutFunction.shared1 ; and JUMPTABLE_INDEX_MASK / ld [wFieldMoveSucceeded], a
 
 .FishTable:
 	dw .TryFish
@@ -1562,9 +1510,7 @@ RodNothingText:
 
 BikeFunction:
 	call .TryBike
-	and JUMPTABLE_INDEX_MASK
-	ld [wFieldMoveSucceeded], a
-	ret
+	jp CutFunction.shared1 ; and JUMPTABLE_INDEX_MASK / ld [wFieldMoveSucceeded], a
 
 .TryBike:
 	call .CheckEnvironment
@@ -1746,3 +1692,23 @@ CantCutScript:
 CanCutText:
 	text_far _CanCutText
 	text_end
+
+CutDownTreeOrGrass_Shared: ; (tools/outline.py)
+	ld hl, wCutWhirlpoolOverworldBlockAddr
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld a, [wCutWhirlpoolReplacementBlock]
+	ld [hl], a
+	xor a
+	ldh [hBGMapMode], a
+	ret
+
+GetSurfType_Shared: ; (tools/outline.py)
+	ld a, [wCurPartyMon]
+	ld e, a
+	ld d, 0
+	ld hl, wPartySpecies
+	add hl, de
+	ld a, [hl]
+	ret

@@ -6,11 +6,8 @@ BattleCommand_Transform:
 	jp nz, BattleEffect_ButItFailed
 	call CheckHiddenOpponent
 	jp nz, BattleEffect_ButItFailed
-	xor a
-	ld [wBattleAfterAnim], a
-	ld [wFXAnimID + 1], a
-	ld a, $1
-	ld [wBattleAnimParam], a
+	call BattleCommand_LowerSub_Shared ; xor a / ld [wBattleAfterAnim], a / ld [wFXAnimID + 1], a
+	call BattleCommand_ForceSwitch_Shared2 ; ld a, $1 / ld [wBattleAnimParam], a
 	ld a, BATTLE_VARS_SUBSTATUS4
 	call GetBattleVarAddr
 	bit SUBSTATUS_SUBSTITUTE, [hl]
@@ -126,9 +123,7 @@ BattleCommand_Transform:
 	call BattleCommand_MoveDelay
 	call BattleCommand_RaiseSubNoAnim
 .after_anim
-	xor a
-	ld [wBattleAfterAnim], a
-	ld [wFXAnimID + 1], a
+	call BattleCommand_LowerSub_Shared ; xor a / ld [wBattleAfterAnim], a / ld [wFXAnimID + 1], a
 	ld a, $2
 	ld [wBattleAnimParam], a
 	pop af

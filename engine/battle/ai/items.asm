@@ -38,9 +38,7 @@ DontSwitch:
 	jp AI_TryItem
 
 SwitchOften:
-	callfar CheckAbleToSwitch
-	ld a, [wEnemySwitchMonParam]
-	and $f0
+	call SwitchOften_Shared ; callfar CheckAbleToSwitch / ld a, [wEnemySwitchMonParam] / and $f0
 	jr z, DontSwitch
 
 	cp $10
@@ -73,9 +71,7 @@ SwitchOften:
 	jp AI_TrySwitch
 
 SwitchRarely:
-	callfar CheckAbleToSwitch
-	ld a, [wEnemySwitchMonParam]
-	and $f0
+	call SwitchOften_Shared ; callfar CheckAbleToSwitch / ld a, [wEnemySwitchMonParam] / and $f0
 	jr z, DontSwitch
 
 	cp $10
@@ -103,9 +99,7 @@ SwitchRarely:
 	jr SwitchOften.switch ; same as there (tools/tailmerge.py)
 
 SwitchSometimes:
-	callfar CheckAbleToSwitch
-	ld a, [wEnemySwitchMonParam]
-	and $f0
+	call SwitchOften_Shared ; callfar CheckAbleToSwitch / ld a, [wEnemySwitchMonParam] / and $f0
 	jp z, DontSwitch
 
 	cp $10
@@ -658,9 +652,7 @@ AI_Switch:
 	callfar PursuitSwitch
 
 	push af
-	ld a, [wCurOTMon]
-	ld hl, wOTPartyMon1Status
-	ld bc, PARTYMON_STRUCT_LENGTH
+	call AI_Switch_Shared ; ld a, [wCurOTMon] / ld hl, wOTPartyMon1Status / ld bc, PARTYMON_STRUCT_LENGTH
 	call AddNTimes
 	ld d, h
 	ld e, l
@@ -698,9 +690,7 @@ EnemyWithdrewText:
 AI_HealStatus:
 ; BUG: AI use of Full Heal or Full Restore does not cure Nightmare status (see docs/bugs_and_glitches.md)
 ; BUG: AI use of Full Heal or Full Restore does not cure Attack or Speed drops from burn or paralysis (see docs/bugs_and_glitches.md)
-	ld a, [wCurOTMon]
-	ld hl, wOTPartyMon1Status
-	ld bc, PARTYMON_STRUCT_LENGTH
+	call AI_Switch_Shared ; ld a, [wCurOTMon] / ld hl, wOTPartyMon1Status / ld bc, PARTYMON_STRUCT_LENGTH
 	call AddNTimes
 	xor a
 	ld [hl], a
@@ -782,3 +772,15 @@ PrintText_UsedItemOn:
 EnemyUsedOnText:
 	text_far _EnemyUsedOnText
 	text_end
+
+SwitchOften_Shared: ; (tools/outline.py)
+	callfar CheckAbleToSwitch
+	ld a, [wEnemySwitchMonParam]
+	and $f0
+	ret
+
+AI_Switch_Shared: ; (tools/outline.py)
+	ld a, [wCurOTMon]
+	ld hl, wOTPartyMon1Status
+	ld bc, PARTYMON_STRUCT_LENGTH
+	ret

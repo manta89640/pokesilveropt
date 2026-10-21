@@ -24,10 +24,7 @@ BattleCommand_FuryCutter:
 	ret z
 
 ; Double the damage
-	ld hl, wCurDamage + 1
-	sla [hl]
-	dec hl
-	rl [hl]
+	call DoubleDamage_Shared ; ld hl, wCurDamage + 1 / sla [hl] / dec hl / ...
 	jr nc, .checkdouble
 
 ; No overflow

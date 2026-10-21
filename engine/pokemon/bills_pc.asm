@@ -155,12 +155,10 @@ BillsPCDepositFuncDeposit:
 	jp c, BillsPCDepositFuncCancel
 	call DepositPokemon
 	jr c, .box_full
-	ld a, $0
-	ld [wJumptableIndex], a
+.shared1: ; (tools/outline.py)
+	call BillsPCDepositFuncCancel.shared1 ; ld a, $0 / ld [wJumptableIndex], a
 	xor a
-	ld [wBillsPC_CursorPosition], a
-	ld [wBillsPC_ScrollPosition], a
-	ret
+	jp BillsPC_InitRAM.shared1 ; ld [wBillsPC_CursorPosition], a / ld [wBillsPC_ScrollPosition], a
 
 .box_full
 	ld de, PCString_WhatsUp
@@ -193,19 +191,13 @@ BillsPCDepositFuncRelease:
 	call ExitMenu
 	and a
 	jr nz, .failed_release
-	ld a, [wBillsPC_CursorPosition]
-	ld hl, wBillsPC_ScrollPosition
-	add [hl]
+	call BillsPCDepositFuncRelease_Shared ; ld a, [wBillsPC_CursorPosition] / ld hl, wBillsPC_ScrollPosition / add [hl]
 	ld [wCurPartyMon], a
 	xor a ; REMOVE_PARTY
 	ld [wPokemonWithdrawDepositParameter], a
 	farcall RemoveMonFromPartyOrBox
 	call ReleasePKMN_ByePKMN
-	ld a, $0
-	ld [wJumptableIndex], a
-	xor a
-	ld [wBillsPC_CursorPosition], a
-	ld [wBillsPC_ScrollPosition], a
+	call BillsPCDepositFuncDeposit.shared1 ; ld a, $0 / ld [wJumptableIndex], a / xor a / ...
 	pop af
 	ret
 
@@ -217,6 +209,7 @@ BillsPCDepositFuncRelease:
 	ret
 
 BillsPCDepositFuncCancel:
+.shared1: ; (tools/outline.py)
 	ld a, $0
 	ld [wJumptableIndex], a
 	ret
@@ -658,6 +651,7 @@ BillsPC_InitRAM:
 	ld [wUnusedBillsPCData], a
 	ld [wUnusedBillsPCData+1], a
 	ld [wUnusedBillsPCData+2], a
+.shared1: ; (tools/outline.py)
 	ld [wBillsPC_CursorPosition], a
 	ld [wBillsPC_ScrollPosition], a
 	ret
@@ -688,12 +682,7 @@ _StatsScreenDPad:
 	jp BillsPC_JoypadDidNothing
 
 Withdraw_UpDown:
-	ld hl, hJoyLast
-	ld a, [wBillsPC_NumMonsOnScreen]
-	ld d, a
-	ld a, [wBillsPC_NumMonsInBox]
-	ld e, a
-	and a
+	call Withdraw_UpDown_Shared ; ld hl, hJoyLast / ld a, [wBillsPC_NumMonsOnScreen] / ld d, a / ...
 	jr z, .empty
 	ld a, [hl]
 	and PAD_UP
@@ -705,12 +694,7 @@ Withdraw_UpDown:
 	jp BillsPC_JoypadDidNothing
 
 MoveMonWithoutMail_DPad:
-	ld hl, hJoyLast
-	ld a, [wBillsPC_NumMonsOnScreen]
-	ld d, a
-	ld a, [wBillsPC_NumMonsInBox]
-	ld e, a
-	and a
+	call Withdraw_UpDown_Shared ; ld hl, hJoyLast / ld a, [wBillsPC_NumMonsOnScreen] / ld d, a / ...
 	jr z, .check_left_right
 	ld a, [hl]
 	and PAD_UP
@@ -729,12 +713,7 @@ MoveMonWithoutMail_DPad:
 	jr BillsPC_JoypadDidNothing
 
 MoveMonWithoutMail_DPad_2:
-	ld hl, hJoyLast
-	ld a, [wBillsPC_NumMonsOnScreen]
-	ld d, a
-	ld a, [wBillsPC_NumMonsInBox]
-	ld e, a
-	and a
+	call Withdraw_UpDown_Shared ; ld hl, hJoyLast / ld a, [wBillsPC_NumMonsOnScreen] / ld d, a / ...
 	jr z, .check_left_right
 
 	ld a, [hl]
@@ -764,9 +743,7 @@ BillsPC_PressUp:
 	jr BillsPC_UpDownDidSomething
 
 BillsPC_PressDown:
-	ld a, [wBillsPC_CursorPosition]
-	ld hl, wBillsPC_ScrollPosition
-	add [hl]
+	call BillsPCDepositFuncRelease_Shared ; ld a, [wBillsPC_CursorPosition] / ld hl, wBillsPC_ScrollPosition / add [hl]
 	inc a
 	cp e
 	jr nc, BillsPC_JoypadDidNothing
@@ -824,8 +801,7 @@ BillsPC_LeftRightDidSomething:
 
 BillsPC_PlaceString:
 	push de
-	hlcoord 0, 15
-	lb bc, 1, 18
+	call BillsPC_PlaceString_Shared ; hlcoord 0, 15 / lb bc, 1, 18
 	call Textbox
 	pop de
 	hlcoord 1, 16
@@ -971,9 +947,7 @@ PCMonInfo:
 	ret
 
 BillsPC_LoadMonStats:
-	ld a, [wBillsPC_CursorPosition]
-	ld hl, wBillsPC_ScrollPosition
-	add [hl]
+	call BillsPCDepositFuncRelease_Shared ; ld a, [wBillsPC_CursorPosition] / ld hl, wBillsPC_ScrollPosition / add [hl]
 	ld e, a
 	ld d, 0
 	ld hl, wBillsPCPokemonList + BOXLIST_BOXNUM
@@ -1293,9 +1267,7 @@ CopyBoxmonSpecies:
 	ret
 
 BillsPC_GetSelectedPokemonSpecies:
-	ld a, [wBillsPC_CursorPosition]
-	ld hl, wBillsPC_ScrollPosition
-	add [hl]
+	call BillsPCDepositFuncRelease_Shared ; ld a, [wBillsPC_CursorPosition] / ld hl, wBillsPC_ScrollPosition / add [hl]
 	ld e, a
 	ld d, 0
 	ld hl, wBillsPCPokemonList + BOXLIST_SPECIES
@@ -1318,13 +1290,7 @@ BillsPC_UpdateSelectionCursor:
 	ld a, [hl]
 	cp -1
 	ret z
-	ld a, [wBillsPC_CursorPosition]
-	and $7
-	swap a
-	add [hl]
-	inc hl
-	ld [de], a ; y
-	inc de
+	call BillsPC_UpdateSelectionCursor_Shared ; ld a, [wBillsPC_CursorPosition] / and $7 / swap a / ...
 rept OBJ_SIZE - 1
 	ld a, [hli]
 	ld [de], a
@@ -1362,13 +1328,7 @@ BillsPC_UpdateInsertCursor:
 	ld a, [hl]
 	cp -1
 	ret z
-	ld a, [wBillsPC_CursorPosition]
-	and $7
-	swap a
-	add [hl]
-	inc hl
-	ld [de], a ; y
-	inc de
+	call BillsPC_UpdateSelectionCursor_Shared ; ld a, [wBillsPC_CursorPosition] / and $7 / swap a / ...
 rept OBJ_SIZE - 1
 	ld a, [hli]
 	ld [de], a
@@ -1434,9 +1394,7 @@ BillsPC_CheckMail_PreventBlackout:
 	ld a, [wBillsPC_NumMonsInBox]
 	cp $3
 	jr c, .ItsYourLastPokemon
-	ld a, [wBillsPC_CursorPosition]
-	ld hl, wBillsPC_ScrollPosition
-	add [hl]
+	call BillsPCDepositFuncRelease_Shared ; ld a, [wBillsPC_CursorPosition] / ld hl, wBillsPC_ScrollPosition / add [hl]
 	ld [wCurPartyMon], a
 	farcall CheckCurPartyMonFainted
 	jr c, .AllOthersFainted
@@ -1513,9 +1471,7 @@ StatsScreenDPad:
 	ret
 
 BillsPC_CopyMon:
-	ld a, [wBillsPC_CursorPosition]
-	ld hl, wBillsPC_ScrollPosition
-	add [hl]
+	call BillsPCDepositFuncRelease_Shared ; ld a, [wBillsPC_CursorPosition] / ld hl, wBillsPC_ScrollPosition / add [hl]
 	ld [wCurPartyMon], a
 	ld a, [wBillsPC_LoadedBox]
 	and a
@@ -1584,9 +1540,7 @@ BillsPC_CopyMon:
 	ret
 
 DepositPokemon:
-	ld a, [wBillsPC_CursorPosition]
-	ld hl, wBillsPC_ScrollPosition
-	add [hl]
+	call BillsPCDepositFuncRelease_Shared ; ld a, [wBillsPC_CursorPosition] / ld hl, wBillsPC_ScrollPosition / add [hl]
 	ld [wCurPartyMon], a
 	ld hl, wPartyMonNicknames
 	ld a, [wCurPartyMon]
@@ -1596,18 +1550,13 @@ DepositPokemon:
 	predef SendGetMonIntoFromBox
 	jr c, .BoxFull
 	xor a ; REMOVE_PARTY
-	ld [wPokemonWithdrawDepositParameter], a
-	farcall RemoveMonFromPartyOrBox
-	ld a, [wCurPartySpecies]
+	call DepositPokemon_Shared3 ; ld [wPokemonWithdrawDepositParameter], a / farcall RemoveMonFromPartyOrBox / ld a, [wCurPartySpecies]
 	call PlayMonCry
-	hlcoord 0, 0
-	lb bc, 15, 8
+	call DepositPokemon_Shared ; hlcoord 0, 0 / lb bc, 15, 8
 	call ClearBox
-	hlcoord 8, 14
-	lb bc, 1, 3
+	call DepositPokemon_Shared2 ; hlcoord 8, 14 / lb bc, 1, 3
 	call ClearBox
-	hlcoord 0, 15
-	lb bc, 1, 18
+	call BillsPC_PlaceString_Shared ; hlcoord 0, 15 / lb bc, 1, 18
 	call Textbox
 	call WaitBGMap
 	hlcoord 1, 16
@@ -1629,9 +1578,7 @@ DepositPokemon:
 	jp BillsPC_CheckSpaceInDestination.tailmerge_1448 ; same as there (tools/tailmerge.py)
 
 TryWithdrawPokemon:
-	ld a, [wBillsPC_CursorPosition]
-	ld hl, wBillsPC_ScrollPosition
-	add [hl]
+	call BillsPCDepositFuncRelease_Shared ; ld a, [wBillsPC_CursorPosition] / ld hl, wBillsPC_ScrollPosition / add [hl]
 	ld [wCurPartyMon], a
 	ld a, BANK(sBoxMonNicknames)
 	call OpenSRAM
@@ -1644,18 +1591,13 @@ TryWithdrawPokemon:
 	predef SendGetMonIntoFromBox
 	jr c, .PartyFull
 	ld a, REMOVE_BOX
-	ld [wPokemonWithdrawDepositParameter], a
-	farcall RemoveMonFromPartyOrBox
-	ld a, [wCurPartySpecies]
+	call DepositPokemon_Shared3 ; ld [wPokemonWithdrawDepositParameter], a / farcall RemoveMonFromPartyOrBox / ld a, [wCurPartySpecies]
 	call PlayMonCry
-	hlcoord 0, 0
-	lb bc, 15, 8
+	call DepositPokemon_Shared ; hlcoord 0, 0 / lb bc, 15, 8
 	call ClearBox
-	hlcoord 8, 14
-	lb bc, 1, 3
+	call DepositPokemon_Shared2 ; hlcoord 8, 14 / lb bc, 1, 3
 	call ClearBox
-	hlcoord 0, 15
-	lb bc, 1, 18
+	call BillsPC_PlaceString_Shared ; hlcoord 0, 15 / lb bc, 1, 18
 	call Textbox
 	call WaitBGMap
 	hlcoord 1, 16
@@ -1677,14 +1619,11 @@ TryWithdrawPokemon:
 	jp BillsPC_CheckSpaceInDestination.tailmerge_1448 ; same as there (tools/tailmerge.py)
 
 ReleasePKMN_ByePKMN:
-	hlcoord 0, 0
-	lb bc, 15, 8
+	call DepositPokemon_Shared ; hlcoord 0, 0 / lb bc, 15, 8
 	call ClearBox
-	hlcoord 8, 14
-	lb bc, 1, 3
+	call DepositPokemon_Shared2 ; hlcoord 8, 14 / lb bc, 1, 3
 	call ClearBox
-	hlcoord 0, 15
-	lb bc, 1, 18
+	call BillsPC_PlaceString_Shared ; hlcoord 0, 15 / lb bc, 1, 18
 	call Textbox
 
 	call WaitBGMap
@@ -1704,8 +1643,7 @@ ReleasePKMN_ByePKMN:
 	call PlaceString
 	ld c, 80
 	call DelayFrames
-	hlcoord 0, 15
-	lb bc, 1, 18
+	call BillsPC_PlaceString_Shared ; hlcoord 0, 15 / lb bc, 1, 18
 	call Textbox
 	hlcoord 1, 16
 	ld de, PCString_Bye
@@ -1942,6 +1880,7 @@ GetBoxPointer:
 	add hl, bc
 	add hl, bc
 	add hl, bc
+.shared1: ; (tools/outline.py)
 	ld a, [hli]
 	ld b, a
 	ld a, [hli]
@@ -2040,8 +1979,7 @@ _ChangeBox:
 BillsPC_ClearTilemap:
 	xor a
 	ldh [hBGMapMode], a
-	hlcoord 0, 0
-	ld bc, SCREEN_AREA
+	call PrintDiplomaPage2_Shared ; hlcoord 0, 0 / ld bc, SCREEN_AREA
 	ld a, ' '
 	jp ByteFill
 
@@ -2289,4 +2227,50 @@ BillsPC_PlaceChangeBoxString:
 	call PlaceString
 	ld a, $1
 	ldh [hBGMapMode], a
+	ret
+
+BillsPCDepositFuncRelease_Shared: ; (tools/outline.py)
+	ld a, [wBillsPC_CursorPosition]
+	ld hl, wBillsPC_ScrollPosition
+	add [hl]
+	ret
+
+Withdraw_UpDown_Shared: ; (tools/outline.py)
+	ld hl, hJoyLast
+	ld a, [wBillsPC_NumMonsOnScreen]
+	ld d, a
+	ld a, [wBillsPC_NumMonsInBox]
+	ld e, a
+	and a
+	ret
+
+BillsPC_PlaceString_Shared: ; (tools/outline.py)
+	hlcoord 0, 15
+	lb bc, 1, 18
+	ret
+
+BillsPC_UpdateSelectionCursor_Shared: ; (tools/outline.py)
+	ld a, [wBillsPC_CursorPosition]
+	and $7
+	swap a
+	add [hl]
+	inc hl
+	ld [de], a ; y
+	inc de
+	ret
+
+DepositPokemon_Shared: ; (tools/outline.py)
+	hlcoord 0, 0
+	lb bc, 15, 8
+	ret
+
+DepositPokemon_Shared2: ; (tools/outline.py)
+	hlcoord 8, 14
+	lb bc, 1, 3
+	ret
+
+DepositPokemon_Shared3: ; (tools/outline.py)
+	ld [wPokemonWithdrawDepositParameter], a
+	farcall RemoveMonFromPartyOrBox
+	ld a, [wCurPartySpecies]
 	ret

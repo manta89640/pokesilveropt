@@ -38,10 +38,7 @@ SwitchItemsInBag:
 .below:
 	ld a, [wSwitchItem]
 	call ItemSwitch_CopyItemToBuffer
-	ld a, [wScrollingMenuCursorPosition]
-	ld d, a
-	ld a, [wSwitchItem]
-	ld e, a
+	call SwitchItemsInBag_Shared2 ; ld a, [wScrollingMenuCursorPosition] / ld d, a / ld a, [wSwitchItem] / ...
 	call ItemSwitch_GetItemOffset
 	push bc
 	ld a, [wSwitchItem]
@@ -63,10 +60,7 @@ SwitchItemsInBag:
 .above:
 	ld a, [wSwitchItem]
 	call ItemSwitch_CopyItemToBuffer
-	ld a, [wScrollingMenuCursorPosition]
-	ld d, a
-	ld a, [wSwitchItem]
-	ld e, a
+	call SwitchItemsInBag_Shared2 ; ld a, [wScrollingMenuCursorPosition] / ld d, a / ld a, [wSwitchItem] / ...
 	call ItemSwitch_GetItemOffset
 	push bc
 	ld a, [wSwitchItem]
@@ -139,10 +133,7 @@ SwitchItemsInBag:
 	inc hl
 	pop af
 	ld [hl], a
-	ld hl, wMenuData_ItemsPointerAddr
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
+	call SwitchItemsInBag_Shared ; ld hl, wMenuData_ItemsPointerAddr / ld a, [hli] / ld h, [hl] / ...
 	ld a, [wSwitchItem]
 	cp [hl]
 	jr nz, .not_combining_last_item
@@ -191,10 +182,7 @@ ItemSwitch_CopyBufferToItem:
 ItemSwitch_GetNthItem:
 	push af
 	call ItemSwitch_GetItemFormatSize
-	ld hl, wMenuData_ItemsPointerAddr
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
+	call SwitchItemsInBag_Shared ; ld hl, wMenuData_ItemsPointerAddr / ld a, [hli] / ld h, [hl] / ...
 	inc hl
 	pop af
 	jp AddNTimes
@@ -261,4 +249,18 @@ ItemSwitch_BackwardsCopyBytes:
 	ld a, b
 	or c
 	jr nz, .loop
+	ret
+
+SwitchItemsInBag_Shared: ; (tools/outline.py)
+	ld hl, wMenuData_ItemsPointerAddr
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ret
+
+SwitchItemsInBag_Shared2: ; (tools/outline.py)
+	ld a, [wScrollingMenuCursorPosition]
+	ld d, a
+	ld a, [wSwitchItem]
+	ld e, a
 	ret

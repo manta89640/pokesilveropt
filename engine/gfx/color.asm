@@ -79,9 +79,7 @@ Unused_CheckShininess:
 SGB_ApplyCreditsPals::
 	push de
 	push bc
-	ld hl, PalPacket_Pal01
-	ld de, wSGBPals
-	ld bc, PALPACKET_LENGTH
+	call SGB_ApplyCreditsPals_Shared ; ld hl, PalPacket_Pal01 / ld de, wSGBPals / ld bc, PALPACKET_LENGTH
 	call CopyBytes
 	pop bc
 	pop de
@@ -92,8 +90,7 @@ SGB_ApplyCreditsPals::
 	ld a, e
 	ld [wSGBPals + 5], a
 	ld a, d
-	ld [wSGBPals + 6], a
-	ld hl, wSGBPals
+	call SGB_ApplyCreditsPals_Shared2 ; ld [wSGBPals + 6], a / ld hl, wSGBPals
 	call PushSGBPals
 .tailmerge_98: ; (tools/tailmerge.py)
 	ld hl, BlkPacket_AllPal0
@@ -115,14 +112,7 @@ InitPartyMenuPalettes:
 
 ; SGB layout for SCGB_PARTY_MENU_HP_BARS
 SGB_ApplyPartyMenuHPPals:
-	ld hl, wHPPals
-	ld a, [wSGBPals]
-	ld e, a
-	ld d, 0
-	add hl, de
-	ld e, l
-	ld d, h
-	ld a, [de]
+	call SGB_ApplyPartyMenuHPPals_Shared ; ld hl, wHPPals / ld a, [wSGBPals] / ld e, a / ...
 	and a
 	ld e, $5
 	jr z, .okay
@@ -146,8 +136,7 @@ Intro_LoadMagikarpPalettes:
 
 ; CGB only
 	ld hl, .MagikarpBGPal
-	ld de, wBGPals1
-	ld bc, 1 palettes
+	call _CGB_MysteryGift_Shared ; ld de, wBGPals1 / ld bc, 1 palettes
 	call CopyBytes
 
 	ld hl, .MagikarpOBPal
@@ -183,21 +172,13 @@ Intro_LoadMonPalette:
 	ret z
 	ld a, c
 	push af
-	ld hl, PalPacket_Pal01
-	ld de, wSGBPals
-	ld bc, PALPACKET_LENGTH
+	call SGB_ApplyCreditsPals_Shared ; ld hl, PalPacket_Pal01 / ld de, wSGBPals / ld bc, PALPACKET_LENGTH
 	call CopyBytes
 	pop af
 	call GetMonPalettePointer
-	ld a, [hli]
-	ld [wSGBPals + 3], a
-	ld a, [hli]
-	ld [wSGBPals + 4], a
-	ld a, [hli]
-	ld [wSGBPals + 5], a
+	call Intro_LoadMonPalette_Shared ; ld a, [hli] / ld [wSGBPals + 3], a / ld a, [hli] / ...
 	ld a, [hl]
-	ld [wSGBPals + 6], a
-	ld hl, wSGBPals
+	call SGB_ApplyCreditsPals_Shared2 ; ld [wSGBPals + 6], a / ld hl, wSGBPals
 	jp PushSGBPals
 
 .cgb
@@ -307,29 +288,20 @@ LoadMailPalettes:
 	call CheckCGB
 	jr nz, .cgb
 	push hl
-	ld hl, PalPacket_Pal01
-	ld de, wSGBPals
-	ld bc, PALPACKET_LENGTH
+	call SGB_ApplyCreditsPals_Shared ; ld hl, PalPacket_Pal01 / ld de, wSGBPals / ld bc, PALPACKET_LENGTH
 	call CopyBytes
 	pop hl
 	inc hl
 	inc hl
+	call Intro_LoadMonPalette_Shared ; ld a, [hli] / ld [wSGBPals + 3], a / ld a, [hli] / ...
 	ld a, [hli]
-	ld [wSGBPals + 3], a
-	ld a, [hli]
-	ld [wSGBPals + 4], a
-	ld a, [hli]
-	ld [wSGBPals + 5], a
-	ld a, [hli]
-	ld [wSGBPals + 6], a
-	ld hl, wSGBPals
+	call SGB_ApplyCreditsPals_Shared2 ; ld [wSGBPals + 6], a / ld hl, wSGBPals
 	call PushSGBPals
 	ld hl, BlkPacket_AllPal0
 	jp PushSGBPals
 
 .cgb
-	ld de, wBGPals1
-	ld bc, 1 palettes
+	call _CGB_MysteryGift_Shared ; ld de, wBGPals1 / ld bc, 1 palettes
 .tailmerge_332: ; (tools/tailmerge.py)
 	call CopyBytes
 	call ApplyPals
@@ -361,10 +333,7 @@ CopyPalettes:
 	ret
 
 GetPredefPal:
-	ld l, a
-	ld h, 0
-	add hl, hl
-	add hl, hl
+	call _CGB_BattleColors_Shared ; ld l, a / ld h, 0 / add hl, hl / ...
 	add hl, hl
 	ld bc, PredefPals
 	add hl, bc
@@ -446,8 +415,7 @@ ResetBGPals:
 	ret
 
 WipeAttrmap:
-	hlcoord 0, 0, wAttrmap
-	ld bc, SCREEN_AREA
+	call _CGB_FinishBattleScreenLayout_Shared ; hlcoord 0, 0, wAttrmap / ld bc, SCREEN_AREA
 	xor a
 	jp ByteFill
 
@@ -501,14 +469,7 @@ ApplyAttrmap:
 
 ; CGB layout for SCGB_PARTY_MENU_HP_BARS
 CGB_ApplyPartyMenuHPPals:
-	ld hl, wHPPals
-	ld a, [wSGBPals]
-	ld e, a
-	ld d, 0
-	add hl, de
-	ld e, l
-	ld d, h
-	ld a, [de]
+	call SGB_ApplyPartyMenuHPPals_Shared ; ld hl, wHPPals / ld a, [wSGBPals] / ld e, a / ...
 	inc a
 	ld e, a
 	hlcoord 11, 2, wAttrmap
@@ -561,10 +522,7 @@ GetFrontpicPalettePointer:
 	ld a, [wTrainerClass]
 
 GetTrainerPalettePointer:
-	ld l, a
-	ld h, 0
-	add hl, hl
-	add hl, hl
+	call _CGB_BattleColors_Shared ; ld l, a / ld h, 0 / add hl, hl / ...
 	ld bc, TrainerPalettes
 	add hl, bc
 	ret
@@ -598,10 +556,7 @@ CGBCopyTwoPredefObjectPals: ; unreferenced
 	ret
 
 _GetMonPalettePointer:
-	ld l, a
-	ld h, 0
-	add hl, hl
-	add hl, hl
+	call _CGB_BattleColors_Shared ; ld l, a / ld h, 0 / add hl, hl / ...
 	add hl, hl
 	ld bc, PokemonPalettes
 	add hl, bc
@@ -638,9 +593,7 @@ _PushSGBPals:
 .loop
 	push bc
 	xor a ; JOYP_SGB_START
-	ldh [rJOYP], a
-	ld a, JOYP_SGB_FINISH
-	ldh [rJOYP], a
+	call _PushSGBPals_Shared ; ldh [rJOYP], a / ld a, JOYP_SGB_FINISH / ldh [rJOYP], a
 	ld b, 16
 .loop2
 	ld e, 8
@@ -652,18 +605,14 @@ _PushSGBPals:
 	jr nz, .okay
 	ld a, JOYP_SGB_ZERO
 .okay
-	ldh [rJOYP], a
-	ld a, JOYP_SGB_FINISH
-	ldh [rJOYP], a
+	call _PushSGBPals_Shared ; ldh [rJOYP], a / ld a, JOYP_SGB_FINISH / ldh [rJOYP], a
 	rr d
 	dec e
 	jr nz, .loop3
 	dec b
 	jr nz, .loop2
 	ld a, JOYP_SGB_ZERO
-	ldh [rJOYP], a
-	ld a, JOYP_SGB_FINISH
-	ldh [rJOYP], a
+	call _PushSGBPals_Shared ; ldh [rJOYP], a / ld a, JOYP_SGB_FINISH / ldh [rJOYP], a
 	call SGBDelayCycles
 	pop bc
 	dec b
@@ -1048,10 +997,7 @@ LoadMapPals:
 	ld a, [de] ; lookup index for TilesetBGPalette
 	push de
 	push hl
-	ld l, a
-	ld h, 0
-	add hl, hl
-	add hl, hl
+	call _CGB_BattleColors_Shared ; ld l, a / ld h, 0 / add hl, hl / ...
 	add hl, hl
 	ld de, TilesetBGPalette
 	add hl, de
@@ -1085,10 +1031,7 @@ LoadMapPals:
 	ret nz
 .outside
 	ld a, [wMapGroup]
-	ld l, a
-	ld h, 0
-	add hl, hl
-	add hl, hl
+	call _CGB_BattleColors_Shared ; ld l, a / ld h, 0 / add hl, hl / ...
 	add hl, hl
 	ld de, RoofPals
 	add hl, de
@@ -1148,3 +1091,41 @@ INCLUDE "gfx/slots/slots_gold.pal"
 ELIF DEF(_SILVER)
 INCLUDE "gfx/slots/slots_silver.pal"
 ENDC
+
+SGB_ApplyCreditsPals_Shared: ; (tools/outline.py)
+	ld hl, PalPacket_Pal01
+.shared1: ; (tools/outline.py)
+	ld de, wSGBPals
+	ld bc, PALPACKET_LENGTH
+	ret
+
+Intro_LoadMonPalette_Shared: ; (tools/outline.py)
+	ld a, [hli]
+	ld [wSGBPals + 3], a
+	ld a, [hli]
+	ld [wSGBPals + 4], a
+	ld a, [hli]
+	ld [wSGBPals + 5], a
+	ret
+
+SGB_ApplyPartyMenuHPPals_Shared: ; (tools/outline.py)
+	ld hl, wHPPals
+	ld a, [wSGBPals]
+	ld e, a
+	ld d, 0
+	add hl, de
+	ld e, l
+	ld d, h
+	ld a, [de]
+	ret
+
+SGB_ApplyCreditsPals_Shared2: ; (tools/outline.py)
+	ld [wSGBPals + 6], a
+	ld hl, wSGBPals
+	ret
+
+_PushSGBPals_Shared: ; (tools/outline.py)
+	ldh [rJOYP], a
+	ld a, JOYP_SGB_FINISH
+	ldh [rJOYP], a
+	ret

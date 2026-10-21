@@ -844,14 +844,11 @@ Mail_Draw2x2Graphic:
 	ret
 
 Mail_Draw3x2Graphic:
-	ld [hli], a
-	inc a
-	ld [hli], a
-	inc a
-	ld [hl], a
+	call Mail_Draw3x2Graphic.shared1 ; ld [hli], a / inc a / ld [hli], a / ...
 	ld bc, SCREEN_WIDTH - 2
 	add hl, bc
 	inc a
+.shared1: ; (tools/outline.py)
 	ld [hli], a
 	inc a
 	ld [hli], a

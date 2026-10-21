@@ -1,9 +1,7 @@
 BattleCommand_FalseSwipe:
 ; Makes sure wCurDamage < MonHP
 
-	ld hl, wEnemyMonHP
-	ldh a, [hBattleTurn]
-	and a
+	call BattleCommand_CheckFaint_Shared ; ld hl, wEnemyMonHP / ldh a, [hBattleTurn] / and a
 	jr z, .got_hp
 	ld hl, wBattleMonHP
 .got_hp

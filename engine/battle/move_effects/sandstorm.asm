@@ -4,9 +4,7 @@ BattleCommand_StartSandstorm:
 	jr z, .failed
 
 	ld a, WEATHER_SANDSTORM
-	ld [wBattleWeather], a
-	ld a, 5
-	ld [wWeatherCount], a
+	call BattleCommand_StartRain_Shared ; ld [wBattleWeather], a / ld a, 5 / ld [wWeatherCount], a
 	call AnimateCurrentMove
 	ld hl, SandstormBrewedText
 	jp StdBattleTextbox

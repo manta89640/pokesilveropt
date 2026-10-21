@@ -76,11 +76,7 @@ HideHeadbuttTree:
 	; Assumes any tileset with headbutt trees has grass at tile $05
 	xor a
 	ldh [hBGMapMode], a
-	ld a, [wPlayerDirection]
-	and %00001100
-	srl a
-	ld e, a
-	ld d, 0
+	call HideHeadbuttTree_Shared ; ld a, [wPlayerDirection] / and %00001100 / srl a / ...
 	ld hl, TreeRelativeLocationTable
 	add hl, de
 	ld a, [hli]
@@ -211,9 +207,7 @@ Cut_SpawnLeaf:
 	push af
 	ld a, SPRITE_ANIM_OBJ_LEAF ; leaf
 	call InitSpriteAnimStruct
-	ld hl, SPRITEANIMSTRUCT_TILE_ID
-	add hl, bc
-	ld [hl], FIELDMOVE_GRASS
+	call FlyFunction_FrameTimer.shared1 ; ld hl, SPRITEANIMSTRUCT_TILE_ID / add hl, bc / ld [hl], FIELDMOVE_GRASS
 	ld hl, SPRITEANIMSTRUCT_VAR3
 	add hl, bc
 	ld [hl], $4
@@ -245,6 +239,7 @@ Cut_GetLeafSpawnCoords:
 	add e
 	ld e, a
 	ld hl, .Coords
+.shared1: ; (tools/outline.py)
 	add hl, de
 	add hl, de
 	ld e, [hl]
@@ -274,11 +269,7 @@ Cut_GetLeafSpawnCoords:
 	dbpixel 13, 10 ; facing right, bottom right
 
 Cut_Headbutt_GetPixelFacing:
-	ld a, [wPlayerDirection]
-	and %00001100
-	srl a
-	ld e, a
-	ld d, 0
+	call HideHeadbuttTree_Shared ; ld a, [wPlayerDirection] / and %00001100 / srl a / ...
 	ld hl, .Coords
 	add hl, de
 	ld e, [hl]
@@ -302,17 +293,12 @@ FlyFromAnim:
 	depixel 10, 10, 4, 0
 	ld a, SPRITE_ANIM_OBJ_RED_WALK
 	call InitSpriteAnimStruct
-	ld hl, SPRITEANIMSTRUCT_TILE_ID
-	add hl, bc
-	ld [hl], FIELDMOVE_FLY
-	ld hl, SPRITEANIMSTRUCT_ANIM_SEQ_ID
-	add hl, bc
+	call FlyFromAnim_Shared ; ld hl, SPRITEANIMSTRUCT_TILE_ID / add hl, bc / ld [hl], FIELDMOVE_FLY / ...
 	ld [hl], SPRITE_ANIM_FUNC_FLY_FROM
 	ld a, 128
 	ld [wFrameCounter], a
 .loop
-	ld a, [wJumptableIndex]
-	bit JUMPTABLE_EXIT_F, a
+	call DoBattleTransition_Shared ; ld a, [wJumptableIndex] / bit JUMPTABLE_EXIT_F, a
 	jr nz, .exit
 	ld a, 0 * OBJ_SIZE
 	ld [wCurSpriteOAMAddr], a
@@ -336,11 +322,7 @@ FlyToAnim:
 	depixel 31, 10, 4, 0
 	ld a, SPRITE_ANIM_OBJ_RED_WALK
 	call InitSpriteAnimStruct
-	ld hl, SPRITEANIMSTRUCT_TILE_ID
-	add hl, bc
-	ld [hl], FIELDMOVE_FLY
-	ld hl, SPRITEANIMSTRUCT_ANIM_SEQ_ID
-	add hl, bc
+	call FlyFromAnim_Shared ; ld hl, SPRITEANIMSTRUCT_TILE_ID / add hl, bc / ld [hl], FIELDMOVE_FLY / ...
 	ld [hl], SPRITE_ANIM_FUNC_FLY_TO
 	ld hl, SPRITEANIMSTRUCT_VAR4
 	add hl, bc
@@ -348,8 +330,7 @@ FlyToAnim:
 	ld a, 64
 	ld [wFrameCounter], a
 .loop
-	ld a, [wJumptableIndex]
-	bit JUMPTABLE_EXIT_F, a
+	call DoBattleTransition_Shared ; ld a, [wJumptableIndex] / bit JUMPTABLE_EXIT_F, a
 	jr nz, .exit
 	ld a, 0 * OBJ_SIZE
 	ld [wCurSpriteOAMAddr], a
@@ -430,7 +411,25 @@ FlyFunction_FrameTimer:
 	ld e, 0
 	ld a, SPRITE_ANIM_OBJ_FLY_LEAF
 	call InitSpriteAnimStruct
+.shared1: ; (tools/outline.py)
 	ld hl, SPRITEANIMSTRUCT_TILE_ID
 	add hl, bc
 	ld [hl], FIELDMOVE_GRASS
+	ret
+
+FlyFromAnim_Shared: ; (tools/outline.py)
+	ld hl, SPRITEANIMSTRUCT_TILE_ID
+	add hl, bc
+	ld [hl], FIELDMOVE_FLY
+	ld hl, SPRITEANIMSTRUCT_ANIM_SEQ_ID
+	add hl, bc
+	ret
+
+HideHeadbuttTree_Shared: ; (tools/outline.py)
+	ld a, [wPlayerDirection]
+	and %00001100
+.shared1: ; (tools/outline.py)
+	srl a
+	ld e, a
+	ld d, 0
 	ret

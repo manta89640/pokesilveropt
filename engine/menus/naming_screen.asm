@@ -394,10 +394,7 @@ NamingScreenJoypadLoop:
 	ret nc
 
 .start
-	ld hl, wNamingScreenCursorObjectPointer
-	ld c, [hl]
-	inc hl
-	ld b, [hl]
+	call NamingScreenJoypadLoop_Shared ; ld hl, wNamingScreenCursorObjectPointer / ld c, [hl] / inc hl / ...
 	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld [hl], $8
@@ -415,6 +412,7 @@ NamingScreenJoypadLoop:
 
 .end
 	call NamingScreen_StoreEntry
+.shared2: ; (tools/outline.py)
 	ld hl, wJumptableIndex
 	set JUMPTABLE_EXIT_F, [hl]
 	ret
@@ -433,15 +431,10 @@ NamingScreenJoypadLoop:
 	jp NamingScreen_ApplyTextInputMode
 
 .GetCursorPosition:
-	ld hl, wNamingScreenCursorObjectPointer
-	ld c, [hl]
-	inc hl
-	ld b, [hl]
+	call NamingScreenJoypadLoop_Shared ; ld hl, wNamingScreenCursorObjectPointer / ld c, [hl] / inc hl / ...
 
 NamingScreen_GetCursorPosition:
-	ld hl, SPRITEANIMSTRUCT_VAR2
-	add hl, bc
-	ld a, [hl]
+	call NamingScreen_GetCursorPosition_Shared ; ld hl, SPRITEANIMSTRUCT_VAR2 / add hl, bc / ld a, [hl]
 	push bc
 	ld b, $4
 	call NamingScreen_IsTargetBox
@@ -451,9 +444,7 @@ NamingScreen_GetCursorPosition:
 	cp b
 	pop bc
 	jr nz, .not_bottom_row
-	ld hl, SPRITEANIMSTRUCT_VAR1
-	add hl, bc
-	ld a, [hl]
+	call NamingScreen_GetCursorPosition_Shared2 ; ld hl, SPRITEANIMSTRUCT_VAR1 / add hl, bc / ld a, [hl]
 	cp $3
 	jr c, .case_switch
 	cp $6
@@ -475,14 +466,8 @@ NamingScreen_GetCursorPosition:
 
 NamingScreen_AnimateCursor:
 	call .GetDPad
-	ld hl, SPRITEANIMSTRUCT_VAR2
-	add hl, bc
-	ld a, [hl]
-	ld e, a
-	swap e
-	ld hl, SPRITEANIMSTRUCT_YOFFSET
-	add hl, bc
-	ld [hl], e
+	call NamingScreen_GetCursorPosition_Shared ; ld hl, SPRITEANIMSTRUCT_VAR2 / add hl, bc / ld a, [hl]
+	call NamingScreen_AnimateCursor_Shared2 ; ld e, a / swap e / ld hl, SPRITEANIMSTRUCT_YOFFSET / ...
 	ld d, $4
 	call NamingScreen_IsTargetBox
 	jr nz, .ok
@@ -495,15 +480,7 @@ NamingScreen_AnimateCursor:
 	ld de, .CaseDelEnd
 	ld a, SPRITE_ANIM_FRAMESET_TEXT_ENTRY_CURSOR_BIG - SPRITE_ANIM_FRAMESET_TEXT_ENTRY_CURSOR ; 1
 .ok2
-	ld hl, SPRITEANIMSTRUCT_VAR3
-	add hl, bc
-	add [hl] ; default SPRITE_ANIM_FRAMESET_TEXT_ENTRY_CURSOR
-	ld hl, SPRITEANIMSTRUCT_FRAMESET_ID
-	add hl, bc
-	ld [hl], a
-	ld hl, SPRITEANIMSTRUCT_VAR1
-	add hl, bc
-	ld l, [hl]
+	call NamingScreen_AnimateCursor_Shared ; ld hl, SPRITEANIMSTRUCT_VAR3 / add hl, bc / add [hl] / ...
 	ld h, $0
 .tailmerge_506: ; (tools/tailmerge.py)
 	add hl, de
@@ -539,9 +516,7 @@ NamingScreen_AnimateCursor:
 	call NamingScreen_GetCursorPosition
 	and a
 	jr nz, .target_right
-	ld hl, SPRITEANIMSTRUCT_VAR1
-	add hl, bc
-	ld a, [hl]
+	call NamingScreen_GetCursorPosition_Shared2 ; ld hl, SPRITEANIMSTRUCT_VAR1 / add hl, bc / ld a, [hl]
 	cp $8
 	jr nc, .wrap_left
 	inc [hl]
@@ -568,9 +543,7 @@ NamingScreen_AnimateCursor:
 	call NamingScreen_GetCursorPosition
 	and a
 	jr nz, .target_left
-	ld hl, SPRITEANIMSTRUCT_VAR1
-	add hl, bc
-	ld a, [hl]
+	call NamingScreen_GetCursorPosition_Shared2 ; ld hl, SPRITEANIMSTRUCT_VAR1 / add hl, bc / ld a, [hl]
 	and a
 	jr z, .wrap_right
 	dec [hl]
@@ -590,9 +563,7 @@ NamingScreen_AnimateCursor:
 	jr NamingScreen_AnimateCursor.no_wrap_target_left ; same as there (tools/tailmerge.py)
 
 .down
-	ld hl, SPRITEANIMSTRUCT_VAR2
-	add hl, bc
-	ld a, [hl]
+	call NamingScreen_GetCursorPosition_Shared ; ld hl, SPRITEANIMSTRUCT_VAR2 / add hl, bc / ld a, [hl]
 	call NamingScreen_IsTargetBox
 	jr nz, .not_box
 	cp $5
@@ -611,9 +582,7 @@ NamingScreen_AnimateCursor:
 	ret
 
 .up
-	ld hl, SPRITEANIMSTRUCT_VAR2
-	add hl, bc
-	ld a, [hl]
+	call NamingScreen_GetCursorPosition_Shared ; ld hl, SPRITEANIMSTRUCT_VAR2 / add hl, bc / ld a, [hl]
 	and a
 	jr z, .wrap_down
 	dec [hl]
@@ -624,9 +593,7 @@ NamingScreen_AnimateCursor:
 	jp NamingScreenJoypadLoop.tailmerge_406 ; same as there (tools/tailmerge.py)
 
 NamingScreen_TryAddCharacter:
-	ld a, [wNamingScreenLastCharacter]
-	ld hl, Dakutens
-	cp 'ﾞ'
+	call NamingScreen_TryAddCharacter_Shared ; ld a, [wNamingScreenLastCharacter] / ld hl, Dakutens / cp 'ﾞ'
 	jr z, AddDakutenToCharacter
 	ld hl, Handakutens
 	cp 'ﾟ'
@@ -703,10 +670,7 @@ NamingScreen_DeleteCharacter:
 
 NamingScreen_GetTextCursorPosition:
 	push af
-	ld hl, wNamingScreenDestinationPointer
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
+	call NamingScreen_GetTextCursorPosition_Shared ; ld hl, wNamingScreenDestinationPointer / ld a, [hli] / ld h, [hl] / ...
 	ld a, [wNamingScreenCurNameLength]
 	ld e, a
 	ld d, 0
@@ -716,10 +680,7 @@ NamingScreen_GetTextCursorPosition:
 
 NamingScreen_InitNameEntry:
 ; load NAMINGSCREEN_UNDERLINE, (NAMINGSCREEN_MIDDLELINE * [wNamingScreenMaxNameLength]), "@" into the dw address at wNamingScreenDestinationPointer
-	ld hl, wNamingScreenDestinationPointer
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
+	call NamingScreen_GetTextCursorPosition_Shared ; ld hl, wNamingScreenDestinationPointer / ld a, [hli] / ld h, [hl] / ...
 	ld [hl], NAMINGSCREEN_UNDERLINE
 	inc hl
 	ld a, [wNamingScreenMaxNameLength]
@@ -734,10 +695,7 @@ NamingScreen_InitNameEntry:
 	ret
 
 NamingScreen_StoreEntry:
-	ld hl, wNamingScreenDestinationPointer
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
+	call NamingScreen_GetTextCursorPosition_Shared ; ld hl, wNamingScreenDestinationPointer / ld a, [hli] / ld h, [hl] / ...
 	ld a, [wNamingScreenMaxNameLength]
 	ld c, a
 .loop
@@ -755,10 +713,7 @@ NamingScreen_StoreEntry:
 	ret
 
 NamingScreen_GetLastCharacter:
-	ld hl, wNamingScreenCursorObjectPointer
-	ld c, [hl]
-	inc hl
-	ld b, [hl]
+	call NamingScreenJoypadLoop_Shared ; ld hl, wNamingScreenCursorObjectPointer / ld c, [hl] / inc hl / ...
 	ld hl, SPRITEANIMSTRUCT_XOFFSET
 	add hl, bc
 	ld a, [hl]
@@ -766,9 +721,7 @@ NamingScreen_GetLastCharacter:
 	add hl, bc
 	add [hl]
 	sub $8
-	srl a
-	srl a
-	srl a
+	call ContestScore_Shared ; srl a / srl a / srl a
 	ld e, a
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
 	add hl, bc
@@ -777,9 +730,7 @@ NamingScreen_GetLastCharacter:
 	add hl, bc
 	add [hl]
 	sub $10
-	srl a
-	srl a
-	srl a
+	call ContestScore_Shared ; srl a / srl a / srl a
 	ld d, a
 	hlcoord 0, 0
 	ld bc, SCREEN_WIDTH
@@ -1096,14 +1047,8 @@ INCBIN "gfx/naming_screen/mail.2bpp"
 
 ComposeMail_AnimateCursor:
 	call .GetDPad
-	ld hl, SPRITEANIMSTRUCT_VAR2
-	add hl, bc
-	ld a, [hl]
-	ld e, a
-	swap e
-	ld hl, SPRITEANIMSTRUCT_YOFFSET
-	add hl, bc
-	ld [hl], e
+	call NamingScreen_GetCursorPosition_Shared ; ld hl, SPRITEANIMSTRUCT_VAR2 / add hl, bc / ld a, [hl]
+	call NamingScreen_AnimateCursor_Shared2 ; ld e, a / swap e / ld hl, SPRITEANIMSTRUCT_YOFFSET / ...
 	cp $5
 	ld de, .LetterEntries
 	ld a, 0
@@ -1111,15 +1056,7 @@ ComposeMail_AnimateCursor:
 	ld de, .CaseDelEnd
 	ld a, 1
 .got_pointer
-	ld hl, SPRITEANIMSTRUCT_VAR3
-	add hl, bc
-	add [hl]
-	ld hl, SPRITEANIMSTRUCT_FRAMESET_ID
-	add hl, bc
-	ld [hl], a
-	ld hl, SPRITEANIMSTRUCT_VAR1
-	add hl, bc
-	ld l, [hl]
+	call NamingScreen_AnimateCursor_Shared ; ld hl, SPRITEANIMSTRUCT_VAR3 / add hl, bc / add [hl] / ...
 	ld h, 0
 	jp NamingScreen_AnimateCursor.tailmerge_506 ; same as there (tools/tailmerge.py)
 
@@ -1149,9 +1086,7 @@ ComposeMail_AnimateCursor:
 	call ComposeMail_GetCursorPosition
 	and a
 	jr nz, .case_del_done_right
-	ld hl, SPRITEANIMSTRUCT_VAR1
-	add hl, bc
-	ld a, [hl]
+	call NamingScreen_GetCursorPosition_Shared2 ; ld hl, SPRITEANIMSTRUCT_VAR1 / add hl, bc / ld a, [hl]
 	cp $9
 	jr nc, .wrap_around_letter_right
 	inc [hl]
@@ -1172,9 +1107,7 @@ ComposeMail_AnimateCursor:
 	call ComposeMail_GetCursorPosition
 	and a
 	jr nz, .caps_del_done_left
-	ld hl, SPRITEANIMSTRUCT_VAR1
-	add hl, bc
-	ld a, [hl]
+	call NamingScreen_GetCursorPosition_Shared2 ; ld hl, SPRITEANIMSTRUCT_VAR1 / add hl, bc / ld a, [hl]
 	and a
 	jr z, .wrap_around_letter_left
 	dec [hl]
@@ -1192,9 +1125,7 @@ ComposeMail_AnimateCursor:
 	jp NamingScreen_AnimateCursor.no_wrap_target_right ; same as there (tools/tailmerge.py)
 
 .down
-	ld hl, SPRITEANIMSTRUCT_VAR2
-	add hl, bc
-	ld a, [hl]
+	call NamingScreen_GetCursorPosition_Shared ; ld hl, SPRITEANIMSTRUCT_VAR2 / add hl, bc / ld a, [hl]
 	cp $5
 	jr nc, .wrap_around_down
 	inc [hl]
@@ -1205,9 +1136,7 @@ ComposeMail_AnimateCursor:
 	ret
 
 .up
-	ld hl, SPRITEANIMSTRUCT_VAR2
-	add hl, bc
-	ld a, [hl]
+	call NamingScreen_GetCursorPosition_Shared ; ld hl, SPRITEANIMSTRUCT_VAR2 / add hl, bc / ld a, [hl]
 	and a
 	jr z, .wrap_around_up
 	dec [hl]
@@ -1218,20 +1147,13 @@ ComposeMail_AnimateCursor:
 	ret
 
 NamingScreen_PressedA_GetCursorCommand:
-	ld hl, wNamingScreenCursorObjectPointer
-	ld c, [hl]
-	inc hl
-	ld b, [hl]
+	call NamingScreenJoypadLoop_Shared ; ld hl, wNamingScreenCursorObjectPointer / ld c, [hl] / inc hl / ...
 
 ComposeMail_GetCursorPosition:
-	ld hl, SPRITEANIMSTRUCT_VAR2
-	add hl, bc
-	ld a, [hl]
+	call NamingScreen_GetCursorPosition_Shared ; ld hl, SPRITEANIMSTRUCT_VAR2 / add hl, bc / ld a, [hl]
 	cp $5
 	jr nz, .letter
-	ld hl, SPRITEANIMSTRUCT_VAR1
-	add hl, bc
-	ld a, [hl]
+	call NamingScreen_GetCursorPosition_Shared2 ; ld hl, SPRITEANIMSTRUCT_VAR1 / add hl, bc / ld a, [hl]
 	cp $3
 	jr c, .case
 	cp $6
@@ -1252,9 +1174,7 @@ ComposeMail_GetCursorPosition:
 	ret
 
 MailComposition_TryAddLastCharacter:
-	ld a, [wNamingScreenLastCharacter]
-	ld hl, Dakutens
-	cp 'ﾞ'
+	call NamingScreen_TryAddCharacter_Shared ; ld a, [wNamingScreenLastCharacter] / ld hl, Dakutens / cp 'ﾞ'
 	jr z, .add_dakuten
 	ld hl, Handakutens
 	cp 'ﾟ'
@@ -1295,3 +1215,55 @@ MailComposition_TryAddLastCharacter:
 	jp NamingScreen_LoadNextCharacter
 
 INCLUDE "data/text/mail_input_chars.asm"
+
+NamingScreen_GetCursorPosition_Shared: ; (tools/outline.py)
+	ld hl, SPRITEANIMSTRUCT_VAR2
+	add hl, bc
+	ld a, [hl]
+	ret
+
+NamingScreen_AnimateCursor_Shared: ; (tools/outline.py)
+	ld hl, SPRITEANIMSTRUCT_VAR3
+	add hl, bc
+	add [hl] ; default SPRITE_ANIM_FRAMESET_TEXT_ENTRY_CURSOR
+	ld hl, SPRITEANIMSTRUCT_FRAMESET_ID
+	add hl, bc
+	ld [hl], a
+	ld hl, SPRITEANIMSTRUCT_VAR1
+	add hl, bc
+	ld l, [hl]
+	ret
+
+NamingScreen_GetCursorPosition_Shared2: ; (tools/outline.py)
+	ld hl, SPRITEANIMSTRUCT_VAR1
+	add hl, bc
+	ld a, [hl]
+	ret
+
+NamingScreenJoypadLoop_Shared: ; (tools/outline.py)
+	ld hl, wNamingScreenCursorObjectPointer
+	ld c, [hl]
+	inc hl
+	ld b, [hl]
+	ret
+
+NamingScreen_GetTextCursorPosition_Shared: ; (tools/outline.py)
+	ld hl, wNamingScreenDestinationPointer
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ret
+
+NamingScreen_AnimateCursor_Shared2: ; (tools/outline.py)
+	ld e, a
+	swap e
+	ld hl, SPRITEANIMSTRUCT_YOFFSET
+	add hl, bc
+	ld [hl], e
+	ret
+
+NamingScreen_TryAddCharacter_Shared: ; (tools/outline.py)
+	ld a, [wNamingScreenLastCharacter]
+	ld hl, Dakutens
+	cp 'ﾞ'
+	ret

@@ -33,8 +33,7 @@ MagnetTrain:
 	push af
 	ld [hl], VBLANK_CUTSCENE
 .loop
-	ld a, [wJumptableIndex]
-	bit JUMPTABLE_EXIT_F, a
+	call DoBattleTransition_Shared ; ld a, [wJumptableIndex] / bit JUMPTABLE_EXIT_F, a
 	jr nz, .done
 	callfar PlaySpriteAnimations
 	call MagnetTrain_Jumptable
@@ -211,11 +210,7 @@ GetMagnetTrainBGTiles:
 	ld e, a
 	ld d, 0
 	ld hl, MagnetTrainBGTiles
-	add hl, de
-	add hl, de
-	ld e, [hl]
-	inc hl
-	ld d, [hl]
+	call Cut_GetLeafSpawnCoords.shared1 ; add hl, de / add hl, de / ld e, [hl] / ...
 	pop hl
 	ret
 
@@ -293,6 +288,7 @@ MagnetTrain_Jumptable:
 	add hl, bc
 	ld [hl], 0
 	call .Next
+.shared2: ; (tools/outline.py)
 	ld a, 128
 	ld [wMagnetTrainWaitCounter], a
 	ret
@@ -307,18 +303,14 @@ MagnetTrain_Jumptable:
 	xor $ff
 	inc a
 	add e
-	ld [wMagnetTrainPosition], a
-	ld hl, wGlobalAnimXOffset
-	ld a, [wMagnetTrainDirection]
+	call MagnetTrain_Jumptable_Shared ; ld [wMagnetTrainPosition], a / ld hl, wGlobalAnimXOffset / ld a, [wMagnetTrainDirection]
 	add [hl]
 	ld [hl], a
 	ret
 
 .PrepareToHoldTrain:
 	call .Next
-	ld a, 128
-	ld [wMagnetTrainWaitCounter], a
-	ret
+	jr MagnetTrain_Jumptable.shared2 ; ld a, 128 / ld [wMagnetTrainWaitCounter], a
 
 .WaitScene:
 	ld hl, wMagnetTrainWaitCounter
@@ -344,9 +336,7 @@ MagnetTrain_Jumptable:
 	ld a, e
 	add d
 	add d
-	ld [wMagnetTrainPosition], a
-	ld hl, wGlobalAnimXOffset
-	ld a, [wMagnetTrainDirection]
+	call MagnetTrain_Jumptable_Shared ; ld [wMagnetTrainPosition], a / ld hl, wGlobalAnimXOffset / ld a, [wMagnetTrainDirection]
 	ld d, a
 	ld a, [hl]
 	add d
@@ -360,8 +350,7 @@ MagnetTrain_Jumptable:
 	jr .Next
 
 .TrainArrived:
-	ld a, JUMPTABLE_EXIT
-	ld [wJumptableIndex], a
+	call StartTrainerBattle_Finish.shared1 ; ld a, JUMPTABLE_EXIT / ld [wJumptableIndex], a
 	ld de, SFX_TRAIN_ARRIVED
 	jp PlaySFX
 
@@ -369,3 +358,9 @@ MagnetTrain_Jumptable:
 MagnetTrainTilemap:
 ; 20x4 tilemap
 INCBIN "gfx/overworld/magnet_train_fg.tilemap"
+
+MagnetTrain_Jumptable_Shared: ; (tools/outline.py)
+	ld [wMagnetTrainPosition], a
+	ld hl, wGlobalAnimXOffset
+	ld a, [wMagnetTrainDirection]
+	ret

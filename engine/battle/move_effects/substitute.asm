@@ -59,9 +59,7 @@ BattleCommand_Substitute:
 	add a
 	jr c, .no_anim
 
-	xor a
-	ld [wBattleAfterAnim], a
-	ld [wFXAnimID + 1], a
+	call BattleCommand_LowerSub_Shared ; xor a / ld [wBattleAfterAnim], a / ld [wFXAnimID + 1], a
 	ld [wBattleAnimParam], a
 	ld a, SUBSTITUTE
 	call LoadAnim

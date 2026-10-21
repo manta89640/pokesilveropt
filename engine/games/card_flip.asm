@@ -488,8 +488,7 @@ CardFlip_PrintCoinBalance:
 CardFlip_InitTilemap:
 	xor a
 	ldh [hBGMapMode], a
-	hlcoord 0, 0
-	ld bc, SCREEN_AREA
+	call PrintDiplomaPage2_Shared ; hlcoord 0, 0 / ld bc, SCREEN_AREA
 	ld a, $29
 	call ByteFill
 	hlcoord 9, 0
@@ -1271,11 +1270,7 @@ CardFlip_UpdateCursorOAM:
 	add hl, de
 	ld a, [hli]
 	ld c, a
-	ld a, [hli]
-	ld b, a
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
+	call GetBoxPointer.shared1 ; ld a, [hli] / ld b, a / ld a, [hli] / ...
 	jp CardFlip_CopyOAM
 
 .OAMData:

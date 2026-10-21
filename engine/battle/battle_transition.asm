@@ -24,8 +24,7 @@ DoBattleTransition:
 	ld [hl], VBLANK_CUTSCENE
 
 .loop
-	ld a, [wJumptableIndex]
-	bit JUMPTABLE_EXIT_F, a
+	call DoBattleTransition_Shared ; ld a, [wJumptableIndex] / bit JUMPTABLE_EXIT_F, a
 	jr nz, .done
 	call BattleTransitionJumptable
 	call DelayFrame
@@ -192,6 +191,7 @@ StartTrainerBattle_DetermineWhichAnimation:
 
 StartTrainerBattle_Finish:
 	call ClearSprites
+.shared1: ; (tools/outline.py)
 	ld a, JUMPTABLE_EXIT
 	ld [wJumptableIndex], a
 	ret
@@ -220,9 +220,7 @@ StartTrainerBattle_Flash:
 	ld hl, wBattleTransitionCounter
 	ld a, [hl]
 	inc [hl]
-	srl a
-	ld e, a
-	ld d, 0
+	call HideHeadbuttTree_Shared.shared1 ; srl a / ld e, a / ld d, 0
 	ld hl, .pals
 	add hl, de
 	ld a, [hl]
@@ -720,3 +718,7 @@ ENDM
 	jr nz, .row
 	ret
 
+DoBattleTransition_Shared: ; (tools/outline.py)
+	ld a, [wJumptableIndex]
+	bit JUMPTABLE_EXIT_F, a
+	ret

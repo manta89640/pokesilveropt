@@ -271,6 +271,7 @@ SlotsAction_Init:
 SlotsAction_BetAndStart:
 	call Slots_AskBet
 	jr nc, .proceed
+.shared1: ; (tools/outline.py)
 	ld a, SLOTS_QUIT
 	ld [wJumptableIndex], a
 	ret
@@ -308,9 +309,7 @@ SlotsAction_WaitStart:
 	ret
 
 SlotsAction_WaitReel1:
-	ld hl, hJoypadSum
-	ld a, [hl]
-	and PAD_A
+	call SlotsAction_WaitReel1_Shared ; ld hl, hJoypadSum / ld a, [hl] / and PAD_A
 	ret z
 	call SlotsAction_Next
 	call Slots_StopReel1
@@ -328,9 +327,7 @@ SlotsAction_WaitStopReel1:
 	xor a
 	ldh [hJoypadSum], a
 SlotsAction_WaitReel2:
-	ld hl, hJoypadSum
-	ld a, [hl]
-	and PAD_A
+	call SlotsAction_WaitReel1_Shared ; ld hl, hJoypadSum / ld a, [hl] / and PAD_A
 	ret z
 	call SlotsAction_Next
 	call Slots_StopReel2
@@ -348,9 +345,7 @@ SlotsAction_WaitStopReel2:
 	xor a
 	ldh [hJoypadSum], a
 SlotsAction_WaitReel3:
-	ld hl, hJoypadSum
-	ld a, [hl]
-	and PAD_A
+	call SlotsAction_WaitReel1_Shared ; ld hl, hJoypadSum / ld a, [hl] / and PAD_A
 	ret z
 	call SlotsAction_Next
 	call Slots_StopReel3
@@ -457,9 +452,7 @@ SlotsAction_RestartOrQuit:
 	ret
 
 .exit_slots
-	ld a, SLOTS_QUIT
-	ld [wJumptableIndex], a
-	ret
+	jp SlotsAction_BetAndStart.shared1 ; ld a, SLOTS_QUIT / ld [wJumptableIndex], a
 
 SlotsAction_Quit:
 	ld hl, wJumptableIndex
@@ -473,6 +466,7 @@ Slots_LoadReelState:
 	ld a, [hli]
 	ld [de], a
 	inc de
+.shared1: ; (tools/outline.py)
 	ld a, [hli]
 	ld [de], a
 	inc de
@@ -617,17 +611,9 @@ Slots_InitReelTiles:
 	ld hl, REEL_OAM_ADDR
 	add hl, bc
 	ld de, wShadowOAMSprite16
-	ld [hl], e
-	inc hl
-	ld [hl], d
-	ld hl, REEL_TILEMAP_ADDR
-	add hl, bc
+	call Slots_InitReelTiles_Shared ; ld [hl], e / inc hl / ld [hl], d / ...
 	ld de, Reel1Tilemap
-	ld [hl], e
-	inc hl
-	ld [hl], d
-	ld hl, REEL_X_COORD
-	add hl, bc
+	call Slots_InitReelTiles_Shared2 ; ld [hl], e / inc hl / ld [hl], d / ...
 	ld [hl], 6 * TILE_WIDTH
 	call .OAM
 
@@ -635,17 +621,9 @@ Slots_InitReelTiles:
 	ld hl, REEL_OAM_ADDR
 	add hl, bc
 	ld de, wShadowOAMSprite24
-	ld [hl], e
-	inc hl
-	ld [hl], d
-	ld hl, REEL_TILEMAP_ADDR
-	add hl, bc
+	call Slots_InitReelTiles_Shared ; ld [hl], e / inc hl / ld [hl], d / ...
 	ld de, Reel2Tilemap
-	ld [hl], e
-	inc hl
-	ld [hl], d
-	ld hl, REEL_X_COORD
-	add hl, bc
+	call Slots_InitReelTiles_Shared2 ; ld [hl], e / inc hl / ld [hl], d / ...
 	ld [hl], 10 * TILE_WIDTH
 	call .OAM
 
@@ -653,17 +631,9 @@ Slots_InitReelTiles:
 	ld hl, REEL_OAM_ADDR
 	add hl, bc
 	ld de, wShadowOAMSprite32
-	ld [hl], e
-	inc hl
-	ld [hl], d
-	ld hl, REEL_TILEMAP_ADDR
-	add hl, bc
+	call Slots_InitReelTiles_Shared ; ld [hl], e / inc hl / ld [hl], d / ...
 	ld de, Reel3Tilemap
-	ld [hl], e
-	inc hl
-	ld [hl], d
-	ld hl, REEL_X_COORD
-	add hl, bc
+	call Slots_InitReelTiles_Shared2 ; ld [hl], e / inc hl / ld [hl], d / ...
 	ld [hl], 14 * TILE_WIDTH
 	jr .OAM
 
@@ -840,6 +810,7 @@ ReelAction_DoNothing:
 	ret
 
 ReelAction_QuadrupleRate:
+.shared1: ; (tools/outline.py)
 	ld hl, REEL_SPIN_RATE
 	add hl, bc
 	ld [hl], 16
@@ -864,15 +835,14 @@ ReelAction_HalfRate:
 	ret
 
 ReelAction_QuarterRate:
+.shared1: ; (tools/outline.py)
 	ld hl, REEL_SPIN_RATE
 	add hl, bc
 	ld [hl], 1
 	ret
 
 Slots_StopReel:
-	ld hl, REEL_SPIN_RATE
-	add hl, bc
-	ld [hl], 0
+	call ReelAction_SetUpReel2SkipTo7.shared2 ; ld hl, REEL_SPIN_RATE / add hl, bc / ld [hl], 0
 	ld hl, REEL_ACTION
 	add hl, bc
 	ld [hl], REEL_ACTION_STOP_REEL_IGNORE_JOYPAD
@@ -904,10 +874,7 @@ ReelAction_StopReel1:
 	ld a, [wSlotBias]
 	cp SLOTS_NO_BIAS
 	jr z, .NoBias
-	ld hl, REEL_MANIP_COUNTER
-	add hl, bc
-	ld a, [hl]
-	and a
+	call ReelAction_StopReel1_Shared ; ld hl, REEL_MANIP_COUNTER / add hl, bc / ld a, [hl] / ...
 	jr z, .NoBias
 	dec [hl]
 	call .CheckForBias
@@ -945,10 +912,7 @@ ReelAction_StopReel2:
 	ld a, [wSlotBias]
 	cp SLOTS_NO_BIAS
 	jr z, .NoBias
-	ld hl, REEL_MANIP_COUNTER
-	add hl, bc
-	ld a, [hl]
-	and a
+	call ReelAction_StopReel1_Shared ; ld hl, REEL_MANIP_COUNTER / add hl, bc / ld a, [hl] / ...
 	jr z, .NoBias
 	dec [hl]
 	ret
@@ -966,10 +930,7 @@ ReelAction_StopReel3:
 	ld hl, wSlotBias
 	cp [hl]
 	jr z, .NoBias
-	ld hl, REEL_MANIP_COUNTER
-	add hl, bc
-	ld a, [hl]
-	and a
+	call ReelAction_StopReel1_Shared ; ld hl, REEL_MANIP_COUNTER / add hl, bc / ld a, [hl] / ...
 	ret z
 	dec [hl]
 	ret
@@ -978,10 +939,7 @@ ReelAction_StopReel3:
 	ld a, [wSlotBias]
 	cp SLOTS_NO_BIAS
 	jr z, .NoBias
-	ld hl, REEL_MANIP_COUNTER
-	add hl, bc
-	ld a, [hl]
-	and a
+	call ReelAction_StopReel1_Shared ; ld hl, REEL_MANIP_COUNTER / add hl, bc / ld a, [hl] / ...
 	jr z, .NoBias
 	dec [hl]
 	ret
@@ -1005,23 +963,19 @@ ReelAction_SetUpReel2SkipTo7:
 .no_match
 	ld a, SFX_STOP_SLOT
 	call Slots_PlaySFX
-	ld hl, REEL_ACTION
-	add hl, bc
-	inc [hl] ; REEL_ACTION_WAIT_REEL2_SKIP_TO_7
+	call ReelAction_SetUpReel2SkipTo7_Shared ; ld hl, REEL_ACTION / add hl, bc / inc [hl]
 	ld hl, REEL_MANIP_DELAY
 	add hl, bc
 	ld [hl], 32
 .tailmerge_1019: ; (tools/tailmerge.py)
+.shared2: ; (tools/outline.py)
 	ld hl, REEL_SPIN_RATE
 	add hl, bc
 	ld [hl], 0
 	ret
 
 ReelAction_WaitReel2SkipTo7:
-	ld hl, REEL_MANIP_DELAY
-	add hl, bc
-	ld a, [hl]
-	and a
+	call ReelAction_WaitReel2SkipTo7_Shared ; ld hl, REEL_MANIP_DELAY / add hl, bc / ld a, [hl] / ...
 	jr z, .ready
 	dec [hl]
 	ret
@@ -1057,12 +1011,8 @@ ReelAction_InitGolem:
 	ld a, SFX_STOP_SLOT
 	call Slots_PlaySFX
 	call Slots_WaitSFX
-	ld hl, REEL_ACTION
-	add hl, bc
-	inc [hl] ; REEL_ACTION_WAIT_GOLEM
-	ld hl, REEL_SPIN_RATE
-	add hl, bc
-	ld [hl], 0
+	call ReelAction_SetUpReel2SkipTo7_Shared ; ld hl, REEL_ACTION / add hl, bc / inc [hl]
+	call ReelAction_SetUpReel2SkipTo7.shared2 ; ld hl, REEL_SPIN_RATE / add hl, bc / ld [hl], 0
 	call Slots_GetNumberOfGolems
 	push bc
 	push af
@@ -1111,12 +1061,8 @@ ReelAction_InitChansey:
 	ld a, SFX_STOP_SLOT
 	call Slots_PlaySFX
 	call Slots_WaitSFX
-	ld hl, REEL_ACTION
-	add hl, bc
-	inc [hl] ; REEL_ACTION_WAIT_CHANSEY
-	ld hl, REEL_SPIN_RATE
-	add hl, bc
-	ld [hl], 0
+	call ReelAction_SetUpReel2SkipTo7_Shared ; ld hl, REEL_ACTION / add hl, bc / inc [hl]
+	call ReelAction_SetUpReel2SkipTo7.shared2 ; ld hl, REEL_SPIN_RATE / add hl, bc / ld [hl], 0
 	push bc
 	depixel 12, 0
 	ld a, SPRITE_ANIM_OBJ_SLOTS_CHANSEY
@@ -1130,29 +1076,20 @@ ReelAction_WaitChansey:
 	ld a, [wSlotsDelay]
 	and a
 	ret z
-	ld hl, REEL_ACTION
-	add hl, bc
-	inc [hl] ; REEL_ACTION_WAIT_EGG
+	call ReelAction_SetUpReel2SkipTo7_Shared ; ld hl, REEL_ACTION / add hl, bc / inc [hl]
 	ld a, 2
 	ld [wSlotsDelay], a
 ReelAction_WaitEgg:
 	ld a, [wSlotsDelay]
 	cp $4
 	ret c
-	ld hl, REEL_ACTION
-	add hl, bc
-	inc [hl] ; REEL_ACTION_DROP_REEL
-	ld hl, REEL_SPIN_RATE
-	add hl, bc
-	ld [hl], 16
+	call ReelAction_SetUpReel2SkipTo7_Shared ; ld hl, REEL_ACTION / add hl, bc / inc [hl]
+	call ReelAction_QuadrupleRate.shared1 ; ld hl, REEL_SPIN_RATE / add hl, bc / ld [hl], 16
 	ld hl, REEL_MANIP_DELAY
 	add hl, bc
 	ld [hl], 17
 ReelAction_DropReel:
-	ld hl, REEL_MANIP_DELAY
-	add hl, bc
-	ld a, [hl]
-	and a
+	call ReelAction_WaitReel2SkipTo7_Shared ; ld hl, REEL_MANIP_DELAY / add hl, bc / ld a, [hl] / ...
 	jr z, .check_match
 	dec [hl]
 	ret
@@ -1167,9 +1104,7 @@ ReelAction_DropReel:
 	jp Slots_StopReel
 
 .EggAgain:
-	ld hl, REEL_SPIN_RATE
-	add hl, bc
-	ld [hl], 0
+	call ReelAction_SetUpReel2SkipTo7.shared2 ; ld hl, REEL_SPIN_RATE / add hl, bc / ld [hl], 0
 	ld hl, REEL_ACTION
 	add hl, bc
 	dec [hl]
@@ -1184,33 +1119,24 @@ ReelAction_Unused:
 	ld a, SFX_STOP_SLOT
 	call Slots_PlaySFX
 	call Slots_WaitSFX
-	ld hl, REEL_ACTION
-	add hl, bc
-	inc [hl] ; REEL_ACTION_CHECK_DROP_REEL
+	call ReelAction_SetUpReel2SkipTo7_Shared ; ld hl, REEL_ACTION / add hl, bc / inc [hl]
 	call Slots_GetNumberOfGolems
 	ld hl, REEL_MANIP_DELAY
 	add hl, bc
 	ld [hl], a
 ReelAction_CheckDropReel:
-	ld hl, REEL_MANIP_DELAY
-	add hl, bc
-	ld a, [hl]
-	and a
+	call ReelAction_WaitReel2SkipTo7_Shared ; ld hl, REEL_MANIP_DELAY / add hl, bc / ld a, [hl] / ...
 	jr nz, .spin
 	call Slots_CheckMatchedAllThreeReels
 	jp Slots_StopReel
 
 .spin
 	dec [hl]
-	ld hl, REEL_ACTION
-	add hl, bc
-	inc [hl] ; REEL_ACTION_WAIT_DROP_REEL
+	call ReelAction_SetUpReel2SkipTo7_Shared ; ld hl, REEL_ACTION / add hl, bc / inc [hl]
 	ld hl, REEL_DROP_COUNTER
 	add hl, bc
 	ld [hl], 32
-	ld hl, REEL_SPIN_RATE
-	add hl, bc
-	ld [hl], 0
+	call ReelAction_SetUpReel2SkipTo7.shared2 ; ld hl, REEL_SPIN_RATE / add hl, bc / ld [hl], 0
 ReelAction_WaitDropReel:
 	ld hl, REEL_DROP_COUNTER
 	add hl, bc
@@ -1239,20 +1165,13 @@ ReelAction_StartSlowAdvanceReel3:
 	ld a, SFX_STOP_SLOT
 	call Slots_PlaySFX
 	call Slots_WaitSFX
-	ld hl, REEL_SPIN_RATE
-	add hl, bc
-	ld [hl], 1
-	ld hl, REEL_ACTION
-	add hl, bc
-	inc [hl] ; REEL_ACTION_WAIT_SLOW_ADVANCE_REEL3
+	call ReelAction_QuarterRate.shared1 ; ld hl, REEL_SPIN_RATE / add hl, bc / ld [hl], 1
+	call ReelAction_SetUpReel2SkipTo7_Shared ; ld hl, REEL_ACTION / add hl, bc / inc [hl]
 	ld hl, REEL_MANIP_DELAY
 	add hl, bc
 	ld [hl], 16
 ReelAction_WaitSlowAdvanceReel3:
-	ld hl, REEL_MANIP_DELAY
-	add hl, bc
-	ld a, [hl]
-	and a
+	call ReelAction_WaitReel2SkipTo7_Shared ; ld hl, REEL_MANIP_DELAY / add hl, bc / ld a, [hl] / ...
 	jr z, .check1
 	dec [hl]
 .play_sfx
@@ -1476,11 +1395,7 @@ Slots_CheckMatchedAllThreeReels:
 
 Slots_CopyReelState:
 	ld de, wCurReelStopped
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hli]
-	ld [de], a
+	call Slots_LoadReelState.shared1 ; ld a, [hli] / ld [de], a / inc de / ...
 	inc de
 	ld a, [hl]
 	ld [de], a
@@ -1604,13 +1519,11 @@ Slots_Lights1OnOff:
 
 Slots_TurnLightsOnOrOff:
 	ld a, b
-	ld [hl], a
-	ld de, SCREEN_WIDTH / 2 + 3
-	add hl, de
-	ld [hl], a
+	call Slots_TurnLightsOnOrOff.shared1 ; ld [hl], a / ld de, SCREEN_WIDTH / 2 + 3 / add hl, de / ...
 	ld de, SCREEN_WIDTH / 2 - 3
 	add hl, de
 	inc a
+.shared1: ; (tools/outline.py)
 	ld [hl], a
 	ld de, SCREEN_WIDTH / 2 + 3
 	add hl, de
@@ -2117,3 +2030,45 @@ INCBIN "gfx/slots/slots_2.2bpp.lz"
 
 Slots3LZ:
 INCBIN "gfx/slots/slots_3.2bpp.lz"
+
+ReelAction_SetUpReel2SkipTo7_Shared: ; (tools/outline.py)
+	ld hl, REEL_ACTION
+	add hl, bc
+	inc [hl] ; REEL_ACTION_WAIT_REEL2_SKIP_TO_7
+	ret
+
+ReelAction_StopReel1_Shared: ; (tools/outline.py)
+	ld hl, REEL_MANIP_COUNTER
+	add hl, bc
+	ld a, [hl]
+	and a
+	ret
+
+ReelAction_WaitReel2SkipTo7_Shared: ; (tools/outline.py)
+	ld hl, REEL_MANIP_DELAY
+	add hl, bc
+	ld a, [hl]
+	and a
+	ret
+
+Slots_InitReelTiles_Shared: ; (tools/outline.py)
+	ld [hl], e
+	inc hl
+	ld [hl], d
+	ld hl, REEL_TILEMAP_ADDR
+	add hl, bc
+	ret
+
+Slots_InitReelTiles_Shared2: ; (tools/outline.py)
+	ld [hl], e
+	inc hl
+	ld [hl], d
+	ld hl, REEL_X_COORD
+	add hl, bc
+	ret
+
+SlotsAction_WaitReel1_Shared: ; (tools/outline.py)
+	ld hl, hJoypadSum
+	ld a, [hl]
+	and PAD_A
+	ret

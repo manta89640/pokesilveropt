@@ -93,6 +93,7 @@ _PlayerDecorationMenu:
 	ld hl, wStringBuffer2
 	inc [hl]
 .tailmerge_95: ; (tools/tailmerge.py)
+.shared1: ; (tools/outline.py)
 	ld e, [hl]
 	ld d, 0
 	add hl, de
@@ -623,8 +624,7 @@ DecoAction_TrySetItUp:
 	push hl
 	call DecoAction_SetItUp
 	jr c, .failed
-	ld a, TRUE
-	ld [wChangedDecorations], a
+	call DecoAction_TrySetItUp_Shared ; ld a, TRUE / ld [wChangedDecorations], a
 	pop hl
 	ld a, [wMenuSelection]
 	ld [hl], a
@@ -684,8 +684,7 @@ DecoAction_TryPutItAway:
 	and a
 	jr z, .nothingthere
 ; Put it away.
-	ld a, TRUE
-	ld [wChangedDecorations], a
+	call DecoAction_TrySetItUp_Shared ; ld a, TRUE / ld [wChangedDecorations], a
 	ld a, [wCurDecoration]
 	ld [wMenuSelection], a
 	ld hl, wStringBuffer3
@@ -705,8 +704,7 @@ DecoAction_setupornament:
 	jr c, .cancel
 	call DecoAction_SetItUp_Ornament
 	jr c, .cancel
-	ld a, TRUE
-	ld [wChangedDecorations], a
+	call DecoAction_TrySetItUp_Shared ; ld a, TRUE / ld [wChangedDecorations], a
 	jr DecoAction_FinishUp_Ornament
 
 .cancel
@@ -789,8 +787,7 @@ DecoAction_PutItAway_Ornament:
 	jr z, .nothingthere
 	ld hl, wStringBuffer3
 	call GetDecorationName
-	ld a, TRUE
-	ld [wChangedDecorations], a
+	call DecoAction_TrySetItUp_Shared ; ld a, TRUE / ld [wChangedDecorations], a
 	xor a
 	ld [wSelectedDecoration], a
 	ld hl, PutAwayTheDecoText
@@ -1131,3 +1128,8 @@ PadCoords_de:
 	add 4
 	ld e, a
 	jp GetBlockLocation
+
+DecoAction_TrySetItUp_Shared: ; (tools/outline.py)
+	ld a, TRUE
+	ld [wChangedDecorations], a
+	ret

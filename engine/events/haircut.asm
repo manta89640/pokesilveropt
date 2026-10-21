@@ -54,6 +54,7 @@ HaircutOrGrooming:
 	jp GiveShuckle.NotGiven ; same as there (tools/tailmerge.py)
 
 .egg
+.shared1: ; (tools/outline.py)
 	ld a, 1
 	ld [wScriptVar], a
 	ret

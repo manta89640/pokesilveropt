@@ -32,10 +32,7 @@ BattleCommand_Conversion:
 	cp NUM_MOVES
 	jr c, .loop
 .okay
-	ld a, $ff
-	ld [de], a
-	inc de
-	ld [de], a
+	call BattleCommand_ApplyDamage.shared1 ; ld a, $ff / ld [de], a / inc de / ...
 	inc de
 	ld [de], a
 	pop de

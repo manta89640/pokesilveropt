@@ -437,6 +437,7 @@ UseItem:
 	ld a, [wItemEffectSucceeded]
 	and a
 	jr z, .Oak
+.shared1: ; (tools/outline.py)
 	ld a, PACKSTATE_QUITRUNSCRIPT
 	ld [wJumptableIndex], a
 	ret
@@ -505,9 +506,7 @@ GiveItem:
 	ld a, PARTYMENUACTION_GIVE_ITEM
 	ld [wPartyMenuActionText], a
 	call ClearBGPalettes
-	farcall LoadPartyMenuGFX
-	farcall InitPartyMenuWithCancel
-	farcall InitPartyMenuGFX
+	call GiveItem_Shared ; farcall LoadPartyMenuGFX / farcall InitPartyMenuWithCancel / farcall InitPartyMenuGFX
 .loop
 	farcall WritePartyMenuTilemap
 	farcall PlacePartyMenuText
@@ -529,9 +528,7 @@ GiveItem:
 	ld a, [wPackJumptableIndex]
 	push af
 	call GetCurNickname
-	ld hl, wStringBuffer1
-	ld de, wMonOrItemNameBuffer
-	ld bc, MON_NAME_LENGTH
+	call GiveItem_Shared2 ; ld hl, wStringBuffer1 / ld de, wMonOrItemNameBuffer / ld bc, MON_NAME_LENGTH
 	call CopyBytes
 	call TryGiveItemToPartymon
 	pop af
@@ -766,9 +763,7 @@ TMHMSubmenu:
 	cp $2
 	jr z, .didnt_use_item
 .quit_run_script
-	ld a, PACKSTATE_QUITRUNSCRIPT
-	ld [wJumptableIndex], a
-	ret
+	jp UseItem.shared1 ; ld a, PACKSTATE_QUITRUNSCRIPT / ld [wJumptableIndex], a
 
 .didnt_use_item
 	xor a
@@ -1041,6 +1036,7 @@ Pack_JumptableNext:
 Pack_GetJumptablePointer:
 	ld e, a
 	ld d, 0
+.shared1: ; (tools/outline.py)
 	add hl, de
 	add hl, de
 	ld a, [hli]
@@ -1049,15 +1045,13 @@ Pack_GetJumptablePointer:
 	ret
 
 Pack_QuitNoScript:
-	ld hl, wJumptableIndex
-	set JUMPTABLE_EXIT_F, [hl]
+	call NamingScreenJoypadLoop.shared2 ; ld hl, wJumptableIndex / set JUMPTABLE_EXIT_F, [hl]
 	xor a ; FALSE
 	ld [wPackUsedItem], a
 	ret
 
 Pack_QuitRunScript:
-	ld hl, wJumptableIndex
-	set JUMPTABLE_EXIT_F, [hl]
+	call NamingScreenJoypadLoop.shared2 ; ld hl, wJumptableIndex / set JUMPTABLE_EXIT_F, [hl]
 	ld a, TRUE
 	ld [wPackUsedItem], a
 	ret
@@ -1411,3 +1405,15 @@ PackKeyItemsGFX: INCBIN "gfx/pack/pack_key_items.2bpp.lz"
 PackItemsGFX:    INCBIN "gfx/pack/pack_items.2bpp.lz"
 PackTMHMGFX:     INCBIN "gfx/pack/pack_tmhm.2bpp.lz"
 PackBallsGFX:    INCBIN "gfx/pack/pack_balls.2bpp.lz"
+
+GiveItem_Shared: ; (tools/outline.py)
+	farcall LoadPartyMenuGFX
+	farcall InitPartyMenuWithCancel
+	farcall InitPartyMenuGFX
+	ret
+
+GiveItem_Shared2: ; (tools/outline.py)
+	ld hl, wStringBuffer1
+	ld de, wMonOrItemNameBuffer
+	ld bc, MON_NAME_LENGTH
+	ret

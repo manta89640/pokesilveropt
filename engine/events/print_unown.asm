@@ -200,13 +200,18 @@ UnownDexBTile:
 INCBIN "gfx/printer/bold_b.1bpp"
 
 PlaceUnownPrinterFrontpic:
-	hlcoord 0, 0
-	ld bc, SCREEN_AREA
-	ld a, ' '
+	call PlaceUnownPrinterFrontpic_Shared ; hlcoord 0, 0 / ld bc, SCREEN_AREA / ld a, ' '
 	call ByteFill
 	hlcoord 7, 11
 	ld a, $31
+.shared2: ; (tools/outline.py)
 	ldh [hGraphicStartTile], a
 	lb bc, 7, 7
 	predef PlaceGraphic
+	ret
+
+PlaceUnownPrinterFrontpic_Shared: ; (tools/outline.py)
+	hlcoord 0, 0
+	ld bc, SCREEN_AREA
+	ld a, ' '
 	ret

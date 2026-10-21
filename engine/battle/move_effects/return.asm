@@ -7,11 +7,7 @@ BattleCommand_HappinessPower:
 	jr z, .ok
 	ld hl, wEnemyMonHappiness
 .ok
-	xor a
-	ldh [hMultiplicand + 0], a
-	ldh [hMultiplicand + 1], a
-	ld a, [hl]
-	ldh [hMultiplicand + 2], a
+	call BattleCommand_CheckHit_Shared ; xor a / ldh [hMultiplicand + 0], a / ldh [hMultiplicand + 1], a / ...
 .tailmerge_15: ; (tools/tailmerge.py)
 	ld a, 10
 	ldh [hMultiplier], a

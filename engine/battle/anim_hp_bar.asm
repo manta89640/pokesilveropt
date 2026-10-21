@@ -55,15 +55,7 @@ _AnimateHPBar:
 
 .ComputePixels:
 	push hl
-	ld hl, wCurHPAnimMaxHP
-	ld a, [hli]
-	ld e, a
-	ld a, [hli]
-	ld d, a
-	ld a, [hli]
-	ld c, a
-	ld a, [hli]
-	ld b, a
+	call _AnimateHPBar_Shared ; ld hl, wCurHPAnimMaxHP / ld a, [hli] / ld e, a / ...
 	pop hl
 	call ComputeHPBarPixels
 	ld a, e
@@ -72,11 +64,7 @@ _AnimateHPBar:
 	ld a, [wCurHPAnimNewHP]
 	ld c, a
 	ld a, [wCurHPAnimNewHP + 1]
-	ld b, a
-	ld a, [wCurHPAnimMaxHP]
-	ld e, a
-	ld a, [wCurHPAnimMaxHP + 1]
-	ld d, a
+	call _AnimateHPBar_Shared2 ; ld b, a / ld a, [wCurHPAnimMaxHP] / ld e, a / ...
 	call ComputeHPBarPixels
 	ld a, e
 	ld [wNewHPBarPixels], a
@@ -170,15 +158,7 @@ LongAnim_UpdateVariables:
 	push hl
 	push de
 	push bc
-	ld hl, wCurHPAnimMaxHP
-	ld a, [hli]
-	ld e, a
-	ld a, [hli]
-	ld d, a
-	ld a, [hli]
-	ld c, a
-	ld a, [hli]
-	ld b, a
+	call _AnimateHPBar_Shared ; ld hl, wCurHPAnimMaxHP / ld a, [hli] / ld e, a / ...
 ; BUG: HP bar animation is slow for high HP (see docs/bugs_and_glitches.md)
 	call ComputeHPBarPixels
 	pop bc
@@ -194,10 +174,7 @@ LongAnim_UpdateVariables:
 
 ShortHPBarAnim_UpdateTiles:
 	call HPBarAnim_UpdateHPRemaining
-	ld d, HP_BAR_LENGTH
-	ld a, [wWhichHPBar]
-	and $1
-	ld b, a
+	call ShortHPBarAnim_UpdateTiles_Shared ; ld d, HP_BAR_LENGTH / ld a, [wWhichHPBar] / and $1 / ...
 	ld a, [wCurHPBarPixels]
 	ld e, a
 	ld c, a
@@ -212,17 +189,10 @@ LongHPBarAnim_UpdateTiles:
 	ld a, [wCurHPAnimOldHP]
 	ld c, a
 	ld a, [wCurHPAnimOldHP + 1]
-	ld b, a
-	ld a, [wCurHPAnimMaxHP]
-	ld e, a
-	ld a, [wCurHPAnimMaxHP + 1]
-	ld d, a
+	call _AnimateHPBar_Shared2 ; ld b, a / ld a, [wCurHPAnimMaxHP] / ld e, a / ...
 	call ComputeHPBarPixels
 	ld c, e
-	ld d, HP_BAR_LENGTH
-	ld a, [wWhichHPBar]
-	and $1
-	ld b, a
+	call ShortHPBarAnim_UpdateTiles_Shared ; ld d, HP_BAR_LENGTH / ld a, [wWhichHPBar] / and $1 / ...
 	jr ShortHPBarAnim_UpdateTiles.tailmerge_204 ; same as there (tools/tailmerge.py)
 
 HPBarAnim_RedrawHPBar:
@@ -362,12 +332,7 @@ ShortHPBar_CalcPixelFrame:
 	ld b, 0
 .loop
 ; BUG: HP bar animation off-by-one error for low HP (see docs/bugs_and_glitches.md)
-	ld a, l
-	sub HP_BAR_LENGTH_PX
-	ld l, a
-	ld a, h
-	sbc $0
-	ld h, a
+	call ShortHPBar_CalcPixelFrame_Shared ; ld a, l / sub HP_BAR_LENGTH_PX / ld l, a / ...
 	jr c, .done
 	inc b
 	jr .loop
@@ -377,12 +342,7 @@ ShortHPBar_CalcPixelFrame:
 	ld bc, $80
 	add hl, bc
 	pop bc
-	ld a, l
-	sub HP_BAR_LENGTH_PX
-	ld l, a
-	ld a, h
-	sbc $0
-	ld h, a
+	call ShortHPBar_CalcPixelFrame_Shared ; ld a, l / sub HP_BAR_LENGTH_PX / ld l, a / ...
 	jr c, .no_carry
 	inc b
 .no_carry
@@ -405,4 +365,40 @@ ShortHPBar_CalcPixelFrame:
 .return_max
 	ld a, [wCurHPAnimMaxHP]
 	ld [wCurHPAnimOldHP], a
+	ret
+
+_AnimateHPBar_Shared: ; (tools/outline.py)
+	ld hl, wCurHPAnimMaxHP
+	ld a, [hli]
+	ld e, a
+	ld a, [hli]
+	ld d, a
+	ld a, [hli]
+	ld c, a
+	ld a, [hli]
+	ld b, a
+	ret
+
+_AnimateHPBar_Shared2: ; (tools/outline.py)
+	ld b, a
+	ld a, [wCurHPAnimMaxHP]
+	ld e, a
+	ld a, [wCurHPAnimMaxHP + 1]
+	ld d, a
+	ret
+
+ShortHPBarAnim_UpdateTiles_Shared: ; (tools/outline.py)
+	ld d, HP_BAR_LENGTH
+	ld a, [wWhichHPBar]
+	and $1
+	ld b, a
+	ret
+
+ShortHPBar_CalcPixelFrame_Shared: ; (tools/outline.py)
+	ld a, l
+	sub HP_BAR_LENGTH_PX
+	ld l, a
+	ld a, h
+	sbc $0
+	ld h, a
 	ret

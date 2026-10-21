@@ -92,11 +92,7 @@ TrainerType1:
 	cp $ff
 	ret z
 
-	ld [wCurPartyLevel], a
-	ld a, [hli]
-	ld [wCurPartySpecies], a
-	ld a, OTPARTYMON
-	ld [wMonType], a
+	call TrainerType1_Shared ; ld [wCurPartyLevel], a / ld a, [hli] / ld [wCurPartySpecies], a / ...
 	push hl
 	predef TryAddMonToParty
 	pop hl
@@ -111,18 +107,11 @@ TrainerType2:
 	cp $ff
 	ret z
 
-	ld [wCurPartyLevel], a
-	ld a, [hli]
-	ld [wCurPartySpecies], a
-	ld a, OTPARTYMON
-	ld [wMonType], a
+	call TrainerType1_Shared ; ld [wCurPartyLevel], a / ld a, [hli] / ld [wCurPartySpecies], a / ...
 
 	push hl
 	predef TryAddMonToParty
-	ld a, [wOTPartyCount]
-	dec a
-	ld hl, wOTPartyMon1Moves
-	ld bc, PARTYMON_STRUCT_LENGTH
+	call TrainerType2_Shared ; ld a, [wOTPartyCount] / dec a / ld hl, wOTPartyMon1Moves / ...
 	call AddNTimes
 	ld d, h
 	ld e, l
@@ -187,17 +176,9 @@ TrainerType3:
 	cp $ff
 	ret z
 
-	ld [wCurPartyLevel], a
-	ld a, [hli]
-	ld [wCurPartySpecies], a
-	ld a, OTPARTYMON
-	ld [wMonType], a
+	call TrainerType1_Shared ; ld [wCurPartyLevel], a / ld a, [hli] / ld [wCurPartySpecies], a / ...
 	push hl
-	predef TryAddMonToParty
-	ld a, [wOTPartyCount]
-	dec a
-	ld hl, wOTPartyMon1Item
-	ld bc, PARTYMON_STRUCT_LENGTH
+	call TrainerType3_Shared ; predef TryAddMonToParty / ld a, [wOTPartyCount] / dec a / ...
 	call AddNTimes
 	ld d, h
 	ld e, l
@@ -215,19 +196,10 @@ TrainerType4:
 	cp $ff
 	ret z
 
-	ld [wCurPartyLevel], a
-	ld a, [hli]
-	ld [wCurPartySpecies], a
-
-	ld a, OTPARTYMON
-	ld [wMonType], a
+	call TrainerType1_Shared ; ld [wCurPartyLevel], a / ld a, [hli] / ld [wCurPartySpecies], a / ...
 
 	push hl
-	predef TryAddMonToParty
-	ld a, [wOTPartyCount]
-	dec a
-	ld hl, wOTPartyMon1Item
-	ld bc, PARTYMON_STRUCT_LENGTH
+	call TrainerType3_Shared ; predef TryAddMonToParty / ld a, [wOTPartyCount] / dec a / ...
 	call AddNTimes
 	ld d, h
 	ld e, l
@@ -237,10 +209,7 @@ TrainerType4:
 	ld [de], a
 
 	push hl
-	ld a, [wOTPartyCount]
-	dec a
-	ld hl, wOTPartyMon1Moves
-	ld bc, PARTYMON_STRUCT_LENGTH
+	call TrainerType2_Shared ; ld a, [wOTPartyCount] / dec a / ld hl, wOTPartyMon1Moves / ...
 	call AddNTimes
 	ld d, h
 	ld e, l
@@ -370,3 +339,26 @@ CopyTrainerName:
 	jp GetTrainerClassName.tailmerge_18 ; same as there (tools/tailmerge.py)
 
 INCLUDE "data/trainers/parties.asm"
+
+TrainerType1_Shared: ; (tools/outline.py)
+	ld [wCurPartyLevel], a
+	ld a, [hli]
+	ld [wCurPartySpecies], a
+	ld a, OTPARTYMON
+	ld [wMonType], a
+	ret
+
+TrainerType3_Shared: ; (tools/outline.py)
+	predef TryAddMonToParty
+	ld a, [wOTPartyCount]
+	dec a
+	ld hl, wOTPartyMon1Item
+	ld bc, PARTYMON_STRUCT_LENGTH
+	ret
+
+TrainerType2_Shared: ; (tools/outline.py)
+	ld a, [wOTPartyCount]
+	dec a
+	ld hl, wOTPartyMon1Moves
+	ld bc, PARTYMON_STRUCT_LENGTH
+	ret

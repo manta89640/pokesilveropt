@@ -37,8 +37,7 @@ CheckPartyFullAfterContest:
 	ld e, l
 	ld hl, wPlayerName
 	call CopyBytes
-	ld a, [wCurPartySpecies]
-	ld [wNamedObjectIndex], a
+	call CheckForLuckyNumberWinners_Shared ; ld a, [wCurPartySpecies] / ld [wNamedObjectIndex], a
 	call GetPokemonName
 	ld hl, wStringBuffer1
 	ld de, wMonOrItemNameBuffer
@@ -50,9 +49,7 @@ CheckPartyFullAfterContest:
 	dec a
 	ld [wCurPartyMon], a
 	xor a
-	ld [wMonType], a
-	ld de, wMonOrItemNameBuffer
-	callfar InitNickname
+	call CheckPartyFullAfterContest_Shared ; ld [wMonType], a / ld de, wMonOrItemNameBuffer / callfar InitNickname
 
 .Party_SkipNickname:
 	ld a, [wPartyCount]
@@ -88,16 +85,13 @@ CheckPartyFullAfterContest:
 	ld bc, NAME_LENGTH
 	call CopyBytes
 	callfar InsertPokemonIntoBox
-	ld a, [wCurPartySpecies]
-	ld [wNamedObjectIndex], a
+	call CheckForLuckyNumberWinners_Shared ; ld a, [wCurPartySpecies] / ld [wNamedObjectIndex], a
 	call GetPokemonName
 	call GiveANickname_YesNo
 	ld hl, wStringBuffer1
 	jr c, .Box_SkipNickname
 	ld a, BOXMON
-	ld [wMonType], a
-	ld de, wMonOrItemNameBuffer
-	callfar InitNickname
+	call CheckPartyFullAfterContest_Shared ; ld [wMonType], a / ld de, wMonOrItemNameBuffer / callfar InitNickname
 	ld hl, wMonOrItemNameBuffer
 
 .Box_SkipNickname:
@@ -128,3 +122,9 @@ GiveANickname_YesNo:
 CaughtAskNicknameText:
 	text_far _CaughtAskNicknameText
 	text_end
+
+CheckPartyFullAfterContest_Shared: ; (tools/outline.py)
+	ld [wMonType], a
+	ld de, wMonOrItemNameBuffer
+	callfar InitNickname
+	ret

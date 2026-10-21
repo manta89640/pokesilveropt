@@ -134,9 +134,7 @@ SetHour:
 	and PAD_A
 	jr nz, .Confirm
 
-	ld hl, hJoyLast
-	ld a, [hl]
-	and PAD_UP
+	call PokegearMap_ContinueMap_Shared ; ld hl, hJoyLast / ld a, [hl] / and PAD_UP
 	jr nz, .up
 	ld a, [hl]
 	and PAD_DOWN
@@ -200,9 +198,7 @@ SetMinutes:
 	ldh a, [hJoyPressed]
 	and PAD_A
 	jr nz, .a_button
-	ld hl, hJoyLast
-	ld a, [hl]
-	and PAD_UP
+	call PokegearMap_ContinueMap_Shared ; ld hl, hJoyLast / ld a, [hl] / and PAD_UP
 	jr nz, .d_up
 	ld a, [hl]
 	and PAD_DOWN
@@ -509,10 +505,7 @@ SetDayOfWeek:
 InitialSetDSTFlag:
 	ld a, [wDST]
 	set DST_F, a
-	ld [wDST], a
-	predef UpdateTimePredef
-	hlcoord 1, 14
-	lb bc, 3, 18
+	call InitialSetDSTFlag_Shared ; ld [wDST], a / predef UpdateTimePredef / hlcoord 1, 14 / ...
 	call ClearBox
 	ld hl, .Text
 	jp PrintTextboxTextAt
@@ -520,12 +513,7 @@ InitialSetDSTFlag:
 .Text:
 	text_asm
 	call UpdateTime
-	ldh a, [hHours]
-	ld b, a
-	ldh a, [hMinutes]
-	ld c, a
-	decoord 1, 14
-	farcall PrintHoursMins
+	call InitialSetDSTFlag_Shared2 ; ldh a, [hHours] / ld b, a / ldh a, [hMinutes] / ...
 	ld hl, .DSTIsThatOKText
 	ret
 
@@ -536,10 +524,7 @@ InitialSetDSTFlag:
 InitialClearDSTFlag:
 	ld a, [wDST]
 	res DST_F, a
-	ld [wDST], a
-	predef UpdateTimePredef
-	hlcoord 1, 14
-	lb bc, 3, 18
+	call InitialSetDSTFlag_Shared ; ld [wDST], a / predef UpdateTimePredef / hlcoord 1, 14 / ...
 	call ClearBox
 	ld hl, .Text
 	jp PrintTextboxTextAt
@@ -547,12 +532,7 @@ InitialClearDSTFlag:
 .Text:
 	text_asm
 	call UpdateTime
-	ldh a, [hHours]
-	ld b, a
-	ldh a, [hMinutes]
-	ld c, a
-	decoord 1, 14
-	farcall PrintHoursMins
+	call InitialSetDSTFlag_Shared2 ; ldh a, [hHours] / ld b, a / ldh a, [hMinutes] / ...
 	ld hl, .TimeAskOkayText
 	ret
 
@@ -687,4 +667,20 @@ AdjustHourForAMorPM:
 
 .midnight
 	ld a, NOON_HOUR
+	ret
+
+InitialSetDSTFlag_Shared: ; (tools/outline.py)
+	ld [wDST], a
+	predef UpdateTimePredef
+	hlcoord 1, 14
+	lb bc, 3, 18
+	ret
+
+InitialSetDSTFlag_Shared2: ; (tools/outline.py)
+	ldh a, [hHours]
+	ld b, a
+	ldh a, [hMinutes]
+	ld c, a
+	decoord 1, 14
+	farcall PrintHoursMins
 	ret

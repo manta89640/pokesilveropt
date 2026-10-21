@@ -16,12 +16,7 @@ PrintItemDescription:
 .not_a_tm
 	push de
 	ld hl, ItemDescriptions
-	ld a, [wCurSpecies]
-	dec a
-	ld c, a
-	ld b, 0
-	add hl, bc
-	add hl, bc
+	call PrintItemDescription_Shared ; ld a, [wCurSpecies] / dec a / ld c, a / ...
 	ld a, BANK(ItemDescriptions)
 	call GetFarWord
 	ld d, h
@@ -29,3 +24,12 @@ PrintItemDescription:
 	pop hl
 	ld a, BANK(ItemDescriptions)
 	jp PlaceFarString
+
+PrintItemDescription_Shared: ; (tools/outline.py)
+	ld a, [wCurSpecies]
+	dec a
+	ld c, a
+	ld b, 0
+	add hl, bc
+	add hl, bc
+	ret

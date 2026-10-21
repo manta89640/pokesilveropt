@@ -336,9 +336,7 @@ PlayerWithdrawItemMenu:
 
 .Submenu:
 	; check if the item has a quantity
-	farcall _CheckTossableItem
-	ld a, [wItemAttributeValue]
-	and a
+	call PlayerWithdrawItemMenu_Shared3 ; farcall _CheckTossableItem / ld a, [wItemAttributeValue] / and a
 	jr z, .askquantity
 
 	; items without quantity are always ×1
@@ -355,17 +353,11 @@ PlayerWithdrawItemMenu:
 	ret c
 
 .withdraw
-	ld a, [wItemQuantityChange]
-	ld [wPCItemQuantityChange], a
-	ld a, [wCurItemQuantity]
-	ld [wPCItemQuantity], a
+	call PlayerWithdrawItemMenu_Shared ; ld a, [wItemQuantityChange] / ld [wPCItemQuantityChange], a / ld a, [wCurItemQuantity] / ...
 	ld hl, wNumItems
 	call ReceiveItem
 	jr nc, .PackFull
-	ld a, [wPCItemQuantityChange]
-	ld [wItemQuantityChange], a
-	ld a, [wPCItemQuantity]
-	ld [wCurItemQuantity], a
+	call PlayerWithdrawItemMenu_Shared2 ; ld a, [wPCItemQuantityChange] / ld [wItemQuantityChange], a / ld a, [wPCItemQuantity] / ...
 	ld hl, wNumPCItems
 	call TossItem
 	predef PartyMonItemName
@@ -493,9 +485,7 @@ PlayerDepositItemMenu:
 	ret
 
 .DepositItem:
-	farcall _CheckTossableItem
-	ld a, [wItemAttributeValue]
-	and a
+	call PlayerWithdrawItemMenu_Shared3 ; farcall _CheckTossableItem / ld a, [wItemAttributeValue] / and a
 	jr z, .AskQuantity
 	ld a, 1
 	ld [wItemQuantityChange], a
@@ -512,17 +502,11 @@ PlayerDepositItemMenu:
 	jr c, .DeclinedToDeposit
 
 .ContinueDeposit:
-	ld a, [wItemQuantityChange]
-	ld [wPCItemQuantityChange], a
-	ld a, [wCurItemQuantity]
-	ld [wPCItemQuantity], a
+	call PlayerWithdrawItemMenu_Shared ; ld a, [wItemQuantityChange] / ld [wPCItemQuantityChange], a / ld a, [wCurItemQuantity] / ...
 	ld hl, wNumPCItems
 	call ReceiveItem
 	jr nc, .NoRoomInPC
-	ld a, [wPCItemQuantityChange]
-	ld [wItemQuantityChange], a
-	ld a, [wPCItemQuantity]
-	ld [wCurItemQuantity], a
+	call PlayerWithdrawItemMenu_Shared2 ; ld a, [wPCItemQuantityChange] / ld [wItemQuantityChange], a / ld a, [wPCItemQuantity] / ...
 	ld hl, wNumItems
 	call TossItem
 	predef PartyMonItemName
@@ -664,3 +648,23 @@ PokecenterOaksPCText:
 PokecenterPCOaksClosedText:
 	text_far _PokecenterPCOaksClosedText
 	text_end
+
+PlayerWithdrawItemMenu_Shared: ; (tools/outline.py)
+	ld a, [wItemQuantityChange]
+	ld [wPCItemQuantityChange], a
+	ld a, [wCurItemQuantity]
+	ld [wPCItemQuantity], a
+	ret
+
+PlayerWithdrawItemMenu_Shared2: ; (tools/outline.py)
+	ld a, [wPCItemQuantityChange]
+	ld [wItemQuantityChange], a
+	ld a, [wPCItemQuantity]
+	ld [wCurItemQuantity], a
+	ret
+
+PlayerWithdrawItemMenu_Shared3: ; (tools/outline.py)
+	farcall _CheckTossableItem
+	ld a, [wItemAttributeValue]
+	and a
+	ret

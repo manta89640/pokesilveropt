@@ -582,10 +582,7 @@ UpdateRoamMons:
 	ld a, [wRoamMon1MapNumber]
 	ld c, a
 	call .Update
-	ld a, b
-	ld [wRoamMon1MapGroup], a
-	ld a, c
-	ld [wRoamMon1MapNumber], a
+	call UpdateRoamMons_Shared2 ; ld a, b / ld [wRoamMon1MapGroup], a / ld a, c / ...
 
 .SkipRaikou:
 	ld a, [wRoamMon2MapGroup]
@@ -595,10 +592,7 @@ UpdateRoamMons:
 	ld a, [wRoamMon2MapNumber]
 	ld c, a
 	call .Update
-	ld a, b
-	ld [wRoamMon2MapGroup], a
-	ld a, c
-	ld [wRoamMon2MapNumber], a
+	call UpdateRoamMons_Shared3 ; ld a, b / ld [wRoamMon2MapGroup], a / ld a, c / ...
 
 .SkipEntei:
 	ld a, [wRoamMon3MapGroup]
@@ -608,10 +602,7 @@ UpdateRoamMons:
 	ld a, [wRoamMon3MapNumber]
 	ld c, a
 	call .Update
-	ld a, b
-	ld [wRoamMon3MapGroup], a
-	ld a, c
-	ld [wRoamMon3MapNumber], a
+	call UpdateRoamMons_Shared4 ; ld a, b / ld [wRoamMon3MapGroup], a / ld a, c / ...
 
 .Finished:
 	jp _BackUpMapIndices
@@ -654,10 +645,7 @@ UpdateRoamMons:
 	cp [hl]
 	jr nc, .update_loop ; invalid index, try again
 	inc hl
-	ld c, a
-	ld b, 0
-	add hl, bc
-	add hl, bc
+	call UpdateRoamMons_Shared ; ld c, a / ld b, 0 / add hl, bc / ...
 	ld a, [wRoamMons_LastMapGroup]
 	cp [hl]
 	jr nz, .done
@@ -678,30 +666,21 @@ JumpRoamMons:
 	cp GROUP_N_A
 	jr z, .SkipRaikou
 	call JumpRoamMon
-	ld a, b
-	ld [wRoamMon1MapGroup], a
-	ld a, c
-	ld [wRoamMon1MapNumber], a
+	call UpdateRoamMons_Shared2 ; ld a, b / ld [wRoamMon1MapGroup], a / ld a, c / ...
 
 .SkipRaikou:
 	ld a, [wRoamMon2MapGroup]
 	cp GROUP_N_A
 	jr z, .SkipEntei
 	call JumpRoamMon
-	ld a, b
-	ld [wRoamMon2MapGroup], a
-	ld a, c
-	ld [wRoamMon2MapNumber], a
+	call UpdateRoamMons_Shared3 ; ld a, b / ld [wRoamMon2MapGroup], a / ld a, c / ...
 
 .SkipEntei:
 	ld a, [wRoamMon3MapGroup]
 	cp GROUP_N_A
 	jr z, .Finished
 	call JumpRoamMon
-	ld a, b
-	ld [wRoamMon3MapGroup], a
-	ld a, c
-	ld [wRoamMon3MapNumber], a
+	call UpdateRoamMons_Shared4 ; ld a, b / ld [wRoamMon3MapGroup], a / ld a, c / ...
 
 .Finished:
 	jr _BackUpMapIndices
@@ -770,11 +749,7 @@ ValidateTempWildMonSpecies:
 ; Finds a rare wild Pokemon in the route of the trainer calling, then checks if it's been Seen already.
 ; The trainer will then tell you about the Pokemon if you haven't seen it.
 RandomUnseenWildMon:
-	farcall GetCallerLocation
-	ld d, b
-	ld e, c
-	ld hl, JohtoGrassWildMons
-	ld bc, GRASS_WILDDATA_LENGTH
+	call RandomUnseenWildMon_Shared ; farcall GetCallerLocation / ld d, b / ld e, c / ...
 	call LookUpWildmonsForMapDE
 	jr c, .GetGrassmon
 	ld hl, KantoGrassWildMons
@@ -793,10 +768,7 @@ RandomUnseenWildMon:
 	and %11
 	jr z, .randloop1
 	dec a
-	ld c, a
-	ld b, 0
-	add hl, bc
-	add hl, bc
+	call UpdateRoamMons_Shared ; ld c, a / ld b, 0 / add hl, bc / ...
 ; We now have the pointer to one of the last (rarest) three wild Pokemon found in that area.
 	inc hl
 	ld c, [hl] ; Contains the species index of this rare Pokemon
@@ -841,11 +813,7 @@ RandomUnseenWildMon:
 	text_end
 
 RandomPhoneWildMon:
-	farcall GetCallerLocation
-	ld d, b
-	ld e, c
-	ld hl, JohtoGrassWildMons
-	ld bc, GRASS_WILDDATA_LENGTH
+	call RandomUnseenWildMon_Shared ; farcall GetCallerLocation / ld d, b / ld e, c / ...
 	call LookUpWildmonsForMapDE
 	jr c, .ok
 	ld hl, KantoGrassWildMons
@@ -866,10 +834,7 @@ RandomPhoneWildMon:
 .done
 	call Random
 	and %11
-	ld c, a
-	ld b, 0
-	add hl, bc
-	add hl, bc
+	call UpdateRoamMons_Shared ; ld c, a / ld b, 0 / add hl, bc / ...
 	inc hl
 	ld a, [hl]
 .tailmerge_875: ; (tools/tailmerge.py)
@@ -886,10 +851,7 @@ RandomPhoneMon:
 	ld hl, TrainerGroups
 	ld a, d
 	dec a
-	ld c, a
-	ld b, 0
-	add hl, bc
-	add hl, bc
+	call UpdateRoamMons_Shared ; ld c, a / ld b, 0 / add hl, bc / ...
 	ld a, BANK(TrainerGroups)
 	call GetFarWord
 
@@ -964,3 +926,39 @@ INCLUDE "data/wild/kanto_grass.asm"
 INCLUDE "data/wild/kanto_water.asm"
 INCLUDE "data/wild/swarm_grass.asm"
 INCLUDE "data/wild/swarm_water.asm"
+
+RandomUnseenWildMon_Shared: ; (tools/outline.py)
+	farcall GetCallerLocation
+	ld d, b
+	ld e, c
+	ld hl, JohtoGrassWildMons
+	ld bc, GRASS_WILDDATA_LENGTH
+	ret
+
+UpdateRoamMons_Shared: ; (tools/outline.py)
+	ld c, a
+	ld b, 0
+	add hl, bc
+	add hl, bc
+	ret
+
+UpdateRoamMons_Shared2: ; (tools/outline.py)
+	ld a, b
+	ld [wRoamMon1MapGroup], a
+	ld a, c
+	ld [wRoamMon1MapNumber], a
+	ret
+
+UpdateRoamMons_Shared3: ; (tools/outline.py)
+	ld a, b
+	ld [wRoamMon2MapGroup], a
+	ld a, c
+	ld [wRoamMon2MapNumber], a
+	ret
+
+UpdateRoamMons_Shared4: ; (tools/outline.py)
+	ld a, b
+	ld [wRoamMon3MapGroup], a
+	ld a, c
+	ld [wRoamMon3MapNumber], a
+	ret

@@ -4,9 +4,7 @@ BattleCommand_StoreEnergy:
 	bit SUBSTATUS_BIDE, a
 	ret z
 
-	ld hl, wPlayerRolloutCount
-	ldh a, [hBattleTurn]
-	and a
+	call BattleCommand_StartLoop_Shared ; ld hl, wPlayerRolloutCount / ldh a, [hBattleTurn] / and a
 	jr z, .check_still_storing_energy
 	ld hl, wEnemyRolloutCount
 .check_still_storing_energy
@@ -46,8 +44,7 @@ BattleCommand_StoreEnergy:
 .not_maxed
 	or b
 	jr nz, .built_up_something
-	ld a, 1
-	ld [wAttackMissed], a
+	call BattleCommand_CheckHit.shared2 ; ld a, 1 / ld [wAttackMissed], a
 .built_up_something
 	xor a
 	ld [hli], a

@@ -1,9 +1,7 @@
 ; Core components of the battle engine.
 
 DoBattle:
-	xor a
-	ld [wBattleParticipantsNotFainted], a
-	ld [wBattleParticipantsIncludingFainted], a
+	call DoBattle_Shared3 ; xor a / ld [wBattleParticipantsNotFainted], a / ld [wBattleParticipantsIncludingFainted], a
 	ld [wBattlePlayerAction], a
 	ld [wBattleEnded], a
 	inc a
@@ -67,16 +65,10 @@ DoBattle:
 	jr .loop2
 
 .alive2
-	ld a, [wCurBattleMon]
-	ld [wLastPlayerMon], a
-	ld a, [wCurPartyMon]
-	ld [wCurBattleMon], a
+	call DoBattle_Shared ; ld a, [wCurBattleMon] / ld [wLastPlayerMon], a / ld a, [wCurPartyMon] / ...
 	inc a
 	ld hl, wPartySpecies - 1
-	ld c, a
-	ld b, 0
-	add hl, bc
-	ld a, [hl]
+	call DoBattle_Shared2 ; ld c, a / ld b, 0 / add hl, bc / ...
 	ld [wCurPartySpecies], a
 	ld [wTempBattleMonSpecies], a
 	hlcoord 1, 5
@@ -117,8 +109,7 @@ DoBattle:
 
 WildFled_EnemyFled_LinkBattleCanceled:
 	call SafeLoadTempTilemapToTilemap
-	ld a, [wBattleResult]
-	and BATTLERESULT_BITMASK
+	call WildFled_EnemyFled_LinkBattleCanceled_Shared ; ld a, [wBattleResult] / and BATTLERESULT_BITMASK
 	add DRAW
 	ld [wBattleResult], a
 	ld a, [wLinkMode]
@@ -126,8 +117,7 @@ WildFled_EnemyFled_LinkBattleCanceled:
 	ld hl, BattleText_WildFled
 	jr z, .print_text
 
-	ld a, [wBattleResult]
-	and BATTLERESULT_BITMASK
+	call WildFled_EnemyFled_LinkBattleCanceled_Shared ; ld a, [wBattleResult] / and BATTLERESULT_BITMASK
 	ld [wBattleResult], a ; WIN
 	ld hl, BattleText_EnemyFled
 
@@ -139,6 +129,7 @@ WildFled_EnemyFled_LinkBattleCanceled:
 	call PlaySFX
 	call SetPlayerTurn
 	callfar DummyPredef38
+.shared2: ; (tools/outline.py)
 	ld a, 1
 	ld [wBattleEnded], a
 	ret
@@ -327,9 +318,7 @@ HandleBerserkGene:
 .go
 	push de
 	push bc
-	callfar GetUserItem
-	ld a, [hl]
-	ld [wNamedObjectIndex], a
+	call HandleBerserkGene_Shared ; callfar GetUserItem / ld a, [hl] / ld [wNamedObjectIndex], a
 	sub BERSERK_GENE
 	pop bc
 	pop de
@@ -519,8 +508,7 @@ CheckContestBattleOver:
 	ld a, [wParkBallsRemaining]
 	and a
 	jr nz, .contest_not_over
-	ld a, [wBattleResult]
-	and BATTLERESULT_BITMASK
+	call WildFled_EnemyFled_LinkBattleCanceled_Shared ; ld a, [wBattleResult] / and BATTLERESULT_BITMASK
 	add DRAW
 	ld [wBattleResult], a
 	scf
@@ -609,8 +597,7 @@ ParsePlayerAction:
 	ld a, [wPlayerMoveStruct + MOVE_EFFECT]
 	cp EFFECT_RAGE
 	jr z, .continue_rage
-	ld hl, wPlayerSubStatus4
-	res SUBSTATUS_RAGE, [hl]
+	call ParsePlayerAction_Shared.shared1 ; ld hl, wPlayerSubStatus4 / res SUBSTATUS_RAGE, [hl]
 	xor a
 	ld [wPlayerRageCounter], a
 
@@ -629,12 +616,7 @@ ParsePlayerAction:
 	res SUBSTATUS_BIDE, [hl]
 
 .locked_in
-	xor a
-	ld [wPlayerFuryCutterCount], a
-	ld [wPlayerProtectCount], a
-	ld [wPlayerRageCounter], a
-	ld hl, wPlayerSubStatus4
-	res SUBSTATUS_RAGE, [hl]
+	call ParsePlayerAction_Shared ; xor a / ld [wPlayerFuryCutterCount], a / ld [wPlayerProtectCount], a / ...
 
 .continue_protect
 	call ParseEnemyAction
@@ -642,12 +624,7 @@ ParsePlayerAction:
 	ret
 
 .reset_rage
-	xor a
-	ld [wPlayerFuryCutterCount], a
-	ld [wPlayerProtectCount], a
-	ld [wPlayerRageCounter], a
-	ld hl, wPlayerSubStatus4
-	res SUBSTATUS_RAGE, [hl]
+	call ParsePlayerAction_Shared ; xor a / ld [wPlayerFuryCutterCount], a / ld [wPlayerProtectCount], a / ...
 	xor a
 	ret
 
@@ -670,10 +647,7 @@ HandleEncore:
 	jr z, .end_player_encore
 	ld hl, wBattleMonPP
 	ld a, [wCurMoveNum]
-	ld c, a
-	ld b, 0
-	add hl, bc
-	ld a, [hl]
+	call DoBattle_Shared2 ; ld c, a / ld b, 0 / add hl, bc / ...
 	and PP_MASK
 	ret nz
 
@@ -695,10 +669,7 @@ HandleEncore:
 	jr z, .end_enemy_encore
 	ld hl, wEnemyMonPP
 	ld a, [wCurEnemyMoveNum]
-	ld c, a
-	ld b, 0
-	add hl, bc
-	ld a, [hl]
+	call DoBattle_Shared2 ; ld c, a / ld b, 0 / add hl, bc / ...
 	and PP_MASK
 	ret nz
 
@@ -725,8 +696,7 @@ TryEnemyFlee:
 	and 1 << FRZ | SLP_MASK
 	jr nz, .Stay
 
-	ld a, [wTempEnemyMonSpecies]
-	ld de, 1
+	call TryEnemyFlee_Shared ; ld a, [wTempEnemyMonSpecies] / ld de, 1
 	ld hl, AlwaysFleeMons
 	call IsInArray
 	jr c, .Flee
@@ -737,8 +707,7 @@ TryEnemyFlee:
 	jr nc, .Stay
 
 	push bc
-	ld a, [wTempEnemyMonSpecies]
-	ld de, 1
+	call TryEnemyFlee_Shared ; ld a, [wTempEnemyMonSpecies] / ld de, 1
 	ld hl, OftenFleeMons
 	call IsInArray
 	pop bc
@@ -748,8 +717,7 @@ TryEnemyFlee:
 	cp 10 percent + 1
 	jr nc, .Stay
 
-	ld a, [wTempEnemyMonSpecies]
-	ld de, 1
+	call TryEnemyFlee_Shared ; ld a, [wTempEnemyMonSpecies] / ld de, 1
 	ld hl, SometimesFleeMons
 	call IsInArray
 	jr c, .Flee
@@ -1062,9 +1030,7 @@ ResidualDamage:
 	call StdBattleTextbox
 
 .not_cursed
-	ld hl, wBattleMonHP
-	ldh a, [hBattleTurn]
-	and a
+	call ResidualDamage_Shared ; ld hl, wBattleMonHP / ldh a, [hBattleTurn] / and a
 	jr z, .check_fainted
 	ld hl, wEnemyMonHP
 
@@ -1195,10 +1161,7 @@ HandleWrap:
 	jr nz, .skip_anim
 
 	call SwitchTurnCore
-	xor a
-	ld [wBattleAfterAnim], a
-	ld [wFXAnimID + 1], a
-	predef PlayBattleAnim
+	call HandleWrap_Shared ; xor a / ld [wBattleAfterAnim], a / ld [wFXAnimID + 1], a / ...
 	call SwitchTurnCore
 
 .skip_anim
@@ -1234,17 +1197,13 @@ HandleLeftovers:
 	call SetPlayerTurn
 .do_it
 
-	callfar GetUserItem
-	ld a, [hl]
-	ld [wNamedObjectIndex], a
+	call HandleBerserkGene_Shared ; callfar GetUserItem / ld a, [hl] / ld [wNamedObjectIndex], a
 	call GetItemName
 	ld a, b
 	cp HELD_LEFTOVERS
 	ret nz
 
-	ld hl, wBattleMonHP
-	ldh a, [hBattleTurn]
-	and a
+	call ResidualDamage_Shared ; ld hl, wBattleMonHP / ldh a, [hBattleTurn] / and a
 	jr z, .got_hp
 	ld hl, wEnemyMonHP
 
@@ -1380,9 +1339,7 @@ HandleMysteryberry:
 	add b
 	ld [de], a
 .skip_checks
-	callfar GetUserItem
-	ld a, [hl]
-	ld [wNamedObjectIndex], a
+	call HandleBerserkGene_Shared ; callfar GetUserItem / ld a, [hl] / ld [wNamedObjectIndex], a
 	xor a
 	ld [hl], a
 	call GetPartymonItem
@@ -1705,10 +1662,7 @@ HandleWeather:
 
 .PrintWeatherMessage:
 	ld a, [wBattleWeather]
-	dec a
-	ld c, a
-	ld b, 0
-	add hl, bc
+	call HandleWeather_Shared ; dec a / ld c, a / ld b, 0 / ...
 	add hl, bc
 	ld a, [hli]
 	ld h, [hl]
@@ -1741,9 +1695,7 @@ SubtractHPFromUser:
 	jp UpdateHPBarBattleHuds
 
 SubtractHP:
-	ld hl, wBattleMonHP
-	ldh a, [hBattleTurn]
-	and a
+	call ResidualDamage_Shared ; ld hl, wBattleMonHP / ldh a, [hBattleTurn] / and a
 	jr z, .ok
 	ld hl, wEnemyMonHP
 .ok
@@ -1751,10 +1703,7 @@ SubtractHP:
 	ld a, [hl]
 	ld [wHPBuffer2], a
 	sub c
-	ld [hld], a
-	ld [wHPBuffer3], a
-	ld a, [hl]
-	ld [wHPBuffer2 + 1], a
+	call SubtractHP_Shared ; ld [hld], a / ld [wHPBuffer3], a / ld a, [hl] / ...
 	sbc b
 	ld [hl], a
 	ld [wHPBuffer3 + 1], a
@@ -1881,10 +1830,7 @@ RestoreHP:
 	ld a, [hl]
 	ld [wHPBuffer2], a
 	add c
-	ld [hld], a
-	ld [wHPBuffer3], a
-	ld a, [hl]
-	ld [wHPBuffer2 + 1], a
+	call SubtractHP_Shared ; ld [hld], a / ld [wHPBuffer3], a / ld a, [hl] / ...
 	adc b
 	ld [hli], a
 	ld [wHPBuffer3 + 1], a
@@ -1931,9 +1877,7 @@ UpdateHPBar:
 
 HandleEnemyMonFaint:
 	call FaintEnemyPokemon
-	ld hl, wBattleMonHP
-	ld a, [hli]
-	or [hl]
+	call HandleEnemyMonFaint_Shared ; ld hl, wBattleMonHP / ld a, [hli] / or [hl]
 	call z, FaintYourPokemon
 	xor a
 	ld [wWhichMonFaintedFirst], a
@@ -1943,9 +1887,7 @@ HandleEnemyMonFaint:
 	and a
 	jp z, LostBattle
 
-	ld hl, wBattleMonHP
-	ld a, [hli]
-	or [hl]
+	call HandleEnemyMonFaint_Shared ; ld hl, wBattleMonHP / ld a, [hli] / or [hl]
 	call nz, UpdatePlayerHUD
 
 	ld a, $1
@@ -1957,37 +1899,29 @@ HandleEnemyMonFaint:
 	dec a
 	jr nz, .trainer
 
-	ld a, 1
-	ld [wBattleEnded], a
-	ret
+	jp WildFled_EnemyFled_LinkBattleCanceled.shared2 ; ld a, 1 / ld [wBattleEnded], a
 
 .trainer
 	call CheckEnemyTrainerDefeated
 	jp z, WinTrainerBattle
 
-	ld hl, wBattleMonHP
-	ld a, [hli]
-	or [hl]
+	call HandleEnemyMonFaint_Shared ; ld hl, wBattleMonHP / ld a, [hli] / or [hl]
 	jr nz, .player_mon_not_fainted
 
 	call AskUseNextPokemon
 	jr nc, .dont_flee
 
-	ld a, 1
-	ld [wBattleEnded], a
-	ret
+	jp WildFled_EnemyFled_LinkBattleCanceled.shared2 ; ld a, 1 / ld [wBattleEnded], a
 
 .dont_flee
 	call ForcePlayerMonChoice
-	ld a, BATTLEPLAYERACTION_USEITEM
-	ld [wBattlePlayerAction], a
+	call HandleEnemyMonFaint_Shared2 ; ld a, BATTLEPLAYERACTION_USEITEM / ld [wBattlePlayerAction], a
 	call HandleEnemySwitch
 	jp z, WildFled_EnemyFled_LinkBattleCanceled
 	jr DoubleSwitch
 
 .player_mon_not_fainted
-	ld a, BATTLEPLAYERACTION_USEITEM
-	ld [wBattlePlayerAction], a
+	call HandleEnemyMonFaint_Shared2 ; ld a, BATTLEPLAYERACTION_USEITEM / ld [wBattlePlayerAction], a
 	call HandleEnemySwitch
 	jp z, WildFled_EnemyFled_LinkBattleCanceled
 	jp Battle_EnemyFirst.tailmerge_856 ; same as there (tools/tailmerge.py)
@@ -1997,8 +1931,7 @@ DoubleSwitch:
 	cp USING_EXTERNAL_CLOCK
 	jr z, .player_1
 	call ClearSprites
-	hlcoord 1, 0
-	lb bc, 4, 10
+	call DoubleSwitch_Shared ; hlcoord 1, 0 / lb bc, 4, 10
 	call ClearBox
 	call PlayerPartyMonEntrance
 	ld a, $1
@@ -2051,9 +1984,7 @@ UpdateBattleStateAndExperienceAfterEnemyFaint:
 	ld [wBattleLowHealthAlarm], a
 
 .trainer
-	ld hl, wBattleMonHP
-	ld a, [hli]
-	or [hl]
+	call HandleEnemyMonFaint_Shared ; ld hl, wBattleMonHP / ld a, [hli] / or [hl]
 	jr nz, .player_mon_did_not_faint
 	ld a, [wWhichMonFaintedFirst]
 	and a
@@ -2070,8 +2001,7 @@ UpdateBattleStateAndExperienceAfterEnemyFaint:
 	call z, PlayVictoryMusic
 	call EmptyBattleTextbox
 	call LoadTilemapToTempTilemap
-	ld a, [wBattleResult]
-	and BATTLERESULT_BITMASK
+	call WildFled_EnemyFled_LinkBattleCanceled_Shared ; ld a, [wBattleResult] / and BATTLERESULT_BITMASK
 	ld [wBattleResult], a ; WIN
 	call IsAnyMonHoldingExpShare
 	jr z, .skip_exp
@@ -2172,13 +2102,10 @@ StopDangerSound:
 FaintYourPokemon:
 	call StopDangerSound
 	call WaitSFX
-	ld a, $f0
-	ld [wCryTracks], a
-	ld a, [wBattleMonSpecies]
+	call FaintYourPokemon_Shared2 ; ld a, $f0 / ld [wCryTracks], a / ld a, [wBattleMonSpecies]
 	call PlayStereoCry
 	call PlayerMonFaintedAnimation
-	hlcoord 9, 7
-	lb bc, 5, 11
+	call FaintYourPokemon_Shared ; hlcoord 9, 7 / lb bc, 5, 11
 	call ClearBox
 	ld hl, BattleText_MonFainted
 	jp StdBattleTextbox
@@ -2190,8 +2117,7 @@ FaintEnemyPokemon:
 	call EnemyMonFaintedAnimation
 	ld de, SFX_FAINT
 	call PlaySFX
-	hlcoord 1, 0
-	lb bc, 4, 10
+	call DoubleSwitch_Shared ; hlcoord 1, 0 / lb bc, 4, 10
 	call ClearBox
 	ld hl, BattleText_EnemyMonFainted
 	jp StdBattleTextbox
@@ -2233,9 +2159,7 @@ HandleEnemySwitch:
 	call SafeLoadTempTilemapToTilemap
 
 .not_linked
-	ld hl, wBattleMonHP
-	ld a, [hli]
-	or [hl]
+	call HandleEnemyMonFaint_Shared ; ld hl, wBattleMonHP / ld a, [hli] / or [hl]
 	ld a, $0
 	jr nz, EnemyPartyMonEntrance
 	inc a
@@ -2280,8 +2204,7 @@ WinTrainerBattle:
 	ld hl, BattleText_EnemyWasDefeated
 	call StdBattleTextbox
 
-	ld a, [wLinkMode]
-	cp LINK_COLOSSEUM
+	call WinTrainerBattle_Shared ; ld a, [wLinkMode] / cp LINK_COLOSSEUM
 	ret z
 
 	call BattleWinSlideInEnemyTrainerFrontpic
@@ -2342,10 +2265,7 @@ WinTrainerBattle:
 	and MOM_SAVING_MONEY_MASK
 	jr z, .KeepItAll
 	ld hl, .SentToMomTexts
-	dec a
-	ld c, a
-	ld b, 0
-	add hl, bc
+	call HandleWeather_Shared ; dec a / ld c, a / ld b, 0 / ...
 	add hl, bc
 	ld a, [hli]
 	ld h, [hl]
@@ -2373,12 +2293,9 @@ WinTrainerBattle:
 
 .DoubleReward:
 	ld hl, wBattleReward + 2
-	sla [hl]
-	dec hl
-	rl [hl]
-	dec hl
-	rl [hl]
+	call WinTrainerBattle_Shared2 ; sla [hl] / dec hl / rl [hl] / ...
 	ret nc
+.shared3: ; (tools/outline.py)
 	ld a, $ff
 	ld [hli], a
 	ld [hli], a
@@ -2393,6 +2310,7 @@ WinTrainerBattle:
 
 .CheckMaxedOutMomMoney:
 	ld hl, wMomsMoney + 2
+.shared4: ; (tools/outline.py)
 	ld a, [hld]
 	cp LOW(MAX_MONEY)
 	ld a, [hld]
@@ -2414,12 +2332,7 @@ AddBattleMoneyToAccount:
 	dec c
 	jr nz, .loop
 	pop hl
-	ld a, [hld]
-	cp LOW(MAX_MONEY)
-	ld a, [hld]
-	sbc HIGH(MAX_MONEY) ; mid
-	ld a, [hl]
-	sbc HIGH(MAX_MONEY >> 8)
+	call WinTrainerBattle.shared4 ; ld a, [hld] / cp LOW(MAX_MONEY) / ld a, [hld] / ...
 	ret c
 	ld [hl], HIGH(MAX_MONEY >> 8)
 	inc hl
@@ -2481,9 +2394,7 @@ INCLUDE "data/trainers/leaders.asm"
 
 HandlePlayerMonFaint:
 	call FaintYourPokemon
-	ld hl, wEnemyMonHP
-	ld a, [hli]
-	or [hl]
+	call SwitchPlayerMon.shared1 ; ld hl, wEnemyMonHP / ld a, [hli] / or [hl]
 	call z, FaintEnemyPokemon
 	ld a, $1
 	ld [wWhichMonFaintedFirst], a
@@ -2492,14 +2403,13 @@ HandlePlayerMonFaint:
 	ld a, d
 	and a
 	jp z, LostBattle
-	ld hl, wEnemyMonHP
-	ld a, [hli]
-	or [hl]
+	call SwitchPlayerMon.shared1 ; ld hl, wEnemyMonHP / ld a, [hli] / or [hl]
 	jr nz, .notfainted
 	call UpdateBattleStateAndExperienceAfterEnemyFaint
 	ld a, [wBattleMode]
 	dec a
 	jr nz, .trainer
+.shared1: ; (tools/outline.py)
 	ld a, $1
 	ld [wBattleEnded], a
 	ret
@@ -2511,25 +2421,19 @@ HandlePlayerMonFaint:
 .notfainted
 	call AskUseNextPokemon
 	jr nc, .switch
-	ld a, $1
-	ld [wBattleEnded], a
-	ret
+	jr HandlePlayerMonFaint.shared1 ; ld a, $1 / ld [wBattleEnded], a
 
 .switch
 	call ForcePlayerMonChoice
 	ret nz
-	ld a, BATTLEPLAYERACTION_USEITEM
-	ld [wBattlePlayerAction], a
+	call HandleEnemyMonFaint_Shared2 ; ld a, BATTLEPLAYERACTION_USEITEM / ld [wBattlePlayerAction], a
 	call HandleEnemySwitch
 	jp z, WildFled_EnemyFled_LinkBattleCanceled
 	jp DoubleSwitch
 
 UpdateFaintedPlayerMon:
 	ld a, [wCurBattleMon]
-	ld c, a
-	ld hl, wBattleParticipantsNotFainted
-	ld b, RESET_FLAG
-	predef SmallFarFlagAction
+	call UpdateFaintedPlayerMon_Shared2 ; ld c, a / ld hl, wBattleParticipantsNotFainted / ld b, RESET_FLAG / ...
 	ld hl, wEnemySubStatus3
 	res SUBSTATUS_IN_LOOP, [hl]
 	xor a
@@ -2550,11 +2454,9 @@ UpdateFaintedPlayerMon:
 	ld c, HAPPINESS_BEATENBYSTRONGFOE
 
 .got_param
-	ld a, [wCurBattleMon]
-	ld [wCurPartyMon], a
+	call UpdateFaintedPlayerMon_Shared ; ld a, [wCurBattleMon] / ld [wCurPartyMon], a
 	callfar ChangeHappiness
-	ld a, [wBattleResult]
-	and BATTLERESULT_BITMASK
+	call WildFled_EnemyFled_LinkBattleCanceled_Shared ; ld a, [wBattleResult] / and BATTLERESULT_BITMASK
 	add LOSE
 	ld [wBattleResult], a
 	ld a, [wWhichMonFaintedFirst]
@@ -2596,19 +2498,15 @@ ForcePlayerMonChoice:
 	call LoadStandardMenuHeader
 	call SetUpBattlePartyMenu
 	call ForcePickPartyMonInBattle
-	ld a, [wLinkMode]
-	cp LINK_COLOSSEUM
+	call WinTrainerBattle_Shared ; ld a, [wLinkMode] / cp LINK_COLOSSEUM
 	jr nz, .skip_link
-	ld a, BATTLEPLAYERACTION_USEITEM
-	ld [wBattlePlayerAction], a
+	call HandleEnemyMonFaint_Shared2 ; ld a, BATTLEPLAYERACTION_USEITEM / ld [wBattlePlayerAction], a
 	call LinkBattleSendReceiveAction
 
 .skip_link
 	xor a ; BATTLEPLAYERACTION_USEMOVE
 	ld [wBattlePlayerAction], a
-	ld hl, wEnemyMonHP
-	ld a, [hli]
-	or [hl]
+	call SwitchPlayerMon.shared1 ; ld hl, wEnemyMonHP / ld a, [hli] / or [hl]
 	jr nz, .send_out_pokemon
 
 	call ClearSprites
@@ -2624,10 +2522,7 @@ ForcePlayerMonChoice:
 
 .send_out_pokemon
 	call ClearSprites
-	ld a, [wCurBattleMon]
-	ld [wLastPlayerMon], a
-	ld a, [wCurPartyMon]
-	ld [wCurBattleMon], a
+	call DoBattle_Shared ; ld a, [wCurBattleMon] / ld [wLastPlayerMon], a / ld a, [wCurPartyMon] / ...
 	call AddBattleParticipant
 	call InitBattleMon
 	call ResetPlayerStatLevels
@@ -2650,10 +2545,7 @@ ForcePlayerMonChoice:
 	ret
 
 PlayerPartyMonEntrance:
-	ld a, [wCurBattleMon]
-	ld [wLastPlayerMon], a
-	ld a, [wCurPartyMon]
-	ld [wCurBattleMon], a
+	call DoBattle_Shared ; ld a, [wCurBattleMon] / ld [wLastPlayerMon], a / ld a, [wCurPartyMon] / ...
 	call AddBattleParticipant
 	call InitBattleMon
 	call ResetPlayerStatLevels
@@ -2669,6 +2561,7 @@ PlayerPartyMonEntrance:
 
 SetUpBattlePartyMenu:
 	call ClearBGPalettes
+.shared1: ; (tools/outline.py)
 	farcall LoadPartyMenuGFX
 	farcall InitPartyMenuWithCancel
 	farcall InitPartyMenuGFX
@@ -2738,8 +2631,7 @@ ForcePickSwitchMonInBattle:
 	ret
 
 LostBattle:
-	ld a, 1
-	ld [wBattleEnded], a
+	call WildFled_EnemyFled_LinkBattleCanceled.shared2 ; ld a, 1 / ld [wBattleEnded], a
 	ld a, [wBattleType]
 	cp BATTLETYPE_CANLOSE
 	jr nz, .not_canlose
@@ -2776,8 +2668,7 @@ LostBattle:
 	call CheckEnemyTrainerDefeated
 	jr nz, .not_tied
 	ld hl, TiedAgainstText
-	ld a, [wBattleResult]
-	and BATTLERESULT_BITMASK
+	call WildFled_EnemyFled_LinkBattleCanceled_Shared ; ld a, [wBattleResult] / and BATTLERESULT_BITMASK
 	add DRAW
 	ld [wBattleResult], a
 	jr .text
@@ -2932,9 +2823,7 @@ EnemySwitch:
 	pop af
 	ret c
 	; If we're here, then we're switching too
-	xor a
-	ld [wBattleParticipantsNotFainted], a
-	ld [wBattleParticipantsIncludingFainted], a
+	call DoBattle_Shared3 ; xor a / ld [wBattleParticipantsNotFainted], a / ld [wBattleParticipantsIncludingFainted], a
 	ld [wBattlePlayerAction], a
 	inc a
 	ld [wEnemyIsSwitching], a
@@ -2992,8 +2881,7 @@ CheckWhetherSwitchmonIsPredetermined:
 ResetEnemyBattleVars:
 ; and draw empty Textbox
 	xor a
-	ld [wLastPlayerCounterMove], a
-	ld [wLastEnemyCounterMove], a
+	call ResetEnemyBattleVars_Shared ; ld [wLastPlayerCounterMove], a / ld [wLastEnemyCounterMove], a
 	ld [wLastEnemyMove], a
 	ld [wCurEnemyMove], a
 	dec a
@@ -3007,9 +2895,7 @@ ResetEnemyBattleVars:
 	jp LoadStandardMenuHeader
 
 ResetBattleParticipants:
-	xor a
-	ld [wBattleParticipantsNotFainted], a
-	ld [wBattleParticipantsIncludingFainted], a
+	call DoBattle_Shared3 ; xor a / ld [wBattleParticipantsNotFainted], a / ld [wBattleParticipantsIncludingFainted], a
 AddBattleParticipant:
 	ld a, [wCurBattleMon]
 	ld c, a
@@ -3027,10 +2913,7 @@ FindMonInOTPartyToSwitchIntoBattle:
 	ld [wEnemyEffectivenessVsPlayerMons], a
 	ld [wPlayerEffectivenessVsEnemyMons], a
 .loop
-	ld hl, wEnemyEffectivenessVsPlayerMons
-	sla [hl]
-	inc hl ; wPlayerEffectivenessVsEnemyMons
-	sla [hl]
+	call FindMonInOTPartyToSwitchIntoBattle_Shared ; ld hl, wEnemyEffectivenessVsPlayerMons / sla [hl] / inc hl / ...
 	inc b
 	ld a, [wOTPartyCount]
 	cp b
@@ -3101,10 +2984,7 @@ IsThePlayerMonTypesEffectiveAgainstOTMon:
 	ld hl, wOTPartyCount
 	ld a, b
 	inc a
-	ld c, a
-	ld b, 0
-	add hl, bc
-	ld a, [hl]
+	call DoBattle_Shared2 ; ld c, a / ld b, 0 / add hl, bc / ...
 	dec a
 	ld hl, BaseData + BASE_ROM_TYPES
 	ld bc, BASE_ROM_DATA_SIZE
@@ -3144,10 +3024,7 @@ IsThePlayerMonTypesEffectiveAgainstOTMon:
 
 ScoreMonTypeMatchups:
 .loop1
-	ld hl, wEnemyEffectivenessVsPlayerMons
-	sla [hl]
-	inc hl ; wPlayerEffectivenessVsEnemyMons
-	sla [hl]
+	call FindMonInOTPartyToSwitchIntoBattle_Shared ; ld hl, wEnemyEffectivenessVsPlayerMons / sla [hl] / inc hl / ...
 	jr nc, .loop1
 	ld a, [wOTPartyCount]
 	ld b, a
@@ -3215,10 +3092,7 @@ LoadEnemyMonToSwitchTo:
 	ld a, [wCurPartyMon]
 	inc a
 	ld hl, wOTPartyCount
-	ld c, a
-	ld b, 0
-	add hl, bc
-	ld a, [hl]
+	call DoBattle_Shared2 ; ld c, a / ld b, 0 / add hl, bc / ...
 	ld [wTempEnemyMonSpecies], a
 	ld [wCurPartySpecies], a
 	call LoadEnemyMon
@@ -3257,8 +3131,7 @@ CheckWhetherToAskSwitch:
 	jr nz, .return_nc
 	ld a, [wCurPartyMon]
 	push af
-	ld a, [wCurBattleMon]
-	ld [wCurPartyMon], a
+	call UpdateFaintedPlayerMon_Shared ; ld a, [wCurBattleMon] / ld [wCurPartyMon], a
 	farcall CheckCurPartyMonFainted
 	pop bc
 	ld a, b
@@ -3285,10 +3158,7 @@ OfferSwitch:
 	call SetUpBattlePartyMenu
 	call PickSwitchMonInBattle
 	jr c, .canceled_switch
-	ld a, [wCurBattleMon]
-	ld [wLastPlayerMon], a
-	ld a, [wCurPartyMon]
-	ld [wCurBattleMon], a
+	call DoBattle_Shared ; ld a, [wCurBattleMon] / ld [wLastPlayerMon], a / ld a, [wCurPartyMon] / ...
 	call ClearPalettes
 	call DelayFrame
 	call _LoadHPBar
@@ -3316,8 +3186,7 @@ ClearEnemyMonBox:
 	ldh [hBGMapMode], a
 	call ExitMenu
 	call ClearSprites
-	hlcoord 1, 0
-	lb bc, 4, 10
+	call DoubleSwitch_Shared ; hlcoord 1, 0 / lb bc, 4, 10
 	call ClearBox
 	call WaitBGMap
 	jp FinishBattleAnim
@@ -3329,12 +3198,10 @@ ShowBattleTextEnemySentOut:
 
 ShowSetEnemyMonAndSendOutAnimation:
 	ld a, [wTempEnemyMonSpecies]
-	ld [wCurPartySpecies], a
-	ld [wCurSpecies], a
+	call ShowSetEnemyMonAndSendOutAnimation_Shared2 ; ld [wCurPartySpecies], a / ld [wCurSpecies], a
 	call GetBaseData
 	ld a, OTPARTYMON
-	ld [wMonType], a
-	predef CopyMonToTempMon
+	call ShowSetEnemyMonAndSendOutAnimation_Shared3 ; ld [wMonType], a / predef CopyMonToTempMon
 	call GetEnemyMonFrontpic
 
 	xor a
@@ -3347,15 +3214,11 @@ ShowSetEnemyMonAndSendOutAnimation:
 	call BattleCheckEnemyShininess
 	jr nc, .cry_no_anim
 
-	ld a, 1 ; shiny anim
-	ld [wBattleAnimParam], a
-	ld de, ANIM_SEND_OUT_MON
+	call ShowSetEnemyMonAndSendOutAnimation_Shared ; ld a, 1 / ld [wBattleAnimParam], a / ld de, ANIM_SEND_OUT_MON
 	call Call_PlayBattleAnim
 
 .cry_no_anim
-	ld a, $f
-	ld [wCryTracks], a
-	ld a, [wTempEnemyMonSpecies]
+	call ShowSetEnemyMonAndSendOutAnimation_Shared4 ; ld a, $f / ld [wCryTracks], a / ld a, [wTempEnemyMonSpecies]
 	call PlayStereoCry
 	call UpdateEnemyHUD
 .tailmerge_3366: ; (tools/tailmerge.py)
@@ -3365,8 +3228,7 @@ ShowSetEnemyMonAndSendOutAnimation:
 
 NewEnemyMonStatus:
 	xor a
-	ld [wLastPlayerCounterMove], a
-	ld [wLastEnemyCounterMove], a
+	call ResetEnemyBattleVars_Shared ; ld [wLastPlayerCounterMove], a / ld [wLastEnemyCounterMove], a
 	ld [wLastEnemyMove], a
 	ld hl, wEnemySubStatus1
 rept 4
@@ -3426,10 +3288,7 @@ CheckIfCurPartyMonIsFitToFight:
 	jr nz, .finish_fail
 	ld hl, wPartySpecies
 	ld a, [wCurPartyMon]
-	ld c, a
-	ld b, 0
-	add hl, bc
-	ld a, [hl]
+	call DoBattle_Shared2 ; ld c, a / ld b, 0 / add hl, bc / ...
 	cp EGG
 	ld hl, BattleText_AnEGGCantBattle
 	jr z, .print_textbox
@@ -3514,17 +3373,12 @@ TryToRunAwayFromBattle:
 	ld a, 32
 	ldh [hMultiplier], a
 	call Multiply
-	ldh a, [hProduct + 2]
-	ldh [hDividend + 0], a
-	ldh a, [hProduct + 3]
-	ldh [hDividend + 1], a
+	call TryToRunAwayFromBattle_Shared2 ; ldh a, [hProduct + 2] / ldh [hDividend + 0], a / ldh a, [hProduct + 3] / ...
 	ldh a, [hEnemyMonSpeed + 0]
 	ld b, a
 	ldh a, [hEnemyMonSpeed + 1]
 	srl b
-	rr a
-	srl b
-	rr a
+	call TryToRunAwayFromBattle_Shared ; rr a / srl b / rr a
 	and a
 	jr z, .can_escape
 	ldh [hDivisor], a
@@ -3551,8 +3405,7 @@ TryToRunAwayFromBattle:
 	ldh a, [hQuotient + 3]
 	cp b
 	jr nc, .can_escape
-	ld a, BATTLEPLAYERACTION_USEITEM
-	ld [wBattlePlayerAction], a
+	call HandleEnemyMonFaint_Shared2 ; ld a, BATTLEPLAYERACTION_USEITEM / ld [wBattlePlayerAction], a
 	ld hl, BattleText_CantEscape2
 	jr .print_inescapable_text
 
@@ -3595,8 +3448,7 @@ TryToRunAwayFromBattle:
 	dec a
 .fled
 	ld b, a
-	ld a, [wBattleResult]
-	and BATTLERESULT_BITMASK
+	call WildFled_EnemyFled_LinkBattleCanceled_Shared ; ld a, [wBattleResult] / and BATTLERESULT_BITMASK
 	add b
 	ld [wBattleResult], a
 	call StopDangerSound
@@ -3631,8 +3483,7 @@ InitBattleMon:
 	call CopyBytes
 	ld a, [wBattleMonSpecies]
 	ld [wTempBattleMonSpecies], a
-	ld [wCurPartySpecies], a
-	ld [wCurSpecies], a
+	call ShowSetEnemyMonAndSendOutAnimation_Shared2 ; ld [wCurPartySpecies], a / ld [wCurSpecies], a
 	call GetBaseData
 	ld a, [wBaseType1]
 	ld [wBattleMonType1], a
@@ -3675,8 +3526,7 @@ GetPartyMonDVs:
 
 GetEnemyMonDVs:
 	ld hl, wEnemyMonDVs
-	ld a, [wEnemySubStatus5]
-	bit SUBSTATUS_TRANSFORMED, a
+	call GetEnemyMonDVs_Shared ; ld a, [wEnemySubStatus5] / bit SUBSTATUS_TRANSFORMED, a
 	ret z
 	ld hl, wEnemyBackupDVs
 	ld a, [wBattleMode]
@@ -3730,32 +3580,24 @@ InitEnemyMon:
 	call ApplyStatusEffectOnEnemyStats
 	ld hl, wBaseType1
 	ld de, wEnemyMonType1
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	call InitEnemyMon_Shared ; ld a, [hli] / ld [de], a / inc de / ...
 	; The enemy mon's base Sp. Def isn't needed since its base
 	; Sp. Atk is also used to calculate Sp. Def stat experience.
-	ld hl, wBaseStats
-	ld de, wEnemyMonBaseStats
-	ld b, NUM_STATS - 1
+	call InitEnemyMon_Shared2 ; ld hl, wBaseStats / ld de, wEnemyMonBaseStats / ld b, NUM_STATS - 1
 .loop
 	ld a, [hli]
 	ld [de], a
 	inc de
 	dec b
 	jr nz, .loop
+.shared3: ; (tools/outline.py)
 	ld a, [wCurPartyMon]
 	ld [wCurOTMon], a
 	ret
 
 SwitchPlayerMon:
 	call ClearSprites
-	ld a, [wCurBattleMon]
-	ld [wLastPlayerMon], a
-	ld a, [wCurPartyMon]
-	ld [wCurBattleMon], a
+	call DoBattle_Shared ; ld a, [wCurBattleMon] / ld [wLastPlayerMon], a / ld a, [wCurPartyMon] / ...
 	call AddBattleParticipant
 	call InitBattleMon
 	call ResetPlayerStatLevels
@@ -3764,6 +3606,7 @@ SwitchPlayerMon:
 	call SendOutPlayerMon
 	call EmptyBattleTextbox
 	call LoadTilemapToTempTilemap
+.shared1: ; (tools/outline.py)
 	ld hl, wEnemyMonHP
 	ld a, [hli]
 	or [hl]
@@ -3785,8 +3628,7 @@ SendOutPlayerMon:
 	ld [wCurMoveNum], a
 	ld [wTypeModifier], a
 	ld [wPlayerMoveStruct + MOVE_ANIM], a
-	ld [wLastPlayerCounterMove], a
-	ld [wLastEnemyCounterMove], a
+	call ResetEnemyBattleVars_Shared ; ld [wLastPlayerCounterMove], a / ld [wLastEnemyCounterMove], a
 	ld [wLastPlayerMove], a
 	call CheckAmuletCoin
 	call FinishBattleAnim
@@ -3795,14 +3637,11 @@ SendOutPlayerMon:
 	call SetPlayerTurn
 	xor a
 	ld [wBattleAfterAnim], a
-	ld [wBattleAnimParam], a
-	ld de, ANIM_SEND_OUT_MON
+	call ShowSetEnemyMonAndSendOutAnimation_Shared.shared1 ; ld [wBattleAnimParam], a / ld de, ANIM_SEND_OUT_MON
 	call Call_PlayBattleAnim
 	call BattleCheckPlayerShininess
 	jr nc, .not_shiny
-	ld a, 1
-	ld [wBattleAnimParam], a
-	ld de, ANIM_SEND_OUT_MON
+	call ShowSetEnemyMonAndSendOutAnimation_Shared ; ld a, 1 / ld [wBattleAnimParam], a / ld de, ANIM_SEND_OUT_MON
 	call Call_PlayBattleAnim
 
 .not_shiny
@@ -3815,8 +3654,7 @@ SendOutPlayerMon:
 
 NewBattleMonStatus:
 	xor a
-	ld [wLastPlayerCounterMove], a
-	ld [wLastEnemyCounterMove], a
+	call ResetEnemyBattleVars_Shared ; ld [wLastPlayerCounterMove], a / ld [wLastEnemyCounterMove], a
 	ld [wLastPlayerMove], a
 	ld hl, wPlayerSubStatus1
 rept 4
@@ -3925,28 +3763,19 @@ PursuitSwitch:
 
 	ld a, [wLastPlayerMon]
 	call UpdateBattleMon
-	ld hl, wBattleMonHP
-	ld a, [hli]
-	or [hl]
+	call HandleEnemyMonFaint_Shared ; ld hl, wBattleMonHP / ld a, [hli] / or [hl]
 	jr nz, .done
 
-	ld a, $f0
-	ld [wCryTracks], a
-	ld a, [wBattleMonSpecies]
+	call FaintYourPokemon_Shared2 ; ld a, $f0 / ld [wCryTracks], a / ld a, [wBattleMonSpecies]
 	call PlayStereoCry
 	ld a, [wLastPlayerMon]
-	ld c, a
-	ld hl, wBattleParticipantsNotFainted
-	ld b, RESET_FLAG
-	predef SmallFarFlagAction
+	call UpdateFaintedPlayerMon_Shared2 ; ld c, a / ld hl, wBattleParticipantsNotFainted / ld b, RESET_FLAG / ...
 	call PlayerMonFaintedAnimation
 	ld hl, BattleText_MonFainted
 	jr .done_fainted
 
 .check_enemy_fainted
-	ld hl, wEnemyMonHP
-	ld a, [hli]
-	or [hl]
+	call SwitchPlayerMon.shared1 ; ld hl, wEnemyMonHP / ld a, [hli] / or [hl]
 	jr nz, .done
 
 	ld de, SFX_KINESIS
@@ -4103,10 +3932,7 @@ ItemRecoveryAnim:
 	ld a, RECOVER
 	ld [wFXAnimID], a
 	call SwitchTurnCore
-	xor a
-	ld [wBattleAfterAnim], a
-	ld [wFXAnimID + 1], a
-	predef PlayBattleAnim
+	call HandleWrap_Shared ; xor a / ld [wBattleAfterAnim], a / ld [wFXAnimID + 1], a / ...
 	call SwitchTurnCore
 	pop bc
 	pop de
@@ -4327,8 +4153,7 @@ DrawPlayerHUD:
 	ldh [hBGMapMode], a
 
 	; Clear the area
-	hlcoord 9, 7
-	lb bc, 5, 11
+	call FaintYourPokemon_Shared ; hlcoord 9, 7 / lb bc, 5, 11
 	call ClearBox
 
 	farcall DrawPlayerHUDBorder
@@ -4364,9 +4189,7 @@ UpdatePlayerHPPal:
 	jp UpdateHPPal
 
 CheckDanger:
-	ld hl, wBattleMonHP
-	ld a, [hli]
-	or [hl]
+	call HandleEnemyMonFaint_Shared ; ld hl, wBattleMonHP / ld a, [hli] / or [hl]
 	jr z, .no_danger
 	ld a, [wBattleLowHealthAlarm]
 	and a
@@ -4399,11 +4222,7 @@ PrintPlayerHUD:
 	ld hl, wPartyMon1DVs
 	call GetPartyLocation
 	ld de, wTempMonDVs
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	call InitEnemyMon_Shared ; ld a, [hli] / ld [de], a / inc de / ...
 	ld hl, wBattleMonLevel
 	ld de, wTempMonLevel
 	ld bc, wTempMonStructEnd - wTempMonLevel
@@ -4412,17 +4231,13 @@ PrintPlayerHUD:
 	ld hl, wPartyMon1Species
 	call GetPartyLocation
 	ld a, [hl]
-	ld [wCurPartySpecies], a
-	ld [wCurSpecies], a
+	call ShowSetEnemyMonAndSendOutAnimation_Shared2 ; ld [wCurPartySpecies], a / ld [wCurSpecies], a
 	call GetBaseData
 
 	pop hl
 	dec hl
 
-	ld a, TEMPMON
-	ld [wMonType], a
-	callfar GetGender
-	ld a, ' '
+	call PrintPlayerHUD_Shared ; ld a, TEMPMON / ld [wMonType], a / callfar GetGender / ...
 	jr c, .got_gender_char
 	ld a, '♂'
 	jr nz, .got_gender_char
@@ -4484,21 +4299,13 @@ DrawEnemyHUD:
 
 	ld hl, wEnemyMonDVs
 	ld de, wTempMonDVs
-	ld a, [wEnemySubStatus5]
-	bit SUBSTATUS_TRANSFORMED, a
+	call GetEnemyMonDVs_Shared ; ld a, [wEnemySubStatus5] / bit SUBSTATUS_TRANSFORMED, a
 	jr z, .ok
 	ld hl, wEnemyBackupDVs
 .ok
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	call InitEnemyMon_Shared ; ld a, [hli] / ld [de], a / inc de / ...
 
-	ld a, TEMPMON
-	ld [wMonType], a
-	callfar GetGender
-	ld a, ' '
+	call PrintPlayerHUD_Shared ; ld a, TEMPMON / ld [wMonType], a / callfar GetGender / ...
 	jr c, .got_gender
 	ld a, '♂'
 	jr nz, .got_gender
@@ -4555,26 +4362,19 @@ DrawEnemyHUD:
 	jr z, .less_than_256_max
 	ldh a, [hMultiplier]
 	srl b
-	rr a
-	srl b
-	rr a
+	call TryToRunAwayFromBattle_Shared ; rr a / srl b / rr a
 	ldh [hDivisor], a
 	ldh a, [hProduct + 2]
 	ld b, a
 	srl b
 	ldh a, [hProduct + 3]
-	rr a
-	srl b
-	rr a
+	call TryToRunAwayFromBattle_Shared ; rr a / srl b / rr a
 	ldh [hProduct + 3], a
 	ld a, b
 	ldh [hProduct + 2], a
 
 .less_than_256_max
-	ldh a, [hProduct + 2]
-	ldh [hDividend + 0], a
-	ldh a, [hProduct + 3]
-	ldh [hDividend + 1], a
+	call TryToRunAwayFromBattle_Shared2 ; ldh a, [hProduct + 2] / ldh [hDividend + 0], a / ldh a, [hProduct + 3] / ...
 	ld a, 2
 	ld b, a
 	call Divide
@@ -4748,8 +4548,7 @@ BattleMenu_Pack:
 .run
 	xor a
 	ld [wWildMon], a
-	ld a, [wBattleResult]
-	and BATTLERESULT_BITMASK
+	call WildFled_EnemyFled_LinkBattleCanceled_Shared ; ld a, [wBattleResult] / and BATTLERESULT_BITMASK
 	ld [wBattleResult], a ; WIN
 	call ClearWindowData
 	call SetDefaultBGPAndOBP
@@ -4763,9 +4562,7 @@ BattleMenuPKMN_ReturnFromStats:
 	call LoadStandardMenuHeader
 	call ClearBGPalettes
 BattleMenuPKMN_Loop:
-	farcall LoadPartyMenuGFX
-	farcall InitPartyMenuWithCancel
-	farcall InitPartyMenuGFX
+	call SetUpBattlePartyMenu.shared1 ; farcall LoadPartyMenuGFX / farcall InitPartyMenuWithCancel / farcall InitPartyMenuGFX
 	xor a
 	ld [wPartyMenuActionText], a
 	farcall WritePartyMenuTilemap
@@ -4842,10 +4639,7 @@ Battle_StatsScreen:
 	jp EnableLCD
 
 TryPlayerSwitch:
-	ld a, [wCurBattleMon]
-	ld d, a
-	ld a, [wCurPartyMon]
-	cp d
+	call TryPlayerSwitch_Shared ; ld a, [wCurBattleMon] / ld d, a / ld a, [wCurPartyMon] / ...
 	jr nz, .check_trapped
 	ld hl, BattleText_MonIsAlreadyOut
 	call StdBattleTextbox
@@ -4878,8 +4672,7 @@ TryPlayerSwitch:
 	call CloseWindow
 	call GetMemSGBLayout
 	call SetDefaultBGPAndOBP
-	ld a, [wCurPartyMon]
-	ld [wCurBattleMon], a
+	call DoBattle_Shared.shared1 ; ld a, [wCurPartyMon] / ld [wCurBattleMon], a
 PlayerSwitch:
 	ld a, 1
 	ld [wPlayerIsSwitching], a
@@ -4937,8 +4730,7 @@ BattleMonEntrance:
 	ld c, 50
 	call DelayFrames
 
-	ld hl, wPlayerSubStatus4
-	res SUBSTATUS_RAGE, [hl]
+	call ParsePlayerAction_Shared.shared1 ; ld hl, wPlayerSubStatus4 / res SUBSTATUS_RAGE, [hl]
 
 	call SetEnemyTurn
 	call PursuitSwitch
@@ -4946,12 +4738,10 @@ BattleMonEntrance:
 	call RecallPlayerMon
 .ok
 
-	hlcoord 9, 7
-	lb bc, 5, 11
+	call FaintYourPokemon_Shared ; hlcoord 9, 7 / lb bc, 5, 11
 	call ClearBox
 
-	ld a, [wCurBattleMon]
-	ld [wCurPartyMon], a
+	call UpdateFaintedPlayerMon_Shared ; ld a, [wCurBattleMon] / ld [wCurPartyMon], a
 	call AddBattleParticipant
 	call InitBattleMon
 	call ResetPlayerStatLevels
@@ -4971,12 +4761,10 @@ PassedBattleMonEntrance:
 	ld c, 50
 	call DelayFrames
 
-	hlcoord 9, 7
-	lb bc, 5, 11
+	call FaintYourPokemon_Shared ; hlcoord 9, 7 / lb bc, 5, 11
 	call ClearBox
 
-	ld a, [wCurPartyMon]
-	ld [wCurBattleMon], a
+	call DoBattle_Shared.shared1 ; ld a, [wCurPartyMon] / ld [wCurBattleMon], a
 	call AddBattleParticipant
 	call InitBattleMon
 	xor a ; FALSE
@@ -5088,8 +4876,7 @@ MoveSelectionScreen:
 	dec a
 	ld b, PAD_DOWN | PAD_UP | PAD_A | PAD_B
 	jr z, .okay
-	ld a, [wLinkMode]
-	cp LINK_COLOSSEUM
+	call WinTrainerBattle_Shared ; ld a, [wLinkMode] / cp LINK_COLOSSEUM
 	jr z, .okay
 	ld b, PAD_DOWN | PAD_UP | PAD_A | PAD_B | PAD_SELECT
 
@@ -5166,10 +4953,7 @@ MoveSelectionScreen:
 
 	ld hl, wBattleMonPP
 	ld a, [wMenuCursorY]
-	ld c, a
-	ld b, 0
-	add hl, bc
-	ld a, [hl]
+	call DoBattle_Shared2 ; ld c, a / ld b, 0 / add hl, bc / ...
 	and PP_MASK
 	jr z, .no_pp_left
 	ld a, [wPlayerDisableCount]
@@ -5183,10 +4967,7 @@ MoveSelectionScreen:
 	jr nz, .skip2
 	ld a, [wMenuCursorY]
 	ld hl, wBattleMonMoves
-	ld c, a
-	ld b, 0
-	add hl, bc
-	ld a, [hl]
+	call DoBattle_Shared2 ; ld c, a / ld b, 0 / add hl, bc / ...
 
 .skip2
 	ld [wCurPlayerMove], a
@@ -5285,9 +5066,7 @@ MoveSelectionScreen:
 	ld hl, wPlayerDisableCount
 	ld a, [hl]
 	swap a
-	and $f
-	ld b, a
-	ld a, [wMenuCursorY]
+	call MoveSelectionScreen_Shared ; and $f / ld b, a / ld a, [wMenuCursorY]
 	cp b
 	jr nz, .not_swapping_disabled_move
 	ld a, [hl]
@@ -5304,9 +5083,7 @@ MoveSelectionScreen:
 	cp b
 	jr nz, .swap_moves_in_party_struct
 	ld a, [hl]
-	and $f
-	ld b, a
-	ld a, [wMenuCursorY]
+	call MoveSelectionScreen_Shared ; and $f / ld b, a / ld a, [wMenuCursorY]
 	swap a
 	add b
 	ld [hl], a
@@ -5335,18 +5112,12 @@ MoveSelectionScreen:
 .swap_bytes
 	push hl
 	ld a, [wSwappingMove]
-	dec a
-	ld c, a
-	ld b, 0
-	add hl, bc
+	call HandleWeather_Shared ; dec a / ld c, a / ld b, 0 / ...
 	ld d, h
 	ld e, l
 	pop hl
 	ld a, [wMenuCursorY]
-	dec a
-	ld c, a
-	ld b, 0
-	add hl, bc
+	call HandleWeather_Shared ; dec a / ld c, a / ld b, 0 / ...
 	ld a, [de]
 	ld b, [hl]
 	ld [hl], a
@@ -5371,9 +5142,7 @@ MoveInfoBox:
 	jr z, .not_disabled
 
 	swap a
-	and $f
-	ld b, a
-	ld a, [wMenuCursorY]
+	call MoveSelectionScreen_Shared ; and $f / ld b, a / ld a, [wMenuCursorY]
 	cp b
 	jr nz, .not_disabled
 
@@ -5387,14 +5156,10 @@ MoveInfoBox:
 	call SetPlayerTurn
 	ld hl, wBattleMonMoves
 	ld a, [wMenuCursorY]
-	ld c, a
-	ld b, 0
-	add hl, bc
-	ld a, [hl]
+	call DoBattle_Shared2 ; ld c, a / ld b, 0 / add hl, bc / ...
 	ld [wCurPlayerMove], a
 
-	ld a, [wCurBattleMon]
-	ld [wCurPartyMon], a
+	call UpdateFaintedPlayerMon_Shared ; ld a, [wCurBattleMon] / ld [wCurPartyMon], a
 	ld a, WILDMON
 	ld [wMonType], a
 	callfar GetMaxPPOfMove
@@ -5568,8 +5333,7 @@ ParseEnemyAction:
 	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
 	cp EFFECT_RAGE
 	jr z, .no_rage
-	ld hl, wEnemySubStatus4
-	res SUBSTATUS_RAGE, [hl]
+	call ResetVarsForSubstatusRage.shared1 ; ld hl, wEnemySubStatus4 / res SUBSTATUS_RAGE, [hl]
 	xor a
 	ld [wEnemyRageCounter], a
 
@@ -5592,6 +5356,7 @@ ResetVarsForSubstatusRage:
 	ld [wEnemyFuryCutterCount], a
 	ld [wEnemyProtectCount], a
 	ld [wEnemyRageCounter], a
+.shared1: ; (tools/outline.py)
 	ld hl, wEnemySubStatus4
 	res SUBSTATUS_RAGE, [hl]
 	ret
@@ -5757,18 +5522,13 @@ LoadEnemyMon:
 	and a
 	jr z, .InitDVs
 
-	ld a, [wEnemySubStatus5]
-	bit SUBSTATUS_TRANSFORMED, a
+	call GetEnemyMonDVs_Shared ; ld a, [wEnemySubStatus5] / bit SUBSTATUS_TRANSFORMED, a
 	jr z, .InitDVs
 
 ; Unknown
 	ld hl, wEnemyBackupDVs
 	ld de, wEnemyMonDVs
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	call InitEnemyMon_Shared ; ld a, [hli] / ld [de], a / inc de / ...
 	jp .Happiness
 
 .InitDVs:
@@ -5964,8 +5724,7 @@ LoadEnemyMon:
 	and a
 	jr z, .TreeMon
 
-	ld a, [wEnemySubStatus5]
-	bit SUBSTATUS_TRANSFORMED, a
+	call GetEnemyMonDVs_Shared ; ld a, [wEnemySubStatus5] / bit SUBSTATUS_TRANSFORMED, a
 	jr nz, .Moves
 
 .TreeMon:
@@ -6054,8 +5813,7 @@ LoadEnemyMon:
 	ld [wEnemyMonHP], a
 
 ; Make sure everything knows which monster the opponent is using
-	ld a, [wCurPartyMon]
-	ld [wCurOTMon], a
+	call InitEnemyMon.shared3 ; ld a, [wCurPartyMon] / ld [wCurOTMon], a
 
 ; Get status from the party struct
 	dec hl
@@ -6065,11 +5823,7 @@ LoadEnemyMon:
 .Moves:
 	ld hl, wBaseType1
 	ld de, wEnemyMonType1
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	call InitEnemyMon_Shared ; ld a, [hli] / ld [de], a / inc de / ...
 
 ; Get moves
 	ld de, wEnemyMonMoves
@@ -6122,9 +5876,7 @@ LoadEnemyMon:
 .Finish:
 ; Copy the first five base stats (the enemy mon's base Sp. Atk
 ; is also used to calculate Sp. Def stat experience)
-	ld hl, wBaseStats
-	ld de, wEnemyMonBaseStats
-	ld b, NUM_STATS - 1
+	call InitEnemyMon_Shared2 ; ld hl, wBaseStats / ld de, wEnemyMonBaseStats / ld b, NUM_STATS - 1
 .loop
 	ld a, [hli]
 	ld [de], a
@@ -6303,10 +6055,7 @@ ApplyPrzEffectOnSpeed:
 	ld a, [hld]
 	ld b, a
 	ld a, [hl]
-	srl a
-	rr b
-	srl a
-	rr b
+	call ApplyPrzEffectOnSpeed_Shared ; srl a / rr b / srl a / ...
 	ld [hli], a
 	or b
 	jr nz, .player_ok
@@ -6324,10 +6073,7 @@ ApplyPrzEffectOnSpeed:
 	ld a, [hld]
 	ld b, a
 	ld a, [hl]
-	srl a
-	rr b
-	srl a
-	rr b
+	call ApplyPrzEffectOnSpeed_Shared ; srl a / rr b / srl a / ...
 	ld [hli], a
 	or b
 	jr nz, .enemy_ok
@@ -6345,13 +6091,7 @@ ApplyBrnEffectOnAttack:
 	and 1 << BRN
 	ret z
 	ld hl, wBattleMonAttack + 1
-	ld a, [hld]
-	ld b, a
-	ld a, [hl]
-	srl a
-	rr b
-	ld [hli], a
-	or b
+	call ApplyBrnEffectOnAttack_Shared ; ld a, [hld] / ld b, a / ld a, [hl] / ...
 	jr nz, .player_ok
 	ld b, $1 ; min attack
 
@@ -6364,13 +6104,7 @@ ApplyBrnEffectOnAttack:
 	and 1 << BRN
 	ret z
 	ld hl, wEnemyMonAttack + 1
-	ld a, [hld]
-	ld b, a
-	ld a, [hl]
-	srl a
-	rr b
-	ld [hli], a
-	or b
+	call ApplyBrnEffectOnAttack_Shared ; ld a, [hld] / ld b, a / ld a, [hl] / ...
 	jr nz, .enemy_ok
 	ld b, $1 ; min attack
 
@@ -6873,8 +6607,7 @@ GiveExperiencePoints:
 .not_max_exp
 ; Check if the mon leveled up
 	xor a ; PARTYMON
-	ld [wMonType], a
-	predef CopyMonToTempMon
+	call ShowSetEnemyMonAndSendOutAnimation_Shared3 ; ld [wMonType], a / predef CopyMonToTempMon
 	callfar CalcLevel
 	pop bc
 	ld hl, MON_LEVEL
@@ -6927,10 +6660,7 @@ GiveExperiencePoints:
 	ld a, [hl]
 	adc d
 	ld [hl], a
-	ld a, [wCurBattleMon]
-	ld d, a
-	ld a, [wCurPartyMon]
-	cp d
+	call TryPlayerSwitch_Shared ; ld a, [wCurBattleMon] / ld d, a / ld a, [wCurPartyMon] / ...
 	jr nz, .skip_active_mon_update
 	ld de, wBattleMonHP
 	ld a, [hli]
@@ -6986,8 +6716,7 @@ GiveExperiencePoints:
 
 .skip_exp_bar_animation
 	xor a ; PARTYMON
-	ld [wMonType], a
-	predef CopyMonToTempMon
+	call ShowSetEnemyMonAndSendOutAnimation_Shared3 ; ld [wMonType], a / predef CopyMonToTempMon
 	hlcoord 9, 0
 	lb bc, 10, 9
 	call Textbox
@@ -7139,8 +6868,7 @@ AnimateExpBar:
 	xor a
 	ld [wExperienceGained], a
 	xor a ; PARTYMON
-	ld [wMonType], a
-	predef CopyMonToTempMon
+	call ShowSetEnemyMonAndSendOutAnimation_Shared3 ; ld [wMonType], a / predef CopyMonToTempMon
 	ld a, [wTempMonLevel]
 	ld b, a
 	ld e, a
@@ -7305,9 +7033,7 @@ SendOutMonText:
 
 .not_linked
 ; Depending on the HP of the enemy mon, the game prints a different text
-	ld hl, wEnemyMonHP
-	ld a, [hli]
-	or [hl]
+	call SwitchPlayerMon.shared1 ; ld hl, wEnemyMonHP / ld a, [hli] / or [hl]
 	ld hl, GoMonText
 	jr z, .skip_to_textbox
 
@@ -7327,10 +7053,7 @@ SendOutMonText:
 	ld hl, wEnemyMonMaxHP
 	ld a, [hli]
 	ld b, [hl]
-	srl a
-	rr b
-	srl a
-	rr b
+	call ApplyPrzEffectOnSpeed_Shared ; srl a / rr b / srl a / ...
 	ld a, b
 	ld b, 4
 	ldh [hDivisor], a
@@ -7398,10 +7121,7 @@ WithdrawMonText:
 	ld hl, wEnemyMonMaxHP
 	ld a, [hli]
 	ld b, [hl]
-	srl a
-	rr b
-	srl a
-	rr b
+	call ApplyPrzEffectOnSpeed_Shared ; srl a / rr b / srl a / ...
 	ld a, b
 	ld b, 4
 	ldh [hDivisor], a
@@ -7698,11 +7418,9 @@ StartBattle:
 	ld hl, rLCDC
 	set B_LCDC_WIN_MAP, [hl] ; select vBGMap1/vBGMap3
 	call EmptyBattleTextbox
-	hlcoord 9, 7
-	lb bc, 5, 11
+	call FaintYourPokemon_Shared ; hlcoord 9, 7 / lb bc, 5, 11
 	call ClearBox
-	hlcoord 1, 0
-	lb bc, 4, 10
+	call DoubleSwitch_Shared ; hlcoord 1, 0 / lb bc, 4, 10
 	call ClearBox
 	call ClearSprites
 	ld a, [wBattleMode]
@@ -7812,8 +7530,7 @@ ExitBattle:
 	jr .CleanUpBattleRAM
 
 .HandleEndOfBattle:
-	ld a, [wBattleResult]
-	and $f
+	call ExitBattle_Shared ; ld a, [wBattleResult] / and $f
 	jr nz, .CleanUpBattleRAM
 	; WIN
 	call CheckPayDay
@@ -7864,16 +7581,9 @@ CheckPayDay:
 	and a
 	jr z, .okay
 	ld hl, wPayDayMoney + 2
-	sla [hl]
-	dec hl
-	rl [hl]
-	dec hl
-	rl [hl]
+	call WinTrainerBattle_Shared2 ; sla [hl] / dec hl / rl [hl] / ...
 	jr nc, .okay
-	ld a, $ff
-	ld [hli], a
-	ld [hli], a
-	ld [hl], a
+	call WinTrainerBattle.shared3 ; ld a, $ff / ld [hli], a / ld [hli], a / ...
 
 .okay
 	ld hl, wPayDayMoney + 2
@@ -7891,8 +7601,7 @@ ShowLinkBattleParticipantsAfterEnd:
 	ld [hl], a
 	call ClearTilemap
 	farcall _ShowLinkBattleParticipants
-	ld a, [wBattleResult]
-	and $f
+	call ExitBattle_Shared ; ld a, [wBattleResult] / and $f
 	cp LOSE
 	ld de, .YouWin
 	jr c, .store_result ; WIN
@@ -8073,8 +7782,7 @@ BattleEnd_HandleRoamMons:
 	ld a, [wBattleType]
 	cp BATTLETYPE_ROAMING
 	jr nz, .not_roaming
-	ld a, [wBattleResult]
-	and $f
+	call ExitBattle_Shared ; ld a, [wBattleResult] / and $f
 	jr z, .caught_or_defeated_roam_mon ; WIN
 	call GetRoamMonHP
 	ld a, [wEnemyMonHP + 1]
@@ -8102,10 +7810,7 @@ BattleEnd_HandleRoamMons:
 	ret
 
 GetRoamMonMapGroup:
-	ld a, [wTempEnemyMonSpecies]
-	ld b, a
-	ld a, [wRoamMon1Species]
-	cp b
+	call GetRoamMonMapGroup_Shared ; ld a, [wTempEnemyMonSpecies] / ld b, a / ld a, [wRoamMon1Species] / ...
 	ld hl, wRoamMon1MapGroup
 	ret z
 	ld a, [wRoamMon2Species]
@@ -8116,10 +7821,7 @@ GetRoamMonMapGroup:
 	ret
 
 GetRoamMonMapNumber:
-	ld a, [wTempEnemyMonSpecies]
-	ld b, a
-	ld a, [wRoamMon1Species]
-	cp b
+	call GetRoamMonMapGroup_Shared ; ld a, [wTempEnemyMonSpecies] / ld b, a / ld a, [wRoamMon1Species] / ...
 	ld hl, wRoamMon1MapNumber
 	ret z
 	ld a, [wRoamMon2Species]
@@ -8131,10 +7833,7 @@ GetRoamMonMapNumber:
 
 GetRoamMonHP:
 ; output: hl = wRoamMonHP
-	ld a, [wTempEnemyMonSpecies]
-	ld b, a
-	ld a, [wRoamMon1Species]
-	cp b
+	call GetRoamMonMapGroup_Shared ; ld a, [wTempEnemyMonSpecies] / ld b, a / ld a, [wRoamMon1Species] / ...
 	ld hl, wRoamMon1HP
 	ret z
 	ld a, [wRoamMon2Species]
@@ -8146,10 +7845,7 @@ GetRoamMonHP:
 
 GetRoamMonDVs:
 ; output: hl = wRoamMonDVs
-	ld a, [wTempEnemyMonSpecies]
-	ld b, a
-	ld a, [wRoamMon1Species]
-	cp b
+	call GetRoamMonMapGroup_Shared ; ld a, [wTempEnemyMonSpecies] / ld b, a / ld a, [wRoamMon1Species] / ...
 	ld hl, wRoamMon1DVs
 	ret z
 	ld a, [wRoamMon2Species]
@@ -8226,8 +7922,7 @@ AddLastLinkBattleToLinkRecord:
 	jr .FindOpponentAndAppendRecord
 
 .StoreResult:
-	ld a, [wBattleResult]
-	and $f
+	call ExitBattle_Shared ; ld a, [wBattleResult] / and $f
 	cp LOSE
 	ld bc, (sLinkBattleRecord1Wins - sLinkBattleRecord1) + 1
 	jr c, .okay ; WIN
@@ -8537,15 +8232,11 @@ BattleStartMessage:
 	ld [wBattleAfterAnim], a
 	ld a, 1
 	ldh [hBattleTurn], a
-	ld a, 1
-	ld [wBattleAnimParam], a
-	ld de, ANIM_SEND_OUT_MON
+	call ShowSetEnemyMonAndSendOutAnimation_Shared ; ld a, 1 / ld [wBattleAnimParam], a / ld de, ANIM_SEND_OUT_MON
 	call Call_PlayBattleAnim
 
 .not_shiny
-	ld a, $f
-	ld [wCryTracks], a
-	ld a, [wTempEnemyMonSpecies]
+	call ShowSetEnemyMonAndSendOutAnimation_Shared4 ; ld a, $f / ld [wCryTracks], a / ld a, [wTempEnemyMonSpecies]
 	call PlayStereoCry
 	ld hl, HookedPokemonAttackedText
 	ld a, [wBattleType]
@@ -8589,9 +8280,250 @@ ShowLinkBattleParticipants:
 IsLinkBattle:
 	push bc
 	push af
-	ld a, [wLinkMode]
-	cp LINK_COLOSSEUM
+	call WinTrainerBattle_Shared ; ld a, [wLinkMode] / cp LINK_COLOSSEUM
 	pop bc
 	ld a, b
 	pop bc
+	ret
+
+DoBattle_Shared: ; (tools/outline.py)
+	ld a, [wCurBattleMon]
+	ld [wLastPlayerMon], a
+.shared1: ; (tools/outline.py)
+	ld a, [wCurPartyMon]
+	ld [wCurBattleMon], a
+	ret
+
+DoBattle_Shared2: ; (tools/outline.py)
+	ld c, a
+	ld b, 0
+	add hl, bc
+	ld a, [hl]
+	ret
+
+ApplyPrzEffectOnSpeed_Shared: ; (tools/outline.py)
+	srl a
+	rr b
+	srl a
+	rr b
+	ret
+
+GetRoamMonMapGroup_Shared: ; (tools/outline.py)
+	ld a, [wTempEnemyMonSpecies]
+	ld b, a
+	ld a, [wRoamMon1Species]
+	cp b
+	ret
+
+WildFled_EnemyFled_LinkBattleCanceled_Shared: ; (tools/outline.py)
+	ld a, [wBattleResult]
+	and BATTLERESULT_BITMASK
+	ret
+
+ParsePlayerAction_Shared: ; (tools/outline.py)
+	xor a
+	ld [wPlayerFuryCutterCount], a
+	ld [wPlayerProtectCount], a
+	ld [wPlayerRageCounter], a
+.shared1: ; (tools/outline.py)
+	ld hl, wPlayerSubStatus4
+	res SUBSTATUS_RAGE, [hl]
+	ret
+
+HandleEnemyMonFaint_Shared: ; (tools/outline.py)
+	ld hl, wBattleMonHP
+	ld a, [hli]
+	or [hl]
+	ret
+
+FaintYourPokemon_Shared: ; (tools/outline.py)
+	hlcoord 9, 7
+	lb bc, 5, 11
+	ret
+
+ShowSetEnemyMonAndSendOutAnimation_Shared: ; (tools/outline.py)
+	ld a, 1 ; shiny anim
+.shared1: ; (tools/outline.py)
+	ld [wBattleAnimParam], a
+	ld de, ANIM_SEND_OUT_MON
+	ret
+
+DoubleSwitch_Shared: ; (tools/outline.py)
+	hlcoord 1, 0
+	lb bc, 4, 10
+	ret
+
+UpdateFaintedPlayerMon_Shared: ; (tools/outline.py)
+	ld a, [wCurBattleMon]
+	ld [wCurPartyMon], a
+	ret
+
+ResetEnemyBattleVars_Shared: ; (tools/outline.py)
+	ld [wLastPlayerCounterMove], a
+	ld [wLastEnemyCounterMove], a
+	ret
+
+DoBattle_Shared3: ; (tools/outline.py)
+	xor a
+	ld [wBattleParticipantsNotFainted], a
+	ld [wBattleParticipantsIncludingFainted], a
+	ret
+
+HandleEnemyMonFaint_Shared2: ; (tools/outline.py)
+	ld a, BATTLEPLAYERACTION_USEITEM
+	ld [wBattlePlayerAction], a
+	ret
+
+InitEnemyMon_Shared: ; (tools/outline.py)
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ld [de], a
+	ret
+
+HandleBerserkGene_Shared: ; (tools/outline.py)
+	callfar GetUserItem
+	ld a, [hl]
+	ld [wNamedObjectIndex], a
+	ret
+
+TryEnemyFlee_Shared: ; (tools/outline.py)
+	ld a, [wTempEnemyMonSpecies]
+	ld de, 1
+	ret
+
+ResidualDamage_Shared: ; (tools/outline.py)
+	ld hl, wBattleMonHP
+	ldh a, [hBattleTurn]
+	and a
+	ret
+
+HandleWrap_Shared: ; (tools/outline.py)
+	xor a
+	ld [wBattleAfterAnim], a
+	ld [wFXAnimID + 1], a
+	predef PlayBattleAnim
+	ret
+
+HandleWeather_Shared: ; (tools/outline.py)
+	dec a
+	ld c, a
+	ld b, 0
+	add hl, bc
+	ret
+
+WinTrainerBattle_Shared: ; (tools/outline.py)
+	ld a, [wLinkMode]
+	cp LINK_COLOSSEUM
+	ret
+
+ShowSetEnemyMonAndSendOutAnimation_Shared2: ; (tools/outline.py)
+	ld [wCurPartySpecies], a
+	ld [wCurSpecies], a
+	ret
+
+ShowSetEnemyMonAndSendOutAnimation_Shared3: ; (tools/outline.py)
+	ld [wMonType], a
+	predef CopyMonToTempMon
+	ret
+
+TryToRunAwayFromBattle_Shared: ; (tools/outline.py)
+	rr a
+	srl b
+	rr a
+	ret
+
+GetEnemyMonDVs_Shared: ; (tools/outline.py)
+	ld a, [wEnemySubStatus5]
+	bit SUBSTATUS_TRANSFORMED, a
+	ret
+
+PrintPlayerHUD_Shared: ; (tools/outline.py)
+	ld a, TEMPMON
+	ld [wMonType], a
+	callfar GetGender
+	ld a, ' '
+	ret
+
+MoveSelectionScreen_Shared: ; (tools/outline.py)
+	and $f
+	ld b, a
+	ld a, [wMenuCursorY]
+	ret
+
+ApplyBrnEffectOnAttack_Shared: ; (tools/outline.py)
+	ld a, [hld]
+	ld b, a
+	ld a, [hl]
+	srl a
+	rr b
+	ld [hli], a
+	or b
+	ret
+
+ExitBattle_Shared: ; (tools/outline.py)
+	ld a, [wBattleResult]
+	and $f
+	ret
+
+SubtractHP_Shared: ; (tools/outline.py)
+	ld [hld], a
+	ld [wHPBuffer3], a
+	ld a, [hl]
+	ld [wHPBuffer2 + 1], a
+	ret
+
+FaintYourPokemon_Shared2: ; (tools/outline.py)
+	ld a, $f0
+	ld [wCryTracks], a
+	ld a, [wBattleMonSpecies]
+	ret
+
+WinTrainerBattle_Shared2: ; (tools/outline.py)
+	sla [hl]
+	dec hl
+	rl [hl]
+	dec hl
+	rl [hl]
+	ret
+
+UpdateFaintedPlayerMon_Shared2: ; (tools/outline.py)
+	ld c, a
+	ld hl, wBattleParticipantsNotFainted
+	ld b, RESET_FLAG
+	predef SmallFarFlagAction
+	ret
+
+FindMonInOTPartyToSwitchIntoBattle_Shared: ; (tools/outline.py)
+	ld hl, wEnemyEffectivenessVsPlayerMons
+	sla [hl]
+	inc hl ; wPlayerEffectivenessVsEnemyMons
+	sla [hl]
+	ret
+
+ShowSetEnemyMonAndSendOutAnimation_Shared4: ; (tools/outline.py)
+	ld a, $f
+	ld [wCryTracks], a
+	ld a, [wTempEnemyMonSpecies]
+	ret
+
+TryToRunAwayFromBattle_Shared2: ; (tools/outline.py)
+	ldh a, [hProduct + 2]
+	ldh [hDividend + 0], a
+	ldh a, [hProduct + 3]
+	ldh [hDividend + 1], a
+	ret
+
+InitEnemyMon_Shared2: ; (tools/outline.py)
+	ld hl, wBaseStats
+	ld de, wEnemyMonBaseStats
+	ld b, NUM_STATS - 1
+	ret
+
+TryPlayerSwitch_Shared: ; (tools/outline.py)
+	ld a, [wCurBattleMon]
+	ld d, a
+	ld a, [wCurPartyMon]
+	cp d
 	ret

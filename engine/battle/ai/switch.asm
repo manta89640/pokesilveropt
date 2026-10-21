@@ -28,8 +28,7 @@ CheckPlayerMoveTypeMatchups:
 	call GetMoveByte
 	ld hl, wEnemyMonType
 	call CheckTypeMatchup
-	ld a, [wTypeMatchup]
-	cp EFFECTIVE + 1 ; 1.0 + 0.1
+	call CheckPlayerMoveTypeMatchups_Shared ; ld a, [wTypeMatchup] / cp EFFECTIVE + 1
 	jr nc, .super_effective
 	and a
 	jr z, .next
@@ -73,8 +72,7 @@ CheckPlayerMoveTypeMatchups:
 	ld b, a
 	ld hl, wEnemyMonType1
 	call CheckTypeMatchup
-	ld a, [wTypeMatchup]
-	cp EFFECTIVE + 1 ; 1.0 + 0.1
+	call CheckPlayerMoveTypeMatchups_Shared ; ld a, [wTypeMatchup] / cp EFFECTIVE + 1
 	jr c, .ok
 	call .DecreaseScore
 .ok
@@ -82,8 +80,7 @@ CheckPlayerMoveTypeMatchups:
 	cp b
 	jr z, .ok2
 	call CheckTypeMatchup
-	ld a, [wTypeMatchup]
-	cp EFFECTIVE + 1 ; 1.0 + 0.1
+	call CheckPlayerMoveTypeMatchups_Shared ; ld a, [wTypeMatchup] / cp EFFECTIVE + 1
 	jr c, .ok2
 	call .DecreaseScore
 .ok2
@@ -197,6 +194,7 @@ CheckAbleToSwitch:
 	jr nz, .not_2
 
 	ld a, [wEnemyAISwitchScore]
+.shared1: ; (tools/outline.py)
 	add $30 ; maximum chance
 	ld [wEnemySwitchMonParam], a
 	ret
@@ -213,9 +211,7 @@ CheckAbleToSwitch:
 	jr nc, .loop1
 
 	ld a, b
-	add $30 ; maximum chance
-	ld [wEnemySwitchMonParam], a
-	ret
+	jr CheckAbleToSwitch.shared1 ; add $30 / ld [wEnemySwitchMonParam], a
 
 .no_perish
 	call CheckPlayerMoveTypeMatchups
@@ -249,6 +245,7 @@ CheckAbleToSwitch:
 	ret nc
 
 	ld a, b
+.shared2: ; (tools/outline.py)
 	add $10
 	ld [wEnemySwitchMonParam], a
 	ret
@@ -283,9 +280,7 @@ CheckAbleToSwitch:
 	ret nz
 
 	ld a, [wEnemyAISwitchScore]
-	add $10
-	ld [wEnemySwitchMonParam], a
-	ret
+	jr CheckAbleToSwitch.shared2 ; add $10 / ld [wEnemySwitchMonParam], a
 
 FindAliveEnemyMons:
 	ld a, [wOTPartyCount]
@@ -568,16 +563,14 @@ FindEnemyMonsThatResistPlayer:
 	ld a, [wBattleMonType1]
 	ld hl, wBaseType
 	call CheckTypeMatchup
-	ld a, [wTypeMatchup]
-	cp EFFECTIVE + 1
+	call CheckPlayerMoveTypeMatchups_Shared ; ld a, [wTypeMatchup] / cp EFFECTIVE + 1
 	jr nc, .dont_choose_mon
 	ld a, [wBattleMonType2]
 
 .check_type
 	ld hl, wBaseType
 	call CheckTypeMatchup
-	ld a, [wTypeMatchup]
-	cp EFFECTIVE + 1
+	call CheckPlayerMoveTypeMatchups_Shared ; ld a, [wTypeMatchup] / cp EFFECTIVE + 1
 	jr nc, .dont_choose_mon
 
 	ld a, b
@@ -644,3 +637,8 @@ FindEnemyMonsWithAtLeastQuarterMaxHP:
 
 .done
 	jr FindEnemyMonsThatResistPlayer.done ; same as there (tools/tailmerge.py)
+
+CheckPlayerMoveTypeMatchups_Shared: ; (tools/outline.py)
+	ld a, [wTypeMatchup]
+	cp EFFECTIVE + 1 ; 1.0 + 0.1
+	ret
