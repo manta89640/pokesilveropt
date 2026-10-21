@@ -26,11 +26,15 @@ press a 60
 shot menu
 press a 60
 shot buylist
-press a 60
+# Hold A longer: menus that poll the joypad every few frames can miss a short press
+hold a 10
+wait 60
 shot quantity
-press a 60
+hold a 10
+wait 60
 shot confirm
-press a 90
+hold a 10
+wait 90
 shot bought
 mashshot b 8 50 leave
 wait 60
