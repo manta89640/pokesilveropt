@@ -31,7 +31,7 @@ FIRST_REGULAR_TEXT_CHAR = 0x60
 GROUP_SIZE = 16
 SECOND_BYTE_MIN = 0x60
 CODES_PER_PREFIX = 0x100 - SECOND_BYTE_MIN
-MAX_ENTRY_LEN = 16
+MAX_ENTRY_LEN = 24
 
 # Control characters that may appear inside a dictionary entry: they only
 # print a fixed or RAM string, so they are safe to nest.
