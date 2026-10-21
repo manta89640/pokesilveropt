@@ -17,6 +17,9 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 
+# Log lines from play.py that describe the game state rather than a screenshot
+STATE_LINES = ('state ', 'pos ', 'battle=')
+
 
 def main():
 	ap = argparse.ArgumentParser()
@@ -42,11 +45,11 @@ def main():
 	for a, b in zip(*logs):
 		if a == b:
 			continue
-		if a.startswith(('state', 'pos', 'battle')):
+		if a.startswith(STATE_LINES):
 			state_diffs.append((a, b))
 		else:
 			differing.append(a.split()[0])
-	shots = sum(1 for line in logs[0] if not line.startswith(('state', 'pos', 'battle')))
+	shots = sum(1 for line in logs[0] if not line.startswith(STATE_LINES))
 	print(f'{name}: {len(differing)}/{shots} screenshots and {len(state_diffs)} states differ')
 	for a, b in state_diffs[:5]:
 		print(f'  original: {a}\n  new:      {b}')
