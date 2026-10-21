@@ -10,7 +10,7 @@ This is a fork of [pret/pokegold](https://github.com/pret/pokegold), the disasse
 
 The figures are for Silver; Gold is within a few hundred bytes. The debug ROMs keep uncompressed text (their menus are in Japanese) and still build at 2 MB.
 
-To set up the repository, see [INSTALL.md](INSTALL.md). `make` builds `pokegold.gbc` and `pokesilver.gbc`, and fails if either does not fit in 1 MB. Since the ROMs no longer match the originals, `make compare` fails.
+To set up the repository, see [INSTALL.md](INSTALL.md). `make` builds `pokegold.gbc` and `pokesilver.gbc`, and fails if either does not fit in 1 MB. `make compare` checks that the build reproduces the ROMs listed in `roms.sha1`, which are this fork's, not the originals.
 
 
 ## What changed
