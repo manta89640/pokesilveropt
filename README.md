@@ -5,17 +5,17 @@ This is a fork of [pret/pokegold](https://github.com/pret/pokegold), the disasse
 | | Original | This fork |
 |-|-|-|
 | ROM file | 2,097,152 bytes (128 banks) | **1,048,576 bytes (64 banks)** |
-| Content | 1,155,066 bytes | 981,391 bytes |
-| Free space | 942,086 bytes | 67,185 bytes |
+| Content | 1,154,855 bytes | 976,274 bytes |
+| Free space | 942,297 bytes | 72,302 bytes |
 
-The figures are for Silver; Gold is within a few hundred bytes. The debug ROMs keep uncompressed text (their menus are in Japanese) and still build at 2 MB.
+The figures are for Silver, from the summary in rgblink's map file; Gold is within a few hundred bytes. The debug ROMs keep uncompressed text (their menus are in Japanese) and still build at 2 MB.
 
 To set up the repository, see [INSTALL.md](INSTALL.md). `make` builds `pokegold.gbc` and `pokesilver.gbc`, and fails if either does not fit in 1 MB. `make compare` checks that the build reproduces the ROMs listed in `roms.sha1`, which are this fork's, not the originals.
 
 
 ## What changed
 
-**Text compression** (`tools/textdict.py`, `home/text.asm`). Text is encoded with a dictionary of about 2,500 frequent substrings, from two-letter pairs like `"e "` up to whole phrases like `"#MON CENTER"`. The `text`, `line`, `para`, `cont`, `next` and `page` macros, Pokédex entries, and move and item descriptions use a `dict` charmap, so rgbasm picks dictionary entries itself and the source text stays readable. One-byte codes reuse character values below `$60` that English text never prints (Japanese kana with dakuten). Codes 1–16 are prefixes for two-byte codes whose second byte is `$60`–`$ff`, so no byte of a code looks like a control character to code that scans text for `"@"` or `"<NEXT>"`. `PlaceString` prints an entry by switching to the dictionary bank and printing it recursively. This shrinks the text from 243 KB to 127 KB, dictionary included.
+**Text compression** (`tools/textdict.py`, `home/text.asm`). Text is encoded with a dictionary of about 2,500 frequent substrings, from two-letter pairs like `"e "` up to whole phrases like `"#MON CENTER"`. The `text`, `line`, `para`, `cont`, `next` and `page` macros, Pokédex entries, move and item descriptions, and the item, move and trainer class names use a `dict` charmap, so rgbasm picks dictionary entries itself and the source text stays readable. One-byte codes reuse character values below `$60` that English text never prints (Japanese kana with dakuten). Codes 1–16 are prefixes for two-byte codes whose second byte is `$60`–`$ff`, so no byte of a code looks like a control character to code that scans text for `"@"` or `"<NEXT>"`. `PlaceString` prints an entry by switching to the dictionary bank and printing it recursively. Pokémon names stay plain, since they are copied into nicknames. This shrinks the text from 248 KB to 131 KB, dictionary included.
 
 **1 MB layout** (`layout.link`). Sections that lived in banks `$40`–`$7f` now float, and rgblink packs them into free space in banks `$01`–`$3f`. Each map's scripts are their own section so they can fill small gaps. `tools/section_xref.py` reads the object files and reports code that uses another section's addresses without asking for its bank. It found which sections must share a bank: three pairs of maps, glued with `SECTION FRAGMENT`. The Pokédex entries stay in four consecutive banks because their bank is computed from the species. The Stadium 2 checksums move to the end of the 1 MB ROM, and `tools/stadium` handles any ROM size.
 
@@ -25,18 +25,18 @@ To set up the repository, see [INSTALL.md](INSTALL.md). `make` builds `pokegold.
 
 **Compressed overworld sprites** (`engine/overworld/overworld.asm`). Overworld sprite tiles are LZ-compressed, except the player, rival, Mom and Poké Ball, whose tiles other code loads directly. `GetSprite` decompresses them to a 384-byte SRAM buffer placed in space the save layout leaves free.
 
-**Pokédex footprints** (`gfx/footprints.asm`). Each distinct footprint is stored once, with a table mapping species to footprints; 61 of 251 were duplicates.
+**Duplicate graphics** (`gfx/footprints.asm`, `engine/menus/trainer_card.asm`). Each distinct Pokédex footprint is stored once, with a table mapping species to footprints; 61 of 251 were duplicates. The trainer card's Gym Leader faces and badges were stored twice; they are now stored once.
 
 **Dead code and data** (`tools/find_dead_code.py`). Code and data that nothing can reach are removed: beta map blocks, unused graphics and text, the debug color picker, Safari Zone leftovers, and so on. The tool follows references and fallthrough from code and scripts.
 
-**Peephole optimizations** (`tools/peephole.py`). Tail calls become jumps, jumps to `ret` become `ret cc`, near `jp`s become `jr`, and pairs of constant loads become `lb`. Every rewrite is smaller and no slower; serial, link, printer and infrared code is left alone.
+**Peephole optimizations** (`tools/peephole.py`). Tail calls become jumps, jumps to `ret` become `ret cc`, near `jp`s become `jr`, and pairs of constant loads become `lb`. Every rewrite is smaller and no slower; serial, link, printer and infrared code is left alone. Scripts that only open a text box, show one text and close it use `jumptext` or `jumptextfaceplayer`, which do the same.
 
-Savings by step (Silver, bytes): text dictionary 117,494; dead code 17,742; overworld sprites 12,311; LZ 11,456; map blocks 10,684; footprints 1,864; peephole 1,854.
+Savings by step (Silver, bytes): text dictionary 119,207; dead code 17,742; overworld sprites 12,311; LZ 11,456; map blocks 10,684; duplicate graphics 3,944; peephole 1,854; `jumptext` 1,357.
 
 
 ## What is unchanged
 
-- RAM, SRAM and link data layouts, so saves are compatible with the original games, and trades and battles with them still work. (The sprite buffer uses SRAM that the save layout leaves free.)
+- RAM, SRAM and link data layouts, so trades and battles with the original games still work, and their saves load in this fork. (The sprite buffer uses SRAM that the save layout leaves free.) A save holds the script addresses of the people and items on the current map, and those moved, so Continue reloads them from the map. The original games don't, so moving a save the other way is not safe.
 - All text, as printed on screen. `tools/verify_text.py` decodes every text in a build and compares it with the original ROM.
 - Gameplay timing. Text prints at the same speed; some code runs slightly faster.
 

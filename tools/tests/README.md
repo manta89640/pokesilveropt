@@ -9,7 +9,8 @@ Build the original ROMs from [pret/pokegold](https://github.com/pret/pokegold) t
 tools/tests/compare.py original/pokesilver.gbc pokesilver.gbc tools/tests/scenarios/intro.txt
 tools/tests/compare.py original/pokesilver.gbc pokesilver.gbc tools/tests/scenarios/new_game.txt
 
-# Make a save with a full Pokédex, items and a party (on the original ROM),
+# Make a save with a full Pokédex, items and a party (on the original ROM,
+# so loading it also checks that the original games' saves work),
 # then run the scenarios that start from it
 tools/tests/play.py original/pokesilver.gbc test_output/save tools/tests/scenarios/make_save.txt
 for s in continue pokedex pack pokegear phone radio trainer_card battle services npc_text; do
@@ -25,6 +26,6 @@ tools/tests/maps.py pokesilver.gbc test_output/save/save.ram > new.txt
 diff original.txt new.txt
 ```
 
-`compare.py` writes the differing screenshots side by side to `test_output/<scenario>_diff.png`. Changed code can shift timing by a frame, so expect some differences in partly printed text, blinking cursors, wandering NPCs and random battles; look at the sheet. `intro.txt` matches exactly.
+`compare.py` writes the differing screenshots side by side to `test_output/<scenario>_diff.png`, and reports a run that does not finish within `--timeout` seconds, which is how a crash usually shows up. Changed code can shift timing by a frame, so expect some differences in partly printed text, blinking cursors, wandering NPCs and random battles; look at the sheet. `intro.txt` matches exactly.
 
 Separately, `tools/verify_text.py original.gbc new.gbc` checks every text in the ROM without an emulator.
