@@ -1,0 +1,37 @@
+# A Pokémon Center and a Mart (standard scripts), starting from make_save.txt's save
+wait 400
+press start 60
+press a 120
+press a 200
+press a 200
+wait 100
+
+# Heal at the Cherrygrove Pokémon Center
+teleport CHERRYGROVE_POKECENTER_1F 3 3
+wait 60
+press up 30
+press a 60
+mashshot a 12 50 nurse
+mashshot b 8 50 nursedone
+wait 120
+state healed
+
+# Buy a Potion at the Cherrygrove Mart
+teleport CHERRYGROVE_MART 2 3
+wait 60
+press left 30
+press a 60
+shot welcome
+press a 60
+shot menu
+press a 60
+shot buylist
+press a 60
+shot quantity
+press a 60
+shot confirm
+press a 90
+shot bought
+mashshot b 8 50 leave
+wait 60
+state bought

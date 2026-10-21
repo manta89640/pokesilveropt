@@ -24,6 +24,7 @@ Scenario commands:
   fill SYM[+N] COUNT BYTE    write COUNT copies of a hex byte
   copy SRC[+N] DST[+N] COUNT copy COUNT bytes of RAM
   savefile NAME              stop, and copy the save file (and clock) to outdir/NAME
+  teleport MAP X Y           warp to a map (a MAP_CONSTANT), like the warp script command
 """
 
 import hashlib
@@ -38,6 +39,21 @@ FRAMES = [0]
 time.time = lambda: 1700000000.0 + FRAMES[0] / 59.7275
 
 from pyboy import PyBoy  # noqa: E402
+
+
+def read_maps():
+	root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+	maps = {}
+	group = number = 0
+	for line in open(os.path.join(root, 'constants/map_constants.asm')):
+		if re.match(r'\s+newgroup\b', line):
+			group += 1
+			number = 0
+		m = re.match(r'\s+map_const\s+(\w+),', line)
+		if m:
+			number += 1
+			maps[m.group(1)] = (group, number)
+	return maps
 
 
 def read_syms(rom):
@@ -156,6 +172,26 @@ def main():
 		elif cmd == 'fill':
 			for i in range(int(args[2], 0)):
 				mem[address(args[1]) + i] = int(args[3], 16)
+		elif cmd == 'teleport':
+			# Let any running script finish first
+			for _ in range(60):
+				if not mem[sym['wScriptRunning']]:
+					break
+				press('b', 30)
+			group, number = read_maps()[args[1]]
+			mem[sym['wMapGroup']] = group
+			mem[sym['wMapNumber']] = number
+			mem[sym['wXCoord']] = int(args[2])
+			mem[sym['wYCoord']] = int(args[3])
+			# The same as the warp script command
+			mem[sym['wDefaultSpawnpoint']] = 0xff  # SPAWN_N_A
+			mem[sym['hMapEntryMethod']] = 0xf1  # MAPSETUP_WARP
+			mem[sym['wMapStatus']] = 1  # MAPSTATUS_ENTER
+			for _ in range(600):
+				tick(1)
+				if mem[sym['wMapStatus']] == 2:  # MAPSTATUS_HANDLE
+					break
+			tick(60)
 		elif cmd == 'copy':
 			src, dst = address(args[1]), address(args[2])
 			data = [mem[src + i] for i in range(int(args[3], 0))]
