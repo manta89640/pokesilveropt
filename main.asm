@@ -396,3 +396,15 @@ SECTION "Stadium 2 Checksums", ROMX
 ; If it is removed, also remove the "tools/stadium" command in the Makefile.
 
 	ds 6 + 2 + NUM_ROM_BANKS * 2 * 2 ; "N64PS3" header, CRC, half-bank checksums
+
+
+SECTION "Far Call Targets", ROM0
+
+; Each farcall or callfar to one of these is "rst FarCallIndexed" and its index
+; (see macros/farcall.asm)
+FarCallTargets::
+	PURGE farcall_target
+MACRO farcall_target
+	dba \1
+ENDM
+INCLUDE "data/farcall_targets.asm"

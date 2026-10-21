@@ -74,3 +74,6 @@ INCLUDE "vc/pokesilver.constants.asm"
 ENDC
 
 INCLUDE "macros/legacy.asm"
+
+DEF NUM_FARCALL_TARGETS = 0
+INCLUDE "data/farcall_targets.asm"

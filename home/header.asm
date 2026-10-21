@@ -15,10 +15,12 @@ Bankswitch::
 	ret
 
 SECTION "rst18", ROM0[$0018]
-	rst $38
+FarCallIndexed::
+	jp _FarCallIndexed
 
 SECTION "rst20", ROM0[$0020]
-	rst $38
+PredefIndexed::
+	jp _PredefIndexed
 
 SECTION "rst28", ROM0[$0028]
 JumpTable::

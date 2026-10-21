@@ -50,3 +50,26 @@ Predef::
 	ld a, [wPredefHL + 1]
 	ld l, a
 	ret
+
+_PredefIndexed::
+; "rst PredefIndexed" followed by a predef id does what predef does: call
+; Predef with a = the id, and the caller's flags, bc, de and hl.
+	push af
+	push hl
+	; get the id, and return after it
+	ld hl, sp + 4
+	push de
+	ld e, [hl]
+	inc hl
+	ld d, [hl]
+	ld a, [de]
+	inc de
+	ld [hl], d
+	dec hl
+	ld [hl], e
+	ld [wPredefID], a
+	pop de
+	pop hl
+	pop af
+	ld a, [wPredefID]
+	jp Predef

@@ -144,7 +144,9 @@ def find_text_labels(src):
 	labels = {}
 	for root, dirs, files in os.walk(src):
 		rel = os.path.relpath(root, src)
-		if rel.startswith(('tools', '.git')):
+		# Text commands like sound_dex_fanfare_50_79 start with sound_, like the
+		# audio commands, so leave the audio out
+		if rel.startswith(('tools', '.git', 'audio')):
 			dirs[:] = []
 			continue
 		for name in files:

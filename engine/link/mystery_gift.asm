@@ -37,7 +37,10 @@ DoMysteryGift:
 	call ClearMysteryGiftTrainer
 	vc_patch Infrared_stage_party_data
 if DEF(_GOLD_VC) || DEF(_SILVER_VC)
-	farcall StagePartyDataForMysteryGift
+	; farcall StagePartyDataForMysteryGift, in as many bytes as the code it replaces
+	ld a, BANK(StagePartyDataForMysteryGift)
+	ld hl, StagePartyDataForMysteryGift
+	rst FarCall
 	call ClearMysteryGiftTrainer
 	nop
 else
