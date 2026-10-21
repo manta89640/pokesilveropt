@@ -1,0 +1,100 @@
+# Make a save file with a full Pokédex, items, every Pokégear card, and a
+# party of six, for the scenarios that start from a save.
+# Run it on the original ROM: tools/tests/play.py pokesilver.gbc out make_save.txt
+
+# A new game, up to receiving a starter (the same inputs as new_game.txt)
+wait 400
+press start 60
+press a 120
+press a 60
+press a 60
+mash a 100 40
+wait 120
+walk right 3
+walk up 2
+walk right 1
+walk up 1
+wait 60
+mash a 60 40
+mash a 30 40
+walk down 6
+walk left 2
+walk down 2
+wait 60
+walk left 7
+walk up 3
+wait 80
+mash a 36 40
+mash b 12 40
+wait 60
+walk down 2
+walk right 2
+walk up 1
+mash a 60 40
+mash b 20 40
+wait 60
+
+# The Pokédex (with Unown mode), every badge, money, and every Pokégear card
+pokeor wStatusFlags 03
+fill wPokedexCaught 31 ff
+poke wPokedexCaught+31 07
+fill wPokedexSeen 31 ff
+poke wPokedexSeen+31 07
+poke wJohtoBadges ff ff
+poke wMoney 99 99 99
+poke wPokegearFlags 8f
+poke wUnlockedUnowns 0f
+poke wUnownDex 01 02 03 04 05 06 07 08 09 0a 0b 0c 0d 0e 0f 10 11 12 13 14 15 16 17 18 19 1a
+poke wFirstUnownSeen 01
+
+# Items: a count, then item and quantity pairs, then -1
+poke wNumItems 14 12 09 11 09 10 09 0f 09 0e 09 09 09 0a 09 0b 09 0c 09 0d 09 13 09 14 09 15 09 08 09 16 09 17 09 18 09 1a 09 1b 09 20 09 ff
+poke wNumBalls 04 01 05 02 05 04 05 05 05 ff
+poke wNumKeyItems 06 06 07 36 37 38 3a ff
+fill wTMsHMs 57 01
+
+# A party of six: copies of the starter with other species and moves
+poke wPartyCount 06 9b 06 96 fb 19 f9 ff
+
+poke wPartyMon1+0 9b
+poke wPartyMon1+2 01 02 03 04
+copy wPartyMon1 wPartyMon1+48 48
+copy wPartyMonOTs wPartyMonOTs+11 11
+copy wPartyMonNicknames wPartyMonNicknames+11 11
+poke wPartyMon1+48 06
+poke wPartyMon1+50 05 06 07 08
+copy wPartyMon1 wPartyMon1+96 48
+copy wPartyMonOTs wPartyMonOTs+22 11
+copy wPartyMonNicknames wPartyMonNicknames+22 11
+poke wPartyMon1+96 96
+poke wPartyMon1+98 09 0a 0b 0c
+copy wPartyMon1 wPartyMon1+144 48
+copy wPartyMonOTs wPartyMonOTs+33 11
+copy wPartyMonNicknames wPartyMonNicknames+33 11
+poke wPartyMon1+144 fb
+poke wPartyMon1+146 0d 0e 0f 10
+copy wPartyMon1 wPartyMon1+192 48
+copy wPartyMonOTs wPartyMonOTs+44 11
+copy wPartyMonNicknames wPartyMonNicknames+44 11
+poke wPartyMon1+192 19
+poke wPartyMon1+194 11 12 13 14
+copy wPartyMon1 wPartyMon1+240 48
+copy wPartyMonOTs wPartyMonOTs+55 11
+copy wPartyMonNicknames wPartyMonNicknames+55 11
+poke wPartyMon1+240 f9
+poke wPartyMon1+242 15 16 17 18
+wait 30
+
+# Save: START, then SAVE (the sixth option once there is a Pokédex), then YES
+press start 40
+press down 15
+press down 15
+press down 15
+press down 15
+press down 15
+press a 60
+press a 120
+press a 400
+mash b 4 40
+wait 60
+savefile save.ram

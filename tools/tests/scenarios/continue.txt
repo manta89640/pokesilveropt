@@ -1,0 +1,9 @@
+wait 400
+press start 60
+shot title
+press a 120
+shot menu
+press a 200
+shot cont
+mashshot b 6 30 c
+state

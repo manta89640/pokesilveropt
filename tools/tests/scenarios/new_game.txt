@@ -1,0 +1,48 @@
+wait 400
+press start 60
+press a 120
+press a 60
+press a 60
+mash a 100 40
+wait 120
+state
+shot w0
+walk right 3
+state
+walk up 2
+state
+shot w1
+walk right 1
+state
+walk up 1
+wait 60
+state
+shot w2
+mash a 60 40
+state
+mashshot a 30 40 x
+wait 60
+shot h0
+walk down 6
+state
+walk left 2
+state
+walk down 2
+wait 60
+state
+shot h1
+walk left 7
+state
+walk up 3
+wait 80
+state
+mash a 36 40
+mash b 12 40
+wait 60
+state
+walk down 2
+walk right 2
+state
+walk up 1
+mashshot a 60 40 ball
+state

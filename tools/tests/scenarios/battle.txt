@@ -1,0 +1,39 @@
+wait 400
+press start 60
+press a 120
+press a 200
+press a 200
+wait 100
+walk left 1
+walk down 5
+wait 30
+mash b 30 30
+wait 60
+pos
+walk down 4
+wait 80
+pos
+walk left 6
+walk down 1
+walk left 3
+wait 60
+pos
+shot r29
+walk down 3
+walk left 4
+wait 60
+pos
+walk left 4
+pos
+shot r29b
+walk left 4
+walk down 3
+pos
+shot r29c
+walk left 3
+pos
+shot r29d
+grass 300 up down
+pos
+mashshot a 50 50 bt
+pos

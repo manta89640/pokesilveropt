@@ -1,0 +1,1265 @@
+wait 400
+press start 60
+press a 120
+press a 200
+press a 200
+wait 100
+press start 40
+press a 100
+press a 100
+
+shot p1_000
+press a 60
+shot p2_000
+press a 30
+press down 60
+shot p1_001
+press a 60
+shot p2_001
+press a 30
+press down 60
+shot p1_002
+press a 60
+shot p2_002
+press a 30
+press down 60
+shot p1_003
+press a 60
+shot p2_003
+press a 30
+press down 60
+shot p1_004
+press a 60
+shot p2_004
+press a 30
+press down 60
+shot p1_005
+press a 60
+shot p2_005
+press a 30
+press down 60
+shot p1_006
+press a 60
+shot p2_006
+press a 30
+press down 60
+shot p1_007
+press a 60
+shot p2_007
+press a 30
+press down 60
+shot p1_008
+press a 60
+shot p2_008
+press a 30
+press down 60
+shot p1_009
+press a 60
+shot p2_009
+press a 30
+press down 60
+shot p1_010
+press a 60
+shot p2_010
+press a 30
+press down 60
+shot p1_011
+press a 60
+shot p2_011
+press a 30
+press down 60
+shot p1_012
+press a 60
+shot p2_012
+press a 30
+press down 60
+shot p1_013
+press a 60
+shot p2_013
+press a 30
+press down 60
+shot p1_014
+press a 60
+shot p2_014
+press a 30
+press down 60
+shot p1_015
+press a 60
+shot p2_015
+press a 30
+press down 60
+shot p1_016
+press a 60
+shot p2_016
+press a 30
+press down 60
+shot p1_017
+press a 60
+shot p2_017
+press a 30
+press down 60
+shot p1_018
+press a 60
+shot p2_018
+press a 30
+press down 60
+shot p1_019
+press a 60
+shot p2_019
+press a 30
+press down 60
+shot p1_020
+press a 60
+shot p2_020
+press a 30
+press down 60
+shot p1_021
+press a 60
+shot p2_021
+press a 30
+press down 60
+shot p1_022
+press a 60
+shot p2_022
+press a 30
+press down 60
+shot p1_023
+press a 60
+shot p2_023
+press a 30
+press down 60
+shot p1_024
+press a 60
+shot p2_024
+press a 30
+press down 60
+shot p1_025
+press a 60
+shot p2_025
+press a 30
+press down 60
+shot p1_026
+press a 60
+shot p2_026
+press a 30
+press down 60
+shot p1_027
+press a 60
+shot p2_027
+press a 30
+press down 60
+shot p1_028
+press a 60
+shot p2_028
+press a 30
+press down 60
+shot p1_029
+press a 60
+shot p2_029
+press a 30
+press down 60
+shot p1_030
+press a 60
+shot p2_030
+press a 30
+press down 60
+shot p1_031
+press a 60
+shot p2_031
+press a 30
+press down 60
+shot p1_032
+press a 60
+shot p2_032
+press a 30
+press down 60
+shot p1_033
+press a 60
+shot p2_033
+press a 30
+press down 60
+shot p1_034
+press a 60
+shot p2_034
+press a 30
+press down 60
+shot p1_035
+press a 60
+shot p2_035
+press a 30
+press down 60
+shot p1_036
+press a 60
+shot p2_036
+press a 30
+press down 60
+shot p1_037
+press a 60
+shot p2_037
+press a 30
+press down 60
+shot p1_038
+press a 60
+shot p2_038
+press a 30
+press down 60
+shot p1_039
+press a 60
+shot p2_039
+press a 30
+press down 60
+shot p1_040
+press a 60
+shot p2_040
+press a 30
+press down 60
+shot p1_041
+press a 60
+shot p2_041
+press a 30
+press down 60
+shot p1_042
+press a 60
+shot p2_042
+press a 30
+press down 60
+shot p1_043
+press a 60
+shot p2_043
+press a 30
+press down 60
+shot p1_044
+press a 60
+shot p2_044
+press a 30
+press down 60
+shot p1_045
+press a 60
+shot p2_045
+press a 30
+press down 60
+shot p1_046
+press a 60
+shot p2_046
+press a 30
+press down 60
+shot p1_047
+press a 60
+shot p2_047
+press a 30
+press down 60
+shot p1_048
+press a 60
+shot p2_048
+press a 30
+press down 60
+shot p1_049
+press a 60
+shot p2_049
+press a 30
+press down 60
+shot p1_050
+press a 60
+shot p2_050
+press a 30
+press down 60
+shot p1_051
+press a 60
+shot p2_051
+press a 30
+press down 60
+shot p1_052
+press a 60
+shot p2_052
+press a 30
+press down 60
+shot p1_053
+press a 60
+shot p2_053
+press a 30
+press down 60
+shot p1_054
+press a 60
+shot p2_054
+press a 30
+press down 60
+shot p1_055
+press a 60
+shot p2_055
+press a 30
+press down 60
+shot p1_056
+press a 60
+shot p2_056
+press a 30
+press down 60
+shot p1_057
+press a 60
+shot p2_057
+press a 30
+press down 60
+shot p1_058
+press a 60
+shot p2_058
+press a 30
+press down 60
+shot p1_059
+press a 60
+shot p2_059
+press a 30
+press down 60
+shot p1_060
+press a 60
+shot p2_060
+press a 30
+press down 60
+shot p1_061
+press a 60
+shot p2_061
+press a 30
+press down 60
+shot p1_062
+press a 60
+shot p2_062
+press a 30
+press down 60
+shot p1_063
+press a 60
+shot p2_063
+press a 30
+press down 60
+shot p1_064
+press a 60
+shot p2_064
+press a 30
+press down 60
+shot p1_065
+press a 60
+shot p2_065
+press a 30
+press down 60
+shot p1_066
+press a 60
+shot p2_066
+press a 30
+press down 60
+shot p1_067
+press a 60
+shot p2_067
+press a 30
+press down 60
+shot p1_068
+press a 60
+shot p2_068
+press a 30
+press down 60
+shot p1_069
+press a 60
+shot p2_069
+press a 30
+press down 60
+shot p1_070
+press a 60
+shot p2_070
+press a 30
+press down 60
+shot p1_071
+press a 60
+shot p2_071
+press a 30
+press down 60
+shot p1_072
+press a 60
+shot p2_072
+press a 30
+press down 60
+shot p1_073
+press a 60
+shot p2_073
+press a 30
+press down 60
+shot p1_074
+press a 60
+shot p2_074
+press a 30
+press down 60
+shot p1_075
+press a 60
+shot p2_075
+press a 30
+press down 60
+shot p1_076
+press a 60
+shot p2_076
+press a 30
+press down 60
+shot p1_077
+press a 60
+shot p2_077
+press a 30
+press down 60
+shot p1_078
+press a 60
+shot p2_078
+press a 30
+press down 60
+shot p1_079
+press a 60
+shot p2_079
+press a 30
+press down 60
+shot p1_080
+press a 60
+shot p2_080
+press a 30
+press down 60
+shot p1_081
+press a 60
+shot p2_081
+press a 30
+press down 60
+shot p1_082
+press a 60
+shot p2_082
+press a 30
+press down 60
+shot p1_083
+press a 60
+shot p2_083
+press a 30
+press down 60
+shot p1_084
+press a 60
+shot p2_084
+press a 30
+press down 60
+shot p1_085
+press a 60
+shot p2_085
+press a 30
+press down 60
+shot p1_086
+press a 60
+shot p2_086
+press a 30
+press down 60
+shot p1_087
+press a 60
+shot p2_087
+press a 30
+press down 60
+shot p1_088
+press a 60
+shot p2_088
+press a 30
+press down 60
+shot p1_089
+press a 60
+shot p2_089
+press a 30
+press down 60
+shot p1_090
+press a 60
+shot p2_090
+press a 30
+press down 60
+shot p1_091
+press a 60
+shot p2_091
+press a 30
+press down 60
+shot p1_092
+press a 60
+shot p2_092
+press a 30
+press down 60
+shot p1_093
+press a 60
+shot p2_093
+press a 30
+press down 60
+shot p1_094
+press a 60
+shot p2_094
+press a 30
+press down 60
+shot p1_095
+press a 60
+shot p2_095
+press a 30
+press down 60
+shot p1_096
+press a 60
+shot p2_096
+press a 30
+press down 60
+shot p1_097
+press a 60
+shot p2_097
+press a 30
+press down 60
+shot p1_098
+press a 60
+shot p2_098
+press a 30
+press down 60
+shot p1_099
+press a 60
+shot p2_099
+press a 30
+press down 60
+shot p1_100
+press a 60
+shot p2_100
+press a 30
+press down 60
+shot p1_101
+press a 60
+shot p2_101
+press a 30
+press down 60
+shot p1_102
+press a 60
+shot p2_102
+press a 30
+press down 60
+shot p1_103
+press a 60
+shot p2_103
+press a 30
+press down 60
+shot p1_104
+press a 60
+shot p2_104
+press a 30
+press down 60
+shot p1_105
+press a 60
+shot p2_105
+press a 30
+press down 60
+shot p1_106
+press a 60
+shot p2_106
+press a 30
+press down 60
+shot p1_107
+press a 60
+shot p2_107
+press a 30
+press down 60
+shot p1_108
+press a 60
+shot p2_108
+press a 30
+press down 60
+shot p1_109
+press a 60
+shot p2_109
+press a 30
+press down 60
+shot p1_110
+press a 60
+shot p2_110
+press a 30
+press down 60
+shot p1_111
+press a 60
+shot p2_111
+press a 30
+press down 60
+shot p1_112
+press a 60
+shot p2_112
+press a 30
+press down 60
+shot p1_113
+press a 60
+shot p2_113
+press a 30
+press down 60
+shot p1_114
+press a 60
+shot p2_114
+press a 30
+press down 60
+shot p1_115
+press a 60
+shot p2_115
+press a 30
+press down 60
+shot p1_116
+press a 60
+shot p2_116
+press a 30
+press down 60
+shot p1_117
+press a 60
+shot p2_117
+press a 30
+press down 60
+shot p1_118
+press a 60
+shot p2_118
+press a 30
+press down 60
+shot p1_119
+press a 60
+shot p2_119
+press a 30
+press down 60
+shot p1_120
+press a 60
+shot p2_120
+press a 30
+press down 60
+shot p1_121
+press a 60
+shot p2_121
+press a 30
+press down 60
+shot p1_122
+press a 60
+shot p2_122
+press a 30
+press down 60
+shot p1_123
+press a 60
+shot p2_123
+press a 30
+press down 60
+shot p1_124
+press a 60
+shot p2_124
+press a 30
+press down 60
+shot p1_125
+press a 60
+shot p2_125
+press a 30
+press down 60
+shot p1_126
+press a 60
+shot p2_126
+press a 30
+press down 60
+shot p1_127
+press a 60
+shot p2_127
+press a 30
+press down 60
+shot p1_128
+press a 60
+shot p2_128
+press a 30
+press down 60
+shot p1_129
+press a 60
+shot p2_129
+press a 30
+press down 60
+shot p1_130
+press a 60
+shot p2_130
+press a 30
+press down 60
+shot p1_131
+press a 60
+shot p2_131
+press a 30
+press down 60
+shot p1_132
+press a 60
+shot p2_132
+press a 30
+press down 60
+shot p1_133
+press a 60
+shot p2_133
+press a 30
+press down 60
+shot p1_134
+press a 60
+shot p2_134
+press a 30
+press down 60
+shot p1_135
+press a 60
+shot p2_135
+press a 30
+press down 60
+shot p1_136
+press a 60
+shot p2_136
+press a 30
+press down 60
+shot p1_137
+press a 60
+shot p2_137
+press a 30
+press down 60
+shot p1_138
+press a 60
+shot p2_138
+press a 30
+press down 60
+shot p1_139
+press a 60
+shot p2_139
+press a 30
+press down 60
+shot p1_140
+press a 60
+shot p2_140
+press a 30
+press down 60
+shot p1_141
+press a 60
+shot p2_141
+press a 30
+press down 60
+shot p1_142
+press a 60
+shot p2_142
+press a 30
+press down 60
+shot p1_143
+press a 60
+shot p2_143
+press a 30
+press down 60
+shot p1_144
+press a 60
+shot p2_144
+press a 30
+press down 60
+shot p1_145
+press a 60
+shot p2_145
+press a 30
+press down 60
+shot p1_146
+press a 60
+shot p2_146
+press a 30
+press down 60
+shot p1_147
+press a 60
+shot p2_147
+press a 30
+press down 60
+shot p1_148
+press a 60
+shot p2_148
+press a 30
+press down 60
+shot p1_149
+press a 60
+shot p2_149
+press a 30
+press down 60
+shot p1_150
+press a 60
+shot p2_150
+press a 30
+press down 60
+shot p1_151
+press a 60
+shot p2_151
+press a 30
+press down 60
+shot p1_152
+press a 60
+shot p2_152
+press a 30
+press down 60
+shot p1_153
+press a 60
+shot p2_153
+press a 30
+press down 60
+shot p1_154
+press a 60
+shot p2_154
+press a 30
+press down 60
+shot p1_155
+press a 60
+shot p2_155
+press a 30
+press down 60
+shot p1_156
+press a 60
+shot p2_156
+press a 30
+press down 60
+shot p1_157
+press a 60
+shot p2_157
+press a 30
+press down 60
+shot p1_158
+press a 60
+shot p2_158
+press a 30
+press down 60
+shot p1_159
+press a 60
+shot p2_159
+press a 30
+press down 60
+shot p1_160
+press a 60
+shot p2_160
+press a 30
+press down 60
+shot p1_161
+press a 60
+shot p2_161
+press a 30
+press down 60
+shot p1_162
+press a 60
+shot p2_162
+press a 30
+press down 60
+shot p1_163
+press a 60
+shot p2_163
+press a 30
+press down 60
+shot p1_164
+press a 60
+shot p2_164
+press a 30
+press down 60
+shot p1_165
+press a 60
+shot p2_165
+press a 30
+press down 60
+shot p1_166
+press a 60
+shot p2_166
+press a 30
+press down 60
+shot p1_167
+press a 60
+shot p2_167
+press a 30
+press down 60
+shot p1_168
+press a 60
+shot p2_168
+press a 30
+press down 60
+shot p1_169
+press a 60
+shot p2_169
+press a 30
+press down 60
+shot p1_170
+press a 60
+shot p2_170
+press a 30
+press down 60
+shot p1_171
+press a 60
+shot p2_171
+press a 30
+press down 60
+shot p1_172
+press a 60
+shot p2_172
+press a 30
+press down 60
+shot p1_173
+press a 60
+shot p2_173
+press a 30
+press down 60
+shot p1_174
+press a 60
+shot p2_174
+press a 30
+press down 60
+shot p1_175
+press a 60
+shot p2_175
+press a 30
+press down 60
+shot p1_176
+press a 60
+shot p2_176
+press a 30
+press down 60
+shot p1_177
+press a 60
+shot p2_177
+press a 30
+press down 60
+shot p1_178
+press a 60
+shot p2_178
+press a 30
+press down 60
+shot p1_179
+press a 60
+shot p2_179
+press a 30
+press down 60
+shot p1_180
+press a 60
+shot p2_180
+press a 30
+press down 60
+shot p1_181
+press a 60
+shot p2_181
+press a 30
+press down 60
+shot p1_182
+press a 60
+shot p2_182
+press a 30
+press down 60
+shot p1_183
+press a 60
+shot p2_183
+press a 30
+press down 60
+shot p1_184
+press a 60
+shot p2_184
+press a 30
+press down 60
+shot p1_185
+press a 60
+shot p2_185
+press a 30
+press down 60
+shot p1_186
+press a 60
+shot p2_186
+press a 30
+press down 60
+shot p1_187
+press a 60
+shot p2_187
+press a 30
+press down 60
+shot p1_188
+press a 60
+shot p2_188
+press a 30
+press down 60
+shot p1_189
+press a 60
+shot p2_189
+press a 30
+press down 60
+shot p1_190
+press a 60
+shot p2_190
+press a 30
+press down 60
+shot p1_191
+press a 60
+shot p2_191
+press a 30
+press down 60
+shot p1_192
+press a 60
+shot p2_192
+press a 30
+press down 60
+shot p1_193
+press a 60
+shot p2_193
+press a 30
+press down 60
+shot p1_194
+press a 60
+shot p2_194
+press a 30
+press down 60
+shot p1_195
+press a 60
+shot p2_195
+press a 30
+press down 60
+shot p1_196
+press a 60
+shot p2_196
+press a 30
+press down 60
+shot p1_197
+press a 60
+shot p2_197
+press a 30
+press down 60
+shot p1_198
+press a 60
+shot p2_198
+press a 30
+press down 60
+shot p1_199
+press a 60
+shot p2_199
+press a 30
+press down 60
+shot p1_200
+press a 60
+shot p2_200
+press a 30
+press down 60
+shot p1_201
+press a 60
+shot p2_201
+press a 30
+press down 60
+shot p1_202
+press a 60
+shot p2_202
+press a 30
+press down 60
+shot p1_203
+press a 60
+shot p2_203
+press a 30
+press down 60
+shot p1_204
+press a 60
+shot p2_204
+press a 30
+press down 60
+shot p1_205
+press a 60
+shot p2_205
+press a 30
+press down 60
+shot p1_206
+press a 60
+shot p2_206
+press a 30
+press down 60
+shot p1_207
+press a 60
+shot p2_207
+press a 30
+press down 60
+shot p1_208
+press a 60
+shot p2_208
+press a 30
+press down 60
+shot p1_209
+press a 60
+shot p2_209
+press a 30
+press down 60
+shot p1_210
+press a 60
+shot p2_210
+press a 30
+press down 60
+shot p1_211
+press a 60
+shot p2_211
+press a 30
+press down 60
+shot p1_212
+press a 60
+shot p2_212
+press a 30
+press down 60
+shot p1_213
+press a 60
+shot p2_213
+press a 30
+press down 60
+shot p1_214
+press a 60
+shot p2_214
+press a 30
+press down 60
+shot p1_215
+press a 60
+shot p2_215
+press a 30
+press down 60
+shot p1_216
+press a 60
+shot p2_216
+press a 30
+press down 60
+shot p1_217
+press a 60
+shot p2_217
+press a 30
+press down 60
+shot p1_218
+press a 60
+shot p2_218
+press a 30
+press down 60
+shot p1_219
+press a 60
+shot p2_219
+press a 30
+press down 60
+shot p1_220
+press a 60
+shot p2_220
+press a 30
+press down 60
+shot p1_221
+press a 60
+shot p2_221
+press a 30
+press down 60
+shot p1_222
+press a 60
+shot p2_222
+press a 30
+press down 60
+shot p1_223
+press a 60
+shot p2_223
+press a 30
+press down 60
+shot p1_224
+press a 60
+shot p2_224
+press a 30
+press down 60
+shot p1_225
+press a 60
+shot p2_225
+press a 30
+press down 60
+shot p1_226
+press a 60
+shot p2_226
+press a 30
+press down 60
+shot p1_227
+press a 60
+shot p2_227
+press a 30
+press down 60
+shot p1_228
+press a 60
+shot p2_228
+press a 30
+press down 60
+shot p1_229
+press a 60
+shot p2_229
+press a 30
+press down 60
+shot p1_230
+press a 60
+shot p2_230
+press a 30
+press down 60
+shot p1_231
+press a 60
+shot p2_231
+press a 30
+press down 60
+shot p1_232
+press a 60
+shot p2_232
+press a 30
+press down 60
+shot p1_233
+press a 60
+shot p2_233
+press a 30
+press down 60
+shot p1_234
+press a 60
+shot p2_234
+press a 30
+press down 60
+shot p1_235
+press a 60
+shot p2_235
+press a 30
+press down 60
+shot p1_236
+press a 60
+shot p2_236
+press a 30
+press down 60
+shot p1_237
+press a 60
+shot p2_237
+press a 30
+press down 60
+shot p1_238
+press a 60
+shot p2_238
+press a 30
+press down 60
+shot p1_239
+press a 60
+shot p2_239
+press a 30
+press down 60
+shot p1_240
+press a 60
+shot p2_240
+press a 30
+press down 60
+shot p1_241
+press a 60
+shot p2_241
+press a 30
+press down 60
+shot p1_242
+press a 60
+shot p2_242
+press a 30
+press down 60
+shot p1_243
+press a 60
+shot p2_243
+press a 30
+press down 60
+shot p1_244
+press a 60
+shot p2_244
+press a 30
+press down 60
+shot p1_245
+press a 60
+shot p2_245
+press a 30
+press down 60
+shot p1_246
+press a 60
+shot p2_246
+press a 30
+press down 60
+shot p1_247
+press a 60
+shot p2_247
+press a 30
+press down 60
+shot p1_248
+press a 60
+shot p2_248
+press a 30
+press down 60
+shot p1_249
+press a 60
+shot p2_249
+press a 30
+press down 60
+shot p1_250
+press a 60
+shot p2_250
+press a 30
+press down 60

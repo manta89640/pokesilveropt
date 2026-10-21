@@ -1,0 +1,6 @@
+wait 400
+press start 60
+press a 120
+press a 60
+press a 60
+mashshot a 60 40 intro

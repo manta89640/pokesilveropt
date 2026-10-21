@@ -1,0 +1,37 @@
+wait 400
+press start 60
+press a 120
+press a 200
+press a 200
+wait 100
+press start 40
+press down 20
+press down 20
+press a 120
+shot i00
+press down 40
+shot i01
+press down 40
+shot i02
+press right 60
+shot b00
+press right 60
+shot k00
+press right 60
+shot t00
+press down 40
+shot t01
+press b 60
+press b 60
+shot x0
+press up 20
+press a 100
+shot m0
+press a 60
+shot m1
+press down 20
+press down 20
+press a 100
+shot m2
+press a 60
+shot m3
