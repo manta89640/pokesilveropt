@@ -45,5 +45,4 @@
 	tilecoll FLOOR, WALL, FLOOR, WALL ; 2c
 	tilecoll FLOOR, FLOOR, COUNTER, COUNTER ; 2d
 	tilecoll FLOOR, WALL, FLOOR, FLOOR ; 2e
-	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 2f
-; blocks that no map can show were removed (tools/trim_metatiles.py)
+; blocks that no map can show, or that were the same as an earlier block, were removed (tools/trim_metatiles.py)

@@ -25,20 +25,19 @@
 	tilecoll WATER_21, WATER_21, WALL, WALL ; 18
 	tilecoll WALL, WALL, WALL, WATER ; 19
 	tilecoll WALL, FLOOR, WATER, WARP_CARPET_DOWN ; 1a
-	tilecoll LADDER, LADDER, LADDER, LADDER ; 1b
-	tilecoll FLOOR, FLOOR, WATER, WATER ; 1c
-	tilecoll FLOOR, FLOOR, WATER, FLOOR ; 1d
-	tilecoll WALL, WALL, FLOOR, FLOOR ; 1e
-	tilecoll WATER, FLOOR, FLOOR, FLOOR ; 1f
-	tilecoll FLOOR, WATER, FLOOR, WATER ; 20
-	tilecoll WATER, FLOOR, WATER, FLOOR ; 21
-	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 22
-	tilecoll WALL, FLOOR, WALL, FLOOR ; 23
-	tilecoll FLOOR, FLOOR, WARP_CARPET_DOWN, WARP_CARPET_DOWN ; 24
-	tilecoll FLOOR, WATER, FLOOR, WATER ; 25
-	tilecoll WALL, WALL, FLOOR, LADDER ; 26
-	tilecoll WATER, WATER, WATER, WATER ; 27
-	tilecoll FLOOR, WATER, FLOOR, WATER ; 28
-	tilecoll WATER, FLOOR, WATER, FLOOR ; 29
-	tilecoll WATER, WATER, FLOOR, FLOOR ; 2a
-; blocks that no map can show were removed (tools/trim_metatiles.py)
+	tilecoll FLOOR, FLOOR, WATER, WATER ; 1b
+	tilecoll FLOOR, FLOOR, WATER, FLOOR ; 1c
+	tilecoll WALL, WALL, FLOOR, FLOOR ; 1d
+	tilecoll WATER, FLOOR, FLOOR, FLOOR ; 1e
+	tilecoll FLOOR, WATER, FLOOR, WATER ; 1f
+	tilecoll WATER, FLOOR, WATER, FLOOR ; 20
+	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 21
+	tilecoll WALL, FLOOR, WALL, FLOOR ; 22
+	tilecoll FLOOR, FLOOR, WARP_CARPET_DOWN, WARP_CARPET_DOWN ; 23
+	tilecoll FLOOR, WATER, FLOOR, WATER ; 24
+	tilecoll WALL, WALL, FLOOR, LADDER ; 25
+	tilecoll WATER, WATER, WATER, WATER ; 26
+	tilecoll FLOOR, WATER, FLOOR, WATER ; 27
+	tilecoll WATER, FLOOR, WATER, FLOOR ; 28
+	tilecoll WATER, WATER, FLOOR, FLOOR ; 29
+; blocks that no map can show, or that were the same as an earlier block, were removed (tools/trim_metatiles.py)

@@ -52,5 +52,4 @@
 	tilecoll WALL, WALL, WALL, WALL ; 33
 	tilecoll WALL, WALL, WALL, WALL ; 34
 	tilecoll WALL, WALL, WALL, WALL ; 35
-	tilecoll WALL, FLOOR, WALL, WARP_CARPET_DOWN ; 36
-; blocks that no map can show were removed (tools/trim_metatiles.py)
+; blocks that no map can show, or that were the same as an earlier block, were removed (tools/trim_metatiles.py)

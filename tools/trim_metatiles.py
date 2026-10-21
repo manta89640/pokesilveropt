@@ -14,8 +14,10 @@ where a carpet also uses the next two blocks). Block 0 is always kept, since
 a decoration of 0 means none.
 
 Tilesets of maps without connections are renumbered without the blocks that
-can't be shown: their metatiles and collision, and every reference to their
-blocks listed above, are rewritten. Other tilesets only lose the blocks after
+can't be shown, and with blocks that have the same metatile and collision as
+an earlier one merged into it (except for blocks that Cut, Whirlpool and
+decorations look up by number): their metatiles and collision, and every
+reference to their blocks listed above, are rewritten. Other tilesets only lose the blocks after
 the last one that can be shown. Without --apply, only reports what it would
 remove.
 """
@@ -95,6 +97,8 @@ class Maps:
 					assert 'UGDOOR_' in code, f'maps/{name}.asm: {line}'
 
 		self.used = collections.defaultdict(set)  # tileset -> blocks
+		# Blocks that code looks up by number, which can't be merged with others
+		self.fixed = collections.defaultdict(lambda: {0})
 		self.connected = set()  # tilesets of maps with connections
 		for name, tileset in self.tileset_of.items():
 			self.used[tileset] |= self.shown[name]
@@ -108,13 +112,16 @@ class Maps:
 				tileset = field_move_tileset(m.group(1))
 			m = FIELD_MOVE.match(line)
 			if m and tileset:
-				self.used[tileset] |= {int(m.group(2), 16), int(m.group(3), 16)}
+				blocks = {int(m.group(2), 16), int(m.group(3), 16)}
+				self.used[tileset] |= blocks
+				self.fixed[tileset] |= blocks
 		for line in lines('data/decorations/attributes.asm'):
 			m = DECORATION.match(line)
 			if m:
 				block = int(m.group(3), 16)
 				count = CARPET_BLOCKS if m.group(2) == 'DECO_CARPET' else 1
 				self.used['TILESET_PLAYERS_ROOM'] |= set(range(block, block + count))
+				self.fixed['TILESET_PLAYERS_ROOM'] |= set(range(block, block + count))
 
 		# Tilesets that share metatiles and collision
 		constants = ['TILESET_0'] + re.findall(r'^\tconst (TILESET_\w+)',
@@ -146,7 +153,8 @@ def ugdoor_blocks(code):
 
 
 def plan(maps):
-	"""Returns {(metatiles, collision): (tilesets, blocks to keep, block count)}."""
+	"""Returns {(metatiles, collision): (tilesets, old blocks in their new order,
+	{old block: new block}, block count)}."""
 	plans = {}
 	for (meta, coll), tilesets in sorted(maps.groups.items()):
 		count = os.path.getsize(path(meta)) // METATILE_SIZE
@@ -154,28 +162,45 @@ def plan(maps):
 		if 'TILESET_0' in tilesets or not blocks:
 			continue
 		if tilesets & maps.connected:
-			keep = list(range(max(blocks) + 1))
+			order = list(range(max(blocks) + 1))
+			new = {old: old for old in order}
 		else:
-			keep = sorted(blocks | {0})
-		if len(keep) < count:
-			plans[(meta, coll)] = (tilesets, keep, count)
+			# Blocks with the same metatile and collision become one
+			fixed = set().union(*(maps.fixed[t] for t in tilesets))
+			data = open(path(meta), 'rb').read()
+			collision = [line.split(';')[0].strip() for line in lines(coll)
+				if line.strip().startswith('tilecoll')]
+			order = []
+			new = {}
+			first = {}
+			for old in sorted(blocks | {0}):
+				look = (data[old * METATILE_SIZE:(old + 1) * METATILE_SIZE], collision[old])
+				if old not in fixed and look in first:
+					new[old] = first[look]
+					continue
+				new[old] = len(order)
+				if old not in fixed:
+					first[look] = new[old]
+				order.append(old)
+		if len(order) < count:
+			plans[(meta, coll)] = (tilesets, order, new, count)
 	return plans
 
 
 def apply(maps, plans):
 	remap = {}  # tileset -> {old block: new block}
-	for (meta, coll), (tilesets, keep, count) in plans.items():
-		new = {old: i for i, old in enumerate(keep)}
+	for (meta, coll), (tilesets, order, new, count) in plans.items():
 		for tileset in tilesets:
 			remap[tileset] = new
 		data = open(path(meta), 'rb').read()
 		open(path(meta), 'wb').write(b''.join(
-			data[i * METATILE_SIZE:(i + 1) * METATILE_SIZE] for i in keep))
+			data[i * METATILE_SIZE:(i + 1) * METATILE_SIZE] for i in order))
 		old = [line for line in lines(coll) if line.strip().startswith('tilecoll')]
 		assert len(old) == count
 		write_lines(coll, [re.sub(r'; [0-9a-f]{2}$', f'; {i:02x}', old[block])
-			for i, block in enumerate(keep)] + [
-			'; blocks that no map can show were removed (tools/trim_metatiles.py)', ''])
+			for i, block in enumerate(order)] + [
+			'; blocks that no map can show, or that were the same as an earlier block, '
+			'were removed (tools/trim_metatiles.py)', ''])
 
 	def block(tileset, value):
 		return f'${remap[tileset][int(value, 16)]:02x}'
@@ -241,10 +266,10 @@ def main():
 	maps = Maps()
 	plans = plan(maps)
 	total = 0
-	for (meta, coll), (tilesets, keep, count) in plans.items():
-		saved = (count - len(keep)) * (METATILE_SIZE + COLLISION_SIZE)
+	for (meta, coll), (tilesets, order, new, count) in plans.items():
+		saved = (count - len(order)) * (METATILE_SIZE + COLLISION_SIZE)
 		total += saved
-		print(f'{meta}: {count - len(keep)} of {count} blocks unused ({saved} bytes)')
+		print(f'{meta}: {count - len(order)} of {count} blocks unused or the same ({saved} bytes)')
 	print(f'{total} bytes')
 	if args.apply:
 		apply(maps, plans)
