@@ -29,8 +29,8 @@ RuinsOfAlphOmanyteChamberPuzzle:
 	setmapscene RUINS_OF_ALPH_INNER_CHAMBER, SCENE_RUINSOFALPHINNERCHAMBER_STRANGE_PRESENCE
 	earthquake 30
 	showemote EMOTE_SHOCK, PLAYER, 15
-	changeblock 2, 2, $18 ; left hole
-	changeblock 4, 2, $19 ; right hole
+	changeblock 2, 2, $14 ; left hole
+	changeblock 4, 2, $15 ; right hole
 	refreshmap
 	playsound SFX_STRENGTH
 	earthquake 80

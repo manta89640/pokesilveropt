@@ -21,7 +21,7 @@ GoldenRodDeptStoreB1FClearBoxesCallback:
 	sjump .Continue
 
 .GotCardKey:
-	changeblock 16, 4, $0d ; floor
+	changeblock 16, 4, $0c ; floor
 	sjump .Continue
 
 .Continue:
@@ -29,15 +29,15 @@ GoldenRodDeptStoreB1FClearBoxesCallback:
 	iftrue .Layout2
 	checkevent EVENT_GOLDENROD_DEPT_STORE_B1F_LAYOUT_3
 	iftrue .Layout3
-	changeblock 10, 8, $0d ; floor
+	changeblock 10, 8, $0c ; floor
 	endcallback
 
 .Layout2:
-	changeblock 4, 10, $0d ; floor
+	changeblock 4, 10, $0c ; floor
 	endcallback
 
 .Layout3:
-	changeblock 10, 12, $0d ; floor
+	changeblock 10, 12, $0c ; floor
 	endcallback
 
 GoldenRodDeptStoreUnblockCallback:

@@ -19,7 +19,7 @@ RadioTower3FCardKeyShutterCallback:
 	endcallback
 
 .Change:
-	changeblock 14, 2, $2a ; open shutter
+	changeblock 14, 2, $1f ; open shutter
 	changeblock 14, 4, $01 ; floor
 	endcallback
 
@@ -125,7 +125,7 @@ CardKeySlotScript::
 	waitbutton
 	setevent EVENT_USED_THE_CARD_KEY_IN_THE_RADIO_TOWER
 	playsound SFX_ENTER_DOOR
-	changeblock 14, 2, $2a ; open shutter
+	changeblock 14, 2, $1f ; open shutter
 	changeblock 14, 4, $01 ; floor
 	refreshmap
 	closetext

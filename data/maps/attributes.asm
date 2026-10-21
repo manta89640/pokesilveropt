@@ -408,7 +408,7 @@ ENDM
 	map_attributes TinTower8F, TIN_TOWER_8F, $00
 	map_attributes TinTower9F, TIN_TOWER_9F, $00
 	map_attributes BurnedTower1F, BURNED_TOWER_1F, $00
-	map_attributes BurnedTowerB1F, BURNED_TOWER_B1F, $09
+	map_attributes BurnedTowerB1F, BURNED_TOWER_B1F, $08
 	map_attributes NationalPark, NATIONAL_PARK, $00
 	map_attributes NationalParkBugContest, NATIONAL_PARK_BUG_CONTEST, $00
 	map_attributes RadioTower1F, RADIO_TOWER_1F, $00
@@ -423,11 +423,11 @@ ENDM
 	map_attributes RuinsOfAlphAerodactylChamber, RUINS_OF_ALPH_AERODACTYL_CHAMBER, $00
 	map_attributes RuinsOfAlphInnerChamber, RUINS_OF_ALPH_INNER_CHAMBER, $00
 	map_attributes RuinsOfAlphResearchCenter, RUINS_OF_ALPH_RESEARCH_CENTER, $00
-	map_attributes UnionCave1F, UNION_CAVE_1F, $09
-	map_attributes UnionCaveB1F, UNION_CAVE_B1F, $09
-	map_attributes UnionCaveB2F, UNION_CAVE_B2F, $09
-	map_attributes SlowpokeWellB1F, SLOWPOKE_WELL_B1F, $09
-	map_attributes SlowpokeWellB2F, SLOWPOKE_WELL_B2F, $09
+	map_attributes UnionCave1F, UNION_CAVE_1F, $08
+	map_attributes UnionCaveB1F, UNION_CAVE_B1F, $08
+	map_attributes UnionCaveB2F, UNION_CAVE_B2F, $08
+	map_attributes SlowpokeWellB1F, SLOWPOKE_WELL_B1F, $08
+	map_attributes SlowpokeWellB2F, SLOWPOKE_WELL_B2F, $08
 	map_attributes OlivineLighthouse1F, OLIVINE_LIGHTHOUSE_1F, $00
 	map_attributes OlivineLighthouse2F, OLIVINE_LIGHTHOUSE_2F, $00
 	map_attributes OlivineLighthouse3F, OLIVINE_LIGHTHOUSE_3F, $00
@@ -443,32 +443,32 @@ ENDM
 	map_attributes GoldenrodUndergroundSwitchRoomEntrances, GOLDENROD_UNDERGROUND_SWITCH_ROOM_ENTRANCES, $00
 	map_attributes GoldenrodDeptStoreB1F, GOLDENROD_DEPT_STORE_B1F, $00
 	map_attributes GoldenrodUndergroundWarehouse, GOLDENROD_UNDERGROUND_WAREHOUSE, $00
-	map_attributes MountMortar1FOutside, MOUNT_MORTAR_1F_OUTSIDE, $09
-	map_attributes MountMortar1FInside, MOUNT_MORTAR_1F_INSIDE, $09
-	map_attributes MountMortar2FInside, MOUNT_MORTAR_2F_INSIDE, $09
-	map_attributes MountMortarB1F, MOUNT_MORTAR_B1F, $09
-	map_attributes IcePath1F, ICE_PATH_1F, $09
-	map_attributes IcePathB1F, ICE_PATH_B1F, $19
-	map_attributes IcePathB2FMahoganySide, ICE_PATH_B2F_MAHOGANY_SIDE, $19
-	map_attributes IcePathB2FBlackthornSide, ICE_PATH_B2F_BLACKTHORN_SIDE, $19
-	map_attributes IcePathB3F, ICE_PATH_B3F, $19
-	map_attributes WhirlIslandNW, WHIRL_ISLAND_NW, $09
-	map_attributes WhirlIslandNE, WHIRL_ISLAND_NE, $09
-	map_attributes WhirlIslandSW, WHIRL_ISLAND_SW, $09
-	map_attributes WhirlIslandCave, WHIRL_ISLAND_CAVE, $09
-	map_attributes WhirlIslandSE, WHIRL_ISLAND_SE, $0f
-	map_attributes WhirlIslandB1F, WHIRL_ISLAND_B1F, $09
-	map_attributes WhirlIslandB2F, WHIRL_ISLAND_B2F, $2e
-	map_attributes WhirlIslandLugiaChamber, WHIRL_ISLAND_LUGIA_CHAMBER, $0f
-	map_attributes SilverCaveRoom1, SILVER_CAVE_ROOM_1, $09
-	map_attributes SilverCaveRoom2, SILVER_CAVE_ROOM_2, $09
-	map_attributes SilverCaveRoom3, SILVER_CAVE_ROOM_3, $09
-	map_attributes SilverCaveItemRooms, SILVER_CAVE_ITEM_ROOMS, $09
-	map_attributes DarkCaveVioletEntrance, DARK_CAVE_VIOLET_ENTRANCE, $09
-	map_attributes DarkCaveBlackthornEntrance, DARK_CAVE_BLACKTHORN_ENTRANCE, $09
-	map_attributes DragonsDen1F, DRAGONS_DEN_1F, $09
+	map_attributes MountMortar1FOutside, MOUNT_MORTAR_1F_OUTSIDE, $08
+	map_attributes MountMortar1FInside, MOUNT_MORTAR_1F_INSIDE, $08
+	map_attributes MountMortar2FInside, MOUNT_MORTAR_2F_INSIDE, $08
+	map_attributes MountMortarB1F, MOUNT_MORTAR_B1F, $08
+	map_attributes IcePath1F, ICE_PATH_1F, $08
+	map_attributes IcePathB1F, ICE_PATH_B1F, $15
+	map_attributes IcePathB2FMahoganySide, ICE_PATH_B2F_MAHOGANY_SIDE, $15
+	map_attributes IcePathB2FBlackthornSide, ICE_PATH_B2F_BLACKTHORN_SIDE, $15
+	map_attributes IcePathB3F, ICE_PATH_B3F, $15
+	map_attributes WhirlIslandNW, WHIRL_ISLAND_NW, $08
+	map_attributes WhirlIslandNE, WHIRL_ISLAND_NE, $08
+	map_attributes WhirlIslandSW, WHIRL_ISLAND_SW, $08
+	map_attributes WhirlIslandCave, WHIRL_ISLAND_CAVE, $08
+	map_attributes WhirlIslandSE, WHIRL_ISLAND_SE, $0e
+	map_attributes WhirlIslandB1F, WHIRL_ISLAND_B1F, $08
+	map_attributes WhirlIslandB2F, WHIRL_ISLAND_B2F, $2b
+	map_attributes WhirlIslandLugiaChamber, WHIRL_ISLAND_LUGIA_CHAMBER, $0e
+	map_attributes SilverCaveRoom1, SILVER_CAVE_ROOM_1, $08
+	map_attributes SilverCaveRoom2, SILVER_CAVE_ROOM_2, $08
+	map_attributes SilverCaveRoom3, SILVER_CAVE_ROOM_3, $08
+	map_attributes SilverCaveItemRooms, SILVER_CAVE_ITEM_ROOMS, $08
+	map_attributes DarkCaveVioletEntrance, DARK_CAVE_VIOLET_ENTRANCE, $08
+	map_attributes DarkCaveBlackthornEntrance, DARK_CAVE_BLACKTHORN_ENTRANCE, $08
+	map_attributes DragonsDen1F, DRAGONS_DEN_1F, $08
 	map_attributes DragonsDenB1F, DRAGONS_DEN_B1F, $71
-	map_attributes TohjoFalls, TOHJO_FALLS, $09
+	map_attributes TohjoFalls, TOHJO_FALLS, $08
 	map_attributes OlivinePokecenter1F, OLIVINE_POKECENTER_1F, $00
 	map_attributes OlivineGym, OLIVINE_GYM, $00
 	map_attributes OlivineTimsHouse, OLIVINE_TIMS_HOUSE, $00
@@ -484,14 +484,14 @@ ENDM
 	map_attributes MahoganyGym, MAHOGANY_GYM, $00
 	map_attributes MahoganyPokecenter1F, MAHOGANY_POKECENTER_1F, $00
 	map_attributes Route42EcruteakGate, ROUTE_42_ECRUTEAK_GATE, $00
-	map_attributes DiglettsCave, DIGLETTS_CAVE, $09
-	map_attributes MountMoon, MOUNT_MOON, $09
+	map_attributes DiglettsCave, DIGLETTS_CAVE, $08
+	map_attributes MountMoon, MOUNT_MOON, $08
 	map_attributes UndergroundPath, UNDERGROUND_PATH, $00
-	map_attributes RockTunnel1F, ROCK_TUNNEL_1F, $09
-	map_attributes RockTunnelB1F, ROCK_TUNNEL_B1F, $09
+	map_attributes RockTunnel1F, ROCK_TUNNEL_1F, $08
+	map_attributes RockTunnelB1F, ROCK_TUNNEL_B1F, $08
 	map_attributes SafariZoneFuchsiaGateBeta, SAFARI_ZONE_FUCHSIA_GATE_BETA, $00
 	map_attributes SafariZoneBeta, SAFARI_ZONE_BETA, $13
-	map_attributes VictoryRoad, VICTORY_ROAD, $1d
+	map_attributes VictoryRoad, VICTORY_ROAD, $1a
 	map_attributes EcruteakTinTowerEntrance, ECRUTEAK_TIN_TOWER_ENTRANCE, $00
 	map_attributes EcruteakTinTowerBackEntrance, ECRUTEAK_TIN_TOWER_BACK_ENTRANCE, $00
 	map_attributes EcruteakPokecenter1F, ECRUTEAK_POKECENTER_1F, $00
@@ -510,7 +510,7 @@ ENDM
 	map_attributes CinnabarPokecenter1F, CINNABAR_POKECENTER_1F, $00
 	map_attributes CinnabarPokecenter2FBeta, CINNABAR_POKECENTER_2F_BETA, $00
 	map_attributes Route19FuchsiaGate, ROUTE_19_FUCHSIA_GATE, $00
-	map_attributes SeafoamGym, SEAFOAM_GYM, $09
+	map_attributes SeafoamGym, SEAFOAM_GYM, $08
 	map_attributes CeruleanGymBadgeSpeechHouse, CERULEAN_GYM_BADGE_SPEECH_HOUSE, $00
 	map_attributes CeruleanPoliceStation, CERULEAN_POLICE_STATION, $00
 	map_attributes CeruleanTradeSpeechHouse, CERULEAN_TRADE_SPEECH_HOUSE, $00
@@ -583,8 +583,8 @@ ENDM
 	map_attributes PewterPokecenter1F, PEWTER_POKECENTER_1F, $00
 	map_attributes PewterPokecenter2FBeta, PEWTER_POKECENTER_2F_BETA, $00
 	map_attributes PewterSnoozeSpeechHouse, PEWTER_SNOOZE_SPEECH_HOUSE, $00
-	map_attributes OlivinePort, OLIVINE_PORT, $0a
-	map_attributes VermilionPort, VERMILION_PORT, $0a
+	map_attributes OlivinePort, OLIVINE_PORT, $08
+	map_attributes VermilionPort, VERMILION_PORT, $08
 	map_attributes FastShip1F, FAST_SHIP_1F, $00
 	map_attributes FastShipCabins_NNW_NNE_NE, FAST_SHIP_CABINS_NNW_NNE_NE, $00
 	map_attributes FastShipCabins_SW_SSW_NW, FAST_SHIP_CABINS_SW_SSW_NW, $00

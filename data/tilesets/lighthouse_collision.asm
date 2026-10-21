@@ -14,51 +14,47 @@
 	tilecoll WALL, WALL, WALL, WALL ; 0d
 	tilecoll WALL, WALL, WALL, WALL ; 0e
 	tilecoll WALL, WALL, WALL, WALL ; 0f
-	tilecoll 9C, FLOOR, COUNTER, FLOOR ; 10
+	tilecoll WALL, WALL, WALL, WALL ; 10
 	tilecoll WALL, WALL, WALL, WALL ; 11
 	tilecoll WALL, WALL, WALL, WALL ; 12
-	tilecoll WALL, WALL, WALL, WALL ; 13
-	tilecoll WALL, WARP_CARPET_DOWN, WALL, WALL ; 14
+	tilecoll WALL, WARP_CARPET_DOWN, WALL, WALL ; 13
+	tilecoll WALL, WALL, WALL, WALL ; 14
 	tilecoll WALL, WALL, WALL, WALL ; 15
-	tilecoll 9C, FLOOR, COUNTER, FLOOR ; 16
-	tilecoll WALL, WALL, WALL, WALL ; 17
-	tilecoll FLOOR, WALL, FLOOR, WALL ; 18
-	tilecoll WALL, WALL, WALL, STAIRCASE ; 19
-	tilecoll LADDER, FLOOR, FLOOR, FLOOR ; 1a
-	tilecoll FLOOR, FLOOR, WARP_CARPET_DOWN, WARP_CARPET_DOWN ; 1b
-	tilecoll WALL, WALL, WALL, WALL ; 1c
-	tilecoll WALL, WALL, FLOOR, FLOOR ; 1d
-	tilecoll WALL, WALL, WALL, WALL ; 1e
-	tilecoll WALL, WALL, WALL, WALL ; 1f
-	tilecoll WALL, FLOOR, WALL, FLOOR ; 20
-	tilecoll FLOOR, WALL, FLOOR, WALL ; 21
-	tilecoll WALL, FLOOR, WALL, WALL ; 22
-	tilecoll FLOOR, WALL, WALL, WALL ; 23
-	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 24
-	tilecoll FLOOR, FLOOR, WALL, WALL ; 25
+	tilecoll WALL, WALL, WALL, STAIRCASE ; 16
+	tilecoll LADDER, FLOOR, FLOOR, FLOOR ; 17
+	tilecoll FLOOR, FLOOR, WARP_CARPET_DOWN, WARP_CARPET_DOWN ; 18
+	tilecoll WALL, WALL, WALL, WALL ; 19
+	tilecoll WALL, WALL, WALL, WALL ; 1a
+	tilecoll WALL, WALL, WALL, WALL ; 1b
+	tilecoll WALL, FLOOR, WALL, FLOOR ; 1c
+	tilecoll FLOOR, WALL, FLOOR, WALL ; 1d
+	tilecoll WALL, FLOOR, WALL, WALL ; 1e
+	tilecoll FLOOR, WALL, WALL, WALL ; 1f
+	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 20
+	tilecoll FLOOR, FLOOR, WALL, WALL ; 21
+	tilecoll WALL, WALL, WALL, WALL ; 22
+	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 23
+	tilecoll FLOOR, FLOOR, PIT, PIT ; 24
+	tilecoll WALL, WALL, WINDOW, WINDOW ; 25
 	tilecoll WALL, WALL, WALL, WALL ; 26
 	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 27
-	tilecoll FLOOR, FLOOR, PIT, PIT ; 28
-	tilecoll WALL, WALL, WINDOW, WINDOW ; 29
-	tilecoll WALL, WALL, WALL, WALL ; 2a
-	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 2b
-	tilecoll WALL, WALL, FLOOR, FLOOR ; 2c
-	tilecoll WALL, WALL, WALL, WALL ; 2d
-	tilecoll FLOOR, FLOOR, WARP_CARPET_DOWN, WARP_CARPET_DOWN ; 2e
-	tilecoll WALL, WALL, WALL, BOOKSHELF ; 2f
-	tilecoll WALL, WALL, FLOOR, WALL ; 30
-	tilecoll FLOOR, FLOOR, FLOOR, LADDER ; 31
-	tilecoll WALL, WALL, WALL, WALL ; 32
-	tilecoll WALL, FLOOR, WALL, FLOOR ; 33
-	tilecoll WALL, WALL, PC, FLOOR ; 34
-	tilecoll FLOOR, FLOOR, FLOOR, WALL ; 35
-	tilecoll FLOOR, WALL, FLOOR, WALL ; 36
+	tilecoll WALL, WALL, FLOOR, FLOOR ; 28
+	tilecoll WALL, WALL, WALL, WALL ; 29
+	tilecoll FLOOR, FLOOR, WARP_CARPET_DOWN, WARP_CARPET_DOWN ; 2a
+	tilecoll WALL, WALL, WALL, BOOKSHELF ; 2b
+	tilecoll WALL, WALL, FLOOR, WALL ; 2c
+	tilecoll FLOOR, FLOOR, FLOOR, LADDER ; 2d
+	tilecoll WALL, WALL, WALL, WALL ; 2e
+	tilecoll WALL, FLOOR, WALL, FLOOR ; 2f
+	tilecoll WALL, WALL, PC, FLOOR ; 30
+	tilecoll FLOOR, FLOOR, FLOOR, WALL ; 31
+	tilecoll FLOOR, WALL, FLOOR, WALL ; 32
+	tilecoll WALL, WALL, WALL, WALL ; 33
+	tilecoll WALL, WALL, FLOOR, WALL ; 34
+	tilecoll FLOOR, WALL, FLOOR, FLOOR ; 35
+	tilecoll FLOOR, FLOOR, FLOOR, LADDER ; 36
 	tilecoll WALL, WALL, WALL, WALL ; 37
-	tilecoll WALL, WALL, FLOOR, WALL ; 38
-	tilecoll FLOOR, WALL, FLOOR, FLOOR ; 39
-	tilecoll FLOOR, FLOOR, FLOOR, LADDER ; 3a
-	tilecoll WALL, WALL, WALL, WALL ; 3b
-	tilecoll WALL, WALL, WALL, WALL ; 3c
-	tilecoll WALL, WALL, WINDOW, WALL ; 3d
-	tilecoll WALL, WALL, WALL, WALL ; 3e
-	tilecoll WALL, WALL, WALL, WALL ; 3f
+	tilecoll WALL, WALL, WINDOW, WALL ; 38
+	tilecoll WALL, WALL, WALL, WALL ; 39
+	tilecoll WALL, WALL, WALL, WALL ; 3a
+; blocks that no map can show were removed (tools/trim_metatiles.py)

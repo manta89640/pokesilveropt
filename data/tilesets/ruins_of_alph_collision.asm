@@ -7,40 +7,30 @@
 	tilecoll WALL, WALL, FLOOR, FLOOR ; 06
 	tilecoll WALL, WALL, FLOOR, FLOOR ; 07
 	tilecoll WALL, WALL, FLOOR, WALL ; 08
-	tilecoll WALL, FLOOR, WALL, WALL ; 09
+	tilecoll FLOOR, FLOOR, WALL, WALL ; 09
 	tilecoll FLOOR, FLOOR, WALL, WALL ; 0a
-	tilecoll FLOOR, FLOOR, WALL, WALL ; 0b
-	tilecoll FLOOR, WALL, WALL, WALL ; 0c
-	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 0d
-	tilecoll WALL, FLOOR, WALL, FLOOR ; 0e
-	tilecoll FLOOR, WALL, FLOOR, WALL ; 0f
-	tilecoll WALL, FLOOR, FLOOR, FLOOR ; 10
-	tilecoll FLOOR, WALL, FLOOR, FLOOR ; 11
-	tilecoll FLOOR, FLOOR, WALL, FLOOR ; 12
-	tilecoll FLOOR, FLOOR, FLOOR, WALL ; 13
-	tilecoll WALL, FLOOR, WALL, WALL ; 14
-	tilecoll FLOOR, FLOOR, WALL, FLOOR ; 15
-	tilecoll FLOOR, FLOOR, FLOOR, WALL ; 16
-	tilecoll FLOOR, WALL, WALL, WALL ; 17
-	tilecoll WALL, WALL, WALL, PIT ; 18
-	tilecoll WALL, WALL, PIT, WALL ; 19
-	tilecoll FLOOR, FLOOR, LADDER, FLOOR ; 1a
-	tilecoll WALL, FLOOR, WALL, FLOOR ; 1b
-	tilecoll FLOOR, WALL, FLOOR, WALL ; 1c
-	tilecoll FLOOR, FLOOR, WALL, FLOOR ; 1d
-	tilecoll FLOOR, FLOOR, FLOOR, WALL ; 1e
-	tilecoll WALL, FLOOR, FLOOR, FLOOR ; 1f
-	tilecoll FLOOR, WALL, FLOOR, FLOOR ; 20
-	tilecoll WALL, FLOOR, WALL, FLOOR ; 21
-	tilecoll WALL, FLOOR, FLOOR, FLOOR ; 22
-	tilecoll FLOOR, WALL, FLOOR, FLOOR ; 23
-	tilecoll WALL, WALL, WALL, WALL ; 24
-	tilecoll WALL, WALL, WALL, WALL ; 25
-	tilecoll WALL, WALL, WALL, WALL ; 26
-	tilecoll WALL, WALL, WALL, WALL ; 27
-	tilecoll WALL, WALL, WALL, WALL ; 28
-	tilecoll WALL, WALL, WALL, WALL ; 29
-	tilecoll WALL, WALL, WALL, WALL ; 2a
-	tilecoll FLOOR, FLOOR, WARP_CARPET_DOWN, WALL ; 2b
-	tilecoll FLOOR, FLOOR, WALL, WARP_CARPET_DOWN ; 2c
-; blocks $2d-$3f were unused (tools/trim_metatiles.py)
+	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 0b
+	tilecoll WALL, FLOOR, WALL, FLOOR ; 0c
+	tilecoll FLOOR, WALL, FLOOR, WALL ; 0d
+	tilecoll WALL, FLOOR, FLOOR, FLOOR ; 0e
+	tilecoll FLOOR, WALL, FLOOR, FLOOR ; 0f
+	tilecoll FLOOR, FLOOR, WALL, FLOOR ; 10
+	tilecoll FLOOR, FLOOR, FLOOR, WALL ; 11
+	tilecoll WALL, FLOOR, WALL, WALL ; 12
+	tilecoll FLOOR, WALL, WALL, WALL ; 13
+	tilecoll WALL, WALL, WALL, PIT ; 14
+	tilecoll WALL, WALL, PIT, WALL ; 15
+	tilecoll FLOOR, FLOOR, LADDER, FLOOR ; 16
+	tilecoll WALL, FLOOR, WALL, FLOOR ; 17
+	tilecoll FLOOR, WALL, FLOOR, WALL ; 18
+	tilecoll FLOOR, FLOOR, WALL, FLOOR ; 19
+	tilecoll FLOOR, FLOOR, FLOOR, WALL ; 1a
+	tilecoll WALL, FLOOR, FLOOR, FLOOR ; 1b
+	tilecoll FLOOR, WALL, FLOOR, FLOOR ; 1c
+	tilecoll WALL, WALL, WALL, WALL ; 1d
+	tilecoll WALL, WALL, WALL, WALL ; 1e
+	tilecoll WALL, WALL, WALL, WALL ; 1f
+	tilecoll WALL, WALL, WALL, WALL ; 20
+	tilecoll FLOOR, FLOOR, WARP_CARPET_DOWN, WALL ; 21
+	tilecoll FLOOR, FLOOR, WALL, WARP_CARPET_DOWN ; 22
+; blocks that no map can show were removed (tools/trim_metatiles.py)

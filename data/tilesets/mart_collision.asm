@@ -34,15 +34,14 @@
 	tilecoll WALL, WALL, WALL, WALL ; 21
 	tilecoll COUNTER, FLOOR, COUNTER, FLOOR ; 22
 	tilecoll FLOOR, MART_SHELF, FLOOR, MART_SHELF ; 23
-	tilecoll WALL, WALL, WALL, WALL ; 24
-	tilecoll FLOOR, FLOOR, WARP_CARPET_DOWN, FLOOR ; 25
-	tilecoll WALL, WALL, FLOOR, FLOOR ; 26
-	tilecoll WALL, WALL, COUNTER, MART_SHELF ; 27
-	tilecoll FLOOR, MART_SHELF, FLOOR, MART_SHELF ; 28
-	tilecoll WALL, FLOOR, FLOOR, FLOOR ; 29
-	tilecoll FLOOR, FLOOR, WARP_CARPET_DOWN, WARP_CARPET_DOWN ; 2a
-	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 2b
-	tilecoll COUNTER, COUNTER, FLOOR, MART_SHELF ; 2c
-	tilecoll FLOOR, MART_SHELF, COUNTER, COUNTER ; 2d
-	tilecoll COUNTER, FLOOR, COUNTER, COUNTER ; 2e
-; blocks $2f-$3f were unused (tools/trim_metatiles.py)
+	tilecoll FLOOR, FLOOR, WARP_CARPET_DOWN, FLOOR ; 24
+	tilecoll WALL, WALL, FLOOR, FLOOR ; 25
+	tilecoll WALL, WALL, COUNTER, MART_SHELF ; 26
+	tilecoll FLOOR, MART_SHELF, FLOOR, MART_SHELF ; 27
+	tilecoll WALL, FLOOR, FLOOR, FLOOR ; 28
+	tilecoll FLOOR, FLOOR, WARP_CARPET_DOWN, WARP_CARPET_DOWN ; 29
+	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 2a
+	tilecoll COUNTER, COUNTER, FLOOR, MART_SHELF ; 2b
+	tilecoll FLOOR, MART_SHELF, COUNTER, COUNTER ; 2c
+	tilecoll COUNTER, FLOOR, COUNTER, COUNTER ; 2d
+; blocks that no map can show were removed (tools/trim_metatiles.py)

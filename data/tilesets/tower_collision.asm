@@ -37,28 +37,28 @@
 	tilecoll FLOOR, FLOOR, WARP_PANEL, FLOOR ; 24
 	tilecoll FLOOR, FLOOR, PIT, FLOOR ; 25
 	tilecoll FLOOR, FLOOR, WARP_CARPET_DOWN, WARP_CARPET_DOWN ; 26
-	tilecoll WARP_CARPET_UP, WARP_CARPET_UP, FLOOR, FLOOR ; 27
-	tilecoll FLOOR, PIT, FLOOR, PIT ; 28
-	tilecoll PIT, PIT, FLOOR, FLOOR ; 29
-	tilecoll WALL, WALL, WALL, WALL ; 2a
-	tilecoll WALL, HOP_LEFT, WALL, WALL ; 2b
-	tilecoll HOP_RIGHT, WALL, WALL, WALL ; 2c
-	tilecoll WALL, WALL, FLOOR, FLOOR ; 2d
-	tilecoll WALL, WALL, WALL, FLOOR ; 2e
-	tilecoll WALL, WALL, FLOOR, WALL ; 2f
-	tilecoll WALL, FLOOR, WALL, FLOOR ; 30
-	tilecoll FLOOR, WALL, FLOOR, WALL ; 31
-	tilecoll WALL, WALL, FLOOR, FLOOR ; 32
-	tilecoll WALL, WALL, WALL, FLOOR ; 33
-	tilecoll WALL, WALL, FLOOR, WALL ; 34
-	tilecoll WALL, FLOOR, WALL, FLOOR ; 35
-	tilecoll FLOOR, WALL, FLOOR, WALL ; 36
-	tilecoll PIT, PIT, FLOOR, FLOOR ; 37
-	tilecoll FLOOR, PIT, FLOOR, PIT ; 38
-	tilecoll PIT, FLOOR, PIT, FLOOR ; 39
-	tilecoll FLOOR, FLOOR, FLOOR, LADDER ; 3a
-	tilecoll WALL, WALL, FLOOR, FLOOR ; 3b
-	tilecoll WALL, HOP_DOWN_LEFT, WALL, WALL ; 3c
-	tilecoll WALL, HOP_DOWN, WALL, WALL ; 3d
-	tilecoll HOP_DOWN, WALL, WALL, WALL ; 3e
-	tilecoll HOP_DOWN_RIGHT, WALL, WALL, WALL ; 3f
+	tilecoll FLOOR, PIT, FLOOR, PIT ; 27
+	tilecoll PIT, PIT, FLOOR, FLOOR ; 28
+	tilecoll WALL, WALL, WALL, WALL ; 29
+	tilecoll WALL, HOP_LEFT, WALL, WALL ; 2a
+	tilecoll HOP_RIGHT, WALL, WALL, WALL ; 2b
+	tilecoll WALL, WALL, FLOOR, FLOOR ; 2c
+	tilecoll WALL, WALL, WALL, FLOOR ; 2d
+	tilecoll WALL, WALL, FLOOR, WALL ; 2e
+	tilecoll WALL, FLOOR, WALL, FLOOR ; 2f
+	tilecoll FLOOR, WALL, FLOOR, WALL ; 30
+	tilecoll WALL, WALL, FLOOR, FLOOR ; 31
+	tilecoll WALL, WALL, WALL, FLOOR ; 32
+	tilecoll WALL, WALL, FLOOR, WALL ; 33
+	tilecoll WALL, FLOOR, WALL, FLOOR ; 34
+	tilecoll FLOOR, WALL, FLOOR, WALL ; 35
+	tilecoll PIT, PIT, FLOOR, FLOOR ; 36
+	tilecoll FLOOR, PIT, FLOOR, PIT ; 37
+	tilecoll PIT, FLOOR, PIT, FLOOR ; 38
+	tilecoll FLOOR, FLOOR, FLOOR, LADDER ; 39
+	tilecoll WALL, WALL, FLOOR, FLOOR ; 3a
+	tilecoll WALL, HOP_DOWN_LEFT, WALL, WALL ; 3b
+	tilecoll WALL, HOP_DOWN, WALL, WALL ; 3c
+	tilecoll HOP_DOWN, WALL, WALL, WALL ; 3d
+	tilecoll HOP_DOWN_RIGHT, WALL, WALL, WALL ; 3e
+; blocks that no map can show were removed (tools/trim_metatiles.py)

@@ -26,7 +26,7 @@ MahoganyMart1FStaircaseCallback:
 	endcallback
 
 .ShowStairs:
-	changeblock 6, 2, $1e ; stairs
+	changeblock 6, 2, $17 ; stairs
 	endcallback
 
 MahoganyMart1FPharmacistScript:
@@ -87,7 +87,7 @@ MahoganyMart1FLanceUncoversStaircaseScript:
 	waitbutton
 	showemote EMOTE_SHOCK, MAHOGANYMART1F_PHARMACIST, 10
 	playsound SFX_FAINT
-	changeblock 6, 2, $1e ; stairs
+	changeblock 6, 2, $17 ; stairs
 	refreshmap
 	closetext
 	setevent EVENT_UNCOVERED_STAIRCASE_IN_MAHOGANY_MART

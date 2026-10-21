@@ -18,22 +18,15 @@
 	tilecoll WALL, WALL, FLOOR, FLOOR ; 11
 	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 12
 	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 13
-	tilecoll WALL, WALL, FLOOR, FLOOR ; 14
-	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 15
-	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 16
-	tilecoll WALL, WALL, FLOOR, FLOOR ; 17
-	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 18
-	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 19
-	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 1a
-	tilecoll WALL, FLOOR, WALL, FLOOR ; 1b
-	tilecoll WALL, FLOOR, WALL, FLOOR ; 1c
-	tilecoll WALL, FLOOR, WALL, FLOOR ; 1d
-	tilecoll WALL, FLOOR, WALL, FLOOR ; 1e
-	tilecoll TOWN_MAP, STAIRCASE, FLOOR, FLOOR ; 1f
-	tilecoll FLOOR, WALL, FLOOR, FLOOR ; 20
-	tilecoll FLOOR, WALL, FLOOR, FLOOR ; 21
-	tilecoll FLOOR, WALL, FLOOR, WALL ; 22
-	tilecoll WALL, STAIRCASE, FLOOR, FLOOR ; 23
-	tilecoll WALL, STAIRCASE, FLOOR, FLOOR ; 24
-	tilecoll WALL, STAIRCASE, FLOOR, FLOOR ; 25
-; blocks $26-$3f were unused (tools/trim_metatiles.py)
+	tilecoll WALL, FLOOR, WALL, FLOOR ; 14
+	tilecoll WALL, FLOOR, WALL, FLOOR ; 15
+	tilecoll WALL, FLOOR, WALL, FLOOR ; 16
+	tilecoll WALL, FLOOR, WALL, FLOOR ; 17
+	tilecoll TOWN_MAP, STAIRCASE, FLOOR, FLOOR ; 18
+	tilecoll FLOOR, WALL, FLOOR, FLOOR ; 19
+	tilecoll FLOOR, WALL, FLOOR, FLOOR ; 1a
+	tilecoll FLOOR, WALL, FLOOR, WALL ; 1b
+	tilecoll WALL, STAIRCASE, FLOOR, FLOOR ; 1c
+	tilecoll WALL, STAIRCASE, FLOOR, FLOOR ; 1d
+	tilecoll WALL, STAIRCASE, FLOOR, FLOOR ; 1e
+; blocks that no map can show were removed (tools/trim_metatiles.py)
