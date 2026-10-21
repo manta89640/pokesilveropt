@@ -105,7 +105,8 @@ DEF SCENE_SCRIPT_SIZE EQU  4 ; scene_script
 DEF CALLBACK_SIZE     EQU  3 ; callback
 DEF WARP_EVENT_SIZE   EQU  5 ; warp_event
 DEF COORD_EVENT_SIZE  EQU  5 ; coord_event (without the filler bytes of wCurCoordEvent)
-DEF BG_EVENT_SIZE     EQU  5 ; bg_event
+DEF BG_EVENT_SIZE     EQU  5 ; bg_event, with its function
+DEF BG_EVENT_FUNCTION_F EQU 7 ; set in y if a bg_event's function is not BGEVENT_READ
 ; An object_event is a map_object without its initial MAPOBJECT_OBJECT_STRUCT_ID or final padding
 DEF OBJECT_EVENT_SIZE EQU MAPOBJECT_LENGTH - 3 ; 13, once read into a map object
 

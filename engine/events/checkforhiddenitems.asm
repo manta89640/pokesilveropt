@@ -23,8 +23,10 @@ CheckForHiddenItems:
 ; Store the counter in wRemainingBGEventCount, and store the bg_event pointer in the stack.
 	ld [wRemainingBGEventCount], a
 	push hl
-; Get the Y coordinate of the BG event.
+; Get the Y coordinate of the BG event, and whether it has a function.
 	call .GetFarByte
+	ld b, a
+	and ~(1 << BG_EVENT_FUNCTION_F)
 	ld e, a
 ; Is the Y coordinate of the BG event on the screen?  If not, go to the next BG event.
 	ld a, [wBottomRightYCoord]
@@ -41,6 +43,8 @@ CheckForHiddenItems:
 	cp SCREEN_WIDTH / 2
 	jr nc, .next
 ; Is this BG event a hidden item?  If not, go to the next BG event.
+	bit BG_EVENT_FUNCTION_F, b
+	jr z, .next ; BGEVENT_READ
 	call .GetFarByte
 	cp BGEVENT_ITEM
 	jr nz, .next
@@ -58,9 +62,15 @@ CheckForHiddenItems:
 	jr z, .itemnearby
 
 .next
-; Restore the bg_event pointer and increment it by the length of a bg_event.
+; Restore the bg_event pointer and increment it by the length of a bg_event,
+; which is 4 bytes, or 5 if it has a function.
 	pop hl
-	ld bc, BG_EVENT_SIZE
+	call .GetFarByte
+	rlca ; BG_EVENT_FUNCTION_F
+	ld bc, BG_EVENT_SIZE - 2
+	jr nc, .no_function
+	inc c
+.no_function
 	add hl, bc
 ; Restore the BG event counter and decrement it.  If it hits zero, there are no hidden items in range.
 	ld a, [wRemainingBGEventCount]

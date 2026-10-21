@@ -941,8 +941,19 @@ ReadBGEvents::
 	and a
 	ret z
 
-	ld bc, BG_EVENT_SIZE
-	jp AddNTimes
+.skip
+; A bg_event is 4 bytes, or 5 if it has a function
+	ld a, [hl]
+	rlca ; BG_EVENT_FUNCTION_F
+	ld a, BG_EVENT_SIZE - 1
+	adc l
+	ld l, a
+	jr nc, .no_carry
+	inc h
+.no_carry
+	dec c
+	jr nz, .skip
+	ret
 
 ReadObjectEvents::
 	push hl
@@ -2165,6 +2176,8 @@ CheckIfFacingTileCoordIsBGEvent::
 .loop
 	push hl
 	ld a, [hli]
+	ld b, a
+	and ~(1 << BG_EVENT_FUNCTION_F)
 	cp e
 	jr nz, .next
 	ld a, [hli]
@@ -2173,9 +2186,12 @@ CheckIfFacingTileCoordIsBGEvent::
 	jr .copysign
 
 .next
+; A bg_event is 4 bytes, or 5 if it has a function
 	pop hl
-	ld a, BG_EVENT_SIZE
-	add l
+	ld a, b
+	rlca ; BG_EVENT_FUNCTION_F
+	ld a, BG_EVENT_SIZE - 1
+	adc l
 	ld l, a
 	jr nc, .nocarry
 	inc h
@@ -2187,9 +2203,24 @@ CheckIfFacingTileCoordIsBGEvent::
 	ret
 
 .copysign
+; Copy it to wCurBGEvent, with BGEVENT_READ for a bg_event without a function
 	pop hl
 	ld de, wCurBGEvent
-	ld bc, BG_EVENT_SIZE
+	ld a, [hli]
+	and ~(1 << BG_EVENT_FUNCTION_F)
+	ld [de], a
+	inc de
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, BGEVENT_READ
+	bit BG_EVENT_FUNCTION_F, b
+	jr z, .got_function
+	ld a, [hli]
+.got_function
+	ld [de], a
+	inc de
+	ld bc, 2 ; script pointer
 .tailmerge_2164: ; (tools/tailmerge.py)
 	call CopyBytes
 	scf

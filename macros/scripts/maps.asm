@@ -97,7 +97,14 @@ MACRO bg_event
 ;\2: y: top to bottom, starts at 0
 ;\3: function: a BGEVENT_* constant
 ;\4: script pointer
-	db \2, \1, \3
+; A bg_event that's read (BGEVENT_READ) leaves out its function; the others
+; set bit BG_EVENT_FUNCTION_F of y, and have it after x.
+	assert (\2) < (1 << BG_EVENT_FUNCTION_F), "bg_event y is too large"
+	if (\3) == BGEVENT_READ
+		db \2, \1
+	else
+		db (\2) | (1 << BG_EVENT_FUNCTION_F), \1, \3
+	endc
 	dw \4
 	DEF {_NUM_BG_EVENTS} += 1
 ENDM
