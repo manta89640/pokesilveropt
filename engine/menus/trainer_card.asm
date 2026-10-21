@@ -621,7 +621,8 @@ INCBIN "gfx/trainer_card/trainer_card.2bpp"
 
 CardStatusGFX: INCBIN "gfx/trainer_card/card_status.2bpp"
 
-LeaderGFX:  INCBIN "gfx/trainer_card/leaders.2bpp"
+; Pages 2 and 3 use the same graphics
+LeaderGFX:
 LeaderGFX2: INCBIN "gfx/trainer_card/leaders.2bpp"
-BadgeGFX:   INCBIN "gfx/trainer_card/badges.2bpp"
+BadgeGFX:
 BadgeGFX2:  INCBIN "gfx/trainer_card/badges.2bpp"

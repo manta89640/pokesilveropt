@@ -12,7 +12,7 @@ tools/tests/compare.py original/pokesilver.gbc pokesilver.gbc tools/tests/scenar
 # Make a save with a full Pokédex, items and a party (on the original ROM),
 # then run the scenarios that start from it
 tools/tests/play.py original/pokesilver.gbc test_output/save tools/tests/scenarios/make_save.txt
-for s in continue pokedex pack pokegear phone radio battle services; do
+for s in continue pokedex pack pokegear phone radio trainer_card battle services; do
 	tools/tests/compare.py original/pokesilver.gbc pokesilver.gbc tools/tests/scenarios/$s.txt test_output/save/save.ram
 done
 ```
