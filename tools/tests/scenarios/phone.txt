@@ -5,6 +5,9 @@ press a 120
 press a 200
 press a 200
 wait 100
+# Add Schoolboy Jack, Pokéfan Beverly and Sailor Huey to the phone list, which
+# shows trainers' names and classes
+poke wPhoneList+2 05 06 07
 press start 40
 press down 20
 press down 20
@@ -20,4 +23,3 @@ shot phone_mom
 mashshot a 7 60 call
 press b 60
 shot after_call
-
