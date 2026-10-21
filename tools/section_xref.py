@@ -120,8 +120,38 @@ def parse_object(path):
 	return syms, sects
 
 
+def rom0_report(objects, sym_section, section_type, window=24):
+	"""ROM0 code using a ROMX address with no BANK() of that section nearby."""
+	for syms, sects in objects:
+		for sname, stype, size, patches in sects:
+			if stype != 'ROM0':
+				continue
+			banks_at = []
+			nears = []
+			for offset, ptype, rpn, line in patches:
+				refs = list(parse_rpn(rpn))
+				for kind, v in refs:
+					if kind == 'banksym':
+						target = sym_section.get(syms[v][0])
+						banks_at.append((offset, target))
+					elif kind == 'banksect':
+						banks_at.append((offset, v))
+				sym_targets = [sym_section.get(syms[v][0]) for kind, v in refs if kind == 'sym']
+				if len(sym_targets) >= 2 and len(set(sym_targets)) == 1:
+					continue
+				for kind, v in refs:
+					if kind == 'sym':
+						target = sym_section.get(syms[v][0])
+						if target and section_type.get(target) == 'ROMX':
+							nears.append((offset, target, syms[v][0], line))
+			for offset, target, symbol, line in nears:
+				if not any(abs(o - offset) <= window and t == target for o, t in banks_at):
+					print(f'ROM0 {sname!r}+${offset:04x} (line {line}) -> {target!r}: {symbol}')
+
+
 def main():
-	objects = [parse_object(p) for p in sys.argv[1:]]
+	rom0 = sys.argv[1] == '--rom0'
+	objects = [parse_object(p) for p in sys.argv[1 + rom0:]]
 	# Map every defined symbol to its section name
 	sym_section = {}
 	section_type = {}
@@ -131,6 +161,10 @@ def main():
 		for name, t, sect, value in syms:
 			if t != 1 and sect is not None and sect >= 0:
 				sym_section.setdefault(name, sects[sect][0])
+
+	if rom0:
+		rom0_report(objects, sym_section, section_type)
+		return
 
 	near = collections.defaultdict(lambda: collections.defaultdict(int))
 	banked = collections.defaultdict(set)

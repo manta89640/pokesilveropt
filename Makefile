@@ -138,7 +138,7 @@ $(pokesilver_vc_obj):    RGBASMFLAGS += -D _SILVER -D _SILVER_VC
 
 %.patch: %_vc.gbc %.gbc vc/%.patch.template
 # Ignore the checksums added by tools/stadium at the end of the ROM
-	tools/make_patch --ignore 0x1ffdf8:0x208 $*_vc.sym $^ $@
+	tools/make_patch --ignore 0xffef8:0x108 $*_vc.sym $^ $@
 
 rgbdscheck.o: rgbdscheck.asm
 	$(RGBASM) -o $@ $<
