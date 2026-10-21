@@ -51,8 +51,7 @@ SaveMenu_CopyTilemapAtOnce:
 	ld l, 0
 	ld a, SCREEN_HEIGHT
 	ldh [hTilesPerCycle], a
-	ld b, STAT_BUSY
-	ld c, LOW(rSTAT)
+	lb bc, STAT_BUSY, LOW(rSTAT)
 
 .loop
 rept SCREEN_WIDTH / 2

@@ -85,14 +85,12 @@ LoadBattleTransitionGFX:
 ; fill visible area of BGMap0 with BATTLETRANSITION_BLACK
 	ld de, wDecompressScratch
 	hlbgcoord 0, 0
-	ld b, BANK(@)
-	ld c, TILEMAP_WIDTH * (TILEMAP_HEIGHT - 12) / TILE_SIZE
+	lb bc, BANK(@), TILEMAP_WIDTH * (TILEMAP_HEIGHT - 12) / TILE_SIZE
 	call Request2bpp
 
 	ld de, BattleTransitionTiles
 	ld hl, vTiles0 tile BATTLETRANSITION_SQUARE
-	ld b, BANK(BattleTransitionTiles)
-	ld c, 2
+	lb bc, BANK(BattleTransitionTiles), 2
 	jp Request2bpp
 
 BattleTransitionTiles:

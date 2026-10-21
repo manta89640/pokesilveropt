@@ -235,8 +235,7 @@ _ShowLinkBattleParticipants:
 	call ClearBGPalettes
 	call LoadFontsExtra
 	hlcoord 3, 3
-	ld b, 9
-	ld c, 12
+	lb bc, 9, 12
 	call Textbox
 	hlcoord 4, 5
 	ld de, wPlayerName

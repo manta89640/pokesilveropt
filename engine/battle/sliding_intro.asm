@@ -1,6 +1,5 @@
 BattleIntroSlidingPics:
-	ld b, $70
-	ld c, $90
+	lb bc, $70, $90
 	ld a, c
 	ldh [hSCX], a
 	call DelayFrame
@@ -14,8 +13,7 @@ BattleIntroSlidingPics:
 	ld h, b
 	ld l, $40
 	call .subfunction2
-	ld h, $00
-	ld l, $60
+	lb hl, $00, $60
 	call .subfunction2
 	call .subfunction1
 	pop bc

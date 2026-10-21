@@ -183,8 +183,7 @@ MainMenu_PrintCurrentTimeAndDay:
 	and RTC_RESET
 	jr nz, .TimeFail
 	hlcoord 0, 12
-	ld b, 4
-	ld c, 13
+	lb bc, 4, 13
 	jp Textbox
 
 .TimeFail:

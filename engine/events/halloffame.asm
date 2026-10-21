@@ -522,8 +522,7 @@ HOF_AnimatePlayerPic:
 
 	ld hl, ChrisBackpic
 	ld de, vTiles2 tile $31
-	ld b, BANK(ChrisBackpic)
-	ld c, 7 * 7
+	lb bc, BANK(ChrisBackpic), 7 * 7
 	predef DecompressGet2bpp
 
 	ld a, $31
