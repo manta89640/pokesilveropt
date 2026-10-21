@@ -5,8 +5,8 @@ This is a fork of [pret/pokegold](https://github.com/pret/pokegold), the disasse
 | | Original | This fork |
 |-|-|-|
 | ROM file | 2,097,152 bytes (128 banks) | **1,048,576 bytes (64 banks)** |
-| Content | 1,155,066 bytes | 1,006,334 bytes |
-| Free space | 942,086 bytes | 42,242 bytes |
+| Content | 1,155,066 bytes | 981,391 bytes |
+| Free space | 942,086 bytes | 67,185 bytes |
 
 The figures are for Silver; Gold is within a few hundred bytes. The debug ROMs keep uncompressed text (their menus are in Japanese) and still build at 2 MB.
 
@@ -21,16 +21,22 @@ To set up the repository, see [INSTALL.md](INSTALL.md). `make` builds `pokegold.
 
 **Optimal LZ compression.** Graphics are compressed with `tools/lzcompress`'s optimal mode instead of byte-for-byte matching settings.
 
+**Compressed map blocks** (`home/map.asm`). Map block data is LZ-compressed like graphics. When a map loads, its blocks and those of each connected map are decompressed in turn to the SRAM scratch buffer, and copied from there.
+
+**Compressed overworld sprites** (`engine/overworld/overworld.asm`). Overworld sprite tiles are LZ-compressed, except the player, rival, Mom and Poké Ball, whose tiles other code loads directly. `GetSprite` decompresses them to a 384-byte SRAM buffer placed in space the save layout leaves free.
+
+**Pokédex footprints** (`gfx/footprints.asm`). Each distinct footprint is stored once, with a table mapping species to footprints; 61 of 251 were duplicates.
+
 **Dead code and data** (`tools/find_dead_code.py`). Code and data that nothing can reach are removed: beta map blocks, unused graphics and text, the debug color picker, Safari Zone leftovers, and so on. The tool follows references and fallthrough from code and scripts.
 
-**Peephole optimizations** (`tools/peephole.py`). Tail calls become jumps, jumps to `ret` become `ret cc`, and near `jp`s become `jr`. Every rewrite is smaller and no slower; serial, link, printer and infrared code is left alone.
+**Peephole optimizations** (`tools/peephole.py`). Tail calls become jumps, jumps to `ret` become `ret cc`, near `jp`s become `jr`, and pairs of constant loads become `lb`. Every rewrite is smaller and no slower; serial, link, printer and infrared code is left alone.
 
-Savings by step (Silver, bytes): text dictionary 104,905 + 12,589; LZ 11,456; dead code 17,742; peephole 1,770.
+Savings by step (Silver, bytes): text dictionary 117,494; dead code 17,742; overworld sprites 12,311; LZ 11,456; map blocks 10,684; footprints 1,864; peephole 1,854.
 
 
 ## What is unchanged
 
-- RAM, SRAM and link data layouts, so saves are compatible with the original games, and trades and battles with them still work.
+- RAM, SRAM and link data layouts, so saves are compatible with the original games, and trades and battles with them still work. (The sprite buffer uses SRAM that the save layout leaves free.)
 - All text, as printed on screen. `tools/verify_text.py` decodes every text in a build and compares it with the original ROM.
 - Gameplay timing. Text prints at the same speed; some code runs slightly faster.
 
@@ -38,7 +44,8 @@ Savings by step (Silver, bytes): text dictionary 104,905 + 12,589; LZ 11,456; de
 ## Verification
 
 - `tools/verify_text.py original.gbc pokesilver.gbc` checks all 5,000+ texts, Pokédex entries, and move and item descriptions.
-- The changes were also played in an emulator (PyBoy) next to the original ROMs: the intro and new game, Elm's lab, menus, every Pokédex entry, the Pack, the Pokégear, and wild battles. Apart from timing, the screens match.
+- `tools/tests/maps.py` loads all 368 maps and checks that their blocks, with the strips of connected maps, match the original ROM.
+- The changes were also played in an emulator (PyBoy) next to the original ROMs with the scenarios in `tools/tests`: the intro and new game, Elm's lab, menus, every Pokédex entry, the Pack, the Pokégear phone and radio, a Pokémon Center, a Mart, and wild battles. Apart from timing, the screens match. See [tools/tests/README.md](tools/tests/README.md).
 
 
 ## See also
