@@ -1076,8 +1076,8 @@ _DebugRoom_FinishGetName:
 	ret
 
 DebugRoom_UpdateExpForLevel:
-	ld hl, BaseData + BASE_GROWTH_RATE
-	ld bc, BASE_DATA_SIZE
+	ld hl, BaseData + BASE_ROM_GROWTH_RATE
+	ld bc, BASE_ROM_DATA_SIZE
 	ld a, [wDebugRoomMonSpecies]
 	dec a
 	call AddNTimes

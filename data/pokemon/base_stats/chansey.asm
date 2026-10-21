@@ -1,4 +1,4 @@
-	db CHANSEY ; 113
+	; CHANSEY ; dex number 113
 
 	db 250,  05,  05,  50,  35, 105
 	;   hp  atk  def  spd  sat  sdf
@@ -8,15 +8,15 @@
 	db 255 ; base exp
 	db NO_ITEM, LUCKY_EGG ; items
 	db GENDER_F100 ; gender ratio
-	db 100 ; unknown 1
+	; unknown 1 (BASE_UNKNOWN_1_VALUE)
 	db 40 ; step cycles to hatch
-	db 5 ; unknown 2
+	; unknown 2 (BASE_UNKNOWN_2_VALUE)
 IF DEF(_GOLD)
 	INCBIN "gfx/pokemon/chansey/front_gold.dimensions"
 ELIF DEF(_SILVER)
 	INCBIN "gfx/pokemon/chansey/front_silver.dimensions"
 ENDC
-	dw NULL, NULL ; unused (beta front/back pics)
+	; unused beta front/back pics (NULL)
 	db GROWTH_FAST ; growth rate
 	dn EGG_FAIRY, EGG_FAIRY ; egg groups
 

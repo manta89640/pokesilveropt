@@ -1,4 +1,4 @@
-	db RAPIDASH ; 078
+	; RAPIDASH ; dex number 078
 
 	db  65, 100,  70, 105,  80,  80
 	;   hp  atk  def  spd  sat  sdf
@@ -8,15 +8,15 @@
 	db 192 ; base exp
 	db NO_ITEM, NO_ITEM ; items
 	db GENDER_F50 ; gender ratio
-	db 100 ; unknown 1
+	; unknown 1 (BASE_UNKNOWN_1_VALUE)
 	db 20 ; step cycles to hatch
-	db 5 ; unknown 2
+	; unknown 2 (BASE_UNKNOWN_2_VALUE)
 IF DEF(_GOLD)
 	INCBIN "gfx/pokemon/rapidash/front_gold.dimensions"
 ELIF DEF(_SILVER)
 	INCBIN "gfx/pokemon/rapidash/front_silver.dimensions"
 ENDC
-	dw NULL, NULL ; unused (beta front/back pics)
+	; unused beta front/back pics (NULL)
 	db GROWTH_MEDIUM_FAST ; growth rate
 	dn EGG_GROUND, EGG_GROUND ; egg groups
 

@@ -31,6 +31,24 @@ DEF BASE_EGG_GROUPS  rb
 DEF BASE_TMHM        rb (NUM_TM_HM + 7) / 8
 DEF BASE_DATA_SIZE EQU _RS
 
+; BaseData entries leave out the fields that are the same for every species;
+; GetBaseData fills them in to make wCurBaseData (see BASE_* above)
+rsreset
+DEF BASE_ROM_STATS       rb NUM_STATS
+DEF BASE_ROM_TYPES       rw
+DEF BASE_ROM_CATCH_RATE  rb
+DEF BASE_ROM_EXP         rb
+DEF BASE_ROM_ITEMS       rw
+DEF BASE_ROM_GENDER      rb
+DEF BASE_ROM_EGG_STEPS   rb
+DEF BASE_ROM_PIC_SIZE    rb
+DEF BASE_ROM_GROWTH_RATE rb
+DEF BASE_ROM_EGG_GROUPS  rb
+DEF BASE_ROM_TMHM        rb (NUM_TM_HM + 7) / 8
+DEF BASE_ROM_DATA_SIZE EQU _RS
+DEF BASE_UNKNOWN_1_VALUE EQU 100 ; at BASE_GENDER + 1
+DEF BASE_UNKNOWN_2_VALUE EQU 5   ; at BASE_EGG_STEPS + 1
+
 ; gender ratio constants
 DEF GENDER_F0      EQU   0 percent
 DEF GENDER_F12_5   EQU  12 percent + 1

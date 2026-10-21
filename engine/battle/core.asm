@@ -3106,8 +3106,8 @@ IsThePlayerMonTypesEffectiveAgainstOTMon:
 	add hl, bc
 	ld a, [hl]
 	dec a
-	ld hl, BaseData + BASE_TYPES
-	ld bc, BASE_DATA_SIZE
+	ld hl, BaseData + BASE_ROM_TYPES
+	ld bc, BASE_ROM_DATA_SIZE
 	call AddNTimes
 	ld de, wEnemyMonType
 	ld bc, BASE_CATCH_RATE - BASE_TYPES

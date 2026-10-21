@@ -1,4 +1,4 @@
-	db ENTEI ; 244
+	; ENTEI ; dex number 244
 
 	db 115, 115,  85, 100,  90,  75
 	;   hp  atk  def  spd  sat  sdf
@@ -8,11 +8,11 @@
 	db 217 ; base exp
 	db NO_ITEM, NO_ITEM ; items
 	db GENDER_UNKNOWN ; gender ratio
-	db 100 ; unknown 1
+	; unknown 1 (BASE_UNKNOWN_1_VALUE)
 	db 80 ; step cycles to hatch
-	db 5 ; unknown 2
+	; unknown 2 (BASE_UNKNOWN_2_VALUE)
 	INCBIN "gfx/pokemon/entei/front.dimensions"
-	dw NULL, NULL ; unused (beta front/back pics)
+	; unused beta front/back pics (NULL)
 	db GROWTH_SLOW ; growth rate
 	dn EGG_NONE, EGG_NONE ; egg groups
 

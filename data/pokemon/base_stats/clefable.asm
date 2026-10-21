@@ -1,4 +1,4 @@
-	db CLEFABLE ; 036
+	; CLEFABLE ; dex number 036
 
 	db  95,  70,  73,  60,  85,  90
 	;   hp  atk  def  spd  sat  sdf
@@ -8,15 +8,15 @@
 	db 129 ; base exp
 	db MYSTERYBERRY, MOON_STONE ; items
 	db GENDER_F75 ; gender ratio
-	db 100 ; unknown 1
+	; unknown 1 (BASE_UNKNOWN_1_VALUE)
 	db 10 ; step cycles to hatch
-	db 5 ; unknown 2
+	; unknown 2 (BASE_UNKNOWN_2_VALUE)
 IF DEF(_GOLD)
 	INCBIN "gfx/pokemon/clefable/front_gold.dimensions"
 ELIF DEF(_SILVER)
 	INCBIN "gfx/pokemon/clefable/front_silver.dimensions"
 ENDC
-	dw NULL, NULL ; unused (beta front/back pics)
+	; unused beta front/back pics (NULL)
 	db GROWTH_FAST ; growth rate
 	dn EGG_FAIRY, EGG_FAIRY ; egg groups
 

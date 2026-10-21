@@ -1,4 +1,4 @@
-	db FEAROW ; 022
+	; FEAROW ; dex number 022
 
 	db  65,  90,  65, 100,  61,  61
 	;   hp  atk  def  spd  sat  sdf
@@ -8,15 +8,15 @@
 	db 162 ; base exp
 	db NO_ITEM, SHARP_BEAK ; items
 	db GENDER_F50 ; gender ratio
-	db 100 ; unknown 1
+	; unknown 1 (BASE_UNKNOWN_1_VALUE)
 	db 15 ; step cycles to hatch
-	db 5 ; unknown 2
+	; unknown 2 (BASE_UNKNOWN_2_VALUE)
 IF DEF(_GOLD)
 	INCBIN "gfx/pokemon/fearow/front_gold.dimensions"
 ELIF DEF(_SILVER)
 	INCBIN "gfx/pokemon/fearow/front_silver.dimensions"
 ENDC
-	dw NULL, NULL ; unused (beta front/back pics)
+	; unused beta front/back pics (NULL)
 	db GROWTH_MEDIUM_FAST ; growth rate
 	dn EGG_FLYING, EGG_FLYING ; egg groups
 

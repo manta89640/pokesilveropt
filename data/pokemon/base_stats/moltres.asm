@@ -1,4 +1,4 @@
-	db MOLTRES ; 146
+	; MOLTRES ; dex number 146
 
 	db  90, 100,  90,  90, 125,  85
 	;   hp  atk  def  spd  sat  sdf
@@ -8,15 +8,15 @@
 	db 217 ; base exp
 	db NO_ITEM, NO_ITEM ; items
 	db GENDER_UNKNOWN ; gender ratio
-	db 100 ; unknown 1
+	; unknown 1 (BASE_UNKNOWN_1_VALUE)
 	db 80 ; step cycles to hatch
-	db 5 ; unknown 2
+	; unknown 2 (BASE_UNKNOWN_2_VALUE)
 IF DEF(_GOLD)
 	INCBIN "gfx/pokemon/moltres/front_gold.dimensions"
 ELIF DEF(_SILVER)
 	INCBIN "gfx/pokemon/moltres/front_silver.dimensions"
 ENDC
-	dw NULL, NULL ; unused (beta front/back pics)
+	; unused beta front/back pics (NULL)
 	db GROWTH_SLOW ; growth rate
 	dn EGG_NONE, EGG_NONE ; egg groups
 

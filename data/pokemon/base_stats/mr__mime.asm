@@ -1,4 +1,4 @@
-	db MR__MIME ; 122
+	; MR__MIME ; dex number 122
 
 	db  40,  45,  65,  90, 100, 120
 	;   hp  atk  def  spd  sat  sdf
@@ -8,15 +8,15 @@
 	db 136 ; base exp
 	db NO_ITEM, MYSTERYBERRY ; items
 	db GENDER_F50 ; gender ratio
-	db 100 ; unknown 1
+	; unknown 1 (BASE_UNKNOWN_1_VALUE)
 	db 25 ; step cycles to hatch
-	db 5 ; unknown 2
+	; unknown 2 (BASE_UNKNOWN_2_VALUE)
 IF DEF(_GOLD)
 	INCBIN "gfx/pokemon/mr__mime/front_gold.dimensions"
 ELIF DEF(_SILVER)
 	INCBIN "gfx/pokemon/mr__mime/front_silver.dimensions"
 ENDC
-	dw NULL, NULL ; unused (beta front/back pics)
+	; unused beta front/back pics (NULL)
 	db GROWTH_MEDIUM_FAST ; growth rate
 	dn EGG_HUMANSHAPE, EGG_HUMANSHAPE ; egg groups
 

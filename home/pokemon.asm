@@ -216,13 +216,36 @@ GetBaseData::
 	cp EGG
 	jr z, .egg
 
-; Get BaseData
+; Get BaseData, and fill in the fields it leaves out
 	dec a
-	ld bc, BASE_DATA_SIZE
+	ld bc, BASE_ROM_DATA_SIZE
 	ld hl, BaseData
 	call AddNTimes
-	ld de, wCurBaseData
-	ld bc, BASE_DATA_SIZE
+	ld de, wCurBaseData + BASE_STATS
+	ld bc, BASE_ROM_EGG_STEPS - BASE_ROM_STATS ; stats to gender
+	call CopyBytes
+	ld a, BASE_UNKNOWN_1_VALUE
+	ld [de], a
+	inc de
+	ld a, [hli] ; egg steps
+	ld [de], a
+	inc de
+	ld a, BASE_UNKNOWN_2_VALUE
+	ld [de], a
+	inc de
+	ld a, [hli] ; pic size
+	ld [de], a
+	inc de
+	xor a ; unused front and back pics
+	ld [de], a
+	inc de
+	ld [de], a
+	inc de
+	ld [de], a
+	inc de
+	ld [de], a
+	inc de
+	ld bc, BASE_ROM_DATA_SIZE - BASE_ROM_GROWTH_RATE ; growth rate to TM/HM learnset
 	call CopyBytes
 	jr .end
 

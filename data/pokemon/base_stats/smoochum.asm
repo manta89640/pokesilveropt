@@ -1,4 +1,4 @@
-	db SMOOCHUM ; 238
+	; SMOOCHUM ; dex number 238
 
 	db  45,  30,  15,  65,  85,  65
 	;   hp  atk  def  spd  sat  sdf
@@ -8,15 +8,15 @@
 	db 87 ; base exp
 	db ICE_BERRY, ICE_BERRY ; items
 	db GENDER_F100 ; gender ratio
-	db 100 ; unknown 1
+	; unknown 1 (BASE_UNKNOWN_1_VALUE)
 	db 25 ; step cycles to hatch
-	db 5 ; unknown 2
+	; unknown 2 (BASE_UNKNOWN_2_VALUE)
 IF DEF(_GOLD)
 	INCBIN "gfx/pokemon/smoochum/front_gold.dimensions"
 ELIF DEF(_SILVER)
 	INCBIN "gfx/pokemon/smoochum/front_silver.dimensions"
 ENDC
-	dw NULL, NULL ; unused (beta front/back pics)
+	; unused beta front/back pics (NULL)
 	db GROWTH_MEDIUM_FAST ; growth rate
 	dn EGG_NONE, EGG_NONE ; egg groups
 

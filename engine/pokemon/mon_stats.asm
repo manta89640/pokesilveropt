@@ -200,8 +200,8 @@ GetGender:
 	push bc
 	ld a, [wCurPartySpecies]
 	dec a
-	ld hl, BaseData + BASE_GENDER
-	ld bc, BASE_DATA_SIZE
+	ld hl, BaseData + BASE_ROM_GENDER
+	ld bc, BASE_ROM_DATA_SIZE
 	call AddNTimes
 	pop bc
 
