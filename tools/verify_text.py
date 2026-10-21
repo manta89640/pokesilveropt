@@ -6,7 +6,8 @@ Usage: tools/verify_text.py reference.gbc modified.gbc [source_dir]
 
 Both ROMs need .sym files next to them. Text labels are found by scanning the
 source for labels followed by text macros, Pokédex entries, move/item
-descriptions, and the item, move and trainer class name lists. Each text is
+descriptions, landmark names, credits, trainer names and parties, and the
+item, move and trainer class name lists. Each text is
 decoded (following text_far and expanding
 dictionary codes) and the results are compared.
 """
@@ -177,13 +178,21 @@ def find_text_labels(src):
 						kind = 'text'
 					elif re.match(r'data/pokemon/dex_entries_(gold|silver)\.asm$', relpath):
 						kind = 'dex'
-					elif relpath in ('data/moves/descriptions.asm', 'data/items/descriptions.asm') \
-							and re.match(r'^\s*db\s+"', code):
+					elif relpath in DB_STRING_FILES and re.match(r'^\s*db\s+"', code):
 						kind = 'desc'
 					if kind:
 						for label in pending:
 							labels[label] = kind
 					pending = []
+	# Trainer parties: one label per group, then each trainer's name and party
+	label = None
+	for line in open(os.path.join(src, 'data/trainers/parties.asm'), encoding='utf-8'):
+		m = re.match(r'^(\w+Group):', line)
+		if m:
+			label = m.group(1)
+			labels[label] = ('trainers', 0)
+		elif label and re.match(r'^\s*db\s+"', line):
+			labels[label] = ('trainers', labels[label][1] + 1)
 	# Name lists: one label, then a "li" per name
 	for relpath in NAME_LISTS:
 		label = None
@@ -197,6 +206,9 @@ def find_text_labels(src):
 	return labels
 
 
+DB_STRING_FILES = ('data/moves/descriptions.asm', 'data/items/descriptions.asm',
+	'data/maps/landmarks.asm', 'data/credits_strings.asm')
+
 NAME_LISTS = ('data/items/names.asm', 'data/moves/names.asm', 'data/trainers/class_names.asm')
 
 
@@ -209,6 +221,18 @@ def decode(rom, label, kind):
 		s = []
 		rom.string(bank, addr, s)
 		out.append(bytes(s))
+	elif kind[0] == 'trainers':
+		for _ in range(kind[1]):
+			s = []
+			addr, _ = rom.string(bank, addr, s)
+			out.append(bytes(s))
+			party = []
+			while True:
+				party.append(rom.byte(bank, addr))
+				addr += 1
+				if party[-1] == 0xff:
+					break
+			out.append(bytes(party))
 	elif kind[0] == 'list':
 		for _ in range(kind[1]):
 			s = []

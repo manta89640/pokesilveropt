@@ -63,7 +63,7 @@ RESERVED_CODES = {
 TEXT_MACROS = ('text', 'line', 'para', 'cont', 'next', 'page')
 
 # Files whose `db` strings are compressed too (see their pushc/popc).
-DB_TEXT_FILES = re.compile(r'^data/(pokemon/dex_entries/|moves/descriptions\.asm|items/descriptions\.asm)')
+DB_TEXT_FILES = re.compile(r'^data/(pokemon/dex_entries/|moves/descriptions\.asm|items/descriptions\.asm|maps/landmarks\.asm|credits_strings\.asm|trainers/parties\.asm)')
 
 # Name lists whose `li` strings are compressed (see their pushc/popc).
 # Pokémon names are not: they are copied into nicknames.
@@ -310,7 +310,8 @@ class GreedyParser:
 
 def assign_codes(num_prefixes):
 	singles = [c for c in range(1 + num_prefixes, FIRST_REGULAR_TEXT_CHAR) if c not in RESERVED_CODES]
-	doubles = [(p, b) for p in range(1, 1 + num_prefixes) for b in range(SECOND_BYTE_MIN, 0x100)]
+	# $ff is left out: GetTrainerName finds the next trainer by looking for it
+	doubles = [(p, b) for p in range(1, 1 + num_prefixes) for b in range(SECOND_BYTE_MIN, 0xff)]
 	return singles, doubles
 
 

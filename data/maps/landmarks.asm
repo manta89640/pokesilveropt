@@ -105,6 +105,7 @@ Landmarks:
 	landmark 140, 116, FastShipName
 	assert_table_length NUM_LANDMARKS
 
+	pushc dict
 NewBarkTownName:     db "NEW BARK<BSP>TOWN@"
 CherrygroveCityName: db "CHERRYGROVE<BSP>CITY@"
 VioletCityName:      db "VIOLET CITY@"
@@ -200,3 +201,4 @@ DiglettsCaveName:    db "DIGLETT's<BSP>CAVE@"
 TohjoFallsName:      db "TOHJO FALLS@"
 UndergroundName:     db "UNDERGROUND@"
 SpecialMapName:      db "SPECIAL@"
+	popc

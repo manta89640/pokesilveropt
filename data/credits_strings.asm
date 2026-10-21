@@ -1,5 +1,6 @@
 CreditsStrings:: ; used for BANK(CreditsStrings)
 
+	pushc dict
 Credits_SatoshiTajiri::       db "   SATOSHI TAJIRI@"         ; "たじり　さとし@"
 Credits_JunichiMasuda::       db "   JUNICHI MASUDA@"         ; "ますだ　じゅんいち@"
 Credits_TetsuyaWatanabe::     db "  TETSUYA WATANABE@"        ; "わたなべ　てつや@"
@@ -82,5 +83,6 @@ Credits_UsCoordination::      db "  US COORDINATION@"
 Credits_TextTranslation::     db "  TEXT TRANSLATION@"
 Credits_PaadTesting::         db "    PAAD TESTING@"
 
+	popc
 Credits_Copyright::
 INCLUDE "data/copyright.asm"

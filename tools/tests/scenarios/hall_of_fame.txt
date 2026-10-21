@@ -1,0 +1,10 @@
+# Enter the Hall of Fame (Lance's scene, the Hall of Fame and the credits),
+# starting from make_save.txt's save
+wait 400
+press start 60
+press a 120
+press a 200
+press a 200
+wait 100
+teleport HALL_OF_FAME 4 12
+mashshot a 80 200 hof
