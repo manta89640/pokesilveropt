@@ -1,0 +1,21 @@
+# Battle a trainer (trainer class name, pic, party, prize money and
+# after-battle text), starting from make_save.txt's save
+wait 400
+press start 60
+press a 120
+press a 200
+press a 200
+wait 100
+# Battle style SET, so mashing A does not switch Pokémon
+pokeor wOptions 40
+# Level 100 (and its experience, 1,059,860 for medium slow growth), so each
+# hit knocks out and no level-up teaches a move
+poke wPartyMon1Level 64
+poke wPartyMon1Exp 10 2c 14
+# Bug Catcher Wade spots the player
+teleport ROUTE_31 18 14
+shot spotted
+mashshot a 10 40 intro
+mashshot a 95 50 fight
+mashshot b 8 60 after
+state

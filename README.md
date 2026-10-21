@@ -45,7 +45,7 @@ Savings by step (Silver, bytes): text dictionary 119,207; dead code 17,742; over
 
 - `tools/verify_text.py original.gbc pokesilver.gbc` checks all 5,000+ texts, Pokédex entries, and move and item descriptions.
 - `tools/tests/maps.py` loads all 368 maps and checks that their blocks, with the strips of connected maps, match the original ROM.
-- The changes were also played in an emulator (PyBoy) next to the original ROMs with the scenarios in `tools/tests`: the intro and new game, Elm's lab, menus, every Pokédex entry, the Pack, the Pokégear phone and radio, a Pokémon Center, a Mart, and wild battles. Apart from timing, the screens match. See [tools/tests/README.md](tools/tests/README.md).
+- The changes were also played in an emulator (PyBoy) next to the original ROMs with the scenarios in `tools/tests`: the intro and new game, Elm's lab, menus, every Pokédex entry, the Pack, the Pokégear phone and radio, a Pokémon Center, a Mart, wild and trainer battles, and the debug room. Apart from timing, the screens match. See [tools/tests/README.md](tools/tests/README.md).
 
 
 ## See also
