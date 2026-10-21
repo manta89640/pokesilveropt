@@ -30,4 +30,4 @@ diff original.txt new.txt
 
 `compare.py` writes the differing screenshots side by side to `test_output/<scenario>_diff.png`, and reports a run that does not finish within `--timeout` seconds, which is how a crash usually shows up. Changed code can shift timing by a frame, so expect some differences in partly printed text, blinking cursors, wandering NPCs and random battles; look at the sheet. `intro.txt` matches exactly.
 
-Separately, `tools/verify_text.py original.gbc new.gbc` checks every text in the ROM without an emulator.
+Separately, `tools/verify_text.py original.gbc new.gbc` checks every text in the ROM without an emulator, and `tools/tests/verify_sprites.py original.gbc new.gbc` checks the tiles every overworld sprite loads.

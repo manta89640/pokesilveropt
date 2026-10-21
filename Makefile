@@ -281,6 +281,21 @@ gfx/intro/fire1.2bpp: gfx/intro/charizard1.2bpp gfx/intro/charizard2_top.2bpp gf
 gfx/intro/fire2.2bpp: gfx/intro/charizard2_bottom.2bpp gfx/intro/charizard3.2bpp ; cat $^ > $@
 gfx/intro/fire3.2bpp: gfx/intro/fire.2bpp gfx/intro/unused_blastoise_venusaur.2bpp ; cat $^ > $@
 
+# These sprites have fewer tiles than GetSprite loads (twice the length in
+# data/sprites/sprites.asm, except for still sprites), so the original games
+# load the start of the next sprites as their last tiles. Their compressed
+# graphics include those tiles too.
+padded_sprite = $(1)_padded.2bpp: $(addsuffix .2bpp,$(1) $(2)) ; cat $$^ | head -c 384 > $$@
+$(eval $(call padded_sprite,gfx/sprites/gameboy_kid,gfx/sprites/rival))
+$(eval $(call padded_sprite,gfx/sprites/will,gfx/sprites/falkner))
+$(eval $(call padded_sprite,gfx/sprites/karen,gfx/sprites/bruno))
+$(eval $(call padded_sprite,gfx/sprites/big_snorlax,gfx/sprites/surfing_pikachu))
+$(eval $(call padded_sprite,gfx/sprites/nurse,gfx/sprites/link_receptionist))
+$(eval $(call padded_sprite,gfx/sprites/big_lapras,gfx/sprites/gym_guide))
+$(eval $(call padded_sprite,gfx/sprites/big_onix,gfx/sprites/n64 gfx/sprites/sudowoodo))
+$(eval $(call padded_sprite,gfx/sprites/sudowoodo,gfx/sprites/surf))
+$(eval $(call padded_sprite,gfx/sprites/old_link_receptionist,gfx/sprites/rock gfx/sprites/boulder gfx/sprites/snes gfx/sprites/famicom gfx/sprites/fruit_tree))
+
 gfx/new_game/shrink1.2bpp: RGBGFXFLAGS += --columns
 gfx/new_game/shrink2.2bpp: RGBGFXFLAGS += --columns
 
