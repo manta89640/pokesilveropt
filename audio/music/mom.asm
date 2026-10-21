@@ -6,7 +6,7 @@ Music_Mom:
 
 Music_Mom_Ch2:
 	tempo 144
-	sound_call Music_ViridianCity_Shared5
+	sound_call Music_ViridianCity_Shared4
 	duty_cycle 2
 	note_type 6, 11, 3
 	octave 3
@@ -77,7 +77,7 @@ Music_Mom_Ch3:
 	sound_loop 0, .mainloop
 
 Music_Mom_Ch4:
-	sound_call Music_ViridianCity_Shared3
+	sound_call Music_ViridianCity_Shared2
 	rest 6
 .mainloop:
 	drum_note 4, 1

@@ -7,8 +7,8 @@ Music_IndigoPlateau:
 
 Music_IndigoPlateau_Ch1:
 	tempo 128
-	volume 7, 7
-	sound_call Music_KantoGymBattle_Shared7
+	sound_call Music_Lighthouse_Shared1.shared5
+	pitch_offset 2
 	stereo_panning FALSE, TRUE
 .mainloop:
 	sound_call .sub1
@@ -132,14 +132,11 @@ Music_IndigoPlateau_Ch3:
 
 .sub1:
 	octave 3
-	note D_, 1
-	rest 3
-	octave 2
-	note A_, 1
-	rest 3
+	sound_call Music_IndigoPlateau_Ch3.shared1
 	octave 3
 	note C_, 1
 	rest 3
+.shared1: ; (tools/musiccalls.py)
 	note D_, 1
 	rest 3
 	octave 2

@@ -74,10 +74,10 @@ Music_Route30_Ch1:
 	note C_, 2
 	octave 3
 	note B_, 2
-	sound_call Music_Route12_Shared2
-	note B_, 2
 	note A_, 2
-	note G_, 2
+	octave 4
+	note C_, 2
+	sound_call Music_PokemonCenter_Shared1.shared8
 	note D_, 1
 	note E_, 1
 	note D_, 1
@@ -228,10 +228,7 @@ Music_Route30_Ch2:
 	note D_, 8
 	volume_envelope 12, 7
 	note C_, 10
-	note C_, 2
-	octave 3
-	note A_, 2
-	note F_, 2
+	sound_call Music_LavenderTown_Shared4.shared12
 	octave 4
 	note F_, 10
 	note E_, 2
@@ -409,10 +406,7 @@ Music_Route30_Ch3:
 	rest 1
 	note B_, 2
 	note A_, 2
-	note G_, 1
-	note G_, 1
-	note G_, 1
-	rest 1
+	sound_call Music_Route30_Shared3.shared6
 	note B_, 2
 	sound_call Music_KantoTrainerBattle_Shared7
 	sound_call Music_Route30_Shared1
@@ -439,7 +433,7 @@ Music_Route30_Ch3:
 	sound_loop 0, .mainloop
 
 Music_Route30_Ch4:
-	sound_call Music_PokemonCenter_Shared6
+	sound_call Music_PokemonCenter_Shared5
 	sound_call .sub1
 	sound_call .sub2
 .mainloop:
@@ -470,6 +464,7 @@ Music_Route30_Ch4:
 .sub2:
 	sound_call Music_Route30_Shared2
 	drum_note 3, 2
+.shared5: ; (tools/musiccalls.py)
 	drum_note 3, 1
 	drum_note 3, 1
 	drum_note 3, 1
@@ -493,7 +488,9 @@ Music_Route30_Ch4:
 .sub5:
 	sound_call Music_Route30_Shared2
 	drum_note 3, 2
-	sound_call Music_Route26_Shared1
+	drum_speed 6
+	sound_call Music_Route30_Ch4.shared5
+	sound_call Music_Route30_Ch4.shared5
 	drum_speed 12
 	sound_ret
 
@@ -540,6 +537,7 @@ Music_Route30_Shared2: ; (tools/musiccalls.py)
 
 Music_Route30_Shared3: ; (tools/musiccalls.py)
 	octave 2
+.shared6: ; (tools/musiccalls.py)
 	note G_, 1
 	note G_, 1
 	note G_, 1

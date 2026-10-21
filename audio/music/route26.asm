@@ -143,7 +143,7 @@ Music_Route26_Ch1:
 	note C#, 8
 	note_type 8, 10, 5
 	octave 3
-	sound_call Music_KantoWildBattle_Shared12
+	sound_call Music_KantoWildBattle_Shared11
 	note C#, 6
 	note_type 6, 10, 5
 	rest 7
@@ -152,7 +152,7 @@ Music_Route26_Ch1:
 	note E_, 8
 	note_type 8, 10, 5
 	octave 3
-	sound_call Music_Route1_Shared6
+	sound_call Music_Route1_Shared5
 	note E_, 1
 	rest 1
 	note E_, 6
@@ -428,15 +428,9 @@ Music_Route26_Ch3:
 	note A_, 1
 	rest 3
 	note_type 6, 1, 5
-	note A_, 1
-	rest 1
-	note A_, 1
-	rest 1
+	sound_call Music_Route3_Shared2.shared7
 	note A_, 2
-	rest 2
-	note A_, 2
-	rest 2
-	octave 3
+	sound_call Music_Lighthouse_Shared2.shared6
 	note A_, 2
 	rest 2
 	octave 2
@@ -462,7 +456,7 @@ Music_Route26_Ch3:
 	octave 2
 	note G#, 2
 	rest 6
-	sound_call Music_KantoWildBattle_Shared9
+	sound_call Music_KantoWildBattle_Shared8
 	note G#, 2
 	rest 2
 	note G#, 2
@@ -476,10 +470,7 @@ Music_Route26_Ch3:
 	octave 3
 	note C#, 2
 	rest 10
-	note C#, 1
-	rest 1
-	note C#, 1
-	rest 1
+	sound_call Music_KantoWildBattle_Shared11.shared21
 	note C#, 2
 	rest 2
 	note C#, 2
@@ -573,7 +564,9 @@ Music_Route26_Ch4:
 	sound_call .sub1
 	sound_call .sub2
 .loop3:
-	sound_call Music_Route26_Shared1
+	drum_speed 6
+	sound_call Music_Route30_Ch4.shared5
+	sound_call Music_Route30_Ch4.shared5
 	drum_speed 8
 	drum_note 3, 2
 	drum_note 3, 2
@@ -591,8 +584,7 @@ Music_Route26_Ch4:
 	drum_note 3, 2
 	drum_note 3, 4
 	drum_note 3, 4
-	sound_call Music_Route3_Shared1
-	sound_ret
+	sound_jump Music_Route12_Ch4.shared2
 
 .sub2:
 	drum_note 5, 12
@@ -606,23 +598,11 @@ Music_Route26_Ch4:
 
 .sub3:
 	drum_speed 6
-	sound_call Music_Route3_Shared1
-	sound_call Music_Route3_Shared1
-	sound_call Music_Route3_Shared1
+	sound_call Music_Route12_Ch4.shared2
+	sound_call Music_Route12_Ch4.shared2
+	sound_call Music_Route12_Ch4.shared2
 	drum_speed 8
 	drum_note 3, 2
 	drum_note 3, 2
 	drum_note 5, 2
-	sound_ret
-
-Music_Route26_Shared1: ; (tools/musiccalls.py)
-	drum_speed 6
-	drum_note 3, 1
-	drum_note 3, 1
-	drum_note 3, 1
-	drum_note 3, 1
-	drum_note 3, 1
-	drum_note 3, 1
-	drum_note 3, 1
-	drum_note 3, 1
 	sound_ret

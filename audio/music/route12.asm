@@ -89,7 +89,10 @@ Music_Route12_Ch1:
 	note G#, 2
 	note F#, 2
 	note G#, 2
-	sound_call Music_Route12_Shared2
+	note A_, 2
+	octave 4
+	note C_, 2
+	octave 3
 	note B_, 3
 	note A_, 3
 	note G#, 1
@@ -346,7 +349,13 @@ Music_Route12_Ch3:
 	note F#, 4
 	note D#, 4
 .loop1:
-	sound_call Music_Route12_Shared1
+	note E_, 1
+	rest 1
+	note E_, 1
+	rest 3
+	note E_, 1
+	note F#, 1
+	note G#, 4
 	note E_, 3
 	rest 1
 	sound_loop 2, .loop1
@@ -354,8 +363,7 @@ Music_Route12_Ch3:
 
 .sub1:
 	octave 3
-	sound_call Music_Route12_Shared1
-	note E_, 4
+	sound_call Music_Route12_Ch3.shared1
 	note D_, 1
 	rest 1
 	note D_, 1
@@ -364,7 +372,14 @@ Music_Route12_Ch3:
 	note E_, 1
 	note F#, 4
 	note D_, 4
-	sound_call Music_Route12_Shared1
+.shared1: ; (tools/musiccalls.py)
+	note E_, 1
+	rest 1
+	note E_, 1
+	rest 3
+	note E_, 1
+	note F#, 1
+	note G#, 4
 	note E_, 4
 	sound_ret
 
@@ -420,22 +435,13 @@ Music_Route12_Ch4:
 	sound_loop 0, .mainloop
 
 .sub1:
-	sound_call Music_Route3_Shared1
-	sound_ret
-
-Music_Route12_Shared1: ; (tools/musiccalls.py)
-	note E_, 1
-	rest 1
-	note E_, 1
-	rest 3
-	note E_, 1
-	note F#, 1
-	note G#, 4
-	sound_ret
-
-Music_Route12_Shared2: ; (tools/musiccalls.py)
-	note A_, 2
-	octave 4
-	note C_, 2
-	octave 3
+.shared2: ; (tools/musiccalls.py)
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
 	sound_ret

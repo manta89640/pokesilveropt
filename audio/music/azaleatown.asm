@@ -139,17 +139,13 @@ Music_AzaleaTown_Ch1:
 	volume_envelope 6, 1
 	note A_, 2
 	sound_call Music_AzaleaTown_Shared4
-	note C#, 2
-	volume_envelope 6, 1
-	note C#, 2
+	sound_call Music_AzaleaTown_Ch1.shared7
 	note C#, 2
 	note C#, 2
 	note C#, 2
 	volume_envelope 10, 1
 	sound_call Music_AzaleaTown_Shared3
-	note C#, 2
-	volume_envelope 6, 1
-	note C#, 2
+	sound_call Music_AzaleaTown_Ch1.shared7
 	note C#, 2
 	note C#, 2
 	rest 2
@@ -165,9 +161,7 @@ Music_AzaleaTown_Ch1:
 	volume_envelope 10, 1
 	sound_call Music_AzaleaTown_Shared1
 	sound_call Music_AzaleaTown_Shared3
-	note C#, 2
-	volume_envelope 6, 1
-	note C#, 2
+	sound_call Music_AzaleaTown_Ch1.shared7
 	sound_call Music_AzaleaTown_Shared4
 	octave 2
 	note A#, 2
@@ -176,6 +170,7 @@ Music_AzaleaTown_Ch1:
 	note A#, 2
 	volume_envelope 10, 1
 	octave 3
+.shared7: ; (tools/musiccalls.py)
 	note C#, 2
 	volume_envelope 6, 1
 	note C#, 2
@@ -531,13 +526,21 @@ Music_AzaleaTown_Ch3:
 .sub2:
 	volume_envelope 3, 5
 	octave 3
-	sound_call Music_AzaleaTown_Shared7
+	sound_call Music_AzaleaTown_Ch3.shared8
 	volume_envelope 2, 5
-	sound_call Music_AzaleaTown_Shared7
+.shared8: ; (tools/musiccalls.py)
+	note F_, 1
+	rest 1
+	note F_, 1
+	rest 1
+	note F_, 1
+	rest 1
+	note F_, 1
+	rest 1
 	sound_ret
 
 Music_AzaleaTown_Ch4:
-	sound_call Music_ViridianCity_Shared3
+	sound_call Music_ViridianCity_Shared2
 	drum_note 6, 2
 .mainloop:
 	sound_call Music_AzaleaTown_Shared6
@@ -606,15 +609,4 @@ Music_AzaleaTown_Shared6: ; (tools/musiccalls.py)
 	drum_note 8, 1
 	drum_note 4, 2
 	drum_note 3, 2
-	sound_ret
-
-Music_AzaleaTown_Shared7: ; (tools/musiccalls.py)
-	note F_, 1
-	rest 1
-	note F_, 1
-	rest 1
-	note F_, 1
-	rest 1
-	note F_, 1
-	rest 1
 	sound_ret

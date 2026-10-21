@@ -103,7 +103,7 @@ Music_LookHiker_Ch3:
 	sound_ret
 
 Music_LookHiker_Ch4:
-	sound_call Music_ViridianCity_Shared3
+	sound_call Music_ViridianCity_Shared2
 	drum_note 6, 4
 	rest 16
 .mainloop:

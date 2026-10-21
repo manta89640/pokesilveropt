@@ -28,10 +28,7 @@ Music_Surf_Ch1:
 	note D#, 1
 	rest 1
 	volume_envelope 10, 7
-	note F_, 1
-	rest 1
-	note D#, 1
-	rest 1
+	sound_call Music_Surf_Shared3.shared8
 	note F_, 1
 	rest 1
 	note D#, 1
@@ -164,13 +161,7 @@ Music_Surf_Ch1:
 	note F_, 2
 	note D_, 2
 	note F_, 2
-	note D_, 2
-	octave 3
-	note A#, 2
-	octave 4
-	note D_, 2
-	octave 3
-	note A#, 2
+	sound_call Music_NationalPark_Shared1.shared6
 	note F_, 2
 	note A#, 2
 	note F_, 2
@@ -220,7 +211,11 @@ Music_Surf_Ch1:
 	octave 4
 	note D#, 9
 	note_type 6, 5, 8
-	sound_call Music_Surf_Shared4
+	note D_, 1
+	note C#, 1
+	note C_, 1
+	octave 3
+	note B_, 1
 	note A#, 1
 	note A_, 1
 	note G#, 1
@@ -247,7 +242,11 @@ Music_Surf_Ch1:
 	note F_, 12
 	volume_envelope 5, 8
 	note D#, 1
-	sound_call Music_Surf_Shared4
+	note D_, 1
+	note C#, 1
+	note C_, 1
+	octave 3
+	note B_, 1
 	note A#, 1
 	note A_, 1
 	note G_, 1
@@ -414,11 +413,13 @@ Music_Surf_Ch2:
 	note F_, 4
 	note G_, 12
 	volume_envelope 5, 8
-	note F#, 1
-	note F_, 1
-	note E_, 1
-	note D#, 1
-	sound_call Music_Surf_Shared4
+	sound_call Music_JohtoWildBattle_Shared2.shared9
+	note D_, 1
+	note C#, 1
+.shared5: ; (tools/musiccalls.py)
+	note C_, 1
+	octave 3
+	note B_, 1
 	note A_, 1
 	sound_ret
 
@@ -443,10 +444,7 @@ Music_Surf_Ch2:
 	note G#, 12
 	volume_envelope 5, 8
 	note G_, 1
-	note F#, 1
-	note F_, 1
-	note E_, 1
-	note D#, 1
+	sound_call Music_JohtoWildBattle_Shared2.shared9
 	note D_, 1
 	note C#, 1
 	octave 3
@@ -533,7 +531,7 @@ Music_Surf_Ch3:
 	note D_, 4
 	note D#, 4
 	note_type 6, 1, 3
-	sound_call Music_Surf_Shared5
+	sound_call Music_Surf_Shared4
 	note_type 12, 1, 3
 	octave 5
 	note A#, 12
@@ -554,7 +552,7 @@ Music_Surf_Ch3:
 	note D_, 4
 	note D#, 4
 	note_type 6, 1, 4
-	sound_call Music_Surf_Shared5
+	sound_call Music_Surf_Shared4
 	note_type 12, 1, 4
 	octave 5
 	note A#, 12
@@ -616,11 +614,8 @@ Music_Surf_Ch3:
 	rest 3
 	note A#, 1
 	rest 3
-	note C_, 4
-	note F_, 1
-	rest 3
-	note G#, 1
-	rest 3
+	sound_call Music_Surf_Ch3.shared6
+.shared6: ; (tools/musiccalls.py)
 	note C_, 4
 	note F_, 1
 	rest 3
@@ -646,6 +641,7 @@ Music_Surf_Shared2: ; (tools/musiccalls.py)
 	rest 1
 	octave 3
 	note A#, 1
+.shared7: ; (tools/musiccalls.py)
 	rest 1
 	octave 4
 	note D#, 1
@@ -657,6 +653,7 @@ Music_Surf_Shared3: ; (tools/musiccalls.py)
 	note D#, 1
 	rest 1
 	volume_envelope 7, 3
+.shared8: ; (tools/musiccalls.py)
 	note F_, 1
 	rest 1
 	note D#, 1
@@ -664,14 +661,6 @@ Music_Surf_Shared3: ; (tools/musiccalls.py)
 	sound_ret
 
 Music_Surf_Shared4: ; (tools/musiccalls.py)
-	note D_, 1
-	note C#, 1
-	note C_, 1
-	octave 3
-	note B_, 1
-	sound_ret
-
-Music_Surf_Shared5: ; (tools/musiccalls.py)
 	note D_, 1
 	note D#, 15
 	note D_, 4

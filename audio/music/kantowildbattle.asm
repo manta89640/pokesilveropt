@@ -268,11 +268,11 @@ Music_KantoWildBattle_Ch2:
 	vibrato 18, 2, 3
 	note_type 12, 11, 1
 	octave 4
-	sound_call Music_KantoWildBattle_Shared13
-	sound_call Music_KantoWildBattle_Shared13
-	sound_call Music_KantoWildBattle_Shared13
-	sound_call Music_KantoWildBattle_Shared13
-	sound_call Music_KantoWildBattle_Shared13
+	sound_call Music_KantoWildBattle_Shared12
+	sound_call Music_KantoWildBattle_Shared12
+	sound_call Music_KantoWildBattle_Shared12
+	sound_call Music_KantoWildBattle_Shared12
+	sound_call Music_KantoWildBattle_Shared12
 	note F#, 1
 	note F_, 1
 	note E_, 1
@@ -371,7 +371,7 @@ Music_KantoWildBattle_Ch2:
 	transpose 0, 0
 	sound_call .sub4
 	octave 2
-	sound_call Music_KantoWildBattle_Shared2
+	sound_call Music_KantoWildBattle_Ch2.shared13
 	note C_, 2
 	rest 2
 	octave 4
@@ -386,10 +386,10 @@ Music_KantoWildBattle_Ch2:
 	rest 2
 	octave 4
 	note C#, 4
-	sound_call Music_KantoWildBattle_Shared3
-	sound_call Music_KantoWildBattle_Shared3
-	sound_call Music_KantoWildBattle_Shared3
-	sound_call Music_KantoWildBattle_Shared3
+	sound_call Music_KantoWildBattle_Shared2
+	sound_call Music_KantoWildBattle_Shared2
+	sound_call Music_KantoWildBattle_Shared2
+	sound_call Music_KantoWildBattle_Shared2
 	octave 2
 	note C#, 2
 	rest 2
@@ -409,7 +409,7 @@ Music_KantoWildBattle_Ch2:
 	rest 2
 	octave 3
 	note G#, 4
-	sound_call Music_KantoWildBattle_Shared3
+	sound_call Music_KantoWildBattle_Shared2
 	octave 2
 	note C#, 2
 	rest 2
@@ -419,7 +419,7 @@ Music_KantoWildBattle_Ch2:
 	note C#, 2
 	rest 2
 	sound_call .sub4
-	sound_call Music_KantoWildBattle_Shared2
+	sound_call Music_KantoWildBattle_Ch2.shared13
 	note C_, 2
 	rest 2
 	octave 4
@@ -469,7 +469,7 @@ Music_KantoWildBattle_Ch2:
 	note G_, 2
 	octave 2
 	note G_, 2
-	sound_call Music_KantoWildBattle_Shared10
+	sound_call Music_KantoWildBattle_Shared9
 	octave 3
 	note C#, 1
 	rest 1
@@ -480,7 +480,7 @@ Music_KantoWildBattle_Ch2:
 	rest 2
 	note G#, 1
 	octave 2
-	sound_call Music_KantoWildBattle_Shared10
+	sound_call Music_KantoWildBattle_Shared9
 	octave 1
 	note G_, 2
 	sound_ret
@@ -495,11 +495,7 @@ Music_KantoWildBattle_Ch2:
 	octave 3
 	note C_, 2
 	octave 2
-	note C_, 4
-	rest 2
-	note C_, 2
-	rest 2
-	note C_, 2
+	sound_call Music_KantoWildBattle_Shared7.shared19
 	octave 3
 	note C_, 2
 	rest 2
@@ -544,24 +540,23 @@ Music_KantoWildBattle_Ch2:
 	sound_ret
 
 .sub4:
+	sound_call Music_KantoWildBattle_Ch2.shared14
+	sound_call Music_KantoWildBattle_Ch2.shared13
+.shared13: ; (tools/musiccalls.py)
+	note C_, 2
+	rest 2
+.shared14: ; (tools/musiccalls.py)
 	octave 3
 	note G_, 4
 	octave 2
 	note C_, 2
 	rest 2
-	sound_call Music_KantoWildBattle_Shared2
-	sound_call Music_KantoWildBattle_Shared2
 	sound_ret
 
 .sub5:
-	sound_call Music_KantoWildBattle_Shared2
-	sound_call Music_KantoWildBattle_Shared2
-	octave 3
-	note G_, 4
-	octave 2
-	note C_, 2
-	rest 2
-	sound_ret
+	sound_call Music_KantoWildBattle_Ch2.shared13
+	sound_call Music_KantoWildBattle_Ch2.shared13
+	sound_jump Music_KantoWildBattle_Ch2.shared14
 
 Music_KantoWildBattle_Ch3:
 	vibrato 20, 2, 3
@@ -616,7 +611,7 @@ Music_KantoWildBattle_Ch3:
 	note G_, 1
 .mainloop:
 	note_type 12, 1, 4
-	sound_call Music_KantoWildBattle_Shared4
+	sound_call Music_KantoWildBattle_Shared3
 	octave 3
 	note G_, 1
 	note B_, 1
@@ -658,7 +653,7 @@ Music_KantoWildBattle_Ch3:
 	note D_, 1
 	octave 4
 	note B_, 1
-	sound_call Music_KantoWildBattle_Shared4
+	sound_call Music_KantoWildBattle_Shared3
 	note C_, 1
 	note D_, 1
 	note D#, 1
@@ -695,11 +690,7 @@ Music_KantoWildBattle_Ch3:
 	sound_call Music_KantoWildBattle_Shared1
 	note E_, 2
 	volume_envelope 2, 4
-	note C_, 1
-	octave 4
-	note G_, 1
-	volume_envelope 1, 4
-	octave 5
+	sound_call Music_KantoWildBattle_Shared1.shared15
 	note G_, 2
 	sound_call Music_KantoWildBattle_Shared1
 	note A_, 2
@@ -722,32 +713,24 @@ Music_KantoWildBattle_Ch3:
 	octave 6
 	note C_, 1
 	note C#, 8
-	sound_call Music_KantoWildBattle_Shared5
-	note E_, 1
-	note G_, 1
-	volume_envelope 1, 4
+	sound_call Music_KantoWildBattle_Shared4
+	sound_call Music_KantoWildBattle_Shared10.shared20
 	note G#, 2
 	volume_envelope 2, 4
-	note E_, 1
-	note G_, 1
-	volume_envelope 1, 4
+	sound_call Music_KantoWildBattle_Shared10.shared20
 	octave 5
 	note C#, 2
-	sound_call Music_KantoWildBattle_Shared11
-	sound_call Music_KantoWildBattle_Shared5
+	sound_call Music_KantoWildBattle_Shared10
+	sound_call Music_KantoWildBattle_Shared4
 	volume_envelope 1, 4
 	octave 5
 	note F_, 2
-	sound_call Music_KantoWildBattle_Shared7
+	sound_call Music_KantoWildBattle_Shared6
 	note E_, 2
-	sound_call Music_KantoWildBattle_Shared7
+	sound_call Music_KantoWildBattle_Shared6
 	note D_, 2
 	volume_envelope 2, 4
-	octave 4
-	note G_, 1
-	octave 5
-	note C_, 1
-	volume_envelope 1, 4
+	sound_call Music_KantoWildBattle_Shared6.shared18
 	octave 4
 	note A#, 4
 	octave 5
@@ -762,15 +745,15 @@ Music_KantoWildBattle_Ch3:
 	note G#, 1
 	rest 1
 	volume_envelope 3, 4
-	sound_call Music_KantoWildBattle_Shared9
-	sound_call Music_KantoWildBattle_Shared9
+	sound_call Music_KantoWildBattle_Shared8
+	sound_call Music_KantoWildBattle_Shared8
 	volume_envelope 2, 4
-	sound_call Music_KantoWildBattle_Shared9
-	sound_call Music_KantoWildBattle_Shared9
+	sound_call Music_KantoWildBattle_Shared8
+	sound_call Music_KantoWildBattle_Shared8
 	volume_envelope 1, 4
-	sound_call Music_KantoWildBattle_Shared9
+	sound_call Music_KantoWildBattle_Shared8
 	octave 6
-	sound_call Music_KantoWildBattle_Shared12
+	sound_call Music_KantoWildBattle_Shared11
 	note C#, 1
 	rest 1
 	octave 5
@@ -807,7 +790,7 @@ Music_KantoWildBattle_Ch3:
 	note C_, 1
 	rest 2
 	note_type 6, 1, 5
-	sound_call Music_KantoWildBattle_Shared8
+	sound_call Music_KantoWildBattle_Shared7
 	octave 4
 	note C_, 2
 	rest 2
@@ -815,7 +798,7 @@ Music_KantoWildBattle_Ch3:
 	note C_, 4
 	note C_, 2
 	rest 4
-	sound_call Music_KantoWildBattle_Shared8
+	sound_call Music_KantoWildBattle_Shared7
 	octave 2
 	note A#, 2
 	rest 2
@@ -840,14 +823,8 @@ Music_KantoWildBattle_Ch3:
 	note A#, 1
 	rest 1
 	note D_, 2
-	rest 2
-	note D_, 1
-	rest 3
-	note D_, 1
-	rest 1
-	octave 4
-	note D_, 1
-	rest 1
+	sound_call Music_LookBeauty_Shared1.shared3
+	sound_call Music_DancingHall_Ch1.shared2
 	octave 2
 	note B_, 1
 	rest 1
@@ -870,7 +847,7 @@ Music_KantoWildBattle_Ch3:
 	note E_, 1
 	rest 1
 	octave 4
-	sound_call Music_KantoWildBattle_Shared6
+	sound_call Music_KantoWildBattle_Shared5
 	note E_, 1
 	note G_, 1
 	note E_, 1
@@ -946,22 +923,17 @@ Music_KantoWildBattle_Shared1: ; (tools/musiccalls.py)
 	volume_envelope 2, 4
 	note C_, 1
 	octave 4
-	sound_call Music_GameCorner_Shared9
+	note G_, 1
+	octave 5
+.shared15: ; (tools/musiccalls.py)
+	note C_, 1
+	octave 4
+	note G_, 1
 	volume_envelope 1, 4
 	octave 5
 	sound_ret
 
 Music_KantoWildBattle_Shared2: ; (tools/musiccalls.py)
-	note C_, 2
-	rest 2
-	octave 3
-	note G_, 4
-	octave 2
-	note C_, 2
-	rest 2
-	sound_ret
-
-Music_KantoWildBattle_Shared3: ; (tools/musiccalls.py)
 	octave 2
 	note C#, 2
 	rest 2
@@ -971,12 +943,8 @@ Music_KantoWildBattle_Shared3: ; (tools/musiccalls.py)
 	note C#, 4
 	sound_ret
 
-Music_KantoWildBattle_Shared4: ; (tools/musiccalls.py)
-	octave 5
-	note G_, 1
-	rest 2
-	octave 4
-	note G_, 1
+Music_KantoWildBattle_Shared3: ; (tools/musiccalls.py)
+	sound_call Music_KantoWildBattle_Shared3.shared16
 	rest 2
 	octave 5
 	note G_, 1
@@ -984,6 +952,7 @@ Music_KantoWildBattle_Shared4: ; (tools/musiccalls.py)
 	octave 4
 	note G_, 1
 	rest 1
+.shared16: ; (tools/musiccalls.py)
 	octave 5
 	note G_, 1
 	rest 2
@@ -991,40 +960,47 @@ Music_KantoWildBattle_Shared4: ; (tools/musiccalls.py)
 	note G_, 1
 	sound_ret
 
-Music_KantoWildBattle_Shared5: ; (tools/musiccalls.py)
+Music_KantoWildBattle_Shared4: ; (tools/musiccalls.py)
 	octave 5
 	note C_, 2
-	sound_call Music_KantoWildBattle_Shared11
+	sound_call Music_KantoWildBattle_Shared10
 	note A#, 2
 	volume_envelope 2, 4
 	note E_, 1
 	note G_, 1
 	sound_ret
 
-Music_KantoWildBattle_Shared6: ; (tools/musiccalls.py)
+Music_KantoWildBattle_Shared5: ; (tools/musiccalls.py)
 	note C_, 1
+.shared17: ; (tools/musiccalls.py)
 	octave 3
 	note G_, 1
 	octave 4
 	note C_, 1
 	sound_ret
 
-Music_KantoWildBattle_Shared7: ; (tools/musiccalls.py)
+Music_KantoWildBattle_Shared6: ; (tools/musiccalls.py)
 	volume_envelope 2, 4
 	octave 4
-	sound_call Music_GameCorner_Shared9
+	note G_, 1
+	octave 5
+	note C_, 1
+.shared18: ; (tools/musiccalls.py)
+	octave 4
+	note G_, 1
 	octave 5
 	note C_, 1
 	volume_envelope 1, 4
 	sound_ret
 
-Music_KantoWildBattle_Shared8: ; (tools/musiccalls.py)
+Music_KantoWildBattle_Shared7: ; (tools/musiccalls.py)
 	note C_, 1
 	rest 1
 	note C_, 2
 	octave 4
 	note C_, 2
 	octave 3
+.shared19: ; (tools/musiccalls.py)
 	note C_, 4
 	rest 2
 	note C_, 2
@@ -1032,14 +1008,14 @@ Music_KantoWildBattle_Shared8: ; (tools/musiccalls.py)
 	note C_, 2
 	sound_ret
 
-Music_KantoWildBattle_Shared9: ; (tools/musiccalls.py)
+Music_KantoWildBattle_Shared8: ; (tools/musiccalls.py)
 	note G#, 1
 	rest 1
 	note G#, 1
 	rest 1
 	sound_ret
 
-Music_KantoWildBattle_Shared10: ; (tools/musiccalls.py)
+Music_KantoWildBattle_Shared9: ; (tools/musiccalls.py)
 	note C#, 1
 	rest 2
 	note C#, 1
@@ -1051,26 +1027,28 @@ Music_KantoWildBattle_Shared10: ; (tools/musiccalls.py)
 	rest 1
 	sound_ret
 
-Music_KantoWildBattle_Shared11: ; (tools/musiccalls.py)
+Music_KantoWildBattle_Shared10: ; (tools/musiccalls.py)
 	volume_envelope 2, 4
 	octave 4
 	note E_, 1
 	note G_, 1
+.shared20: ; (tools/musiccalls.py)
 	note E_, 1
 	note G_, 1
 	volume_envelope 1, 4
 	sound_ret
 
-Music_KantoWildBattle_Shared12: ; (tools/musiccalls.py)
+Music_KantoWildBattle_Shared11: ; (tools/musiccalls.py)
 	note C#, 1
 	rest 1
+.shared21: ; (tools/musiccalls.py)
 	note C#, 1
 	rest 1
 	note C#, 1
 	rest 1
 	sound_ret
 
-Music_KantoWildBattle_Shared13: ; (tools/musiccalls.py)
+Music_KantoWildBattle_Shared12: ; (tools/musiccalls.py)
 	note G_, 1
 	note F#, 1
 	note F_, 1

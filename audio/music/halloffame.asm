@@ -95,10 +95,7 @@ Music_HallOfFame_Ch3:
 	note C_, 2
 	note F_, 2
 	sound_loop 3, .loop1
-	note D_, 4
-	note G_, 4
-	note D_, 4
-	note G_, 4
+	sound_call Music_Evolution_Ch2.shared3
 	note E_, 4
 	note G_, 4
 	note E_, 4
@@ -151,10 +148,8 @@ Music_HallOfFame_Ch4:
 
 Music_HallOfFame_Shared1: ; (tools/musiccalls.py)
 	octave 3
-	note D_, 2
-	note G_, 2
-	note D_, 2
-	note G_, 2
+	sound_call Music_HallOfFame_Shared1.shared2
+.shared2: ; (tools/musiccalls.py)
 	note D_, 2
 	note G_, 2
 	note D_, 2

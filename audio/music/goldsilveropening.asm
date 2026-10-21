@@ -417,17 +417,9 @@ Music_GoldSilverOpening_Ch3:
 	rest 1
 	sound_call Music_GoldSilverOpening_Shared2
 	note C_, 1
-	rest 1
-	octave 4
-	note A#, 1
-	rest 1
-	octave 5
+	sound_call Music_GoldSilverOpening_Shared2.shared6
 	note C_, 1
-	rest 1
-	octave 4
-	note A#, 1
-	rest 1
-	octave 5
+	sound_call Music_GoldSilverOpening_Shared2.shared6
 	note C_, 1
 	rest 1
 	sound_call Music_GoldSilverOpening_Shared2
@@ -495,12 +487,11 @@ Music_GoldSilverOpening_Shared1: ; (tools/musiccalls.py)
 	sound_ret
 
 Music_GoldSilverOpening_Shared2: ; (tools/musiccalls.py)
-	octave 4
-	note A#, 1
-	rest 1
-	octave 5
+	sound_call Music_GoldSilverOpening_Shared2.shared7
 	note D_, 1
+.shared6: ; (tools/musiccalls.py)
 	rest 1
+.shared7: ; (tools/musiccalls.py)
 	octave 4
 	note A#, 1
 	rest 1

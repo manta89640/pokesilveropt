@@ -6,8 +6,7 @@ Music_EcruteakCity:
 
 Music_EcruteakCity_Ch1:
 	tempo 197
-	volume 7, 7
-	stereo_panning FALSE, TRUE
+	sound_call Music_Route2_Shared2
 	vibrato 18, 2, 5
 	duty_cycle 2
 .mainloop:
@@ -113,10 +112,7 @@ Music_EcruteakCity_Ch1:
 	note D_, 2
 	note C_, 2
 	sound_call Music_EcruteakCity_Shared2
-	octave 4
-	note G#, 2
-	octave 5
-	note C_, 2
+	sound_call Music_EcruteakCity_Shared2.shared4
 	sound_call .sub2
 	sound_loop 0, .mainloop
 
@@ -398,10 +394,7 @@ Music_EcruteakCity_Ch2:
 	octave 4
 	note C_, 4
 	note_type 12, 8, 7
-	note F_, 10
-	note G_, 2
-	note F_, 2
-	note E_, 2
+	sound_call Music_LavenderTown_Shared1.shared11
 	note D_, 8
 	rest 2
 	octave 3
@@ -547,7 +540,16 @@ Music_EcruteakCity_Ch3:
 	rest 2
 	note C_, 1
 	rest 1
-	sound_call Music_Route2_Shared1
+	note F_, 4
+	rest 2
+	note F_, 1
+	rest 1
+	note F_, 1
+	rest 1
+	note F_, 2
+	rest 2
+	note F_, 1
+	rest 1
 	note E_, 4
 	rest 2
 	note B_, 1
@@ -608,10 +610,8 @@ Music_EcruteakCity_Shared1: ; (tools/musiccalls.py)
 Music_EcruteakCity_Shared2: ; (tools/musiccalls.py)
 	note D_, 2
 	note C_, 2
-	octave 4
-	note G#, 2
-	octave 5
-	note C_, 2
+	sound_call Music_EcruteakCity_Shared2.shared4
+.shared4: ; (tools/musiccalls.py)
 	octave 4
 	note G#, 2
 	octave 5

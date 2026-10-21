@@ -22,10 +22,7 @@ Music_LookPokemaniac_Ch1:
 	rest 3
 	sound_loop 4, .loop1
 	rest 4
-	note G_, 1
-	rest 3
-	note G_, 1
-	rest 3
+	sound_call Music_TitleScreen_Shared2.shared15
 	sound_loop 4, .loop1
 	sound_loop 0, .mainloop
 
@@ -122,11 +119,7 @@ Music_LookPokemaniac_Ch3:
 	octave 5
 	note F#, 4
 	note C_, 1
-	rest 1
-	note F#, 1
-	rest 1
-	note C_, 1
-	rest 1
+	sound_call Music_LookPokemaniac_Ch3.shared1
 	note F#, 1
 	rest 1
 	note G_, 6
@@ -154,6 +147,7 @@ Music_LookPokemaniac_Ch3:
 	rest 1
 	octave 5
 	note D#, 1
+.shared1: ; (tools/musiccalls.py)
 	rest 1
 	note F#, 1
 	rest 1

@@ -7,7 +7,7 @@ Music_GoldSilverOpening2:
 
 Music_GoldSilverOpening2_Ch1:
 	tempo 92
-	sound_call Music_JohtoWildBattle_Shared2
+	sound_call Music_JohtoWildBattle_Shared1
 	stereo_panning FALSE, TRUE
 	note_type 12, 3, -5
 	octave 3
@@ -65,10 +65,10 @@ Music_GoldSilverOpening2_Ch3:
 	note_type 12, 1, 7
 	rest 8
 	octave 2
-	sound_call Music_NationalPark_Shared4
+	sound_call Music_NationalPark_Shared3
 	note A#, 8
 	rest 2
-	sound_call Music_NationalPark_Shared4
+	sound_call Music_NationalPark_Shared3
 	note D_, 4
 	note F_, 4
 	note A_, 2

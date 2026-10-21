@@ -26,7 +26,7 @@ Music_RuinsOfAlphInterior_Ch2:
 	octave 4
 	note C#, 2
 	note D#, 2
-	sound_call Music_Route36_Shared4
+	sound_call Music_DarkCave_Shared1.shared9
 	note C_, 4
 	octave 3
 	note A#, 4

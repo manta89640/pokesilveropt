@@ -115,7 +115,7 @@ Music_MainMenu_Ch3:
 
 Music_MainMenu_Ch4:
 	stereo_panning FALSE, TRUE
-	sound_call Music_ViridianCity_Shared3
+	sound_call Music_ViridianCity_Shared2
 	rest 8
 	rest 16
 	rest 16

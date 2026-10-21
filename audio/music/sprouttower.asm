@@ -7,7 +7,7 @@ Music_SproutTower:
 
 Music_SproutTower_Ch1:
 	tempo 176
-	sound_call Music_JohtoWildBattle_Shared2
+	sound_call Music_JohtoWildBattle_Shared1
 	vibrato 8, 4, 5
 	stereo_panning FALSE, TRUE
 	note_type 12, 10, 3
@@ -82,7 +82,7 @@ Music_SproutTower_Ch2:
 	note A#, 4
 	octave 4
 	note C_, 2
-	sound_call Music_JohtoWildBattle_Shared4
+	sound_call Music_JohtoWildBattle_Shared3
 	octave 4
 	note C_, 2
 	note C#, 2
@@ -90,7 +90,7 @@ Music_SproutTower_Ch2:
 	note C#, 2
 	note C_, 8
 	volume_envelope 11, 5
-	sound_call Music_JohtoWildBattle_Shared4
+	sound_call Music_JohtoWildBattle_Shared3
 	note F#, 2
 	volume_envelope 11, 7
 	note A#, 8
@@ -127,11 +127,7 @@ Music_SproutTower_Ch3:
 	stereo_panning TRUE, FALSE
 .mainloop:
 	rest 4
-	note C_, 2
-	note F_, 2
-	note F#, 2
-	note D#, 2
-	rest 2
+	sound_call Music_SproutTower_Shared1.shared3
 	note F#, 2
 	sound_call Music_SproutTower_Shared1
 	note F_, 2
@@ -186,6 +182,7 @@ Music_SproutTower_Ch4:
 Music_SproutTower_Shared1: ; (tools/musiccalls.py)
 	note F_, 2
 	rest 2
+.shared3: ; (tools/musiccalls.py)
 	note C_, 2
 	note F_, 2
 	note F#, 2

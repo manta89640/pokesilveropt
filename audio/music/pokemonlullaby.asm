@@ -70,10 +70,7 @@ Music_PokemonLullaby_Ch2:
 	note E_, 2
 	note F_, 4
 	note G_, 4
-	note F_, 2
-	note E_, 2
-	note D_, 2
-	note F_, 2
+	sound_call Music_JohtoTrainerBattle_Shared7.shared20
 	note E_, 10
 	volume_envelope 11, 5
 	note D_, 2

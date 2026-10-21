@@ -24,8 +24,8 @@ Music_MtMoon_Ch2:
 .mainloop:
 	octave 4
 	note D#, 6
-	sound_call Music_MtMoon_Shared2
-	sound_call Music_MtMoon_Shared2
+	sound_call Music_MtMoon_Shared1
+	sound_call Music_MtMoon_Shared1
 	note C#, 6
 	octave 3
 	note B_, 2
@@ -34,8 +34,8 @@ Music_MtMoon_Ch2:
 	octave 4
 	note C#, 10
 	note G#, 6
-	sound_call Music_MtMoon_Shared3
-	sound_call Music_MtMoon_Shared3
+	sound_call Music_MtMoon_Shared2
+	sound_call Music_MtMoon_Shared2
 	note F#, 6
 	note E_, 2
 	note D#, 2
@@ -48,15 +48,15 @@ Music_MtMoon_Ch3:
 .mainloop:
 	note_type 12, 2, 8
 .loop1:
-	sound_call Music_MtMoon_Shared1
+	sound_call Music_Route37_Ch3.shared7
 	note G_, 2
-	sound_call Music_MtMoon_Shared1
+	sound_call Music_Route37_Ch3.shared7
 	note G_, 2
-	sound_call Music_MtMoon_Shared1
+	sound_call Music_Route37_Ch3.shared7
 	sound_loop 3, .loop1
-	sound_call Music_MtMoon_Shared1
+	sound_call Music_Route37_Ch3.shared7
 	note G_, 2
-	sound_call Music_MtMoon_Shared1
+	sound_call Music_Route37_Ch3.shared7
 	note G_, 2
 	note D#, 2
 	note E_, 2
@@ -96,13 +96,6 @@ Music_MtMoon_Ch4:
 	sound_loop 0, .mainloop
 
 Music_MtMoon_Shared1: ; (tools/musiccalls.py)
-	octave 2
-	note B_, 2
-	octave 3
-	note D#, 2
-	sound_ret
-
-Music_MtMoon_Shared2: ; (tools/musiccalls.py)
 	note C#, 6
 	octave 3
 	note B_, 2
@@ -113,7 +106,7 @@ Music_MtMoon_Shared2: ; (tools/musiccalls.py)
 	note D#, 2
 	sound_ret
 
-Music_MtMoon_Shared3: ; (tools/musiccalls.py)
+Music_MtMoon_Shared2: ; (tools/musiccalls.py)
 	note F#, 6
 	note E_, 2
 	note F#, 2

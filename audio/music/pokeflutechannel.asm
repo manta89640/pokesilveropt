@@ -8,7 +8,7 @@ Music_PokeFluteChannel_Ch1:
 	tempo 240
 	volume 7, 7
 	stereo_panning TRUE, FALSE
-	sound_call Music_TinTower_Shared2
+	sound_call Music_JohtoWildBattle_Shared1.shared8
 	note_type 12, 11, 4
 	rest 4
 	octave 3
@@ -19,7 +19,7 @@ Music_PokeFluteChannel_Ch1:
 	note E_, 2
 	note D_, 2
 	note C_, 2
-	sound_call Music_Gym_Shared3
+	sound_call Music_Gym_Shared2
 	note B_, 16
 	rest 2
 	octave 2

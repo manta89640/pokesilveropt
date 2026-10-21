@@ -30,7 +30,7 @@ Music_Lighthouse_Ch1:
 	octave 3
 	note C_, 4
 	octave 2
-	sound_call Music_KantoWildBattle_Shared9
+	sound_call Music_KantoWildBattle_Shared8
 	note G#, 1
 	rest 1
 	note C_, 2
@@ -40,10 +40,7 @@ Music_Lighthouse_Ch1:
 	rest 1
 	note G#, 1
 	rest 1
-	note A_, 1
-	rest 1
-	note A_, 1
-	rest 1
+	sound_call Music_Route3_Shared2.shared7
 	note A_, 1
 	rest 1
 	octave 3
@@ -68,7 +65,7 @@ Music_Lighthouse_Ch1:
 	octave 3
 	note C_, 12
 	octave 2
-	sound_call Music_KantoWildBattle_Shared9
+	sound_call Music_KantoWildBattle_Shared8
 	note G#, 1
 	rest 3
 	octave 3
@@ -122,7 +119,8 @@ Music_Lighthouse_Ch1:
 	sound_loop 0, .mainloop
 
 Music_Lighthouse_Ch2:
-	sound_call Music_KantoGymBattle_Shared7
+	duty_cycle 3
+	pitch_offset 2
 	vibrato 16, 4, 5
 .mainloop:
 	note_type 12, 12, 5
@@ -131,7 +129,7 @@ Music_Lighthouse_Ch2:
 	octave 3
 	note G#, 16
 	volume_envelope 12, 5
-	sound_call Music_KantoWildBattle_Shared12
+	sound_call Music_KantoWildBattle_Shared11
 	note C#, 1
 	rest 1
 	sound_call Music_Lighthouse_Shared4
@@ -243,7 +241,9 @@ Music_Lighthouse_Ch4:
 	sound_loop 0, .mainloop
 
 Music_Lighthouse_Shared1: ; (tools/musiccalls.py)
-	sound_call Music_ShowMeAround_Shared3
+	tempo 144
+.shared5: ; (tools/musiccalls.py)
+	volume 7, 7
 	duty_cycle 3
 	sound_ret
 
@@ -252,6 +252,7 @@ Music_Lighthouse_Shared2: ; (tools/musiccalls.py)
 	rest 2
 	octave 2
 	note G#, 2
+.shared6: ; (tools/musiccalls.py)
 	rest 2
 	note A_, 2
 	rest 2

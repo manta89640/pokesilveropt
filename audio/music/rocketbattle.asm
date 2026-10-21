@@ -6,7 +6,7 @@ Music_RocketBattle:
 
 Music_RocketBattle_Ch1:
 	tempo 101
-	sound_call Music_RivalBattle_Shared3
+	sound_call Music_RivalBattle_Shared2
 	vibrato 16, 1, 5
 	note_type 12, 11, 2
 	sound_call Music_RivalBattle_Shared1
@@ -61,7 +61,7 @@ Music_RocketBattle_Ch1:
 	note D#, 2
 	sound_call Music_RocketBattle_Shared4
 .mainloop:
-	sound_call Music_RivalBattle_Shared7
+	sound_call Music_RivalBattle_Shared4
 	note E_, 2
 	octave 4
 	note D_, 2
@@ -73,7 +73,7 @@ Music_RocketBattle_Ch1:
 	octave 3
 	note D_, 2
 	note D_, 2
-	sound_call Music_RivalBattle_Shared7
+	sound_call Music_RivalBattle_Shared4
 	note E_, 2
 	octave 4
 	note D_, 2
@@ -239,9 +239,7 @@ Music_RocketBattle_Ch1:
 	octave 3
 	note A#, 2
 	note G_, 2
-	note A#, 4
-	note A#, 2
-	volume_envelope 11, 7
+	sound_call Music_ChampionBattle_Ch1.shared7
 	octave 4
 	note D_, 4
 	volume_envelope 11, 3
@@ -265,7 +263,7 @@ Music_RocketBattle_Ch1:
 	note C_, 2
 	note E_, 2
 	note E_, 2
-	sound_call Music_RivalBattle_Shared2
+	sound_call Music_RocketBattle_Ch3.shared9
 	note F_, 2
 	octave 2
 	note A_, 2
@@ -359,7 +357,7 @@ Music_RocketBattle_Ch2:
 	note F_, 16
 .mainloop:
 	sound_call .sub1
-	sound_call Music_RivalBattle_Shared5
+	sound_call Music_RivalBattle_Ch2.shared7
 	volume_envelope 11, 0
 	note A#, 8
 	volume_envelope 11, 7
@@ -506,13 +504,8 @@ Music_RocketBattle_Ch2:
 	note A_, 8
 	volume_envelope 12, 6
 	octave 3
-	note A_, 6
-	note G#, 6
-	note E_, 4
-	note A_, 6
-	note G#, 6
-	note E_, 4
-	sound_call Music_RivalBattle_Shared5
+	sound_call Music_RocketBattle_Ch2.shared8
+	sound_call Music_RivalBattle_Ch2.shared7
 	volume_envelope 3, -5
 	note A#, 8
 	volume_envelope 12, 7
@@ -522,6 +515,7 @@ Music_RocketBattle_Ch2:
 .sub1:
 	volume_envelope 12, 6
 	octave 4
+.shared8: ; (tools/musiccalls.py)
 	note A_, 6
 	note G#, 6
 	note E_, 4
@@ -550,7 +544,7 @@ Music_RocketBattle_Ch3:
 	note E_, 2
 	octave 3
 	note F_, 2
-	sound_call Music_RivalBattle_Shared7
+	sound_call Music_RivalBattle_Shared4
 	octave 4
 	note E_, 2
 	octave 2
@@ -595,9 +589,9 @@ Music_RocketBattle_Ch3:
 	sound_call .sub3
 	octave 3
 	note A#, 2
-	sound_call Music_RivalBattle_Shared2
-	sound_call Music_RivalBattle_Shared2
-	sound_call Music_RivalBattle_Shared2
+	sound_call Music_RocketBattle_Ch3.shared9
+	sound_call Music_RocketBattle_Ch3.shared9
+	sound_call Music_RocketBattle_Ch3.shared9
 	note E_, 2
 	note D_, 2
 	sound_call .sub5
@@ -607,10 +601,10 @@ Music_RocketBattle_Ch3:
 	note A_, 2
 	sound_call Music_RocketBattle_Shared1
 .loop3:
-	sound_call Music_RivalBattle_Shared2
+	sound_call Music_RocketBattle_Ch3.shared9
 	sound_loop 5, .loop3
 	note A#, 2
-	sound_call Music_RivalBattle_Shared2
+	sound_call Music_RocketBattle_Ch3.shared9
 	note A#, 2
 	octave 2
 	note A#, 2
@@ -648,9 +642,9 @@ Music_RocketBattle_Ch3:
 	note G_, 2
 	note F_, 2
 .loop5:
-	sound_call Music_RivalBattle_Shared2
+	sound_call Music_RocketBattle_Ch3.shared9
 	sound_loop 4, .loop5
-	sound_call Music_RivalBattle_Shared2
+	sound_call Music_RocketBattle_Ch3.shared9
 	note G_, 2
 	note F_, 2
 	note E_, 2
@@ -672,19 +666,22 @@ Music_RocketBattle_Ch3:
 	sound_call Music_RocketBattle_Shared1
 	sound_loop 4, .loop7
 	octave 2
-	sound_call Music_Route36_Shared6
+	note A_, 2
+	octave 4
+	note D_, 2
+	octave 3
 	note A_, 2
 	note A#, 4
 	note A_, 2
 	note G_, 2
 	note A#, 2
 .loop8:
-	sound_call Music_RivalBattle_Shared2
+	sound_call Music_RocketBattle_Ch3.shared9
 	sound_loop 7, .loop8
 	note E_, 2
 	note F_, 2
 .loop9:
-	sound_call Music_RivalBattle_Shared2
+	sound_call Music_RocketBattle_Ch3.shared9
 	sound_loop 5, .loop9
 	octave 3
 	note A#, 2
@@ -740,21 +737,25 @@ Music_RocketBattle_Ch3:
 	sound_ret
 
 .sub3:
-	sound_call Music_RivalBattle_Shared2
+	sound_call Music_RocketBattle_Ch3.shared9
 	note A#, 2
-	sound_call Music_RivalBattle_Shared2
+	sound_call Music_RocketBattle_Ch3.shared9
 	note A#, 2
 	octave 2
 	note A#, 2
 	sound_ret
 
 .sub4:
-	sound_call Music_RivalBattle_Shared2
+	sound_call Music_RocketBattle_Ch3.shared9
 	note A#, 2
 	note F_, 2
 	note A#, 2
 	note F_, 2
-	sound_call Music_RivalBattle_Shared2
+.shared9: ; (tools/musiccalls.py)
+	octave 2
+	note A#, 2
+	octave 3
+	note F_, 2
 	sound_ret
 
 .sub5:

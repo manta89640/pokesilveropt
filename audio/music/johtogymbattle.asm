@@ -6,7 +6,7 @@ Music_JohtoGymBattle:
 
 Music_JohtoGymBattle_Ch1:
 	tempo 101
-	sound_call Music_RivalBattle_Shared3
+	sound_call Music_RivalBattle_Shared2
 	vibrato 18, 1, 5
 	note_type 12, 11, 2
 .loop1:
@@ -259,7 +259,7 @@ Music_JohtoGymBattle_Ch1:
 	sound_loop 0, .mainloop
 
 Music_JohtoGymBattle_Ch2:
-	sound_call Music_RivalBattle_Shared4
+	sound_call Music_RivalBattle_Shared3
 .loop1:
 	octave 4
 	note F#, 1
@@ -297,15 +297,9 @@ Music_JohtoGymBattle_Ch2:
 	note_type 12, 9, 2
 	octave 3
 	note D_, 2
-	note D_, 2
-	volume_envelope 12, 2
-	octave 4
+	sound_call Music_JohtoGymBattle_Shared3.shared12
 	note D_, 4
-	volume_envelope 9, 2
-	octave 3
-	note D_, 2
-	volume_envelope 12, 2
-	octave 4
+	sound_call Music_JohtoGymBattle_Shared3.shared11
 	note D#, 2
 	volume_envelope 9, 2
 	octave 3
@@ -551,10 +545,7 @@ Music_JohtoGymBattle_Ch3:
 	sound_call .sub1
 	sound_call Music_JohtoGymBattle_Shared2
 	note G#, 2
-	octave 4
-	note C_, 2
-	octave 3
-	note A#, 2
+	sound_call Music_DarkCave_Ch1.shared7
 	note G#, 2
 .mainloop:
 	sound_call .sub2
@@ -622,18 +613,12 @@ Music_JohtoGymBattle_Ch3:
 	sound_call .sub5
 	octave 3
 	note F_, 2
-	octave 2
-	note A#, 2
-	octave 3
-	note G#, 2
+	sound_call Music_RivalBattle_Shared5.shared8
 	sound_call .sub4
 	note C_, 2
 	note G_, 2
 	note C_, 2
-	octave 4
-	note C_, 2
-	octave 3
-	note A#, 2
+	sound_call Music_DarkCave_Ch1.shared7
 	note G_, 2
 	note F_, 2
 	note G_, 2
@@ -691,10 +676,7 @@ Music_JohtoGymBattle_Ch3:
 	note C#, 2
 	note F#, 2
 	note C#, 2
-	octave 4
-	note C#, 2
-	octave 3
-	note C#, 2
+	sound_call Music_JohtoGymBattle_Ch3.shared9
 	note A_, 2
 	note C#, 2
 	note G_, 2
@@ -794,8 +776,8 @@ Music_JohtoGymBattle_Ch3:
 	sound_ret
 
 .sub5:
-	sound_call Music_RivalBattle_Shared2
-	sound_call Music_RivalBattle_Shared2
+	sound_call Music_RocketBattle_Ch3.shared9
+	sound_call Music_RocketBattle_Ch3.shared9
 	octave 2
 	note A#, 2
 	sound_ret
@@ -803,11 +785,8 @@ Music_JohtoGymBattle_Ch3:
 .sub6:
 	octave 3
 	note C_, 2
-	note G_, 2
-	octave 4
-	note C_, 2
-	octave 3
-	note C_, 2
+	sound_call Music_JohtoGymBattle_Ch3.shared8
+.shared8: ; (tools/musiccalls.py)
 	note G_, 2
 	octave 4
 	note C_, 2
@@ -816,17 +795,27 @@ Music_JohtoGymBattle_Ch3:
 	sound_ret
 
 .sub7:
-	sound_call Music_RivalBattle_Shared6
-	sound_call Music_RivalBattle_Shared6
+	note C#, 2
+	note G#, 2
+	sound_call Music_JohtoGymBattle_Ch3.shared9
+	note G#, 2
+.shared9: ; (tools/musiccalls.py)
+	octave 4
+	note C#, 2
+	octave 3
 	note C#, 2
 	sound_ret
 
 .sub8:
 	octave 3
 	note D_, 2
-	sound_call Music_Route36_Shared6
+	note A_, 2
+	sound_call Music_JohtoGymBattle_Ch3.shared10
+	note A_, 2
+.shared10: ; (tools/musiccalls.py)
+	octave 4
 	note D_, 2
-	sound_call Music_Route36_Shared6
+	octave 3
 	note D_, 2
 	sound_ret
 
@@ -861,7 +850,7 @@ Music_JohtoGymBattle_Shared1: ; (tools/musiccalls.py)
 	volume_envelope 12, 4
 	octave 4
 	note D_, 2
-	sound_call Music_Route36_Shared4
+	sound_call Music_DarkCave_Shared1.shared9
 	note C_, 2
 	volume_envelope 12, 7
 	note C#, 8
@@ -895,12 +884,12 @@ Music_JohtoGymBattle_Shared3: ; (tools/musiccalls.py)
 	volume_envelope 9, 2
 	octave 3
 	note D_, 2
-	note D_, 2
-	volume_envelope 12, 2
-	octave 4
+	sound_call Music_JohtoGymBattle_Shared3.shared12
 	note D#, 4
+.shared11: ; (tools/musiccalls.py)
 	volume_envelope 9, 2
 	octave 3
+.shared12: ; (tools/musiccalls.py)
 	note D_, 2
 	volume_envelope 12, 2
 	octave 4

@@ -56,16 +56,22 @@ Music_Route36_Ch1:
 	volume_envelope 11, 5
 	note C_, 2
 	note F_, 2
-	sound_call Music_Route36_Shared4
+	sound_call Music_DarkCave_Shared1.shared9
 	note D#, 4
 	note D_, 4
 	note C_, 2
 	octave 3
 	note A#, 4
 	volume_envelope 11, 4
-	sound_call Music_Route36_Shared6
+	note A_, 2
+	octave 4
+	note D_, 2
+	octave 3
 	note F#, 2
-	sound_call Music_Route36_Shared6
+	note A_, 2
+	octave 4
+	note D_, 2
+	octave 3
 	note F#, 2
 	note A_, 2
 	octave 4
@@ -337,7 +343,9 @@ Music_Route36_Ch3:
 	note G_, 2
 	note A#, 2
 	note G_, 2
-	sound_call Music_Route36_Shared5
+	sound_call Music_Route36_Shared1.shared4
+	note F#, 2
+	note D_, 2
 	note D_, 4
 	octave 2
 	note A_, 2
@@ -440,14 +448,19 @@ Music_Route36_Ch4:
 	sound_ret
 
 Music_Route36_Shared1: ; (tools/musiccalls.py)
-	sound_call Music_Route36_Shared5
+	sound_call Music_Route36_Shared1.shared4
+	note F#, 2
+	note D_, 2
 	note G_, 4
 	note E_, 2
 	note G_, 4
 	note E_, 2
 	note G_, 2
 	note E_, 2
-	sound_call Music_Route36_Shared5
+	sound_call Music_Route36_Shared1.shared4
+	note F#, 2
+	note D_, 2
+.shared4: ; (tools/musiccalls.py)
 	note F#, 4
 	note D_, 2
 	note F#, 4
@@ -475,27 +488,4 @@ Music_Route36_Shared3: ; (tools/musiccalls.py)
 	note D#, 2
 	note G_, 2
 	note D#, 2
-	sound_ret
-
-Music_Route36_Shared4: ; (tools/musiccalls.py)
-	note C_, 2
-	octave 3
-	note A#, 2
-	octave 4
-	sound_ret
-
-Music_Route36_Shared5: ; (tools/musiccalls.py)
-	note F#, 4
-	note D_, 2
-	note F#, 4
-	note D_, 2
-	note F#, 2
-	note D_, 2
-	sound_ret
-
-Music_Route36_Shared6: ; (tools/musiccalls.py)
-	note A_, 2
-	octave 4
-	note D_, 2
-	octave 3
 	sound_ret

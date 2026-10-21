@@ -80,16 +80,11 @@ Music_LookOfficer_Ch2:
 	sound_loop 0, .mainloop
 
 .sub1:
-	octave 1
+	sound_call Music_LookOfficer_Ch2.shared1
 	note A_, 2
-	octave 2
-	note C#, 2
-	note A_, 2
-	octave 1
-	note A_, 2
-	octave 2
-	note C#, 2
+	sound_call Music_LookOfficer_Ch2.shared1
 	note E_, 2
+.shared1: ; (tools/musiccalls.py)
 	octave 1
 	note A_, 2
 	octave 2

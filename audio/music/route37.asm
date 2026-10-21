@@ -39,7 +39,7 @@ Music_Route37_Ch1:
 	note F#, 3
 	note A_, 1
 	note B_, 6
-	sound_call Music_MtMoon_Shared1
+	sound_call Music_Route37_Ch3.shared7
 	note F#, 2
 	note B_, 2
 	note A_, 4
@@ -241,7 +241,7 @@ Music_Route37_Ch3:
 	note A_, 2
 	sound_call .sub1
 .loop3:
-	sound_call Music_MtMoon_Shared1
+	sound_call Music_Route37_Ch3.shared7
 	sound_loop 4, .loop3
 .loop4:
 	octave 2
@@ -276,10 +276,8 @@ Music_Route37_Ch3:
 
 .sub1:
 	octave 2
-	note F#, 2
-	note B_, 2
-	note F#, 2
-	note B_, 2
+	sound_call Music_Route37_Ch3.shared6
+.shared6: ; (tools/musiccalls.py)
 	note F#, 2
 	note B_, 2
 	note F#, 2
@@ -287,10 +285,14 @@ Music_Route37_Ch3:
 	sound_ret
 
 .sub2:
-	sound_call Music_MtMoon_Shared1
-	sound_call Music_MtMoon_Shared1
-	sound_call Music_MtMoon_Shared1
-	sound_call Music_MtMoon_Shared1
+	sound_call Music_Route37_Ch3.shared7
+	sound_call Music_Route37_Ch3.shared7
+	sound_call Music_Route37_Ch3.shared7
+.shared7: ; (tools/musiccalls.py)
+	octave 2
+	note B_, 2
+	octave 3
+	note D#, 2
 	sound_ret
 
 Music_Route37_Ch4:
@@ -328,13 +330,12 @@ Music_Route37_Ch4:
 	sound_ret
 
 Music_Route37_Shared1: ; (tools/musiccalls.py)
-	note B_, 1
-	note B_, 1
-	volume_envelope 12, 2
+	sound_call Music_Route37_Shared1.shared8
 	note B_, 2
 	volume_envelope 12, 1
 	note B_, 1
 	note B_, 1
+.shared8: ; (tools/musiccalls.py)
 	note B_, 1
 	note B_, 1
 	volume_envelope 12, 2

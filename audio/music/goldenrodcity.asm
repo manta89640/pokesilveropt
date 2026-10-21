@@ -17,7 +17,7 @@ Music_GoldenrodCity_Ch1:
 .mainloop:
 	duty_cycle 0
 	sound_call .sub1
-	sound_call Music_GoldenrodCity_Shared1
+	sound_call Music_GoldenrodCity_Ch1.shared2
 	note D#, 1
 	note F#, 1
 	note G#, 1
@@ -118,7 +118,7 @@ Music_GoldenrodCity_Ch1:
 	note F_, 1
 	note D#, 1
 	note C_, 1
-	sound_call Music_GoldenrodCity_Shared1
+	sound_call Music_GoldenrodCity_Ch1.shared2
 	note D#, 1
 	note F#, 1
 	note C_, 1
@@ -155,7 +155,13 @@ Music_GoldenrodCity_Ch1:
 	note C#, 1
 	note D#, 1
 	note C_, 1
-	sound_call Music_GoldenrodCity_Shared1
+.shared2: ; (tools/musiccalls.py)
+	octave 3
+	note G#, 1
+	octave 4
+	note C_, 1
+	note D#, 1
+	note F#, 1
 	sound_ret
 
 Music_GoldenrodCity_Ch2:
@@ -206,7 +212,7 @@ Music_GoldenrodCity_Ch2:
 	note D#, 4
 	note C_, 4
 	note C#, 2
-	sound_call Music_Route36_Shared4
+	sound_call Music_DarkCave_Shared1.shared9
 	note C_, 2
 	octave 3
 	note G#, 6
@@ -381,7 +387,7 @@ Music_GoldenrodCity_Ch4:
 	drum_note 7, 2
 .mainloop:
 .loop1:
-	sound_call Music_GoldenrodCity_Shared2
+	sound_call Music_GoldenrodCity_Shared1
 	drum_note 3, 2
 	drum_note 7, 2
 	sound_loop 3, .loop1
@@ -417,7 +423,7 @@ Music_GoldenrodCity_Ch4:
 	drum_note 3, 1
 	drum_note 3, 1
 .loop2:
-	sound_call Music_GoldenrodCity_Shared2
+	sound_call Music_GoldenrodCity_Shared1
 	drum_note 3, 2
 	drum_note 7, 2
 	sound_loop 3, .loop2
@@ -425,7 +431,7 @@ Music_GoldenrodCity_Ch4:
 	sound_loop 0, .mainloop
 
 .sub1:
-	sound_call Music_GoldenrodCity_Shared2
+	sound_call Music_GoldenrodCity_Shared1
 	drum_note 3, 1
 	drum_note 3, 1
 	drum_note 7, 2
@@ -436,6 +442,7 @@ Music_GoldenrodCity_Ch4:
 	drum_note 3, 1
 	drum_note 4, 3
 	drum_note 4, 2
+.shared3: ; (tools/musiccalls.py)
 	drum_note 8, 1
 	drum_note 8, 1
 	drum_note 8, 1
@@ -443,15 +450,6 @@ Music_GoldenrodCity_Ch4:
 	sound_ret
 
 Music_GoldenrodCity_Shared1: ; (tools/musiccalls.py)
-	octave 3
-	note G#, 1
-	octave 4
-	note C_, 1
-	note D#, 1
-	note F#, 1
-	sound_ret
-
-Music_GoldenrodCity_Shared2: ; (tools/musiccalls.py)
 	drum_note 4, 2
 	drum_note 7, 2
 	drum_note 3, 2

@@ -7,8 +7,7 @@ Music_GameCorner:
 
 Music_GameCorner_Ch1:
 	tempo 147
-	volume 7, 7
-	stereo_panning FALSE, TRUE
+	sound_call Music_Route2_Shared2
 	note_type 12, 9, 1
 	rest 8
 .mainloop:
@@ -58,7 +57,11 @@ Music_GameCorner_Ch1:
 .loop3:
 	octave 4
 	note D#, 1
-	sound_call Music_GameCorner_Shared9
+	note G_, 1
+	octave 5
+	note C_, 1
+	octave 4
+	note G_, 1
 	sound_loop 4, .loop3
 .loop4:
 	octave 4
@@ -102,7 +105,7 @@ Music_GameCorner_Ch1:
 	sound_loop 0, .mainloop
 
 .sub1:
-	sound_call Music_GameCorner_Shared10
+	sound_call Music_GameCorner_Ch1.shared8
 	rest 2
 	note G#, 3
 	note G#, 3
@@ -113,7 +116,15 @@ Music_GameCorner_Ch1:
 	sound_ret
 
 .sub2:
-	sound_call Music_GameCorner_Shared10
+.shared8: ; (tools/musiccalls.py)
+	rest 2
+	octave 4
+	note A#, 3
+	note G_, 3
+	note D#, 3
+	octave 3
+	note F_, 3
+	note F_, 2
 	sound_ret
 
 Music_GameCorner_Ch2:
@@ -151,7 +162,7 @@ Music_GameCorner_Ch2:
 	note F_, 4
 	duty_cycle 2
 	volume_envelope 12, 7
-	sound_call Music_GameCorner_Shared11
+	sound_call Music_GameCorner_Shared7
 	note F_, 4
 	note D_, 6
 	note C_, 6
@@ -159,7 +170,7 @@ Music_GameCorner_Ch2:
 	note A#, 4
 	note A_, 4
 	rest 10
-	sound_call Music_GameCorner_Shared11
+	sound_call Music_GameCorner_Shared7
 	note F_, 2
 	note D#, 1
 	note F_, 1
@@ -174,15 +185,15 @@ Music_GameCorner_Ch2:
 	sound_loop 0, .mainloop
 
 .sub1:
-	sound_call Music_GameCorner_Shared7
+	sound_call Music_GameCorner_Shared5
 	note F_, 2
 	note D#, 1
 	note F_, 3
-	sound_call Music_GameCorner_Shared7
+	sound_call Music_GameCorner_Shared5
 	note C_, 2
 	note D#, 1
 	note F_, 3
-	sound_call Music_GameCorner_Shared2
+	sound_call Music_GameCorner_Ch2.shared9
 	octave 1
 	note F_, 1
 	octave 4
@@ -197,7 +208,37 @@ Music_GameCorner_Ch2:
 	note A#, 1
 	octave 5
 	note C_, 3
-	sound_call Music_GameCorner_Shared2
+.shared9: ; (tools/musiccalls.py)
+	octave 1
+	note C_, 2
+	octave 5
+	note D_, 3
+	octave 4
+	note A#, 3
+	note G_, 2
+	note C_, 2
+	note D_, 2
+	note D#, 2
+	note F_, 2
+	note D#, 2
+	note F_, 1
+	note D#, 2
+	volume_envelope 10, 4
+	note F_, 3
+	note G_, 4
+	volume_envelope 9, 2
+	note F#, 1
+	note F_, 1
+	octave 1
+	note C_, 2
+	octave 5
+	note D_, 3
+	octave 4
+	note A#, 3
+	note G_, 2
+	note C_, 2
+	note D_, 2
+	note D#, 2
 	sound_ret
 
 Music_GameCorner_Ch3:
@@ -296,9 +337,9 @@ Music_GameCorner_Ch3:
 	rest 1
 	octave 3
 	note C_, 1
-	sound_call Music_GameCorner_Shared3
+	sound_call Music_GameCorner_Shared2
 	sound_call .sub5
-	sound_call Music_GameCorner_Shared8
+	sound_call Music_GameCorner_Shared6
 	note G_, 2
 	octave 3
 	note G_, 1
@@ -331,25 +372,20 @@ Music_GameCorner_Ch3:
 
 .sub1:
 	octave 2
-	sound_call Music_GameCorner_Shared6
+	sound_call Music_GameCorner_Shared4
 	note G_, 1
-	sound_call Music_GameCorner_Shared6
+	sound_call Music_GameCorner_Shared4
 	note A_, 1
-	note C_, 1
-	octave 3
-	note C_, 1
-	octave 4
+	sound_call Music_GameCorner_Shared4.shared13
 	note A_, 2
 	sound_ret
 
 .sub2:
 	octave 2
-	sound_call Music_GameCorner_Shared6
+	sound_call Music_GameCorner_Shared4
 	note G_, 1
-	note C_, 1
-	octave 3
-	note C_, 1
-	octave 4
+	sound_call Music_GameCorner_Shared4.shared13
+.shared10: ; (tools/musiccalls.py)
 	note A#, 1
 	rest 1
 	note A_, 1
@@ -370,8 +406,8 @@ Music_GameCorner_Ch3:
 	sound_ret
 
 .sub5:
-	sound_call Music_GameCorner_Shared3
-	sound_call Music_GameCorner_Shared8
+	sound_call Music_GameCorner_Shared2
+	sound_call Music_GameCorner_Shared6
 	note F_, 1
 	octave 3
 	note F_, 1
@@ -386,7 +422,7 @@ Music_GameCorner_Ch3:
 	sound_ret
 
 Music_GameCorner_Ch4:
-	sound_call Music_PokemonCenter_Shared6
+	sound_call Music_PokemonCenter_Shared5
 	drum_speed 8
 	drum_note 3, 1
 	drum_note 3, 1
@@ -401,12 +437,12 @@ Music_GameCorner_Ch4:
 	sound_call .sub1
 .loop1:
 	drum_note 11, 2
-	sound_call Music_GameCorner_Shared5
+	sound_call Music_GameCorner_Ch4.shared11
 	sound_loop 6, .loop1
 	sound_call .sub2
 .loop2:
 	drum_note 11, 2
-	sound_call Music_GameCorner_Shared5
+	sound_call Music_GameCorner_Ch4.shared11
 	sound_loop 3, .loop2
 	rest 12
 	drum_note 3, 1
@@ -415,32 +451,26 @@ Music_GameCorner_Ch4:
 	sound_call .sub1
 .loop3:
 	drum_note 11, 2
-	sound_call Music_GameCorner_Shared5
+	sound_call Music_GameCorner_Ch4.shared11
 	sound_loop 6, .loop3
 	sound_call .sub2
 .loop4:
 	drum_note 11, 2
-	sound_call Music_GameCorner_Shared5
+	sound_call Music_GameCorner_Ch4.shared11
 	sound_loop 3, .loop4
-	drum_note 11, 2
-	drum_note 7, 2
-	drum_note 3, 2
-	drum_note 7, 2
+	sound_call Music_GameCorner_Ch4.shared12
 	drum_note 4, 2
 	drum_note 7, 2
-	drum_note 3, 1
-	drum_note 3, 1
-	drum_note 3, 1
-	drum_note 3, 1
+	sound_call Music_Route30_Ch4.shared5
 .loop5:
-	sound_call Music_GameCorner_Shared4
+	sound_call Music_GameCorner_Shared3
 	drum_note 7, 2
 	sound_loop 3, .loop5
-	sound_call Music_GameCorner_Shared4
+	sound_call Music_GameCorner_Shared3
 	drum_note 3, 1
 	drum_note 3, 1
 .loop6:
-	sound_call Music_GameCorner_Shared4
+	sound_call Music_GameCorner_Shared3
 	drum_note 7, 2
 	sound_loop 3, .loop6
 	drum_note 3, 1
@@ -456,14 +486,19 @@ Music_GameCorner_Ch4:
 
 .sub1:
 	drum_note 1, 2
-	sound_call Music_GameCorner_Shared5
-	sound_ret
-
-.sub2:
+.shared11: ; (tools/musiccalls.py)
+	drum_note 7, 2
+	drum_note 3, 2
+	drum_note 7, 2
+.shared12: ; (tools/musiccalls.py)
 	drum_note 11, 2
 	drum_note 7, 2
 	drum_note 3, 2
 	drum_note 7, 2
+	sound_ret
+
+.sub2:
+	sound_call Music_GameCorner_Ch4.shared12
 	drum_note 11, 2
 	drum_note 7, 2
 	drum_note 3, 1
@@ -497,101 +532,59 @@ Music_GameCorner_Shared1: ; (tools/musiccalls.py)
 	sound_ret
 
 Music_GameCorner_Shared2: ; (tools/musiccalls.py)
-	octave 1
-	note C_, 2
-	octave 5
-	note D_, 3
-	octave 4
-	note A#, 3
-	note G_, 2
-	note C_, 2
-	note D_, 2
-	note D#, 2
+	octave 2
 	note F_, 2
-	note D#, 2
+	rest 1
 	note F_, 1
-	note D#, 2
-	volume_envelope 10, 4
-	note F_, 3
-	note G_, 4
-	volume_envelope 9, 2
-	note F#, 1
+	octave 3
 	note F_, 1
-	octave 1
-	note C_, 2
-	octave 5
-	note D_, 3
-	octave 4
-	note A#, 3
-	note G_, 2
-	note C_, 2
-	note D_, 2
-	note D#, 2
+	octave 2
+	note F_, 1
+	rest 1
+	note F_, 1
+	note F_, 1
+	octave 3
+	note F_, 1
+	octave 2
+	note F_, 2
+	octave 3
+	note F_, 1
+	octave 2
+	note F_, 1
+	rest 1
+	octave 3
+	note F_, 1
 	sound_ret
 
 Music_GameCorner_Shared3: ; (tools/musiccalls.py)
-	octave 2
-	note F_, 2
-	rest 1
-	note F_, 1
-	octave 3
-	note F_, 1
-	octave 2
-	note F_, 1
-	rest 1
-	note F_, 1
-	note F_, 1
-	octave 3
-	note F_, 1
-	octave 2
-	note F_, 2
-	octave 3
-	note F_, 1
-	octave 2
-	note F_, 1
-	rest 1
-	octave 3
-	note F_, 1
+	drum_note 11, 2
+	drum_note 7, 1
+	drum_note 4, 1
+	drum_note 3, 1
+	drum_note 4, 1
+	drum_note 7, 1
+	drum_note 4, 1
+	drum_note 4, 1
+	drum_note 3, 1
+	drum_note 7, 1
+	drum_note 4, 1
+	drum_note 3, 2
 	sound_ret
 
 Music_GameCorner_Shared4: ; (tools/musiccalls.py)
-	drum_note 11, 2
-	drum_note 7, 1
-	drum_note 4, 1
-	drum_note 3, 1
-	drum_note 4, 1
-	drum_note 7, 1
-	drum_note 4, 1
-	drum_note 4, 1
-	drum_note 3, 1
-	drum_note 7, 1
-	drum_note 4, 1
-	drum_note 3, 2
-	sound_ret
-
-Music_GameCorner_Shared5: ; (tools/musiccalls.py)
-	drum_note 7, 2
-	drum_note 3, 2
-	drum_note 7, 2
-	drum_note 11, 2
-	drum_note 7, 2
-	drum_note 3, 2
-	drum_note 7, 2
-	sound_ret
-
-Music_GameCorner_Shared6: ; (tools/musiccalls.py)
 	note C_, 1
 	octave 3
 	note C_, 1
 	octave 4
 	note G_, 1
+.shared13: ; (tools/musiccalls.py)
 	note C_, 1
 	octave 3
 	note C_, 1
 	octave 4
 	sound_ret
 
-Music_GameCorner_Shared7: ; (tools/musiccalls.py)
+Music_GameCorner_Shared5: ; (tools/musiccalls.py)
 	octave 1
 	note C_, 2
 	octave 3
@@ -608,7 +601,7 @@ Music_GameCorner_Shared7: ; (tools/musiccalls.py)
 	note F_, 2
 	sound_ret
 
-Music_GameCorner_Shared8: ; (tools/musiccalls.py)
+Music_GameCorner_Shared6: ; (tools/musiccalls.py)
 	octave 2
 	note G_, 2
 	rest 1
@@ -625,26 +618,7 @@ Music_GameCorner_Shared8: ; (tools/musiccalls.py)
 	octave 2
 	sound_ret
 
-Music_GameCorner_Shared9: ; (tools/musiccalls.py)
-	note G_, 1
-	octave 5
-	note C_, 1
-	octave 4
-	note G_, 1
-	sound_ret
-
-Music_GameCorner_Shared10: ; (tools/musiccalls.py)
-	rest 2
-	octave 4
-	note A#, 3
-	note G_, 3
-	note D#, 3
-	octave 3
-	note F_, 3
-	note F_, 2
-	sound_ret
-
-Music_GameCorner_Shared11: ; (tools/musiccalls.py)
+Music_GameCorner_Shared7: ; (tools/musiccalls.py)
 	octave 3
 	note D#, 1
 	note F_, 1

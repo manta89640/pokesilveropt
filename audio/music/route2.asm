@@ -7,8 +7,7 @@ Music_Route2:
 
 Music_Route2_Ch1:
 	tempo 151
-	volume 7, 7
-	stereo_panning FALSE, TRUE
+	sound_call Music_Route2_Shared2
 	vibrato 6, 2, 3
 	note_type 12, 11, 1
 	rest 16
@@ -127,12 +126,15 @@ Music_Route2_Ch1:
 	note D_, 2
 	octave 3
 	note B_, 2
+	sound_call Music_Route2_Ch1.shared4
+.shared4: ; (tools/musiccalls.py)
 	octave 4
 	note C_, 2
 	octave 3
-	sound_call Music_Route12_Shared2
-	sound_call Music_Route12_Shared2
-	sound_call Music_Route12_Shared2
+	note A_, 2
+	octave 4
+	note C_, 2
+	octave 3
 	note A_, 2
 	sound_ret
 
@@ -188,18 +190,10 @@ Music_Route2_Ch2:
 
 .sub2:
 	octave 2
-	sound_call Music_Route2_Shared2
-	sound_call Music_KantoTrainerBattle_Shared7
-	note G_, 2
-	rest 2
-	note G_, 1
-	rest 1
 	sound_call Music_Route2_Shared1
-	note F_, 4
-	rest 2
-	note F_, 1
-	rest 1
-	note F_, 4
+	sound_call Music_KantoTrainerBattle_Shared7
+	sound_call Music_Route2_Ch2.shared5
+	sound_call Music_Route2_Ch3.shared6
 	note D_, 4
 	sound_ret
 
@@ -207,7 +201,7 @@ Music_Route2_Ch2:
 	octave 2
 	note E_, 4
 	rest 2
-	sound_call Music_Route1_Shared6
+	sound_call Music_Route1_Shared5
 	note E_, 2
 	rest 2
 	note E_, 1
@@ -235,6 +229,7 @@ Music_Route2_Ch2:
 	note G_, 4
 	rest 2
 	sound_call Music_KantoTrainerBattle_Shared7
+.shared5: ; (tools/musiccalls.py)
 	note G_, 2
 	rest 2
 	note G_, 1
@@ -269,12 +264,9 @@ Music_Route2_Ch3:
 .mainloop:
 	note_type 12, 1, 5
 	octave 3
-	sound_call Music_Route2_Shared2
+	sound_call Music_Route2_Shared1
 	sound_call Music_KantoTrainerBattle_Shared7
-	note G_, 2
-	rest 2
-	note G_, 1
-	rest 1
+	sound_call Music_Route2_Ch2.shared5
 	sound_call .sub1
 	octave 3
 	note D_, 2
@@ -320,7 +312,17 @@ Music_Route2_Ch3:
 
 .sub1:
 	octave 3
-	sound_call Music_Route2_Shared1
+.shared6: ; (tools/musiccalls.py)
+	note F_, 4
+	rest 2
+	note F_, 1
+	rest 1
+	note F_, 1
+	rest 1
+	note F_, 2
+	rest 2
+	note F_, 1
+	rest 1
 	note F_, 4
 	rest 2
 	note F_, 1
@@ -441,19 +443,6 @@ Music_Route2_Ch4:
 	sound_loop 0, .mainloop
 
 Music_Route2_Shared1: ; (tools/musiccalls.py)
-	note F_, 4
-	rest 2
-	note F_, 1
-	rest 1
-	note F_, 1
-	rest 1
-	note F_, 2
-	rest 2
-	note F_, 1
-	rest 1
-	sound_ret
-
-Music_Route2_Shared2: ; (tools/musiccalls.py)
 	note C_, 4
 	rest 2
 	note C_, 1
@@ -466,6 +455,11 @@ Music_Route2_Shared2: ; (tools/musiccalls.py)
 	rest 1
 	note G_, 4
 	rest 2
+	sound_ret
+
+Music_Route2_Shared2: ; (tools/musiccalls.py)
+	volume 7, 7
+	stereo_panning FALSE, TRUE
 	sound_ret
 
 Music_Route2_Shared3: ; (tools/musiccalls.py)

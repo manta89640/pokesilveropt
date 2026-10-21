@@ -7,12 +7,15 @@ Usage: tools/musiccalls.py [--apply]
 Within each song section of audio.asm, this looks for runs of notes and
 commands that appear more than once, and replaces them with a sound_call to
 one copy of the run, which it adds at the end of a song file with a
-sound_ret. It picks the run that saves the most bytes, and repeats until no
-run saves any. A run doesn't include labels or sound_call, sound_ret,
-sound_loop or sound_jump. The sound engine can call a subroutine from a
-subroutine but no deeper, so it follows each channel to find where its data
-is played, and doesn't add calls where they would be too deep. Without
---apply, only reports how much it would save.
+sound_ret. If a copy is followed by a sound_ret already, it stays where it is
+instead, with a label for the others to call. It picks the run that saves the
+most bytes, and repeats until no run saves any. A run doesn't include labels
+or sound_call, sound_ret, sound_loop or sound_jump. Then a sound_call
+followed by a sound_ret becomes a sound_jump, or the subroutine moves to
+right after it. The sound engine can call a subroutine from a subroutine but
+no deeper, so it follows each channel to find where its data is played, and
+doesn't add calls where they would be too deep. Without --apply, only
+reports how much it would save.
 
 tools/tests/verify_music.py checks the result against the original ROMs.
 """
@@ -120,21 +123,34 @@ def depths(items):
 
 
 class Run:
-	"""A run of commands that can hold calls: a list of elements, which are item
-	indices or Sub objects (calls), with a string of one character each to
-	search."""
-	def __init__(self, elements, chars, depth, path):
-		self.elements, self.chars, self.depth, self.path = elements, chars, depth, path
+	"""Commands that can hold calls: a list of elements, which are item indices,
+	Subs (calls) or Jumps, with a string of one character each to search. A run
+	may be followed by a sound_ret (ret_after), or by the body of a Sub (tail)."""
+	def __init__(self, elements, chars, depth, path, scope, ret_after):
+		self.elements, self.chars, self.depth = elements, chars, depth
+		self.path, self.scope, self.ret_after = path, scope, ret_after
+		self.tail = None
+		self.lines = None  # (first line, last line, sound_ret line) for runs of the source
 
 
 class Sub:
+	"""A subroutine: a run, and whether it is placed after another run instead of
+	at the end of a file."""
 	def __init__(self, run, char):
 		self.run, self.char = run, char
+		self.inplace = False
 		self.label = None
 
 
-def factor(items, runs, char_of, sizes):
-	"""Greedily moves repeated phrases of the runs into new Subs."""
+class Jump:
+	def __init__(self, sub):
+		self.sub = sub
+
+
+def factor(runs, sizes):
+	"""Greedily moves repeated phrases of the runs into new Subs. A phrase at the
+	end of a run that returns can stay there, with a label for the other copies
+	to call."""
 	subs = []
 	next_char = 0xf0000
 	while True:
@@ -152,25 +168,44 @@ def factor(items, runs, char_of, sizes):
 			if count < 2:
 				continue
 			size = sum(sizes[c] for c in phrase)
-			if (count - 1) * size - CALL_SIZE * count - RET_SIZE <= (best[0] if best else 0):
+			if (count - 1) * (size - CALL_SIZE) <= (best[0] if best else 0):
 				continue
 			hosts = [run for run in runs if run.depth < MAX_DEPTH and phrase in run.chars]
 			n = sum(run.chars.count(phrase) for run in hosts)
 			saved = (n - 1) * size - CALL_SIZE * n - RET_SIZE
 			if saved > (best[0] if best else 0):
-				best = (saved, phrase, hosts)
+				best = (saved, phrase, hosts, None)
+			for run in runs:
+				if run.ret_after and run.chars.endswith(phrase):
+					head = run.chars[:-len(phrase)]
+					n = 1 + head.count(phrase) + sum(other.chars.count(phrase)
+						for other in hosts if other is not run)
+					saved = (n - 1) * (size - CALL_SIZE)
+					if saved > (best[0] if best else 0):
+						best = (saved, phrase, hosts, run)
 		if not best:
 			return subs
-		saved, phrase, hosts = best
+		saved, phrase, hosts, place = best
 		sub_char = chr(next_char)
 		next_char += 1
-		first = hosts[0]
-		start = first.chars.index(phrase)
-		body = Run(first.elements[start:start + len(phrase)], phrase,
-			max(run.depth for run in hosts) + 1, first.path)
-		sub = Sub(body, sub_char)
 		sizes[sub_char] = CALL_SIZE
-		for run in hosts:
+		if place:
+			k = len(place.chars) - len(phrase)
+			body = Run(place.elements[k:], phrase, place.depth, place.path, place.scope, True)
+			place.elements, place.chars = place.elements[:k], place.chars[:k]
+			place.ret_after = False
+			place.tail = sub = Sub(body, sub_char)
+			sub.inplace = True
+		else:
+			first = hosts[0]
+			start = first.chars.index(phrase)
+			body = Run(first.elements[start:start + len(phrase)], phrase, 0, first.path, None,
+				True)
+			sub = Sub(body, sub_char)
+		callers = [run for run in hosts if phrase in run.chars]
+		if callers:
+			body.depth = max([body.depth] + [run.depth + 1 for run in callers])
+		for run in callers:
 			elements = []
 			i = 0
 			while True:
@@ -185,6 +220,28 @@ def factor(items, runs, char_of, sizes):
 		subs.append(sub)
 
 
+def tail_calls(runs):
+	"""A run that ends with a call and returns jumps instead, or goes on into the
+	Sub's body if that can be placed after it."""
+	saved = 0
+	for run in runs:
+		if not run.ret_after or not run.elements or not isinstance(run.elements[-1], Sub):
+			continue
+		sub = run.elements[-1]
+		if not sub.inplace:
+			sub.inplace = True
+			run.elements = run.elements[:-1]
+			run.chars = run.chars[:-1]
+			run.ret_after = False
+			run.tail = sub
+			saved += CALL_SIZE + RET_SIZE
+		else:
+			run.elements[-1] = Jump(sub)
+			run.ret_after = False
+			saved += RET_SIZE
+	return saved
+
+
 def plan_section(files):
 	items = [item for path in files for item in parse(path)]
 	played = depths(items)
@@ -192,63 +249,102 @@ def plan_section(files):
 	current = None
 	char_of = {}
 	sizes = {}
+	scope = None
 	for i, item in enumerate(items):
+		if item.kind == 'label' and '.' not in item.name:
+			scope = item.name
 		depth = max(played[i]) if i in played else None
 		if item.kind != 'command' or item.op in FLOW or depth is None or depth >= MAX_DEPTH:
+			if current and item.op == 'sound_ret':
+				current.ret_after = True
+				current.lines = current.lines[:2] + (item.line,)
 			current = None
 			continue
 		if not current or current.depth != depth:
-			current = Run([], '', depth, item.path)
+			current = Run([], '', depth, item.path, scope, False)
+			current.lines = (item.line, item.line, None)
 			runs.append(current)
 		if item.code not in char_of:
 			char_of[item.code] = chr(0x100 + len(char_of))
 			sizes[char_of[item.code]] = item.size
 		current.elements.append(i)
 		current.chars += char_of[item.code]
-	original = [list(run.elements) for run in runs]
-	subs = factor(items, runs, char_of, sizes)
-	saved = sum(sizes[c] for run in original for i in run for c in [char_of[items[i].code]])
-	saved -= sum(sizes[c] for run in runs for c in run.chars)
-	saved -= RET_SIZE * len(subs)
-	return items, runs[:len(original)], original, subs, saved
+		current.lines = (current.lines[0], item.line, None)
+	before = sum(sizes[c] for run in runs for c in run.chars)
+	source = list(runs)
+	for run in source:
+		run.original = (list(run.elements), run.ret_after)
+	subs = factor(runs, sizes)
+	saved = before - sum(sizes[c] for run in runs for c in run.chars)
+	saved -= RET_SIZE * sum(1 for sub in subs if not sub.inplace)
+	saved += tail_calls(runs)
+	return items, source, subs, saved
 
 
-def apply(items, runs, original, subs):
-	files = collections.defaultdict(list)
+def apply(items, source, subs):
+	songs = {}
 	for item in items:
-		if item.kind == 'label' and '.' not in item.name:
-			files[item.path].append(item.name)
+		if item.kind == 'label':
+			songs.setdefault(item.path, item.name)
 	counters = collections.Counter()
+
+	def name(sub, path):
+		counters[path] += 1
+		return f'Shared{counters[path]}'
+
+	# Subs at the end of a file get global labels. Subs placed after another
+	# run get local ones, so they don't change the scope of the local labels
+	# that follow.
+	roots = [(run, run.scope, run.path) for run in source]
 	for sub in subs:
-		song = files[sub.run.path][0]
-		existing = ' '.join(files[sub.run.path])
-		while True:
-			counters[song] += 1
-			label = f'{song}_Shared{counters[song]}'
-			if label not in existing:
-				break
-		sub.label = label
+		if not sub.inplace:
+			sub.label = f'{songs[sub.run.path]}_{name(sub, sub.run.path)}'
+			roots.append((sub.run, sub.label, sub.run.path))
+	for run, scope, path in roots:
+		while run.tail:
+			sub = run.tail
+			sub.local = '.' + name(sub, path).lower()
+			sub.label = scope + sub.local
+			run = sub.run
 
-	def lines_of(elements):
-		return [f'\tsound_call {e.label}' if isinstance(e, Sub) else f'\t{items[e].code}'
-			for e in elements]
+	def render(run):
+		lines = []
+		for e in run.elements:
+			if isinstance(e, Sub):
+				lines.append(f'\tsound_call {e.label}')
+			elif isinstance(e, Jump):
+				lines.append(f'\tsound_jump {e.sub.label}')
+			else:
+				lines.append(f'\t{items[e].code}')
+		if run.tail:
+			lines.append(f'{run.tail.local}: ; (tools/musiccalls.py)')
+			lines += render(run.tail.run)
+		return lines
 
-	edits = collections.defaultdict(list)  # path -> [(first line, last line, new lines)]
-	for before, run in zip(original, runs):
-		if [e for e in run.elements if not isinstance(e, Sub)] == before and \
-				len(run.elements) == len(before):
+	def returns(run):
+		while run.tail:
+			run = run.tail.run
+		return run.ret_after
+
+	edits = collections.defaultdict(list)  # path -> [(first line, last line, ret line, new lines)]
+	for run in source:
+		if run.original == (run.elements, run.ret_after) and not run.tail:
 			continue
-		path = items[before[0]].path
-		edits[path].append((items[before[0]].line, items[before[-1]].line,
-			lines_of(run.elements)))
+		first, last, ret = run.lines
+		edits[run.path].append((first, last, None if returns(run) else ret, render(run)))
 	appends = collections.defaultdict(list)
 	for sub in subs:
-		appends[sub.run.path] += ['', f'{sub.label}: ; (tools/musiccalls.py)']
-		appends[sub.run.path] += lines_of(sub.run.elements) + ['\tsound_ret']
+		if not sub.inplace:
+			appends[sub.run.path] += ['', f'{sub.label}: ; (tools/musiccalls.py)']
+			appends[sub.run.path] += render(sub.run)
+			if returns(sub.run):
+				appends[sub.run.path].append('\tsound_ret')
 	for path in set(edits) | set(appends):
 		full = os.path.join(ROOT, path)
 		lines = open(full).read().split('\n')
-		for first, last, new in sorted(edits[path], reverse=True):
+		for first, last, ret, new in sorted(edits[path], reverse=True):
+			if ret is not None:
+				del lines[ret]
 			lines[first:last + 1] = new
 		while lines and not lines[-1]:
 			lines.pop()
@@ -262,11 +358,11 @@ def main():
 	args = ap.parse_args()
 	total = 0
 	for section, files in song_sections().items():
-		items, runs, original, subs, saved = plan_section(files)
+		items, source, subs, saved = plan_section(files)
 		print(f'{section}: {len(subs)} subroutines, {saved} bytes')
 		total += saved
 		if args.apply:
-			apply(items, runs, original, subs)
+			apply(items, source, subs)
 	print(f'{total} bytes')
 
 

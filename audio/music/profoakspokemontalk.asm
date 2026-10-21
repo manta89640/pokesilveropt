@@ -6,7 +6,7 @@ Music_ProfOaksPokemonTalk:
 
 Music_ProfOaksPokemonTalk_Ch1:
 	tempo 164
-	sound_call Music_ViridianCity_Shared5
+	sound_call Music_ViridianCity_Shared4
 	vibrato 6, 2, 5
 	duty_cycle 1
 	note_type 12, 9, 4

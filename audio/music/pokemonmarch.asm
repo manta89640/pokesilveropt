@@ -146,7 +146,7 @@ Music_PokemonMarch_Ch2:
 	note C_, 4
 	note C#, 2
 	note C_, 4
-	sound_call Music_JohtoWildBattle_Shared4
+	sound_call Music_JohtoWildBattle_Shared3
 	note G#, 2
 	note_type 8, 11, 7
 	note A#, 16
@@ -220,16 +220,10 @@ Music_PokemonMarch_Ch3:
 	note G#, 2
 	note D#, 2
 	sound_call .sub1
-	rest 2
-	octave 4
-	note D#, 2
-	octave 3
+	sound_call Music_PokemonMarch_Shared1.shared6
 	sound_call Music_PokemonMarch_Shared1
 	note G#, 2
-	rest 2
-	octave 4
-	note D#, 2
-	octave 3
+	sound_call Music_PokemonMarch_Shared1.shared6
 	note D#, 2
 	note G_, 2
 	note G#, 2
@@ -237,10 +231,7 @@ Music_PokemonMarch_Ch3:
 	octave 3
 	sound_call Music_PokemonMarch_Shared2
 	note G_, 2
-	rest 2
-	octave 4
-	note F_, 2
-	octave 3
+	sound_call Music_PokemonMarch_Shared2.shared7
 	note A_, 2
 	rest 1
 	octave 4
@@ -259,19 +250,13 @@ Music_PokemonMarch_Ch3:
 	note B_, 2
 	sound_call Music_PokemonMarch_Shared2
 	note G_, 2
-	rest 2
-	octave 4
-	note F_, 2
-	octave 3
+	sound_call Music_PokemonMarch_Shared2.shared7
 	note F_, 2
 	note G_, 2
 	note A#, 2
 	sound_call Music_PokemonMarch_Shared1
 	note F_, 2
-	rest 2
-	octave 4
-	note D#, 2
-	octave 3
+	sound_call Music_PokemonMarch_Shared1.shared6
 	note G#, 2
 	rest 2
 	octave 4
@@ -294,10 +279,7 @@ Music_PokemonMarch_Ch3:
 	octave 3
 	sound_call Music_PokemonMarch_Shared1
 	note F_, 2
-	rest 2
-	octave 4
-	note D#, 2
-	octave 3
+	sound_call Music_PokemonMarch_Shared1.shared6
 	note G_, 2
 	sound_ret
 
@@ -373,6 +355,7 @@ Music_PokemonMarch_Shared1: ; (tools/musiccalls.py)
 	note D#, 2
 	octave 3
 	note D#, 2
+.shared6: ; (tools/musiccalls.py)
 	rest 2
 	octave 4
 	note D#, 2
@@ -381,11 +364,9 @@ Music_PokemonMarch_Shared1: ; (tools/musiccalls.py)
 
 Music_PokemonMarch_Shared2: ; (tools/musiccalls.py)
 	note A#, 2
-	rest 2
-	octave 4
+	sound_call Music_PokemonMarch_Shared2.shared7
 	note F_, 2
-	octave 3
-	note F_, 2
+.shared7: ; (tools/musiccalls.py)
 	rest 2
 	octave 4
 	note F_, 2

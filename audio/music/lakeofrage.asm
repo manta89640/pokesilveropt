@@ -256,7 +256,7 @@ Music_LakeOfRage_Ch3:
 
 Music_LakeOfRage_Ch4:
 	stereo_panning TRUE, FALSE
-	sound_call Music_PokemonCenter_Shared6
+	sound_call Music_PokemonCenter_Shared5
 .mainloop:
 	drum_note 3, 2
 	drum_note 3, 1
@@ -301,6 +301,7 @@ Music_LakeOfRage_Shared2: ; (tools/musiccalls.py)
 	note A_, 2
 	octave 3
 	note D_, 4
+.shared3: ; (tools/musiccalls.py)
 	octave 2
 	note A_, 2
 	octave 3

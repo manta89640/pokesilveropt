@@ -213,10 +213,7 @@ Music_LookRival_Ch3:
 	note F#, 2
 	note F_, 4
 	note G#, 2
-	note D#, 4
-	note C_, 2
-	note D_, 2
-	note D#, 2
+	sound_call Music_LookRival_Ch3.shared1
 	note G#, 2
 	note F#, 2
 	note F_, 2
@@ -294,6 +291,7 @@ Music_LookRival_Ch3:
 	note F_, 2
 	note C_, 2
 	note D_, 2
+.shared1: ; (tools/musiccalls.py)
 	note D#, 4
 	note C_, 2
 	note D_, 2
@@ -304,6 +302,7 @@ Music_LookRival_Ch3:
 	note A#, 2
 	note F_, 2
 	note G_, 2
+.shared2: ; (tools/musiccalls.py)
 	note G#, 4
 	note F_, 2
 	note G_, 2
@@ -313,15 +312,11 @@ Music_LookRival_Ch3:
 .sub3:
 	note A#, 4
 	note F_, 2
-	note G#, 4
-	note F_, 2
-	note G_, 2
-	note G#, 2
-	sound_ret
+	sound_jump Music_LookRival_Ch3.shared2
 
 Music_LookRival_Ch4:
 	stereo_panning TRUE, FALSE
-	sound_call Music_ViridianCity_Shared3
+	sound_call Music_ViridianCity_Shared2
 	rest 8
 	rest 16
 	drum_note 4, 2

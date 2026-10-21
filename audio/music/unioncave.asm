@@ -66,6 +66,7 @@ Music_UnionCave_Ch1:
 	sound_loop 0, .mainloop
 
 .sub1:
+.shared1: ; (tools/musiccalls.py)
 	octave 2
 	note G#, 2
 	octave 3
@@ -167,12 +168,7 @@ Music_UnionCave_Ch2:
 	sound_ret
 
 .sub2:
-	octave 2
-	note G#, 2
-	octave 3
-	note C#, 2
-	note E_, 12
-	sound_ret
+	sound_jump Music_UnionCave_Ch1.shared1
 
 Music_UnionCave_Ch3:
 	note_type 12, 1, 6
@@ -257,4 +253,3 @@ Music_UnionCave_Ch4:
 	drum_note 9, 4
 	rest 8
 	sound_loop 0, .mainloop
-

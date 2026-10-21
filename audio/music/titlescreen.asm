@@ -7,7 +7,7 @@ Music_TitleScreen:
 
 Music_TitleScreen_Ch1:
 	tempo 256
-	sound_call Music_RivalBattle_Shared3
+	sound_call Music_RivalBattle_Shared2
 	vibrato 16, 1, 2
 	stereo_panning TRUE, FALSE
 	note_type 12, 10, 7
@@ -110,10 +110,7 @@ Music_TitleScreen_Ch1:
 	octave 3
 	note C_, 3
 	note D_, 3
-	note D_, 9
-	octave 2
-	note B_, 3
-	octave 3
+	sound_call Music_TitleScreen_Shared3.shared16
 	note D_, 6
 	octave 2
 	note B_, 6
@@ -240,6 +237,7 @@ Music_TitleScreen_Ch1:
 	note A_, 2
 	note F#, 2
 	note_type 12, 11, 7
+.shared12: ; (tools/musiccalls.py)
 	note G_, 1
 	rest 3
 	octave 1
@@ -262,6 +260,7 @@ Music_TitleScreen_Ch1:
 	rest 1
 	note D_, 1
 	octave 1
+.shared13: ; (tools/musiccalls.py)
 	note A_, 1
 	note_type 8, 11, 7
 	sound_ret
@@ -275,7 +274,7 @@ Music_TitleScreen_Ch2:
 	note D_, 2
 	note D_, 4
 	note G_, 4
-	sound_call Music_RivalBattle_Shared5
+	sound_call Music_RivalBattle_Ch2.shared7
 	volume_envelope 12, 7
 	note G_, 6
 	note D_, 2
@@ -510,8 +509,7 @@ Music_TitleScreen_Ch2:
 	note A_, 1
 	octave 4
 	note D_, 1
-	note A_, 1
-	note_type 8, 11, 7
+	sound_call Music_TitleScreen_Ch1.shared13
 	octave 5
 	note C_, 4
 	note C_, 4
@@ -587,13 +585,7 @@ Music_TitleScreen_Ch3:
 	octave 2
 	sound_call Music_TitleScreen_Shared1
 	note B_, 2
-	octave 3
-	note C_, 2
-	octave 2
-	note B_, 4
-	note G_, 2
-	note B_, 4
-	note G_, 2
+	sound_call Music_TitleScreen_Shared1.shared14
 	octave 3
 	note D_, 4
 	octave 2
@@ -729,12 +721,7 @@ Music_TitleScreen_Ch3:
 	note F_, 2
 	note A_, 2
 	note_type 12, 1, 6
-	note G_, 1
-	rest 3
-	octave 1
-	note G_, 1
-	rest 11
-	sound_ret
+	sound_jump Music_TitleScreen_Ch1.shared12
 
 Music_TitleScreen_Ch4:
 	toggle_noise 5
@@ -745,11 +732,7 @@ Music_TitleScreen_Ch4:
 	rest 16
 	rest 8
 	drum_note 1, 2
-	drum_note 1, 2
-	drum_note 1, 1
-	drum_note 1, 1
-	drum_note 1, 1
-	drum_note 1, 1
+	sound_call Music_TitleScreen_Shared4.shared17
 	sound_call Music_TitleScreen_Shared4
 	drum_note 1, 6
 	sound_call Music_TitleScreen_Shared4
@@ -944,6 +927,7 @@ Music_TitleScreen_Shared1: ; (tools/musiccalls.py)
 	note A_, 4
 	note F_, 2
 	note A_, 2
+.shared14: ; (tools/musiccalls.py)
 	octave 3
 	note C_, 2
 	octave 2
@@ -960,6 +944,7 @@ Music_TitleScreen_Shared2: ; (tools/musiccalls.py)
 	rest 5
 	note G_, 1
 	note G_, 1
+.shared15: ; (tools/musiccalls.py)
 	note G_, 1
 	rest 3
 	note G_, 1
@@ -979,6 +964,7 @@ Music_TitleScreen_Shared3: ; (tools/musiccalls.py)
 	note B_, 4
 	octave 3
 	note C_, 4
+.shared16: ; (tools/musiccalls.py)
 	note D_, 9
 	octave 2
 	note B_, 3
@@ -989,6 +975,7 @@ Music_TitleScreen_Shared4: ; (tools/musiccalls.py)
 	drum_note 1, 2
 	drum_note 1, 1
 	drum_note 1, 1
+.shared17: ; (tools/musiccalls.py)
 	drum_note 1, 2
 	drum_note 1, 1
 	drum_note 1, 1
@@ -1012,9 +999,7 @@ Music_TitleScreen_Shared6: ; (tools/musiccalls.py)
 	note G_, 6
 	note B_, 2
 	octave 4
-	note D_, 8
-	stereo_panning TRUE, FALSE
-	volume_envelope 9, 7
+	sound_call Music_TitleScreen_Shared7.shared18
 	octave 2
 	sound_ret
 
@@ -1025,6 +1010,7 @@ Music_TitleScreen_Shared7: ; (tools/musiccalls.py)
 	note F_, 6
 	note E_, 1
 	note D#, 1
+.shared18: ; (tools/musiccalls.py)
 	note D_, 8
 	stereo_panning TRUE, FALSE
 	volume_envelope 9, 7

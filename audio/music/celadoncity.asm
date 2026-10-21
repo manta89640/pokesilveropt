@@ -69,10 +69,7 @@ Music_CeladonCity_Ch1:
 	note G#, 1
 	note A_, 1
 	octave 4
-	note C_, 1
-	octave 3
-	note B_, 1
-	note A_, 1
+	sound_call Music_Surf_Ch2.shared5
 	sound_call .sub2
 	sound_call .sub3
 	note D_, 2

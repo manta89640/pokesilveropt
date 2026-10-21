@@ -36,6 +36,7 @@ Music_LookRocket_Ch1:
 	note F_, 1
 	note G#, 1
 	note B_, 1
+.shared6: ; (tools/musiccalls.py)
 	octave 3
 	note D_, 1
 	note F_, 1
@@ -217,11 +218,9 @@ Music_LookRocket_Ch3:
 	octave 2
 	note A#, 1
 	rest 1
-	octave 3
-	note G_, 1
-	rest 1
-	octave 2
+	sound_call Music_BugCatchingContest_Shared1.shared7
 	note B_, 1
+.shared7: ; (tools/musiccalls.py)
 	rest 1
 	octave 3
 	note G#, 1
@@ -255,6 +254,7 @@ Music_LookRocket_Ch3:
 	rest 1
 	note C_, 1
 	rest 1
+.shared8: ; (tools/musiccalls.py)
 	note F#, 1
 	rest 1
 	note A_, 1
@@ -270,7 +270,7 @@ Music_LookRocket_Ch3:
 	sound_ret
 
 Music_LookRocket_Ch4:
-	sound_call Music_ViridianCity_Shared3
+	sound_call Music_ViridianCity_Shared2
 	rest 2
 	sound_call .sub1
 .mainloop:
@@ -288,6 +288,7 @@ Music_LookRocket_Ch4:
 	drum_note 1, 8
 	drum_note 3, 2
 	drum_note 4, 2
+.shared9: ; (tools/musiccalls.py)
 	drum_note 2, 1
 	drum_note 2, 1
 	drum_note 3, 1
@@ -295,10 +296,8 @@ Music_LookRocket_Ch4:
 	sound_ret
 
 .sub2:
-	drum_note 4, 2
-	drum_note 7, 2
-	drum_note 3, 2
-	drum_note 7, 2
+	sound_call Music_LookRocket_Ch4.shared10
+.shared10: ; (tools/musiccalls.py)
 	drum_note 4, 2
 	drum_note 7, 2
 	drum_note 3, 2

@@ -227,20 +227,19 @@ Music_GymLeaderVictory_Ch3:
 	stereo_panning TRUE, FALSE
 .mainloop:
 .loop1:
-	sound_call Music_GymLeaderVictory_Shared2
+	sound_call Music_GymLeaderVictory_Shared1
 	note A_, 2
 	rest 2
 	octave 3
 	note C#, 4
-	sound_call Music_GymLeaderVictory_Shared2
+	sound_call Music_GymLeaderVictory_Shared1
 	octave 3
 	note D_, 2
 	rest 6
 	sound_loop 2, .loop1
 	sound_call .sub1
-	sound_call Music_GymLeaderVictory_Shared1
-	sound_call Music_GymLeaderVictory_Shared3
-	sound_call Music_GymLeaderVictory_Shared4
+	sound_call Music_GymLeaderVictory_Shared2
+	sound_call Music_GymLeaderVictory_Ch3.shared4
 	sound_call .sub1
 	octave 3
 	note D_, 2
@@ -266,7 +265,9 @@ Music_GymLeaderVictory_Ch3:
 	sound_loop 0, .mainloop
 
 .sub1:
-	sound_call Music_GymLeaderVictory_Shared1
+	sound_call Music_GymLeaderVictory_Shared2
+	note A_, 2
+	rest 2
 	note D_, 2
 	note F#, 2
 	rest 2
@@ -275,7 +276,6 @@ Music_GymLeaderVictory_Ch3:
 	octave 3
 	note D_, 2
 	sound_call Music_GymLeaderVictory_Shared3
-	note E_, 2
 	octave 4
 	note E_, 2
 	rest 2
@@ -299,13 +299,23 @@ Music_GymLeaderVictory_Ch3:
 	note A_, 2
 	octave 3
 	note A_, 2
-	rest 2
-	sound_call Music_GymLeaderVictory_Shared4
+	sound_call Music_GymLeaderVictory_Ch3.shared5
 	octave 3
+.shared4: ; (tools/musiccalls.py)
 	note A_, 2
 	rest 2
-	sound_call Music_GymLeaderVictory_Shared3
-	sound_call Music_GymLeaderVictory_Shared4
+	octave 2
+	note A_, 2
+	octave 3
+	note E_, 2
+.shared5: ; (tools/musiccalls.py)
+	rest 2
+	octave 2
+	note A_, 2
+	octave 3
+	note C#, 2
+	octave 2
+	note A_, 2
 	sound_ret
 
 Music_GymLeaderVictory_Ch4:
@@ -322,10 +332,7 @@ Music_GymLeaderVictory_Ch4:
 	drum_note 4, 6
 	drum_note 4, 2
 	drum_note 4, 4
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
+	sound_call Music_Gym_Shared1.shared8
 .loop1:
 	drum_note 4, 2
 	drum_note 8, 2
@@ -349,22 +356,6 @@ Music_GymLeaderVictory_Ch4:
 	sound_ret
 
 Music_GymLeaderVictory_Shared1: ; (tools/musiccalls.py)
-	octave 3
-	note D_, 2
-	rest 2
-	note D_, 2
-	octave 4
-	note D_, 2
-	rest 2
-	octave 3
-	note D_, 2
-	note F#, 2
-	note D_, 2
-	note A_, 2
-	rest 2
-	sound_ret
-
-Music_GymLeaderVictory_Shared2: ; (tools/musiccalls.py)
 	note D_, 2
 	rest 4
 	octave 2
@@ -379,19 +370,25 @@ Music_GymLeaderVictory_Shared2: ; (tools/musiccalls.py)
 	note G_, 2
 	sound_ret
 
+Music_GymLeaderVictory_Shared2: ; (tools/musiccalls.py)
+	octave 3
+	note D_, 2
+	rest 2
+	note D_, 2
+	octave 4
+	note D_, 2
+	rest 2
+	octave 3
+	note D_, 2
+	note F#, 2
+	note D_, 2
+	sound_ret
+
 Music_GymLeaderVictory_Shared3: ; (tools/musiccalls.py)
 	octave 2
 	note A_, 2
 	octave 3
 	note E_, 2
 	rest 2
-	sound_ret
-
-Music_GymLeaderVictory_Shared4: ; (tools/musiccalls.py)
-	octave 2
-	note A_, 2
-	octave 3
-	note C#, 2
-	octave 2
-	note A_, 2
+	note E_, 2
 	sound_ret

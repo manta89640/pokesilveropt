@@ -6,7 +6,7 @@ Music_LookYoungster:
 
 Music_LookYoungster_Ch1:
 	tempo 118
-	sound_call Music_ViridianCity_Shared5
+	sound_call Music_ViridianCity_Shared4
 	duty_cycle 3
 	note_type 12, 10, 3
 	octave 3
@@ -100,9 +100,9 @@ Music_LookYoungster_Ch3:
 	note_type 12, 2, 5
 	rest 4
 	sound_call Music_LookYoungster_Shared1
-	sound_call Music_LookYoungster_Shared4
+	sound_call Music_LookYoungster_Shared1.shared5
 	volume_envelope 1, 5
-	sound_call Music_LookYoungster_Shared4
+	sound_call Music_LookYoungster_Shared1.shared5
 	note D_, 1
 	rest 3
 	note D_, 4
@@ -112,15 +112,21 @@ Music_LookYoungster_Ch3:
 .mainloop:
 	sound_call Music_LookYoungster_Shared1
 	sound_call Music_LookYoungster_Shared1
-	sound_call Music_LookYoungster_Shared5
-	sound_call Music_LookYoungster_Shared5
-	sound_call Music_LookYoungster_Shared5
-	sound_call Music_LookYoungster_Shared5
+	sound_call Music_LookYoungster_Shared4
+	sound_call Music_LookYoungster_Shared4
+	sound_call Music_LookYoungster_Shared4
+	sound_call Music_LookYoungster_Shared4
 	sound_call Music_LookYoungster_Shared1
 	sound_call Music_LookYoungster_Shared1
-	sound_call Music_LookYoungster_Shared6
-	sound_call Music_LookYoungster_Shared6
-	sound_call Music_LookYoungster_Shared6
+	octave 2
+	note G#, 1
+	sound_call Music_LookYoungster_Shared4.shared6
+	octave 2
+	note G#, 1
+	sound_call Music_LookYoungster_Shared4.shared6
+	octave 2
+	note G#, 1
+	sound_call Music_LookYoungster_Shared4.shared6
 	note G_, 1
 	rest 1
 	note G#, 1
@@ -128,8 +134,14 @@ Music_LookYoungster_Ch3:
 	sound_loop 0, .mainloop
 
 Music_LookYoungster_Shared1: ; (tools/musiccalls.py)
-	sound_call Music_LookYoungster_Shared4
-	sound_call Music_LookYoungster_Shared4
+	sound_call Music_LookYoungster_Shared1.shared5
+.shared5: ; (tools/musiccalls.py)
+	octave 2
+	note G_, 1
+	rest 1
+	octave 3
+	note G_, 1
+	rest 1
 	sound_ret
 
 Music_LookYoungster_Shared2: ; (tools/musiccalls.py)
@@ -171,25 +183,8 @@ Music_LookYoungster_Shared3: ; (tools/musiccalls.py)
 
 Music_LookYoungster_Shared4: ; (tools/musiccalls.py)
 	octave 2
-	note G_, 1
-	rest 1
-	octave 3
-	note G_, 1
-	rest 1
-	sound_ret
-
-Music_LookYoungster_Shared5: ; (tools/musiccalls.py)
-	octave 2
 	note F_, 1
-	rest 1
-	octave 3
-	note D#, 1
-	rest 1
-	sound_ret
-
-Music_LookYoungster_Shared6: ; (tools/musiccalls.py)
-	octave 2
-	note G#, 1
+.shared6: ; (tools/musiccalls.py)
 	rest 1
 	octave 3
 	note D#, 1

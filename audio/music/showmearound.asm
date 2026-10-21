@@ -6,8 +6,8 @@ Music_ShowMeAround:
 	channel 4, Music_ShowMeAround_Ch4
 
 Music_ShowMeAround_Ch1:
-	sound_call Music_ShowMeAround_Shared3
-	stereo_panning FALSE, TRUE
+	tempo 144
+	sound_call Music_Route2_Shared2
 	duty_cycle 2
 	note_type 12, 11, 1
 	octave 4
@@ -53,7 +53,7 @@ Music_ShowMeAround_Ch1:
 	note G#, 1
 	rest 1
 	octave 4
-	sound_call Music_Route1_Shared6
+	sound_call Music_Route1_Shared5
 	note E_, 1
 	rest 3
 	sound_ret
@@ -112,7 +112,7 @@ Music_ShowMeAround_Ch2:
 	note A_, 2
 	note A_, 4
 	note G#, 1
-	sound_call Music_KantoWildBattle_Shared13
+	sound_call Music_KantoWildBattle_Shared12
 	rest 1
 	note D#, 1
 	note E_, 1
@@ -260,7 +260,7 @@ Music_ShowMeAround_Ch3:
 	sound_ret
 
 Music_ShowMeAround_Ch4:
-	sound_call Music_PokemonCenter_Shared6
+	sound_call Music_PokemonCenter_Shared5
 	rest 16
 	rest 8
 	drum_note 3, 2
@@ -322,9 +322,4 @@ Music_ShowMeAround_Shared2: ; (tools/musiccalls.py)
 	drum_note 4, 2
 	drum_note 7, 4
 	drum_note 3, 2
-	sound_ret
-
-Music_ShowMeAround_Shared3: ; (tools/musiccalls.py)
-	tempo 144
-	volume 7, 7
 	sound_ret

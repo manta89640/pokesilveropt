@@ -147,7 +147,7 @@ Music_TrainerVictory_Ch3:
 	note_type 8, 2, 5
 	octave 3
 	note G_, 6
-	sound_call Music_SSAqua_Shared13
+	sound_call Music_SSAqua_Shared11
 	note G_, 1
 	rest 1
 	note F#, 6

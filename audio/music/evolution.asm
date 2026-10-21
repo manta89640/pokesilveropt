@@ -13,8 +13,8 @@ Music_Evolution_Ch1:
 	duty_cycle 2
 	note_type 12, 9, 2
 	octave 3
-	sound_call Music_Evolution_Shared3
-	sound_call Music_Evolution_Shared3
+	sound_call Music_Evolution_Shared2
+	sound_call Music_Evolution_Shared2
 	rest 4
 	duty_cycle 3
 	stereo_panning FALSE, TRUE
@@ -96,6 +96,7 @@ Music_Evolution_Ch2:
 	note G_, 4
 	note D_, 4
 	note G_, 4
+.shared3: ; (tools/musiccalls.py)
 	note D_, 4
 	note G_, 4
 	note D_, 4
@@ -135,18 +136,24 @@ Music_Evolution_Ch3:
 	sound_loop 0, .mainloop
 
 .sub1:
-	sound_call Music_Evolution_Shared1
-	sound_call Music_Evolution_Shared1
-	sound_call Music_Evolution_Shared1
+	octave 2
+	note A_, 2
+	rest 2
+	sound_call Music_Evolution_Ch3.shared4
+	sound_call Music_Evolution_Ch3.shared4
+.shared4: ; (tools/musiccalls.py)
+	octave 3
+	note D_, 2
+	rest 2
 	octave 2
 	note A_, 2
 	rest 2
 	sound_ret
 
 .sub2:
-	sound_call Music_Evolution_Shared2
-	sound_call Music_Evolution_Shared2
-	sound_call Music_Evolution_Shared2
+	sound_call Music_Evolution_Shared1
+	sound_call Music_Evolution_Shared1
+	sound_call Music_Evolution_Shared1
 	octave 2
 	note A_, 2
 	rest 2
@@ -168,15 +175,6 @@ Music_Evolution_Ch4:
 
 Music_Evolution_Shared1: ; (tools/musiccalls.py)
 	octave 2
-	note A_, 2
-	rest 2
-	octave 3
-	note D_, 2
-	rest 2
-	sound_ret
-
-Music_Evolution_Shared2: ; (tools/musiccalls.py)
-	octave 2
 	note B_, 2
 	rest 2
 	octave 3
@@ -184,7 +182,7 @@ Music_Evolution_Shared2: ; (tools/musiccalls.py)
 	rest 2
 	sound_ret
 
-Music_Evolution_Shared3: ; (tools/musiccalls.py)
+Music_Evolution_Shared2: ; (tools/musiccalls.py)
 	pitch_slide 1, 4, A_
 	note C_, 1
 	pitch_slide 1, 4, A_

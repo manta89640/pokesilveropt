@@ -14,10 +14,7 @@ Music_Credits_Ch1:
 	octave 2
 	note G_, 16
 	note_type 6, 10, 7
-	octave 3
-	note B_, 12
-	note A#, 2
-	note A_, 2
+	sound_call Music_Credits_Ch1.shared8
 	note B_, 1
 	octave 4
 	note C_, 7
@@ -67,10 +64,7 @@ Music_Credits_Ch1:
 	sound_call Music_Credits_Shared4
 	note E_, 2
 	note D_, 2
-	octave 3
-	note B_, 2
-	octave 4
-	note D_, 2
+	sound_call Music_Credits_Shared4.shared12
 	note B_, 2
 	note G_, 2
 	note D_, 2
@@ -393,10 +387,7 @@ Music_Credits_Ch1:
 	sound_call Music_Credits_Shared4
 	note C_, 2
 	note D_, 2
-	octave 3
-	note B_, 2
-	octave 4
-	note D_, 2
+	sound_call Music_Credits_Shared4.shared12
 	sound_call Music_Credits_Shared4
 	note G_, 4
 	note A_, 2
@@ -470,6 +461,7 @@ Music_Credits_Ch1:
 	note G_, 2
 	note D_, 2
 	note G_, 2
+.shared8: ; (tools/musiccalls.py)
 	octave 3
 	note B_, 12
 	note A#, 2
@@ -1048,8 +1040,7 @@ Music_Credits_Ch3:
 	note D_, 1
 	note D_, 1
 	note D_, 1
-	note_type 12, 1, 4
-	note D_, 16
+	sound_call Music_Credits_Ch3.shared9
 	note F#, 16
 	note G_, 16
 	note G_, 8
@@ -1163,6 +1154,7 @@ Music_Credits_Ch3:
 	note E_, 4
 	note B_, 12
 	note A_, 8
+.shared9: ; (tools/musiccalls.py)
 	note_type 12, 1, 4
 	note D_, 16
 	sound_ret
@@ -1215,10 +1207,7 @@ Music_Credits_Ch3:
 	rest 2
 	note D_, 2
 	rest 2
-	octave 3
-	note B_, 2
-	octave 4
-	note D_, 2
+	sound_call Music_Credits_Shared4.shared12
 	octave 3
 	note G_, 4
 	note E_, 4
@@ -1240,10 +1229,7 @@ Music_Credits_Ch3:
 	note A_, 2
 	rest 2
 	octave 4
-	note E_, 2
-	note C_, 2
-	octave 3
-	note G#, 2
+	sound_call Music_Credits_Ch3.shared10
 	octave 4
 	note C_, 2
 	octave 3
@@ -1252,6 +1238,7 @@ Music_Credits_Ch3:
 	note G#, 2
 	octave 4
 	note C_, 2
+.shared10: ; (tools/musiccalls.py)
 	note E_, 2
 	note C_, 2
 	octave 3
@@ -1329,10 +1316,7 @@ Music_Credits_Ch4:
 	toggle_noise 3
 	drum_speed 12
 	sound_call Music_Credits_Shared1
-	drum_note 8, 1
-	drum_note 8, 1
-	drum_note 8, 1
-	drum_note 8, 1
+	sound_call Music_Credits_Shared1.shared11
 	drum_note 9, 1
 	drum_note 8, 1
 	drum_note 12, 2
@@ -1374,10 +1358,7 @@ Music_Credits_Ch4:
 	drum_note 9, 1
 	drum_note 8, 1
 	drum_note 7, 2
-	drum_note 8, 1
-	drum_note 8, 1
-	drum_note 8, 1
-	drum_note 8, 1
+	sound_call Music_Credits_Shared1.shared11
 	drum_note 11, 4
 	drum_note 2, 4
 	drum_note 9, 1
@@ -1506,6 +1487,7 @@ Music_Credits_Shared1: ; (tools/musiccalls.py)
 	drum_note 8, 1
 	drum_note 8, 1
 	drum_note 8, 1
+.shared11: ; (tools/musiccalls.py)
 	drum_note 8, 1
 	drum_note 8, 1
 	drum_note 8, 1
@@ -1544,6 +1526,7 @@ Music_Credits_Shared4: ; (tools/musiccalls.py)
 	note G_, 2
 	octave 4
 	note D_, 2
+.shared12: ; (tools/musiccalls.py)
 	octave 3
 	note B_, 2
 	octave 4

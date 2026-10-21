@@ -97,7 +97,7 @@ Music_TinTower_Ch1:
 	sound_loop 0, .mainloop
 
 Music_TinTower_Ch2:
-	sound_call Music_TinTower_Shared2
+	sound_call Music_JohtoWildBattle_Shared1.shared8
 	vibrato 24, 4, 4
 .mainloop:
 	stereo_panning TRUE, TRUE
@@ -106,7 +106,7 @@ Music_TinTower_Ch2:
 	octave 4
 	note C_, 4
 	note C_, 4
-	sound_call Music_JohtoWildBattle_Shared4
+	sound_call Music_JohtoWildBattle_Shared3
 	octave 4
 	note C#, 2
 	note C_, 4
@@ -117,7 +117,7 @@ Music_TinTower_Ch2:
 	octave 4
 	note C_, 4
 	note C_, 4
-	sound_call Music_JohtoWildBattle_Shared4
+	sound_call Music_JohtoWildBattle_Shared3
 	octave 4
 	note C#, 2
 	note C_, 4
@@ -274,9 +274,4 @@ Music_TinTower_Shared1: ; (tools/musiccalls.py)
 	note C_, 1
 	rest 3
 	note C_, 1
-	sound_ret
-
-Music_TinTower_Shared2: ; (tools/musiccalls.py)
-	duty_cycle 3
-	pitch_offset 2
 	sound_ret

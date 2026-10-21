@@ -6,15 +6,13 @@ Music_ContestResults:
 	channel 4, Music_ContestResults_Ch4
 
 Music_ContestResults_Ch1:
-	sound_call Music_ShowMeAround_Shared3
+	tempo 144
+	volume 7, 7
 	note_type 12, 5, 1
 .mainloop:
 	rest 2
 	octave 2
-	note G_, 1
-	rest 3
-	note G_, 1
-	rest 3
+	sound_call Music_PokemonChannel_Ch3.shared1
 	note G_, 1
 	rest 3
 	note G_, 1
@@ -22,11 +20,11 @@ Music_ContestResults_Ch1:
 	rest 2
 	note A_, 1
 	rest 3
-	sound_call Music_PokemonCenter_Shared5
+	sound_call Music_PokemonCenter_Ch3.shared6
 	rest 2
 	note A_, 1
 	rest 3
-	sound_call Music_PokemonCenter_Shared5
+	sound_call Music_PokemonCenter_Ch3.shared6
 	rest 2
 	note B_, 1
 	rest 3

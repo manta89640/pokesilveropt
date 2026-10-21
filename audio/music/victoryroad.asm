@@ -7,8 +7,8 @@ Music_VictoryRoad:
 
 Music_VictoryRoad_Ch1:
 	tempo 144
-	sound_call Music_ViridianCity_Shared5
-	sound_call Music_TinTower_Shared2
+	sound_call Music_ViridianCity_Shared4
+	sound_call Music_JohtoWildBattle_Shared1.shared8
 	note_type 12, 11, 3
 .mainloop:
 .loop1:

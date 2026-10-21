@@ -61,10 +61,7 @@ Music_PokemonChannel_Ch1:
 	rest 2
 	note D#, 2
 	rest 2
-	note C_, 2
-	rest 2
-	note D#, 2
-	rest 2
+	sound_call Music_KantoTrainerBattle_Shared10.shared20
 	rest 8
 	octave 3
 	note G_, 2
@@ -186,8 +183,9 @@ Music_PokemonChannel_Ch3:
 	note G_, 1
 	note B_, 1
 	note G_, 1
-	sound_call Music_Route3_Shared5
+	sound_call Music_Route3_Ch1.shared4
 	octave 2
+.shared1: ; (tools/musiccalls.py)
 	note G_, 1
 	rest 3
 	note G_, 1
@@ -195,7 +193,7 @@ Music_PokemonChannel_Ch3:
 	sound_ret
 
 Music_PokemonChannel_Ch4:
-	sound_call Music_PokemonCenter_Shared6
+	sound_call Music_PokemonCenter_Shared5
 .loop1:
 	drum_note 11, 3
 	drum_note 11, 1

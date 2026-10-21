@@ -6,7 +6,7 @@ Music_RivalBattle:
 
 Music_RivalBattle_Ch1:
 	tempo 102
-	sound_call Music_RivalBattle_Shared3
+	sound_call Music_RivalBattle_Shared2
 	vibrato 8, 1, 5
 	note_type 12, 11, 2
 	octave 3
@@ -285,7 +285,7 @@ Music_RivalBattle_Ch1:
 	sound_loop 0, .mainloop
 
 Music_RivalBattle_Ch2:
-	sound_call Music_RivalBattle_Shared4
+	sound_call Music_RivalBattle_Shared3
 	sound_call Music_RivalBattle_Shared1
 	volume_envelope 12, 2
 	octave 4
@@ -488,7 +488,11 @@ Music_RivalBattle_Ch2:
 	note C#, 2
 	volume_envelope 12, 7
 	note D#, 6
-	sound_call Music_RivalBattle_Shared5
+.shared7: ; (tools/musiccalls.py)
+	volume_envelope 11, 0
+	note F_, 8
+	volume_envelope 11, 7
+	note F_, 8
 	sound_ret
 
 Music_RivalBattle_Ch3:
@@ -549,21 +553,25 @@ Music_RivalBattle_Ch3:
 	note A#, 2
 	octave 3
 	note B_, 2
-	sound_call Music_RivalBattle_Shared8
+	sound_call Music_RivalBattle_Shared5
 	sound_call .sub2
-	sound_call Music_RivalBattle_Shared6
+	note C#, 2
+	note G#, 2
+	octave 4
+	note C#, 2
+	octave 3
 	note G#, 4
 	note C#, 2
 	note C_, 2
 	octave 2
 	note B_, 2
 	sound_call .sub1
-	sound_call Music_RivalBattle_Shared8
+	sound_call Music_RivalBattle_Shared5
 	octave 2
 	note A#, 2
 	octave 3
 	note F#, 2
-	sound_call Music_RivalBattle_Shared2
+	sound_call Music_RocketBattle_Ch3.shared9
 	sound_call .sub2
 .loop3:
 	note C#, 2
@@ -573,7 +581,7 @@ Music_RivalBattle_Ch3:
 	note G#, 2
 	note F#, 2
 .loop4:
-	sound_call Music_RivalBattle_Shared2
+	sound_call Music_RocketBattle_Ch3.shared9
 	sound_loop 4, .loop4
 	octave 2
 	note A#, 2
@@ -605,12 +613,12 @@ Music_RivalBattle_Ch3:
 	note A#, 2
 	note E_, 2
 	note B_, 2
-	sound_call Music_RivalBattle_Shared7
+	sound_call Music_RivalBattle_Shared4
 	note B_, 2
-	sound_call Music_RivalBattle_Shared7
-	sound_call Music_RivalBattle_Shared7
+	sound_call Music_RivalBattle_Shared4
+	sound_call Music_RivalBattle_Shared4
 	note B_, 2
-	sound_call Music_RivalBattle_Shared7
+	sound_call Music_RivalBattle_Shared4
 	note E_, 2
 	note F#, 2
 	note G_, 2
@@ -643,8 +651,8 @@ Music_RivalBattle_Ch3:
 	octave 3
 	note F#, 2
 	sound_loop 4, .loop10
-	sound_call Music_RivalBattle_Shared9
-	sound_call Music_RivalBattle_Shared9
+	sound_call Music_RivalBattle_Shared6
+	sound_call Music_RivalBattle_Shared6
 	octave 2
 	note B_, 2
 	octave 3
@@ -737,12 +745,13 @@ Music_RivalBattle_Ch3:
 	sound_ret
 
 .sub2:
-	sound_call Music_RivalBattle_Shared6
-	note G#, 4
+	note C#, 2
+	note G#, 2
 	octave 4
 	note C#, 2
 	octave 3
-	note C#, 2
+	note G#, 4
+	sound_call Music_JohtoGymBattle_Ch3.shared9
 	note G#, 2
 	sound_ret
 
@@ -774,7 +783,7 @@ Music_RivalBattle_Shared1: ; (tools/musiccalls.py)
 	note D_, 1
 	note C#, 1
 	note C_, 1
-	sound_call Music_SSAqua_Shared18
+	sound_call Music_SSAqua_Shared16
 	octave 3
 	note B_, 1
 	note A#, 1
@@ -803,57 +812,36 @@ Music_RivalBattle_Shared1: ; (tools/musiccalls.py)
 	sound_ret
 
 Music_RivalBattle_Shared2: ; (tools/musiccalls.py)
-	octave 2
-	note A#, 2
-	octave 3
-	note F_, 2
-	sound_ret
-
-Music_RivalBattle_Shared3: ; (tools/musiccalls.py)
 	volume 7, 7
 	duty_cycle 3
 	pitch_offset 2
 	sound_ret
 
-Music_RivalBattle_Shared4: ; (tools/musiccalls.py)
+Music_RivalBattle_Shared3: ; (tools/musiccalls.py)
 	sound_call Music_RocketBattle_Shared7
 	note_type 12, 12, 2
 	sound_ret
 
+Music_RivalBattle_Shared4: ; (tools/musiccalls.py)
+	octave 4
+	note E_, 2
+	octave 3
+	note E_, 2
+	sound_ret
+
 Music_RivalBattle_Shared5: ; (tools/musiccalls.py)
-	volume_envelope 11, 0
-	note F_, 8
-	volume_envelope 11, 7
-	note F_, 8
+	octave 2
+	note A#, 2
+	octave 3
+	note A#, 2
+.shared8: ; (tools/musiccalls.py)
+	octave 2
+	note A#, 2
+	octave 3
+	note G#, 2
 	sound_ret
 
 Music_RivalBattle_Shared6: ; (tools/musiccalls.py)
-	note C#, 2
-	note G#, 2
-	octave 4
-	note C#, 2
-	octave 3
-	sound_ret
-
-Music_RivalBattle_Shared7: ; (tools/musiccalls.py)
-	octave 4
-	note E_, 2
-	octave 3
-	note E_, 2
-	sound_ret
-
-Music_RivalBattle_Shared8: ; (tools/musiccalls.py)
-	octave 2
-	note A#, 2
-	octave 3
-	note A#, 2
-	octave 2
-	note A#, 2
-	octave 3
-	note G#, 2
-	sound_ret
-
-Music_RivalBattle_Shared9: ; (tools/musiccalls.py)
 	note D#, 2
 	note G_, 2
 	note A#, 2

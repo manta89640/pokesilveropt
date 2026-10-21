@@ -6,8 +6,7 @@ Music_LookSage:
 Music_LookSage_Ch1:
 	tempo 144
 	stereo_panning FALSE, TRUE
-	volume 7, 7
-	duty_cycle 3
+	sound_call Music_Lighthouse_Shared1.shared5
 	note_type 12, 11, 3
 	rest 2
 	rest 16
@@ -15,9 +14,7 @@ Music_LookSage_Ch1:
 	volume_envelope 11, 3
 	octave 3
 	sound_call Music_LookSage_Shared2
-	note A_, 2
-	volume_envelope 9, 3
-	note A_, 2
+	sound_call Music_LookSage_Ch1.shared4
 	volume_envelope 11, 3
 	note F_, 2
 	volume_envelope 9, 3
@@ -27,6 +24,7 @@ Music_LookSage_Ch1:
 	volume_envelope 11, 3
 	octave 3
 	sound_call Music_LookSage_Shared3
+	volume_envelope 11, 3
 	octave 3
 	sound_call Music_LookSage_Shared2
 	note F_, 2
@@ -34,9 +32,7 @@ Music_LookSage_Ch1:
 	note F_, 2
 	volume_envelope 11, 3
 	sound_call Music_LookSage_Shared2
-	note A_, 2
-	volume_envelope 9, 3
-	note A_, 2
+	sound_call Music_LookSage_Ch1.shared4
 	sound_call Music_LookSage_Shared1
 	sound_call .sub1
 	sound_loop 0, .mainloop
@@ -47,9 +43,9 @@ Music_LookSage_Ch1:
 	note E_, 2
 	volume_envelope 9, 3
 	note E_, 2
+	sound_call Music_LookSage_Shared1.shared5
 	volume_envelope 11, 3
-	sound_call Music_LookSage_Shared4
-	volume_envelope 11, 3
+.shared4: ; (tools/musiccalls.py)
 	note A_, 2
 	volume_envelope 9, 3
 	note A_, 2
@@ -114,7 +110,15 @@ Music_LookSage_Ch3:
 Music_LookSage_Shared1: ; (tools/musiccalls.py)
 	volume_envelope 11, 3
 	sound_call Music_LookSage_Shared3
-	sound_call Music_LookSage_Shared4
+.shared5: ; (tools/musiccalls.py)
+	volume_envelope 11, 3
+	note A_, 2
+	volume_envelope 9, 3
+	note A_, 2
+	volume_envelope 11, 3
+	note B_, 2
+	volume_envelope 9, 3
+	note B_, 2
 	sound_ret
 
 Music_LookSage_Shared2: ; (tools/musiccalls.py)
@@ -134,17 +138,6 @@ Music_LookSage_Shared3: ; (tools/musiccalls.py)
 	note D_, 2
 	volume_envelope 11, 3
 	octave 2
-	note B_, 2
-	volume_envelope 9, 3
-	note B_, 2
-	volume_envelope 11, 3
-	sound_ret
-
-Music_LookSage_Shared4: ; (tools/musiccalls.py)
-	note A_, 2
-	volume_envelope 9, 3
-	note A_, 2
-	volume_envelope 11, 3
 	note B_, 2
 	volume_envelope 9, 3
 	note B_, 2

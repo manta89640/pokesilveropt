@@ -7,7 +7,7 @@ Music_BugCatchingContest:
 
 Music_BugCatchingContest_Ch1:
 	tempo 144
-	sound_call Music_ViridianCity_Shared5
+	sound_call Music_ViridianCity_Shared4
 	vibrato 8, 2, 4
 	duty_cycle 2
 	note_type 12, 11, 7
@@ -207,15 +207,9 @@ Music_BugCatchingContest_Ch2:
 	sound_call .sub1
 	sound_call Music_BugCatchingContest_Shared1
 	note E_, 2
-	octave 3
-	note G_, 1
-	rest 1
-	octave 2
+	sound_call Music_BugCatchingContest_Shared1.shared7
 	note G_, 2
-	octave 3
-	note G_, 1
-	rest 1
-	octave 2
+	sound_call Music_BugCatchingContest_Shared1.shared7
 	note A_, 2
 	octave 3
 	note A_, 1
@@ -227,10 +221,7 @@ Music_BugCatchingContest_Ch2:
 	rest 1
 	octave 2
 	note G_, 2
-	octave 3
-	note G_, 1
-	rest 1
-	octave 2
+	sound_call Music_BugCatchingContest_Shared1.shared7
 	note E_, 2
 	octave 3
 	note E_, 1
@@ -286,10 +277,7 @@ Music_BugCatchingContest_Ch2:
 	rest 1
 	sound_call Music_BugCatchingContest_Shared1
 	note C#, 2
-	octave 3
-	note G_, 1
-	rest 1
-	octave 2
+	sound_call Music_BugCatchingContest_Shared1.shared7
 	note D#, 2
 	octave 3
 	note G_, 1
@@ -330,10 +318,7 @@ Music_BugCatchingContest_Ch3:
 .mainloop:
 	note_type 12, 1, 4
 	note F#, 5
-	rest 1
-	note F#, 1
-	note G_, 1
-	note A_, 4
+	sound_call Music_Gym_Ch3.shared7
 	octave 5
 	note D_, 4
 	note C#, 2
@@ -498,11 +483,8 @@ Music_BugCatchingContest_Ch3:
 Music_BugCatchingContest_Ch4:
 	toggle_noise 4
 	drum_speed 6
-	sound_call Music_Gym_Shared2
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
+	sound_call Music_Gym_Shared1
+	sound_call Music_Gym_Shared1.shared8
 	drum_note 5, 2
 	drum_note 5, 2
 	sound_call Music_BugCatchingContest_Ch4.sub1
@@ -513,7 +495,7 @@ Music_BugCatchingContest_Ch4:
 	sound_call Music_BugCatchingContest_Shared4
 	drum_note 3, 4
 	drum_note 3, 4
-	sound_call Music_Gym_Shared2
+	sound_call Music_Gym_Shared1
 	sound_loop 5, .loop1
 	drum_note 3, 4
 	drum_note 3, 4
@@ -531,8 +513,16 @@ Music_BugCatchingContest_Ch4:
 	sound_loop 0, .mainloop
 
 .sub1:
-	sound_call Music_BugCatchingContest_Shared6
-	sound_call Music_BugCatchingContest_Shared6
+	sound_call Music_BugCatchingContest_Ch4.shared6
+.shared6: ; (tools/musiccalls.py)
+	drum_note 3, 4
+	drum_note 12, 8
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_note 3, 4
+	drum_note 12, 8
+	drum_note 3, 2
+	drum_note 3, 2
 	sound_ret
 
 Music_BugCatchingContest_Shared1: ; (tools/musiccalls.py)
@@ -543,6 +533,7 @@ Music_BugCatchingContest_Shared1: ; (tools/musiccalls.py)
 	rest 1
 	octave 1
 	note B_, 2
+.shared7: ; (tools/musiccalls.py)
 	octave 3
 	note G_, 1
 	rest 1
@@ -595,15 +586,4 @@ Music_BugCatchingContest_Shared5: ; (tools/musiccalls.py)
 	note D_, 1
 	rest 1
 	octave 4
-	sound_ret
-
-Music_BugCatchingContest_Shared6: ; (tools/musiccalls.py)
-	drum_note 3, 4
-	drum_note 12, 8
-	drum_note 3, 2
-	drum_note 3, 2
-	drum_note 3, 4
-	drum_note 12, 8
-	drum_note 3, 2
-	drum_note 3, 2
 	sound_ret

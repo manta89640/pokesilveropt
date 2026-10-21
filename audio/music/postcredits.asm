@@ -66,11 +66,7 @@ Music_PostCredits_Ch1:
 	volume_envelope 7, 3
 	note C_, 2
 	volume_envelope 6, 3
-	note C_, 2
-	volume_envelope 4, 3
-	note C_, 2
-	volume_envelope 9, 3
-	octave 2
+	sound_call Music_PostCredits_Shared3.shared5
 	note F#, 2
 	note A_, 2
 	octave 3
@@ -222,6 +218,7 @@ Music_PostCredits_Shared3: ; (tools/musiccalls.py)
 	volume_envelope 7, 3
 	note C_, 2
 	volume_envelope 5, 3
+.shared5: ; (tools/musiccalls.py)
 	note C_, 2
 	volume_envelope 4, 3
 	note C_, 2

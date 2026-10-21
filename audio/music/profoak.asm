@@ -216,13 +216,7 @@ Music_ProfOak_Ch3:
 	rest 1
 	octave 3
 	note A_, 2
-	rest 2
-	octave 2
-	note B_, 2
-	octave 3
-	note B_, 1
-	rest 1
-	note E_, 2
+	sound_call Music_ProfOak_Ch3.shared1
 	sound_call .sub1
 .loop1:
 	sound_call .sub1
@@ -251,6 +245,7 @@ Music_ProfOak_Ch3:
 	rest 1
 	octave 3
 	note G#, 2
+.shared1: ; (tools/musiccalls.py)
 	rest 2
 	octave 2
 	note B_, 2

@@ -83,7 +83,8 @@ Music_RocketHideout_Ch1:
 	sound_loop 0, .mainloop
 
 Music_RocketHideout_Ch2:
-	sound_call Music_KantoGymBattle_Shared7
+	duty_cycle 3
+	pitch_offset 2
 	vibrato 0, 15, 0
 	note_type 12, 12, 4
 	stereo_panning FALSE, TRUE

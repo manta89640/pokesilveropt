@@ -291,6 +291,7 @@ Music_RocketTheme_Ch2:
 	rest 2
 	note D#, 2
 	rest 2
+.shared2: ; (tools/musiccalls.py)
 	octave 3
 	note D#, 2
 	rest 2
@@ -359,10 +360,7 @@ Music_RocketTheme_Ch3:
 	note D_, 1
 	rest 1
 	note D#, 1
-	rest 1
-	octave 4
-	note D#, 1
-	rest 1
+	sound_call Music_Surf_Shared2.shared7
 	note C_, 1
 	octave 3
 	note A_, 1
@@ -377,19 +375,13 @@ Music_RocketTheme_Ch3:
 	rest 1
 	octave 3
 	note F#, 1
-	rest 1
-	octave 4
-	note D#, 1
-	rest 1
+	sound_call Music_Surf_Shared2.shared7
 	octave 3
 	note G_, 1
 	rest 1
 	octave 4
 	note E_, 1
-	rest 1
-	octave 3
-	note G#, 1
-	rest 1
+	sound_call Music_LookRocket_Ch3.shared7
 	octave 4
 	note F_, 1
 	rest 1
@@ -413,7 +405,7 @@ Music_RocketTheme_Ch3:
 	sound_loop 0, .mainloop
 
 Music_RocketTheme_Ch4:
-	sound_call Music_ViridianCity_Shared3
+	sound_call Music_ViridianCity_Shared2
 	rest 2
 .mainloop:
 	sound_call Music_LookRocket_Ch4.sub1

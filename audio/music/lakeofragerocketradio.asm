@@ -5,7 +5,7 @@ Music_LakeOfRageRocketRadio:
 	channel 3, Music_LakeOfRageRocketRadio_Ch3
 
 Music_LakeOfRageRocketRadio_Ch1:
-	sound_call Music_Route3_Shared6
+	sound_call Music_Route3_Shared3
 	duty_cycle 1
 	pitch_offset 4376
 	vibrato 0, 15, 0

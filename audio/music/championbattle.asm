@@ -6,7 +6,7 @@ Music_ChampionBattle:
 
 Music_ChampionBattle_Ch1:
 	tempo 98
-	sound_call Music_RivalBattle_Shared3
+	sound_call Music_RivalBattle_Shared2
 	vibrato 18, 1, 5
 	note_type 12, 11, 2
 	octave 2
@@ -33,9 +33,7 @@ Music_ChampionBattle_Ch1:
 	sound_loop 7, .loop3
 	sound_call .sub3
 	volume_envelope 11, 2
-	note A#, 2
-	note A#, 2
-	volume_envelope 11, 7
+	sound_call Music_ChampionBattle_Shared2.shared13
 	octave 3
 	note D#, 4
 	sound_call Music_ChampionBattle_Shared2
@@ -61,9 +59,7 @@ Music_ChampionBattle_Ch1:
 	note C#, 1
 .mainloop:
 	sound_call .sub4
-	note E_, 2
-	note E_, 2
-	volume_envelope 11, 7
+	sound_call Music_ChampionBattle_Shared3.shared14
 	note F#, 4
 .loop4:
 	sound_call Music_ChampionBattle_Shared3
@@ -72,9 +68,7 @@ Music_ChampionBattle_Ch1:
 	sound_call Music_ChampionBattle_Shared3
 	note B_, 4
 	sound_call .sub4
-	note E_, 2
-	note E_, 2
-	volume_envelope 11, 7
+	sound_call Music_ChampionBattle_Shared3.shared14
 	note F#, 4
 	sound_call Music_ChampionBattle_Shared3
 	note G#, 4
@@ -144,24 +138,20 @@ Music_ChampionBattle_Ch1:
 	note D#, 4
 	sound_loop 4, .loop5
 .loop6:
-	sound_call Music_ChampionBattle_Shared6
+	sound_call Music_ChampionBattle_Shared5
 	note D#, 4
 	sound_loop 2, .loop6
-	sound_call Music_ChampionBattle_Shared6
+	sound_call Music_ChampionBattle_Shared5
 	note F#, 4
-	sound_call Music_ChampionBattle_Shared6
+	sound_call Music_ChampionBattle_Shared5
 	note G#, 4
 	sound_call .sub6
 	octave 3
-	note D#, 2
-	note D#, 2
-	volume_envelope 11, 7
+	sound_call Music_ChampionBattle_Shared6.shared15
 	note B_, 4
 	sound_call .sub6
 	octave 3
-	note D#, 2
-	note D#, 2
-	volume_envelope 11, 7
+	sound_call Music_ChampionBattle_Shared6.shared15
 	octave 4
 	note D_, 4
 	sound_loop 0, .mainloop
@@ -175,10 +165,7 @@ Music_ChampionBattle_Ch1:
 	note A#, 6
 	note A#, 2
 	note A#, 6
-	note A#, 2
-	note A#, 2
-	volume_envelope 11, 7
-	sound_ret
+	sound_jump Music_ChampionBattle_Shared2.shared13
 
 .sub2:
 	sound_call Music_ChampionBattle_Shared2
@@ -220,24 +207,25 @@ Music_ChampionBattle_Ch1:
 	note A#, 4
 	note A#, 4
 	note A#, 4
+.shared7: ; (tools/musiccalls.py)
 	note A#, 4
 	note A#, 2
 	volume_envelope 11, 7
 	sound_ret
 
 .sub6:
-	sound_call Music_ChampionBattle_Shared7
+	sound_call Music_ChampionBattle_Shared6
 	note A#, 4
-	sound_call Music_ChampionBattle_Shared7
+	sound_call Music_ChampionBattle_Shared6
 	note B_, 4
-	sound_call Music_ChampionBattle_Shared7
+	sound_call Music_ChampionBattle_Shared6
 	octave 4
 	note C#, 4
 	volume_envelope 11, 2
 	sound_ret
 
 Music_ChampionBattle_Ch2:
-	sound_call Music_RivalBattle_Shared4
+	sound_call Music_RivalBattle_Shared3
 	octave 3
 	note D#, 8
 	note D#, 8
@@ -262,7 +250,10 @@ Music_ChampionBattle_Ch2:
 	sound_call Music_ChampionBattle_Shared1
 	octave 4
 	note C_, 4
-	sound_call Music_ChampionBattle_Shared8
+	volume_envelope 12, 2
+	octave 3
+	sound_call Music_ChampionBattle_Shared1.shared12
+	octave 4
 	note C#, 4
 	note D#, 8
 	octave 3
@@ -272,7 +263,7 @@ Music_ChampionBattle_Ch2:
 	volume_envelope 3, -4
 	note E_, 8
 .mainloop:
-	sound_call Music_ChampionBattle_Shared5
+	sound_call Music_ChampionBattle_Shared4
 	note A#, 4
 	volume_envelope 12, 7
 	note B_, 8
@@ -290,7 +281,7 @@ Music_ChampionBattle_Ch2:
 	volume_envelope 12, 7
 	octave 4
 	note C#, 4
-	sound_call Music_ChampionBattle_Shared5
+	sound_call Music_ChampionBattle_Shared4
 	note A#, 2
 	note B_, 2
 	volume_envelope 12, 7
@@ -343,15 +334,16 @@ Music_ChampionBattle_Ch2:
 	sound_call Music_ChampionBattle_Shared1
 	note A#, 4
 	volume_envelope 12, 2
-	note D#, 2
-	note D#, 2
-	volume_envelope 12, 7
+	sound_call Music_ChampionBattle_Shared1.shared12
 	note A_, 4
 	volume_envelope 12, 2
 	sound_call Music_ChampionBattle_Shared1
 	octave 4
 	note C#, 4
-	sound_call Music_ChampionBattle_Shared8
+	volume_envelope 12, 2
+	octave 3
+	sound_call Music_ChampionBattle_Shared1.shared12
+	octave 4
 	note D_, 4
 	volume_envelope 11, 0
 	note D#, 8
@@ -372,10 +364,7 @@ Music_ChampionBattle_Ch2:
 	note D#, 6
 	note D#, 2
 	note D#, 6
-	note D#, 2
-	note D#, 2
-	volume_envelope 12, 7
-	sound_ret
+	sound_jump Music_ChampionBattle_Shared1.shared12
 
 .sub2:
 	volume_envelope 12, 2
@@ -383,10 +372,7 @@ Music_ChampionBattle_Ch2:
 	sound_call Music_ChampionBattle_Shared1
 	note A#, 4
 	volume_envelope 12, 2
-	note D#, 2
-	note D#, 2
-	volume_envelope 12, 7
-	sound_ret
+	sound_jump Music_ChampionBattle_Shared1.shared12
 
 .sub3:
 	volume_envelope 12, 1
@@ -419,17 +405,11 @@ Music_ChampionBattle_Ch3:
 	note A_, 4
 	sound_call .sub2
 	note D_, 4
-	sound_call Music_ChampionBattle_Shared4
+	sound_call Music_ChampionBattle_Ch3.shared8
 	note A#, 4
-	note D#, 1
-	rest 1
-	note D#, 1
-	rest 1
+	sound_call Music_ChampionBattle_Ch3.shared9
 	note B_, 4
-	note D#, 1
-	rest 1
-	note D#, 1
-	rest 1
+	sound_call Music_ChampionBattle_Ch3.shared9
 	octave 4
 	note C#, 4
 	note D#, 8
@@ -473,22 +453,14 @@ Music_ChampionBattle_Ch3:
 	note E_, 2
 	note D#, 2
 	note E_, 2
-	note D#, 2
-	octave 4
-	note D_, 2
-	note C#, 2
-	note C_, 2
+	sound_call Music_ChampionBattle_Ch3.shared10
 	sound_call .sub3
 	octave 3
 	note D#, 2
 	note A#, 2
 	note D#, 2
 	note A#, 2
-	note D#, 2
-	octave 4
-	note D_, 2
-	note C#, 2
-	note C_, 2
+	sound_call Music_ChampionBattle_Ch3.shared10
 	octave 3
 	note A#, 8
 	note D#, 8
@@ -501,16 +473,10 @@ Music_ChampionBattle_Ch3:
 	sound_call .sub4
 	octave 3
 	note E_, 2
-	note B_, 2
-	octave 4
-	note D#, 2
-	note E_, 2
+	sound_call Music_ChampionBattle_Ch3.shared11
 	note F#, 2
 	octave 3
-	note B_, 2
-	octave 4
-	note D#, 2
-	note E_, 2
+	sound_call Music_ChampionBattle_Ch3.shared11
 	sound_call .sub4
 .loop7:
 	octave 3
@@ -573,17 +539,24 @@ Music_ChampionBattle_Ch3:
 	note D#, 1
 	rest 5
 	sound_loop 3, .sub1loop1
-	note D#, 1
-	rest 1
-	note D#, 1
-	rest 1
+	sound_call Music_ChampionBattle_Ch3.shared9
 	note B_, 4
 	sound_ret
 
 .sub2:
-	sound_call Music_ChampionBattle_Shared4
+	sound_call Music_ChampionBattle_Ch3.shared8
 	note B_, 4
-	sound_call Music_ChampionBattle_Shared4
+.shared8: ; (tools/musiccalls.py)
+	note D#, 1
+	rest 1
+	note D#, 1
+	rest 1
+	note A#, 4
+.shared9: ; (tools/musiccalls.py)
+	note D#, 1
+	rest 1
+	note D#, 1
+	rest 1
 	sound_ret
 
 .sub3:
@@ -592,6 +565,7 @@ Music_ChampionBattle_Ch3:
 	note F#, 2
 	note D#, 2
 	note F#, 2
+.shared10: ; (tools/musiccalls.py)
 	note D#, 2
 	octave 4
 	note D_, 2
@@ -606,6 +580,7 @@ Music_ChampionBattle_Ch3:
 	note E_, 2
 	note B_, 2
 	note E_, 2
+.shared11: ; (tools/musiccalls.py)
 	note B_, 2
 	octave 4
 	note D#, 2
@@ -623,6 +598,7 @@ Music_ChampionBattle_Shared1: ; (tools/musiccalls.py)
 	volume_envelope 12, 7
 	note B_, 4
 	volume_envelope 12, 2
+.shared12: ; (tools/musiccalls.py)
 	note D#, 2
 	note D#, 2
 	volume_envelope 12, 7
@@ -631,6 +607,7 @@ Music_ChampionBattle_Shared1: ; (tools/musiccalls.py)
 Music_ChampionBattle_Shared2: ; (tools/musiccalls.py)
 	volume_envelope 11, 2
 	octave 2
+.shared13: ; (tools/musiccalls.py)
 	note A#, 2
 	note A#, 2
 	volume_envelope 11, 7
@@ -638,24 +615,13 @@ Music_ChampionBattle_Shared2: ; (tools/musiccalls.py)
 
 Music_ChampionBattle_Shared3: ; (tools/musiccalls.py)
 	volume_envelope 11, 2
+.shared14: ; (tools/musiccalls.py)
 	note E_, 2
 	note E_, 2
 	volume_envelope 11, 7
 	sound_ret
 
 Music_ChampionBattle_Shared4: ; (tools/musiccalls.py)
-	note D#, 1
-	rest 1
-	note D#, 1
-	rest 1
-	note A#, 4
-	note D#, 1
-	rest 1
-	note D#, 1
-	rest 1
-	sound_ret
-
-Music_ChampionBattle_Shared5: ; (tools/musiccalls.py)
 	volume_envelope 12, 5
 	note D#, 6
 	octave 3
@@ -669,25 +635,17 @@ Music_ChampionBattle_Shared5: ; (tools/musiccalls.py)
 	note B_, 4
 	sound_ret
 
+Music_ChampionBattle_Shared5: ; (tools/musiccalls.py)
+	volume_envelope 11, 2
+	note C_, 2
+	note C_, 2
+	volume_envelope 11, 7
+	sound_ret
+
 Music_ChampionBattle_Shared6: ; (tools/musiccalls.py)
 	volume_envelope 11, 2
-	note C_, 2
-	note C_, 2
-	volume_envelope 11, 7
-	sound_ret
-
-Music_ChampionBattle_Shared7: ; (tools/musiccalls.py)
-	volume_envelope 11, 2
+.shared15: ; (tools/musiccalls.py)
 	note D#, 2
 	note D#, 2
 	volume_envelope 11, 7
-	sound_ret
-
-Music_ChampionBattle_Shared8: ; (tools/musiccalls.py)
-	volume_envelope 12, 2
-	octave 3
-	note D#, 2
-	note D#, 2
-	volume_envelope 12, 7
-	octave 4
 	sound_ret

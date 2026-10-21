@@ -6,8 +6,7 @@ Music_DancingHall:
 
 Music_DancingHall_Ch1:
 	tempo 208
-	volume 7, 7
-	stereo_panning FALSE, TRUE
+	sound_call Music_Route2_Shared2
 	note_type 6, 11, 7
 	rest 3
 	duty_cycle 0
@@ -20,10 +19,7 @@ Music_DancingHall_Ch1:
 	rest 16
 	rest 16
 	volume_envelope 11, 1
-	octave 2
-	note B_, 1
-	octave 3
-	note D_, 1
+	sound_call Music_Route3_Ch1.shared5
 	note F_, 1
 	note A_, 1
 	note B_, 1
@@ -80,6 +76,7 @@ Music_DancingHall_Ch1:
 	rest 1
 	octave 3
 	note B_, 1
+.shared2: ; (tools/musiccalls.py)
 	rest 1
 	octave 4
 	note D_, 1
@@ -191,15 +188,9 @@ Music_DancingHall_Ch2:
 	octave 4
 	note E_, 1
 	volume_envelope 11, 3
-	octave 3
-	note A_, 1
-	octave 4
-	note D_, 1
+	sound_call Music_DancingHall_Ch2.shared3
 	volume_envelope 12, 3
-	octave 3
-	note A_, 1
-	octave 4
-	note D_, 1
+	sound_call Music_DancingHall_Ch2.shared3
 	volume_envelope 13, 3
 	octave 3
 	note E_, 1
@@ -212,6 +203,7 @@ Music_DancingHall_Ch2:
 	octave 4
 	note D_, 1
 	volume_envelope 15, 3
+.shared3: ; (tools/musiccalls.py)
 	octave 3
 	note A_, 1
 	octave 4

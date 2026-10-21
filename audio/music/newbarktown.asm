@@ -78,13 +78,13 @@ Music_NewBarkTown_Ch1:
 	rest 1
 	note A_, 2
 	note D_, 1
-	sound_call Music_SSAqua_Shared14
+	sound_call Music_SSAqua_Shared12
 	note A#, 2
 	note D_, 1
-	sound_call Music_SSAqua_Shared14
+	sound_call Music_SSAqua_Shared12
 	note B_, 2
 	note F#, 1
-	sound_call Music_SSAqua_Shared14
+	sound_call Music_SSAqua_Shared12
 	octave 4
 	note C_, 2
 	octave 3
@@ -146,7 +146,7 @@ Music_NewBarkTown_Ch2:
 	octave 2
 	note G_, 4
 	rest 8
-	sound_call Music_SSAqua_Shared13
+	sound_call Music_SSAqua_Shared11
 	octave 1
 	note G#, 2
 	rest 2

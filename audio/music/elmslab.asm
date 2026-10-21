@@ -155,9 +155,9 @@ Music_ElmsLab_Ch1:
 	note E_, 4
 	volume_envelope 11, 4
 	octave 3
-	sound_call Music_ElmsLab_Shared3
-	sound_call Music_ElmsLab_Shared3
-	sound_call Music_ElmsLab_Shared3
+	sound_call Music_ElmsLab_Shared2
+	sound_call Music_ElmsLab_Shared2
+	sound_call Music_ElmsLab_Shared2
 	note A_, 2
 	volume_envelope 11, 2
 	note F_, 2
@@ -339,13 +339,15 @@ Music_ElmsLab_Ch3:
 	octave 3
 	note C_, 2
 	sound_call Music_ElmsLab_Shared1
-	sound_call Music_ElmsLab_Shared2
+	sound_call Music_ElmsLab_Shared1.shared3
+	note F_, 2
 	note C_, 2
 	note D_, 2
 	note E_, 2
 .mainloop:
 	sound_call Music_ElmsLab_Shared1
-	sound_call Music_ElmsLab_Shared2
+	sound_call Music_ElmsLab_Shared1.shared3
+	note F_, 2
 	note A_, 2
 	note E_, 2
 	octave 4
@@ -361,7 +363,8 @@ Music_ElmsLab_Ch3:
 	note A_, 2
 	note D_, 2
 	note E_, 2
-	sound_call Music_ElmsLab_Shared2
+	sound_call Music_ElmsLab_Shared1.shared3
+	note F_, 2
 	note C_, 2
 	note D_, 2
 	note E_, 2
@@ -425,7 +428,8 @@ Music_ElmsLab_Ch3:
 	note G_, 2
 	note C_, 2
 	note G_, 2
-	sound_call Music_ElmsLab_Shared2
+	sound_call Music_ElmsLab_Shared1.shared3
+	note F_, 2
 	note A_, 2
 	note G_, 2
 	note E_, 2
@@ -447,7 +451,8 @@ Music_ElmsLab_Ch3:
 	note F#, 4
 	note G_, 4
 	sound_call Music_ElmsLab_Shared1
-	sound_call Music_ElmsLab_Shared2
+	sound_call Music_ElmsLab_Shared1.shared3
+	note F_, 2
 	note C_, 2
 	note F_, 2
 	note A_, 2
@@ -464,21 +469,15 @@ Music_ElmsLab_Ch4:
 	sound_loop 0, .mainloop
 
 Music_ElmsLab_Shared1: ; (tools/musiccalls.py)
-	sound_call Music_ElmsLab_Shared2
+	sound_call Music_ElmsLab_Shared1.shared3
+.shared3: ; (tools/musiccalls.py)
+	note F_, 2
 	note A_, 2
 	note C_, 2
 	note A_, 2
 	sound_ret
 
 Music_ElmsLab_Shared2: ; (tools/musiccalls.py)
-	note F_, 2
-	note A_, 2
-	note C_, 2
-	note A_, 2
-	note F_, 2
-	sound_ret
-
-Music_ElmsLab_Shared3: ; (tools/musiccalls.py)
 	note A_, 2
 	note F_, 2
 	octave 4

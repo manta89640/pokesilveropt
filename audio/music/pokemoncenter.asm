@@ -198,7 +198,7 @@ Music_PokemonCenter_Ch3:
 	sound_call .sub1
 	sound_call .sub2
 	note F#, 1
-	sound_call Music_PokemonCenter_Shared7
+	sound_call Music_PokemonCenter_Ch3.shared7
 	note D_, 1
 	rest 5
 	note F#, 1
@@ -249,22 +249,32 @@ Music_PokemonCenter_Ch3:
 .sub1:
 	note E_, 1
 	rest 5
-	sound_call Music_PokemonCenter_Shared5
+.shared6: ; (tools/musiccalls.py)
+	note A_, 1
+	rest 3
+	note A_, 1
+	rest 3
+	note A_, 1
+	rest 1
 	sound_ret
 
 .sub2:
 	note E_, 1
-	sound_call Music_PokemonCenter_Shared7
+.shared7: ; (tools/musiccalls.py)
+	sound_call Music_PokemonCenter_Shared3.shared9
+	note G_, 1
+	rest 1
+	note A_, 1
+	rest 1
 	sound_ret
 
 .sub3:
 	note F#, 1
 	rest 5
-	sound_call Music_PokemonCenter_Shared5
-	sound_ret
+	sound_jump Music_PokemonCenter_Ch3.shared6
 
 Music_PokemonCenter_Ch4:
-	sound_call Music_PokemonCenter_Shared6
+	sound_call Music_PokemonCenter_Shared5
 	stereo_panning TRUE, TRUE
 .mainloop:
 	drum_note 8, 6
@@ -297,6 +307,7 @@ Music_PokemonCenter_Shared1: ; (tools/musiccalls.py)
 	note A_, 2
 	octave 4
 	note C#, 4
+.shared8: ; (tools/musiccalls.py)
 	octave 3
 	note B_, 2
 	note A_, 2
@@ -317,13 +328,11 @@ Music_PokemonCenter_Shared3: ; (tools/musiccalls.py)
 	rest 1
 	note E_, 1
 	rest 5
-	note G_, 1
-	rest 3
-	note G_, 1
-	rest 3
+	sound_call Music_PokemonChannel_Ch3.shared1
 	note G_, 1
 	rest 1
 	note F#, 1
+.shared9: ; (tools/musiccalls.py)
 	rest 5
 	note A_, 1
 	rest 3
@@ -340,27 +349,6 @@ Music_PokemonCenter_Shared4: ; (tools/musiccalls.py)
 	sound_ret
 
 Music_PokemonCenter_Shared5: ; (tools/musiccalls.py)
-	note A_, 1
-	rest 3
-	note A_, 1
-	rest 3
-	note A_, 1
-	rest 1
-	sound_ret
-
-Music_PokemonCenter_Shared6: ; (tools/musiccalls.py)
 	toggle_noise 3
 	drum_speed 12
-	sound_ret
-
-Music_PokemonCenter_Shared7: ; (tools/musiccalls.py)
-	rest 5
-	note A_, 1
-	rest 3
-	note A_, 1
-	rest 1
-	note G_, 1
-	rest 1
-	note A_, 1
-	rest 1
 	sound_ret

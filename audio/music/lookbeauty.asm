@@ -78,10 +78,7 @@ Music_LookBeauty_Ch2:
 	octave 4
 	note B_, 1
 	rest 1
-	note A#, 1
-	rest 1
-	note A_, 1
-	rest 1
+	sound_call Music_GameCorner_Ch3.shared10
 	note G#, 1
 	sound_call Music_PokemonCenter_Shared4
 	note F_, 1
@@ -277,7 +274,7 @@ Music_LookBeauty_Ch3:
 	sound_loop 0, .mainloop
 
 Music_LookBeauty_Ch4:
-	sound_call Music_PokemonCenter_Shared6
+	sound_call Music_PokemonCenter_Shared5
 	rest 16
 	rest 16
 .mainloop:
@@ -289,15 +286,11 @@ Music_LookBeauty_Ch4:
 
 .sub1:
 	drum_note 7, 2
-	drum_note 8, 2
-	drum_note 3, 2
-	drum_note 8, 2
-	drum_note 8, 2
-	drum_note 3, 2
-	drum_note 8, 2
+	sound_call Music_LookBeauty_Ch4.shared2
 	drum_note 8, 2
 	drum_note 7, 2
 	drum_note 3, 2
+.shared2: ; (tools/musiccalls.py)
 	drum_note 8, 2
 	drum_note 3, 2
 	drum_note 8, 2
@@ -311,6 +304,7 @@ Music_LookBeauty_Shared1: ; (tools/musiccalls.py)
 	rest 5
 	note D_, 1
 	rest 5
+.shared3: ; (tools/musiccalls.py)
 	rest 2
 	note D_, 1
 	rest 3

@@ -77,11 +77,7 @@ Music_VermilionCity_Ch1:
 	octave 3
 	note G#, 8
 	note E_, 8
-	note B_, 8
-	note A_, 4
-	note G#, 4
-	note F#, 4
-	note E_, 4
+	sound_call Music_VermilionCity_Ch2.shared1
 	octave 2
 	note B_, 4
 	note G#, 4
@@ -212,6 +208,7 @@ Music_VermilionCity_Ch2:
 
 .sub2:
 	note F#, 8
+.shared1: ; (tools/musiccalls.py)
 	note B_, 8
 	note A_, 4
 	note G#, 4
@@ -263,10 +260,7 @@ Music_VermilionCity_Ch3:
 	note D_, 1
 	note D_, 1
 	sound_call .sub2
-	octave 4
-	note D_, 2
-	octave 3
-	note D_, 2
+	sound_call Music_JohtoGymBattle_Ch3.shared10
 	rest 2
 	note D_, 2
 	sound_call .sub2

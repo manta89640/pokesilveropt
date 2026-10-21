@@ -13,7 +13,7 @@ Music_KantoTrainerBattle_Ch1:
 	duty_cycle 1
 	rest 1
 	octave 4
-	sound_call Music_KantoGymBattle_Shared8
+	sound_call Music_KantoGymBattle_Shared7
 	note F_, 1
 	note F#, 1
 	note F_, 1
@@ -35,7 +35,7 @@ Music_KantoTrainerBattle_Ch1:
 	note A#, 1
 	note A_, 1
 	note A#, 1
-	sound_call Music_KantoGymBattle_Shared8
+	sound_call Music_KantoGymBattle_Shared7
 	note G_, 1
 	duty_cycle 2
 	volume_envelope 11, 1
@@ -66,10 +66,7 @@ Music_KantoTrainerBattle_Ch1:
 	note F#, 2
 	rest 2
 	note D#, 2
-	note F_, 2
-	rest 2
-	note F#, 2
-	rest 2
+	sound_call Music_KantoTrainerBattle_Shared9.shared19
 	note D#, 2
 	note F_, 2
 	note F#, 2
@@ -153,10 +150,7 @@ Music_KantoTrainerBattle_Ch1:
 	rest 7
 	sound_call Music_KantoGymBattle_Shared6
 	octave 3
-	note G_, 1
-	rest 3
-	note G_, 1
-	rest 3
+	sound_call Music_PokemonChannel_Ch3.shared1
 	octave 4
 	note C_, 8
 	volume_envelope 7, 7
@@ -171,10 +165,10 @@ Music_KantoTrainerBattle_Ch1:
 	note C#, 2
 	rest 6
 	note E_, 8
-	sound_call Music_Route1_Shared6
+	sound_call Music_Route1_Shared5
 	note E_, 1
 	rest 7
-	sound_call Music_Route1_Shared6
+	sound_call Music_Route1_Shared5
 	octave 3
 	note G#, 1
 	rest 3
@@ -316,18 +310,12 @@ Music_KantoTrainerBattle_Ch2:
 	note A#, 4
 	note A#, 4
 	note A#, 4
-	note G_, 1
-	note G#, 1
-	note G_, 1
-	note F#, 1
+	sound_call Music_KantoGymBattle_Shared7.shared10
 	duty_cycle 3
 	volume_envelope 6, 2
 .loop1:
 	octave 3
-	note G_, 1
-	note G#, 1
-	note G_, 1
-	note F#, 1
+	sound_call Music_KantoGymBattle_Shared7.shared10
 	sound_loop 14, .loop1
 	note G_, 1
 	note G#, 1
@@ -527,10 +515,7 @@ Music_KantoTrainerBattle_Ch2:
 	note D#, 2
 	rest 2
 	octave 3
-	note F_, 2
-	rest 2
-	note F#, 2
-	rest 2
+	sound_call Music_KantoTrainerBattle_Shared9.shared19
 	note G#, 2
 	rest 2
 	note C#, 2
@@ -915,14 +900,11 @@ Music_KantoTrainerBattle_Shared1: ; (tools/musiccalls.py)
 	sound_ret
 
 Music_KantoTrainerBattle_Shared2: ; (tools/musiccalls.py)
-	octave 3
-	note G_, 1
-	octave 4
-	note C_, 1
+	sound_call Music_KantoWildBattle_Shared5.shared17
 	octave 3
 	note D#, 1
 	octave 4
-	sound_call Music_KantoWildBattle_Shared6
+	sound_call Music_KantoWildBattle_Shared5
 	octave 3
 	note D#, 1
 	octave 4
@@ -930,19 +912,29 @@ Music_KantoTrainerBattle_Shared2: ; (tools/musiccalls.py)
 	sound_ret
 
 Music_KantoTrainerBattle_Shared3: ; (tools/musiccalls.py)
-	sound_call Music_DragonsDen_Shared1
-	note E_, 1
+	sound_call Music_KantoTrainerBattle_Shared3.shared17
+.shared17: ; (tools/musiccalls.py)
+	octave 3
+	note G#, 1
 	octave 4
 	note C#, 1
-	sound_call Music_DragonsDen_Shared1
+	octave 3
 	note E_, 1
 	octave 4
 	note C#, 1
 	sound_ret
 
 Music_KantoTrainerBattle_Shared4: ; (tools/musiccalls.py)
-	sound_call Music_KantoTrainerBattle_Shared17
-	sound_call Music_KantoTrainerBattle_Shared17
+	sound_call Music_KantoTrainerBattle_Shared4.shared18
+.shared18: ; (tools/musiccalls.py)
+	octave 3
+	note A_, 1
+	octave 4
+	note D_, 1
+	octave 3
+	note F_, 1
+	octave 4
+	note D_, 1
 	sound_ret
 
 Music_KantoTrainerBattle_Shared5: ; (tools/musiccalls.py)
@@ -1057,6 +1049,7 @@ Music_KantoTrainerBattle_Shared9: ; (tools/musiccalls.py)
 	note D#, 1
 	octave 5
 	note D#, 2
+.shared19: ; (tools/musiccalls.py)
 	note F_, 2
 	rest 2
 	note F#, 2
@@ -1076,6 +1069,7 @@ Music_KantoTrainerBattle_Shared10: ; (tools/musiccalls.py)
 	octave 3
 	note A#, 2
 	octave 4
+.shared20: ; (tools/musiccalls.py)
 	note C_, 2
 	rest 2
 	note D#, 2
@@ -1116,10 +1110,7 @@ Music_KantoTrainerBattle_Shared13: ; (tools/musiccalls.py)
 	rest 4
 	note D#, 2
 	note C_, 2
-	octave 3
-	note G_, 1
-	octave 4
-	note C_, 1
+	sound_call Music_KantoWildBattle_Shared5.shared17
 	note D#, 1
 	rest 1
 	sound_ret
@@ -1149,15 +1140,4 @@ Music_KantoTrainerBattle_Shared16: ; (tools/musiccalls.py)
 	note A#, 1
 	rest 1
 	octave 3
-	sound_ret
-
-Music_KantoTrainerBattle_Shared17: ; (tools/musiccalls.py)
-	octave 3
-	note A_, 1
-	octave 4
-	note D_, 1
-	octave 3
-	note F_, 1
-	octave 4
-	note D_, 1
 	sound_ret

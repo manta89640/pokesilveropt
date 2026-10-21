@@ -220,7 +220,7 @@ Music_CherrygroveCity_Ch3:
 	sound_loop 0, .mainloop
 
 Music_CherrygroveCity_Ch4:
-	sound_call Music_ViridianCity_Shared3
+	sound_call Music_ViridianCity_Shared2
 	rest 16
 .mainloop:
 	drum_note 2, 2

@@ -186,12 +186,10 @@ Music_BurnedTower_Ch3:
 .mainloop:
 .loop1:
 	sound_call Music_GymLeaderVictory_Shared3
-	note E_, 2
 	rest 2
 	note E_, 2
 	note F_, 4
 	sound_call Music_GymLeaderVictory_Shared3
-	note E_, 2
 	rest 2
 	note E_, 2
 	note D#, 4

@@ -7,7 +7,7 @@ Music_NationalPark:
 
 Music_NationalPark_Ch1:
 	tempo 192
-	sound_call Music_ViridianCity_Shared5
+	sound_call Music_ViridianCity_Shared4
 	vibrato 24, 2, 4
 	duty_cycle 1
 	note_type 12, 7, 7
@@ -21,10 +21,7 @@ Music_NationalPark_Ch1:
 	rest 16
 	octave 2
 	note A#, 1
-	octave 3
-	note D_, 1
-	note F_, 1
-	note G#, 1
+	sound_call Music_LookRocket_Ch1.shared6
 	note D_, 1
 	note F_, 1
 	note A#, 1
@@ -148,14 +145,7 @@ Music_NationalPark_Ch1:
 	note A#, 1
 	sound_call Music_NationalPark_Shared1
 	octave 4
-	note D_, 2
-	octave 3
-	note A#, 2
-	octave 4
-	note D_, 2
-	octave 3
-	note A#, 2
-	sound_ret
+	sound_jump Music_NationalPark_Shared1.shared6
 
 .sub2:
 	rest 16
@@ -173,7 +163,7 @@ Music_NationalPark_Ch1:
 	rest 16
 	rest 3
 	note A_, 1
-	sound_call Music_NationalPark_Shared4
+	sound_call Music_NationalPark_Shared3
 	note A_, 2
 	rest 4
 	sound_ret
@@ -254,14 +244,33 @@ Music_NationalPark_Ch2:
 	sound_loop 0, .mainloop
 
 .sub1:
-	sound_call Music_NationalPark_Shared5
+	sound_call Music_NationalPark_Shared4
 	note C#, 8
-	sound_call Music_NationalPark_Shared5
+	sound_call Music_NationalPark_Shared4
 	note F#, 8
-	sound_call Music_NationalPark_Shared2
+	sound_call Music_NationalPark_Ch2.shared5
 	octave 3
 	note D_, 8
-	sound_call Music_NationalPark_Shared2
+.shared5: ; (tools/musiccalls.py)
+	octave 1
+	note F#, 6
+	octave 2
+	note C#, 2
+	note A#, 8
+	octave 1
+	note F#, 6
+	octave 2
+	note C#, 2
+	note A_, 8
+	octave 1
+	note F_, 6
+	octave 2
+	note C_, 2
+	note G#, 8
+	octave 1
+	note A#, 6
+	octave 2
+	note F_, 2
 	sound_ret
 
 .sub2:
@@ -356,7 +365,7 @@ Music_NationalPark_Ch3:
 	note C_, 2
 	note C#, 2
 	note D#, 2
-	sound_call Music_NationalPark_Shared3
+	sound_call Music_NationalPark_Shared2
 	note A_, 9
 	octave 6
 	note D_, 1
@@ -372,7 +381,7 @@ Music_NationalPark_Ch3:
 	note F_, 14
 	note D_, 1
 	note D#, 1
-	sound_call Music_NationalPark_Shared3
+	sound_call Music_NationalPark_Shared2
 	note A_, 10
 	octave 6
 	note D#, 2
@@ -429,7 +438,7 @@ Music_NationalPark_Ch3:
 	sound_ret
 
 Music_NationalPark_Ch4:
-	sound_call Music_ViridianCity_Shared3
+	sound_call Music_ViridianCity_Shared2
 	rest 2
 .mainloop:
 .loop1:
@@ -520,6 +529,7 @@ Music_NationalPark_Shared1: ; (tools/musiccalls.py)
 	note C_, 2
 	note D#, 2
 	note C_, 2
+.shared6: ; (tools/musiccalls.py)
 	note D_, 2
 	octave 3
 	note A#, 2
@@ -530,28 +540,6 @@ Music_NationalPark_Shared1: ; (tools/musiccalls.py)
 	sound_ret
 
 Music_NationalPark_Shared2: ; (tools/musiccalls.py)
-	octave 1
-	note F#, 6
-	octave 2
-	note C#, 2
-	note A#, 8
-	octave 1
-	note F#, 6
-	octave 2
-	note C#, 2
-	note A_, 8
-	octave 1
-	note F_, 6
-	octave 2
-	note C_, 2
-	note G#, 8
-	octave 1
-	note A#, 6
-	octave 2
-	note F_, 2
-	sound_ret
-
-Music_NationalPark_Shared3: ; (tools/musiccalls.py)
 	note F_, 2
 	note D#, 2
 	note C#, 2
@@ -564,16 +552,17 @@ Music_NationalPark_Shared3: ; (tools/musiccalls.py)
 	octave 5
 	sound_ret
 
-Music_NationalPark_Shared4: ; (tools/musiccalls.py)
+Music_NationalPark_Shared3: ; (tools/musiccalls.py)
 	note A_, 1
 	rest 1
+.shared7: ; (tools/musiccalls.py)
 	note A_, 1
 	rest 1
 	note A_, 1
 	rest 1
 	sound_ret
 
-Music_NationalPark_Shared5: ; (tools/musiccalls.py)
+Music_NationalPark_Shared4: ; (tools/musiccalls.py)
 	octave 2
 	note C#, 6
 	note G#, 2
