@@ -1,0 +1,20 @@
+# Use Substitute in a wild battle: its doll is drawn from the overworld
+# monster sprite. Starts from make_save.txt's save; the wild Pokémon is random.
+wait 400
+press start 60
+press a 120
+press a 200
+press a 200
+wait 100
+# First move Substitute
+poke wPartyMon1Moves a4
+poke wPartyMon1PP 0a
+teleport ROUTE_29 47 10
+grass 300 up down
+wait 600
+press a 300
+shot fight
+press a 60
+shot moves
+press a 1
+mashshot b 40 6 sub

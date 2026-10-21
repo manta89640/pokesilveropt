@@ -1,8 +1,9 @@
 MACRO overworld_sprite
 ; pointer, length, type, palette
 ; Sprites are LZ-compressed, except the ones other code loads directly
+; (MonsterSpriteGFX is where Substitute's doll comes from)
 	dw \1
-	if STRFIND("ChrisSpriteGFX RivalSpriteGFX MomSpriteGFX PokeBallSpriteGFX", "\1") != -1
+	if STRFIND("ChrisSpriteGFX RivalSpriteGFX MomSpriteGFX PokeBallSpriteGFX MonsterSpriteGFX", "\1") != -1
 		db \2 tiles
 	else
 		db \2 tiles | SPRITE_GFX_COMPRESSED
