@@ -322,7 +322,8 @@ def asm_string(units):
 
 def main():
 	ap = argparse.ArgumentParser()
-	ap.add_argument('--entries', type=int, default=0, help='total entries (default: fill all codes)')
+	ap.add_argument('--entries', type=int, default=0,
+		help='candidate entries to pick from (default: 15%% more than there are codes)')
 	ap.add_argument('--prefixes', type=int, default=16)
 	args = ap.parse_args()
 
@@ -331,26 +332,32 @@ def main():
 	print(f'corpus: {total:.0f} characters, {len(runs)} unique runs', file=sys.stderr)
 
 	singles, doubles = assign_codes(args.prefixes)
-	num_entries = args.entries or (len(singles) + len(doubles))
+	num_entries = args.entries or (len(singles) + len(doubles)) * 115 // 100
 	expansions = select_entries(runs, num_entries, len(singles))
 
-	# Parse the corpus greedily (as rgbasm will) to count how often each
-	# entry is used, then give the most used entries the one-byte codes.
-	entry_index = {e: i for i, e in enumerate(expansions)}
+	# Parse the corpus greedily (as rgbasm will) to count how often each entry
+	# is used. Keep the entries that save the most, and parse again, since
+	# dropping entries changes which ones the greedy parse picks.
+	num_codes = len(singles) + len(doubles)
+	kept = list(range(len(expansions)))
+	for _ in range(4):
+		parser = GreedyParser({expansions[i]: i for i in kept})
+		uses = collections.Counter()
+		for r, weight in runs.items():
+			for x in parser.parse(r):
+				if isinstance(x, int):
+					uses[x] += weight
+		def value(i, code_len):
+			length = len(expansions[i])
+			return uses[i] * (length - code_len) - (length + 1)
+		# One-byte codes go where they gain the most over a two-byte code
+		one = sorted(kept, key=lambda i: -(value(i, 1) - max(value(i, 2), 0)))[:len(singles)]
+		rest = [i for i in kept if i not in set(one) and value(i, 2) > 0]
+		two = sorted(rest, key=lambda i: -value(i, 2))[:len(doubles)]
+		kept = one + two
+	order = kept
+	entry_index = {expansions[i]: i for i in kept}
 	parser = GreedyParser(entry_index)
-	uses = collections.Counter()
-	for r, weight in runs.items():
-		for x in parser.parse(r):
-			if isinstance(x, int):
-				uses[x] += weight
-	# Only keep entries that pay for themselves with the code they would get
-	keep = []
-	for i in sorted(range(len(expansions)), key=lambda i: -uses[i]):
-		length = len(expansions[i])
-		code_len = 1 if len(keep) < len(singles) else 2
-		if uses[i] * (length - code_len) > length + 1:
-			keep.append(i)
-	order = keep
 	codes = {}
 	for rank, i in enumerate(order):
 		if rank < len(singles):
