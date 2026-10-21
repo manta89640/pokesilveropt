@@ -1,9 +1,5 @@
 RepelWoreOffScript::
-	opentext
-	writetext .RepelWoreOffText
-	waitbutton
-	closetext
-	end
+	jumptext .RepelWoreOffText
 
 .RepelWoreOffText:
 	text_far _RepelWoreOffText

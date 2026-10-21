@@ -154,11 +154,7 @@ WindowScript:
 	jumptext WindowText
 
 TVScript:
-	opentext
-	writetext TVText
-	waitbutton
-	closetext
-	end
+	jumptext TVText
 
 HomepageScript:
 	jumptext HomepageText
@@ -637,11 +633,7 @@ RematchFScript:
 
 GymStatue1Script:
 	getcurlandmarkname STRING_BUFFER_3
-	opentext
-	writetext GymStatue_CityGymText
-	waitbutton
-	closetext
-	end
+	jumptext GymStatue_CityGymText
 
 GymStatue2Script:
 	getcurlandmarkname STRING_BUFFER_3
