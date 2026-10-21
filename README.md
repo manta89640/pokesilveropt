@@ -5,8 +5,8 @@ This is a fork of [pret/pokegold](https://github.com/pret/pokegold), the disasse
 | | Original | This fork |
 |-|-|-|
 | ROM file | 2,097,152 bytes (128 banks) | **1,048,576 bytes (64 banks)** |
-| Content | 1,154,855 bytes | 954,253 bytes |
-| Free space | 942,297 bytes | 94,323 bytes |
+| Content | 1,154,855 bytes | 952,594 bytes |
+| Free space | 942,297 bytes | 95,982 bytes |
 
 The figures are for Silver, from the summary in rgblink's map file; Gold is within a few hundred bytes. The debug ROMs, which add the debug room, are 1 MB too.
 
@@ -25,7 +25,7 @@ To set up the repository, see [INSTALL.md](INSTALL.md). `make` builds `pokegold.
 
 **Compressed overworld sprites** (`engine/overworld/overworld.asm`). Overworld sprite tiles are LZ-compressed, except the player, rival, Mom, Poké Ball and monster, whose tiles other code loads directly (the monster is Substitute's doll). `GetSprite` decompresses them to a 384-byte SRAM buffer placed in space the save layout leaves free. Nine standing sprites have fewer tiles than `GetSprite` loads, so the original games load the start of the next sprites after them; their compressed graphics include those tiles.
 
-**Unused tileset blocks** (`tools/trim_metatiles.py`). Indoor tilesets had blocks that no map can show: not in any map's blocks or border, nor placed by a script, Cut, Whirlpool or a decoration in the player's room. Their metatiles and collision are removed, blocks that look and behave the same as an earlier one are merged into it, and the other blocks are renumbered in the maps' blocks and everything else that refers to them. (Outdoor tilesets keep their numbering, since the edges of connected maps are drawn with the current map's tileset.)
+**Unused tileset blocks** (`tools/trim_metatiles.py`). Indoor tilesets had blocks that no map can show: not in any map's blocks or border, nor placed by a script, Cut, Whirlpool or a decoration in the player's room. Their metatiles and collision are removed, blocks that look and behave the same as an earlier one are merged into it, and the other blocks are renumbered in the maps' blocks and everything else that refers to them. (Outdoor tilesets keep their numbering, since the edges of connected maps are drawn with the current map's tileset.) Then the tiles of the tilesets' graphics that no metatile shows (nor the Magnet Train, which draws with the station's tiles) are blanked, which compresses better (`tools/blank_unused_tiles.py`).
 
 **Base data** (`home/pokemon.asm`). Each species' base data leaves out the 7 bytes that are the same for every species (the dex number, two unknown values and the unused beta pic pointers); `GetBaseData` fills them in, so `wCurBaseData` is the same as before.
 
@@ -53,7 +53,7 @@ Savings by step (Silver, bytes): text dictionary 120,661; dead code 18,254; LZ 1
 
 - `tools/verify_text.py original.gbc pokesilver.gbc` checks every compressed string, 5,276 in all: texts, Pokédex entries, move and item descriptions, item, move and trainer class names, trainer names and parties, landmark names, and the credits.
 - `tools/tests/verify_music.py` follows every channel of every song, sound effect and cry in a build and in the original ROM, through calls, loops and jumps, and checks that they play the same notes and commands. `tools/tests/verify_anims.py` does the same for every battle animation, with every value of its parameter. `tools/tests/music.py` plays them all in an emulator and hashes the sound engine's channel state at each update, to compare with the original ROM.
-- `tools/tests/maps.py` loads all 368 maps and checks that the screen and the sprite tiles match the original ROM, and outdoor maps' blocks, with the strips of connected maps. (Indoor tilesets' blocks are renumbered.) `tools/tests/verify_sprites.py` checks the tiles of every overworld sprite.
+- `tools/tests/maps.py` loads all 368 maps and checks that the screen, the graphics of its tiles and the sprite tiles match the original ROM, and outdoor maps' blocks, with the strips of connected maps. (Indoor tilesets' blocks are renumbered.) `tools/tests/verify_sprites.py` checks the tiles of every overworld sprite.
 - The changes were also played in an emulator (PyBoy) next to the original ROMs with the scenarios in `tools/tests`: the intro and new game, Elm's lab, menus, every Pokédex entry, the Pack, the Pokégear phone and radio, a Pokémon Center, a Mart, wild and trainer battles, Substitute, the Hall of Fame and credits, and the debug room. Apart from timing, the screens match. See [tools/tests/README.md](tools/tests/README.md).
 
 

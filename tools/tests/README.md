@@ -20,11 +20,11 @@ done
 
 `debug_room.txt` is for the debug ROMs (`original/pokesilver_debug.gbc` and `pokesilver_debug.gbc`), from the same save.
 
-`maps.py` enters every map from the save and prints a hash of its blocks (with the strips of connected maps), of the screen's tilemap and of the sprite tiles, so two ROMs can be compared map by map. `tools/trim_metatiles.py` renumbers the blocks of indoor tilesets, so compare the tilemaps and sprites:
+`maps.py` enters every map from the save and prints a hash of its blocks (with the strips of connected maps), of the screen's tilemap, of the sprite tiles and of the graphics of the tiles on the screen, so two ROMs can be compared map by map. `tools/trim_metatiles.py` renumbers the blocks of indoor tilesets, so compare the other columns:
 
 ```sh
-tools/tests/maps.py original/pokesilver.gbc test_output/save/save.ram | cut -d' ' -f1,2,4,5 > original.txt
-tools/tests/maps.py pokesilver.gbc test_output/save/save.ram | cut -d' ' -f1,2,4,5 > new.txt
+tools/tests/maps.py original/pokesilver.gbc test_output/save/save.ram | cut -d' ' -f1,2,4- > original.txt
+tools/tests/maps.py pokesilver.gbc test_output/save/save.ram | cut -d' ' -f1,2,4- > new.txt
 diff original.txt new.txt
 ```
 
