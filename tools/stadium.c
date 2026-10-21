@@ -3,26 +3,17 @@
 
 #include "common.h"
 
-// A matching ROM has 128 banks
-#define NUM_BANKS 128
 // ROM banks are 0x4000 bytes
 #define BANK_SIZE 0x4000
-// A matching ROM is 2 MB
-#define ROM_SIZE (NUM_BANKS * BANK_SIZE)
 
 // The Game Boy cartridge header stores a global checksum at 0x014E-0x014F
 #define GLOBAL_OFF 0x014E
 
 // ASCII "N64PS3" header (Stadium G/S was the third Japanese Stadium release for N64)
 uint8_t n64ps3[6] = {'N', '6', '4', 'P', 'S', '3'};
+
 // "N64PS3" header + 2-byte CRC
 #define N64PS3_HEADER_SIZE (COUNTOF(n64ps3) + 2)
-// 2-byte checksums per half-bank
-#define N64PS3_DATA_SIZE (NUM_BANKS * 2 * 2)
-// "N64PS3" header + CRC + half-bank checksums
-#define N64PS3_TOTAL_SIZE (N64PS3_HEADER_SIZE + N64PS3_DATA_SIZE)
-// The Stadium data is stored at the end of the ROM
-#define N64PS3_OFF (ROM_SIZE - N64PS3_TOTAL_SIZE)
 
 // The CRC polynomial value
 #define CRC_POLY 0xC387
@@ -41,7 +32,14 @@ uint16_t calculate_checksum(uint16_t checksum, uint8_t *file, size_t size) {
 	return checksum;
 }
 
-void calculate_checksums(uint8_t *file) {
+void calculate_checksums(uint8_t *file, size_t rom_size) {
+	// 2-byte checksums per half-bank
+	size_t num_banks = rom_size / BANK_SIZE;
+	size_t data_size = num_banks * 2 * 2;
+	// "N64PS3" header + CRC + half-bank checksums, stored at the end of the ROM
+	size_t total_size = N64PS3_HEADER_SIZE + data_size;
+	size_t n64ps3_off = rom_size - total_size;
+
 	// Initialize the CRC table
 	uint16_t crc_table[256];
 	for (uint16_t i = 0; i < COUNTOF(crc_table); i++) {
@@ -56,24 +54,24 @@ void calculate_checksums(uint8_t *file) {
 	SET_U16BE(file + GLOBAL_OFF, 0);
 
 	// Initialize the Stadium data (this should be free space anyway)
-	memset(file + N64PS3_OFF, 0, N64PS3_TOTAL_SIZE);
-	memcpy(file + N64PS3_OFF, n64ps3, COUNTOF(n64ps3));
+	memset(file + n64ps3_off, 0, total_size);
+	memcpy(file + n64ps3_off, n64ps3, COUNTOF(n64ps3));
 
 	// Calculate the half-bank checksums
-	for (size_t i = 0; i < NUM_BANKS * 2; i++) {
+	for (size_t i = 0; i < num_banks * 2; i++) {
 		uint16_t checksum = calculate_checksum(CRC_INIT, file + i * BANK_SIZE / 2, BANK_SIZE / 2);
-		SET_U16BE(file + N64PS3_OFF + N64PS3_HEADER_SIZE + i * 2, checksum);
+		SET_U16BE(file + n64ps3_off + N64PS3_HEADER_SIZE + i * 2, checksum);
 	}
 
 	// Calculate the CRC of the half-bank checksums
 	uint16_t crc = CRC_INIT;
-	for (size_t i = 0; i < N64PS3_DATA_SIZE; i++) {
-		crc = (crc >> 8) ^ crc_table[(crc & 0xFF) ^ file[N64PS3_OFF + N64PS3_HEADER_SIZE + i]];
+	for (size_t i = 0; i < data_size; i++) {
+		crc = (crc >> 8) ^ crc_table[(crc & 0xFF) ^ file[n64ps3_off + N64PS3_HEADER_SIZE + i]];
 	}
-	SET_U16BE(file + N64PS3_OFF + N64PS3_HEADER_SIZE - 2, crc);
+	SET_U16BE(file + n64ps3_off + N64PS3_HEADER_SIZE - 2, crc);
 
 	// Calculate the global checksum
-	uint16_t globalsum = calculate_checksum(0, file, ROM_SIZE);
+	uint16_t globalsum = calculate_checksum(0, file, rom_size);
 	SET_U16BE(file + GLOBAL_OFF, globalsum);
 }
 
@@ -85,8 +83,9 @@ int main(int argc, char *argv[]) {
 	char *filename = argv[1];
 	long filesize;
 	uint8_t *file = read_u8(filename, &filesize);
-	if (filesize == ROM_SIZE) {
-		calculate_checksums(file);
+	// The checksums cover a whole power-of-two ROM of at least two banks
+	if (filesize >= 2 * BANK_SIZE && (filesize & (filesize - 1)) == 0) {
+		calculate_checksums(file, (size_t)filesize);
 	}
 	write_u8(filename, file, filesize);
 	free(file);

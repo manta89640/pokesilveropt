@@ -199,6 +199,8 @@ pokesilver_vc.gbc:    RGBFIXFLAGS += -t POKEMON_SLV -i AAXE
 	$(RGBLINK) $(RGBLINKFLAGS) -l layout.link -n $*.sym -m $*.map -o $@ $(filter %.o,$^)
 	$(RGBFIX) $(RGBFIXFLAGS) $@
 	tools/stadium $@
+# Retail ROMs must fit in 1 MB (see layout.link); debug ROMs may be larger
+	$(if $(findstring debug,$*),,@test $$(wc -c < $@) -eq 1048576 || { echo "error: $@ does not fit in 1 MB" >&2; $(RM) $@; false; })
 
 
 ### LZ compression rules

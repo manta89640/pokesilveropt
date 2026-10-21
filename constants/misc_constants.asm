@@ -60,3 +60,6 @@ DEF CARDFLIP_DECK_SIZE EQU 4 * 6
 
 ; SGB command MLT_REQ can be used to detect SGB hardware
 DEF JOYP_SGB_MLT_REQ EQU %00000011
+
+; The ROM is 1 MB (see layout.link)
+DEF NUM_ROM_BANKS EQU 64

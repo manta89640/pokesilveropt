@@ -389,12 +389,13 @@ INCLUDE "data/text/dictionary.asm"
 endc
 
 
-SECTION "Stadium 2 Checksums", ROMX[$7DF8], BANK[$7F]
+SECTION "Stadium 2 Checksums", ROMX
 
 ; The end of the ROM is taken up by checksums of the content, apparently used
 ; by Pokémon Stadium 2 due to the checksums' "N64PS3" header. (In Japan,
 ; Pokémon Stadium Gold and Silver was the third Stadium release for N64.)
-; This SECTION reserves space for those checksums.
+; This SECTION reserves space for those checksums; layout.link places it at
+; the end of the last bank.
 ; If it is removed, also remove the "tools/stadium" command in the Makefile.
 
-	ds $208
+	ds 6 + 2 + NUM_ROM_BANKS * 2 * 2 ; "N64PS3" header, CRC, half-bank checksums
