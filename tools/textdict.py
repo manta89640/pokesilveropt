@@ -10,7 +10,9 @@ frequent substrings. Writes:
   data/text/dictionary.asm        - the dictionary entries themselves
 
 Strings are encoded by rgbasm itself: the "dict" charmap maps each entry's
-text to its code, and rgbasm's greedy longest-match picks the entries.
+text to its code, and rgbasm's greedy longest-match picks the entries. Where
+that takes more bytes than the best choice of entries, the charmap also maps
+the whole run of text to the best encoding.
 Single-byte codes reuse character values below FIRST_REGULAR_TEXT_CHAR that
 PlaceString does not otherwise handle. Two-byte codes are a prefix byte
 (1 to NUM_DICT_PREFIXES) followed by a byte from $60 to $ff, so neither byte
@@ -308,6 +310,55 @@ class GreedyParser:
 		return out
 
 
+def optimal_parse(units, costs, by_first):
+	"""Returns the entries and single units that encode units in the fewest
+	bytes. costs maps entries (tuples of units) to their code lengths."""
+	n = len(units)
+	best = [(0, None)] * (n + 1)
+	for i in range(n - 1, -1, -1):
+		choice = (1 + best[i + 1][0], None)
+		for e in by_first.get(units[i], ()):
+			if tuple(units[i:i + len(e)]) == e and costs[e] + best[i + len(e)][0] < choice[0]:
+				choice = (costs[e] + best[i + len(e)][0], e)
+		best[i] = choice
+	out = []
+	i = 0
+	while i < n:
+		e = best[i][1]
+		out.append(e if e else units[i])
+		i += len(e) if e else 1
+	return out
+
+
+def run_entries(runs, costs):
+	"""rgbasm parses greedily, which can take more bytes than needed. Returns
+	{run: entries and units} for the runs whose best encoding is shorter, to
+	add to the charmap as whole runs (a charmap entry can map to several
+	bytes), and for the runs whose greedy encoding those entries would make
+	longer."""
+	by_first = collections.defaultdict(list)
+	for e in costs:
+		by_first[e[0]].append(e)
+	parser = GreedyParser({e: e for e in costs})
+
+	def cost(parse, extra=None):
+		return sum((extra or costs).get(x, 1) if isinstance(x, tuple) else 1 for x in parse)
+
+	best = {r: optimal_parse(r, costs, by_first) for r in runs}
+	greedy = {r: cost(parser.parse(r)) for r in runs}
+	added = {r: best[r] for r in runs if cost(best[r]) < greedy[r]}
+	while True:
+		extra = dict(costs)
+		extra.update({r: cost(p) for r, p in added.items()})
+		augmented = GreedyParser({e: e for e in extra})
+		worse = [r for r in runs if r not in added and
+			cost(augmented.parse(r), extra) > greedy[r]]
+		if not worse:
+			return added
+		for r in worse:
+			added[r] = best[r]
+
+
 def assign_codes(num_prefixes):
 	singles = [c for c in range(1 + num_prefixes, FIRST_REGULAR_TEXT_CHAR) if c not in RESERVED_CODES]
 	# $ff is left out: GetTrainerName finds the next trainer by looking for it
@@ -373,22 +424,32 @@ def main():
 	used = sorted(codes, key=lambda i: slot_of(codes[i]))
 
 	# Encode each entry with entries strictly shorter than itself (no cycles)
-	def encode_entry(i):
-		exp = expansions[i]
-		shorter = {expansions[j]: j for j in used if len(''.join(expansions[j])) < len(''.join(exp))}
+	costs = {expansions[i]: len(codes[i]) for i in used}
+	code_of = {expansions[i]: codes[i] for i in used}
+
+	def encode(parse):
 		out = []
-		for x in GreedyParser(shorter).parse(exp):
-			if isinstance(x, int):
-				out.extend(codes[x])
-			else:
-				out.append(charmap[x])
+		for x in parse:
+			out.extend(code_of[x] if isinstance(x, tuple) else (charmap[x],))
 		return out
 
+	def encode_entry(i):
+		exp = expansions[i]
+		shorter = {e: c for e, c in costs.items() if len(''.join(e)) < len(''.join(exp))}
+		by_first = collections.defaultdict(list)
+		for e in shorter:
+			by_first[e[0]].append(e)
+		return encode(optimal_parse(exp, shorter, by_first))
+
 	encoded = {i: encode_entry(i) for i in used}
+	whole_runs = run_entries(runs, costs)
 
 	# Estimate compressed size
 	compressed = 0
 	for r, weight in runs.items():
+		if r in whole_runs:
+			compressed += weight * len(encode(whole_runs[r]))
+			continue
 		for x in parser.parse(r):
 			compressed += weight * (len(codes[x]) if isinstance(x, int) and x in codes else 1)
 	printable = sum(len(r) * w for r, w in runs.items())
@@ -409,6 +470,10 @@ def main():
 			i = by_slot[slot]
 			vals = ', '.join(f'${v:02x}' for v in codes[i])
 			f.write(f'\tcharmap {asm_string(expansions[i])}, {vals}\n')
+		f.write('\n; Whole runs of text that rgbasm would otherwise encode in more bytes\n')
+		for r in sorted(whole_runs, key=lambda r: ''.join(r)):
+			vals = ', '.join(f'${v:02x}' for v in encode(whole_runs[r]))
+			f.write(f'\tcharmap {asm_string(r)}, {vals}\n')
 		f.write('\tsetcharmap main\n')
 
 	with open(os.path.join(ROOT, 'data/text/dictionary.asm'), 'w', encoding='utf-8') as f:

@@ -5,8 +5,8 @@ This is a fork of [pret/pokegold](https://github.com/pret/pokegold), the disasse
 | | Original | This fork |
 |-|-|-|
 | ROM file | 2,097,152 bytes (128 banks) | **1,048,576 bytes (64 banks)** |
-| Content | 1,154,855 bytes | 952,594 bytes |
-| Free space | 942,297 bytes | 95,982 bytes |
+| Content | 1,154,855 bytes | 951,444 bytes |
+| Free space | 942,297 bytes | 97,132 bytes |
 
 The figures are for Silver, from the summary in rgblink's map file; Gold is within a few hundred bytes. The debug ROMs, which add the debug room, are 1 MB too.
 
@@ -15,7 +15,7 @@ To set up the repository, see [INSTALL.md](INSTALL.md). `make` builds `pokegold.
 
 ## What changed
 
-**Text compression** (`tools/textdict.py`, `home/text.asm`). Text is encoded with a dictionary of about 2,900 frequent substrings, from two-letter pairs like `"e "` up to whole phrases like `"#MON CENTER"`. The `text`, `line`, `para`, `cont`, `next` and `page` macros, Pokédex entries, move and item descriptions, the item, move and trainer class names, trainer names, landmark names and the credits use a `dict` charmap, so rgbasm picks dictionary entries itself and the source text stays readable. One-byte codes reuse character values below `$60` that English text never prints (Japanese kana with dakuten, and the control characters of Japanese text, which `PlaceString` no longer handles). Codes 1–18 are prefixes for two-byte codes whose second byte is `$60`–`$fe`, so no byte of a code looks like a control character to code that scans text for `"@"` or `"<NEXT>"`, or like the `$ff` that ends a trainer's party. `PlaceString` prints an entry by switching to the dictionary bank and printing it recursively. Pokémon names stay plain, since they are copied into nicknames. This shrinks the text from 253 KB to 134 KB, dictionary included.
+**Text compression** (`tools/textdict.py`, `home/text.asm`). Text is encoded with a dictionary of about 2,900 frequent substrings, from two-letter pairs like `"e "` up to whole phrases like `"#MON CENTER"`. The `text`, `line`, `para`, `cont`, `next` and `page` macros, Pokédex entries, move and item descriptions, the item, move and trainer class names, trainer names, landmark names and the credits use a `dict` charmap, so rgbasm picks dictionary entries itself and the source text stays readable. rgbasm picks the longest entry at each point, which is not always best, so where another choice of entries is shorter the charmap maps the whole run of text to it. One-byte codes reuse character values below `$60` that English text never prints (Japanese kana with dakuten, and the control characters of Japanese text, which `PlaceString` no longer handles). Codes 1–18 are prefixes for two-byte codes whose second byte is `$60`–`$fe`, so no byte of a code looks like a control character to code that scans text for `"@"` or `"<NEXT>"`, or like the `$ff` that ends a trainer's party. `PlaceString` prints an entry by switching to the dictionary bank and printing it recursively. Pokémon names stay plain, since they are copied into nicknames. This shrinks the text from 253 KB to 134 KB, dictionary included.
 
 **1 MB layout** (`layout.link`). Sections that lived in banks `$40`–`$7f` now float, and rgblink packs them into free space in banks `$01`–`$3f`. Each map's scripts are their own section so they can fill small gaps. `tools/section_xref.py` reads the object files and reports code that uses another section's addresses without asking for its bank. It found which sections must share a bank: three pairs of maps, glued with `SECTION FRAGMENT`. The Pokédex entries stay in four consecutive banks because their bank is computed from the species. The Stadium 2 checksums move to the end of the 1 MB ROM, and `tools/stadium` handles any ROM size.
 
@@ -39,7 +39,7 @@ To set up the repository, see [INSTALL.md](INSTALL.md). `make` builds `pokegold.
 
 **Indexed far calls** (`tools/farcall_targets.py`, `home/farcall.asm`, `home/predef.asm`). A `farcall` or `callfar` is 6 bytes. To one of the 146 functions that are far-called more than once, it is now `rst FarCallIndexed` and an index into a table in ROM0, 2 bytes, which calls the function with the same registers and flags. Likewise `predef` is `rst PredefIndexed` and the predef's id, 2 bytes instead of 5. These used the two `rst` vectors that were free.
 
-Savings by step (Silver, bytes): text dictionary 120,661; dead code 18,254; LZ 13,867; overworld sprites 10,708; map blocks 10,684; duplicate graphics 3,944; peephole 1,854; duplicate code 3,245; `jumptext` 1,357; base data 1,728; music and sound effects 3,231; battle animations 925; indexed far calls 2,207; tileset blocks 7,911.
+Savings by step (Silver, bytes): text dictionary 121,811; dead code 18,254; LZ 13,867; overworld sprites 10,708; map blocks 10,684; duplicate graphics 3,944; peephole 1,854; duplicate code 3,245; `jumptext` 1,357; base data 1,728; music and sound effects 3,231; battle animations 925; indexed far calls 2,207; tileset blocks 7,911.
 
 
 ## What is unchanged

@@ -2914,4 +2914,885 @@ DEF NUM_DICT_PREFIXES EQU 18
 	charmap "Ohhh", $12, $fc
 	charmap "FARM", $12, $fd
 	charmap " BUILD", $12, $fe
+
+; Whole runs of text that rgbasm would otherwise encode in more bytes
+	charmap "    COUNTER", $7f, $03, $b3, $82, $12, $bb, $48
+	charmap "    MARKET", $7f, $03, $b3, $12, $be
+	charmap " forgot", $7f, $0a, $be
+	charmap "# BALL, weaken", $0a, $b2, $1b, $02, $f3, $35
+	charmap "#DEX is tough,", $03, $83, $7f, $23, $b3, $02, $8f, $f4
+	charmap "#MON STRENGTH.", $16, $7f, $07, $b2, $e8
+	charmap "#MON are really", $16, $01, $cf, $32, $09, $dc
+	charmap "#MON are tough…", $16, $01, $cf, $b3, $02, $8f, $75
+	charmap "#MON at the", $16, $7f, $02, $cb
+	charmap "#MON can't do a", $16, $7f, $01, $7f, $05, $69, $a0
+	charmap "#MON can't make", $16, $7f, $01, $7f, $ac, $0d, $b0
+	charmap "#MON doesn't", $16, $7f, $06, $bb
+	charmap "#MON don't like", $16, $7f, $01, $d6, $01, $f1
+	charmap "#MON forget?", $16, $7f, $0c, $77, $e6
+	charmap "#MON in the", $16, $7f, $01, $71
+	charmap "#MON with MAIL", $16, $01, $b5, $03, $e0
+	charmap "#MON with MAIL.", $16, $01, $b5, $03, $e0, $e8
+	charmap "#MON with me?", $16, $7f, $07, $ae
+	charmap "#MON. Since it", $16, $e8, $7f, $04, $6b, $15
+	charmap ", would", $f4, $08, $b3
+	charmap "1,000 years.", $f7, $f4, $f6, $f6, $f6, $0f, $73, $e8
+	charmap "1F SERVICE COUNTER", $f7, $85, $7f, $0a, $9e, $7f, $82, $12, $bb, $48
+	charmap "200! Your #DEX", $f8, $f6, $f6, $e7, $7f, $01, $e4, $03, $83
+	charmap "50 years.", $fb, $f6, $0f, $73, $e8
+	charmap "<PLAYER>, howdy!", $52, $f4, $09, $8a, $a3, $b8, $e7
+	charmap "<PLAYER>, now we'll", $52, $1b, $08, $a3, $b6, $a4, $d1, $ab
+	charmap "<PLAYER>, would you", $52, $f4, $08, $b3, $3d
+	charmap "<PLAYER>? I thought", $52, $e6, $7f, $04, $98
+	charmap "A #MON CENTER", $80, $7f, $02, $97
+	charmap "A #MON GYM can", $80, $7f, $02, $80, $02, $62
+	charmap "A #MON that", $80, $7f, $02, $78
+	charmap "A #MON that hid", $80, $01, $9e, $47, $0a, $cd
+	charmap "A battle without", $80, $7f, $01, $78, $0c, $cf
+	charmap "A beautiful pearl.", $80, $7f, $03, $6d, $7f, $af, $0d, $e7, $e8
+	charmap "A black APRICORN.", $80, $7f, $07, $6a, $02, $f6, $e8
+	charmap "A burn lingers", $80, $7f, $07, $75, $7f, $ab, $20, $28, $b2
+	charmap "A burn steadily", $80, $7f, $07, $75, $7f, $08, $70, $b8
+	charmap "A dance that in-", $80, $7f, $a3, $0d, $af, $47, $1d, $e3
+	charmap "A double kicking", $80, $7f, $0c, $f0, $aa, $03, $fc, $20
+	charmap "A downpour", $80, $7f, $03, $9a, $af, $41, $b1
+	charmap "A fast punch that", $80, $7f, $a5, $08, $e0, $af, $0c, $c8, $44, $29
+	charmap "A machine part for", $80, $7f, $03, $e8, $13, $08, $be, $a5, $36
+	charmap "A mysterious box", $80, $7f, $0a, $90, $08, $ba, $a1, $ae, $b7
+	charmap "A mysterious radio", $80, $7f, $0a, $90, $08, $ba, $01, $fc
+	charmap "A powerful punch", $04, $da, $af, $0c, $c8
+	charmap "A young man from", $80, $0f, $79, $7f, $09, $ea, $02, $b4
+	charmap "AMY: You're", $80, $8c, $98, $9c, $02, $91
+	charmap "ANTIDOTE with you.", $0b, $6a, $7f, $07, $f4
+	charmap "After three years", $80, $a5, $b3, $28, $0d, $96, $0f, $73
+	charmap "Ah, excellent!", $06, $6b, $a4, $0e, $66, $e7
+	charmap "Ah, it can't be", $80, $a7, $01, $ba, $01, $7f, $2e
+	charmap "All grand plans", $06, $73, $a6, $0f, $67, $06, $c9, $b2
+	charmap "An electric punch.", $0b, $e1, $02, $84, $a2, $7f, $af, $0c, $c8, $e8
+	charmap "Anyway, they're at", $0e, $aa, $1b, $09, $67, $13, $29
+	charmap "Are they really", $0d, $a3, $32, $09, $dc
+	charmap "Arrgh… You found", $80, $10, $c8, $a7, $75, $7f, $40, $a5, $02, $c4
+	charmap "As it moves, it", $80, $17, $15, $03, $77, $1b, $15
+	charmap "At night, the sea", $0c, $dd, $1b, $02, $fb, $a0
+	charmap "Aww! There's no", $11, $8f, $e7, $7f, $01, $93
+	charmap "BADGE to use that", $01, $83, $7f, $1c, $0b, $92
+	charmap "BILL is an expert.", $06, $b0, $7f, $23, $0b, $75, $b3, $e8
+	charmap "BILL made the PC", $06, $b0, $7f, $02, $e1, $04, $7c, $82
+	charmap "BILL: I knew it!", $06, $b0, $9c, $7f, $0c, $87, $08, $a2
+	charmap "BLUESKY MAIL", $0f, $e8, $84, $92, $8a, $98, $7f, $03, $e0
+	charmap "Besides the sea, I", $81, $2f, $0f, $d0, $17, $02, $fb, $a0, $1b, $88
+	charmap "Bet you can't get", $81, $a4, $b3, $3d, $7f, $01, $7f, $03, $81
+	charmap "Binds the target", $81, $1d, $a3, $b2, $10, $69
+	charmap "Bow down before my", $81, $ae, $b6, $7f, $a3, $05, $da, $03, $d8, $ac, $b8
+	charmap "But I couldn't!", $01, $8c, $18, $07, $95, $e7
+	charmap "But I don't use a", $01, $8c, $18, $01, $d6, $03, $64, $a0
+	charmap "But I'm really", $01, $8c, $3b, $32, $09, $dc
+	charmap "But if you don't", $01, $8c, $02, $68, $7f, $06, $b1
+	charmap "But not the best", $01, $8c, $04, $ee, $11, $90
+	charmap "But one of the", $01, $8c, $2b, $13, $01, $a2
+	charmap "But the PACK is", $01, $8c, $14, $13, $0f, $72, $7f, $2c
+	charmap "But they actually", $01, $8c, $02, $8b, $07, $7e, $b4, $09, $dc
+	charmap "But, where would", $0d, $bc, $1b, $b6, $01, $73, $08, $b3
+	charmap "But, you should be", $0d, $bc, $1b, $08, $89, $2e
+	charmap "By spreading the", $81, $19, $b2, $af, $04, $69, $01, $9f
+	charmap "CELADON DEPT.STORE", $04, $68, $8d, $7f, $06, $87, $84
+	charmap "CHUCK, the GYM", $0f, $ee, $1b, $02, $c2
+	charmap "CIANWOOD is across", $01, $e9, $7f, $23, $05, $6e, $b2
+	charmap "CINDY: I really", $82, $0e, $e5, $98, $0d, $87, $32, $09, $dc
+	charmap "CITY in JOHTO…", $05, $72, $7f, $07, $a9, $75
+	charmap "CLAIR: All right.", $05, $f1, $9c, $7f, $02, $aa, $e8
+	charmap "CLAIR: You did", $05, $f1, $9c, $7f, $40, $0f, $d4
+	charmap "CLAIR: You have", $05, $f1, $9c, $7f, $40, $01, $c3
+	charmap "COIN CASE in the", $0e, $65, $0f, $77, $7f, $01, $71
+	charmap "Can I do anything", $82, $21, $7f, $18, $05, $69, $03, $8f
+	charmap "Causes confusion", $82, $a0, $05, $d5, $a2, $11, $bb
+	charmap "Check to see how", $08, $df, $7f, $1c, $07, $a7
+	charmap "Crossing the sea?", $82, $b1, $ae, $b2, $b2, $2a, $02, $fb, $a0, $e6
+	charmap "Cuts the foe's HP", $12, $ce, $17, $05, $b3, $34, $87, $8f
+	charmap "DAISY: OK, I'll", $06, $8b, $8e, $8a, $06, $6d
+	charmap "DENROD in JOHTO.", $0f, $e2, $07, $81, $7f, $07, $a9, $e8
+	charmap "DEX, the PROF's", $83, $84, $97, $1b, $04, $7c, $91, $8e, $85, $d4
+	charmap "Darn. I thought I", $06, $e9, $e8, $7f, $04, $98, $7f, $88
+	charmap "Darn… I thought", $06, $e9, $75, $7f, $04, $98
+	charmap "Disables the foe's", $83, $2c, $05, $66, $17, $05, $b3, $d4
+	charmap "Do I know the", $83, $ae, $7f, $18, $0e, $c3
+	charmap "Don't tell anyone,", $83, $05, $9f, $b3, $0a, $73, $10, $c2, $f4
+	charmap "Don't you forget", $03, $ef, $7f, $0c, $77
+	charmap "Done! Your #MON", $83, $0a, $f1, $7f, $01, $e4, $16
+	charmap "Drops rocks on the", $83, $b1, $ae, $af, $17, $b1, $07, $df, $17, $01, $ae
+	charmap "ECRUTEAK made some", $01, $c0, $7f, $02, $e1, $01, $c6
+	charmap "ELDER: You are in-", $10, $67, $9c, $7f, $05, $85, $1d, $e3
+	charmap "EON MAIL", $84, $8e, $8d, $7f, $03, $e0
+	charmap "Eeyaaaah!", $84, $a4, $b8, $a0, $08, $dd
+	charmap "Evolution really", $84, $12, $9c, $03, $8d, $7f, $32, $09, $dc
+	charmap "Eyes on its back", $84, $b8, $a4, $17, $0d, $bb
+	charmap "FIRE STONE", $0a, $f4, $7f, $0c, $a5
+	charmap "FLOWER MAIL", $85, $8b, $03, $ed, $7f, $03, $e0
+	charmap "FROM A GOOD ROAR!", $85, $91, $8e, $8c, $12, $8f, $86, $8e, $8e, $83, $7f, $11, $e5, $e7
+	charmap "FRUSTRATION", $85, $91, $94, $0f, $cf, $05, $75
+	charmap "FUCHSIA's GYM.", $03, $c4, $80, $d4, $0e, $c2
+	charmap "Flying-type moves", $85, $ab, $b8, $20, $e3, $01, $94
+	charmap "GLASSES, so forget", $0e, $72, $92, $1b, $02, $c3, $0c, $77
+	charmap "Gee, isn't that", $86, $a4, $a4, $f4, $08, $7c, $44, $29
+	charmap "Gee, that's really", $86, $a4, $a4, $08, $f2, $32, $09, $dc
+	charmap "Ghost-type moves", $86, $0e, $9b, $e3, $01, $94
+	charmap "Great! Thank you!", $86, $32, $29, $e7, $7f, $03, $cf
+	charmap "Gyaaaah!", $86, $b8, $a0, $08, $dd
+	charmap "HARD STONE", $87, $0f, $63, $7f, $0c, $a5
+	charmap "HEADBUTT. Some-", $05, $f8, $e8, $7f, $0e, $b4, $e3
+	charmap "HM moves can't be", $87, $8c, $7f, $04, $a7, $01, $7f, $2e
+	charmap "Haaah, I'm full!", $87, $0e, $ab, $a7, $1b, $3b, $02, $ca, $e7
+	charmap "He said they're", $87, $13, $07, $e6, $27, $09, $67, $a4
+	charmap "He was really", $87, $13, $46, $32, $09, $dc
+	charmap "He's on ROUTE 31.", $08, $a1, $2b, $7f, $01, $64, $f9, $f7, $e8
+	charmap "Heh, I'm just a", $10, $d5, $1b, $3b, $01, $6d, $a0
+	charmap "Heh, sorry, I just", $10, $d5, $1b, $04, $75, $1b, $18, $02, $a4
+	charmap "Hehehe… You don't", $10, $d5, $a4, $a7, $a4, $75, $7f, $40, $06, $b1
+	charmap "Hello! Welcome to", $02, $b8, $e7, $7f, $0a, $6e, $13, $1e
+	charmap "Here, you can have", $02, $a9, $1b, $04, $b2, $01, $c3
+	charmap "Here. Your #MON", $02, $a9, $e8, $7f, $01, $e4, $16
+	charmap "Hey, I'm training", $08, $96, $1b, $3b, $01, $72, $20
+	charmap "Hey. I love strong", $08, $96, $e8, $7f, $04, $e1, $01, $62
+	charmap "Hi. Welcome to our", $87, $a8, $e8, $7f, $01, $d0, $41, $b1
+	charmap "Hmmm… I don't know", $0e, $7e, $ac, $08, $f7, $01, $d6, $01, $a7
+	charmap "Hmm… You appear to", $87, $ac, $0f, $91, $40, $01, $b4, $7f, $1e
+	charmap "However, it would", $05, $bb, $1b, $15, $08, $b3
+	charmap "Huh? You want me", $04, $c7, $7f, $40, $01, $99, $ac, $a4
+	charmap "Huh? Your #GEAR", $04, $c7, $7f, $01, $e4, $04, $8d
+	charmap "Humph. This is my", $87, $09, $d9, $a7, $04, $96, $07, $87
+	charmap "I am BRUNO of the", $03, $ec, $7f, $81, $91, $94, $8d, $8e, $7f, $01, $a2
+	charmap "I am KAREN of the", $03, $ec, $7f, $8a, $12, $92, $8d, $7f, $01, $a2
+	charmap "I am KOGA of the", $03, $ec, $7f, $12, $e7, $7f, $01, $a2
+	charmap "I bragged about", $18, $a1, $09, $99, $a6, $a4, $27, $02, $e5
+	charmap "I don't believe", $18, $01, $d6, $02, $b9, $a4
+	charmap "I don't care if", $18, $01, $d6, $05, $9d, $a8, $a5
+	charmap "I don't care that", $18, $01, $d6, $a2, $31, $03, $89
+	charmap "I don't enjoy bat-", $18, $01, $d6, $35, $a9, $ae, $19, $10, $76
+	charmap "I don't even know", $18, $01, $d6, $01, $e5, $01, $a7
+	charmap "I don't know the", $18, $01, $d6, $0e, $c3
+	charmap "I don't know very", $18, $01, $d6, $aa, $08, $a3, $04, $d3
+	charmap "I don't know why…", $18, $01, $d6, $aa, $08, $a3, $12, $b6, $75
+	charmap "I don't love and", $18, $01, $d6, $05, $98, $a4, $02, $94
+	charmap "I don't mind", $18, $01, $d6, $0c, $60
+	charmap "I don't mind it", $18, $01, $d6, $0d, $b7, $15
+	charmap "I don't need any-", $18, $01, $d6, $09, $b5, $27, $0a, $84
+	charmap "I don't need it,", $18, $01, $d6, $ad, $a4, $0c, $f5, $f4
+	charmap "I don't need you", $18, $01, $d6, $ad, $10, $72, $3d
+	charmap "I don't regret", $18, $01, $d6, $32, $a6, $32, $b3
+	charmap "I don't see a", $18, $01, $d6, $3a, $13, $a0
+	charmap "I don't show mercy", $18, $01, $d6, $09, $93, $28, $a2, $b8
+	charmap "I don't think", $18, $01, $d6, $01, $c5
+	charmap "I don't understand", $18, $01, $d6, $02, $d2, $04, $8e
+	charmap "I don't want to", $18, $01, $d6, $01, $99, $1e
+	charmap "I got shattered!", $18, $02, $a3, $b2, $a7, $0b, $79, $05, $c8
+	charmap "I got wiped out on", $18, $02, $a3, $b6, $a8, $af, $11, $73, $2b
+	charmap "I have to take so", $18, $3e, $05, $d3, $b2, $ae
+	charmap "I hear many rare", $01, $c2, $7f, $02, $e9, $08, $f9
+	charmap "I hear that the", $01, $c2, $44, $02, $cb
+	charmap "I learn anything", $18, $04, $a1, $7f, $03, $8f
+	charmap "I need from here.", $18, $09, $b5, $27, $02, $b4, $04, $70
+	charmap "I slammed down", $18, $b2, $ab, $a0, $ac, $ac, $a4, $27, $03, $9a
+	charmap "I smell a conspir-", $18, $b2, $ac, $0a, $73, $1a, $a2, $2b, $0a, $dc, $e3
+	charmap "I use X SPEED in", $18, $03, $64, $97, $7f, $08, $da, $7f, $1d
+	charmap "I went to the GYM,", $18, $0b, $82, $1c, $02, $c2, $f4
+	charmap "I wouldn't lose to", $88, $08, $b3, $02, $e0, $ab, $06, $8d, $1e
+	charmap "I, I, I'm really", $88, $1b, $88, $1b, $3b, $32, $09, $dc
+	charmap "If it inflates to", $03, $b6, $1d, $a5, $ab, $0b, $d7, $1e
+	charmap "If one of the", $88, $a5, $09, $ae, $01, $a2
+	charmap "If one of the twin", $04, $81, $2b, $06, $61, $02, $a2, $b6, $1d
+	charmap "If the bud on its", $88, $a5, $44, $13, $a1, $b4, $a3, $05, $e9
+	charmap "If we turn up the", $04, $81, $b6, $13, $02, $85, $7f, $0b, $71
+	charmap "If you beat the", $01, $66, $2e, $02, $cb
+	charmap "If you did, the PC", $01, $66, $0f, $d4, $1b, $04, $7c, $82
+	charmap "If you want to get", $04, $81, $05, $b0, $03, $81
+	charmap "Is there really a", $88, $b2, $0c, $f9, $01, $ef, $a0
+	charmap "It can't fly,", $88, $2d, $01, $7f, $a5, $11, $70
+	charmap "It can't learn", $88, $2d, $01, $7f, $04, $a1
+	charmap "It can't move if", $88, $2d, $01, $7f, $02, $fe, $a4, $06, $da
+	charmap "It can't stop", $88, $2d, $01, $7f, $06, $b6
+	charmap "It catches and", $88, $2d, $01, $87, $a4, $09, $a7
+	charmap "It collects bones", $88, $2d, $03, $97, $17, $a1, $2b, $2f
+	charmap "It collects data ", $88, $2d, $03, $97, $17, $a3, $29, $1a
+	charmap "It collects honey", $88, $2d, $03, $97, $17, $07, $7a, $b8
+	charmap "It concentrates", $88, $2d, $0c, $d7, $29, $2f
+	charmap "It contains a", $88, $2d, $05, $cf, $7f, $a0
+	charmap "It continuously", $88, $2d, $06, $d8, $11, $6f, $b8
+	charmap "It grows dispirit-", $88, $2d, $02, $d4, $17, $a3, $a8, $0a, $dc, $15, $e3
+	charmap "It hates light and", $88, $2d, $a7, $0b, $d7, $ab, $01, $ab, $02, $94
+	charmap "It is actually", $02, $75, $07, $7e, $b4, $09, $dc
+	charmap "It is said that it", $02, $75, $07, $e6, $27, $47, $15
+	charmap "It is said to", $88, $b3, $0d, $b9
+	charmap "It is said to be", $02, $75, $07, $bf, $2e
+	charmap "It looks really", $03, $6e, $32, $09, $dc
+	charmap "It loves anything", $88, $2d, $05, $98, $a4, $17, $03, $8f
+	charmap "It nests at the", $88, $2d, $ad, $a4, $3c, $17, $02, $cb
+	charmap "It secretes a", $88, $2d, $03, $88, $a4, $17, $a0
+	charmap "It seems that the", $88, $2d, $0a, $e6, $b2, $44, $02, $cb
+	charmap "It shoots itself", $06, $b9, $a7, $0d, $ca, $17, $15, $03, $e2
+	charmap "It shows interest", $88, $2d, $03, $61, $17, $06, $ac, $a4, $3c
+	charmap "It sleeps deep on", $88, $2d, $02, $92, $17, $a3, $07, $e2, $2b
+	charmap "It soon becomes so", $88, $2d, $0e, $84, $2e, $03, $6b, $17, $b2, $ae
+	charmap "It stands on its", $88, $2d, $04, $8e, $b2, $05, $e9
+	charmap "It stands to", $88, $2d, $04, $8e, $17, $1e
+	charmap "It stays mostly in", $88, $2d, $0c, $db, $17, $10, $e5, $ab, $19, $1d
+	charmap "It stays motion-", $88, $2d, $0c, $db, $17, $ac, $ae, $03, $8d, $e3
+	charmap "It strengthens", $88, $2d, $08, $f6, $35, $b2
+	charmap "It sure is tough", $06, $b9, $0e, $62, $23, $b3, $02, $8f
+	charmap "It swims facing", $88, $2d, $07, $76, $17, $a5, $a0, $a2, $20
+	charmap "It's fun, isn't", $43, $09, $bb, $f4, $08, $7c
+	charmap "It's in your PC.", $43, $1d, $7f, $0c, $e4, $e8
+	charmap "It's located in", $43, $ab, $ae, $a2, $29, $07, $d6
+	charmap "It's rough down", $43, $b1, $02, $8f, $7f, $03, $9a
+	charmap "It's terrible how", $43, $0a, $d1, $a1, $37, $09, $8a
+	charmap "Its punches slice", $02, $e8, $af, $0c, $c8, $a4, $17, $b2, $ab, $05, $6a
+	charmap "Its three heads", $88, $b3, $10, $71, $04, $bb, $a3, $b2
+	charmap "JASMINE, the GYM", $04, $ed, $84, $1b, $02, $c2
+	charmap "Jabs the target", $89, $a0, $a1, $b2, $10, $69
+	charmap "Just you watch!", $03, $6f, $26, $7f, $06, $cf, $e7
+	charmap "KANTO are as tough", $01, $d8, $01, $cf, $a0, $17, $b3, $02, $8f
+	charmap "KANTO. Well done!", $01, $d8, $e8, $7f, $06, $f2
+	charmap "KANTO? It's nice,", $01, $d8, $e6, $7f, $43, $ad, $05, $6a, $f4
+	charmap "KAZ! Sorry, wrong", $8a, $80, $99, $e7, $7f, $01, $f3, $1b, $07, $8b
+	charmap "KOFFING inflates,", $8a, $8e, $85, $85, $04, $67, $7f, $1d, $a5, $11, $87, $f4
+	charmap "Keeping that lit-", $8a, $0f, $cd, $2a, $47, $ab, $15, $e3
+	charmap "LEAF STONE", $0f, $7d, $7f, $0c, $a5
+	charmap "LOVELY MAIL", $10, $ab, $7f, $03, $e0
+	charmap "Leaves the foe", $8b, $a4, $05, $81, $7f, $05, $b3
+	charmap "Let's see… Nope!", $06, $99, $7f, $10, $c5, $e7
+	charmap "Lets the user get", $8b, $a4, $b3, $17, $05, $88, $7f, $03, $81
+	charmap "MAIL to your PC?", $03, $e0, $7f, $1c, $0c, $e4, $e6
+	charmap "MARY on the radio.", $08, $77, $98, $7f, $2b, $44, $13, $01, $fc, $e8
+	charmap "MARY's the best!", $08, $77, $98, $d4, $11, $90, $e7
+	charmap "MARY: Oh! You're", $08, $77, $04, $cf, $8e, $a7, $e7, $02, $91
+	charmap "MIRAGE MAIL", $8c, $88, $0a, $ea, $7f, $03, $e0
+	charmap "MISTY is about the", $06, $e3, $98, $7f, $23, $01, $6a, $14, $a4
+	charmap "MISTY: You really", $06, $e3, $04, $cf, $40, $32, $09, $dc
+	charmap "MON is the same.", $02, $f2, $7f, $23, $02, $61, $a0, $08, $95
+	charmap "MON you don't want", $02, $f2, $3d, $7f, $01, $d6, $05, $cb
+	charmap "MON you saw in the", $02, $f2, $3d, $7f, $0a, $7a, $7f, $01, $71
+	charmap "MON, even if they", $02, $f2, $1b, $01, $e5, $a8, $a5, $08, $f0
+	charmap "MON, there should", $02, $f2, $f4, $0c, $f9, $01, $af, $a3
+	charmap "MOON STONE", $0f, $6f, $8d, $7f, $0c, $a5
+	charmap "MORPH MAIL", $0c, $fc, $8f, $87, $7f, $03, $e0
+	charmap "MORTY, the GYM", $8c, $10, $91, $98, $1b, $02, $c2
+	charmap "MUSIC MAIL", $09, $df, $7f, $03, $e0
+	charmap "MYSTERY STONE", $07, $89, $7f, $0c, $a5
+	charmap "May make the foe", $08, $b4, $ac, $07, $73, $05, $b3
+	charmap "Most excellent.", $8c, $0b, $c7, $a4, $0e, $66, $e8
+	charmap "My brother made", $8c, $19, $06, $9e, $7f, $0f, $dd
+	charmap "No! I don't", $8d, $ae, $05, $9e, $06, $b1
+	charmap "No, it doesn't", $8d, $ae, $01, $ba, $06, $bb
+	charmap "Nobody lives here.", $8d, $ae, $02, $d9, $0b, $d2, $04, $70
+	charmap "Nope! ITEMFINDER", $10, $c5, $e7, $7f, $0c, $70
+	charmap "Nope, none of your", $10, $c5, $1b, $ad, $10, $68
+	charmap "OAK: Ah, you're", $08, $ee, $80, $a7, $04, $d7
+	charmap "OK, so you wanted", $8e, $8a, $02, $c7, $3d, $7f, $06, $80
+	charmap "OLIVINE CITY -", $0a, $6f, $84, $02, $dd
+	charmap "Off to the #MON", $8e, $a5, $a5, $7f, $1c, $01, $b7
+	charmap "Oh! You're really", $8e, $05, $c9, $01, $6b, $32, $09, $dc
+	charmap "Oh, look at all", $01, $da, $01, $9c, $7f, $07, $e5
+	charmap "Oh, make it forget", $01, $da, $ac, $0a, $94, $0c, $77
+	charmap "Oh, no! They're so", $03, $69, $e7, $7f, $02, $95, $b2, $ae
+	charmap "Oh. I couldn't", $8e, $a7, $03, $87, $07, $95
+	charmap "Ooh, I'm feeling", $0e, $e6, $1b, $3b, $03, $c2, $20
+	charmap "Oops! Look at the", $0b, $ee, $e7, $7f, $8b, $07, $78, $7f, $02, $cb
+	charmap "Over many years,", $8e, $b5, $28, $7f, $06, $e7, $0f, $73, $f4
+	charmap "PACK's full, son.", $0f, $72, $34, $02, $ca, $1b, $11, $94
+	charmap "PATH! That really", $10, $a1, $e7, $7f, $01, $7a, $32, $09, $dc
+	charmap "PP of one #MON.", $8f, $8f, $01, $96, $05, $7b
+	charmap "PROTECTED itself!", $0f, $e5, $82, $93, $84, $83, $7f, $15, $03, $e2, $e7
+	charmap "PROTECTING itself!", $0f, $e5, $82, $93, $04, $67, $7f, $15, $03, $e2, $e7
+	charmap "Pests! You heard", $8f, $a4, $3c, $b2, $06, $ef, $03, $90, $a3
+	charmap "Please come again.", $01, $77, $03, $6b, $09, $b1
+	charmap "Plentiful in the", $8f, $ab, $0e, $6e, $07, $cb, $7f, $01, $71
+	charmap "Pretty tough, huh?", $11, $fa, $19, $b3, $02, $8f, $08, $f1
+	charmap "RADIO STATION,", $05, $ca, $7f, $08, $ce, $f4
+	charmap "ROD DEPT.STORE.", $07, $81, $7f, $06, $87, $84, $e8
+	charmap "ROD has the best", $07, $81, $08, $9d, $11, $90
+	charmap "Really?", $91, $a4, $09, $dc, $e6
+	charmap "Really? Great!", $91, $a4, $09, $dc, $0f, $94, $e7
+	charmap "Repeatedly punches", $0f, $7b, $04, $cb, $ab, $19, $af, $0c, $c8, $2f
+	charmap "SABRINA: I knew", $08, $e7, $80, $9c, $7f, $0c, $87
+	charmap "SABRINA: Your love", $08, $e7, $80, $9c, $7f, $01, $e4, $05, $98, $a4
+	charmap "STRENGTH outside", $07, $b2, $7f, $0b, $bb
+	charmap "SUN STONE", $92, $94, $8d, $7f, $0c, $a5
+	charmap "SURF MAIL", $09, $b9, $7f, $03, $e0
+	charmap "SURF MAIL to send", $09, $b9, $7f, $03, $e0, $7f, $1c, $0f, $ca
+	charmap "Sailors are really", $92, $07, $d2, $36, $04, $6d, $32, $09, $dc
+	charmap "See for yourself.", $92, $a4, $03, $f2, $0a, $63, $e8
+	charmap "Send the removed", $92, $35, $27, $09, $d8, $02, $fe, $a4, $a3
+	charmap "Sheesh, some big", $92, $a7, $a4, $2f, $a7, $1b, $01, $bd, $05, $6b
+	charmap "Since you wish it,", $04, $6b, $26, $7f, $07, $8d, $15, $f4
+	charmap "Sleep for 2 turns", $92, $ab, $07, $e2, $01, $6e, $f8, $7f, $02, $85, $b2
+	charmap "Sorry! It's all my", $01, $f3, $e7, $7f, $43, $a0, $4d, $07, $87
+	charmap "Sorry, I'll be out", $01, $f3, $1b, $06, $9b, $41, $b3
+	charmap "Sorry, son.", $01, $f3, $1b, $11, $94
+	charmap "Squeezes the foe", $92, $0f, $d3, $a4, $b9, $a4, $17, $05, $b3
+	charmap "Stop! I'm known as", $0f, $a6, $e7, $7f, $3b, $01, $a7, $ad, $0b, $c8
+	charmap "TEAM ROCKET member", $01, $63, $7f, $05, $73
+	charmap "TRAIN STATION was", $02, $b7, $7f, $08, $ce, $7f, $03, $c0
+	charmap "TRAINERS at the", $02, $b7, $48, $92, $7f, $02, $cb
+	charmap "Tch, you really", $93, $a2, $a7, $01, $e8, $32, $09, $dc
+	charmap "That I don't treat", $01, $7a, $18, $01, $d6, $0f, $6b
+	charmap "That sounds really", $01, $7a, $b2, $02, $c4, $17, $32, $09, $dc
+	charmap "That's the best", $09, $e5, $11, $90
+	charmap "The #MON GYM", $33, $13, $02, $80
+	charmap "The CAPE in the", $33, $13, $12, $ba, $7f, $01, $71
+	charmap "The RADIO STATION", $33, $13, $05, $ca, $7f, $08, $ce
+	charmap "The battlers", $33, $13, $01, $61, $b1, $b2
+	charmap "The blackboard", $33, $13, $07, $6a, $08, $f4
+	charmap "The boulder fell", $33, $13, $07, $ca, $7f, $06, $ec
+	charmap "The broadcast ex-", $33, $13, $04, $94, $7f, $a4, $b7, $e3
+	charmap "The clock has been", $33, $13, $0b, $90, $05, $e6, $2e, $35
+	charmap "The clock's time", $33, $13, $0b, $90, $34, $01, $81
+	charmap "The cops shut down", $06, $ab, $ae, $af, $17, $0d, $c5, $7f, $03, $9a
+	charmap "The person who", $33, $13, $05, $a6, $7f, $0b, $e5
+	charmap "The powder on its", $33, $13, $af, $ae, $b6, $a3, $28, $05, $e9
+	charmap "The rest of the", $33, $13, $b1, $2f, $2d, $01, $a2
+	charmap "The secret behind", $33, $13, $07, $90, $08, $80, $a3
+	charmap "The shell on its", $33, $13, $08, $c2, $4d, $05, $e9
+	charmap "The ship departs", $33, $13, $0b, $e7, $7f, $09, $7b, $b2
+	charmap "The ship will", $33, $13, $0b, $e7, $7f, $02, $9f
+	charmap "The small spikes", $33, $13, $0b, $9e, $12, $95, $2f
+	charmap "The stairs at the", $33, $13, $3c, $07, $77, $17, $02, $cb
+	charmap "The strange #-", $33, $13, $03, $c6, $a4, $0d, $b5
+	charmap "The string leads", $33, $13, $3c, $b1, $2a, $0f, $60, $b2
+	charmap "The stuff on the", $33, $13, $09, $e3, $7f, $01, $ae
+	charmap "The switch is", $33, $13, $05, $f2, $7f, $2c
+	charmap "The switch on the", $33, $13, $05, $f2, $7f, $01, $ae
+	charmap "The units at the", $33, $13, $b4, $ad, $15, $17, $02, $cb
+	charmap "There's no MAIL", $01, $93, $7f, $03, $e0
+	charmap "They'll really", $33, $a4, $b8, $0d, $bd, $32, $09, $dc
+	charmap "Think you can beat", $0d, $98, $7f, $09, $8f
+	charmap "This item can't be", $33, $23, $15, $12, $87, $01, $7f, $2e
+	charmap "This way, weak", $33, $23, $03, $d5, $1b, $02, $f3
+	charmap "To evolve, some", $0c, $bb, $03, $a0, $a4, $1b, $01, $c6
+	charmap "To the PRODUCER", $93, $ae, $44, $a4, $0f, $74, $48
+	charmap "Toss out how many", $93, $ae, $b2, $b2, $04, $64, $02, $c5, $06, $e7
+	charmap "Trainers will be", $05, $a5, $b2, $05, $94
+	charmap "Trust is the tie", $93, $b1, $b4, $b2, $2d, $23, $02, $a2, $a8, $a4
+	charmap "Uh-oh… Your PACK", $05, $f0, $7f, $01, $e4, $0f, $72
+	charmap "Um… I don't know", $94, $ac, $08, $f7, $01, $d6, $01, $a7
+	charmap "VIOLET #MON GYM", $03, $82, $7f, $02, $80
+	charmap "VIOLET CITY's GYM.", $03, $82, $01, $9b, $d4, $0e, $c2
+	charmap "WARDEN's grand-", $0c, $6f, $34, $a6, $0c, $aa, $e3
+	charmap "WATER STONE", $09, $de, $7f, $0c, $a5
+	charmap "WESLEY: Today's", $09, $e1, $98, $12, $6d
+	charmap "Waaaaah!", $96, $a0, $a0, $08, $dd
+	charmap "We have a grand", $03, $75, $1a, $a6, $0c, $aa
+	charmap "We need the money,", $96, $13, $ad, $a4, $04, $be, $03, $8e, $f4
+	charmap "Well, aren't you", $04, $f6, $a0, $0e, $86
+	charmap "Whaaat? You don't", $96, $42, $a0, $29, $e6, $7f, $40, $06, $b1
+	charmap "What is the source", $01, $a8, $23, $02, $61, $41, $b1, $a2, $a4
+	charmap "What is your", $0a, $df, $0b, $8f
+	charmap "What were they?", $01, $a8, $09, $c2, $08, $f0, $e6
+	charmap "When it comes down", $01, $c4, $a8, $2d, $03, $6b, $17, $03, $9a
+	charmap "Whenever I find a", $96, $a7, $a4, $02, $a6, $18, $05, $84, $a0
+	charmap "Whenever I get in", $96, $a7, $a4, $02, $a6, $18, $01, $8b, $1d
+	charmap "Where did they", $96, $01, $79, $0f, $d4, $08, $f0
+	charmap "Where is your", $96, $01, $73, $0b, $8f
+	charmap "Which prize would", $04, $9e, $04, $9b, $a4, $08, $b3
+	charmap "Why did the shut-", $07, $ed, $05, $e1, $14, $13, $0d, $c5, $e3
+	charmap "Why would they", $96, $a7, $b8, $08, $b3, $08, $f0
+	charmap "Wiped out by some", $96, $a8, $af, $07, $ec, $06, $63, $01, $c6
+	charmap "Wow, look at all", $0a, $c5, $7f, $01, $9c, $7f, $07, $e5
+	charmap "Wow. You've found", $96, $ae, $b6, $e8, $7f, $03, $a8, $a5, $02, $c4
+	charmap "X SPECIAL", $97, $7f, $06, $e1, $8b
+	charmap "X SPEED", $97, $7f, $08, $da
+	charmap "Yeah! I'm finally", $0a, $fd, $e7, $7f, $3b, $a5, $1d, $09, $dc
+	charmap "Yeah, I'm a sail-", $0a, $fd, $1b, $3b, $1a, $b2, $07, $d2, $e3
+	charmap "Yes! ITEMFINDER", $98, $2f, $e7, $7f, $0c, $70
+	charmap "Yikes! You've got", $0b, $fb, $7f, $03, $a8, $09, $b8
+	charmap "You can shatter", $40, $01, $84, $b2, $a7, $0b, $79
+	charmap "You proved how", $40, $09, $af, $a3, $09, $8a
+	charmap "You saved all the", $40, $b2, $0c, $fe, $27, $08, $c8
+	charmap "You will bow down", $40, $01, $80, $a1, $ae, $b6, $7f, $03, $9a
+	charmap "You're a tough", $01, $6b, $1a, $b3, $02, $8f
+	charmap "You've really", $03, $a8, $32, $09, $dc
+	charmap "Your friend isn't", $01, $e4, $01, $e0, $08, $7c
+	charmap "Yow! That's hot!", $98, $ae, $b6, $e7, $7f, $01, $69, $0b, $f3, $e7
+	charmap "a #MON CENTER.", $1a, $02, $97, $e8
+	charmap "a #MON that's", $1a, $16, $0e, $d8
+	charmap "a FAN is about.", $a0, $0f, $78, $7f, $23, $02, $e5, $e8
+	charmap "a bug in the game!", $1a, $a1, $11, $ba, $01, $71, $0d, $f9, $0c, $9d
+	charmap "a few ROCKETS.", $1a, $11, $d0, $7f, $02, $e4, $92, $e8
+	charmap "a selected move.", $1a, $3a, $0c, $cb, $a4, $27, $05, $63
+	charmap "a speed battle?", $1a, $09, $a0, $a4, $27, $01, $61, $e6
+	charmap "able to use that", $02, $f0, $1c, $0b, $92
+	charmap "about 1500 years", $01, $6a, $f7, $fb, $f6, $f6, $0f, $73
+	charmap "accomplice?", $a0, $a2, $06, $c3, $ab, $05, $6a, $e6
+	charmap "across the sea on", $05, $6e, $17, $02, $fb, $1a, $2b
+	charmap "across the sea.", $05, $6e, $17, $02, $fb, $a0, $e8
+	charmap "across the sea…", $05, $6e, $17, $02, $fb, $a0, $75
+	charmap "against the best", $01, $9d, $3c, $11, $90
+	charmap "against the ship's", $03, $96, $14, $13, $0b, $e7, $d4
+	charmap "all around", $a0, $4d, $03, $7d
+	charmap "among machines.", $a0, $ac, $2b, $a6, $7f, $03, $e8, $2f, $e8
+	charmap "an item on the", $21, $7f, $15, $12, $87, $01, $ae
+	charmap "and feasts on the", $21, $27, $a5, $a4, $a0, $3c, $17, $01, $ae
+	charmap "and glides down to", $21, $27, $a6, $ab, $0f, $d0, $17, $a3, $05, $da, $1e
+	charmap "and gorges itself", $21, $27, $a6, $36, $a6, $a4, $17, $15, $03, $e2
+	charmap "and plans three", $21, $27, $06, $c9, $b2, $0d, $96
+	charmap "and scary for me…", $21, $27, $0e, $d7, $01, $6e, $11, $c2
+	charmap "and strong…", $21, $27, $01, $62, $75
+	charmap "and suffered much", $07, $6e, $11, $b7, $a4, $32, $27, $01, $f0
+	charmap "anyone come here.", $07, $96, $03, $6b, $04, $70
+	charmap "appears at night.", $01, $b4, $17, $0b, $ba
+	charmap "approach trainers", $a0, $af, $08, $b5, $10, $8d, $01, $82
+	charmap "are in this to-", $31, $13, $10, $7a, $1e, $e3
+	charmap "are permitted to", $31, $0a, $d8, $ac, $15, $b3, $03, $f1
+	charmap "are pretty tough?", $31, $13, $04, $74, $19, $b3, $02, $8f, $e6
+	charmap "aren't you?", $a0, $0e, $86, $e6
+	charmap "arm punch.", $31, $ac, $7f, $af, $0c, $c8, $e8
+	charmap "around here.", $31, $41, $ad, $0a, $ae
+	charmap "assistant?", $0a, $cc, $a8, $07, $9c, $e6
+	charmap "assistant? He's at", $0a, $cc, $a8, $07, $9c, $e6, $7f, $08, $a1, $29
+	charmap "at #MON CENTER.", $a0, $2d, $02, $97, $e8
+	charmap "at the DEPT.STORE", $29, $44, $13, $06, $87, $84
+	charmap "at the foot of the", $29, $44, $13, $0d, $6d, $2d, $01, $a2
+	charmap "attack with the", $01, $6f, $7f, $02, $8d
+	charmap "away from here.", $a0, $03, $70, $02, $b4, $04, $70
+	charmap "back outside and", $01, $b1, $7f, $0b, $bb, $02, $94
+	charmap "bad. I thought it", $0b, $b9, $e8, $7f, $04, $98, $7f, $15
+	charmap "battles in the", $01, $61, $17, $01, $71
+	charmap "be anywhere as", $a1, $13, $09, $f7, $a0, $b2
+	charmap "be done about it.", $a1, $13, $0a, $60, $01, $6a, $15, $e8
+	charmap "be forgotten?", $a1, $13, $0a, $be, $b3, $35, $e6
+	charmap "be good and stay", $a1, $13, $01, $90, $21, $27, $0c, $db
+	charmap "be many more.", $a1, $13, $02, $e9, $03, $62, $e8
+	charmap "be outside!", $a1, $13, $0b, $bb, $e7
+	charmap "be the CHAMP in no", $a1, $13, $05, $8a, $01, $ac, $ad, $ae
+	charmap "beat power.", $2e, $29, $09, $b2
+	charmap "beautiful, I'm in", $03, $6d, $1b, $3b, $1d
+	charmap "believe that it", $02, $b9, $13, $47, $15
+	charmap "best and strongest", $2e, $3c, $01, $a1, $01, $62, $a4, $3c
+	charmap "big trouble at the", $05, $6b, $7f, $03, $b7, $7f, $02, $cb
+	charmap "blur. If it hides", $a1, $ab, $b4, $b1, $e8, $7f, $03, $b6, $0a, $cd, $2f
+	charmap "body. If it starts", $05, $6f, $e8, $7f, $03, $b6, $03, $b4, $b2
+	charmap "born, it has no", $0c, $c9, $1b, $0d, $f7, $ad, $ae
+	charmap "both battlers.", $06, $cd, $7f, $05, $f4, $08, $76
+	charmap "boys or anything.", $0a, $fc, $17, $36, $7f, $03, $8f, $e8
+	charmap "briefly, some EXP.", $a1, $b1, $a8, $a4, $09, $bf, $1b, $01, $bd, $0f, $76
+	charmap "brother is the GYM", $06, $9e, $7f, $23, $02, $c2
+	charmap "built, there was a", $06, $c0, $b3, $f4, $0c, $f9, $46, $a0
+	charmap "but I don't like", $02, $c6, $18, $01, $d6, $01, $f1
+	charmap "by riding around", $a1, $19, $0a, $81, $20, $03, $7d
+	charmap "capable of punch-", $0d, $67, $02, $f0, $30, $7f, $af, $0c, $c8, $e3
+	charmap "caused by the sun.", $03, $bc, $27, $0d, $f5, $0d, $62, $e8
+	charmap "changes to become", $03, $93, $a4, $06, $a0, $03, $6b
+	charmap "charge was really", $05, $df, $7f, $46, $32, $09, $dc
+	charmap "chase, no matter", $0b, $96, $1b, $05, $d9, $ac, $0b, $79
+	charmap "cherished bird", $a2, $a7, $28, $a8, $08, $c2, $27, $0a, $db
+	charmap "color. If it is", $0a, $6c, $36, $e8, $7f, $03, $b6, $2c
+	charmap "come again.", $03, $6b, $09, $b1
+	charmap "come through ROCK", $01, $92, $01, $cc, $7f, $08, $d8
+	charmap "come visit again.", $01, $92, $05, $62, $09, $b1
+	charmap "command again.", $0a, $e3, $21, $a3, $09, $b1
+	charmap "command without", $0a, $e3, $21, $27, $0c, $cf
+	charmap "complacent.", $06, $c3, $ab, $a0, $09, $c0, $e8
+	charmap "concerned about", $0f, $93, $a4, $27, $02, $e5
+	charmap "confuse the foe.", $07, $88, $7f, $05, $b3, $e8
+	charmap "confusion!", $a2, $11, $bb, $e7
+	charmap "copied the stat", $a2, $ae, $af, $a8, $04, $be, $3c, $29
+	charmap "couple times. How", $a2, $41, $af, $ab, $13, $01, $81, $b2, $08, $b9
+	charmap "currents, it can", $a2, $10, $63, $b3, $b2, $08, $93
+	charmap "cute #MON that", $03, $85, $7f, $02, $78
+	charmap "dancers, they're", $08, $61, $28, $b2, $1b, $09, $67, $a4
+	charmap "delightful match.", $0c, $d0, $07, $cb, $7f, $06, $65, $e8
+	charmap "description of the", $a3, $2f, $0f, $61, $af, $03, $8d, $7f, $01, $a2
+	charmap "did in GYM of the", $05, $e1, $1d, $7f, $03, $ba, $7f, $01, $a2
+	charmap "disguise perfect?", $0c, $be, $2c, $13, $06, $98, $e6
+	charmap "disturb anyone", $08, $9f, $b4, $b1, $a1, $7f, $10, $c2
+	charmap "dragon master, has", $02, $e6, $7f, $0e, $6c, $f4, $08, $9d
+	charmap "dragon master.", $02, $e6, $7f, $0e, $6c, $e8
+	charmap "drawings on the", $0b, $f0, $20, $17, $01, $ae
+	charmap "drifted in the", $a3, $b1, $a8, $a5, $b3, $a4, $27, $01, $71
+	charmap "drool is actually", $a3, $b1, $ae, $ae, $ab, $7f, $23, $07, $7e, $b4, $09, $dc
+	charmap "drop anymore!", $0d, $cc, $7f, $08, $cc, $e7
+	charmap "drowsy if they", $10, $ea, $b2, $b8, $06, $da, $08, $f0
+	charmap "duce myself.", $09, $dd, $13, $0c, $6e, $e8
+	charmap "duce myself. I am", $09, $dd, $13, $0c, $6e, $e8, $7f, $03, $ec
+	charmap "earned yourself", $0c, $67, $a4, $a3, $0a, $63
+	charmap "earnings. (HOLD)", $0c, $67, $20, $b2, $01, $88
+	charmap "ed, it inflates", $a4, $a3, $01, $ba, $1d, $a5, $11, $87
+	charmap "eerie howls, other", $a4, $28, $a8, $a4, $09, $8a, $ab, $b2, $1b, $01, $de
+	charmap "ers in JOHTO? Like", $28, $17, $07, $a9, $e6, $7f, $8b, $a8, $aa, $a4
+	charmap "evolve, but they", $03, $a0, $a4, $02, $d8, $08, $f0
+	charmap "evolve. Really!", $08, $74, $7f, $91, $a4, $09, $dc, $e7
+	charmap "excellent!", $a4, $0e, $66, $e7
+	charmap "excellent.", $a4, $0e, $66, $e8
+	charmap "excessive power.", $0f, $a5, $2f, $b2, $04, $7f, $09, $b2
+	charmap "extreme measures.", $0b, $9b, $13, $12, $b2, $b2, $e8
+	charmap "falls, the rings", $0b, $b4, $b2, $1b, $06, $83, $20, $b2
+	charmap "fangs. It can even", $0e, $99, $e8, $7f, $08, $73, $04, $f3
+	charmap "feelings for it.", $03, $c2, $20, $17, $0f, $af
+	charmap "fell asleep and", $a5, $0a, $73, $a0, $02, $92, $02, $94
+	charmap "fell asleep!", $a5, $0a, $73, $a0, $02, $92, $e7
+	charmap "fell down this", $a5, $0a, $73, $03, $9a, $44, $2c
+	charmap "fishing again.", $03, $eb, $20, $09, $b1
+	charmap "flection of the", $a5, $07, $ac, $7f, $01, $a2
+	charmap "flicker in the", $a5, $ab, $03, $fc, $28, $7f, $01, $71
+	charmap "floes. It uses its", $a5, $ab, $ae, $a4, $09, $d1, $b4, $3a, $08, $86
+	charmap "flourish in the", $a5, $ab, $41, $b1, $2c, $a7, $7f, $01, $71
+	charmap "food in many hid-", $0d, $6d, $a3, $01, $ac, $02, $e9, $0a, $cd, $e3
+	charmap "footprints on its", $a5, $0d, $ca, $06, $c7, $b2, $05, $e9
+	charmap "for that door.", $01, $6e, $47, $0f, $f9
+	charmap "for yourself.", $a5, $36, $0a, $63, $e8
+	charmap "forget some moves?", $05, $b8, $01, $c6, $03, $77, $e6
+	charmap "friend here.", $01, $e0, $04, $70
+	charmap "from VIOLET's GYM.", $01, $67, $03, $82, $d4, $0e, $c2
+	charmap "from here.", $02, $b4, $04, $70
+	charmap "from its surround-", $01, $67, $15, $17, $b2, $12, $8d, $e3
+	charmap "from the town.", $01, $67, $14, $13, $07, $f0, $e8
+	charmap "gasping for air…", $a6, $a0, $b2, $af, $2a, $01, $6e, $07, $77, $75
+	charmap "gated the sea by", $a6, $29, $04, $be, $3a, $a0, $0c, $b6
+	charmap "get the passwords.", $01, $8b, $14, $13, $02, $f4, $11, $e7
+	charmap "gether for many", $0e, $ce, $7f, $01, $6e, $06, $e7
+	charmap "girl. If you see", $05, $ee, $e8, $7f, $01, $66, $3a, $a4
+	charmap "go at it makes me", $04, $c6, $a0, $11, $e8, $06, $62, $ac, $a4
+	charmap "gone. I was really", $0b, $7f, $03, $87, $46, $32, $09, $dc
+	charmap "good variety here.", $01, $90, $11, $69, $a4, $b3, $b8, $04, $70
+	charmap "got them in JOHTO.", $02, $a3, $14, $12, $87, $07, $a9, $e8
+	charmap "got! Your #MON", $09, $b8, $e7, $7f, $01, $e4, $16
+	charmap "grand design.", $a6, $0f, $67, $a3, $a4, $07, $cd, $e8
+	charmap "granddaughter.", $a6, $0c, $aa, $07, $a5, $e8
+	charmap "grass. When first", $04, $60, $e8, $7f, $01, $c4, $03, $7f
+	charmap "great-grandpa.", $01, $e6, $e3, $a6, $0c, $aa, $af, $a0, $e8
+	charmap "green #MON that", $a6, $32, $35, $7f, $02, $78
+	charmap "grind that LANCE", $a6, $b1, $1d, $27, $47, $8b, $07, $7f
+	charmap "groom an EGG.", $a6, $03, $9b, $7f, $07, $fa, $e8
+	charmap "grown, it has to", $02, $d4, $ad, $1b, $0d, $f7, $1e
+	charmap "hacking the tails", $a7, $07, $cc, $2a, $02, $a2, $07, $d2, $b2
+	charmap "hairs on its back", $0a, $e2, $17, $0d, $bb
+	charmap "has MAIL with you.", $42, $17, $03, $e0, $7f, $07, $f4
+	charmap "has the power to", $42, $17, $06, $7d, $1e
+	charmap "hates water, so it", $a7, $0b, $d7, $01, $a5, $06, $a5
+	charmap "have no right to", $3e, $ad, $ae, $04, $89, $1e
+	charmap "have tea around", $3e, $b3, $a4, $a0, $03, $7d
+	charmap "head tilted down.", $04, $bb, $27, $b3, $a8, $ab, $b3, $a4, $27, $03, $9a, $e8
+	charmap "her go by here.", $0c, $75, $a6, $ae, $0c, $b6, $04, $70
+	charmap "here are tough?", $01, $73, $01, $cf, $b3, $02, $8f, $e6
+	charmap "hold itself up in", $a7, $08, $9a, $15, $03, $e2, $7f, $04, $ea, $1d
+	charmap "hold on to that.", $02, $e3, $03, $94, $1e, $0e, $9a
+	charmap "holding the MAIL.", $02, $e3, $20, $44, $13, $03, $e0, $e8
+	charmap "home to three", $08, $7f, $1e, $0d, $96
+	charmap "hone my skills.", $a7, $2b, $13, $10, $d4
+	charmap "honey. Although", $07, $7a, $b8, $e8, $7f, $08, $81
+	charmap "host of the show?", $a7, $0b, $c7, $30, $44, $13, $03, $61, $e6
+	charmap "hot flames, it can", $0e, $a2, $0a, $68, $b2, $08, $93
+	charmap "house? It's a bit", $0a, $d3, $e6, $7f, $43, $07, $70
+	charmap "hunched over.", $a7, $0c, $c8, $a4, $27, $01, $a0, $e8
+	charmap "icent. Many people", $a8, $09, $c0, $e8, $7f, $0d, $b6, $01, $98
+	charmap "ies, I'm ready for", $a8, $2f, $1b, $3b, $06, $a8
+	charmap "improve.", $a8, $ac, $09, $af, $e8
+	charmap "in DRAGON'S DEN.", $1d, $7f, $0e, $f9
+	charmap "in a long time.", $1d, $7f, $07, $ad, $01, $81, $e8
+	charmap "in a long time…", $1d, $7f, $07, $ad, $01, $81, $75
+	charmap "in front of the", $0c, $c0, $2d, $01, $a2
+	charmap "in the grass.", $1d, $7f, $06, $f0
+	charmap "in the past would", $1d, $7f, $03, $6a, $a0, $3c, $08, $b3
+	charmap "in your #MON.", $1d, $7f, $03, $8b
+	charmap "incredibly tough…", $04, $d1, $ab, $19, $b3, $02, $8f, $75
+	charmap "ing for the return", $2a, $03, $95, $32, $02, $85
+	charmap "ing that now.", $2a, $47, $04, $c8
+	charmap "ing the mystery", $20, $44, $13, $0a, $90, $b8
+	charmap "introduce myself.", $1d, $0e, $e7, $09, $dd, $13, $0c, $6e, $e8
+	charmap "is fast asleep!", $23, $a5, $08, $e0, $a0, $02, $92, $e7
+	charmap "is probably…", $23, $08, $b5, $a1, $0e, $98, $75
+	charmap "is right for me?", $2c, $04, $89, $01, $6e, $0e, $67
+	charmap "is the #MON", $23, $01, $b7
+	charmap "is the best for", $2c, $11, $90, $01, $75
+	charmap "it anytime.", $a8, $2d, $12, $6c
+	charmap "it balances itself", $a8, $2d, $a1, $a0, $ab, $09, $b3, $17, $15, $03, $e2
+	charmap "it can't attack!", $a8, $2d, $01, $7f, $01, $6f, $e7
+	charmap "it cloaks itself", $a8, $2d, $a2, $10, $70, $aa, $17, $15, $03, $e2
+	charmap "it cracks, it can", $a8, $2d, $a2, $b1, $07, $cc, $b2, $08, $93
+	charmap "it doesn't mind if", $a8, $2d, $06, $bb, $7f, $0c, $60, $06, $da
+	charmap "it forget, then?", $a8, $2d, $0c, $77, $05, $de, $e6
+	charmap "it makes you want", $a8, $2d, $06, $62, $26, $7f, $05, $cb
+	charmap "it may be weak.", $a8, $2d, $0a, $af, $02, $f3, $e8
+	charmap "it right away…", $a8, $2d, $0b, $f7, $75
+	charmap "its confusion!", $15, $17, $a2, $11, $bb, $e7
+	charmap "its fists around", $15, $17, $a5, $a8, $3c, $b2, $03, $7d
+	charmap "its grand mane.", $15, $17, $a6, $0f, $67, $ac, $21, $a4, $e8
+	charmap "its right eye sees", $15, $b2, $04, $89, $a4, $b8, $13, $3a, $2f
+	charmap "joy, son.", $10, $6e, $1b, $11, $94
+	charmap "just that.", $02, $a4, $0e, $9a
+	charmap "kids these days", $0e, $e8, $17, $06, $b7, $04, $c5, $b2
+	charmap "know any moves!", $01, $a7, $04, $88, $03, $77, $e7
+	charmap "know anything", $aa, $08, $a3, $03, $8f
+	charmap "know you're really", $01, $a7, $05, $a8, $32, $09, $dc
+	charmap "last came here.", $ab, $08, $e0, $a2, $06, $bf, $04, $70
+	charmap "lected all the", $0c, $cb, $a4, $27, $08, $c8
+	charmap "like the way they", $06, $a7, $03, $d5, $08, $f0
+	charmap "like to see that.", $01, $7c, $05, $b5, $0e, $9a
+	charmap "lives here.", $0b, $d2, $04, $70
+	charmap "lonely, the skull", $ab, $2b, $0b, $c9, $1b, $02, $61, $aa, $b4, $4d
+	charmap "look in JOHTO.", $01, $9c, $7f, $07, $a9, $e8
+	charmap "look, someone", $01, $9c, $1b, $06, $a9
+	charmap "lose at the #-", $ab, $06, $8d, $02, $cb, $0d, $b5
+	charmap "lot, but that's", $08, $6e, $02, $d8, $0e, $d8
+	charmap "lower SPEED.", $03, $a1, $7f, $08, $da, $e8
+	charmap "ly, so I can see", $ab, $b8, $03, $d9, $01, $84, $3a, $a4
+	charmap "made resistant.", $02, $e1, $b1, $2f, $a8, $07, $9c, $e8
+	charmap "made the delivery", $02, $e1, $14, $13, $a3, $a4, $ab, $a8, $04, $d3
+	charmap "magma body would", $ac, $a0, $a6, $ac, $1a, $05, $6f, $08, $b3
+	charmap "make it fast.", $ac, $0a, $94, $05, $ce, $e8
+	charmap "make it highly", $ac, $0a, $94, $05, $6c, $ab, $b8
+	charmap "make it invisible.", $ac, $0a, $94, $1d, $b5, $2c, $07, $64, $e8
+	charmap "make room for it.", $ac, $07, $73, $03, $9b, $7f, $0f, $af
+	charmap "master of the", $0e, $6c, $7f, $01, $a2
+	charmap "may be seen around", $0a, $af, $3a, $35, $03, $7d
+	charmap "me so many cute", $0b, $b2, $7f, $02, $e9, $03, $85
+	charmap "me, please?", $ac, $a4, $03, $f7, $e6
+	charmap "me. You wear it", $ac, $a4, $02, $d5, $b6, $08, $9c, $15
+	charmap "money than that.", $03, $8e, $44, $21, $0e, $9a
+	charmap "move that drains", $02, $fe, $13, $47, $a3, $05, $ea, $b2
+	charmap "move that slowly", $02, $fe, $13, $47, $0d, $d1, $ab, $b8
+	charmap "move, however.", $02, $fe, $a4, $f4, $09, $8a, $01, $d9, $e8
+	charmap "much better in the", $01, $f0, $7f, $01, $8d, $7f, $01, $71
+	charmap "my #MON don't", $01, $f6, $7f, $06, $b1
+	charmap "my MOON STONE…", $ac, $19, $0f, $6f, $8d, $7f, $0c, $a5, $75
+	charmap "myself and improve", $0c, $6e, $01, $a1, $a8, $ac, $09, $af
+	charmap "nates from around", $ad, $0b, $d7, $02, $b4, $03, $7d
+	charmap "near ROCK TUNNEL?", $ad, $08, $9c, $08, $91, $e6
+	charmap "need the BADGE", $ad, $a4, $04, $be, $01, $83
+	charmap "nessed much more", $ad, $2f, $3a, $27, $01, $f0, $7f, $03, $62
+	charmap "nets is awesome!", $ad, $a4, $b3, $17, $23, $06, $d9, $e7
+	charmap "night again.", $ad, $01, $ab, $09, $b1
+	charmap "nothing here.", $07, $9b, $04, $70
+	charmap "of anyone nearby.", $30, $7f, $07, $96, $09, $74, $a1, $b8, $e8
+	charmap "of itself.", $30, $7f, $0d, $f8
+	charmap "of merchandise.", $30, $7f, $11, $8d, $3a, $e8
+	charmap "of one #MON.", $30, $7f, $05, $7b
+	charmap "of the #MON FAN", $30, $7f, $01, $b7, $0f, $78
+	charmap "of the best right", $30, $11, $90, $7f, $b1, $01, $ab
+	charmap "of the grass.", $30, $7f, $06, $f0
+	charmap "on ROUTE 36, it", $2b, $7f, $01, $64, $f9, $fc, $1b, $15
+	charmap "on ROUTE 44.", $2b, $7f, $01, $64, $fa, $fa, $e8
+	charmap "on a long trip.", $2b, $7f, $07, $ad, $09, $9a, $af, $e8
+	charmap "on an EGG.", $2b, $7f, $07, $fa, $e8
+	charmap "on anyone who has", $2b, $7f, $07, $96, $03, $a4, $42, $b2
+	charmap "on master, accept", $2b, $7f, $0e, $6c, $1b, $0b, $60, $0f, $fb
+	charmap "on the MENU.", $2b, $10, $c3
+	charmap "one each in the", $2b, $13, $a4, $10, $8d, $01, $71
+	charmap "ooh, so sensually", $ae, $ae, $a7, $1b, $02, $c3, $12, $93, $b4, $09, $dc
+	charmap "our EEVEE in the", $01, $fd, $0a, $f3, $7f, $01, $71
+	charmap "over. We hope you", $01, $a0, $e8, $7f, $0a, $ec, $26
+	charmap "paign right now.", $af, $a0, $0e, $83, $7f, $06, $fe
+	charmap "password that only", $02, $f4, $27, $47, $06, $b3
+	charmap "past here.", $af, $a0, $3c, $04, $70
+	charmap "pay if you don't", $af, $a0, $19, $02, $68, $7f, $06, $b1
+	charmap "pearl. Sell high.", $af, $0d, $e7, $e8, $7f, $0c, $8c
+	charmap "perfect match of", $06, $98, $7f, $06, $65, $7f, $30
+	charmap "ple as possible to", $af, $37, $06, $9c, $af, $0c, $e1, $1e
+	charmap "plummets down in", $af, $ab, $12, $db, $a4, $b3, $17, $a3, $05, $da, $1d
+	charmap "points. (HOLD)", $af, $09, $be, $b2, $01, $88
+	charmap "possible to fully", $af, $0c, $e1, $1c, $02, $ca, $b8
+	charmap "possible to swim", $af, $0c, $e1, $1c, $07, $76
+	charmap "powder on its", $af, $ae, $b6, $a3, $28, $05, $e9
+	charmap "powerful in the", $01, $be, $7f, $01, $71
+	charmap "pretty right on!", $04, $74, $b8, $04, $89, $2b, $e7
+	charmap "problems. (HOLD)", $04, $d4, $b2, $01, $88
+	charmap "problems. Bitter.", $04, $d4, $b2, $0d, $7a
+	charmap "punches and chops", $af, $0c, $c8, $a4, $03, $68, $a2, $0c, $fd, $b2
+	charmap "question.", $b0, $0c, $b4, $e8
+	charmap "question:", $b0, $0c, $b4, $9c
+	charmap "raise all stats.", $02, $65, $7f, $a0, $4d, $0c, $7a, $e8
+	charmap "rate in ten years!", $b1, $29, $05, $64, $b3, $35, $0f, $73, $e7
+	charmap "reach me here.", $0b, $85, $04, $80, $04, $70
+	charmap "real power of the", $32, $05, $ec, $01, $91, $7f, $01, $a2
+	charmap "relocated to SEA-", $32, $ab, $ae, $a2, $29, $04, $6a, $12, $a0, $e3
+	charmap "renovated at the", $b1, $35, $ae, $b5, $29, $a4, $27, $02, $cb
+	charmap "right here.", $b1, $01, $ab, $04, $70
+	charmap "room for the EGG.", $03, $9b, $7f, $03, $95, $06, $c1, $e8
+	charmap "rooms on its back.", $03, $9b, $17, $0d, $bb, $e8
+	charmap "roost here.", $b1, $ae, $ae, $3c, $04, $70
+	charmap "rugged body to", $b1, $11, $77, $a4, $27, $02, $d9, $1e
+	charmap "rumbles in the", $b1, $10, $80, $17, $01, $71
+	charmap "running again.", $0b, $c1, $09, $b1
+	charmap "sea #MON that", $3a, $1a, $02, $78
+	charmap "seal the entrance", $b2, $0a, $95, $44, $13, $35, $b3, $b1, $09, $b3
+	charmap "seed also grows", $3a, $a4, $27, $03, $be, $02, $d4, $b2
+	charmap "she believes to be", $0e, $9e, $02, $b9, $a4, $06, $a0
+	charmap "should be useful", $01, $af, $27, $a1, $13, $09, $cd
+	charmap "side, you can see", $b2, $0f, $d0, $1b, $04, $b2, $3a, $a4
+	charmap "sive, rugged body.", $b2, $04, $7f, $1b, $b1, $11, $77, $a4, $27, $05, $6f, $e8
+	charmap "smell sweet, it", $b2, $ac, $0a, $73, $b2, $0a, $6b, $b3, $1b, $15
+	charmap "smoothly again.", $b2, $11, $f1, $14, $ab, $b8, $09, $b1
+	charmap "so I don't ever", $02, $c3, $18, $01, $d6, $01, $d9
+	charmap "so flipped out and", $02, $c3, $a5, $11, $75, $af, $07, $ec, $02, $94
+	charmap "so very topically", $02, $c3, $02, $6d, $1e, $af, $0a, $bd
+	charmap "something that's", $02, $86, $0e, $d8
+	charmap "source of the", $b2, $41, $b1, $a2, $13, $01, $a2
+	charmap "south of here.", $b2, $41, $14, $7f, $30, $04, $70
+	charmap "spreading its", $b2, $af, $04, $69, $20, $04, $c1
+	charmap "spreads its wings", $b2, $af, $04, $69, $04, $82, $08, $bf
+	charmap "starts here.", $03, $b4, $b2, $04, $70
+	charmap "still the best.", $06, $ce, $11, $90, $e8
+	charmap "stock! Now I can", $3c, $07, $df, $e7, $7f, $0a, $ab, $88, $02, $62
+	charmap "stolen from here.", $0c, $69, $7f, $02, $b4, $04, $70
+	charmap "surprises itself.", $0a, $fb, $3a, $17, $0d, $f8
+	charmap "surrounding envi-", $b2, $12, $8d, $2a, $35, $b5, $a8, $e3
+	charmap "surroundings.", $b2, $12, $8d, $05, $9b
+	charmap "surroundings. If", $b2, $12, $8d, $20, $b2, $04, $7e, $a5
+	charmap "surroundings. It", $b2, $12, $8d, $20, $b2, $04, $7e, $b3
+	charmap "swallow large prey", $b2, $b6, $06, $aa, $7f, $0a, $e0, $13, $08, $7d
+	charmap "swallow you up.", $b2, $b6, $06, $aa, $3d, $7f, $0b, $e4
+	charmap "swimming in the", $05, $92, $7f, $01, $71
+	charmap "swims, it doesn't", $07, $76, $b2, $01, $ba, $06, $bb
+	charmap "symmetrical geo-", $b2, $b8, $ac, $ac, $a4, $b3, $b1, $07, $d9, $a6, $a4, $ae, $e3
+	charmap "take it to KURT.", $b3, $0a, $94, $1c, $0a, $ef, $e8
+	charmap "takes to become", $b3, $0d, $b0, $06, $a0, $03, $6b
+	charmap "tects itself by", $b3, $09, $b4, $17, $15, $03, $e2, $0c, $b6
+	charmap "tently, it can", $b3, $35, $b3, $ab, $b8, $08, $93
+	charmap "terns drawn on the", $b3, $28, $ad, $17, $0b, $f0, $ad, $7f, $01, $ae
+	charmap "that anyone would", $47, $10, $c2, $08, $b3
+	charmap "that dragon master", $47, $02, $e6, $7f, $0e, $6c
+	charmap "that it really", $47, $a8, $2d, $32, $09, $dc
+	charmap "that the trainers", $47, $14, $13, $01, $82
+	charmap "that wasn't around", $47, $03, $c0, $ad, $d5, $03, $7d
+	charmap "the #MON CENTER", $14, $13, $02, $97
+	charmap "the #MON GYM", $14, $13, $02, $80
+	charmap "the #MON GYM?", $14, $13, $02, $80, $e6
+	charmap "the #MON GYMS", $14, $13, $02, $80, $92
+	charmap "the #MON LEAGUE", $14, $13, $03, $f8
+	charmap "the GYM BADGES of", $14, $13, $03, $ca, $7f, $30
+	charmap "the GYM LEADER", $14, $13, $01, $7e
+	charmap "the GYM LEADER.", $14, $13, $01, $7e, $e8
+	charmap "the GYM LEADERS of", $14, $13, $01, $7e, $92, $7f, $30
+	charmap "the GYMS in JOHTO?", $02, $c2, $92, $7f, $07, $a9, $e6
+	charmap "the PASS for the", $14, $13, $0f, $70, $7f, $03, $cc, $a4
+	charmap "the POWER PLANT's", $14, $13, $02, $6c, $d4
+	charmap "the POWER PLANT?", $14, $13, $02, $6c, $e6
+	charmap "the POWER PLANT…", $14, $13, $02, $6c, $75
+	charmap "the RADIO STATION", $14, $13, $05, $ca, $7f, $08, $ce
+	charmap "the antenna on its", $14, $13, $21, $b3, $35, $ad, $a0, $05, $e9
+	charmap "the best they", $14, $13, $2e, $3c, $08, $f0
+	charmap "the dragon master?", $14, $13, $02, $e6, $7f, $0e, $6c, $e6
+	charmap "the ladies here.", $14, $13, $0f, $87, $a8, $2f, $04, $70
+	charmap "the others will be", $14, $13, $01, $de, $b2, $05, $94
+	charmap "the password.", $14, $13, $02, $f4, $a3, $e8
+	charmap "the past here.", $03, $6a, $a0, $3c, $04, $70
+	charmap "the petals shake", $14, $13, $11, $e6, $17, $0e, $a5, $a4
+	charmap "the prize for", $14, $13, $04, $9b, $03, $f2
+	charmap "the problems.", $14, $13, $04, $d4, $b2, $e8
+	charmap "the protector?", $14, $13, $03, $7c, $36, $e6
+	charmap "the radio any-", $14, $13, $01, $fc, $7f, $0a, $84
+	charmap "the radio anytime,", $14, $13, $01, $fc, $04, $88, $01, $81, $f4
+	charmap "the radio programs", $14, $13, $01, $fc, $7f, $04, $bf, $b2
+	charmap "the rail PASS!", $14, $13, $07, $f1, $e7
+	charmap "the road?", $14, $13, $08, $c1, $e6
+	charmap "the sea around", $02, $fb, $a0, $03, $7d
+	charmap "the second son out", $14, $13, $0f, $c5, $b2, $2b, $05, $7d
+	charmap "the secret stair-", $14, $13, $07, $90, $3c, $07, $77, $e3
+	charmap "the secrets of", $14, $13, $03, $88, $17, $30
+	charmap "the shortcut.", $14, $13, $08, $b8, $11, $89, $e8
+	charmap "the stronger its", $14, $13, $01, $62, $28, $04, $c1
+	charmap "the stronger of", $14, $13, $01, $62, $28, $7f, $30
+	charmap "the stuff on the", $14, $13, $09, $e3, $7f, $01, $ae
+	charmap "the trainer CHAMP", $14, $13, $01, $a9, $04, $ce
+	charmap "the trainer.", $14, $13, $02, $82
+	charmap "the trainers at", $14, $13, $01, $ce, $29
+	charmap "the walls of the", $14, $13, $0b, $9c, $17, $01, $a2
+	charmap "them all around.", $14, $12, $87, $01, $b0, $0c, $f3
+	charmap "them makes #-", $14, $12, $87, $06, $62, $54, $e3
+	charmap "then swallows the", $14, $35, $7f, $b2, $b6, $06, $aa, $01, $86
+	charmap "there from around", $02, $f8, $02, $b4, $03, $7d
+	charmap "they are actually", $02, $8b, $31, $13, $07, $7e, $b4, $09, $dc
+	charmap "thin. If it is", $14, $1d, $e8, $7f, $03, $b6, $2c
+	charmap "thing about that.", $14, $2a, $02, $e5, $0e, $9a
+	charmap "thing around it.", $14, $20, $03, $7d, $04, $cc
+	charmap "think that the", $01, $c5, $44, $02, $cb
+	charmap "this city's GYM.", $14, $23, $06, $e6, $d4, $0e, $c2
+	charmap "this! It's wild!", $14, $2c, $e7, $7f, $43, $0d, $eb, $a3, $e7
+	charmap "this: You should", $14, $2c, $9c, $7f, $40, $01, $af, $a3
+	charmap "time at all!", $01, $81, $7f, $07, $e5, $e7
+	charmap "times and tough", $01, $81, $03, $68, $b3, $02, $8f
+	charmap "tinuously on its", $b3, $1d, $b4, $11, $6f, $b8, $05, $e9
+	charmap "tip. Although not", $11, $72, $e8, $7f, $08, $81, $7f, $04, $ee
+	charmap "tive power.", $b3, $04, $7f, $09, $b2
+	charmap "to be the best", $1c, $2e, $11, $90
+	charmap "to have this TM.", $1c, $3e, $06, $95, $e8
+	charmap "to it, nothing can", $1c, $15, $1b, $04, $79, $a2, $21
+	charmap "to knock down a", $1c, $aa, $ad, $07, $df, $7f, $a3, $05, $da, $a0
+	charmap "to pare them down.", $1c, $af, $a0, $32, $44, $12, $87, $03, $9a, $e8
+	charmap "to play, I really", $07, $c1, $1b, $18, $32, $09, $dc
+	charmap "to their extremes.", $1c, $03, $73, $0b, $9b, $2f, $e8
+	charmap "to their mass out-", $1c, $03, $73, $ac, $a0, $b2, $07, $dd, $e3
+	charmap "to your PC.", $1c, $0c, $e4, $e8
+	charmap "took down with it,", $08, $fd, $7f, $03, $9a, $01, $b5, $15, $f4
+	charmap "tough, dude!", $b3, $02, $8f, $0a, $88, $e7
+	charmap "toughest #MON.", $b3, $02, $8f, $a4, $3c, $01, $b3
+	charmap "tough…", $b3, $02, $8f, $75
+	charmap "towns in KANTO.", $07, $f0, $b2, $06, $fc
+	charmap "train at the", $01, $72, $7f, $02, $cb
+	charmap "trainer is really", $01, $a9, $23, $32, $09, $dc
+	charmap "training that I", $01, $72, $2a, $47, $88
+	charmap "trapped in its", $b3, $b1, $10, $97, $07, $d6, $04, $c1
+	charmap "trees. When leap-", $04, $b1, $e8, $7f, $01, $c4, $37, $a0, $af, $e3
+	charmap "try again.", $12, $90, $09, $b1
+	charmap "tumble down the", $b3, $10, $80, $7f, $03, $9a, $44, $a4
+	charmap "turned black. A", $02, $85, $a4, $27, $07, $6a, $0d, $c0
+	charmap "up here. My bird", $b4, $af, $04, $70, $07, $ee, $0a, $db
+	charmap "used here.", $b4, $3a, $0a, $ae
+	charmap "variable power.", $11, $69, $05, $66, $09, $b2
+	charmap "vice: the GYM", $b5, $05, $6a, $9c, $7f, $02, $c2
+	charmap "walls of the", $0b, $9c, $17, $01, $a2
+	charmap "want to see how", $01, $99, $1c, $07, $a7
+	charmap "washed up on the", $b6, $a0, $08, $c2, $27, $04, $ea, $01, $ae
+	charmap "waste with you.", $0c, $cd, $7f, $07, $f4
+	charmap "waves if it builds", $b6, $05, $81, $7f, $09, $d0, $06, $c0, $a3, $b2
+	charmap "waves. It may", $b6, $0c, $fe, $09, $d1, $0a, $c8
+	charmap "way to get here.", $03, $70, $1c, $03, $81, $04, $70
+	charmap "what they'll do if", $03, $86, $08, $f0, $d1, $ab, $03, $9f, $06, $da
+	charmap "who's surrounded", $0b, $e5, $34, $b2, $12, $8d, $a4, $a3
+	charmap "whole. It can be-", $0b, $e5, $37, $e8, $7f, $08, $73, $2e, $e3
+	charmap "will cure itself", $01, $80, $a2, $0e, $62, $15, $03, $e2
+	charmap "will print out a", $01, $80, $af, $11, $95, $a0
+	charmap "will shatter your", $01, $80, $b2, $a7, $0b, $79, $3d, $b1
+	charmap "will they, mine", $02, $9f, $08, $f0, $1b, $ac, $1d, $a4
+	charmap "win if I don't get", $b6, $1d, $7f, $08, $d5, $18, $01, $d6, $03, $81
+	charmap "winds and spreads", $09, $66, $17, $07, $6e, $af, $04, $69, $b2
+	charmap "with #MON, some", $45, $7f, $16, $1b, $01, $c6
+	charmap "with a part that's", $08, $cf, $08, $dc, $0e, $d8
+	charmap "with an amazing", $45, $0b, $6d, $07, $8f
+	charmap "with an answer.", $45, $0b, $6d, $21, $b2, $b6, $28, $e8
+	charmap "with an intense", $45, $0b, $6d, $1d, $b3, $35, $3a
+	charmap "with its three", $45, $04, $c1, $0d, $96
+	charmap "with its tough", $45, $02, $66, $b3, $02, $8f
+	charmap "with your #MON.", $45, $7f, $03, $8b
+	charmap "wonder I couldn't", $05, $aa, $7f, $18, $07, $95
+	charmap "work on the #-", $03, $bd, $7f, $01, $ae, $0d, $b5
+	charmap "would eventually", $b6, $01, $db, $04, $f3, $b3, $b4, $09, $dc
+	charmap "written here.", $11, $e9, $b3, $35, $04, $70
+	charmap "wrong with the", $07, $8b, $7f, $02, $8d
+	charmap "you agree that it", $26, $11, $fb, $13, $47, $15
+	charmap "you anything more", $26, $7f, $04, $63, $03, $62
+	charmap "you can't be.", $26, $7f, $01, $7f, $2e, $e8
+	charmap "you can't get from", $26, $7f, $01, $7f, $01, $8b, $02, $b4
+	charmap "you don't have to", $26, $7f, $01, $d6, $3e, $1e
+	charmap "you down!", $26, $7f, $03, $9a, $e7
+	charmap "you down! Prepare", $26, $7f, $03, $9a, $e7, $7f, $07, $98
+	charmap "you have… Are they", $26, $7f, $01, $c3, $75, $7f, $80, $32, $08, $f0
+	charmap "you outsider!", $26, $7f, $0b, $bb, $b1, $e7
+	charmap "you show me how?", $26, $7f, $09, $93, $a4, $09, $8a, $e6
+	charmap "you take it away?", $26, $7f, $b3, $0a, $94, $a0, $03, $d5, $e6
+	charmap "you the power of", $26, $7f, $06, $7d, $30
+	charmap "you to have this", $26, $7f, $05, $b6
+	charmap "you to have this!", $26, $7f, $05, $b6, $e7
+	charmap "you want? You want", $26, $7f, $05, $cb, $e6, $7f, $40, $05, $cb
+	charmap "you were out here.", $26, $7f, $01, $dc, $41, $b3, $04, $70
+	charmap "you with the EGG", $26, $7f, $45, $44, $13, $06, $c1
+	charmap "you, I'm tough!", $26, $1b, $3b, $09, $86
+	charmap "young gets out of", $04, $b0, $7f, $03, $81, $17, $04, $87
+	charmap "your #MON made", $26, $b1, $01, $9e, $0f, $dd
+	charmap "your help at the", $01, $65, $03, $e3, $7f, $02, $cb
+	charmap "your money. Sorry!", $01, $65, $03, $8e, $e8, $7f, $01, $f3, $e7
+	charmap "your power.", $26, $b1, $09, $b2
+	charmap "…Humph! I don't", $75, $0f, $a2, $18, $06, $b1
+	charmap "…Humph! You keep", $75, $0f, $a2, $40, $02, $73
+	charmap "…I don't under-", $75, $18, $01, $d6, $02, $d2, $e3
+	charmap "…Repeating myself", $75, $0f, $7b, $29, $2a, $0c, $6e
+	charmap "…Waaaaaaah!", $75, $96, $a0, $0e, $ab, $08, $dd
 	setcharmap main
