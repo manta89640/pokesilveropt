@@ -1,4 +1,5 @@
 ItemNames::
+	pushc dict
 	list_start ITEM_NAME_LENGTH - 1
 	li "MASTER BALL"
 	li "ULTRA BALL"
@@ -260,3 +261,4 @@ ItemNames::
 	li "TERU-SAMA"
 	li "?"
 	assert_list_length $100
+	popc

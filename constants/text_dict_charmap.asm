@@ -8,53 +8,53 @@ if !DEF(_DEBUG)
 	charmap "e ", $11
 	charmap "th", $12
 	charmap "it", $13
-	charmap "#MON", $14
-	charmap "s ", $15
-	charmap "y ", $16
-	charmap ", ", $17
+	charmap "s ", $14
+	charmap "#MON", $15
+	charmap "I ", $16
+	charmap "y ", $17
 	charmap "a ", $18
-	charmap "I ", $19
+	charmap ", ", $19
 	charmap "to ", $1a
 	charmap "in", $1b
 	charmap "to", $1c
-	charmap "ing", $1d
-	charmap "is ", $1e
-	charmap "an", $20
-	charmap "you", $21
-	charmap "d ", $23
-	charmap "at", $26
-	charmap "er", $27
+	charmap "an", $1d
+	charmap "ing", $1e
+	charmap "is ", $20
+	charmap "d ", $21
+	charmap "you", $23
+	charmap "er", $26
+	charmap "at", $27
 	charmap "on", $28
 	charmap "ing ", $29
-	charmap "is", $2a
-	charmap "be", $2b
-	charmap "t ", $2c
-	charmap "es", $2d
+	charmap "t ", $2a
+	charmap "is", $2b
+	charmap "be", $2c
+	charmap "ar", $2d
 	charmap "re", $2e
-	charmap "ar", $2f
+	charmap "es", $2f
 	charmap "of", $30
 	charmap "Th", $31
-	charmap "'s ", $32
-	charmap "o ", $33
+	charmap "o ", $32
+	charmap "'s ", $33
 	charmap "en", $34
 	charmap "or", $35
-	charmap ". ", $36
-	charmap "le", $37
+	charmap "le", $36
+	charmap "se", $37
 	charmap "st", $3a
-	charmap "se", $3b
-	charmap "I'm ", $3c
-	charmap "You ", $3d
+	charmap "I'm ", $3b
+	charmap "You ", $3c
+	charmap "ou", $3d
 	charmap "have ", $3e
-	charmap "ou", $40
+	charmap " th", $40
 	charmap " you", $41
-	charmap " th", $42
-	charmap "It's ", $43
+	charmap "It's ", $42
+	charmap "with", $43
 	charmap "ha", $44
-	charmap "with", $45
-	charmap "was ", $46
-	charmap "that ", $47
-	charmap "ch", $48
-	charmap "ll", $4d
+	charmap "was ", $45
+	charmap "that ", $46
+	charmap "ll", $47
+	charmap "for ", $48
+	charmap "ch", $4d
 	charmap "An attack that may", $01, $60
 	charmap "battle", $01, $61
 	charmap "strong", $01, $62
@@ -63,410 +63,410 @@ if !DEF(_DEBUG)
 	charmap "If you ", $01, $65
 	charmap "from ", $01, $66
 	charmap "going to ", $01, $67
-	charmap "You're ", $01, $68
-	charmap "about ", $01, $69
-	charmap "That's ", $01, $6a
-	charmap "just ", $01, $6b
-	charmap "type moves. (HOLD)", $01, $6c
-	charmap "for ", $01, $6d
-	charmap "in the", $01, $6e
-	charmap "attack", $01, $6f
-	charmap "<PLAYER> received", $01, $70
-	charmap "here", $01, $71
-	charmap "Please ", $01, $72
-	charmap "train", $01, $73
-	charmap ", but ", $01, $74
+	charmap "about ", $01, $68
+	charmap "That's ", $01, $69
+	charmap "You're ", $01, $6a
+	charmap "TERU-SAMA", $01, $6b
+	charmap "just ", $01, $6c
+	charmap "attack", $01, $6d
+	charmap "<PLAYER> received", $01, $6e
+	charmap "here", $01, $6f
+	charmap "train", $01, $70
+	charmap "This is ", $01, $71
+	charmap " for", $01, $72
+	charmap ", but ", $01, $73
+	charmap "Please ", $01, $74
 	charmap "battle ", $01, $75
-	charmap " for", $01, $76
-	charmap "That ", $01, $77
-	charmap "This is ", $01, $78
-	charmap "here ", $01, $79
+	charmap "in the", $01, $76
+	charmap "here ", $01, $77
+	charmap "That ", $01, $78
+	charmap " the ", $01, $79
 	charmap "like ", $01, $7a
 	charmap "Would you like ", $01, $7b
 	charmap "GYM LEADER", $01, $7c
 	charmap "time", $01, $7d
-	charmap " the ", $01, $7e
+	charmap "can't ", $01, $7e
 	charmap "will ", $01, $7f
 	charmap "trainers", $01, $80
 	charmap "BADGE", $01, $81
 	charmap "catch", $01, $82
 	charmap ", the", $01, $83
 	charmap "s the", $01, $84
-	charmap "power", $01, $85
+	charmap "can ", $01, $85
 	charmap "better", $01, $86
 	charmap "There are ", $01, $87
-	charmap "get ", $01, $88
-	charmap " of ", $01, $89
+	charmap "type moves", $01, $88
+	charmap "get ", $01, $89
 	charmap "what ", $01, $8a
-	charmap " that ", $01, $8b
-	charmap "look", $01, $8c
-	charmap "good ", $01, $8d
-	charmap "But ", $01, $8e
-	charmap "ROUTE ", $01, $8f
-	charmap "come ", $01, $90
-	charmap "tough", $01, $91
-	charmap "I can", $01, $92
-	charmap "people", $01, $93
-	charmap "want ", $01, $94
-	charmap " and ", $01, $95
-	charmap "not ", $01, $96
-	charmap " CITY", $01, $97
-	charmap "RADIO TOWER", $01, $98
-	charmap "I'll ", $01, $99
-	charmap "ing the", $01, $9a
-	charmap "over", $01, $9b
-	charmap "again", $01, $9c
-	charmap "appear", $01, $9d
-	charmap " #MON ", $01, $9e
-	charmap "SLOWPOKE", $01, $9f
-	charmap "Are you ", $01, $a0
-	charmap "can't ", $01, $a1
+	charmap ". (HOLD)", $01, $8b
+	charmap " of ", $01, $8c
+	charmap " that ", $01, $8d
+	charmap "look", $01, $8e
+	charmap "good ", $01, $8f
+	charmap "But ", $01, $90
+	charmap "power", $01, $91
+	charmap "come ", $01, $92
+	charmap "tough", $01, $93
+	charmap "LEADER", $01, $94
+	charmap "people", $01, $95
+	charmap "want ", $01, $96
+	charmap " and ", $01, $97
+	charmap "not ", $01, $98
+	charmap "SLOWPOKE", $01, $99
+	charmap "RADIO TOWER", $01, $9a
+	charmap " #MON ", $01, $9b
+	charmap "ing the", $01, $9c
+	charmap "over", $01, $9d
+	charmap "again", $01, $9e
+	charmap "ROUTE ", $01, $9f
+	charmap "appear", $01, $a0
+	charmap "Are you ", $01, $a1
 	charmap "of the", $01, $a2
 	charmap "challeng", $01, $a3
 	charmap "water", $01, $a4
-	charmap "Welcome to ", $01, $a5
-	charmap "only ", $01, $a6
-	charmap "know", $01, $a7
+	charmap "only ", $01, $a5
+	charmap "know", $01, $a6
+	charmap " CITY", $01, $a7
 	charmap "back", $01, $a8
 	charmap "trainer ", $01, $a9
 	charmap "What ", $01, $aa
 	charmap "cause ", $01, $ab
 	charmap "ight", $01, $ac
-	charmap " in ", $01, $ad
-	charmap "are you", $01, $ae
-	charmap ", so ", $01, $af
-	charmap "all ", $01, $b0
-	charmap "right ", $01, $b1
-	charmap "enough", $01, $b2
-	charmap "on the", $01, $b3
-	charmap "JOHTO", $01, $b4
-	charmap "can ", $01, $b5
+	charmap "I'll ", $01, $ad
+	charmap " in ", $01, $ae
+	charmap "shoul", $01, $af
+	charmap ", so ", $01, $b0
+	charmap "all ", $01, $b1
+	charmap "right ", $01, $b2
+	charmap "enough", $01, $b3
+	charmap "on the", $01, $b4
+	charmap "JOHTO", $01, $b5
 	charmap " #MON.", $01, $b6
-	charmap "GOLDENROD", $01, $b7
-	charmap "You don't have", $01, $b8
-	charmap "the #MON", $01, $b9
-	charmap "lose", $01, $ba
-	charmap ", it ", $01, $bb
-	charmap "(HOLD)", $01, $bc
-	charmap "you're ", $01, $bd
+	charmap "You don't have", $01, $b7
+	charmap "the #MON", $01, $b8
+	charmap "think", $01, $b9
+	charmap "There's ", $01, $ba
+	charmap "LAKE OF RAGE", $01, $bb
+	charmap "lose", $01, $bc
+	charmap ", it ", $01, $bd
 	charmap " with ", $01, $be
 	charmap "There's no ", $01, $bf
-	charmap "shoul", $01, $c0
-	charmap "some ", $01, $c1
-	charmap "Your ", $01, $c2
-	charmap "powerful", $01, $c3
-	charmap "Want to ", $01, $c4
-	charmap "Do you ", $01, $c5
-	charmap "There's ", $01, $c6
+	charmap "some ", $01, $c0
+	charmap "powerful", $01, $c1
+	charmap "Want to ", $01, $c2
+	charmap "Do you ", $01, $c3
+	charmap "don't ", $01, $c4
+	charmap "I hear", $01, $c5
+	charmap "have", $01, $c6
 	charmap "When ", $01, $c7
-	charmap "I hear", $01, $c8
-	charmap "have", $01, $c9
-	charmap "How ", $01, $ca
-	charmap "think", $01, $cb
-	charmap "some", $01, $cc
-	charmap "electri", $01, $cd
-	charmap "Powers up ", $01, $ce
-	charmap "They ", $01, $cf
-	charmap "My #MON ", $01, $d0
-	charmap "e MAGNET TRAIN", $01, $d1
-	charmap "ECRUTEAK", $01, $d2
-	charmap "Restores ", $01, $d3
-	charmap "trainers ", $01, $d4
-	charmap "ould ", $01, $d5
-	charmap "something ", $01, $d6
-	charmap "don't ", $01, $d7
-	charmap "KANTO", $01, $d8
-	charmap "Oh, ", $01, $d9
-	charmap "were ", $01, $da
-	charmap "going to", $01, $db
-	charmap "other", $01, $dc
-	charmap "always ", $01, $dd
-	charmap "friend", $01, $de
-	charmap "poison", $01, $df
-	charmap "We hope to see you", $01, $e0
-	charmap "FAST SHIP S.S.AQUA", $01, $e1
+	charmap "some", $01, $c8
+	charmap "ould ", $01, $c9
+	charmap "Powers up ", $01, $ca
+	charmap "They ", $01, $cb
+	charmap "My #MON ", $01, $cc
+	charmap "you're ", $01, $cd
+	charmap "e MAGNET TRAIN", $01, $ce
+	charmap "ECRUTEAK", $01, $cf
+	charmap "Restores ", $01, $d0
+	charmap "trainers ", $01, $d1
+	charmap "Welcome to ", $01, $d2
+	charmap "lost", $01, $d3
+	charmap "something ", $01, $d4
+	charmap "KANTO", $01, $d5
+	charmap "ever", $01, $d6
+	charmap "Oh, ", $01, $d7
+	charmap "How ", $01, $d8
+	charmap "were ", $01, $d9
+	charmap "going to", $01, $da
+	charmap "other", $01, $db
+	charmap "always ", $01, $dc
+	charmap "friend", $01, $dd
+	charmap "poison", $01, $de
+	charmap "We hope to see you", $01, $df
+	charmap "FAST SHIP S.S.AQUA", $01, $e0
+	charmap "Your ", $01, $e1
 	charmap "even ", $01, $e2
 	charmap "ation", $01, $e3
 	charmap "great", $01, $e4
-	charmap " are ", $01, $e5
-	charmap "TRAINER TIPS", $01, $e6
-	charmap "number", $01, $e7
-	charmap ", you ", $01, $e8
-	charmap "An attack that", $01, $e9
-	charmap "You should ", $01, $ea
+	charmap "#MON are ", $01, $e5
+	charmap "number", $01, $e6
+	charmap ", you ", $01, $e7
+	charmap "An attack that", $01, $e8
+	charmap "You should ", $01, $e9
+	charmap "GOLDENROD CITY", $01, $ea
 	charmap "I'm going to be", $01, $eb
-	charmap "VERMILION CITY", $01, $ec
-	charmap "Do you want to", $01, $ed
-	charmap "really ", $01, $ee
-	charmap "ever", $01, $ef
-	charmap "lost", $01, $f0
-	charmap " can", $01, $f1
-	charmap "like", $01, $f2
-	charmap "Let me ", $01, $f3
-	charmap "for you", $01, $f4
-	charmap "take th", $01, $f5
-	charmap "Do you know about", $01, $f6
-	charmap "Your #MON ", $01, $f7
-	charmap "I have to ", $01, $f8
-	charmap "is the", $01, $f9
-	charmap " it ", $01, $fa
-	charmap "our ", $01, $fb
-	charmap "if you", $01, $fc
-	charmap "PROF.OAK", $01, $fd
-	charmap "there", $01, $fe
-	charmap "CIANWOOD", $01, $ff
-	charmap "ound ", $02, $60
-	charmap "raise", $02, $61
-	charmap "LEADER", $02, $62
-	charmap " your ", $02, $63
-	charmap "You'll ", $02, $64
-	charmap "much", $02, $65
-	charmap "good", $02, $66
-	charmap "ive ", $02, $67
-	charmap "very ", $02, $68
-	charmap "MAHOGANY TOWN", $02, $69
-	charmap "RUINS OF ALPH", $02, $6a
-	charmap "GYARADOS", $02, $6b
-	charmap "must be ", $02, $6c
-	charmap "the s", $02, $6d
-	charmap "I heard that ", $02, $6e
-	charmap "keep", $02, $6f
-	charmap " my ", $02, $70
-	charmap "It is ", $02, $71
-	charmap "to the", $02, $72
-	charmap "cause paralysis.", $02, $73
-	charmap "Congratulations!", $02, $74
-	charmap "#MON that", $02, $75
-	charmap "been ", $02, $76
-	charmap " its ", $02, $77
-	charmap "long", $02, $78
-	charmap " there", $02, $79
-	charmap "happen", $02, $7a
-	charmap "#MON GYM", $02, $7b
-	charmap "trainer.", $02, $7c
-	charmap "LEADER: ", $02, $7d
-	charmap "CERULEAN", $02, $7e
-	charmap "my #MON", $02, $7f
-	charmap "turn", $02, $80
-	charmap "something", $02, $81
-	charmap " and", $02, $82
-	charmap "HOUSE", $02, $83
-	charmap "research", $02, $84
-	charmap "they ", $02, $85
-	charmap "real", $02, $86
-	charmap ". You", $02, $87
-	charmap "trying ", $02, $88
-	charmap "ame ", $02, $89
-	charmap "got ", $02, $8a
-	charmap "when", $02, $8b
-	charmap "sleep", $02, $8c
-	charmap "more ", $02, $8d
-	charmap "rough", $02, $8e
-	charmap " use", $02, $8f
-	charmap "Sorry", $02, $90
-	charmap "They're ", $02, $91
-	charmap "Did you ", $02, $92
-	charmap "#MON CENTER", $02, $93
-	charmap "then come see me.", $02, $94
-	charmap "POWER PLANT", $02, $95
-	charmap "UNDERGROUND", $02, $96
-	charmap "Do you know ", $02, $97
+	charmap "Do you want to", $01, $ec
+	charmap "really ", $01, $ed
+	charmap "like", $01, $ee
+	charmap "Let me ", $01, $ef
+	charmap "Sorry", $01, $f0
+	charmap "for you", $01, $f1
+	charmap "take th", $01, $f2
+	charmap "there", $01, $f3
+	charmap "Do you know about", $01, $f4
+	charmap " your ", $01, $f5
+	charmap "Your #MON ", $01, $f6
+	charmap "I have to ", $01, $f7
+	charmap "is the", $01, $f8
+	charmap "our ", $01, $f9
+	charmap "PROF.OAK", $01, $fa
+	charmap "CIANWOOD", $01, $fb
+	charmap " it ", $01, $fc
+	charmap "ound ", $01, $fd
+	charmap "raise", $01, $fe
+	charmap " its ", $01, $ff
+	charmap "You'll ", $02, $60
+	charmap "if you", $02, $61
+	charmap "my #MON", $02, $62
+	charmap "good", $02, $63
+	charmap "ive ", $02, $64
+	charmap "very ", $02, $65
+	charmap "MAHOGANY TOWN", $02, $66
+	charmap "RUINS OF ALPH", $02, $67
+	charmap "must be ", $02, $68
+	charmap "the s", $02, $69
+	charmap "I heard that ", $02, $6a
+	charmap "keep", $02, $6b
+	charmap "much", $02, $6c
+	charmap "to the", $02, $6d
+	charmap "It is ", $02, $6e
+	charmap "cause paralysis.", $02, $6f
+	charmap "Congratulations!", $02, $70
+	charmap "#MON that", $02, $71
+	charmap " can", $02, $72
+	charmap "been ", $02, $73
+	charmap "ATTACK", $02, $74
+	charmap "long", $02, $75
+	charmap " there", $02, $76
+	charmap "happen", $02, $77
+	charmap "ELITE FOUR", $02, $78
+	charmap "#MON GYM", $02, $79
+	charmap "trainer.", $02, $7a
+	charmap "LEADER: ", $02, $7b
+	charmap "LIGHTHOUSE", $02, $7c
+	charmap "electri", $02, $7d
+	charmap "turn", $02, $7e
+	charmap "something", $02, $7f
+	charmap "they ", $02, $80
+	charmap " my ", $02, $81
+	charmap " You", $02, $82
+	charmap "research", $02, $83
+	charmap "real", $02, $84
+	charmap "trying ", $02, $85
+	charmap " You're", $02, $86
+	charmap " and", $02, $87
+	charmap "ame ", $02, $88
+	charmap "when", $02, $89
+	charmap "sleep", $02, $8a
+	charmap "more ", $02, $8b
+	charmap "rough", $02, $8c
+	charmap "down", $02, $8d
+	charmap "VERMILION", $02, $8e
+	charmap "All right", $02, $8f
+	charmap "BALL", $02, $90
+	charmap "POWER PLANT", $02, $91
+	charmap "They're ", $02, $92
+	charmap "Did you ", $02, $93
+	charmap "#MON CENTER", $02, $94
+	charmap "then come see me.", $02, $95
+	charmap "Do you know ", $02, $96
+	charmap "them", $02, $97
 	charmap "coins", $02, $98
 	charmap "to be ", $02, $99
 	charmap "in your party", $02, $9a
 	charmap "I want to ", $02, $9b
 	charmap "will", $02, $9c
 	charmap "discover", $02, $9d
-	charmap "them", $02, $9e
+	charmap " use", $02, $9e
 	charmap "with the", $02, $9f
 	charmap "the t", $02, $a0
-	charmap "just", $02, $a1
-	charmap "never ", $02, $a2
-	charmap "LEAGUE", $02, $a3
-	charmap "Here", $02, $a4
-	charmap "All right", $02, $a5
-	charmap "going", $02, $a6
-	charmap "give you ", $02, $a7
-	charmap "would be ", $02, $a8
-	charmap "DEFENSE.", $02, $a9
-	charmap "you w", $02, $aa
-	charmap "bug #MON", $02, $ab
-	charmap "I do", $02, $ac
-	charmap "#MON with", $02, $ad
-	charmap "ound", $02, $ae
-	charmap "from", $02, $af
-	charmap "still ", $02, $b0
-	charmap " are", $02, $b1
-	charmap "at the", $02, $b2
-	charmap "Hello", $02, $b3
-	charmap "nothing ", $02, $b4
-	charmap "believ", $02, $b5
-	charmap "little ", $02, $b6
-	charmap "CYCLING ROAD", $02, $b7
-	charmap "do you", $02, $b8
-	charmap "A move that ", $02, $b9
-	charmap "This is", $02, $ba
-	charmap "Hyuck-hyuck-hyuck!", $02, $bb
-	charmap " CITY -", $02, $bc
-	charmap "I have no regrets.", $02, $bd
-	charmap "Let's battle!", $02, $be
-	charmap "MAGNET TRAIN", $02, $bf
-	charmap "the GYM", $02, $c0
-	charmap "how ", $02, $c1
-	charmap "but ", $02, $c2
-	charmap "e the ", $02, $c3
-	charmap "must ", $02, $c4
-	charmap "full", $02, $c5
-	charmap "LAVENDER", $02, $c6
+	charmap "may ", $02, $a1
+	charmap "got ", $02, $a2
+	charmap "just", $02, $a3
+	charmap "never ", $02, $a4
+	charmap "many ", $02, $a5
+	charmap "you w", $02, $a6
+	charmap "are you", $02, $a7
+	charmap "LEAGUE", $02, $a8
+	charmap "Here", $02, $a9
+	charmap "going", $02, $aa
+	charmap "give you ", $02, $ab
+	charmap "would be ", $02, $ac
+	charmap "DEFENSE.", $02, $ad
+	charmap "bug #MON", $02, $ae
+	charmap "#MON with", $02, $af
+	charmap "ound", $02, $b0
+	charmap "from", $02, $b1
+	charmap "still ", $02, $b2
+	charmap "at the", $02, $b3
+	charmap "I do", $02, $b4
+	charmap "Hello", $02, $b5
+	charmap "nothing ", $02, $b6
+	charmap "MAIL", $02, $b7
+	charmap "CERULEA", $02, $b8
+	charmap "believ", $02, $b9
+	charmap "little ", $02, $ba
+	charmap "CYCLING ROAD", $02, $bb
+	charmap "A move that ", $02, $bc
+	charmap "Hyuck-hyuck-hyuck!", $02, $bd
+	charmap "I have no regrets.", $02, $be
+	charmap "Let's battle!", $02, $bf
+	charmap "MAGNET TRAIN", $02, $c0
+	charmap "the GYM", $02, $c1
+	charmap "made ", $02, $c2
+	charmap "how ", $02, $c3
+	charmap "but ", $02, $c4
+	charmap "must ", $02, $c5
+	charmap "full", $02, $c6
 	charmap "ight ", $02, $c7
-	charmap "DIRECTOR", $02, $c8
-	charmap "another ", $02, $c9
-	charmap "MAGIKARP", $02, $ca
-	charmap "Have you ", $02, $cb
-	charmap "Hello, <PLAYER>?", $02, $cc
-	charmap "ould you ", $02, $cd
-	charmap "under", $02, $ce
-	charmap "e the", $02, $cf
+	charmap "there ", $02, $c8
+	charmap "DIRECTOR", $02, $c9
+	charmap "another ", $02, $ca
+	charmap "MAGIKARP", $02, $cb
+	charmap "Have you ", $02, $cc
+	charmap "Hello, <PLAYER>?", $02, $cd
+	charmap "ould you ", $02, $ce
+	charmap "under", $02, $cf
 	charmap "grow", $02, $d0
-	charmap "while ", $02, $d1
-	charmap ", but", $02, $d2
-	charmap "body ", $02, $d3
-	charmap "Come ", $02, $d4
-	charmap "many ", $02, $d5
-	charmap "Has a high criti-", $02, $d6
-	charmap "I'm the ", $02, $d7
-	charmap "item", $02, $d8
-	charmap "made ", $02, $d9
-	charmap "hold", $02, $da
-	charmap "n't ", $02, $db
-	charmap "about", $02, $dc
-	charmap "-type", $02, $dd
-	charmap "dragon", $02, $de
-	charmap "tak", $02, $df
-	charmap "I though", $02, $e0
-	charmap "e that", $02, $e1
-	charmap "cal hit ratio.", $02, $e2
-	charmap "getting ", $02, $e3
-	charmap "VIRIDIAN", $02, $e4
-	charmap "CLEFAIRY", $02, $e5
-	charmap "confusion.", $02, $e6
-	charmap "kinds of #MON.", $02, $e7
-	charmap "show", $02, $e8
-	charmap "Its ", $02, $e9
-	charmap " out", $02, $ea
-	charmap "able ", $02, $eb
-	charmap ". It ", $02, $ec
-	charmap "The s", $02, $ed
-	charmap "the p", $02, $ee
-	charmap "weak", $02, $ef
-	charmap "feel", $02, $f0
-	charmap "passwor", $02, $f1
-	charmap "Raises ", $02, $f2
-	charmap "there ", $02, $f3
-	charmap "2nd turn: Attack", $02, $f4
-	charmap "I won't ", $02, $f5
-	charmap "I could", $02, $f6
-	charmap "to have this", $02, $f7
-	charmap "the se", $02, $f8
-	charmap "a #MON ", $02, $f9
-	charmap "have been", $02, $fa
-	charmap "mov", $02, $fb
-	charmap "Thank", $02, $fc
-	charmap "anything", $02, $fd
-	charmap "more", $02, $fe
-	charmap "ies ", $02, $ff
-	charmap "use ", $03, $60
-	charmap "may ", $03, $61
-	charmap "Maybe ", $03, $62
-	charmap "I've ", $03, $63
-	charmap "It doesn't ", $03, $64
-	charmap "s and ", $03, $65
-	charmap "that's ", $03, $66
-	charmap "Oh, no", $03, $67
-	charmap "MON", $03, $68
-	charmap "come", $03, $69
-	charmap " at ", $03, $6a
+	charmap ". You ", $02, $d1
+	charmap "while ", $02, $d2
+	charmap "TRAIN", $02, $d3
+	charmap ", but", $02, $d4
+	charmap "body ", $02, $d5
+	charmap "Come ", $02, $d6
+	charmap "Has a high criti-", $02, $d7
+	charmap " CITY -", $02, $d8
+	charmap "I'm the ", $02, $d9
+	charmap " out", $02, $da
+	charmap "e the ", $02, $db
+	charmap "item", $02, $dc
+	charmap "e the", $02, $dd
+	charmap "hold", $02, $de
+	charmap " are", $02, $df
+	charmap "ROCKET", $02, $e0
+	charmap "(HOLD)", $02, $e1
+	charmap "about", $02, $e2
+	charmap "-type", $02, $e3
+	charmap "use ", $02, $e4
+	charmap "dragon", $02, $e5
+	charmap "tak", $02, $e6
+	charmap "Its ", $02, $e7
+	charmap "e that", $02, $e8
+	charmap "cal hit ratio.", $02, $e9
+	charmap "getting ", $02, $ea
+	charmap "VIRIDIAN", $02, $eb
+	charmap "CLEFAIRY", $02, $ec
+	charmap "confusion.", $02, $ed
+	charmap "kinds of #MON.", $02, $ee
+	charmap "show", $02, $ef
+	charmap "able ", $02, $f0
+	charmap "The s", $02, $f1
+	charmap "the p", $02, $f2
+	charmap "n't ", $02, $f3
+	charmap "weak", $02, $f4
+	charmap "feel", $02, $f5
+	charmap "passwor", $02, $f6
+	charmap "Raises ", $02, $f7
+	charmap " APRICORN", $02, $f8
+	charmap "2nd turn: Attack", $02, $f9
+	charmap "I won't ", $02, $fa
+	charmap "to have this", $02, $fb
+	charmap "a #MON ", $02, $fc
+	charmap "have been", $02, $fd
+	charmap "MON", $02, $fe
+	charmap "mov", $02, $ff
+	charmap "Thank", $03, $60
+	charmap "anything", $03, $61
+	charmap " at ", $03, $62
+	charmap "more", $03, $63
+	charmap "ies ", $03, $64
+	charmap "Maybe ", $03, $65
+	charmap "I've ", $03, $66
+	charmap "It doesn't ", $03, $67
+	charmap "s and ", $03, $68
+	charmap "Oh, no", $03, $69
+	charmap "come", $03, $6a
 	charmap "beautiful", $03, $6b
 	charmap "It looks ", $03, $6c
-	charmap "Just ", $03, $6d
-	charmap "way ", $03, $6e
-	charmap "tell", $03, $6f
-	charmap "radio", $03, $70
-	charmap "CINNABAR", $03, $71
-	charmap "their ", $03, $72
-	charmap " moves", $03, $73
-	charmap "all the ", $03, $74
-	charmap "We have ", $03, $75
-	charmap "without ", $03, $76
-	charmap "OLIVINE ", $03, $77
-	charmap "LAKE OF RAGE ", $03, $78
-	charmap "tion", $03, $79
-	charmap "wait", $03, $7a
-	charmap "restore", $03, $7b
-	charmap "Evolves certain", $03, $7c
-	charmap "protect", $03, $7d
-	charmap "There's a notice", $03, $7e
-	charmap " around", $03, $7f
-	charmap "I know ", $03, $80
-	charmap "down", $03, $81
-	charmap " on ", $03, $82
-	charmap "first", $03, $83
-	charmap "#DEX", $03, $84
-	charmap "cute", $03, $85
-	charmap "what", $03, $86
-	charmap "secret", $03, $87
-	charmap "ELITE FOUR", $03, $88
-	charmap "ed to ", $03, $89
-	charmap "your #MON.", $03, $8a
-	charmap "get", $03, $8b
-	charmap "money", $03, $8c
-	charmap "hear", $03, $8d
-	charmap "-print MAIL", $03, $8e
-	charmap "ILEX FOREST", $03, $8f
-	charmap "chang", $03, $90
-	charmap "SAFARI ZONE", $03, $91
-	charmap "the P", $03, $92
-	charmap "for the ", $03, $93
-	charmap "against ", $03, $94
-	charmap "collect", $03, $95
-	charmap "It has ", $03, $96
-	charmap "It was ", $03, $97
-	charmap "room", $03, $98
-	charmap "too.", $03, $99
-	charmap "to use", $03, $9a
-	charmap "evolv", $03, $9b
-	charmap "lower", $03, $9c
-	charmap "comes", $03, $9d
-	charmap "won't", $03, $9e
-	charmap "ROCKET", $03, $9f
-	charmap "BALL", $03, $a0
-	charmap "MAIL", $03, $a1
-	charmap "ATTACK", $03, $a2
-	charmap "You've ", $03, $a3
-	charmap "phone ", $03, $a4
-	charmap "LANCE: ", $03, $a5
-	charmap "already ", $03, $a6
-	charmap "radio ", $03, $a7
-	charmap "SPROUT TOWER", $03, $a8
-	charmap "I did my best.", $03, $a9
-	charmap "like the", $03, $aa
-	charmap "I lost ", $03, $ab
-	charmap ". The", $03, $ac
-	charmap "#MON to ", $03, $ad
-	charmap "favorite", $03, $ae
-	charmap "way", $03, $af
-	charmap "want", $03, $b0
-	charmap " do", $03, $b1
-	charmap "start", $03, $b2
-	charmap "OWER", $03, $b3
-	charmap "listen", $03, $b4
-	charmap " ma", $03, $b5
-	charmap "trouble", $03, $b6
-	charmap "However", $03, $b7
-	charmap "ing for", $03, $b8
-	charmap "ed.", $03, $b9
-	charmap "PROF.", $03, $ba
-	charmap "GYM", $03, $bb
+	charmap "GYARADOS ", $03, $6d
+	charmap "ed.", $03, $6e
+	charmap "the se", $03, $6f
+	charmap "Just ", $03, $70
+	charmap "way ", $03, $71
+	charmap "tell", $03, $72
+	charmap "radio", $03, $73
+	charmap "CINNABAR", $03, $74
+	charmap "their ", $03, $75
+	charmap "all the ", $03, $76
+	charmap "We have ", $03, $77
+	charmap "without ", $03, $78
+	charmap "OLIVINE ", $03, $79
+	charmap " moves", $03, $7a
+	charmap "tion", $03, $7b
+	charmap "wait", $03, $7c
+	charmap "do you ", $03, $7d
+	charmap "restore", $03, $7e
+	charmap "Evolves certain", $03, $7f
+	charmap "protect", $03, $80
+	charmap "There's a notice", $03, $81
+	charmap " around", $03, $82
+	charmap "mak", $03, $83
+	charmap "first", $03, $84
+	charmap ". I ", $03, $85
+	charmap "#DEX", $03, $86
+	charmap "cute", $03, $87
+	charmap "what", $03, $88
+	charmap "secret", $03, $89
+	charmap "ed to ", $03, $8a
+	charmap "that's ", $03, $8b
+	charmap "your #MON.", $03, $8c
+	charmap "get", $03, $8d
+	charmap "money", $03, $8e
+	charmap "hear", $03, $8f
+	charmap "-print MAIL", $03, $90
+	charmap "ILEX FOREST", $03, $91
+	charmap "chang", $03, $92
+	charmap " on ", $03, $93
+	charmap "for the ", $03, $94
+	charmap "against ", $03, $95
+	charmap "collect", $03, $96
+	charmap "It has ", $03, $97
+	charmap "It was ", $03, $98
+	charmap "GYM", $03, $99
+	charmap "ould", $03, $9a
+	charmap "room", $03, $9b
+	charmap "too.", $03, $9c
+	charmap "to use", $03, $9d
+	charmap "though", $03, $9e
+	charmap "evolv", $03, $9f
+	charmap "lower", $03, $a0
+	charmap "comes", $03, $a1
+	charmap "won't", $03, $a2
+	charmap "PROF.", $03, $a3
+	charmap "VIOLET", $03, $a4
+	charmap "BERRY", $03, $a5
+	charmap "You've ", $03, $a6
+	charmap "phone ", $03, $a7
+	charmap "LANCE: ", $03, $a8
+	charmap "are you?", $03, $a9
+	charmap "already ", $03, $aa
+	charmap "radio ", $03, $ab
+	charmap "I could", $03, $ac
+	charmap "I did my best.", $03, $ad
+	charmap "e your", $03, $ae
+	charmap "like the", $03, $af
+	charmap "I know ", $03, $b0
+	charmap "I lost ", $03, $b1
+	charmap "SPROUT TOWER", $03, $b2
+	charmap "#MON to ", $03, $b3
+	charmap "CELADON", $03, $b4
+	charmap "favorite", $03, $b5
+	charmap "start", $03, $b6
+	charmap " are ", $03, $b7
+	charmap "want", $03, $b8
+	charmap "listen", $03, $b9
+	charmap "trouble", $03, $ba
+	charmap "ing for", $03, $bb
 	charmap "also ", $03, $bc
 	charmap "What?", $03, $bd
 	charmap "cause", $03, $be
@@ -474,2146 +474,2146 @@ if !DEF(_DEBUG)
 	charmap "beat ", $03, $c0
 	charmap "e for", $03, $c1
 	charmap "was", $03, $c2
-	charmap "CENTER", $03, $c3
-	charmap "VIOLET", $03, $c4
+	charmap "If it ", $03, $c3
+	charmap "CENTER", $03, $c4
 	charmap "I wonder ", $03, $c5
 	charmap "strang", $03, $c6
-	charmap "I am", $03, $c7
-	charmap "experienc", $03, $c8
-	charmap "now.", $03, $c9
-	charmap "s the foe ", $03, $ca
-	charmap "GYM BADGES", $03, $cb
-	charmap "three years ago.", $03, $cc
-	charmap "for th", $03, $cd
-	charmap "You have no room", $03, $ce
-	charmap "ing #MON.", $03, $cf
-	charmap "like that", $03, $d0
-	charmap "Thank you!", $03, $d1
-	charmap "What do you want", $03, $d2
+	charmap "DEPT.STOR", $03, $c7
+	charmap "now.", $03, $c8
+	charmap "experienc", $03, $c9
+	charmap "S.S.TICKET", $03, $ca
+	charmap "s the foe ", $03, $cb
+	charmap "GYM BADGES", $03, $cc
+	charmap "three years ago.", $03, $cd
+	charmap "for th", $03, $ce
+	charmap "You have no room", $03, $cf
+	charmap "ing #MON.", $03, $d0
+	charmap "like that", $03, $d1
+	charmap "Thank you!", $03, $d2
 	charmap "It's a replica of", $03, $d3
 	charmap "inside", $03, $d4
-	charmap "caugh", $03, $d5
-	charmap "friend ", $03, $d6
-	charmap "who ", $03, $d7
-	charmap "before ", $03, $d8
-	charmap "ed #MON", $03, $d9
-	charmap "coming ", $03, $da
-	charmap "disappointing", $03, $db
-	charmap "If it ", $03, $dc
-	charmap " TOWN", $03, $dd
-	charmap "self", $03, $de
-	charmap "help", $03, $df
-	charmap "Good ", $03, $e0
-	charmap "We're ", $03, $e1
-	charmap "legendar", $03, $e2
-	charmap "I guess ", $03, $e3
-	charmap "fish", $03, $e4
-	charmap "Since ", $03, $e5
-	charmap ", right?", $03, $e6
-	charmap "Don't you", $03, $e7
-	charmap "place ", $03, $e8
-	charmap "Is that ", $03, $e9
-	charmap "But you ", $03, $ea
-	charmap "DAY-CARE", $03, $eb
-	charmap "GIOVANNI", $03, $ec
-	charmap ", please", $03, $ed
-	charmap "#MON LEAGUE", $03, $ee
-	charmap "I don't have", $03, $ef
-	charmap "Thanks for ", $03, $f0
-	charmap "I wonder if", $03, $f1
-	charmap "ick", $03, $f2
-	charmap "day", $03, $f3
-	charmap "mak", $03, $f4
-	charmap "grass", $03, $f5
-	charmap "kinds of ", $03, $f6
-	charmap "s for", $03, $f7
-	charmap "anything ", $03, $f8
-	charmap "different", $03, $f9
-	charmap "d the", $03, $fa
-	charmap "read", $03, $fb
-	charmap "FUCHSI", $03, $fc
-	charmap "Reduces the foe", $03, $fd
-	charmap "s are ", $03, $fe
-	charmap "using ", $03, $ff
-	charmap "health", $04, $60
-	charmap "d that", $04, $61
-	charmap " here.", $04, $62
-	charmap "poison the foe.", $04, $63
-	charmap "after ", $04, $64
-	charmap "LIGHT", $04, $65
-	charmap "prett", $04, $66
-	charmap "sorry", $04, $67
-	charmap "faint", $04, $68
-	charmap "each", $04, $69
-	charmap "ed to", $04, $6a
-	charmap "mountain", $04, $6b
-	charmap "trade", $04, $6c
-	charmap "Because ", $04, $6d
-	charmap "ive", $04, $6e
-	charmap " me", $04, $6f
-	charmap "ed b", $04, $70
-	charmap "! I ", $04, $71
-	charmap "There ", $04, $72
-	charmap "nothing", $04, $73
-	charmap "s its ", $04, $74
-	charmap "Yo! CHAMP in", $04, $75
-	charmap "TIME CAPSULE", $04, $76
-	charmap "I love ", $04, $77
-	charmap "serious", $04, $78
-	charmap "need to", $04, $79
-	charmap "I wanted to ", $04, $7a
-	charmap "#GEAR", $04, $7b
-	charmap "stand", $04, $7c
-	charmap "hard ", $04, $7d
-	charmap " up", $04, $7e
-	charmap ", and", $04, $7f
-	charmap "place", $04, $80
-	charmap "If ", $04, $81
-	charmap "ould", $04, $82
-	charmap "2-5 times", $04, $83
-	charmap "generator", $04, $84
-	charmap "broadcast", $04, $85
-	charmap "training.", $04, $86
-	charmap "PROF.ELM ", $04, $87
-	charmap "type moves", $04, $88
-	charmap "Let's ", $04, $89
-	charmap "CELADO", $04, $8a
-	charmap "priz", $04, $8b
-	charmap "until", $04, $8c
-	charmap "skill", $04, $8d
-	charmap "Which ", $04, $8e
-	charmap "first ", $04, $8f
-	charmap " its", $04, $90
-	charmap "The door", $04, $91
-	charmap "together", $04, $92
-	charmap "learn", $04, $93
-	charmap "rare ", $04, $94
-	charmap "used ", $04, $95
-	charmap "1st turn: ", $04, $96
-	charmap "S.S.TICKET", $04, $97
-	charmap "It's the ", $04, $98
-	charmap "ELM: ", $04, $99
-	charmap "moves ", $04, $9a
-	charmap "ground", $04, $9b
-	charmap "I want you to have", $04, $9c
-	charmap "today.", $04, $9d
-	charmap "opponent", $04, $9e
-	charmap "trainer!", $04, $9f
-	charmap "You are ", $04, $a0
-	charmap "battles.", $04, $a1
-	charmap "Welcome!", $04, $a2
-	charmap "in VIOLET CITY", $04, $a3
-	charmap "running ", $04, $a4
-	charmap "young", $04, $a5
-	charmap "trees", $04, $a6
-	charmap "you can ", $04, $a7
-	charmap "more #MON.", $04, $a8
-	charmap "The FAST SHIP will", $04, $a9
-	charmap "There used to be a", $04, $aa
-	charmap "You don't have ", $04, $ab
-	charmap "I should", $04, $ac
-	charmap "May I see your", $04, $ad
-	charmap "has arrived in", $04, $ae
-	charmap "The #MON", $04, $af
-	charmap "to your", $04, $b0
-	charmap "program", $04, $b1
-	charmap "kind of", $04, $b2
-	charmap "ed the ", $04, $b3
-	charmap "special", $04, $b4
-	charmap "hard", $04, $b5
-	charmap "call", $04, $b6
-	charmap "than ", $04, $b7
-	charmap "Huh?", $04, $b8
-	charmap "great ", $04, $b9
-	charmap "kind", $04, $ba
-	charmap "aves", $04, $bb
-	charmap "ated", $04, $bc
-	charmap "evolution", $04, $bd
-	charmap "suppose", $04, $be
-	charmap "incredib", $04, $bf
-	charmap "open", $04, $c0
-	charmap "very", $04, $c1
-	charmap "STATION", $04, $c2
-	charmap "problem", $04, $c3
-	charmap ". It", $04, $c4
-	charmap "GAME CORNER", $04, $c5
-	charmap "CHERRYGROVE", $04, $c6
-	charmap "ister", $04, $c7
-	charmap "adorable", $04, $c8
-	charmap "Steals 1/2 of the", $04, $c9
-	charmap "A powerful ", $04, $ca
-	charmap "will be ", $04, $cb
-	charmap "ive it ", $04, $cc
-	charmap "ground ", $04, $cd
-	charmap "having ", $04, $ce
-	charmap "making!", $04, $cf
-	charmap "damage inflicted.", $04, $d0
-	charmap "around the ", $04, $d1
-	charmap "That was a ", $04, $d2
-	charmap "What's this?", $04, $d3
-	charmap "to see ", $04, $d4
-	charmap "s on ", $04, $d5
-	charmap "fighting", $04, $d6
-	charmap "ing that", $04, $d7
-	charmap " any", $04, $d8
-	charmap "up ", $04, $d9
-	charmap "eople ", $04, $da
-	charmap "hea", $04, $db
-	charmap "not", $04, $dc
-	charmap "e'll ", $04, $dd
-	charmap "even", $04, $de
-	charmap "normal", $04, $df
-	charmap "I wish", $04, $e0
-	charmap "With", $04, $e1
-	charmap "always", $04, $e2
-	charmap "e POWER PLANT", $04, $e3
-	charmap "Well, ", $04, $e4
-	charmap "off ", $04, $e5
-	charmap "Keep reading?", $04, $e6
-	charmap " it.", $04, $e7
-	charmap "stand ", $04, $e8
-	charmap "OLIVINE CITY.", $04, $e9
-	charmap "A #MON may be", $04, $ea
-	charmap "enough money.", $04, $eb
-	charmap "WHIRL ISLANDS", $04, $ec
-	charmap "an ancient #-", $04, $ed
-	charmap "NATIONAL PARK", $04, $ee
-	charmap "too strong", $04, $ef
-	charmap "with the #MON", $04, $f0
-	charmap "Your #MON are", $04, $f1
-	charmap "check", $04, $f2
-	charmap "as a ", $04, $f3
-	charmap "visit", $04, $f4
-	charmap "move.", $04, $f5
-	charmap "e in ", $04, $f6
-	charmap "s of ", $04, $f7
-	charmap "ING", $04, $f8
-	charmap "able", $04, $f9
-	charmap "mean", $04, $fa
-	charmap "ice", $04, $fb
-	charmap "new", $04, $fc
-	charmap "big", $04, $fd
-	charmap "CHAMP", $04, $fe
-	charmap "type ", $04, $ff
-	charmap "acros", $05, $60
-	charmap "body", $05, $61
-	charmap "dream", $05, $62
-	charmap "ave ", $05, $63
-	charmap "member", $05, $64
-	charmap "machin", $05, $65
-	charmap "Sharply ", $05, $66
-	charmap "level", $05, $67
-	charmap "NEW BARK", $05, $68
-	charmap "city", $05, $69
-	charmap "Contest ", $05, $6a
-	charmap "energy", $05, $6b
-	charmap "effect", $05, $6c
-	charmap "one #MON.", $05, $6d
-	charmap "APRICORN.", $05, $6e
-	charmap "MT.SILVER", $05, $6f
-	charmap "accuracy.", $05, $70
-	charmap "find ", $05, $71
-	charmap ", no", $05, $72
-	charmap "I didn't ", $05, $73
-	charmap "the user", $05, $74
-	charmap "like you.", $05, $75
-	charmap "the CHAMP", $05, $76
-	charmap "for your ", $05, $77
-	charmap "Please switch it", $05, $78
-	charmap "wild #MON", $05, $79
-	charmap "you want to use,", $05, $7a
-	charmap "swimming", $05, $7b
-	charmap "back to ", $05, $7c
-	charmap " will be", $05, $7d
-	charmap "defeated", $05, $7e
-	charmap "s it ", $05, $7f
-	charmap "ings.", $05, $80
-	charmap "ment ", $05, $81
-	charmap "away.", $05, $82
-	charmap "care ", $05, $83
-	charmap "JASMIN", $05, $84
-	charmap "on't ", $05, $85
-	charmap "Y: ", $05, $86
-	charmap "ed!", $05, $87
-	charmap "SAFFRO", $05, $88
-	charmap "JANINE", $05, $89
-	charmap "OFFICE", $05, $8a
-	charmap "Hi, <PLAYER>!", $05, $8b
-	charmap "high", $05, $8c
-	charmap "Trainer", $05, $8d
-	charmap "person", $05, $8e
-	charmap "care", $05, $8f
-	charmap "too!", $05, $90
-	charmap "flinching.", $05, $91
-	charmap "OK. ", $05, $92
-	charmap "me, ", $05, $93
-	charmap "Here you go!", $05, $94
-	charmap "BERRIES", $05, $95
-	charmap ", so", $05, $96
-	charmap "you want to ", $05, $97
-	charmap "OK, ", $05, $98
-	charmap "Grandpa", $05, $99
-	charmap "! You ", $05, $9a
-	charmap "KIMONO GIRLS", $05, $9b
-	charmap "the foe", $05, $9c
-	charmap "to do ", $05, $9d
-	charmap "give me", $05, $9e
-	charmap "Well done!", $05, $9f
-	charmap "to see", $05, $a0
-	charmap "I'll be ", $05, $a1
-	charmap "But it ", $05, $a2
-	charmap "forget ", $05, $a3
-	charmap "trade ", $05, $a4
-	charmap "before.", $05, $a5
-	charmap "SQUIRTBOTTLE", $05, $a6
-	charmap "different ", $05, $a7
-	charmap "What? You ", $05, $a8
-	charmap "type #MON.", $05, $a9
-	charmap "Come back ", $05, $aa
-	charmap "JASMINE: …", $05, $ab
-	charmap "ing my", $05, $ac
-	charmap "because of", $05, $ad
-	charmap "-type moves.", $05, $ae
-	charmap "ing for you.", $05, $af
-	charmap "Good evening", $05, $b0
-	charmap "CINNABAR GYM", $05, $b1
-	charmap "ed a", $05, $b2
-	charmap "I see ", $05, $b3
-	charmap "lov", $05, $b4
-	charmap "RADIO", $05, $b5
-	charmap "ather", $05, $b6
-	charmap "in a ", $05, $b7
-	charmap "ahaha", $05, $b8
-	charmap "ed th", $05, $b9
-	charmap "fast", $05, $ba
-	charmap "contains", $05, $bb
-	charmap "sure", $05, $bc
-	charmap "A self-cure for", $05, $bd
-	charmap "to take ", $05, $be
-	charmap "uses ", $05, $bf
-	charmap "building", $05, $c0
-	charmap "ness", $05, $c1
-	charmap "paraly", $05, $c2
-	charmap "disapp", $05, $c3
-	charmap "own ", $05, $c4
-	charmap "little", $05, $c5
-	charmap "ice ", $05, $c6
-	charmap ", then", $05, $c7
-	charmap "charge", $05, $c8
-	charmap "moves.", $05, $c9
-	charmap "e me", $05, $ca
-	charmap "did ", $05, $cb
-	charmap "break", $05, $cc
-	charmap "morning", $05, $cd
-	charmap "# BALLS", $05, $ce
-	charmap "shock", $05, $cf
-	charmap " has ", $05, $d0
-	charmap "s in ", $05, $d1
-	charmap "complet", $05, $d2
-	charmap " on its", $05, $d3
-	charmap "day ", $05, $d4
-	charmap "rain", $05, $d5
-	charmap "al ", $05, $d6
-	charmap "BICYCL", $05, $d7
-	charmap " think", $05, $d8
-	charmap "girl", $05, $d9
-	charmap "Uh-oh…", $05, $da
-	charmap "switch", $05, $db
-	charmap "world", $05, $dc
-	charmap "battl", $05, $dd
-	charmap "abilit", $05, $de
-	charmap "happy.", $05, $df
-	charmap "stud", $05, $e0
-	charmap "pleas", $05, $e1
-	charmap "finish", $05, $e2
-	charmap "MONICA", $05, $e3
-	charmap "importan", $05, $e4
-	charmap " CHANNEL", $05, $e5
-	charmap "doing", $05, $e6
-	charmap "Raises the ", $05, $e7
-	charmap "e of ", $05, $e8
-	charmap "makes ", $05, $e9
-	charmap "record", $05, $ea
-	charmap "match", $05, $eb
-	charmap "ature", $05, $ec
-	charmap "best ", $05, $ed
-	charmap "A BALL for ", $05, $ee
-	charmap "LT.SURGE", $05, $ef
-	charmap "STORAGE SYSTEM", $05, $f0
-	charmap "Then ", $05, $f1
-	charmap "Ah, ", $05, $f2
-	charmap "coming", $05, $f3
-	charmap "KURT: ", $05, $f4
-	charmap "All ", $05, $f5
-	charmap "carry any more", $05, $f6
-	charmap " #MON?", $05, $f7
-	charmap "go to", $05, $f8
-	charmap "the world's ", $05, $f9
-	charmap "could be", $05, $fa
-	charmap "Oh, you ", $05, $fb
-	charmap "did you ", $05, $fc
-	charmap "INDIGO PLATEAU", $05, $fd
-	charmap "e Bug-Catching", $05, $fe
-	charmap "The b", $05, $ff
-	charmap "#MON is ", $06, $60
-	charmap "I had ", $06, $61
-	charmap "the power ", $06, $62
-	charmap "I could ", $06, $63
-	charmap "didn't", $06, $64
-	charmap "Sorry. You ", $06, $65
-	charmap "It's been a ", $06, $66
-	charmap "h! ", $06, $67
-	charmap "cool", $06, $68
-	charmap "DEPT.STOR", $06, $69
-	charmap "Contest", $06, $6a
-	charmap "haven't ", $06, $6b
-	charmap "DAISY: ", $06, $6c
-	charmap "TIN TOWER", $06, $6d
-	charmap "ose ", $06, $6e
-	charmap ", you're", $06, $6f
-	charmap "bird #MON", $06, $70
-	charmap "Will you ", $06, $71
-	charmap "anywhere.", $06, $72
-	charmap "SILPH CO.", $06, $73
-	charmap "closed…", $06, $74
-	charmap "already", $06, $75
-	charmap "this TM", $06, $76
-	charmap "well", $06, $77
-	charmap "ID number", $06, $78
-	charmap "perfect", $06, $79
-	charmap "Let's see…", $06, $7a
-	charmap "became ", $06, $7b
-	charmap "brother", $06, $7c
-	charmap "y grand", $06, $7d
-	charmap "s to be", $06, $7e
-	charmap "say ", $06, $7f
-	charmap "to you.", $06, $80
-	charmap "Take th", $06, $81
-	charmap "like you ", $06, $82
-	charmap "makes me ", $06, $83
-	charmap "like the ", $06, $84
-	charmap "ready for", $06, $85
-	charmap "someone", $06, $86
-	charmap "allow", $06, $87
-	charmap "The c", $06, $88
-	charmap "inter", $06, $89
-	charmap " is a", $06, $8a
-	charmap "tain", $06, $8b
-	charmap "find", $06, $8c
-	charmap "only", $06, $8d
-	charmap "victim", $06, $8e
-	charmap "breath", $06, $8f
-	charmap " by ", $06, $90
-	charmap "stop", $06, $91
-	charmap "out of", $06, $92
-	charmap "these ", $06, $93
-	charmap "ought ", $06, $94
-	charmap "which ", $06, $95
-	charmap "It s", $06, $96
-	charmap "last", $06, $97
-	charmap "doesn't", $06, $98
-	charmap "wings ", $06, $99
-	charmap "ment", $06, $9a
-	charmap "lot", $06, $9b
-	charmap "ame", $06, $9c
-	charmap "buil", $06, $9d
-	charmap "! You", $06, $9e
-	charmap "CLAIR", $06, $9f
-	charmap "ERIKA", $06, $a0
-	charmap "ious", $06, $a1
-	charmap "comp", $06, $a2
-	charmap "super", $06, $a3
-	charmap ", kid", $06, $a4
-	charmap "ink ", $06, $a5
-	charmap "print", $06, $a6
-	charmap "plan", $06, $a7
-	charmap "increase", $06, $a8
-	charmap "Although", $06, $a9
-	charmap "free", $06, $aa
-	charmap "both", $06, $ab
-	charmap "still", $06, $ac
-	charmap "watch", $06, $ad
-	charmap " the Game Boy", $06, $ae
-	charmap "never misses.", $06, $af
-	charmap "appreciation.", $06, $b0
-	charmap "consider", $06, $b1
-	charmap "left ", $06, $b2
-	charmap "ahead", $06, $b3
-	charmap "ed m", $06, $b4
-	charmap "s, it", $06, $b5
-	charmap "you'll", $06, $b6
-	charmap "ION", $06, $b7
-	charmap " them", $06, $b8
-	charmap "inflict", $06, $b9
-	charmap "psychic", $06, $ba
-	charmap "continu", $06, $bb
-	charmap "awesome", $06, $bc
-	charmap "er than", $06, $bd
-	charmap "almost ", $06, $be
-	charmap "LAKE O", $06, $bf
-	charmap "DRAGON", $06, $c0
-	charmap "# DOLL", $06, $c1
-	charmap "journe", $06, $c2
-	charmap "wonder", $06, $c3
-	charmap "many", $06, $c4
-	charmap "worr", $06, $c5
-	charmap "Darn", $06, $c6
-	charmap "BLACKTHORN", $06, $c7
-	charmap "fell", $06, $c8
-	charmap "SUBSTITUTE", $06, $c9
-	charmap "FARFETCH'D", $06, $ca
-	charmap "Use ", $06, $cb
-	charmap "So you", $06, $cc
-	charmap "and confuses user.", $06, $cd
-	charmap " #MON!", $06, $ce
-	charmap "the grass.", $06, $cf
-	charmap "in GOLDENROD CITY.", $06, $d0
-	charmap "Restores HP by 1/2", $06, $d1
-	charmap "able to move this.", $06, $d2
-	charmap ", I'm", $06, $d3
-	charmap "It c", $06, $d4
-	charmap "BALLS ", $06, $d5
-	charmap "to battle.", $06, $d6
-	charmap "You're the ", $06, $d7
-	charmap "That's too ", $06, $d8
-	charmap " in KANTO.", $06, $d9
-	charmap " next time", $06, $da
-	charmap "rare #MON.", $06, $db
-	charmap "Let me demonstrate", $06, $dc
-	charmap "How would you like", $06, $dd
-	charmap "right.", $06, $de
-	charmap "ible", $06, $df
-	charmap "next ", $06, $e0
-	charmap "floor", $06, $e1
-	charmap "strik", $06, $e2
-	charmap "Even though", $06, $e3
-	charmap "black", $06, $e4
-	charmap "to do", $06, $e5
-	charmap "Some ", $06, $e6
-	charmap "enter", $06, $e7
-	charmap "and s", $06, $e8
-	charmap "a bit", $06, $e9
-	charmap "stronger.", $06, $ea
-	charmap "more than", $06, $eb
-	charmap " as ", $06, $ec
-	charmap "ake ", $06, $ed
-	charmap "burn", $06, $ee
-	charmap "swim", $06, $ef
-	charmap "air", $06, $f0
-	charmap "ook", $06, $f1
-	charmap "sinc", $06, $f2
-	charmap " if", $06, $f3
-	charmap "hone", $06, $f4
-	charmap "goes", $06, $f5
-	charmap "ies.", $06, $f6
-	charmap "ail", $06, $f7
-	charmap "tru", $06, $f8
-	charmap "! You're", $06, $f9
-	charmap "RUINS", $06, $fa
-	charmap "ROCK", $06, $fb
-	charmap "BILL", $06, $fc
-	charmap "come see me.", $06, $fd
-	charmap "SPEED", $06, $fe
-	charmap "most ", $06, $ff
-	charmap "him", $07, $60
-	charmap "FISH", $07, $61
-	charmap "Whoa", $07, $62
-	charmap "fore", $07, $63
-	charmap "confuse", $07, $64
-	charmap "Wow! ", $07, $65
-	charmap "wrong", $07, $66
-	charmap "ually ", $07, $67
-	charmap "rail PAS", $07, $68
-	charmap "amazing", $07, $69
-	charmap "secret ", $07, $6a
-	charmap "SPCL.DEF", $07, $6b
-	charmap "winn", $07, $6c
-	charmap "must", $07, $6d
-	charmap "Saturday", $07, $6e
-	charmap "HEADBUTT", $07, $6f
-	charmap "took ", $07, $70
-	charmap "anyone ", $07, $71
-	charmap "Prepare", $07, $72
-	charmap "should I do?", $07, $73
-	charmap "stairs.", $07, $74
-	charmap "stant", $07, $75
-	charmap " so ", $07, $76
-	charmap "put ", $07, $77
-	charmap "hatch", $07, $78
-	charmap "The way you ", $07, $79
-	charmap "…Humph!", $07, $7a
-	charmap "DRAGON'S DEN", $07, $7b
-	charmap "I know! ", $07, $7c
-	charmap "Bug-Catching Con-", $07, $7d
-	charmap "daughter", $07, $7e
-	charmap "see how", $07, $7f
-	charmap "all the", $07, $80
-	charmap "needs ", $07, $81
-	charmap "do with", $07, $82
-	charmap "in JOHTO", $07, $83
-	charmap "What is this", $07, $84
-	charmap "lection", $07, $85
-	charmap "a long ", $07, $86
-	charmap "with me?", $07, $87
-	charmap "Hey! ", $07, $88
-	charmap "The SLOWPOKE have", $07, $89
-	charmap "learned", $07, $8a
-	charmap "Take good care of", $07, $8b
-	charmap "lives ", $07, $8c
-	charmap "to make ", $07, $8d
-	charmap "ing its ", $07, $8e
-	charmap "trainer…", $07, $8f
-	charmap "can't be ", $07, $90
-	charmap "I can se", $07, $91
-	charmap "numbers.", $07, $92
-	charmap "I found ", $07, $93
-	charmap "MILTANK ", $07, $94
-	charmap "said to ", $07, $95
-	charmap "STRENGTH", $07, $96
-	charmap "ENTRANCE", $07, $97
-	charmap "BADGES.", $07, $98
-	charmap "to play", $07, $99
-	charmap "is full.", $07, $9a
-	charmap "through.", $07, $9b
-	charmap ". Please", $07, $9c
-	charmap "islands", $07, $9d
-	charmap "(varies by time).", $07, $9e
-	charmap "boulder", $07, $9f
-	charmap "ful", $07, $a0
-	charmap "EGG", $07, $a1
-	charmap "sign", $07, $a2
-	charmap " my", $07, $a3
-	charmap "ture", $07, $a4
-	charmap "enem", $07, $a5
-	charmap "dark", $07, $a6
-	charmap ", we", $07, $a7
-	charmap "e it ", $07, $a8
-	charmap "tired", $07, $a9
-	charmap "this.", $07, $aa
-	charmap "s are", $07, $ab
-	charmap "ed in", $07, $ac
-	charmap "worth", $07, $ad
-	charmap "ical ", $07, $ae
-	charmap "alone", $07, $af
-	charmap "tail ", $07, $b0
-	charmap "tree ", $07, $b1
-	charmap "bring", $07, $b2
-	charmap "saved", $07, $b3
-	charmap "s out", $07, $b4
-	charmap "e you ", $07, $b5
-	charmap "ock", $07, $b6
-	charmap "F RAGE", $07, $b7
-	charmap "HP by ", $07, $b8
-	charmap "user", $07, $b9
-	charmap "eep ", $07, $ba
-	charmap "don't", $07, $bb
-	charmap "MIST", $07, $bc
-	charmap "AZALEA", $07, $bd
-	charmap "BLAINE", $07, $be
-	charmap "ARTHUR", $07, $bf
-	charmap "at all", $07, $c0
-	charmap "sai", $07, $c1
-	charmap "failed", $07, $c2
-	charmap "… I ", $07, $c3
-	charmap "Prevents ", $07, $c4
-	charmap "SANDSTORM", $07, $c5
-	charmap "ed out", $07, $c6
-	charmap "Why ", $07, $c7
-	charmap "travel", $07, $c8
-	charmap "visit ", $07, $c9
-	charmap "a lot ", $07, $ca
-	charmap "town", $07, $cb
-	charmap "ten ", $07, $cc
-	charmap " one", $07, $cd
-	charmap "Battle", $07, $ce
-	charmap "time to use that", $07, $cf
-	charmap "I'll show you how", $07, $d0
-	charmap "COPYCAT: ", $07, $d1
-	charmap " is a ", $07, $d2
-	charmap "with you.", $07, $d3
-	charmap "items.", $07, $d4
-	charmap "an EGG", $07, $d5
-	charmap "has a ", $07, $d6
-	charmap "I'm going to be a", $07, $d7
-	charmap "weird ", $07, $d8
-	charmap "MANAGER: ", $07, $d9
-	charmap "status problems.", $07, $da
-	charmap "danc", $07, $db
-	charmap "to my ", $07, $dc
-	charmap "LEAGUE challenge", $07, $dd
-	charmap "Don't get ", $07, $de
-	charmap "PROF.ELM.", $07, $df
-	charmap "Wow, you ", $07, $e0
-	charmap "Please make room", $07, $e1
-	charmap "If you're ", $07, $e2
-	charmap "It's important to", $07, $e3
-	charmap "there are ", $07, $e4
-	charmap "medicin", $07, $e5
-	charmap "steadil", $07, $e6
-	charmap "between", $07, $e7
-	charmap "scatter", $07, $e8
-	charmap "! I", $07, $e9
-	charmap "It can ", $07, $ea
-	charmap "a burn.", $07, $eb
-	charmap "evolve.", $07, $ec
-	charmap "eas", $07, $ed
-	charmap "TRAIN", $07, $ee
-	charmap "road", $07, $ef
-	charmap " they", $07, $f0
-	charmap "statu", $07, $f1
-	charmap "fire", $07, $f2
-	charmap "itter", $07, $f3
-	charmap "It's labeled", $07, $f4
-	charmap "Printer Man", $07, $f5
-	charmap " isn't", $07, $f6
-	charmap "ance", $07, $f7
-	charmap "prey", $07, $f8
-	charmap "ress ", $07, $f9
-	charmap "I see", $07, $fa
-	charmap "home ", $07, $fb
-	charmap "take you on", $07, $fc
-	charmap "I'm impresse", $07, $fd
-	charmap "Check out m", $07, $fe
-	charmap "ROCK TUNNEL", $07, $ff
-	charmap "talk ", $08, $60
-	charmap "collect ", $08, $61
-	charmap "s its", $08, $62
-	charmap "told ", $08, $63
-	charmap "certain ", $08, $64
-	charmap "you should ", $08, $65
-	charmap "every turn.", $08, $66
-	charmap "burned down", $08, $67
-	charmap "stone panel", $08, $68
-	charmap "Travel Tip ", $08, $69
-	charmap "seen ", $08, $6a
-	charmap "ing and ", $08, $6b
-	charmap "Wow, ", $08, $6c
-	charmap ", it can", $08, $6d
-	charmap " into", $08, $6e
-	charmap "whi", $08, $6f
-	charmap "act", $08, $70
-	charmap "me.", $08, $71
-	charmap "ack", $08, $72
-	charmap "Hey", $08, $73
-	charmap "ers.", $08, $74
-	charmap "ly.", $08, $75
-	charmap "ter ", $08, $76
-	charmap "old ", $08, $77
-	charmap "Our ", $08, $78
-	charmap "DIGLET", $08, $79
-	charmap "ear ", $08, $7a
-	charmap " has", $08, $7b
-	charmap "world ", $08, $7c
-	charmap "dist", $08, $7d
-	charmap "try ", $08, $7e
-	charmap "He's ", $08, $7f
-	charmap "now ", $08, $80
-	charmap "to fall asleep.", $08, $81
-	charmap "You and your #-", $08, $82
-	charmap "I would love to", $08, $83
-	charmap "being adjusted.", $08, $84
-	charmap "hurts the user.", $08, $85
-	charmap "CELADON MANSION", $08, $86
-	charmap "whole ", $08, $87
-	charmap "t and ", $08, $88
-	charmap "People and #MON", $08, $89
-	charmap "Works 2-3 turns", $08, $8a
-	charmap "where.", $08, $8b
-	charmap "explor", $08, $8c
-	charmap "Thank you, sir!", $08, $8d
-	charmap "lower SPCL.DEF.", $08, $8e
-	charmap "the foe's SPEED.", $08, $8f
-	charmap "rac", $08, $90
-	charmap "May ", $08, $91
-	charmap "if ", $08, $92
-	charmap "short", $08, $93
-	charmap "ious ", $08, $94
-	charmap "less ", $08, $95
-	charmap "cent ", $08, $96
-	charmap "shall", $08, $97
-	charmap "part ", $08, $98
-	charmap "wings", $08, $99
-	charmap "she", $08, $9a
-	charmap "ect ", $08, $9b
-	charmap " you're ", $08, $9c
-	charmap "MT.MOON", $08, $9d
-	charmap "couldn't", $08, $9e
-	charmap "conf", $08, $9f
-	charmap "respect", $08, $a0
-	charmap "to win ", $08, $a1
-	charmap "anymore", $08, $a2
-	charmap "behind ", $08, $a3
-	charmap "It's so ", $08, $a4
-	charmap "I came ", $08, $a5
-	charmap "to make", $08, $a6
-	charmap "reduces", $08, $a7
-	charmap "with a ", $08, $a8
-	charmap "it can ", $08, $a9
-	charmap "useless", $08, $aa
-	charmap "eal", $08, $ab
-	charmap "pro", $08, $ac
-	charmap "imp", $08, $ad
-	charmap "comes to ", $08, $ae
-	charmap " PLANT", $08, $af
-	charmap "damag", $08, $b0
-	charmap "part", $08, $b1
-	charmap "aaah!", $08, $b2
-	charmap "Check", $08, $b3
-	charmap "ast ", $08, $b4
-	charmap "uck", $08, $b5
-	charmap "SPECIA", $08, $b6
-	charmap "(1 BTL", $08, $b7
-	charmap "SANTOS", $08, $b8
-	charmap "Chew…", $08, $b9
-	charmap "TUSCAN", $08, $ba
-	charmap "FRIEDA", $08, $bb
-	charmap "FALKNE", $08, $bc
-	charmap "What's th", $08, $bd
-	charmap "OAK: ", $08, $be
-	charmap "tree", $08, $bf
-	charmap ", huh?", $08, $c0
-	charmap ", that's ", $08, $c1
-	charmap "souvenir", $08, $c2
-	charmap "board", $08, $c3
-	charmap "investig", $08, $c4
-	charmap "MYSTERY ", $08, $c5
-	charmap "strength", $08, $c6
-	charmap "That's", $08, $c7
-	charmap "Not ", $08, $c8
-	charmap "angler", $08, $c9
-	charmap "rare", $08, $ca
-	charmap "Fully ", $08, $cb
-	charmap "home", $08, $cc
-	charmap "Thursday", $08, $cd
-	charmap "PEWTER", $08, $ce
-	charmap "participat", $08, $cf
-	charmap "happ", $08, $d0
-	charmap " My ", $08, $d1
-	charmap "using", $08, $d2
-	charmap "ress", $08, $d3
-	charmap "wind", $08, $d4
-	charmap "they'r", $08, $d5
-	charmap "Friday", $08, $d6
-	charmap " me ", $08, $d7
-	charmap "Daylight", $08, $d8
-	charmap "recovered ", $08, $d9
-	charmap "POISON PIN", $08, $da
-	charmap "Don't be ", $08, $db
-	charmap "Lowers the foe", $08, $dc
-	charmap "BILL's PC", $08, $dd
-	charmap "System opened.", $08, $de
-	charmap "sav", $08, $df
-	charmap "Eliminates all", $08, $e0
-	charmap "near", $08, $e1
-	charmap "ward", $08, $e2
-	charmap "tower", $08, $e3
-	charmap " this.", $08, $e4
-	charmap "this far", $08, $e5
-	charmap "You should", $08, $e6
-	charmap "I knew", $08, $e7
-	charmap "taken over", $08, $e8
-	charmap "depart", $08, $e9
-	charmap "Sell high.", $08, $ea
-	charmap "<PLAYER> opened a", $08, $eb
-	charmap "A #MON statue…", $08, $ec
-	charmap "JIGGLYPUFF", $08, $ed
-	charmap "token of", $08, $ee
-	charmap "s at ", $08, $ef
-	charmap "See you later!", $08, $f0
-	charmap "ADMINISTRATION", $08, $f1
-	charmap "it is ", $08, $f2
-	charmap "right?", $08, $f3
-	charmap "give you", $08, $f4
-	charmap "closed", $08, $f5
-	charmap "Here ", $08, $f6
-	charmap " you a", $08, $f7
-	charmap " off", $08, $f8
-	charmap " how", $08, $f9
-	charmap "thank", $08, $fa
-	charmap "trainer?", $08, $fb
-	charmap "from my ", $08, $fc
-	charmap "But it's ", $08, $fd
-	charmap "BICYCLE.", $08, $fe
-	charmap "show m", $08, $ff
-	charmap "A #MON holding", $09, $60
-	charmap "We were ", $09, $61
-	charmap "APRICORN", $09, $62
-	charmap "I might ", $09, $63
-	charmap "for 2-5 turns.", $09, $64
-	charmap "Someone ", $09, $65
-	charmap "sense", $09, $66
-	charmap "out of the", $09, $67
-	charmap "rag", $09, $68
-	charmap "tri", $09, $69
-	charmap "ted", $09, $6a
-	charmap "rand", $09, $6b
-	charmap "does", $09, $6c
-	charmap "safe", $09, $6d
-	charmap "form", $09, $6e
-	charmap " an ", $09, $6f
-	charmap "spe", $09, $70
-	charmap "lease", $09, $71
-	charmap "MAR", $09, $72
-	charmap "count", $09, $73
-	charmap "sharp", $09, $74
-	charmap "destroy", $09, $75
-	charmap "s and", $09, $76
-	charmap "ordinar", $09, $77
-	charmap "inguish", $09, $78
-	charmap "As a ", $09, $79
-	charmap "rock-", $09, $7a
-	charmap "order", $09, $7b
-	charmap "asleep.", $09, $7c
-	charmap " one ", $09, $7d
-	charmap "prove", $09, $7e
-	charmap "called ", $09, $7f
-	charmap " again.", $09, $80
-	charmap "wee", $09, $81
-	charmap "es in", $09, $82
-	charmap "ect", $09, $83
-	charmap "nee", $09, $84
-	charmap "got", $09, $85
-	charmap "TAIL", $09, $86
-	charmap "rlpool", $09, $87
-	charmap "fun", $09, $88
-	charmap "cogniz", $09, $89
-	charmap "Hi! ", $09, $8a
-	charmap "TEAM", $09, $8b
-	charmap "oint", $09, $8c
-	charmap "fly", $09, $8d
-	charmap "grass ", $09, $8e
-	charmap "volcan", $09, $8f
-	charmap "any-", $09, $90
-	charmap "cent", $09, $91
-	charmap "land", $09, $92
-	charmap "were", $09, $93
-	charmap "She ", $09, $94
-	charmap "danger", $09, $95
-	charmap "guy ", $09, $96
-	charmap "quite ", $09, $97
-	charmap "he's ", $09, $98
-	charmap " it!", $09, $99
-	charmap "prepar", $09, $9a
-	charmap "Oh, fine then", $09, $9b
-	charmap "I'm sorry--the", $09, $9c
-	charmap "How's it going", $09, $9d
-	charmap "5F DIRECTOR'S", $09, $9e
-	charmap "For ", $09, $9f
-	charmap "useful", $09, $a0
-	charmap "the greatest ", $09, $a1
-	charmap "Now ", $09, $a2
-	charmap "if it ", $09, $a3
-	charmap "seeing", $09, $a4
-	charmap "eyes", $09, $a5
-	charmap "The power of ", $09, $a6
-	charmap "with my #MON.", $09, $a7
-	charmap "A little girl", $09, $a8
-	charmap ". I'm", $09, $a9
-	charmap "4F PRODUCTION", $09, $aa
-	charmap "the re", $09, $ab
-	charmap " would", $09, $ac
-	charmap "ally", $09, $ad
-	charmap "duc", $09, $ae
-	charmap "can't", $09, $af
-	charmap "WESLE", $09, $b0
-	charmap "PRYCE", $09, $b1
-	charmap "stuff", $09, $b2
-	charmap "one.", $09, $b3
-	charmap "less", $09, $b4
-	charmap "You're", $09, $b5
-	charmap "convenien", $09, $b6
-	charmap "Saving Ti", $09, $b7
-	charmap "ely ", $09, $b8
-	charmap "sion", $09, $b9
-	charmap "eat ", $09, $ba
-	charmap "left", $09, $bb
-	charmap "man ", $09, $bc
-	charmap "TRAINER'S", $09, $bd
-	charmap "struction", $09, $be
-	charmap "Sell low.", $09, $bf
-	charmap "After all", $09, $c0
-	charmap "ill ", $09, $c1
-	charmap "mimic", $09, $c2
-	charmap "names", $09, $c3
-	charmap "on a ", $09, $c4
-	charmap "wherever", $09, $c5
-	charmap "quick", $09, $c6
-	charmap "block", $09, $c7
-	charmap "sent ", $09, $c8
-	charmap "anywhere ", $09, $c9
-	charmap "Bug #MON ", $09, $ca
-	charmap "Everyone ", $09, $cb
-	charmap "SABRINA: ", $09, $cc
-	charmap "test ", $09, $cd
-	charmap ". Bitter.", $09, $ce
-	charmap ". We ", $09, $cf
-	charmap "done ", $09, $d0
-	charmap "ought", $09, $d1
-	charmap " to the ", $09, $d2
-	charmap "nce ", $09, $d3
-	charmap "This GYM ", $09, $d4
-	charmap " yourself", $09, $d5
-	charmap "Hey, you!", $09, $d6
-	charmap "you'll be ", $09, $d7
-	charmap "to go", $09, $d8
-	charmap "make you", $09, $d9
-	charmap "playing ", $09, $da
-	charmap "flame", $09, $db
-	charmap "TEMFINDER", $09, $dc
-	charmap "alk", $09, $dd
-	charmap "col", $09, $de
-	charmap "What", $09, $df
-	charmap "Welcom", $09, $e0
-	charmap "DEFENS", $09, $e1
-	charmap "pla", $09, $e2
-	charmap "MILTAN", $09, $e3
-	charmap "o! ", $09, $e4
-	charmap "Whew", $09, $e5
-	charmap "defeat", $09, $e6
-	charmap "'S ", $09, $e7
-	charmap " BOX", $09, $e8
-	charmap "saw", $09, $e9
-	charmap "VOLCAN", $09, $ea
-	charmap "Hm? ", $09, $eb
-	charmap "PIKACH", $09, $ec
-	charmap "Oh? ", $09, $ed
-	charmap "PALLET", $09, $ee
-	charmap "rid", $09, $ef
-	charmap "fabulou", $09, $f0
-	charmap "enjoyed", $09, $f1
-	charmap "A self-", $09, $f2
-	charmap "Strong", $09, $f3
-	charmap ", dude", $09, $f4
-	charmap "Wednes", $09, $f5
-	charmap "boss", $09, $f6
-	charmap "control", $09, $f7
-	charmap "announc", $09, $f8
-	charmap "Boosts ", $09, $f9
-	charmap "myster", $09, $fa
-	charmap "serv", $09, $fb
-	charmap "Who ", $09, $fc
-	charmap "ake it ", $09, $fd
-	charmap "hand", $09, $fe
-	charmap "It's a poster", $09, $ff
-	charmap "Today's ", $0a, $60
-	charmap "Yo, CHAMP in", $0a, $61
-	charmap "affect", $0a, $62
-	charmap "Give a nickn", $0a, $63
-	charmap "future ", $0a, $64
-	charmap "MOUNT MORTAR", $0a, $65
-	charmap "BURNED TOWER", $0a, $66
-	charmap "n't the", $0a, $67
-	charmap ", you've", $0a, $68
-	charmap "So, ", $0a, $69
-	charmap "forget", $0a, $6a
-	charmap "Are you", $0a, $6b
-	charmap "stat changes", $0a, $6c
-	charmap "critical hit", $0a, $6d
-	charmap "My daughter ", $0a, $6e
-	charmap "This #MON ", $0a, $6f
-	charmap "right!", $0a, $70
-	charmap "may be ", $0a, $71
-	charmap "<PLAYER> got ", $0a, $72
-	charmap "Be careful", $0a, $73
-	charmap "let you", $0a, $74
-	charmap "up the ", $0a, $75
-	charmap ". Come", $0a, $76
-	charmap "This can't be", $0a, $77
-	charmap "getting", $0a, $78
-	charmap "Your #DEX is", $0a, $79
-	charmap "You seem to ", $0a, $7a
-	charmap "damage.", $0a, $7b
-	charmap "I lost…", $0a, $7c
-	charmap "caught!", $0a, $7d
-	charmap "ically", $0a, $7e
-	charmap "forgot", $0a, $7f
-	charmap "An EGG ", $0a, $80
-	charmap "who caught a", $0a, $81
-	charmap "a COIN CASE.", $0a, $82
-	charmap "Your PACK is", $0a, $83
-	charmap " than ", $0a, $84
-	charmap "take a ", $0a, $85
-	charmap "ped ", $0a, $86
-	charmap "may", $0a, $87
-	charmap "seas", $0a, $88
-	charmap "exp", $0a, $89
-	charmap "ass", $0a, $8a
-	charmap "hid", $0a, $8b
-	charmap "SHELL", $0a, $8c
-	charmap "child", $0a, $8d
-	charmap "trans", $0a, $8e
-	charmap "such ", $0a, $8f
-	charmap "terri", $0a, $90
-	charmap "ance ", $0a, $91
-	charmap "ally ", $0a, $92
-	charmap "house", $0a, $93
-	charmap "begin", $0a, $94
-	charmap "climb", $0a, $95
-	charmap "of a ", $0a, $96
-	charmap "ed an", $0a, $97
-	charmap "e per", $0a, $98
-	charmap "ELM", $0a, $99
-	charmap "rais", $0a, $9a
-	charmap "bird", $0a, $9b
-	charmap "spir", $0a, $9c
-	charmap "carr", $0a, $9d
-	charmap "ost ", $0a, $9e
-	charmap "used", $0a, $9f
-	charmap "larg", $0a, $a0
-	charmap "tast", $0a, $a1
-	charmap "hair", $0a, $a2
-	charmap "comm", $0a, $a3
-	charmap "age ", $0a, $a4
-	charmap "lent", $0a, $a5
-	charmap "seem", $0a, $a6
-	charmap "pos", $0a, $a7
-	charmap "d up", $0a, $a8
-	charmap "sid", $0a, $a9
-	charmap "bug", $0a, $aa
-	charmap "ump", $0a, $ab
-	charmap "eir", $0a, $ac
-	charmap "differ", $0a, $ad
-	charmap "We hope ", $0a, $ae
-	charmap "years ag", $0a, $af
-	charmap "KURT", $0a, $b0
-	charmap "SURF", $0a, $b1
-	charmap "EEVEE", $0a, $b2
-	charmap "agnifi", $0a, $b3
-	charmap "MOUSE", $0a, $b4
-	charmap "develo", $0a, $b5
-	charmap "5 turns.", $0a, $b6
-	charmap "surpri", $0a, $b7
-	charmap "boy", $0a, $b8
-	charmap "Yeah", $0a, $b9
-	charmap "scary", $0a, $ba
-	charmap "acc", $0a, $bb
-	charmap "depend", $0a, $bc
-	charmap "famou", $0a, $bd
-	charmap "determin", $0a, $be
-	charmap "dear.", $0a, $bf
-	charmap "ING DOJO", $0a, $c0
-	charmap "WATERFAL", $0a, $c1
-	charmap "T'S CAVE", $0a, $c2
-	charmap "Only ", $0a, $c3
-	charmap "win.", $0a, $c4
-	charmap "Want me ", $0a, $c5
-	charmap "later", $0a, $c6
-	charmap "Isn't it ", $0a, $c7
-	charmap "now!", $0a, $c8
-	charmap "up the", $0a, $c9
-	charmap "The City of", $0a, $ca
-	charmap "CITY", $0a, $cb
-	charmap "<PLAYER> turned on", $0a, $cc
-	charmap "an exper", $0a, $cd
-	charmap "Throw away ", $0a, $ce
-	charmap "FTOP SQUARE", $0a, $cf
-	charmap "atter", $0a, $d0
-	charmap "ient", $0a, $d1
-	charmap "honor", $0a, $d2
-	charmap "pincer", $0a, $d3
-	charmap "gone", $0a, $d4
-	charmap "Can you ", $0a, $d5
-	charmap "rand ", $0a, $d6
-	charmap "And ", $0a, $d7
-	charmap "went ", $0a, $d8
-	charmap "north", $0a, $d9
-	charmap "style", $0a, $da
-	charmap "reach", $0a, $db
-	charmap "I do ", $0a, $dc
-	charmap "do I ", $0a, $dd
-	charmap "Heighten", $0a, $de
-	charmap "away!", $0a, $df
-	charmap "a while.", $0a, $e0
-	charmap "an item.", $0a, $e1
-	charmap "partner.", $0a, $e2
-	charmap "A strange, ", $0a, $e3
-	charmap "was defrost", $0a, $e4
-	charmap " is your", $0a, $e5
-	charmap "clock", $0a, $e6
-	charmap "? You", $0a, $e7
-	charmap "ish ", $0a, $e8
-	charmap "use that", $0a, $e9
-	charmap "It also ", $0a, $ea
-	charmap "See ", $0a, $eb
-	charmap "e my ", $0a, $ec
-	charmap "chase", $0a, $ed
-	charmap "found.", $0a, $ee
-	charmap "assion", $0a, $ef
-	charmap "going ", $0a, $f0
-	charmap "search", $0a, $f1
-	charmap "extrem", $0a, $f2
-	charmap "and se", $0a, $f3
-	charmap "wall", $0a, $f4
-	charmap "small ", $0a, $f5
-	charmap "this BADGE.", $0a, $f6
-	charmap "move should", $0a, $f7
-	charmap "can beat", $0a, $f8
-	charmap "know where ", $0a, $f9
-	charmap "That's basic", $0a, $fa
-	charmap "Don't bother", $0a, $fb
-	charmap "expected", $0a, $fc
-	charmap "your party.", $0a, $fd
-	charmap "ze the foe.", $0a, $fe
-	charmap " switching.", $0a, $ff
-	charmap "shopping", $0b, $60
-	charmap "hurt by ", $0b, $61
-	charmap "It's locked…", $0b, $62
-	charmap "Thanks, guy", $0b, $63
-	charmap "will cost ¥", $0b, $64
-	charmap "ed it", $0b, $65
-	charmap "My husband ", $0b, $66
-	charmap "<PLAYER>, your BOX", $0b, $67
-	charmap "fall", $0b, $68
-	charmap "at it", $0b, $69
-	charmap "and w", $0b, $6a
-	charmap "y and ", $0b, $6b
-	charmap "e has", $0b, $6c
-	charmap ". If", $0b, $6d
-	charmap "say", $0b, $6e
-	charmap "bad", $0b, $6f
-	charmap "at night.", $0b, $70
-	charmap "outside", $0b, $71
-	charmap "unknown", $0b, $72
-	charmap "future.", $0b, $73
-	charmap "A strong ", $0b, $74
-	charmap "playing", $0b, $75
-	charmap "running", $0b, $76
-	charmap "weather", $0b, $77
-	charmap "hur", $0b, $78
-	charmap "ROD", $0b, $79
-	charmap "ic ", $0b, $7a
-	charmap " as", $0b, $7b
-	charmap "ely", $0b, $7c
-	charmap "ult", $0b, $7d
-	charmap "crea", $0b, $7e
-	charmap "! T", $0b, $7f
-	charmap "out.", $0b, $80
-	charmap "TER", $0b, $81
-	charmap "old", $0b, $82
-	charmap "lives", $0b, $83
-	charmap " by", $0b, $84
-	charmap "odd", $0b, $85
-	charmap "ash", $0b, $86
-	charmap "fire ", $0b, $87
-	charmap "minut", $0b, $88
-	charmap "Befor", $0b, $89
-	charmap "ates ", $0b, $8a
-	charmap "ition", $0b, $8b
-	charmap "ears ", $0b, $8c
-	charmap " any ", $0b, $8d
-	charmap "creat", $0b, $8e
-	charmap "MAGNET", $0b, $8f
-	charmap "OLIVIN", $0b, $90
-	charmap "ANCE", $0b, $91
-	charmap "los", $0b, $92
-	charmap "STOR", $0b, $93
-	charmap "foe", $0b, $94
-	charmap "ell ", $0b, $95
-	charmap "POISON", $0b, $96
-	charmap "An ", $0b, $97
-	charmap " SQUAR", $0b, $98
-	charmap "who", $0b, $99
-	charmap " they ", $0b, $9a
-	charmap "up.", $0b, $9b
-	charmap "ship", $0b, $9c
-	charmap "-he-he", $0b, $9d
-	charmap "one!", $0b, $9e
-	charmap "I'd ", $0b, $9f
-	charmap "SERVIC", $0b, $a0
-	charmap "Oops", $0b, $a1
-	charmap "lif", $0b, $a2
-	charmap "BIRD", $0b, $a3
-	charmap "draw", $0b, $a4
-	charmap "MACH", $0b, $a5
-	charmap "WHITNE", $0b, $a6
-	charmap "LAKE", $0b, $a7
-	charmap "qui", $0b, $a8
-	charmap "hot", $0b, $a9
-	charmap "While ", $0b, $aa
-	charmap "sudden", $0b, $ab
-	charmap "cal", $0b, $ac
-	charmap "pic", $0b, $ad
-	charmap "route ", $0b, $ae
-	charmap "mind", $0b, $af
-	charmap "Fine", $0b, $b0
-	charmap "count ", $0b, $b1
-	charmap "either", $0b, $b2
-	charmap "remain", $0b, $b3
-	charmap "treat ", $0b, $b4
-	charmap "short ", $0b, $b5
-	charmap ", <PLAYER>.", $0b, $b6
-	charmap "earn", $0b, $b7
-	charmap "board ", $0b, $b8
-	charmap "step", $0b, $b9
-	charmap "stolen", $0b, $ba
-	charmap "A vending ", $0b, $bb
-	charmap "a photo of", $0b, $bc
-	charmap "ls weak #-", $0b, $bd
-	charmap "Oh, hi, <PLAYER>!", $0b, $be
-	charmap "myself", $0b, $bf
-	charmap "WARDEN", $0b, $c0
-	charmap "Feel free ", $0b, $c1
-	charmap "A b", $0b, $c2
-	charmap "all.", $0b, $c3
-	charmap "ate.", $0b, $c4
-	charmap "her ", $0b, $c5
-	charmap " us", $0b, $c6
-	charmap "d you ", $0b, $c7
-	charmap "obey", $0b, $c8
-	charmap "do a thing", $0b, $c9
-	charmap "potential.", $0b, $ca
-	charmap "iden", $0b, $cb
-	charmap " stats", $0b, $cc
-	charmap "aving ", $0b, $cd
-	charmap "beaten", $0b, $ce
-	charmap "I'm so ", $0b, $cf
-	charmap "By the way", $0b, $d0
-	charmap "Monday", $0b, $d1
-	charmap "other day.", $0b, $d2
-	charmap "while you ", $0b, $d3
-	charmap "CANCEL", $0b, $d4
-	charmap "make them ", $0b, $d5
-	charmap "became", $0b, $d6
-	charmap "named ", $0b, $d7
-	charmap "fly over GOLDENROD", $0b, $d8
-	charmap "to show you how to", $0b, $d9
-	charmap "sail next ", $0b, $da
-	charmap "The user's ", $0b, $db
-	charmap "But that's ", $0b, $dc
-	charmap "Whew! ", $0b, $dd
-	charmap "But <PLAYER> can't", $0b, $de
-	charmap "turn. It may fail.", $0b, $df
-	charmap "punish", $0b, $e0
-	charmap " DEPT.", $0b, $e1
-	charmap "Apparently", $0b, $e2
-	charmap "Hey there, fellow!", $0b, $e3
-	charmap "ual", $0b, $e4
-	charmap "This is why I hate", $0b, $e5
-	charmap "catch as your own.", $0b, $e6
-	charmap "witnessed the rise", $0b, $e7
-	charmap "is it?", $0b, $e8
-	charmap "The road is closed", $0b, $e9
-	charmap "while you compete.", $0b, $ea
-	charmap "me!", $0b, $eb
-	charmap "ed…", $0b, $ec
-	charmap "cient ", $0b, $ed
-	charmap "EAR", $0b, $ee
-	charmap "ize", $0b, $ef
-	charmap "run", $0b, $f0
-	charmap "favor", $0b, $f1
-	charmap "MOO", $0b, $f2
-	charmap "pun", $0b, $f3
-	charmap "t of ", $0b, $f4
-	charmap "guy", $0b, $f5
-	charmap "augh", $0b, $f6
-	charmap ", sir", $0b, $f7
-	charmap "also", $0b, $f8
-	charmap "adv", $0b, $f9
-	charmap "field", $0b, $fa
-	charmap "CUT", $0b, $fb
-	charmap "MUSIC", $0b, $fc
-	charmap "<……> <……> <……>", $0b, $fd
-	charmap "UNOWN", $0b, $fe
-	charmap "uestion", $0b, $ff
-	charmap "afraid ", $0c, $60
-	charmap "soon ", $0c, $61
-	charmap "Can't ", $0c, $62
-	charmap "fille", $0c, $63
-	charmap "disgu", $0c, $64
-	charmap "types", $0c, $65
-	charmap "two ", $0c, $66
-	charmap "…sigh", $0c, $67
-	charmap "ored", $0c, $68
-	charmap "in fron", $0c, $69
-	charmap "custom ", $0c, $6a
-	charmap "RAINBOW", $0c, $6b
-	charmap "max HP.", $0c, $6c
-	charmap "unch", $0c, $6d
-	charmap "born", $0c, $6e
-	charmap "lect", $0c, $6f
-	charmap "farther", $0c, $70
-	charmap "waste", $0c, $71
-	charmap "missing", $0c, $72
-	charmap "without", $0c, $73
-	charmap "delight", $0c, $74
-	charmap "Always ", $0c, $75
-	charmap "BALLOON", $0c, $76
-	charmap "Tuesday", $0c, $77
-	charmap "THUNDER", $0c, $78
-	charmap "BROCK: ", $0c, $79
-	charmap " Button", $0c, $7a
-	charmap "Crunch…", $0c, $7b
-	charmap "easier ", $0c, $7c
-	charmap "concentr", $0c, $7d
-	charmap "mistake", $0c, $7e
-	charmap "Hang on", $0c, $7f
-	charmap "properly", $0c, $80
-	charmap "stay", $0c, $81
-	charmap ", though", $0c, $82
-	charmap "frighten", $0c, $83
-	charmap "At night", $0c, $84
-	charmap "pract", $0c, $85
-	charmap "ossible ", $0c, $86
-	charmap "d of ", $0c, $87
-	charmap "data", $0c, $88
-	charmap "admit", $0c, $89
-	charmap "d here.", $0c, $8a
-	charmap "your PC", $0c, $8b
-	charmap "There are several", $0c, $8c
-	charmap "with rising power", $0c, $8d
-	charmap "at the same time.", $0c, $8e
-	charmap "You came out from", $0c, $8f
-	charmap "How could I lose?", $0c, $90
-	charmap "It's tough being a", $0c, $91
-	charmap "the strongest bug", $0c, $92
-	charmap "courage", $0c, $93
-	charmap "TALK! Please tune", $0c, $94
-	charmap "PARK BALLS, you're", $0c, $95
-	charmap "double ", $0c, $96
-	charmap "on and select the", $0c, $97
-	charmap "d this ", $0c, $98
-	charmap "around.", $0c, $99
-	charmap "It also lets your", $0c, $9a
-	charmap "The COMMUNICATION", $0c, $9b
-	charmap "sort", $0c, $9c
-	charmap "d with ", $0c, $9d
-	charmap "error", $0c, $9e
-	charmap " there ", $0c, $9f
-	charmap "ave", $0c, $a0
-	charmap "age", $0c, $a1
-	charmap "fla", $0c, $a2
-	charmap "ped", $0c, $a3
-	charmap "   ", $0c, $a4
-	charmap "sun", $0c, $a5
-	charmap "up!", $0c, $a6
-	charmap "cap", $0c, $a7
-	charmap "ERS", $0c, $a8
-	charmap "Good", $0c, $a9
-	charmap "OK?", $0c, $aa
-	charmap "foo", $0c, $ab
-	charmap "milk", $0c, $ac
-	charmap "gift", $0c, $ad
-	charmap "GIFT", $0c, $ae
-	charmap "brok", $0c, $af
-	charmap "PATH", $0c, $b0
-	charmap "Some", $0c, $b1
-	charmap "trap", $0c, $b2
-	charmap "Oh… ", $0c, $b3
-	charmap "hop", $0c, $b4
-	charmap "PP ", $0c, $b5
-	charmap "area", $0c, $b6
-	charmap "Way to go", $0c, $b7
-	charmap "Speaking ", $0c, $b8
-	charmap "overwhelm", $0c, $b9
-	charmap "an e-mail", $0c, $ba
-	charmap "out!", $0c, $bb
-	charmap "DISABLED!", $0c, $bc
-	charmap "join", $0c, $bd
-	charmap "respon", $0c, $be
-	charmap "preven", $0c, $bf
-	charmap "pitch-", $0c, $c0
-	charmap "Hi, ", $0c, $c1
-	charmap "now?", $0c, $c2
-	charmap "In ", $0c, $c3
-	charmap "store ", $0c, $c4
-	charmap "It's this ", $0c, $c5
-	charmap "traveled ", $0c, $c6
-	charmap "My name's ", $0c, $c7
-	charmap "Follow me", $0c, $c8
-	charmap "DARK CAVE", $0c, $c9
-	charmap "Fufufufu…", $0c, $ca
-	charmap "Hehehehe…", $0c, $cb
-	charmap "BIKE SHOP", $0c, $cc
-	charmap "LUCKY NUM", $0c, $cd
-	charmap "ept ", $0c, $ce
-	charmap "Try ", $0c, $cf
-	charmap "Wait", $0c, $d0
-	charmap "me s", $0c, $d1
-	charmap " three", $0c, $d2
-	charmap "Then you ", $0c, $d3
-	charmap "Think you", $0c, $d4
-	charmap "attack will hit.", $0c, $d5
-	charmap "that at the top.", $0c, $d6
-	charmap "everyone ", $0c, $d7
-	charmap "The MAIL ", $0c, $d8
-	charmap "heal your", $0c, $d9
-	charmap "Should I ", $0c, $da
-	charmap "M ISLANDS", $0c, $db
-	charmap "Three years ago,", $0c, $dc
-	charmap "HP by 20.", $0c, $dd
-	charmap "Are they ", $0c, $de
-	charmap "My dream ", $0c, $df
-	charmap "Wow! This one is", $0c, $e0
-	charmap "NIGHTMARE", $0c, $e1
-	charmap "in KANTO.", $0c, $e2
-	charmap "RAGECANDY", $0c, $e3
-	charmap "won ", $0c, $e4
-	charmap "No, ", $0c, $e5
-	charmap "OK to overwrite?", $0c, $e6
-	charmap "ide ", $0c, $e7
-	charmap "app", $0c, $e8
-	charmap "ake", $0c, $e9
-	charmap "sol", $0c, $ea
-	charmap "guard", $0c, $eb
-	charmap "exist", $0c, $ec
-	charmap "ored ", $0c, $ed
-	charmap "Many ", $0c, $ee
-	charmap "mind ", $0c, $ef
-	charmap " is said to", $0c, $f0
-	charmap "It usually ", $0c, $f1
-	charmap "on its back", $0c, $f2
-	charmap "But", $0c, $f3
-	charmap "'ll ", $0c, $f4
-	charmap "ext", $0c, $f5
-	charmap "MR.", $0c, $f6
-	charmap "succ", $0c, $f7
-	charmap "shut", $0c, $f8
-	charmap "type", $0c, $f9
-	charmap "HP ", $0c, $fa
-	charmap "oot", $0c, $fb
-	charmap "drop", $0c, $fc
-	charmap "riv", $0c, $fd
-	charmap "tle ", $0c, $fe
-	charmap "why ", $0c, $ff
-	charmap "con-", $0d, $60
-	charmap "slow", $0d, $61
-	charmap "else", $0d, $62
-	charmap "fine", $0d, $63
-	charmap "sent", $0d, $64
-	charmap "cure", $0d, $65
-	charmap "ied ", $0d, $66
-	charmap "We will make an", $0d, $67
-	charmap "If your #MON is", $0d, $68
-	charmap "feel even worse", $0d, $69
-	charmap "But a loss is a", $0d, $6a
-	charmap "Both your party", $0d, $6b
-	charmap "…But no TICKET!", $0d, $6c
-	charmap "battling wimps.", $0d, $6d
-	charmap "and your PC BOX", $0d, $6e
-	charmap "No wonder you're", $0d, $6f
-	charmap "user's HP is low", $0d, $70
-	charmap "pressing START.", $0d, $71
-	charmap "its TAIL cut of", $0d, $72
-	charmap "are being force", $0d, $73
-	charmap "seven children.", $0d, $74
-	charmap "earl", $0d, $75
-	charmap "CONTEST HELPER.", $0d, $76
-	charmap "line", $0d, $77
-	charmap "MAN", $0d, $78
-	charmap "receive", $0d, $79
-	charmap "rad", $0d, $7a
-	charmap "wil", $0d, $7b
-	charmap "qua", $0d, $7c
-	charmap "techniq", $0d, $7d
-	charmap "00 ", $0d, $7e
-	charmap "scratch", $0d, $7f
-	charmap "single ", $0d, $80
-	charmap "places.", $0d, $81
-	charmap " #-", $0d, $82
-	charmap "by the ", $0d, $83
-	charmap "leaving", $0d, $84
-	charmap "it has ", $0d, $85
-	charmap "itself.", $0d, $86
-	charmap " ga", $0d, $87
-	charmap "s with ", $0d, $88
-	charmap "INE", $0d, $89
-	charmap "VERMIL", $0d, $8a
-	charmap "FOREST", $0d, $8b
-	charmap "BERR", $0d, $8c
-	charmap "NNEL", $0d, $8d
-	charmap "SURGE", $0d, $8e
-	charmap "COPYCA", $0d, $8f
-	charmap "MANAGE", $0d, $90
-	charmap "ure ", $0d, $91
-	charmap "INDIGO", $0d, $92
-	charmap "PLATEA", $0d, $93
-	charmap "xcellent", $0d, $94
-	charmap "me?", $0d, $95
-	charmap "RAT", $0d, $96
-	charmap "MEOWTH", $0d, $97
-	charmap "demonstr", $0d, $98
-	charmap "COIN CAS", $0d, $99
-	charmap "TALK", $0d, $9a
-	charmap "master", $0d, $9b
-	charmap "frozen", $0d, $9c
-	charmap "enti", $0d, $9d
-	charmap "LONG ", $0d, $9e
-	charmap "FLY", $0d, $9f
-	charmap "SPIKE", $0d, $a0
-	charmap "REPEL", $0d, $a1
-	charmap "FLASH", $0d, $a2
-	charmap "FLUTE", $0d, $a3
-	charmap "Hmm", $0d, $a4
-	charmap "NIDOR", $0d, $a5
-	charmap "OK! ", $0d, $a6
-	charmap "PHARMA", $0d, $a7
-	charmap "SEAFOA", $0d, $a8
-	charmap "SUNN", $0d, $a9
-	charmap "AMPH", $0d, $aa
-	charmap "d my", $0d, $ab
-	charmap "PLANT", $0d, $ac
-	charmap "TOWN", $0d, $ad
-	charmap "ign", $0d, $ae
-	charmap "behind", $0d, $af
-	charmap "claws", $0d, $b0
-	charmap "ren't you", $0d, $b1
-	charmap ", etc.", $0d, $b2
-	charmap "woke ", $0d, $b3
-	charmap "cabin", $0d, $b4
-	charmap "inflict ", $0d, $b5
-	charmap "wait ", $0d, $b6
-	charmap "direc", $0d, $b7
-	charmap "held ", $0d, $b8
-	charmap "given", $0d, $b9
-	charmap "Differen", $0d, $ba
-	charmap "exercise", $0d, $bb
-	charmap "tentacle", $0d, $bc
-	charmap "promised", $0d, $bd
-	charmap "Yikes", $0d, $be
-	charmap "BUTTERFR", $0d, $bf
-	charmap "KARATE K", $0d, $c0
-	charmap "3F PERSO", $0d, $c1
-	charmap "CARD KEY", $0d, $c2
-	charmap "der ", $0d, $c3
-	charmap "ably", $0d, $c4
-	charmap "CHARCOAL", $0d, $c5
-	charmap "WILLIAM:", $0d, $c6
-	charmap "fangs", $0d, $c7
-	charmap " that.", $0d, $c8
-	charmap "Too ", $0d, $c9
-	charmap "gain", $0d, $ca
-	charmap "test", $0d, $cb
-	charmap "see.", $0d, $cc
-	charmap "she ", $0d, $cd
-	charmap "soul", $0d, $ce
-	charmap "win!", $0d, $cf
-	charmap "Get ", $0d, $d0
-	charmap "hot ", $0d, $d1
-	charmap "reference ", $0d, $d2
-	charmap "weren't", $0d, $d3
-	charmap "shak", $0d, $d4
-	charmap "second", $0d, $d5
-	charmap "far to", $0d, $d6
-	charmap "disban", $0d, $d7
-	charmap "Life is ", $0d, $d8
-	charmap "Switch", $0d, $d9
-	charmap "Oh. ", $0d, $da
-	charmap "POTION", $0d, $db
-	charmap "MARKET", $0d, $dc
-	charmap "aaa", $0d, $dd
-	charmap "KATE: ", $0d, $de
-	charmap "BLUE: ", $0d, $df
-	charmap " points!", $0d, $e0
-	charmap "Isn't", $0d, $e1
-	charmap "ELECTRIC", $0d, $e2
-	charmap "JENN: ", $0d, $e3
-	charmap "2F SALES", $0d, $e4
-	charmap "face ", $0d, $e5
-	charmap "prefer", $0d, $e6
-	charmap "rumor", $0d, $e7
-	charmap "Let ", $0d, $e8
-	charmap "choo", $0d, $e9
-	charmap "ing #-", $0d, $ea
-	charmap "gone ", $0d, $eb
-	charmap " on your", $0d, $ec
-	charmap "money ", $0d, $ed
-	charmap "let m", $0d, $ee
-	charmap "let's ", $0d, $ef
-	charmap "? I'm ", $0d, $f0
-	charmap " GYM.", $0d, $f1
-	charmap "know the", $0d, $f2
-	charmap "There you are!", $0d, $f3
-	charmap "isn't it?", $0d, $f4
-	charmap "Oh, darn", $0d, $f5
-	charmap "cave.", $0d, $f6
-	charmap "outside ", $0d, $f7
-	charmap "down, we found", $0d, $f8
-	charmap "a BERRY ", $0d, $f9
-	charmap "e forest's pro-", $0d, $fa
-	charmap "assenger", $0d, $fb
-	charmap "hideout ", $0d, $fc
-	charmap "The sunl", $0d, $fd
-	charmap "Register", $0d, $fe
-	charmap "gener", $0d, $ff
-	charmap "equals damage ", $0e, $60
-	charmap "Press START to", $0e, $61
-	charmap "word ", $0e, $62
-	charmap "e my", $0e, $63
-	charmap "RHYDON: Gugooh", $0e, $64
-	charmap "scary ", $0e, $65
-	charmap "? I ", $0e, $66
-	charmap ", if", $0e, $67
-	charmap "ed. ", $0e, $68
-	charmap "ONE", $0e, $69
-	charmap "but", $0e, $6a
-	charmap "ORT", $0e, $6b
-	charmap "ram", $0e, $6c
-	charmap "med", $0e, $6d
-	charmap " CA", $0e, $6e
-	charmap "AIN", $0e, $6f
-	charmap "F: ", $0e, $70
-	charmap "bab", $0e, $71
-	charmap "EED", $0e, $72
-	charmap "Ooh", $0e, $73
-	charmap "tro", $0e, $74
-	charmap "kid", $0e, $75
-	charmap "! S", $0e, $76
-	charmap "horn", $0e, $77
-	charmap "whit", $0e, $78
-	charmap "flee", $0e, $79
-	charmap "skin", $0e, $7a
-	charmap "roll", $0e, $7b
-	charmap "mel", $0e, $7c
-	charmap "hang", $0e, $7d
-	charmap "brat", $0e, $7e
-	charmap "tend", $0e, $7f
-	charmap "show the S.S.", $0e, $80
-	charmap "The link has ", $0e, $81
-	charmap "   COLLECTION", $0e, $82
-	charmap "indefinitely.", $0e, $83
-	charmap "A one-hit KO,", $0e, $84
-	charmap "frozen solid!", $0e, $85
-	charmap "So we replace", $0e, $86
-	charmap "Ensures the n", $0e, $87
-	charmap " EXP. Points!", $0e, $88
-	charmap "colored leaf.", $0e, $89
-	charmap "DRAGONBREATH.", $0e, $8a
-	charmap "quit", $0e, $8b
-	charmap "lead", $0e, $8c
-	charmap "cri", $0e, $8d
-	charmap "WHIRL", $0e, $8e
-	charmap "ENT", $0e, $8f
-	charmap "ush", $0e, $90
-	charmap "claim", $0e, $91
-	charmap "decid", $0e, $92
-	charmap "ELL", $0e, $93
-	charmap "ELE", $0e, $94
-	charmap "drink", $0e, $95
-	charmap "erupt", $0e, $96
-	charmap "Very ", $0e, $97
-	charmap "treat", $0e, $98
-	charmap "city ", $0e, $99
-	charmap "Insid", $0e, $9a
-	charmap "crush", $0e, $9b
-	charmap "STAR", $0e, $9c
-	charmap "PACK", $0e, $9d
-	charmap "HP.", $0e, $9e
-	charmap " young", $0e, $9f
-	charmap "I'll", $0e, $a0
-	charmap "Repe", $0e, $a1
-	charmap "spot", $0e, $a2
-	charmap "diffic", $0e, $a3
-	charmap "Nope", $0e, $a4
-	charmap "(S)", $0e, $a5
-	charmap "evil", $0e, $a6
-	charmap "IREN", $0e, $a7
-	charmap "AME ", $0e, $a8
-	charmap "TRA", $0e, $a9
-	charmap "lad", $0e, $aa
-	charmap "IVE", $0e, $ab
-	charmap "bus", $0e, $ac
-	charmap "popular", $0e, $ad
-	charmap "system.", $0e, $ae
-	charmap "mee", $0e, $af
-	charmap "cut ", $0e, $b0
-	charmap "m… ", $0e, $b1
-	charmap "to MOM!", $0e, $b2
-	charmap "concern", $0e, $b3
-	charmap "? Great", $0e, $b4
-	charmap "Pardon?", $0e, $b5
-	charmap "exhaust", $0e, $b6
-	charmap "satisfi", $0e, $b7
-	charmap "BENNY: ", $0e, $b8
-	charmap "CINDY: ", $0e, $b9
-	charmap " faded!", $0e, $ba
-	charmap "THEATER", $0e, $bb
-	charmap "MASTER ", $0e, $bc
-	charmap "Open", $0e, $bd
-	charmap "warm", $0e, $be
-	charmap "asse", $0e, $bf
-	charmap "dis-", $0e, $c0
-	charmap "prof", $0e, $c1
-	charmap "it with", $0e, $c2
-	charmap "Your", $0e, $c3
-	charmap "Humph! ", $0e, $c4
-	charmap "flinch", $0e, $c5
-	charmap "tunnel", $0e, $c6
-	charmap "exc", $0e, $c7
-	charmap "Stop", $0e, $c8
-	charmap "ity.", $0e, $c9
-	charmap "rely on", $0e, $ca
-	charmap "wearing", $0e, $cb
-	charmap "Losing ", $0e, $cc
-	charmap "foes", $0e, $cd
-	charmap " in the bed.", $0e, $ce
-	charmap "During the t", $0e, $cf
-	charmap "for it.", $0e, $d0
-	charmap "You can zip ", $0e, $d1
-	charmap "# BALL.", $0e, $d2
-	charmap "TRAINING HAL", $0e, $d3
-	charmap "so much", $0e, $d4
-	charmap "up our secur", $0e, $d5
-	charmap " memory", $0e, $d6
-	charmap "Oh! We lost!", $0e, $d7
-	charmap "go through r", $0e, $d8
-	charmap "Humph. ", $0e, $d9
-	charmap "slot machine", $0e, $da
-	charmap "We exchange ", $0e, $db
-	charmap "intrigu", $0e, $dc
-	charmap "MEOWTH: Meow", $0e, $dd
-	charmap "escape!", $0e, $de
-	charmap "Fwahahahaha!", $0e, $df
-	charmap "<PLAYER> played the", $0e, $e0
-	charmap "MINERALBADGE", $0e, $e1
-	charmap " POLICE", $0e, $e2
-	charmap "policy is to", $0e, $e3
-	charmap "tools of war", $0e, $e4
-	charmap "spac", $0e, $e5
-	charmap "'s CAPE.", $0e, $e6
-	charmap "BOULDERBADGE", $0e, $e7
-	charmap "shrine honor", $0e, $e8
-	charmap "second ", $0e, $e9
-	charmap "has no ", $0e, $ea
-	charmap "My p", $0e, $eb
-	charmap "t my", $0e, $ec
-	charmap "send", $0e, $ed
-	charmap "ide", $0e, $ee
-	charmap "DER", $0e, $ef
-	charmap "tly ", $0e, $f0
-	charmap "ach ", $0e, $f1
-	charmap "eep", $0e, $f2
-	charmap "pay", $0e, $f3
-	charmap "vic", $0e, $f4
-	charmap "que", $0e, $f5
-	charmap "did", $0e, $f6
-	charmap "SPCL.", $0e, $f7
-	charmap "BLACK", $0e, $f8
-	charmap "E: ", $0e, $f9
-	charmap "lim", $0e, $fa
-	charmap " SHOP", $0e, $fb
-	charmap "after", $0e, $fc
-	charmap "tun", $0e, $fd
-	charmap "ble ", $0e, $fe
-	charmap "N: ", $0e, $ff
-	charmap "eel", $0f, $60
-	charmap "ANN", $0f, $61
-	charmap "FLAME", $0f, $62
-	charmap "SNAKE", $0f, $63
-	charmap "SMASH", $0f, $64
-	charmap "GRAPH", $0f, $65
-	charmap "See? ", $0f, $66
-	charmap "guts!", $0f, $67
-	charmap "ASSES", $0f, $68
-	charmap " HEAL", $0f, $69
-	charmap "…Zzzz", $0f, $6a
-	charmap "FAIRY", $0f, $6b
-	charmap "spr", $0f, $6c
-	charmap "door.", $0f, $6d
-	charmap "ept", $0f, $6e
-	charmap "fee", $0f, $6f
-	charmap "yet", $0f, $70
-	charmap "ess.", $0f, $71
-	charmap "else ", $0f, $72
-	charmap "gift ", $0f, $73
-	charmap "as my", $0f, $74
-	charmap "urren", $0f, $75
-	charmap "waken", $0f, $76
-	charmap "harsh", $0f, $77
-	charmap "one of your", $0f, $78
-	charmap " the target", $0f, $79
-	charmap "Uh-oh", $0f, $7a
-	charmap "music", $0f, $7b
-	charmap "ven ", $0f, $7c
-	charmap "joy", $0f, $7d
-	charmap "loa", $0f, $7e
-	charmap "s three ", $0f, $7f
-	charmap "eed", $0f, $80
-	charmap "hour", $0f, $81
-	charmap "ruin", $0f, $82
-	charmap "pain", $0f, $83
-	charmap "bat-", $0f, $84
-	charmap "harm", $0f, $85
-	charmap "shad", $0f, $86
-	charmap "glow", $0f, $87
-	charmap "com-", $0f, $88
-	charmap "in this ", $0f, $89
-	charmap "occasion", $0f, $8a
-	charmap "are.", $0f, $8b
-	charmap "we do", $0f, $8c
-	charmap "proud", $0f, $8d
-	charmap "are things?", $0f, $8e
-	charmap "smart", $0f, $8f
-	charmap "umble", $0f, $90
-	charmap "Copies the ", $0f, $91
-	charmap "'s the menu.", $0f, $92
-	charmap "Put away th", $0f, $93
-	charmap "There", $0f, $94
-	charmap "cooperation", $0f, $95
-	charmap "SHIP S.S.AQ", $0f, $96
-	charmap "5F TM CORNE", $0f, $97
-	charmap "<PLAYER> registere", $0f, $98
-	charmap "Ever since ", $0f, $99
-	charmap "ANNOUNCER: ", $0f, $9a
-	charmap "spin", $0f, $9b
-	charmap "! W", $0f, $9c
-	charmap "opp", $0f, $9d
-	charmap "ace", $0f, $9e
-	charmap "dic", $0f, $9f
-	charmap "fur", $0f, $a0
-	charmap "Sun", $0f, $a1
-	charmap "add", $0f, $a2
-	charmap "S.S.AQ", $0f, $a3
-	charmap "ISLAND", $0f, $a4
-	charmap "FAST SHIP ", $0f, $a5
-	charmap "SILVER", $0f, $a6
-	charmap "SPROUT", $0f, $a7
-	charmap "al.", $0f, $a8
-	charmap " years", $0f, $a9
-	charmap "arrived in", $0f, $aa
-	charmap "POLI", $0f, $ab
-	charmap "IGHT", $0f, $ac
-	charmap "phys", $0f, $ad
-	charmap "oyalty", $0f, $ae
-	charmap "Bye-by", $0f, $af
-	charmap "BIG JA", $0f, $b0
-	charmap "COTTON", $0f, $b1
-	charmap "SUPERP", $0f, $b2
-	charmap "TADPOL", $0f, $b3
-	charmap "hug", $0f, $b4
-	charmap "MIRROR", $0f, $b5
-	charmap "Pla", $0f, $b6
-	charmap "Whoops", $0f, $b7
-	charmap " POINT", $0f, $b8
-	charmap "ARTIST", $0f, $b9
-	charmap "DIPLOM", $0f, $ba
-	charmap "SLOWBR", $0f, $bb
-	charmap "ANTIDO", $0f, $bc
-	charmap " STUDI", $0f, $bd
-	charmap "SECRET", $0f, $be
-	charmap "<PLAYER>: ", $0f, $bf
-	charmap "SWITCH", $0f, $c0
-	charmap "RECEPT", $0f, $c1
-	charmap "NICK: ", $0f, $c2
-	charmap "JOSH: ", $0f, $c3
-	charmap "SAMUEL", $0f, $c4
-	charmap "KIPP: ", $0f, $c5
-	charmap "CLUB", $0f, $c6
-	charmap "VICTOR", $0f, $c7
-	charmap "OAR!", $0f, $c8
-	charmap "SNORLA", $0f, $c9
-	charmap "ZEPHYR", $0f, $ca
-	charmap "anyone", $0f, $cb
-	charmap " the MENU.", $0f, $cc
-	charmap "o? ", $0f, $cd
-	charmap "! A ", $0f, $ce
-	charmap "okay", $0f, $cf
-	charmap "smile ", $0f, $d0
-	charmap "silver", $0f, $d1
-	charmap "! Noth", $0f, $d2
-	charmap "avoid ", $0f, $d3
-	charmap "effort", $0f, $d4
-	charmap "embarr", $0f, $d5
-	charmap "I envy you", $0f, $d6
-	charmap "Lullab", $0f, $d7
-	charmap ". No", $0f, $d8
-	charmap "my skills.", $0f, $d9
-	charmap "Heh", $0f, $da
-	charmap "iggl", $0f, $db
-	charmap "ost-", $0f, $dc
-	charmap "house ", $0f, $dd
-	charmap "win…", $0f, $de
-	charmap "gian", $0f, $df
-	charmap "alone ", $0f, $e0
-	charmap "buy ", $0f, $e1
-	charmap "Cures ", $0f, $e2
-	charmap "the author", $0f, $e3
-	charmap "afford to ", $0f, $e4
-	charmap "North ", $0f, $e5
-	charmap "s, I", $0f, $e6
-	charmap "mark", $0f, $e7
-	charmap "guard ", $0f, $e8
-	charmap "roars ", $0f, $e9
-	charmap "luster", $0f, $ea
-	charmap "Listen", $0f, $eb
-	charmap "destin", $0f, $ec
-	charmap "Myster", $0f, $ed
-	charmap "Master", $0f, $ee
-	charmap "ellow ", $0f, $ef
-	charmap "drow", $0f, $f0
-	charmap "base", $0f, $f1
-	charmap "sale", $0f, $f2
-	charmap "beacon", $0f, $f3
-	charmap "Catch ", $0f, $f4
-	charmap "charco", $0f, $f5
-	charmap "Hi. ", $0f, $f6
-	charmap "soon. ", $0f, $f7
-	charmap "Next time,", $0f, $f8
-	charmap "we arrive.", $0f, $f9
-	charmap "simply", $0f, $fa
-	charmap "books.", $0f, $fb
-	charmap "UNION CAVE", $0f, $fc
-	charmap "I'm crushed", $0f, $fd
-	charmap "class.", $0f, $fe
-	charmap "SURF east.", $0f, $ff
-	charmap " RD. AHEAD", $10, $60
-	charmap "gether", $10, $61
-	charmap "FEDERATION", $10, $62
-	charmap "mber", $10, $63
-	charmap "unfortunat", $10, $64
-	charmap "MR.FUJ", $10, $65
-	charmap "illegible…", $10, $66
-	charmap "vari", $10, $67
-	charmap "a #-", $10, $68
-	charmap " magazines", $10, $69
-	charmap " that's", $10, $6a
-	charmap "ousl", $10, $6b
-	charmap "ly,", $10, $6c
-	charmap "ROO", $10, $6d
-	charmap "EXP.", $10, $6e
-	charmap "ARD", $10, $6f
-	charmap "tip", $10, $70
-	charmap "ed out ", $10, $71
-	charmap "dur", $10, $72
-	charmap "lip", $10, $73
-	charmap "Swimm", $10, $74
-	charmap "ugg", $10, $75
-	charmap "iev", $10, $76
-	charmap "patheti", $10, $77
-	charmap "similar", $10, $78
-	charmap "hythm", $10, $79
-	charmap "rescu", $10, $7a
-	charmap "small", $10, $7b
-	charmap "sur", $10, $7c
-	charmap "loo", $10, $7d
-	charmap "content", $10, $7e
-	charmap "environ", $10, $7f
-	charmap "RATTATA", $10, $80
-	charmap "GRIMER ", $10, $81
-	charmap "d by ", $10, $82
-	charmap "From ", $10, $83
-	charmap "d it ", $10, $84
-	charmap "ets", $10, $85
-	charmap "cut", $10, $86
-	charmap "made", $10, $87
-	charmap "CHA", $10, $88
-	charmap "we'r", $10, $89
-	charmap "merchandi", $10, $8a
-	charmap "me…", $10, $8b
-	charmap "Any", $10, $8c
-	charmap "SHA", $10, $8d
-	charmap "Aww", $10, $8e
-	charmap " the best", $10, $8f
-	charmap "BAR", $10, $90
-	charmap " FA", $10, $91
-	charmap "hun", $10, $92
-	charmap "rint out ", $10, $93
-	charmap "ask", $10, $94
-	charmap "son.", $10, $95
-	charmap "ooo", $10, $96
-	charmap "50 ", $10, $97
-	charmap " CO", $10, $98
-	charmap "foe ", $10, $99
-	charmap "flu", $10, $9a
-	charmap "faint in ", $10, $9b
-	charmap "Counters ", $10, $9c
-	charmap "Pant, pan", $10, $9d
-	charmap "illuminat", $10, $9e
-	charmap "Randomly ", $10, $9f
-	charmap "disposed ", $10, $a0
-	charmap "ing SLOW-", $10, $a1
-	charmap "file. Is ", $10, $a2
-	charmap "A ticket ", $10, $a3
-	charmap "DRUG STOR", $10, $a4
-	charmap "A tackle ", $10, $a5
-	charmap "FAST SHIP", $10, $a6
-	charmap "POKETAILS", $10, $a7
-	charmap "3F BATTLE", $10, $a8
-	charmap "PAR", $10, $a9
-	charmap "0HP, HOLD", $10, $aa
-	charmap ": A", $10, $ab
-	charmap "as a", $10, $ac
-	charmap "? I", $10, $ad
-	charmap "One ", $10, $ae
-	charmap "angr", $10, $af
-	charmap "led.", $10, $b0
-	charmap "ily ", $10, $b1
-	charmap "card", $10, $b2
-	charmap ". A ", $10, $b3
-	charmap "put", $10, $b4
-	charmap "de-", $10, $b5
-	charmap "nap", $10, $b6
-	charmap "eck", $10, $b7
-	charmap "uff", $10, $b8
-	charmap "On ", $10, $b9
-	charmap "panel", $10, $ba
-	charmap "lates", $10, $bb
-	charmap "em ", $10, $bc
-	charmap "onfusion", $10, $bd
-	charmap " ROAD", $10, $be
-	charmap "ELITE", $10, $bf
-	charmap "ARK", $10, $c0
-	charmap "HEAD", $10, $c1
-	charmap "CAP", $10, $c2
-	charmap "bit ", $10, $c3
-	charmap "LAB", $10, $c4
-	charmap "yeah", $10, $c5
-	charmap "FIRE", $10, $c6
-	charmap "ARMOR", $10, $c7
-	charmap "DUCK", $10, $c8
-	charmap "sub", $10, $c9
-	charmap "TINY", $10, $ca
-	charmap "few", $10, $cb
-	charmap "PORYGO", $10, $cc
-	charmap "IRON ", $10, $cd
-	charmap "PIDGE", $10, $ce
-	charmap "CURSE", $10, $cf
-	charmap "MOVE", $10, $d0
-	charmap " MAP", $10, $d1
-	charmap "DJ ", $10, $d2
-	charmap "POOL", $10, $d3
-	charmap "judg", $10, $d4
-	charmap "BUGSY", $10, $d5
-	charmap "CHUCK", $10, $d6
-	charmap "SOUL", $10, $d7
-	charmap "ABRA", $10, $d8
-	charmap "snooz", $10, $d9
-	charmap "ROUTE", $10, $da
-	charmap "COR", $10, $db
-	charmap "OAK", $10, $dc
-	charmap ": G", $10, $dd
-	charmap "ds.", $10, $de
-	charmap "petal", $10, $df
-	charmap "eared ", $10, $e0
-	charmap "writ", $10, $e1
-	charmap "Did", $10, $e2
-	charmap "Who", $10, $e3
-	charmap "go!", $10, $e4
-	charmap "moo", $10, $e5
-	charmap "group.", $10, $e6
-	charmap "consum", $10, $e7
-	charmap "muscle", $10, $e8
-	charmap "especi", $10, $e9
-	charmap "bike", $10, $ea
-	charmap "We've ", $10, $eb
-	charmap "hero!", $10, $ec
-	charmap "sand.", $10, $ed
-	charmap "conqu", $10, $ee
-	charmap "Prett", $10, $ef
-	charmap "Fresh", $10, $f0
-	charmap "Wild ", $10, $f1
-	charmap "glad ", $10, $f2
-	charmap "marvelou", $10, $f3
-	charmap "Read it?", $10, $f4
-	charmap "pest!", $10, $f5
-	charmap "am I ", $10, $f6
-	charmap "Skilled ", $10, $f7
-	charmap "champion", $10, $f8
-	charmap "urrow", $10, $f9
-	charmap " rose", $10, $fa
-	charmap "stacles.", $10, $fb
-	charmap "flew ", $10, $fc
-	charmap " grew to", $10, $fd
-	charmap " missed!", $10, $fe
-	charmap "Arrgh", $10, $ff
+	charmap "What do you want", $03, $d5
+	charmap "OWER", $03, $d6
+	charmap "way", $03, $d7
+	charmap "caugh", $03, $d8
+	charmap "ER TIPS", $03, $d9
+	charmap "friend ", $03, $da
+	charmap "who ", $03, $db
+	charmap "before ", $03, $dc
+	charmap "ed #MON", $03, $dd
+	charmap "LAVENDER TOWN", $03, $de
+	charmap "coming ", $03, $df
+	charmap "NEW BARK TOWN", $03, $e0
+	charmap "disappointing", $03, $e1
+	charmap "HOUSE", $03, $e2
+	charmap "self", $03, $e3
+	charmap "help", $03, $e4
+	charmap "Good ", $03, $e5
+	charmap "We're ", $03, $e6
+	charmap "machin", $03, $e7
+	charmap "used ", $03, $e8
+	charmap "legendar", $03, $e9
+	charmap "I guess ", $03, $ea
+	charmap "fish", $03, $eb
+	charmap "I am", $03, $ec
+	charmap ", right?", $03, $ed
+	charmap "Don't you", $03, $ee
+	charmap "the P", $03, $ef
+	charmap "place ", $03, $f0
+	charmap "Is that ", $03, $f1
+	charmap "But you ", $03, $f2
+	charmap "DAY-CARE", $03, $f3
+	charmap "GIOVANNI", $03, $f4
+	charmap ", please", $03, $f5
+	charmap "#MON LEAGUE", $03, $f6
+	charmap "Thanks for ", $03, $f7
+	charmap "I wonder if", $03, $f8
+	charmap "I don't have", $03, $f9
+	charmap "ick", $03, $fa
+	charmap "grass", $03, $fb
+	charmap "kinds of ", $03, $fc
+	charmap "s for", $03, $fd
+	charmap "anything ", $03, $fe
+	charmap "different", $03, $ff
+	charmap ". Th", $04, $60
+	charmap "read", $04, $61
+	charmap "FUCHSI", $04, $62
+	charmap "Since ", $04, $63
+	charmap "Reduces the foe", $04, $64
+	charmap "s are ", $04, $65
+	charmap "using ", $04, $66
+	charmap "health", $04, $67
+	charmap " here.", $04, $68
+	charmap "d that", $04, $69
+	charmap "poison the foe.", $04, $6a
+	charmap "after ", $04, $6b
+	charmap "The POWER PLANT", $04, $6c
+	charmap ". I", $04, $6d
+	charmap "prett", $04, $6e
+	charmap "sorry", $04, $6f
+	charmap "faint", $04, $70
+	charmap "each", $04, $71
+	charmap "ed b", $04, $72
+	charmap "ed to", $04, $73
+	charmap "mountain", $04, $74
+	charmap "trade", $04, $75
+	charmap "Because ", $04, $76
+	charmap " up", $04, $77
+	charmap "ive", $04, $78
+	charmap "nothing", $04, $79
+	charmap "s its ", $04, $7a
+	charmap "There ", $04, $7b
+	charmap "Yo! CHAMP in", $04, $7c
+	charmap "TIME CAPSULE", $04, $7d
+	charmap "serious", $04, $7e
+	charmap "doesn't", $04, $7f
+	charmap "need to", $04, $80
+	charmap "I wanted to ", $04, $81
+	charmap "SAFARI ZONE ", $04, $82
+	charmap "If ", $04, $83
+	charmap "#GEAR", $04, $84
+	charmap "stand", $04, $85
+	charmap "hard ", $04, $86
+	charmap ", and", $04, $87
+	charmap "place", $04, $88
+	charmap " me", $04, $89
+	charmap "2-5 times", $04, $8a
+	charmap "generator", $04, $8b
+	charmap "broadcast", $04, $8c
+	charmap "training.", $04, $8d
+	charmap ". This is", $04, $8e
+	charmap "PROF.ELM ", $04, $8f
+	charmap "doing", $04, $90
+	charmap "Let's ", $04, $91
+	charmap "priz", $04, $92
+	charmap "until", $04, $93
+	charmap "skill", $04, $94
+	charmap "Which ", $04, $95
+	charmap "first ", $04, $96
+	charmap " its", $04, $97
+	charmap "The door", $04, $98
+	charmap "together", $04, $99
+	charmap "! I ", $04, $9a
+	charmap "learn", $04, $9b
+	charmap "rare ", $04, $9c
+	charmap "1st turn: ", $04, $9d
+	charmap "It's the ", $04, $9e
+	charmap "ELM: ", $04, $9f
+	charmap "moves ", $04, $a0
+	charmap "today.", $04, $a1
+	charmap "ground", $04, $a2
+	charmap "I want you to have", $04, $a3
+	charmap "opponent", $04, $a4
+	charmap "trainer!", $04, $a5
+	charmap "battles.", $04, $a6
+	charmap "Welcome!", $04, $a7
+	charmap "running ", $04, $a8
+	charmap "trees", $04, $a9
+	charmap "you can ", $04, $aa
+	charmap "more #MON.", $04, $ab
+	charmap "The FAST SHIP will", $04, $ac
+	charmap "There used to be a", $04, $ad
+	charmap "You don't have ", $04, $ae
+	charmap "I should", $04, $af
+	charmap "May I see your", $04, $b0
+	charmap "has arrived in", $04, $b1
+	charmap "day", $04, $b2
+	charmap "to your", $04, $b3
+	charmap "program", $04, $b4
+	charmap "kind of", $04, $b5
+	charmap "special", $04, $b6
+	charmap "hard", $04, $b7
+	charmap "call", $04, $b8
+	charmap "ice", $04, $b9
+	charmap "than ", $04, $ba
+	charmap "Huh?", $04, $bb
+	charmap "great ", $04, $bc
+	charmap "kind", $04, $bd
+	charmap "makes ", $04, $be
+	charmap "aves", $04, $bf
+	charmap "ated", $04, $c0
+	charmap "evolution", $04, $c1
+	charmap "young", $04, $c2
+	charmap "ed the ", $04, $c3
+	charmap "ING", $04, $c4
+	charmap "CHAMP", $04, $c5
+	charmap "suppose", $04, $c6
+	charmap "incredib", $04, $c7
+	charmap "open", $04, $c8
+	charmap "very", $04, $c9
+	charmap "POISON ", $04, $ca
+	charmap "problem", $04, $cb
+	charmap "ister", $04, $cc
+	charmap ", you're", $04, $cd
+	charmap "CHERRYGROVE", $04, $ce
+	charmap "adorable", $04, $cf
+	charmap "Steals 1/2 of the", $04, $d0
+	charmap "the foe", $04, $d1
+	charmap "A powerful ", $04, $d2
+	charmap "ive it ", $04, $d3
+	charmap "making!", $04, $d4
+	charmap "ground ", $04, $d5
+	charmap "THUNDER", $04, $d6
+	charmap "will be ", $04, $d7
+	charmap "having ", $04, $d8
+	charmap "I love ", $04, $d9
+	charmap "STATION", $04, $da
+	charmap "damage inflicted.", $04, $db
+	charmap "around the ", $04, $dc
+	charmap "That was a ", $04, $dd
+	charmap "What's this?", $04, $de
+	charmap "GAME CORNER", $04, $df
+	charmap "to see ", $04, $e0
+	charmap "s on ", $04, $e1
+	charmap "fighting", $04, $e2
+	charmap "ing that", $04, $e3
+	charmap "GOLDEN", $04, $e4
+	charmap "eople ", $04, $e5
+	charmap "hea", $04, $e6
+	charmap "not", $04, $e7
+	charmap "e'll ", $04, $e8
+	charmap "OFFICE", $04, $e9
+	charmap "even", $04, $ea
+	charmap "normal", $04, $eb
+	charmap "always", $04, $ec
+	charmap "Well, ", $04, $ed
+	charmap "off ", $04, $ee
+	charmap "Keep reading?", $04, $ef
+	charmap " it.", $04, $f0
+	charmap "stand ", $04, $f1
+	charmap "OLIVINE CITY.", $04, $f2
+	charmap "A #MON may be", $04, $f3
+	charmap "enough money.", $04, $f4
+	charmap "WHIRL ISLANDS", $04, $f5
+	charmap "an ancient #-", $04, $f6
+	charmap "NATIONAL PARK", $04, $f7
+	charmap "too strong", $04, $f8
+	charmap "with the #MON", $04, $f9
+	charmap "Your #MON are", $04, $fa
+	charmap "up ", $04, $fb
+	charmap "check", $04, $fc
+	charmap "visit", $04, $fd
+	charmap "move.", $04, $fe
+	charmap "e in ", $04, $ff
+	charmap "s of ", $05, $60
+	charmap "able", $05, $61
+	charmap "With", $05, $62
+	charmap "mean", $05, $63
+	charmap " any", $05, $64
+	charmap "new", $05, $65
+	charmap "big", $05, $66
+	charmap "Y: ", $05, $67
+	charmap "type ", $05, $68
+	charmap "acros", $05, $69
+	charmap "body", $05, $6a
+	charmap "dream", $05, $6b
+	charmap "ave ", $05, $6c
+	charmap "member", $05, $6d
+	charmap "high", $05, $6e
+	charmap "Sharply ", $05, $6f
+	charmap "level", $05, $70
+	charmap "I thought", $05, $71
+	charmap "Contest ", $05, $72
+	charmap "energy", $05, $73
+	charmap "effect", $05, $74
+	charmap "one #MON.", $05, $75
+	charmap "match", $05, $76
+	charmap "MT.SILVER", $05, $77
+	charmap "accuracy.", $05, $78
+	charmap "find ", $05, $79
+	charmap "You are ", $05, $7a
+	charmap ", no", $05, $7b
+	charmap "I didn't ", $05, $7c
+	charmap "the user", $05, $7d
+	charmap "like you.", $05, $7e
+	charmap "the CHAMP", $05, $7f
+	charmap "for your ", $05, $80
+	charmap "APRICORN", $05, $81
+	charmap "the POWER PLANT.", $05, $82
+	charmap "Please switch it", $05, $83
+	charmap "wild #MON", $05, $84
+	charmap "UNDERGROUND PATH", $05, $85
+	charmap "you want to use,", $05, $86
+	charmap "swimming", $05, $87
+	charmap "back to ", $05, $88
+	charmap " will be", $05, $89
+	charmap "defeated", $05, $8a
+	charmap "The #MON", $05, $8b
+	charmap "can't", $05, $8c
+	charmap "lov", $05, $8d
+	charmap "as a ", $05, $8e
+	charmap "s it ", $05, $8f
+	charmap "ings.", $05, $90
+	charmap "ment ", $05, $91
+	charmap "away.", $05, $92
+	charmap "care ", $05, $93
+	charmap "JASMIN", $05, $94
+	charmap "on't ", $05, $95
+	charmap "BICYCL", $05, $96
+	charmap "ed!", $05, $97
+	charmap "OK. ", $05, $98
+	charmap "JANINE", $05, $99
+	charmap "BERRIES", $05, $9a
+	charmap "MANAGER", $05, $9b
+	charmap "Hi, <PLAYER>!", $05, $9c
+	charmap "don't", $05, $9d
+	charmap "Trainer", $05, $9e
+	charmap "person", $05, $9f
+	charmap "care", $05, $a0
+	charmap "too!", $05, $a1
+	charmap "flinching.", $05, $a2
+	charmap "me, ", $05, $a3
+	charmap "ed a", $05, $a4
+	charmap "Here you go!", $05, $a5
+	charmap ", so", $05, $a6
+	charmap "This is", $05, $a7
+	charmap "SUBSTITUTE", $05, $a8
+	charmap "you want to ", $05, $a9
+	charmap "do you", $05, $aa
+	charmap "OK, ", $05, $ab
+	charmap "Grandpa", $05, $ac
+	charmap "KIMONO GIRLS", $05, $ad
+	charmap "to do ", $05, $ae
+	charmap "give me", $05, $af
+	charmap "to see", $05, $b0
+	charmap "But it ", $05, $b1
+	charmap "forget ", $05, $b2
+	charmap "before.", $05, $b3
+	charmap " #MON!", $05, $b4
+	charmap "However", $05, $b5
+	charmap "trade ", $05, $b6
+	charmap "different ", $05, $b7
+	charmap "What? You ", $05, $b8
+	charmap "type #MON.", $05, $b9
+	charmap "Come back ", $05, $ba
+	charmap "JASMINE: …", $05, $bb
+	charmap "ing my", $05, $bc
+	charmap "because of", $05, $bd
+	charmap "-type moves.", $05, $be
+	charmap "ing for you.", $05, $bf
+	charmap "Good evening", $05, $c0
+	charmap "CINNABAR GYM", $05, $c1
+	charmap "electricity.", $05, $c2
+	charmap "! You ", $05, $c3
+	charmap "ake ", $05, $c4
+	charmap "RADIO", $05, $c5
+	charmap "STONE", $05, $c6
+	charmap "conf", $05, $c7
+	charmap "ather", $05, $c8
+	charmap "in a ", $05, $c9
+	charmap "ahaha", $05, $ca
+	charmap "ed th", $05, $cb
+	charmap "fast", $05, $cc
+	charmap "uses ", $05, $cd
+	charmap "contains", $05, $ce
+	charmap "sure", $05, $cf
+	charmap "in VIOLET CITY.", $05, $d0
+	charmap "A self-cure for", $05, $d1
+	charmap "to take ", $05, $d2
+	charmap "BLACKTHORN CITY", $05, $d3
+	charmap "building", $05, $d4
+	charmap "ness", $05, $d5
+	charmap "moves.", $05, $d6
+	charmap "paraly", $05, $d7
+	charmap "disapp", $05, $d8
+	charmap "own ", $05, $d9
+	charmap "little", $05, $da
+	charmap "ice ", $05, $db
+	charmap ", then", $05, $dc
+	charmap "charge", $05, $dd
+	charmap "e me", $05, $de
+	charmap "did ", $05, $df
+	charmap "break", $05, $e0
+	charmap "morning", $05, $e1
+	charmap "# BALLS", $05, $e2
+	charmap "shock", $05, $e3
+	charmap "s in ", $05, $e4
+	charmap " has ", $05, $e5
+	charmap "complet", $05, $e6
+	charmap " on its", $05, $e7
+	charmap "rain", $05, $e8
+	charmap "ION", $05, $e9
+	charmap "al ", $05, $ea
+	charmap "SPEED", $05, $eb
+	charmap "girl", $05, $ec
+	charmap "# DOLL", $05, $ed
+	charmap "Uh-oh…", $05, $ee
+	charmap "switch", $05, $ef
+	charmap "world", $05, $f0
+	charmap "battl", $05, $f1
+	charmap "abilit", $05, $f2
+	charmap "happy.", $05, $f3
+	charmap "HEADBUTT", $05, $f4
+	charmap "many", $05, $f5
+	charmap "stud", $05, $f6
+	charmap "pleas", $05, $f7
+	charmap "finish", $05, $f8
+	charmap "MONICA", $05, $f9
+	charmap "importan", $05, $fa
+	charmap "e of ", $05, $fb
+	charmap "Raises the ", $05, $fc
+	charmap "master", $05, $fd
+	charmap "record", $05, $fe
+	charmap "ature", $05, $ff
+	charmap "best ", $06, $60
+	charmap "A BALL for ", $06, $61
+	charmap "LT.SURGE", $06, $62
+	charmap "STORAGE SYSTEM", $06, $63
+	charmap "Then ", $06, $64
+	charmap "Ah, ", $06, $65
+	charmap "coming", $06, $66
+	charmap ", I'll", $06, $67
+	charmap "KURT: ", $06, $68
+	charmap "carry any more", $06, $69
+	charmap " #MON?", $06, $6a
+	charmap "go to", $06, $6b
+	charmap "the world's ", $06, $6c
+	charmap "All ", $06, $6d
+	charmap "could be", $06, $6e
+	charmap "GYARADOS", $06, $6f
+	charmap "Oh, you ", $06, $70
+	charmap "did you ", $06, $71
+	charmap "INDIGO PLATEAU", $06, $72
+	charmap "e Bug-Catching", $06, $73
+	charmap "STRENGTH", $06, $74
+	charmap "The b", $06, $75
+	charmap "#MON is ", $06, $76
+	charmap "I had ", $06, $77
+	charmap "the power ", $06, $78
+	charmap "I could ", $06, $79
+	charmap "didn't", $06, $7a
+	charmap "It's been a ", $06, $7b
+	charmap "I see ", $06, $7c
+	charmap "cool", $06, $7d
+	charmap " you're ", $06, $7e
+	charmap "Contest", $06, $7f
+	charmap "haven't ", $06, $80
+	charmap "DAISY: ", $06, $81
+	charmap "SANDSTORM", $06, $82
+	charmap "ose ", $06, $83
+	charmap "day ", $06, $84
+	charmap "bird #MON", $06, $85
+	charmap "Will you ", $06, $86
+	charmap "anywhere.", $06, $87
+	charmap "TIN TOWER", $06, $88
+	charmap "closed…", $06, $89
+	charmap "already", $06, $8a
+	charmap "this TM", $06, $8b
+	charmap "well", $06, $8c
+	charmap "ID number", $06, $8d
+	charmap "perfect", $06, $8e
+	charmap "Let's see…", $06, $8f
+	charmap "rail PASS", $06, $90
+	charmap "I'll be ", $06, $91
+	charmap "became ", $06, $92
+	charmap "brother", $06, $93
+	charmap "y grand", $06, $94
+	charmap "ed m", $06, $95
+	charmap "s to be", $06, $96
+	charmap "say ", $06, $97
+	charmap "to you.", $06, $98
+	charmap "like you ", $06, $99
+	charmap "makes me ", $06, $9a
+	charmap "SILPH CO.", $06, $9b
+	charmap "like the ", $06, $9c
+	charmap "ready for", $06, $9d
+	charmap "someone", $06, $9e
+	charmap "allow", $06, $9f
+	charmap "The c", $06, $a0
+	charmap "inter", $06, $a1
+	charmap "sav", $06, $a2
+	charmap " is a", $06, $a3
+	charmap "tain", $06, $a4
+	charmap "find", $06, $a5
+	charmap "only", $06, $a6
+	charmap "victim", $06, $a7
+	charmap "breath", $06, $a8
+	charmap " by ", $06, $a9
+	charmap "stop", $06, $aa
+	charmap "out of", $06, $ab
+	charmap "these ", $06, $ac
+	charmap "which ", $06, $ad
+	charmap "It s", $06, $ae
+	charmap "last", $06, $af
+	charmap "wings ", $06, $b0
+	charmap "ment", $06, $b1
+	charmap "lot", $06, $b2
+	charmap " as ", $06, $b3
+	charmap "buil", $06, $b4
+	charmap "CLAIR", $06, $b5
+	charmap "ious", $06, $b6
+	charmap "comp", $06, $b7
+	charmap "super", $06, $b8
+	charmap ", kid", $06, $b9
+	charmap "ERIKA", $06, $ba
+	charmap "print", $06, $bb
+	charmap "ink ", $06, $bc
+	charmap "plan", $06, $bd
+	charmap "increase", $06, $be
+	charmap "free", $06, $bf
+	charmap "both", $06, $c0
+	charmap "still", $06, $c1
+	charmap "watch", $06, $c2
+	charmap " the Game Boy", $06, $c3
+	charmap "never misses.", $06, $c4
+	charmap "appreciation.", $06, $c5
+	charmap "consider", $06, $c6
+	charmap "left ", $06, $c7
+	charmap "ahead", $06, $c8
+	charmap "s, it", $06, $c9
+	charmap "you'll", $06, $ca
+	charmap " them", $06, $cb
+	charmap "inflict", $06, $cc
+	charmap "psychic", $06, $cd
+	charmap "continu", $06, $ce
+	charmap "awesome", $06, $cf
+	charmap " if", $06, $d0
+	charmap "er than", $06, $d1
+	charmap "almost ", $06, $d2
+	charmap "IGHT", $06, $d3
+	charmap "ame", $06, $d4
+	charmap "EGG", $06, $d5
+	charmap "TAIL", $06, $d6
+	charmap "journe", $06, $d7
+	charmap "city", $06, $d8
+	charmap "wonder", $06, $d9
+	charmap "worr", $06, $da
+	charmap "Darn", $06, $db
+	charmap "POTION", $06, $dc
+	charmap "fell", $06, $dd
+	charmap "FARFETCH'D", $06, $de
+	charmap "Use ", $06, $df
+	charmap "Well done!", $06, $e0
+	charmap "and confuses user.", $06, $e1
+	charmap "the grass.", $06, $e2
+	charmap "Restores HP by 1/2", $06, $e3
+	charmap "able to move this.", $06, $e4
+	charmap ", I'm", $06, $e5
+	charmap "It c", $06, $e6
+	charmap "BALLS ", $06, $e7
+	charmap "to battle.", $06, $e8
+	charmap "You're the ", $06, $e9
+	charmap "That's too ", $06, $ea
+	charmap " in KANTO.", $06, $eb
+	charmap " next time", $06, $ec
+	charmap "rare #MON.", $06, $ed
+	charmap "Let me demonstrate", $06, $ee
+	charmap "How would you like", $06, $ef
+	charmap "in GOLDENROD CITY.", $06, $f0
+	charmap "ible", $06, $f1
+	charmap "next ", $06, $f2
+	charmap "floor", $06, $f3
+	charmap "strik", $06, $f4
+	charmap "this.", $06, $f5
+	charmap "black", $06, $f6
+	charmap "to do", $06, $f7
+	charmap "Some ", $06, $f8
+	charmap "enter", $06, $f9
+	charmap "and s", $06, $fa
+	charmap "a bit", $06, $fb
+	charmap "stronger.", $06, $fc
+	charmap "more than", $06, $fd
+	charmap "ed in", $06, $fe
+	charmap "burn", $06, $ff
+	charmap "swim", $07, $60
+	charmap "air", $07, $61
+	charmap "ook", $07, $62
+	charmap "sinc", $07, $63
+	charmap "hone", $07, $64
+	charmap "goes", $07, $65
+	charmap "ies.", $07, $66
+	charmap "ail", $07, $67
+	charmap "sai", $07, $68
+	charmap "tru", $07, $69
+	charmap "RUINS", $07, $6a
+	charmap "BILL", $07, $6b
+	charmap "come see me.", $07, $6c
+	charmap "most ", $07, $6d
+	charmap "PUNCH", $07, $6e
+	charmap "MIST", $07, $6f
+	charmap "him", $07, $70
+	charmap "Whoa", $07, $71
+	charmap "fore", $07, $72
+	charmap "MYSTERY", $07, $73
+	charmap "FALKNER", $07, $74
+	charmap "Wow! ", $07, $75
+	charmap "wrong", $07, $76
+	charmap "ually ", $07, $77
+	charmap "SUPER", $07, $78
+	charmap "wish ", $07, $79
+	charmap "amazing", $07, $7a
+	charmap "secret ", $07, $7b
+	charmap "SPCL.DEF", $07, $7c
+	charmap "winn", $07, $7d
+	charmap "must", $07, $7e
+	charmap "Saturday", $07, $7f
+	charmap "couldn't", $07, $80
+	charmap "took ", $07, $81
+	charmap "anyone ", $07, $82
+	charmap "itter", $07, $83
+	charmap "Prepare", $07, $84
+	charmap "should I do?", $07, $85
+	charmap "stairs.", $07, $86
+	charmap "stant", $07, $87
+	charmap "put ", $07, $88
+	charmap "hatch", $07, $89
+	charmap "The way you ", $07, $8a
+	charmap "…Humph!", $07, $8b
+	charmap "DRAGON'S DEN", $07, $8c
+	charmap "I know! ", $07, $8d
+	charmap "Bug-Catching Con-", $07, $8e
+	charmap "daughter", $07, $8f
+	charmap "see how", $07, $90
+	charmap "needs ", $07, $91
+	charmap "do with", $07, $92
+	charmap "in JOHTO", $07, $93
+	charmap "What is this", $07, $94
+	charmap "lection", $07, $95
+	charmap "a long ", $07, $96
+	charmap "with me?", $07, $97
+	charmap "Hey! ", $07, $98
+	charmap "The SLOWPOKE have", $07, $99
+	charmap "learned", $07, $9a
+	charmap "#MON CHANNEL", $07, $9b
+	charmap "Take good care of", $07, $9c
+	charmap "lives ", $07, $9d
+	charmap "to make ", $07, $9e
+	charmap "ing its ", $07, $9f
+	charmap "trainer…", $07, $a0
+	charmap "BADGES.", $07, $a1
+	charmap "can't be ", $07, $a2
+	charmap "I can se", $07, $a3
+	charmap "numbers.", $07, $a4
+	charmap "I found ", $07, $a5
+	charmap "MILTANK ", $07, $a6
+	charmap "said to ", $07, $a7
+	charmap "ENTRANCE", $07, $a8
+	charmap "to play", $07, $a9
+	charmap "is full.", $07, $aa
+	charmap "through.", $07, $ab
+	charmap "I thought I ", $07, $ac
+	charmap "islands", $07, $ad
+	charmap "(varies by time).", $07, $ae
+	charmap "boulder", $07, $af
+	charmap "ful", $07, $b0
+	charmap "sign", $07, $b1
+	charmap "ture", $07, $b2
+	charmap "enem", $07, $b3
+	charmap "dark", $07, $b4
+	charmap ", we", $07, $b5
+	charmap "e it ", $07, $b6
+	charmap "tired", $07, $b7
+	charmap "s are", $07, $b8
+	charmap "worth", $07, $b9
+	charmap "ical ", $07, $ba
+	charmap "tail ", $07, $bb
+	charmap "tree ", $07, $bc
+	charmap "bring", $07, $bd
+	charmap "alone", $07, $be
+	charmap "e you ", $07, $bf
+	charmap "ock", $07, $c0
+	charmap "LAVEND", $07, $c1
+	charmap "GROUND", $07, $c2
+	charmap "HP by ", $07, $c3
+	charmap "user", $07, $c4
+	charmap "eep ", $07, $c5
+	charmap "AZALEA", $07, $c6
+	charmap "SQUARE", $07, $c7
+	charmap "ARTHUR", $07, $c8
+	charmap "at all", $07, $c9
+	charmap " my", $07, $ca
+	charmap "POWDER", $07, $cb
+	charmap "failed", $07, $cc
+	charmap "… I ", $07, $cd
+	charmap "Prevents ", $07, $ce
+	charmap "ed out", $07, $cf
+	charmap "Why ", $07, $d0
+	charmap "travel", $07, $d1
+	charmap "visit ", $07, $d2
+	charmap "WATERFALL", $07, $d3
+	charmap "a lot ", $07, $d4
+	charmap "town", $07, $d5
+	charmap " so ", $07, $d6
+	charmap "ten ", $07, $d7
+	charmap "Battle", $07, $d8
+	charmap "with you.", $07, $d9
+	charmap "time to use that", $07, $da
+	charmap "I'll show you how", $07, $db
+	charmap "COPYCAT: ", $07, $dc
+	charmap "an EGG", $07, $dd
+	charmap "items.", $07, $de
+	charmap "has a ", $07, $df
+	charmap " one", $07, $e0
+	charmap "ought ", $07, $e1
+	charmap "right.", $07, $e2
+	charmap "I'm going to be a", $07, $e3
+	charmap "weird ", $07, $e4
+	charmap "status problems.", $07, $e5
+	charmap "danc", $07, $e6
+	charmap "to my ", $07, $e7
+	charmap "LEAGUE challenge", $07, $e8
+	charmap "Don't get ", $07, $e9
+	charmap "PROF.ELM.", $07, $ea
+	charmap "Wow, you ", $07, $eb
+	charmap "Please make room", $07, $ec
+	charmap "If you're ", $07, $ed
+	charmap "It's important to", $07, $ee
+	charmap "Welcome to CABLE", $07, $ef
+	charmap "there are ", $07, $f0
+	charmap "medicin", $07, $f1
+	charmap "steadil", $07, $f2
+	charmap "between", $07, $f3
+	charmap "scatter", $07, $f4
+	charmap "It can ", $07, $f5
+	charmap "evolve.", $07, $f6
+	charmap "a burn.", $07, $f7
+	charmap "me.", $07, $f8
+	charmap "eas", $07, $f9
+	charmap "ROD", $07, $fa
+	charmap "road", $07, $fb
+	charmap "statu", $07, $fc
+	charmap "fire", $07, $fd
+	charmap "Although", $07, $fe
+	charmap "It's labeled", $07, $ff
+	charmap "Printer Man", $08, $60
+	charmap " isn't", $08, $61
+	charmap "ance", $08, $62
+	charmap "they'r", $08, $63
+	charmap "prey", $08, $64
+	charmap "ress ", $08, $65
+	charmap "home ", $08, $66
+	charmap "take you on", $08, $67
+	charmap "I'm impresse", $08, $68
+	charmap "Check out m", $08, $69
+	charmap "talk ", $08, $6a
+	charmap "collect ", $08, $6b
+	charmap "told ", $08, $6c
+	charmap "certain ", $08, $6d
+	charmap "s its", $08, $6e
+	charmap "you should ", $08, $6f
+	charmap "every turn.", $08, $70
+	charmap "burned down", $08, $71
+	charmap "stone panel", $08, $72
+	charmap "Travel Tip ", $08, $73
+	charmap "I see", $08, $74
+	charmap "seen ", $08, $75
+	charmap "ing and ", $08, $76
+	charmap "make you", $08, $77
+	charmap ", it can", $08, $78
+	charmap " into", $08, $79
+	charmap "whi", $08, $7a
+	charmap "act", $08, $7b
+	charmap "ack", $08, $7c
+	charmap "Hey", $08, $7d
+	charmap "ly.", $08, $7e
+	charmap "ter ", $08, $7f
+	charmap "FISH", $08, $80
+	charmap "old ", $08, $81
+	charmap "Our ", $08, $82
+	charmap "DIGLET", $08, $83
+	charmap "does", $08, $84
+	charmap "ear ", $08, $85
+	charmap " has", $08, $86
+	charmap "world ", $08, $87
+	charmap "dist", $08, $88
+	charmap " My ", $08, $89
+	charmap "try ", $08, $8a
+	charmap "He's ", $08, $8b
+	charmap "now ", $08, $8c
+	charmap "to fall asleep.", $08, $8d
+	charmap "You and your #-", $08, $8e
+	charmap "I would love to", $08, $8f
+	charmap "being adjusted.", $08, $90
+	charmap "hurts the user.", $08, $91
+	charmap "whole ", $08, $92
+	charmap "t and ", $08, $93
+	charmap "People and #MON", $08, $94
+	charmap "CELADON MANSION", $08, $95
+	charmap "Works 2-3 turns", $08, $96
+	charmap "where.", $08, $97
+	charmap "explor", $08, $98
+	charmap "Thank you, sir!", $08, $99
+	charmap "lower SPCL.DEF.", $08, $9a
+	charmap "the foe's SPEED.", $08, $9b
+	charmap "the re", $08, $9c
+	charmap "rac", $08, $9d
+	charmap "May ", $08, $9e
+	charmap "it is ", $08, $9f
+	charmap "pro", $08, $a0
+	charmap "short", $08, $a1
+	charmap "child", $08, $a2
+	charmap "! I", $08, $a3
+	charmap "ious ", $08, $a4
+	charmap "less ", $08, $a5
+	charmap "shall", $08, $a6
+	charmap "part ", $08, $a7
+	charmap "s out", $08, $a8
+	charmap "wings", $08, $a9
+	charmap "ers.", $08, $aa
+	charmap "if ", $08, $ab
+	charmap "she", $08, $ac
+	charmap "used", $08, $ad
+	charmap "ect ", $08, $ae
+	charmap "respect", $08, $af
+	charmap "to win ", $08, $b0
+	charmap "all the", $08, $b1
+	charmap "anymore", $08, $b2
+	charmap "behind ", $08, $b3
+	charmap "It's so ", $08, $b4
+	charmap "I came ", $08, $b5
+	charmap "to make", $08, $b6
+	charmap "may be ", $08, $b7
+	charmap "reduces", $08, $b8
+	charmap "with a ", $08, $b9
+	charmap "it can ", $08, $ba
+	charmap "useless", $08, $bb
+	charmap "eal", $08, $bc
+	charmap "sion", $08, $bd
+	charmap "imp", $08, $be
+	charmap "comes to ", $08, $bf
+	charmap "DEFENS", $08, $c0
+	charmap "damag", $08, $c1
+	charmap "DRAGON", $08, $c2
+	charmap " think", $08, $c3
+	charmap "part", $08, $c4
+	charmap "aaah!", $08, $c5
+	charmap "Check", $08, $c6
+	charmap "ast ", $08, $c7
+	charmap "uck", $08, $c8
+	charmap "SPECIA", $08, $c9
+	charmap " BOX", $08, $ca
+	charmap "(1 BTL", $08, $cb
+	charmap "MOOMOO", $08, $cc
+	charmap "SQUIRT", $08, $cd
+	charmap "SANTOS", $08, $ce
+	charmap "Chew…", $08, $cf
+	charmap "TUSCAN", $08, $d0
+	charmap "FRIEDA", $08, $d1
+	charmap "What's th", $08, $d2
+	charmap "TEAM", $08, $d3
+	charmap "OAK: ", $08, $d4
+	charmap "tree", $08, $d5
+	charmap " they", $08, $d6
+	charmap ", huh?", $08, $d7
+	charmap ", that's ", $08, $d8
+	charmap "PEWTER", $08, $d9
+	charmap "souvenir", $08, $da
+	charmap "board", $08, $db
+	charmap "investig", $08, $dc
+	charmap "strength", $08, $dd
+	charmap "angler", $08, $de
+	charmap "rare", $08, $df
+	charmap "Fully ", $08, $e0
+	charmap "home", $08, $e1
+	charmap "Someone ", $08, $e2
+	charmap "Thursday", $08, $e3
+	charmap "participat", $08, $e4
+	charmap "happ", $08, $e5
+	charmap "using", $08, $e6
+	charmap "ress", $08, $e7
+	charmap " it!", $08, $e8
+	charmap "wind", $08, $e9
+	charmap "Friday", $08, $ea
+	charmap " me ", $08, $eb
+	charmap "I wish you", $08, $ec
+	charmap "Daylight", $08, $ed
+	charmap "recovered ", $08, $ee
+	charmap "ROCK SMASH", $08, $ef
+	charmap "CITY", $08, $f0
+	charmap "Don't be ", $08, $f1
+	charmap "Lowers the foe", $08, $f2
+	charmap "BILL's PC", $08, $f3
+	charmap "System opened.", $08, $f4
+	charmap "Eliminates all", $08, $f5
+	charmap "near", $08, $f6
+	charmap "ward", $08, $f7
+	charmap " is a ", $08, $f8
+	charmap "tower", $08, $f9
+	charmap " this.", $08, $fa
+	charmap "this far", $08, $fb
+	charmap "Take this ", $08, $fc
+	charmap "I knew", $08, $fd
+	charmap "taken over", $08, $fe
+	charmap "depart", $08, $ff
+	charmap ". Please", $09, $60
+	charmap "<PLAYER> opened a", $09, $61
+	charmap "A #MON statue…", $09, $62
+	charmap "JIGGLYPUFF", $09, $63
+	charmap "token of", $09, $64
+	charmap "s at ", $09, $65
+	charmap "See you later!", $09, $66
+	charmap "So you", $09, $67
+	charmap "done ", $09, $68
+	charmap "right?", $09, $69
+	charmap "give you", $09, $6a
+	charmap "closed", $09, $6b
+	charmap "Here ", $09, $6c
+	charmap " you a", $09, $6d
+	charmap " how", $09, $6e
+	charmap "thank", $09, $6f
+	charmap "trainer?", $09, $70
+	charmap "from my ", $09, $71
+	charmap "can beat", $09, $72
+	charmap "But it's ", $09, $73
+	charmap "SAFFRON ", $09, $74
+	charmap "BICYCLE.", $09, $75
+	charmap "show m", $09, $76
+	charmap "A #MON holding", $09, $77
+	charmap "We were ", $09, $78
+	charmap "I might ", $09, $79
+	charmap "for 2-5 turns.", $09, $7a
+	charmap "sense", $09, $7b
+	charmap "out of the", $09, $7c
+	charmap "h! ", $09, $7d
+	charmap "rag", $09, $7e
+	charmap "tri", $09, $7f
+	charmap "ted", $09, $80
+	charmap "sid", $09, $81
+	charmap "rand", $09, $82
+	charmap "safe", $09, $83
+	charmap "form", $09, $84
+	charmap "man ", $09, $85
+	charmap " an ", $09, $86
+	charmap "d up", $09, $87
+	charmap "may", $09, $88
+	charmap "spe", $09, $89
+	charmap "MAR", $09, $8a
+	charmap "lease", $09, $8b
+	charmap " though", $09, $8c
+	charmap "count", $09, $8d
+	charmap "sharp", $09, $8e
+	charmap "destroy", $09, $8f
+	charmap ". How", $09, $90
+	charmap "s and", $09, $91
+	charmap "ordinar", $09, $92
+	charmap "inguish", $09, $93
+	charmap "rock-", $09, $94
+	charmap "As a ", $09, $95
+	charmap "order", $09, $96
+	charmap "asleep.", $09, $97
+	charmap " one ", $09, $98
+	charmap "prove", $09, $99
+	charmap "called ", $09, $9a
+	charmap " again.", $09, $9b
+	charmap " power.", $09, $9c
+	charmap "wee", $09, $9d
+	charmap "es in", $09, $9e
+	charmap "ect", $09, $9f
+	charmap "ANCE", $09, $a0
+	charmap "ROCK", $09, $a1
+	charmap "nee", $09, $a2
+	charmap "got", $09, $a3
+	charmap "SURF", $09, $a4
+	charmap "rlpool", $09, $a5
+	charmap "fun", $09, $a6
+	charmap "cogniz", $09, $a7
+	charmap "Hi! ", $09, $a8
+	charmap "oint", $09, $a9
+	charmap "fly", $09, $aa
+	charmap "grass ", $09, $ab
+	charmap "volcan", $09, $ac
+	charmap "any-", $09, $ad
+	charmap "land", $09, $ae
+	charmap "were", $09, $af
+	charmap "danger", $09, $b0
+	charmap "guy ", $09, $b1
+	charmap "quite ", $09, $b2
+	charmap "he's ", $09, $b3
+	charmap "prepar", $09, $b4
+	charmap "Oh, fine then", $09, $b5
+	charmap "I'm sorry--the", $09, $b6
+	charmap "How's it going", $09, $b7
+	charmap "5F DIRECTOR'S", $09, $b8
+	charmap "For ", $09, $b9
+	charmap "useful", $09, $ba
+	charmap "the greatest ", $09, $bb
+	charmap "if it ", $09, $bc
+	charmap "s. It ", $09, $bd
+	charmap " off", $09, $be
+	charmap "seeing", $09, $bf
+	charmap "eyes", $09, $c0
+	charmap "The power of ", $09, $c1
+	charmap "with my #MON.", $09, $c2
+	charmap "A little girl", $09, $c3
+	charmap "4F PRODUCTION", $09, $c4
+	charmap "ump", $09, $c5
+	charmap "ally", $09, $c6
+	charmap "UNDER", $09, $c7
+	charmap "duc", $09, $c8
+	charmap "WATER", $09, $c9
+	charmap "one.", $09, $ca
+	charmap "REPEL", $09, $cb
+	charmap "WESLE", $09, $cc
+	charmap "PRYCE", $09, $cd
+	charmap "stuff", $09, $ce
+	charmap "less", $09, $cf
+	charmap "That's", $09, $d0
+	charmap "convenien", $09, $d1
+	charmap "Saving Ti", $09, $d2
+	charmap "PLANT", $09, $d3
+	charmap "RAGECANDY", $09, $d4
+	charmap "ely ", $09, $d5
+	charmap "eat ", $09, $d6
+	charmap "left", $09, $d7
+	charmap "struction", $09, $d8
+	charmap "After all", $09, $d9
+	charmap "ill ", $09, $da
+	charmap "mimic", $09, $db
+	charmap "cent ", $09, $dc
+	charmap "names", $09, $dd
+	charmap "on a ", $09, $de
+	charmap "wherever", $09, $df
+	charmap "quick", $09, $e0
+	charmap "block", $09, $e1
+	charmap "BLAIN", $09, $e2
+	charmap " HEAL", $09, $e3
+	charmap "sent ", $09, $e4
+	charmap "TRAINER'S", $09, $e5
+	charmap "anywhere ", $09, $e6
+	charmap "Bug #MON ", $09, $e7
+	charmap "Hey, you!", $09, $e8
+	charmap "Everyone ", $09, $e9
+	charmap "NIGHTMARE", $09, $ea
+	charmap "test ", $09, $eb
+	charmap " to the ", $09, $ec
+	charmap "nce ", $09, $ed
+	charmap "This GYM ", $09, $ee
+	charmap " yourself", $09, $ef
+	charmap "you'll be ", $09, $f0
+	charmap "SABRINA: ", $09, $f1
+	charmap "you. ", $09, $f2
+	charmap "to go", $09, $f3
+	charmap "playing ", $09, $f4
+	charmap "flame", $09, $f5
+	charmap "o! ", $09, $f6
+	charmap "ed an", $09, $f7
+	charmap "alk", $09, $f8
+	charmap "ass", $09, $f9
+	charmap "col", $09, $fa
+	charmap "eir", $09, $fb
+	charmap "MAGNET", $09, $fc
+	charmap "Welcom", $09, $fd
+	charmap "pla", $09, $fe
+	charmap "MILTAN", $09, $ff
+	charmap "ell ", $0a, $60
+	charmap "SILVER", $0a, $61
+	charmap "NNEL", $0a, $62
+	charmap "SAFFRO", $0a, $63
+	charmap "Whew", $0a, $64
+	charmap "defeat", $0a, $65
+	charmap "MACH", $0a, $66
+	charmap "BOTTLE", $0a, $67
+	charmap "saw", $0a, $68
+	charmap "VOLCAN", $0a, $69
+	charmap "Hm? ", $0a, $6a
+	charmap "PIKACH", $0a, $6b
+	charmap "Oh? ", $0a, $6c
+	charmap "PALLET", $0a, $6d
+	charmap "rid", $0a, $6e
+	charmap ". W", $0a, $6f
+	charmap "fabulou", $0a, $70
+	charmap "enjoyed", $0a, $71
+	charmap "A self-", $0a, $72
+	charmap "Strong", $0a, $73
+	charmap ", dude", $0a, $74
+	charmap "Wednes", $0a, $75
+	charmap "boss", $0a, $76
+	charmap "control", $0a, $77
+	charmap "announc", $0a, $78
+	charmap "Boosts ", $0a, $79
+	charmap "DRAGON ", $0a, $7a
+	charmap "RAINBOW", $0a, $7b
+	charmap "myster", $0a, $7c
+	charmap "serv", $0a, $7d
+	charmap "Who ", $0a, $7e
+	charmap "Not ", $0a, $7f
+	charmap "She ", $0a, $80
+	charmap "ake it ", $0a, $81
+	charmap "hand", $0a, $82
+	charmap "It's a poster", $0a, $83
+	charmap "Today's ", $0a, $84
+	charmap "Sunday", $0a, $85
+	charmap "Yo, CHAMP in", $0a, $86
+	charmap "affect", $0a, $87
+	charmap "Give a nickn", $0a, $88
+	charmap "future ", $0a, $89
+	charmap "SERVICE", $0a, $8a
+	charmap "MOUNT MORTAR", $0a, $8b
+	charmap "s. ", $0a, $8c
+	charmap "n't the", $0a, $8d
+	charmap ", you've", $0a, $8e
+	charmap "So, ", $0a, $8f
+	charmap ". Come", $0a, $90
+	charmap "forget", $0a, $91
+	charmap "stat changes", $0a, $92
+	charmap "critical hit", $0a, $93
+	charmap "Thanks, guy!", $0a, $94
+	charmap "My daughter ", $0a, $95
+	charmap "BURNED TOWER", $0a, $96
+	charmap "Now ", $0a, $97
+	charmap "This #MON ", $0a, $98
+	charmap "right!", $0a, $99
+	charmap "<PLAYER> got ", $0a, $9a
+	charmap "Be careful", $0a, $9b
+	charmap "# BALL", $0a, $9c
+	charmap "let you", $0a, $9d
+	charmap "up the ", $0a, $9e
+	charmap "This can't be", $0a, $9f
+	charmap "getting", $0a, $a0
+	charmap "Your #DEX is", $0a, $a1
+	charmap "You seem to ", $0a, $a2
+	charmap "damage.", $0a, $a3
+	charmap "caught!", $0a, $a4
+	charmap "ically", $0a, $a5
+	charmap "forgot", $0a, $a6
+	charmap "An EGG ", $0a, $a7
+	charmap "who caught a", $0a, $a8
+	charmap "a COIN CASE.", $0a, $a9
+	charmap "Your PACK is", $0a, $aa
+	charmap "double ", $0a, $ab
+	charmap "DRAGONBREATH", $0a, $ac
+	charmap "policy is to", $0a, $ad
+	charmap "Wow,", $0a, $ae
+	charmap " than ", $0a, $af
+	charmap "take a ", $0a, $b0
+	charmap "ped ", $0a, $b1
+	charmap "AKE", $0a, $b2
+	charmap "seas", $0a, $b3
+	charmap " years", $0a, $b4
+	charmap "exp", $0a, $b5
+	charmap "hid", $0a, $b6
+	charmap "trans", $0a, $b7
+	charmap "such ", $0a, $b8
+	charmap "terri", $0a, $b9
+	charmap "ance ", $0a, $ba
+	charmap "ally ", $0a, $bb
+	charmap "atter", $0a, $bc
+	charmap "house", $0a, $bd
+	charmap "begin", $0a, $be
+	charmap "climb", $0a, $bf
+	charmap "of a ", $0a, $c0
+	charmap "e per", $0a, $c1
+	charmap "ELM", $0a, $c2
+	charmap "rais", $0a, $c3
+	charmap "bird", $0a, $c4
+	charmap "spir", $0a, $c5
+	charmap "carr", $0a, $c6
+	charmap "ost ", $0a, $c7
+	charmap "larg", $0a, $c8
+	charmap "tast", $0a, $c9
+	charmap "hair", $0a, $ca
+	charmap "comm", $0a, $cb
+	charmap "lent", $0a, $cc
+	charmap "seem", $0a, $cd
+	charmap "pos", $0a, $ce
+	charmap " RO", $0a, $cf
+	charmap "bug", $0a, $d0
+	charmap "EAR", $0a, $d1
+	charmap "cent", $0a, $d2
+	charmap "differ", $0a, $d3
+	charmap "We hope ", $0a, $d4
+	charmap "KURT", $0a, $d5
+	charmap "COIN CAS", $0a, $d6
+	charmap "'S ", $0a, $d7
+	charmap "one!", $0a, $d8
+	charmap "EEVEE", $0a, $d9
+	charmap "FIRE", $0a, $da
+	charmap "MUSIC", $0a, $db
+	charmap "SPIKE", $0a, $dc
+	charmap "MOUSE", $0a, $dd
+	charmap "BIRD", $0a, $de
+	charmap "develo", $0a, $df
+	charmap "5 turns.", $0a, $e0
+	charmap "surpri", $0a, $e1
+	charmap "boy", $0a, $e2
+	charmap "Yeah", $0a, $e3
+	charmap "scary", $0a, $e4
+	charmap "acc", $0a, $e5
+	charmap "depend", $0a, $e6
+	charmap "famou", $0a, $e7
+	charmap "determin", $0a, $e8
+	charmap "dear.", $0a, $e9
+	charmap "ING DOJO", $0a, $ea
+	charmap "T'S CAVE", $0a, $eb
+	charmap "CARD KEY", $0a, $ec
+	charmap "CHARCOAL", $0a, $ed
+	charmap "TELEPORT", $0a, $ee
+	charmap "win.", $0a, $ef
+	charmap "Only ", $0a, $f0
+	charmap "later", $0a, $f1
+	charmap "Isn't it ", $0a, $f2
+	charmap "ROCK TUNNEL", $0a, $f3
+	charmap "now!", $0a, $f4
+	charmap "up the", $0a, $f5
+	charmap "Want me to ", $0a, $f6
+	charmap "The City of", $0a, $f7
+	charmap "<PLAYER> turned on", $0a, $f8
+	charmap "an exper", $0a, $f9
+	charmap "Throw away ", $0a, $fa
+	charmap "ient", $0a, $fb
+	charmap "ESCAPE ROPE", $0a, $fc
+	charmap "honor", $0a, $fd
+	charmap ". I'm ", $0a, $fe
+	charmap "pincer", $0a, $ff
+	charmap "gone", $0b, $60
+	charmap "Can you ", $0b, $61
+	charmap "rand ", $0b, $62
+	charmap "And ", $0b, $63
+	charmap "went ", $0b, $64
+	charmap "north", $0b, $65
+	charmap "style", $0b, $66
+	charmap "reach", $0b, $67
+	charmap "I do ", $0b, $68
+	charmap "do I ", $0b, $69
+	charmap "Heighten", $0b, $6a
+	charmap "away!", $0b, $6b
+	charmap "a while.", $0b, $6c
+	charmap "an item.", $0b, $6d
+	charmap "partner.", $0b, $6e
+	charmap "ell low.", $0b, $6f
+	charmap "A strange, ", $0b, $70
+	charmap " KICK", $0b, $71
+	charmap "was defrost", $0b, $72
+	charmap " is your", $0b, $73
+	charmap "clock", $0b, $74
+	charmap "use that", $0b, $75
+	charmap "It also ", $0b, $76
+	charmap "See ", $0b, $77
+	charmap "e my ", $0b, $78
+	charmap "chase", $0b, $79
+	charmap "found.", $0b, $7a
+	charmap "assion", $0b, $7b
+	charmap "going ", $0b, $7c
+	charmap "search", $0b, $7d
+	charmap "extrem", $0b, $7e
+	charmap "wall", $0b, $7f
+	charmap "and se", $0b, $80
+	charmap "small ", $0b, $81
+	charmap "this BADGE.", $0b, $82
+	charmap "move should", $0b, $83
+	charmap "know where ", $0b, $84
+	charmap "That's basic", $0b, $85
+	charmap "Don't bother", $0b, $86
+	charmap "expected", $0b, $87
+	charmap "your party.", $0b, $88
+	charmap "ze the foe.", $0b, $89
+	charmap " switching.", $0b, $8a
+	charmap "shopping", $0b, $8b
+	charmap "hurt by ", $0b, $8c
+	charmap "KING'S ROCK", $0b, $8d
+	charmap "It's locked…", $0b, $8e
+	charmap "will cost ¥", $0b, $8f
+	charmap "SWEET SCENT", $0b, $90
+	charmap "ed it", $0b, $91
+	charmap "My husband ", $0b, $92
+	charmap "<PLAYER>, your BOX", $0b, $93
+	charmap ", it's", $0b, $94
+	charmap "fall", $0b, $95
+	charmap "at it", $0b, $96
+	charmap "and w", $0b, $97
+	charmap "y and ", $0b, $98
+	charmap "e has", $0b, $99
+	charmap "h. ", $0b, $9a
+	charmap "say", $0b, $9b
+	charmap "bad", $0b, $9c
+	charmap "at night.", $0b, $9d
+	charmap "outside", $0b, $9e
+	charmap "unknown", $0b, $9f
+	charmap "future.", $0b, $a0
+	charmap "A strong ", $0b, $a1
+	charmap "playing", $0b, $a2
+	charmap "running", $0b, $a3
+	charmap "weather", $0b, $a4
+	charmap "What", $0b, $a5
+	charmap "hur", $0b, $a6
+	charmap "ic ", $0b, $a7
+	charmap " No", $0b, $a8
+	charmap " as", $0b, $a9
+	charmap "ely", $0b, $aa
+	charmap "age ", $0b, $ab
+	charmap "ult", $0b, $ac
+	charmap "Even", $0b, $ad
+	charmap "crea", $0b, $ae
+	charmap "out.", $0b, $af
+	charmap "CUT", $0b, $b0
+	charmap "WHIRL", $0b, $b1
+	charmap "old", $0b, $b2
+	charmap "lives", $0b, $b3
+	charmap "odd", $0b, $b4
+	charmap "ash", $0b, $b5
+	charmap "fire ", $0b, $b6
+	charmap "minut", $0b, $b7
+	charmap "Befor", $0b, $b8
+	charmap "ates ", $0b, $b9
+	charmap "ition", $0b, $ba
+	charmap "ears ", $0b, $bb
+	charmap " any ", $0b, $bc
+	charmap "creat", $0b, $bd
+	charmap "! T", $0b, $be
+	charmap "OLIVIN", $0b, $bf
+	charmap "los", $0b, $c0
+	charmap "An ", $0b, $c1
+	charmap "RAT", $0b, $c2
+	charmap "who", $0b, $c3
+	charmap " they ", $0b, $c4
+	charmap "ship", $0b, $c5
+	charmap "-he-he", $0b, $c6
+	charmap "MIRROR", $0b, $c7
+	charmap "Oops", $0b, $c8
+	charmap "lif", $0b, $c9
+	charmap "draw", $0b, $ca
+	charmap "WHITNE", $0b, $cb
+	charmap "qui", $0b, $cc
+	charmap "I'd ", $0b, $cd
+	charmap "hot", $0b, $ce
+	charmap " by", $0b, $cf
+	charmap "While ", $0b, $d0
+	charmap "sudden", $0b, $d1
+	charmap "cal", $0b, $d2
+	charmap ", <PLAYER>.", $0b, $d3
+	charmap "Yikes!", $0b, $d4
+	charmap "pic", $0b, $d5
+	charmap "route ", $0b, $d6
+	charmap "mind", $0b, $d7
+	charmap "Fine", $0b, $d8
+	charmap "count ", $0b, $d9
+	charmap "either", $0b, $da
+	charmap "remain", $0b, $db
+	charmap "treat ", $0b, $dc
+	charmap "short ", $0b, $dd
+	charmap "earn", $0b, $de
+	charmap "board ", $0b, $df
+	charmap "stolen", $0b, $e0
+	charmap "A vending ", $0b, $e1
+	charmap "a photo of", $0b, $e2
+	charmap "ls weak #-", $0b, $e3
+	charmap "Oh, hi, <PLAYER>!", $0b, $e4
+	charmap "myself", $0b, $e5
+	charmap "WARDEN", $0b, $e6
+	charmap "ITEMFINDER", $0b, $e7
+	charmap "Feel free ", $0b, $e8
+	charmap "A b", $0b, $e9
+	charmap "all.", $0b, $ea
+	charmap "ate.", $0b, $eb
+	charmap "her ", $0b, $ec
+	charmap " us", $0b, $ed
+	charmap "d you ", $0b, $ee
+	charmap "obey", $0b, $ef
+	charmap "do a thing", $0b, $f0
+	charmap "potential.", $0b, $f1
+	charmap "iden", $0b, $f2
+	charmap " stats", $0b, $f3
+	charmap "aving ", $0b, $f4
+	charmap "beaten", $0b, $f5
+	charmap "I'm so ", $0b, $f6
+	charmap ". I'll ", $0b, $f7
+	charmap "By the way", $0b, $f8
+	charmap "Monday", $0b, $f9
+	charmap "CANCEL", $0b, $fa
+	charmap "other day.", $0b, $fb
+	charmap "while you ", $0b, $fc
+	charmap "make them ", $0b, $fd
+	charmap "became", $0b, $fe
+	charmap "named ", $0b, $ff
+	charmap "to show you how to", $0c, $60
+	charmap "sail next ", $0c, $61
+	charmap "The user's ", $0c, $62
+	charmap "But that's ", $0c, $63
+	charmap "Whew! ", $0c, $64
+	charmap "Sell high.", $0c, $65
+	charmap "But <PLAYER> can't", $0c, $66
+	charmap "punish", $0c, $67
+	charmap "Apparently", $0c, $68
+	charmap "Hey there, fellow!", $0c, $69
+	charmap "ual", $0c, $6a
+	charmap "This is why I hate", $0c, $6b
+	charmap "catch as your own.", $0c, $6c
+	charmap "witnessed the rise", $0c, $6d
+	charmap "is it?", $0c, $6e
+	charmap "The road is closed", $0c, $6f
+	charmap "while you compete.", $0c, $70
+	charmap " The", $0c, $71
+	charmap "me!", $0c, $72
+	charmap "ed…", $0c, $73
+	charmap "step", $0c, $74
+	charmap "cient ", $0c, $75
+	charmap "ize", $0c, $76
+	charmap "INE", $0c, $77
+	charmap "up.", $0c, $78
+	charmap "foe", $0c, $79
+	charmap "run", $0c, $7a
+	charmap "favor", $0c, $7b
+	charmap "guy", $0c, $7c
+	charmap "augh", $0c, $7d
+	charmap ", sir", $0c, $7e
+	charmap "also", $0c, $7f
+	charmap "adv", $0c, $80
+	charmap "field", $0c, $81
+	charmap "<……> <……> <……>", $0c, $82
+	charmap "MT.MO", $0c, $83
+	charmap "UNOWN", $0c, $84
+	charmap "uestion", $0c, $85
+	charmap "afraid ", $0c, $86
+	charmap "MASTER ", $0c, $87
+	charmap "PP ", $0c, $88
+	charmap "Can't ", $0c, $89
+	charmap "fille", $0c, $8a
+	charmap "disgu", $0c, $8b
+	charmap "types", $0c, $8c
+	charmap "two ", $0c, $8d
+	charmap "…sigh", $0c, $8e
+	charmap "ored", $0c, $8f
+	charmap "in fron", $0c, $90
+	charmap "custom ", $0c, $91
+	charmap "KARATE ", $0c, $92
+	charmap "max HP.", $0c, $93
+	charmap "DISABLE", $0c, $94
+	charmap "unch", $0c, $95
+	charmap "born", $0c, $96
+	charmap "SHELLDER", $0c, $97
+	charmap "lect", $0c, $98
+	charmap "farther", $0c, $99
+	charmap "waste", $0c, $9a
+	charmap "missing", $0c, $9b
+	charmap "without", $0c, $9c
+	charmap "delight", $0c, $9d
+	charmap "Always ", $0c, $9e
+	charmap "Tuesday", $0c, $9f
+	charmap "VERSION", $0c, $a0
+	charmap "BROCK: ", $0c, $a1
+	charmap "Crunch…", $0c, $a2
+	charmap "easier ", $0c, $a3
+	charmap "concentr", $0c, $a4
+	charmap "mistake", $0c, $a5
+	charmap "Hang on", $0c, $a6
+	charmap "properly", $0c, $a7
+	charmap "stay", $0c, $a8
+	charmap "frighten", $0c, $a9
+	charmap "At night", $0c, $aa
+	charmap "pract", $0c, $ab
+	charmap "FLAME", $0c, $ac
+	charmap "FLASH", $0c, $ad
+	charmap "ossible ", $0c, $ae
+	charmap "data", $0c, $af
+	charmap "admit", $0c, $b0
+	charmap "d here.", $0c, $b1
+	charmap "your PC", $0c, $b2
+	charmap "There are several", $0c, $b3
+	charmap "with rising power", $0c, $b4
+	charmap "at the same time.", $0c, $b5
+	charmap "You came out from", $0c, $b6
+	charmap "How could I lose?", $0c, $b7
+	charmap "It's tough being a", $0c, $b8
+	charmap "turn. It may fail", $0c, $b9
+	charmap "so much", $0c, $ba
+	charmap "the strongest bug", $0c, $bb
+	charmap "courage", $0c, $bc
+	charmap "TALK! Please tune", $0c, $bd
+	charmap "on and select the", $0c, $be
+	charmap "d this ", $0c, $bf
+	charmap "around.", $0c, $c0
+	charmap "It also lets your", $0c, $c1
+	charmap "ANN & ANNE: You're", $0c, $c2
+	charmap "The COMMUNICATION", $0c, $c3
+	charmap "sort", $0c, $c4
+	charmap "d with ", $0c, $c5
+	charmap "d of ", $0c, $c6
+	charmap "E: ", $0c, $c7
+	charmap "MAN", $0c, $c8
+	charmap "oot", $0c, $c9
+	charmap "error", $0c, $ca
+	charmap ". It's", $0c, $cb
+	charmap " there ", $0c, $cc
+	charmap "ave", $0c, $cd
+	charmap "ELL", $0c, $ce
+	charmap ". S", $0c, $cf
+	charmap "fla", $0c, $d0
+	charmap "ped", $0c, $d1
+	charmap "RAGE", $0c, $d2
+	charmap " TOW", $0c, $d3
+	charmap "But", $0c, $d4
+	charmap "   ", $0c, $d5
+	charmap "sun", $0c, $d6
+	charmap "ICE", $0c, $d7
+	charmap "TALK", $0c, $d8
+	charmap "cap", $0c, $d9
+	charmap "SEED", $0c, $da
+	charmap "SUNN", $0c, $db
+	charmap "Good", $0c, $dc
+	charmap "OK?", $0c, $dd
+	charmap "foo", $0c, $de
+	charmap "milk", $0c, $df
+	charmap "gift", $0c, $e0
+	charmap "GIFT", $0c, $e1
+	charmap "brok", $0c, $e2
+	charmap "HP ", $0c, $e3
+	charmap "trap", $0c, $e4
+	charmap "Oh… ", $0c, $e5
+	charmap "hop", $0c, $e6
+	charmap "area", $0c, $e7
+	charmap ". Bitter.", $0c, $e8
+	charmap "Way to go", $0c, $e9
+	charmap "Speaking ", $0c, $ea
+	charmap "overwhelm", $0c, $eb
+	charmap "an e-mail", $0c, $ec
+	charmap "BIKE SHOP", $0c, $ed
+	charmap "out!", $0c, $ee
+	charmap "join", $0c, $ef
+	charmap "respon", $0c, $f0
+	charmap "preven", $0c, $f1
+	charmap "pitch-", $0c, $f2
+	charmap "Hi, ", $0c, $f3
+	charmap "now?", $0c, $f4
+	charmap "store ", $0c, $f5
+	charmap "It's this ", $0c, $f6
+	charmap "traveled ", $0c, $f7
+	charmap "My name's ", $0c, $f8
+	charmap "Follow me", $0c, $f9
+	charmap "BLACKBELT", $0c, $fa
+	charmap "DARK CAVE", $0c, $fb
+	charmap "Fufufufu…", $0c, $fc
+	charmap "Hehehehe…", $0c, $fd
+	charmap "ept ", $0c, $fe
+	charmap "Wait", $0c, $ff
+	charmap "me s", $0d, $60
+	charmap " three", $0d, $61
+	charmap "Then you ", $0d, $62
+	charmap "Think you", $0d, $63
+	charmap "attack will hit.", $0d, $64
+	charmap "that at the top.", $0d, $65
+	charmap "The MAIL ", $0d, $66
+	charmap "everyone ", $0d, $67
+	charmap "heal your", $0d, $68
+	charmap "Should I ", $0d, $69
+	charmap "S.S.AQUA.", $0d, $6a
+	charmap "I got it!", $0d, $6b
+	charmap "M ISLANDS", $0d, $6c
+	charmap "Three years ago,", $0d, $6d
+	charmap "HP by 20.", $0d, $6e
+	charmap "Are they ", $0d, $6f
+	charmap "My dream ", $0d, $70
+	charmap "PARK BALL", $0d, $71
+	charmap "LUCKY NUM", $0d, $72
+	charmap "Wow! This one is", $0d, $73
+	charmap "SHELLFISH", $0d, $74
+	charmap "Oh!", $0d, $75
+	charmap "We exchange your", $0d, $76
+	charmap "in KANTO.", $0d, $77
+	charmap "won ", $0d, $78
+	charmap "No, ", $0d, $79
+	charmap "OK to overwrite?", $0d, $7a
+	charmap "d my", $0d, $7b
+	charmap " young", $0d, $7c
+	charmap "ide ", $0d, $7d
+	charmap "app", $0d, $7e
+	charmap "ake", $0d, $7f
+	charmap "age", $0d, $80
+	charmap "sol", $0d, $81
+	charmap "guard", $0d, $82
+	charmap "exist", $0d, $83
+	charmap "ored ", $0d, $84
+	charmap "Many ", $0d, $85
+	charmap "mind ", $0d, $86
+	charmap ". There are", $0d, $87
+	charmap "It usually ", $0d, $88
+	charmap "on its back", $0d, $89
+	charmap " ga", $0d, $8a
+	charmap "ARD", $0d, $8b
+	charmap "ENT", $0d, $8c
+	charmap "up!", $0d, $8d
+	charmap "'ll ", $0d, $8e
+	charmap "pun", $0d, $8f
+	charmap ". A", $0d, $90
+	charmap "ext", $0d, $91
+	charmap "MR.", $0d, $92
+	charmap "succ", $0d, $93
+	charmap "shut", $0d, $94
+	charmap "made", $0d, $95
+	charmap "FLY", $0d, $96
+	charmap "type", $0d, $97
+	charmap "drop", $0d, $98
+	charmap "riv", $0d, $99
+	charmap "tle ", $0d, $9a
+	charmap "why ", $0d, $9b
+	charmap "con-", $0d, $9c
+	charmap "slow", $0d, $9d
+	charmap "else", $0d, $9e
+	charmap "fine", $0d, $9f
+	charmap "sent", $0d, $a0
+	charmap "cure", $0d, $a1
+	charmap "ied ", $0d, $a2
+	charmap "We will make an", $0d, $a3
+	charmap "fly over GOLDEN", $0d, $a4
+	charmap "If your #MON is", $0d, $a5
+	charmap "feel even worse", $0d, $a6
+	charmap "But a loss is a", $0d, $a7
+	charmap "…But no TICKET!", $0d, $a8
+	charmap "Both your party", $0d, $a9
+	charmap "battling wimps.", $0d, $aa
+	charmap "and your PC BOX", $0d, $ab
+	charmap "No wonder you're", $0d, $ac
+	charmap "user's HP is low", $0d, $ad
+	charmap "its TAIL cut of", $0d, $ae
+	charmap "are being force", $0d, $af
+	charmap "earl", $0d, $b0
+	charmap "line", $0d, $b1
+	charmap "top ", $0d, $b2
+	charmap " CA", $0d, $b3
+	charmap "BAR", $0d, $b4
+	charmap "lad", $0d, $b5
+	charmap "receive", $0d, $b6
+	charmap "rad", $0d, $b7
+	charmap "wil", $0d, $b8
+	charmap "qua", $0d, $b9
+	charmap "techniq", $0d, $ba
+	charmap "scratch", $0d, $bb
+	charmap "In ", $0d, $bc
+	charmap "single ", $0d, $bd
+	charmap "places.", $0d, $be
+	charmap " #-", $0d, $bf
+	charmap "by the ", $0d, $c0
+	charmap "leaving", $0d, $c1
+	charmap "it has ", $0d, $c2
+	charmap "itself.", $0d, $c3
+	charmap "s with ", $0d, $c4
+	charmap "que", $0d, $c5
+	charmap "years ag", $0d, $c6
+	charmap "t of ", $0d, $c7
+	charmap "FOREST", $0d, $c8
+	charmap "BLACK", $0d, $c9
+	charmap "SURGE", $0d, $ca
+	charmap "COPYCA", $0d, $cb
+	charmap "ure ", $0d, $cc
+	charmap "INDIGO", $0d, $cd
+	charmap "PLATEA", $0d, $ce
+	charmap "LUCKY ", $0d, $cf
+	charmap "xcellent", $0d, $d0
+	charmap "me?", $0d, $d1
+	charmap "MEOWTH", $0d, $d2
+	charmap "demonstr", $0d, $d3
+	charmap "frozen", $0d, $d4
+	charmap "enti", $0d, $d5
+	charmap "ANTIDO", $0d, $d6
+	charmap "REVIV", $0d, $d7
+	charmap "SECRET", $0d, $d8
+	charmap "MUSHRO", $0d, $d9
+	charmap "GLASSE", $0d, $da
+	charmap "CLUB", $0d, $db
+	charmap "DRILL", $0d, $dc
+	charmap "BEAM", $0d, $dd
+	charmap "LEECH ", $0d, $de
+	charmap "PSYCH", $0d, $df
+	charmap "SCREE", $0d, $e0
+	charmap "SLUDGE", $0d, $e1
+	charmap "LONG ", $0d, $e2
+	charmap "FLUTE", $0d, $e3
+	charmap "Hmm", $0d, $e4
+	charmap "NIDOR", $0d, $e5
+	charmap "OK! ", $0d, $e6
+	charmap "PHARMA", $0d, $e7
+	charmap "SEAFOA", $0d, $e8
+	charmap "AMPH", $0d, $e9
+	charmap "TOWN", $0d, $ea
+	charmap "ign", $0d, $eb
+	charmap "soon ", $0d, $ec
+	charmap "behind", $0d, $ed
+	charmap "claws", $0d, $ee
+	charmap "ren't you", $0d, $ef
+	charmap "see.", $0d, $f0
+	charmap ", etc.", $0d, $f1
+	charmap "HYPER ", $0d, $f2
+	charmap "BUTTER", $0d, $f3
+	charmap "OON", $0d, $f4
+	charmap "woke ", $0d, $f5
+	charmap "cabin", $0d, $f6
+	charmap "inflict ", $0d, $f7
+	charmap "wait ", $0d, $f8
+	charmap "direc", $0d, $f9
+	charmap "held ", $0d, $fa
+	charmap "given", $0d, $fb
+	charmap "Differen", $0d, $fc
+	charmap "door.", $0d, $fd
+	charmap "exercise", $0d, $fe
+	charmap "tentacle", $0d, $ff
+	charmap "promised", $0e, $60
+	charmap "HIKER", $0e, $61
+	charmap "der ", $0e, $62
+	charmap "COTTON", $0e, $63
+	charmap "ably", $0e, $64
+	charmap "ADMINIST", $0e, $65
+	charmap "fangs", $0e, $66
+	charmap " that.", $0e, $67
+	charmap "gain", $0e, $68
+	charmap "test", $0e, $69
+	charmap "she ", $0e, $6a
+	charmap "soul", $0e, $6b
+	charmap "win!", $0e, $6c
+	charmap "Get ", $0e, $6d
+	charmap "hot ", $0e, $6e
+	charmap "reference ", $0e, $6f
+	charmap "weren't", $0e, $70
+	charmap "shak", $0e, $71
+	charmap "second", $0e, $72
+	charmap "far to", $0e, $73
+	charmap "disban", $0e, $74
+	charmap "Life is ", $0e, $75
+	charmap "Switch", $0e, $76
+	charmap "Anyway", $0e, $77
+	charmap "MARKET", $0e, $78
+	charmap "aaa", $0e, $79
+	charmap "KATE: ", $0e, $7a
+	charmap " points!", $0e, $7b
+	charmap "Isn't", $0e, $7c
+	charmap "ELECTRIC", $0e, $7d
+	charmap "JENN: ", $0e, $7e
+	charmap "DOUBLE", $0e, $7f
+	charmap "2F SALES", $0e, $80
+	charmap "face ", $0e, $81
+	charmap "prefer", $0e, $82
+	charmap "Some", $0e, $83
+	charmap "rumor", $0e, $84
+	charmap "Let ", $0e, $85
+	charmap "choo", $0e, $86
+	charmap "ing #-", $0e, $87
+	charmap "gone ", $0e, $88
+	charmap " on your", $0e, $89
+	charmap "money ", $0e, $8a
+	charmap "let m", $0e, $8b
+	charmap "let's ", $0e, $8c
+	charmap "? I'm ", $0e, $8d
+	charmap "know the", $0e, $8e
+	charmap "There you are!", $0e, $8f
+	charmap "isn't it?", $0e, $90
+	charmap "Oh, darn", $0e, $91
+	charmap " WING", $0e, $92
+	charmap "cave.", $0e, $93
+	charmap "outside ", $0e, $94
+	charmap "down, we found", $0e, $95
+	charmap "e forest's pro-", $0e, $96
+	charmap "assenger", $0e, $97
+	charmap "hideout ", $0e, $98
+	charmap "The sunl", $0e, $99
+	charmap "Register", $0e, $9a
+	charmap "gener", $0e, $9b
+	charmap "N's CAPE.", $0e, $9c
+	charmap "pressing START", $0e, $9d
+	charmap "equals damage ", $0e, $9e
+	charmap "Are ", $0e, $9f
+	charmap "word ", $0e, $a0
+	charmap "scary ", $0e, $a1
+	charmap " that's", $0e, $a2
+	charmap "e my", $0e, $a3
+	charmap "? I ", $0e, $a4
+	charmap "CONTEST HELPER", $0e, $a5
+	charmap ", if", $0e, $a6
+	charmap "med", $0e, $a7
+	charmap "TRA", $0e, $a8
+	charmap "PIN", $0e, $a9
+	charmap "but", $0e, $aa
+	charmap "ram", $0e, $ab
+	charmap "ORE", $0e, $ac
+	charmap "AIN", $0e, $ad
+	charmap "STA", $0e, $ae
+	charmap "CHA", $0e, $af
+	charmap " CO", $0e, $b0
+	charmap "F: ", $0e, $b1
+	charmap "TM0", $0e, $b2
+	charmap "TM3", $0e, $b3
+	charmap "TM4", $0e, $b4
+	charmap "bab", $0e, $b5
+	charmap "Ooh", $0e, $b6
+	charmap "tro", $0e, $b7
+	charmap "kid", $0e, $b8
+	charmap "horn", $0e, $b9
+	charmap "whit", $0e, $ba
+	charmap "flee", $0e, $bb
+	charmap "skin", $0e, $bc
+	charmap "roll", $0e, $bd
+	charmap "mel", $0e, $be
+	charmap "hang", $0e, $bf
+	charmap "brat", $0e, $c0
+	charmap "tend", $0e, $c1
+	charmap "soon. Please ", $0e, $c2
+	charmap "show the S.S.", $0e, $c3
+	charmap "   COLLECTION", $0e, $c4
+	charmap "The link has ", $0e, $c5
+	charmap "indefinitely.", $0e, $c6
+	charmap "A one-hit KO,", $0e, $c7
+	charmap "frozen solid!", $0e, $c8
+	charmap "Ensures the n", $0e, $c9
+	charmap "So we replace", $0e, $ca
+	charmap "How the heck ", $0e, $cb
+	charmap "colored leaf.", $0e, $cc
+	charmap "quit", $0e, $cd
+	charmap "lead", $0e, $ce
+	charmap "mag", $0e, $cf
+	charmap "ICK", $0e, $d0
+	charmap "IND", $0e, $d1
+	charmap "cri", $0e, $d2
+	charmap "ush", $0e, $d3
+	charmap "claim", $0e, $d4
+	charmap "decid", $0e, $d5
+	charmap "UNTER", $0e, $d6
+	charmap "drink", $0e, $d7
+	charmap "erupt", $0e, $d8
+	charmap "Very ", $0e, $d9
+	charmap "treat", $0e, $da
+	charmap "city ", $0e, $db
+	charmap "crush", $0e, $dc
+	charmap "ON ", $0e, $dd
+	charmap "ARK", $0e, $de
+	charmap "HORN", $0e, $df
+	charmap "PACK", $0e, $e0
+	charmap "HP.", $0e, $e1
+	charmap "EXP.", $0e, $e2
+	charmap "Repe", $0e, $e3
+	charmap "MAX ", $0e, $e4
+	charmap "LEAF", $0e, $e5
+	charmap "TINY", $0e, $e6
+	charmap "TM2", $0e, $e7
+	charmap "spot", $0e, $e8
+	charmap "diffic", $0e, $e9
+	charmap "(S)", $0e, $ea
+	charmap "evil", $0e, $eb
+	charmap "IREN", $0e, $ec
+	charmap "CAPTAIN", $0e, $ed
+	charmap "bus", $0e, $ee
+	charmap "popular", $0e, $ef
+	charmap "system.", $0e, $f0
+	charmap "3F PERS", $0e, $f1
+	charmap "Arrrgh!", $0e, $f2
+	charmap "mee", $0e, $f3
+	charmap "! S", $0e, $f4
+	charmap "cut ", $0e, $f5
+	charmap "m… ", $0e, $f6
+	charmap "to MOM!", $0e, $f7
+	charmap "concern", $0e, $f8
+	charmap "? Great", $0e, $f9
+	charmap "Pardon?", $0e, $fa
+	charmap "exhaust", $0e, $fb
+	charmap "double.", $0e, $fc
+	charmap "satisfi", $0e, $fd
+	charmap "BENNY: ", $0e, $fe
+	charmap " faded!", $0e, $ff
+	charmap "TADPOLE", $0f, $60
+	charmap " you do", $0f, $61
+	charmap "Open", $0f, $62
+	charmap "warm", $0f, $63
+	charmap "asse", $0f, $64
+	charmap "dis-", $0f, $65
+	charmap "EVER", $0f, $66
+	charmap "prof", $0f, $67
+	charmap "it with", $0f, $68
+	charmap "Humph! ", $0f, $69
+	charmap "flinch", $0f, $6a
+	charmap "tunnel", $0f, $6b
+	charmap "exc", $0f, $6c
+	charmap "Too ", $0f, $6d
+	charmap "ity.", $0f, $6e
+	charmap "rely on", $0f, $6f
+	charmap "wearing", $0f, $70
+	charmap "Losing ", $0f, $71
+	charmap "foes", $0f, $72
+	charmap " in the bed.", $0f, $73
+	charmap "During the t", $0f, $74
+	charmap "for it.", $0f, $75
+	charmap "You can zip ", $0f, $76
+	charmap "TRAINING HAL", $0f, $77
+	charmap "up our secur", $0f, $78
+	charmap " memory", $0f, $79
+	charmap "Oh! We lost!", $0f, $7a
+	charmap "go through r", $0f, $7b
+	charmap " Button", $0f, $7c
+	charmap "slot machine", $0f, $7d
+	charmap "5F TM CORNER", $0f, $7e
+	charmap "THEATER", $0f, $7f
+	charmap "intrigu", $0f, $80
+	charmap "MEOWTH: Meow", $0f, $81
+	charmap "TM SHOP", $0f, $82
+	charmap "AIN RD. AHEA", $0f, $83
+	charmap "escape!", $0f, $84
+	charmap "Fwahahahaha!", $0f, $85
+	charmap "<PLAYER> played the", $0f, $86
+	charmap " EXP. Points", $0f, $87
+	charmap "tools of war", $0f, $88
+	charmap "BIG JAW", $0f, $89
+	charmap "spac", $0f, $8a
+	charmap "Press START ", $0f, $8b
+	charmap "shrine honor", $0f, $8c
+	charmap "second ", $0f, $8d
+	charmap "a #-", $0f, $8e
+	charmap "has no ", $0f, $8f
+	charmap "y punch. May", $0f, $90
+	charmap "CASCADEBADGE", $0f, $91
+	charmap "t my", $0f, $92
+	charmap "send", $0f, $93
+	charmap "ide", $0f, $94
+	charmap "o. ", $0f, $95
+	charmap "tly ", $0f, $96
+	charmap "ach ", $0f, $97
+	charmap "ORT", $0f, $98
+	charmap "eep", $0f, $99
+	charmap "OOL", $0f, $9a
+	charmap "pay", $0f, $9b
+	charmap "vic", $0f, $9c
+	charmap "did", $0f, $9d
+	charmap "SPCL.", $0f, $9e
+	charmap "lim", $0f, $9f
+	charmap "after", $0f, $a0
+	charmap "tun", $0f, $a1
+	charmap "N: ", $0f, $a2
+	charmap "SHA", $0f, $a3
+	charmap "eel", $0f, $a4
+	charmap "PROTE", $0f, $a5
+	charmap "SCALE", $0f, $a6
+	charmap " CLAW", $0f, $a7
+	charmap "FAN", $0f, $a8
+	charmap "TM1", $0f, $a9
+	charmap "MEGA", $0f, $aa
+	charmap "FURY ", $0f, $ab
+	charmap "ARMOR", $0f, $ac
+	charmap "CURSE", $0f, $ad
+	charmap "DELET", $0f, $ae
+	charmap "GRAPH", $0f, $af
+	charmap "See? ", $0f, $b0
+	charmap "guts!", $0f, $b1
+	charmap "…Zzzz", $0f, $b2
+	charmap "FAIRY", $0f, $b3
+	charmap "spr", $0f, $b4
+	charmap "ept", $0f, $b5
+	charmap "fee", $0f, $b6
+	charmap "yet", $0f, $b7
+	charmap "ess.", $0f, $b8
+	charmap "else ", $0f, $b9
+	charmap "gift ", $0f, $ba
+	charmap "as my", $0f, $bb
+	charmap "urren", $0f, $bc
+	charmap "waken", $0f, $bd
+	charmap "harsh", $0f, $be
+	charmap "ELDER", $0f, $bf
+	charmap "one of your", $0f, $c0
+	charmap " the target", $0f, $c1
+	charmap "Uh-oh", $0f, $c2
+	charmap " SPEC", $0f, $c3
+	charmap "music", $0f, $c4
+	charmap "joy", $0f, $c5
+	charmap "are.", $0f, $c6
+	charmap "loa", $0f, $c7
+	charmap "s three ", $0f, $c8
+	charmap "eed", $0f, $c9
+	charmap "hour", $0f, $ca
+	charmap "ruin", $0f, $cb
+	charmap "pain", $0f, $cc
+	charmap "bat-", $0f, $cd
+	charmap "harm", $0f, $ce
+	charmap "shad", $0f, $cf
+	charmap "glow", $0f, $d0
+	charmap "com-", $0f, $d1
+	charmap "in this ", $0f, $d2
+	charmap "occasion", $0f, $d3
+	charmap "proud", $0f, $d4
+	charmap "are things?", $0f, $d5
+	charmap "smart", $0f, $d6
+	charmap "umble", $0f, $d7
+	charmap "Copies the ", $0f, $d8
+	charmap "'s the menu.", $0f, $d9
+	charmap "Put away th", $0f, $da
+	charmap "file. Is it", $0f, $db
+	charmap "cooperation", $0f, $dc
+	charmap "<PLAYER> registere", $0f, $dd
+	charmap "Ever since ", $0f, $de
+	charmap " soon", $0f, $df
+	charmap "4F MEDICINE", $0f, $e0
+	charmap "has a", $0f, $e1
+	charmap "spin", $0f, $e2
+	charmap "! W", $0f, $e3
+	charmap "RES", $0f, $e4
+	charmap "opp", $0f, $e5
+	charmap "ace", $0f, $e6
+	charmap "dic", $0f, $e7
+	charmap "fur", $0f, $e8
+	charmap "add", $0f, $e9
+	charmap "FAST S", $0f, $ea
+	charmap "STOR", $0f, $eb
+	charmap "ISLAND", $0f, $ec
+	charmap "FAST SHIP ", $0f, $ed
+	charmap "SPROUT", $0f, $ee
+	charmap "PASS", $0f, $ef
+	charmap "al.", $0f, $f0
+	charmap "LECT", $0f, $f1
+	charmap "arrived in", $0f, $f2
+	charmap "IST", $0f, $f3
+	charmap "ANN", $0f, $f4
+	charmap "RED", $0f, $f5
+	charmap " A ", $0f, $f6
+	charmap "MILK", $0f, $f7
+	charmap "BLU", $0f, $f8
+	charmap "MYSTIC", $0f, $f9
+	charmap "MIRACL", $0f, $fa
+	charmap "LOVELY", $0f, $fb
+	charmap "phys", $0f, $fc
+	charmap "oyalty", $0f, $fd
+	charmap "HYPNOS", $0f, $fe
+	charmap "MOVE", $0f, $ff
+	charmap "NSFORM", $10, $60
+	charmap "SAFEGU", $10, $61
+	charmap "BAT", $10, $62
+	charmap "Bye-by", $10, $63
+	charmap "WEED", $10, $64
+	charmap "hug", $10, $65
+	charmap "Pla", $10, $66
+	charmap "Whoops", $10, $67
+	charmap "OFTOP ", $10, $68
+	charmap "DIPLOM", $10, $69
+	charmap "SLOWBR", $10, $6a
+	charmap " STUDI", $10, $6b
+	charmap "<PLAYER>: ", $10, $6c
+	charmap "SWITCH", $10, $6d
+	charmap "RECEPT", $10, $6e
+	charmap "WILLIA", $10, $6f
+	charmap "JOSH: ", $10, $70
+	charmap "SAMUEL", $10, $71
+	charmap "KIPP: ", $10, $72
+	charmap "VICTOR", $10, $73
+	charmap "SNORLA", $10, $74
+	charmap "ZEPHYR", $10, $75
+	charmap "anyone", $10, $76
+	charmap " the MENU.", $10, $77
+	charmap "POISON", $10, $78
+	charmap "o? ", $10, $79
+	charmap "Nope", $10, $7a
+	charmap "URE", $10, $7b
+	charmap "okay", $10, $7c
+	charmap "smile ", $10, $7d
+	charmap "silver", $10, $7e
+	charmap "avoid ", $10, $7f
+	charmap "effort", $10, $80
+	charmap "embarr", $10, $81
+	charmap "I envy you", $10, $82
+	charmap "Lullab", $10, $83
+	charmap "ENERGY", $10, $84
+	charmap "GRIMER", $10, $85
+	charmap "KEEPER", $10, $86
+	charmap "FEDERA", $10, $87
+	charmap "my skills.", $10, $88
+	charmap "Heh", $10, $89
+	charmap "IVE", $10, $8a
+	charmap "iggl", $10, $8b
+	charmap "ost-", $10, $8c
+	charmap "house ", $10, $8d
+	charmap "win…", $10, $8e
+	charmap "gian", $10, $8f
+	charmap "alone ", $10, $90
+	charmap "buy ", $10, $91
+	charmap "Cures ", $10, $92
+	charmap "the author", $10, $93
+	charmap "afford to ", $10, $94
+	charmap "North ", $10, $95
+	charmap "s, I", $10, $96
+	charmap "mark", $10, $97
+	charmap "guard ", $10, $98
+	charmap "roars ", $10, $99
+	charmap "Listen", $10, $9a
+	charmap "destin", $10, $9b
+	charmap "Myster", $10, $9c
+	charmap "Master", $10, $9d
+	charmap "drow", $10, $9e
+	charmap "base", $10, $9f
+	charmap "seven ", $10, $a0
+	charmap "sale", $10, $a1
+	charmap "top!", $10, $a2
+	charmap "beacon", $10, $a3
+	charmap "Catch ", $10, $a4
+	charmap "charco", $10, $a5
+	charmap " Next time", $10, $a6
+	charmap "we arrive.", $10, $a7
+	charmap "simply", $10, $a8
+	charmap "books.", $10, $a9
+	charmap "I'm crushed", $10, $aa
+	charmap "class.", $10, $ab
+	charmap "SURF east.", $10, $ac
+	charmap "gether", $10, $ad
+	charmap "PHONE icon", $10, $ae
+	charmap "NICK: ", $10, $af
+	charmap "mber", $10, $b0
+	charmap "unfortunat", $10, $b1
+	charmap "MR.FUJ", $10, $b2
+	charmap "BUBBLE", $10, $b3
+	charmap "SHADOW", $10, $b4
+	charmap "CONFUS", $10, $b5
+	charmap "illegible…", $10, $b6
+	charmap "ON: Gugooh", $10, $b7
+	charmap "LIT", $10, $b8
+	charmap "vari", $10, $b9
+	charmap "UNION CAVE", $10, $ba
+	charmap "RARE CANDY", $10, $bb
+	charmap " magazines", $10, $bc
+	charmap "GAME FREAK", $10, $bd
+	charmap "ousl", $10, $be
+	charmap "ly,", $10, $bf
+	charmap "tip", $10, $c0
+	charmap "ed out ", $10, $c1
+	charmap "dur", $10, $c2
+	charmap "ISS", $10, $c3
+	charmap "lip", $10, $c4
+	charmap "Swimm", $10, $c5
+	charmap "ugg", $10, $c6
+	charmap "iev", $10, $c7
+	charmap "patheti", $10, $c8
+	charmap "similar", $10, $c9
+	charmap "hythm", $10, $ca
+	charmap "rescu", $10, $cb
+	charmap "small", $10, $cc
+	charmap "sur", $10, $cd
+	charmap "loo", $10, $ce
+	charmap "content", $10, $cf
+	charmap "environ", $10, $d0
+	charmap "RATTATA", $10, $d1
+	charmap "POLIWAG", $10, $d2
+	charmap "STR", $10, $d3
+	charmap "d by ", $10, $d4
+	charmap "From ", $10, $d5
+	charmap "d it ", $10, $d6
+	charmap "ets", $10, $d7
+	charmap "cut", $10, $d8
+	charmap "ble ", $10, $d9
+	charmap "OLD", $10, $da
+	charmap "ON.", $10, $db
+	charmap "we'r", $10, $dc
+	charmap "merchandi", $10, $dd
+	charmap "me…", $10, $de
+	charmap ". T", $10, $df
+	charmap "Aww", $10, $e0
+	charmap " the best", $10, $e1
+	charmap "TLE", $10, $e2
+	charmap "AND", $10, $e3
+	charmap "hun", $10, $e4
+	charmap "rint out ", $10, $e5
+	charmap "ask", $10, $e6
+	charmap "son.", $10, $e7
+	charmap "ooo", $10, $e8
+	charmap "foe ", $10, $e9
+	charmap "flu", $10, $ea
+	charmap "faint in ", $10, $eb
+	charmap "Counters ", $10, $ec
+	charmap "Pant, pan", $10, $ed
+	charmap "illuminat", $10, $ee
+	charmap "Randomly ", $10, $ef
+	charmap "disposed ", $10, $f0
+	charmap "ing SLOW-", $10, $f1
+	charmap "A ticket ", $10, $f2
+	charmap "A tackle ", $10, $f3
+	charmap "DRUG STOR", $10, $f4
+	charmap "0HP, HOLD", $10, $f5
+	charmap "50 ", $10, $f6
+	charmap "as a", $10, $f7
+	charmap "? I", $10, $f8
+	charmap "BROTHERS.", $10, $f9
+	charmap "One ", $10, $fa
+	charmap "angr", $10, $fb
+	charmap "ily ", $10, $fc
+	charmap "100", $10, $fd
+	charmap "panel", $10, $fe
+	charmap "lates", $10, $ff
 endc
 	setcharmap main

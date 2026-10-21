@@ -1,4 +1,5 @@
 TrainerClassNames::
+	pushc dict
 ; entries correspond to trainer classes (see constants/trainer_constants.asm)
 	list_start TRAINER_CLASS_NAME_LENGTH - 1
 	li "LEADER"
@@ -68,3 +69,4 @@ TrainerClassNames::
 	li "OFFICER"
 	li "ROCKET"
 	assert_list_length NUM_TRAINER_CLASSES
+	popc

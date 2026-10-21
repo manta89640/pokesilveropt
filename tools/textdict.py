@@ -65,6 +65,10 @@ TEXT_MACROS = ('text', 'line', 'para', 'cont', 'next', 'page')
 # Files whose `db` strings are compressed too (see their pushc/popc).
 DB_TEXT_FILES = re.compile(r'^data/(pokemon/dex_entries/|moves/descriptions\.asm|items/descriptions\.asm)')
 
+# Name lists whose `li` strings are compressed (see their pushc/popc).
+# Pokémon names are not: they are copied into nicknames.
+LIST_TEXT_FILES = re.compile(r'^data/(items/names|moves/names|trainers/class_names)\.asm$')
+
 SKIP_DIRS = ('tools', '.git', 'engine/debug')
 
 
@@ -128,13 +132,14 @@ def strip_comment(line):
 
 
 STRING_RE = re.compile(r'"((?:[^"\\]|\\.)*)"')
-MACRO_RE = re.compile(r'^\s*(?:[\w.]+:+\s*)?(' + '|'.join(TEXT_MACROS) + r'|db)\b(.*)$')
+MACRO_RE = re.compile(r'^\s*(?:[\w.]+:+\s*)?(' + '|'.join(TEXT_MACROS) + r'|db|li)\b(.*)$')
 
 
 def collect_strings():
 	"""Yields (weight, string) for every compressible string literal."""
 	for rel, path in iter_asm_files():
 		db_file = DB_TEXT_FILES.match(rel) is not None
+		list_file = LIST_TEXT_FILES.match(rel) is not None
 		# Pokédex entries exist once per version; each ROM has only half of them
 		weight = 0.5 if rel.startswith('data/pokemon/dex_entries/') else 1
 		for line in open(path, encoding='utf-8'):
@@ -142,7 +147,7 @@ def collect_strings():
 			if not m:
 				continue
 			macro, args = m.groups()
-			if macro == 'db' and not db_file:
+			if macro == 'db' and not db_file or macro == 'li' and not list_file:
 				continue
 			for s in STRING_RE.findall(args):
 				if '{' in s:

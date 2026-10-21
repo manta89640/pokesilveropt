@@ -5,8 +5,9 @@ Check that every text in a modified ROM prints the same as in a reference ROM.
 Usage: tools/verify_text.py reference.gbc modified.gbc [source_dir]
 
 Both ROMs need .sym files next to them. Text labels are found by scanning the
-source for labels followed by text macros, Pokédex entries, and move/item
-descriptions. Each text is decoded (following text_far and expanding
+source for labels followed by text macros, Pokédex entries, move/item
+descriptions, and the item, move and trainer class name lists. Each text is
+decoded (following text_far and expanding
 dictionary codes) and the results are compared.
 """
 
@@ -183,7 +184,20 @@ def find_text_labels(src):
 						for label in pending:
 							labels[label] = kind
 					pending = []
+	# Name lists: one label, then a "li" per name
+	for relpath in NAME_LISTS:
+		label = None
+		for line in open(os.path.join(src, relpath), encoding='utf-8'):
+			m = re.match(r'^(\w+)::', line)
+			if m:
+				label = m.group(1)
+			elif label and re.match(r'^\s*li\s+"', line):
+				kind = labels.get(label, ('list', 0))
+				labels[label] = ('list', kind[1] + 1)
 	return labels
+
+
+NAME_LISTS = ('data/items/names.asm', 'data/moves/names.asm', 'data/trainers/class_names.asm')
 
 
 def decode(rom, label, kind):
@@ -195,6 +209,11 @@ def decode(rom, label, kind):
 		s = []
 		rom.string(bank, addr, s)
 		out.append(bytes(s))
+	elif kind[0] == 'list':
+		for _ in range(kind[1]):
+			s = []
+			addr, _ = rom.string(bank, addr, s)
+			out.append(bytes(s))
 	elif kind == 'dex':
 		s = []
 		addr, _ = rom.string(bank, addr, s)
@@ -222,7 +241,7 @@ def main():
 		new.num_prefixes = None
 	labels = find_text_labels(src)
 	checked = mismatched = skipped = 0
-	for label, kind in sorted(labels.items()):
+	for label, kind in sorted(labels.items(), key=lambda item: item[0]):
 		if label not in ref.syms or label not in new.syms:
 			skipped += 1
 			continue

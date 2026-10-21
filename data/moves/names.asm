@@ -1,4 +1,5 @@
 MoveNames::
+	pushc dict
 	list_start MOVE_NAME_LENGTH - 1
 	li "POUND"
 	li "KARATE CHOP"
@@ -252,3 +253,4 @@ MoveNames::
 	li "WHIRLPOOL"
 	li "BEAT UP"
 	assert_list_length NUM_ATTACKS
+	popc
