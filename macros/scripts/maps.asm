@@ -170,11 +170,12 @@ MACRO trainer
 ;\3: flag: an EVENT_BEAT_* constant
 ;\4: seen text
 ;\5: win text
-;\6: loss text
+;\6: loss text: must be 0 (LoadTrainer_continue fills it in)
 ;\7: after-battle text
+	assert (\6) == 0, "trainer {d:\1} {d:\2}: a loss text isn't supported"
 	dw \3
 	db \1, \2
-	dw \4, \5, \6, \7
+	dw \4, \5, \7
 ENDM
 
 MACRO itemball

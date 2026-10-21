@@ -117,8 +117,17 @@ LoadTrainer_continue::
 	add hl, bc
 	ld a, [wSeenTrainerBank]
 	call GetFarWord
+	; the trainer macro leaves out the loss text, which is always 0
 	ld de, wTempTrainer
-	ld bc, wTempTrainerEnd - wTempTrainer
+	ld bc, wLossTextPointer - wTempTrainer
+	ld a, [wSeenTrainerBank]
+	call FarCopyBytes
+	xor a
+	ld [de], a
+	inc de
+	ld [de], a
+	inc de
+	ld c, wRunningTrainerBattleScript - wScriptAfterPointer
 	ld a, [wSeenTrainerBank]
 	call FarCopyBytes
 	xor a
