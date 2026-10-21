@@ -330,7 +330,7 @@ def main():
 	ap = argparse.ArgumentParser()
 	ap.add_argument('--entries', type=int, default=0,
 		help='candidate entries to pick from (default: 15%% more than there are codes)')
-	ap.add_argument('--prefixes', type=int, default=16)
+	ap.add_argument('--prefixes', type=int, default=18)
 	args = ap.parse_args()
 
 	charmap = read_charmap()

@@ -323,7 +323,7 @@ PlaceCommandCharacter::
 
 PlaceDictEntry:
 ; Print the text dictionary entry for code a (see data/text/dictionary.asm).
-; Codes 1 to NUM_DICT_PREFIXES are followed by a second byte from $60 to $ff.
+; Codes 1 to NUM_DICT_PREFIXES are followed by a second byte from $60 to $fe.
 	ld b, h
 	ld c, l
 	ld h, 0
