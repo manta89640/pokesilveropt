@@ -5,8 +5,8 @@ This is a fork of [pret/pokegold](https://github.com/pret/pokegold), the disasse
 | | Original | This fork |
 |-|-|-|
 | ROM file | 2,097,152 bytes (128 banks) | **1,048,576 bytes (64 banks)** |
-| Content | 1,154,855 bytes | 971,556 bytes |
-| Free space | 942,297 bytes | 77,020 bytes |
+| Content | 1,154,855 bytes | 971,208 bytes |
+| Free space | 942,297 bytes | 77,368 bytes |
 
 The figures are for Silver, from the summary in rgblink's map file; Gold is within a few hundred bytes. The debug ROMs, which add the debug room, are 1 MB too.
 
@@ -31,7 +31,7 @@ To set up the repository, see [INSTALL.md](INSTALL.md). `make` builds `pokegold.
 
 **Peephole optimizations** (`tools/peephole.py`). Tail calls become jumps, jumps to `ret` become `ret cc`, near `jp`s become `jr`, and pairs of constant loads become `lb`. Every rewrite is smaller and no slower; serial, link, printer and infrared code is left alone. Scripts that only open a text box, show one text and close it use `jumptext` or `jumptextfaceplayer`, which do the same. `tools/tailmerge.py` replaces each code block that is identical to an earlier one in the same section with a jump to it, and a block that ends with the same instructions as an earlier one with a jump into those instructions.
 
-Savings by step (Silver, bytes): text dictionary 120,661; dead code 18,254; LZ 12,914; overworld sprites 10,708; map blocks 10,684; duplicate graphics 3,944; peephole 1,854; duplicate code 2,897; `jumptext` 1,357.
+Savings by step (Silver, bytes): text dictionary 120,661; dead code 18,254; LZ 12,914; overworld sprites 10,708; map blocks 10,684; duplicate graphics 3,944; peephole 1,854; duplicate code 3,245; `jumptext` 1,357.
 
 
 ## What is unchanged

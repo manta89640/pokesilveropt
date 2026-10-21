@@ -14,7 +14,9 @@ InitSound::
 
 	call _InitSound
 
+.tailmerge_17: ; (tools/tailmerge.py)
 	pop af
+.tailmerge_18: ; (tools/tailmerge.py)
 	ldh [hROMBank], a
 	ld [rROMB], a
 
@@ -34,11 +36,7 @@ UpdateSound::
 
 	call _UpdateSound
 
-	pop af
-	ldh [hROMBank], a
-	ld [rROMB], a
-
-	jp CopyMenuData.tailmerge_148 ; same as there (tools/tailmerge.py)
+	jr InitSound.tailmerge_17 ; same as there (tools/tailmerge.py)
 
 _LoadMusicByte::
 ; [wCurMusicByte] = [a:de]
@@ -77,9 +75,7 @@ PlayMusic::
 
 .end
 	pop af
-	ldh [hROMBank], a
-	ld [rROMB], a
-	jp CopyMenuData.tailmerge_148 ; same as there (tools/tailmerge.py)
+	jr InitSound.tailmerge_18 ; same as there (tools/tailmerge.py)
 
 PlayMusic2::
 ; Stop playing music, then play music de.
@@ -102,11 +98,7 @@ PlayMusic2::
 	pop de
 	call _PlayMusic
 
-	pop af
-	ldh [hROMBank], a
-	ld [rROMB], a
-
-	jp CopyMenuData.tailmerge_148 ; same as there (tools/tailmerge.py)
+	jr InitSound.tailmerge_17 ; same as there (tools/tailmerge.py)
 
 PlayCry::
 ; Play cry de.
@@ -193,11 +185,7 @@ PlaySFX::
 	ld [rROMB], a
 
 .done
-	pop af
-	pop bc
-	pop de
-	pop hl
-	ret
+	jp CopyMenuData.tailmerge_148 ; same as there (tools/tailmerge.py)
 
 WaitPlaySFX::
 	call WaitSFX
@@ -324,6 +312,7 @@ PlayMapMusicBike::
 
 	ld a, e
 	ld [wMapMusic], a
+.tailmerge_323: ; (tools/tailmerge.py)
 	call PlayMusic
 
 	jp CopyMenuData.tailmerge_148 ; same as there (tools/tailmerge.py)
@@ -352,8 +341,7 @@ RestartMapMusic::
 	ld a, [wMapMusic]
 	ld e, a
 	ld d, 0
-	call PlayMusic
-	jp CopyMenuData.tailmerge_148 ; same as there (tools/tailmerge.py)
+	jr PlayMapMusicBike.tailmerge_323 ; same as there (tools/tailmerge.py)
 
 SpecialMapMusic::
 	ld a, [wPlayerState]

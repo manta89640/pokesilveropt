@@ -55,6 +55,7 @@ SwitchItemsInBag:
 	pop hl
 	pop bc
 	call ItemSwitch_BackwardsCopyBytes
+.tailmerge_58: ; (tools/tailmerge.py)
 	ld a, [wScrollingMenuCursorPosition]
 	call ItemSwitch_CopyBufferToItem
 	jr SwitchItemsInBag.trivial ; same as there (tools/tailmerge.py)
@@ -76,9 +77,7 @@ SwitchItemsInBag:
 	add hl, bc
 	pop bc
 	call CopyBytes
-	ld a, [wScrollingMenuCursorPosition]
-	call ItemSwitch_CopyBufferToItem
-	jr SwitchItemsInBag.trivial ; same as there (tools/tailmerge.py)
+	jr SwitchItemsInBag.tailmerge_58 ; same as there (tools/tailmerge.py)
 
 .try_combining_stacks:
 	ld a, [wSwitchItem]

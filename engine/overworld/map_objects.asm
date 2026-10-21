@@ -272,6 +272,7 @@ EndSpriteMovement:
 	ld [hli], a ; OBJECT_STEP_INDEX
 	ld [hli], a ; OBJECT_1D
 	ld [hl], a  ; OBJECT_1E
+.tailmerge_275: ; (tools/tailmerge.py)
 	ld hl, OBJECT_WALKING
 	jp SetFacingStanding.tailmerge_25 ; same as there (tools/tailmerge.py)
 
@@ -649,8 +650,7 @@ MovementFunction_Strength:
 .ok2
 	call CopyLastCoordsToCoords
 .ok
-	ld hl, OBJECT_WALKING
-	jp SetFacingStanding.tailmerge_25 ; same as there (tools/tailmerge.py)
+	jp EndSpriteMovement.tailmerge_275 ; same as there (tools/tailmerge.py)
 
 .on_pit
 	call ObjectMovement_IncAnonJumptableIndex
@@ -1100,6 +1100,7 @@ StepFunction_NPCJump:
 	add hl, bc
 	dec [hl]
 	ret nz
+.tailmerge_1103: ; (tools/tailmerge.py)
 	call CopyCoordsTileToLastCoordsTile
 	jp StepFunction_Reset.tailmerge_480 ; same as there (tools/tailmerge.py)
 
@@ -1146,8 +1147,7 @@ StepFunction_PlayerJump:
 	ret nz
 	ld hl, wPlayerStepFlags
 	set PLAYERSTEP_STOP_F, [hl]
-	call CopyCoordsTileToLastCoordsTile
-	jp StepFunction_Reset.tailmerge_480 ; same as there (tools/tailmerge.py)
+	jr StepFunction_NPCJump.tailmerge_1103 ; same as there (tools/tailmerge.py)
 
 StepFunction_TeleportFrom:
 	call ObjectStep_AnonJumptable
@@ -1210,6 +1210,7 @@ StepFunction_TeleportFrom:
 	dec [hl]
 	ret nz
 	ld hl, OBJECT_STEP_FRAME
+.tailmerge_1213: ; (tools/tailmerge.py)
 	add hl, bc
 	ld [hl], 0
 	jp StepFunction_Reset.tailmerge_480 ; same as there (tools/tailmerge.py)
@@ -1289,9 +1290,7 @@ StepFunction_TeleportTo:
 	add hl, bc
 	ld [hl], 0
 	ld hl, OBJECT_SPRITE_Y_OFFSET
-	add hl, bc
-	ld [hl], 0
-	jp StepFunction_Reset.tailmerge_480 ; same as there (tools/tailmerge.py)
+	jr StepFunction_TeleportFrom.tailmerge_1213 ; same as there (tools/tailmerge.py)
 
 StepFunction_Skyfall:
 	call ObjectStep_AnonJumptable
@@ -1372,9 +1371,7 @@ StepFunction_GotBite:
 	dec [hl]
 	ret nz
 	ld hl, OBJECT_SPRITE_Y_OFFSET
-	add hl, bc
-	ld [hl], 0
-	jp StepFunction_Reset.tailmerge_480 ; same as there (tools/tailmerge.py)
+	jp StepFunction_TeleportFrom.tailmerge_1213 ; same as there (tools/tailmerge.py)
 
 StepFunction_RockSmash:
 	call .Step
@@ -1412,11 +1409,7 @@ StepFunction_Sleep:
 	ld hl, OBJECT_WALKING
 	add hl, bc
 	ld [hl], STANDING
-	ld hl, OBJECT_STEP_DURATION
-	add hl, bc
-	dec [hl]
-	ret nz
-	jp StepFunction_Reset.tailmerge_480 ; same as there (tools/tailmerge.py)
+	jp WaitStep_InPlace ; same as there (tools/tailmerge.py)
 
 StepFunction_Delete:
 	ld hl, OBJECT_WALKING
@@ -1448,8 +1441,7 @@ StepFunction_Restore:
 
 StepFunction_Standing:
 	call Stubbed_UpdateYOffset
-	ld hl, OBJECT_WALKING
-	jp SetFacingStanding.tailmerge_25 ; same as there (tools/tailmerge.py)
+	jp EndSpriteMovement.tailmerge_275 ; same as there (tools/tailmerge.py)
 
 StepFunction_NPCWalk:
 	call Stubbed_UpdateYOffset
@@ -1458,6 +1450,7 @@ StepFunction_NPCWalk:
 	add hl, bc
 	dec [hl]
 	ret nz
+.tailmerge_1461: ; (tools/tailmerge.py)
 	call CopyCoordsTileToLastCoordsTile
 	ld hl, OBJECT_WALKING
 	add hl, bc
@@ -1491,11 +1484,7 @@ StepFunction_PlayerWalk:
 	ret nz
 	ld hl, wPlayerStepFlags
 	set PLAYERSTEP_STOP_F, [hl]
-	call CopyCoordsTileToLastCoordsTile
-	ld hl, OBJECT_WALKING
-	add hl, bc
-	ld [hl], STANDING
-	jp StepFunction_Reset.tailmerge_480 ; same as there (tools/tailmerge.py)
+	jr StepFunction_NPCWalk.tailmerge_1461 ; same as there (tools/tailmerge.py)
 
 StepFunction_Turn:
 	call ObjectStep_AnonJumptable
@@ -1559,11 +1548,7 @@ StepFunction_StrengthBoulder:
 	ld hl, OBJECT_FLAGS2
 	add hl, bc
 	res BOULDER_MOVING_F, [hl]
-	call CopyCoordsTileToLastCoordsTile
-	ld hl, OBJECT_WALKING
-	add hl, bc
-	ld [hl], STANDING
-	jp StepFunction_Reset.tailmerge_480 ; same as there (tools/tailmerge.py)
+	jp StepFunction_NPCWalk.tailmerge_1461 ; same as there (tools/tailmerge.py)
 
 StepFunction_TrackingObject:
 	ld hl, OBJECT_1D

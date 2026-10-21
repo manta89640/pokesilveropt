@@ -1032,8 +1032,7 @@ Intro_LoadCharizardPalette:
 	jr nz, .got_mon
 	ld c, CHARIZARD
 .got_mon
-	farcall Intro_LoadMonPalette
-	ret
+	jr Intro_LoadChikoritaPalette.tailmerge_1018 ; same as there (tools/tailmerge.py)
 
 DrawIntroCharizardGraphic:
 	push af

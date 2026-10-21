@@ -127,8 +127,7 @@ Movement_step_dig:
 	ld hl, OBJECT_STEP_TYPE
 	add hl, bc
 	ld [hl], STEP_TYPE_SLEEP
-	ld hl, OBJECT_WALKING
-	jp SetFacingStanding.tailmerge_25 ; same as there (tools/tailmerge.py)
+	jp EndSpriteMovement.tailmerge_275 ; same as there (tools/tailmerge.py)
 
 Movement_return_dig:
 	call GetSpriteDirection
@@ -231,9 +230,7 @@ Movement_remove_object:
 	ld [hl], -1
 
 .not_leading
-	ld hl, wStateFlags
-	res SCRIPTED_MOVEMENT_STATE_F, [hl]
-	ret
+	jr Movement_step_wait_end.tailmerge_228 ; same as there (tools/tailmerge.py)
 
 Movement_step_stop:
 	ld hl, OBJECT_ACTION
@@ -294,12 +291,12 @@ Movement_step_sleep_common:
 	add hl, bc
 	ld [hl], STEP_TYPE_SLEEP
 
+.tailmerge_294: ; (tools/tailmerge.py)
 	ld hl, OBJECT_ACTION
 	add hl, bc
 	ld [hl], OBJECT_ACTION_STAND
 
-	ld hl, OBJECT_WALKING
-	jp SetFacingStanding.tailmerge_25 ; same as there (tools/tailmerge.py)
+	jp EndSpriteMovement.tailmerge_275 ; same as there (tools/tailmerge.py)
 
 Movement_step_bump:
 	ld a, 1
@@ -315,8 +312,7 @@ Movement_step_bump:
 	add hl, bc
 	ld [hl], OBJECT_ACTION_BUMP
 
-	ld hl, OBJECT_WALKING
-	jp SetFacingStanding.tailmerge_25 ; same as there (tools/tailmerge.py)
+	jp EndSpriteMovement.tailmerge_275 ; same as there (tools/tailmerge.py)
 
 Movement_tree_shake:
 	ld a, 24
@@ -332,8 +328,7 @@ Movement_tree_shake:
 	add hl, bc
 	ld [hl], OBJECT_ACTION_WEIRD_TREE
 
-	ld hl, OBJECT_WALKING
-	jp SetFacingStanding.tailmerge_25 ; same as there (tools/tailmerge.py)
+	jp EndSpriteMovement.tailmerge_275 ; same as there (tools/tailmerge.py)
 
 Movement_remove_sliding:
 	ld hl, OBJECT_FLAGS1
@@ -408,12 +403,7 @@ TurnHead:
 	add hl, bc
 	ld [hl], a
 
-	ld hl, OBJECT_ACTION
-	add hl, bc
-	ld [hl], OBJECT_ACTION_STAND
-
-	ld hl, OBJECT_WALKING
-	jp SetFacingStanding.tailmerge_25 ; same as there (tools/tailmerge.py)
+	jp Movement_step_sleep_common.tailmerge_294 ; same as there (tools/tailmerge.py)
 
 Movement_slow_step_down:
 	ld a, STEP_SLOW << 2 | DOWN

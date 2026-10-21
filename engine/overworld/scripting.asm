@@ -1492,6 +1492,7 @@ Script_getmoney:
 	call GetMoneyAccount
 	ld hl, wStringBuffer1
 	lb bc, PRINTNUM_LEFTALIGN | 3, 6
+.tailmerge_1495: ; (tools/tailmerge.py)
 	call PrintNum
 	jr Script_getitemname.tailmerge_1476 ; same as there (tools/tailmerge.py)
 
@@ -1500,8 +1501,7 @@ Script_getcoins:
 	ld hl, wStringBuffer1
 	ld de, wCoins
 	lb bc, PRINTNUM_LEFTALIGN | 2, 6
-	call PrintNum
-	jr Script_getitemname.tailmerge_1476 ; same as there (tools/tailmerge.py)
+	jr Script_getmoney.tailmerge_1495 ; same as there (tools/tailmerge.py)
 
 Script_getnum:
 	call ResetStringBuffer1

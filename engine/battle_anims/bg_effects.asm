@@ -1012,6 +1012,7 @@ BattleBGEffect_Psychic:
 	ldh [hLYOverrideEnd], a
 	lb de, 6, 5
 	call DeformScreen
+.tailmerge_1015: ; (tools/tailmerge.py)
 	ld hl, BG_EFFECT_STRUCT_PARAM
 	jp BattleBGEffect_RunPicResizeScript.tailmerge_715 ; same as there (tools/tailmerge.py)
 
@@ -1288,8 +1289,7 @@ BattleBGEffect_Dig:
 	ld hl, BG_EFFECT_STRUCT_BATTLE_TURN
 	add hl, bc
 	ld [hl], $2
-	ld hl, BG_EFFECT_STRUCT_PARAM
-	jp BattleBGEffect_RunPicResizeScript.tailmerge_715 ; same as there (tools/tailmerge.py)
+	jp BattleBGEffect_Psychic.tailmerge_1015 ; same as there (tools/tailmerge.py)
 
 .one
 	ld hl, BG_EFFECT_STRUCT_PARAM
@@ -1528,9 +1528,9 @@ BattleBGEffect_WobbleMon:
 	call BattleBGEffect_SetLCDStatCustoms1
 	ldh a, [hLYOverrideEnd]
 	inc a
+.tailmerge_1531: ; (tools/tailmerge.py)
 	ldh [hLYOverrideEnd], a
-	ld hl, BG_EFFECT_STRUCT_PARAM
-	jp BattleBGEffect_RunPicResizeScript.tailmerge_715 ; same as there (tools/tailmerge.py)
+	jp BattleBGEffect_Psychic.tailmerge_1015 ; same as there (tools/tailmerge.py)
 
 .one
 	ld hl, BG_EFFECT_STRUCT_PARAM
@@ -1925,8 +1925,7 @@ BattleBGEffect_FadeMonsToBlackRepeating:
 
 .cgb_zero
 	call BattleBGEffects_IncAnonJumptableIndex
-	ld hl, BG_EFFECT_STRUCT_PARAM
-	jp BattleBGEffect_RunPicResizeScript.tailmerge_715 ; same as there (tools/tailmerge.py)
+	jp BattleBGEffect_Psychic.tailmerge_1015 ; same as there (tools/tailmerge.py)
 
 .cgb_one
 	ld hl, BG_EFFECT_STRUCT_PARAM
@@ -2104,9 +2103,7 @@ BattleBGEffect_WobblePlayer:
 	xor a
 	ldh [hLYOverrideStart], a
 	ld a, $37
-	ldh [hLYOverrideEnd], a
-	ld hl, BG_EFFECT_STRUCT_PARAM
-	jp BattleBGEffect_RunPicResizeScript.tailmerge_715 ; same as there (tools/tailmerge.py)
+	jp BattleBGEffect_WobbleMon.tailmerge_1531 ; same as there (tools/tailmerge.py)
 
 .one
 	ld hl, BG_EFFECT_STRUCT_PARAM

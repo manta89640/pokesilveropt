@@ -403,9 +403,7 @@ endr
 	ld [wSGBPals + 6], a
 
 .done
-	ld hl, wSGBPals
-	ld de, BlkPacket_AllPal0
-	ret
+	jp SGBLayoutJumptable.tailmerge_281 ; same as there (tools/tailmerge.py)
 
 .SGB_Unused0D:
 .SGB_TrainerCard:
@@ -465,6 +463,7 @@ endr
 	ld c, a
 	ld b, 0
 	add hl, bc
+.tailmerge_466: ; (tools/tailmerge.py)
 	ld a, [hli]
 	ld [wSGBPals + 3], a
 	ld a, [hli]
@@ -488,15 +487,7 @@ endr
 	ld a, [wCurPartySpecies]
 	ld bc, wTempMonDVs
 	call GetPlayerOrMonPalettePointer
-	ld a, [hli]
-	ld [wSGBPals + 3], a
-	ld a, [hli]
-	ld [wSGBPals + 4], a
-	ld a, [hli]
-	ld [wSGBPals + 5], a
-	ld a, [hl]
-	ld [wSGBPals + 6], a
-	jp SGBLayoutJumptable.tailmerge_281 ; same as there (tools/tailmerge.py)
+	jr SGBLayoutJumptable.tailmerge_466 ; same as there (tools/tailmerge.py)
 
 .SGB_TradeTube:
 	ld hl, PalPacket_TradeTube
@@ -511,15 +502,7 @@ endr
 	ld a, [wCurPartySpecies]
 	ld bc, wTempMonDVs
 	call GetFrontpicPalettePointer
-	ld a, [hli]
-	ld [wSGBPals + 3], a
-	ld a, [hli]
-	ld [wSGBPals + 4], a
-	ld a, [hli]
-	ld [wSGBPals + 5], a
-	ld a, [hl]
-	ld [wSGBPals + 6], a
-	jp SGBLayoutJumptable.tailmerge_281 ; same as there (tools/tailmerge.py)
+	jr SGBLayoutJumptable.tailmerge_466 ; same as there (tools/tailmerge.py)
 
 .GetMapPalsIndex:
 	ld a, [wTimeOfDayPal]

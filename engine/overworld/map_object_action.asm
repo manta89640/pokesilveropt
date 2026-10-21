@@ -61,6 +61,7 @@ SetFacingStepAction:
 	rrca
 	rrca
 	maskbits NUM_DIRECTIONS
+.tailmerge_64: ; (tools/tailmerge.py)
 	ld d, a
 
 	call GetSpriteDirection
@@ -83,12 +84,7 @@ SetFacingBumpAction:
 	rrca
 	rrca
 	maskbits NUM_DIRECTIONS
-	ld d, a
-
-	call GetSpriteDirection
-	or FACING_STEP_DOWN_0 ; useless
-	or d
-	jr SetFacingCurrent.tailmerge_32 ; same as there (tools/tailmerge.py)
+	jr SetFacingStepAction.tailmerge_64 ; same as there (tools/tailmerge.py)
 
 SetFacingCounterclockwiseSpin:
 	call CounterclockwiseSpinAction

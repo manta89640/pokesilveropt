@@ -2017,9 +2017,7 @@ DoubleSwitch:
 	call PlayerPartyMonEntrance
 
 .done
-	xor a ; BATTLEPLAYERACTION_USEMOVE
-	ld [wBattlePlayerAction], a
-	ret
+	jp Battle_EnemyFirst.tailmerge_856 ; same as there (tools/tailmerge.py)
 
 UpdateBattleStateAndExperienceAfterEnemyFaint:
 	call UpdateBattleMonInParty
@@ -7291,9 +7289,7 @@ AnimateExpBar:
 	cp b
 	jr nz, .anim_loop
 .end_animation
-	ld a, $1
-	ldh [hBGMapMode], a
-	ret
+	jp ShowSetEnemyMonAndSendOutAnimation.tailmerge_3366 ; same as there (tools/tailmerge.py)
 
 SendOutMonText:
 	ld a, [wLinkMode]

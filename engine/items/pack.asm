@@ -1131,15 +1131,14 @@ Pack_InterpretJoypad:
 
 .d_left
 	ld a, b
+.tailmerge_1134: ; (tools/tailmerge.py)
 	ld [wJumptableIndex], a
 	ld [wPackJumptableIndex], a
 	jp DepositSellTutorial_InterpretJoypad.tailmerge_937 ; same as there (tools/tailmerge.py)
 
 .d_right
 	ld a, c
-	ld [wJumptableIndex], a
-	ld [wPackJumptableIndex], a
-	jp DepositSellTutorial_InterpretJoypad.tailmerge_937 ; same as there (tools/tailmerge.py)
+	jr Pack_InterpretJoypad.tailmerge_1134 ; same as there (tools/tailmerge.py)
 
 .select
 	farcall SwitchItemsInBag

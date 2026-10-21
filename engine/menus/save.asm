@@ -466,6 +466,7 @@ SaveBackupPokemonData:
 	call OpenSRAM
 	ld hl, wPokemonData
 	ld de, sBackupPokemonData
+.tailmerge_469: ; (tools/tailmerge.py)
 	ld bc, wPokemonDataEnd - wPokemonData
 	jp SavePlayerData.tailmerge_399 ; same as there (tools/tailmerge.py)
 
@@ -661,6 +662,7 @@ LoadPlayerData:
 	ld bc, wPlayerDataEnd - wPlayerData
 	call CopyBytes
 	ld hl, sCurMapData
+.tailmerge_664: ; (tools/tailmerge.py)
 	ld de, wCurMapData
 	jp SavePlayerData.tailmerge_398 ; same as there (tools/tailmerge.py)
 
@@ -668,9 +670,9 @@ LoadPokemonData:
 	ld a, BANK(sPokemonData)
 	call OpenSRAM
 	ld hl, sPokemonData
+.tailmerge_673: ; (tools/tailmerge.py)
 	ld de, wPokemonData
-	ld bc, wPokemonDataEnd - wPokemonData
-	jp SavePlayerData.tailmerge_399 ; same as there (tools/tailmerge.py)
+	jp SaveBackupPokemonData.tailmerge_469 ; same as there (tools/tailmerge.py)
 
 LoadBox:
 	call GetBoxAddress
@@ -718,16 +720,13 @@ LoadBackupPlayerData:
 	ld a, BANK(sBackupCurMapData)
 	call OpenSRAM
 	ld hl, sBackupCurMapData
-	ld de, wCurMapData
-	jp SavePlayerData.tailmerge_398 ; same as there (tools/tailmerge.py)
+	jr LoadPlayerData.tailmerge_664 ; same as there (tools/tailmerge.py)
 
 LoadBackupPokemonData:
 	ld a, BANK(sBackupPokemonData)
 	call OpenSRAM
 	ld hl, sBackupPokemonData
-	ld de, wPokemonData
-	ld bc, wPokemonDataEnd - wPokemonData
-	jp SavePlayerData.tailmerge_399 ; same as there (tools/tailmerge.py)
+	jr LoadPokemonData.tailmerge_673 ; same as there (tools/tailmerge.py)
 
 VerifyBackupChecksum:
 	ld a, BANK(sBackupPokemonData)

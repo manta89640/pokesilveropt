@@ -621,6 +621,7 @@ BGEventJumptable:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
+.tailmerge_624: ; (tools/tailmerge.py)
 	call GetMapScriptsBank
 	jp CheckTimeEvents.tailmerge_420 ; same as there (tools/tailmerge.py)
 
@@ -663,8 +664,7 @@ BGEventJumptable:
 	inc hl
 	call GetMapScriptsBank
 	call GetFarWord
-	call GetMapScriptsBank
-	jp CheckTimeEvents.tailmerge_420 ; same as there (tools/tailmerge.py)
+	jr BGEventJumptable.tailmerge_624 ; same as there (tools/tailmerge.py)
 
 .dontread:
 	xor a
@@ -1092,9 +1092,7 @@ RandomEncounter::
 	jr .done
 
 .done
-	call CallScript
-	scf
-	ret
+	jp CheckTimeEvents.tailmerge_420 ; same as there (tools/tailmerge.py)
 
 WildBattleScript:
 	randomwildmon

@@ -3449,6 +3449,7 @@ BattleAnimFunction_MetronomeHand:
 	ld [hl], a
 	pop af
 	ld d, $8
+.tailmerge_3452: ; (tools/tailmerge.py)
 	call BattleAnim_Cosine
 	jp BattleAnimFunction_Egg.tailmerge_2138 ; same as there (tools/tailmerge.py)
 
@@ -3726,13 +3727,13 @@ BattleAnimFunction_SwaggerMorningSun:
 	push af
 	push de
 	call BattleAnim_Sine
+.tailmerge_3730: ; (tools/tailmerge.py)
 	ld hl, BATTLEANIMSTRUCT_YOFFSET
 	add hl, bc
 	ld [hl], a
 	pop de
 	pop af
-	call BattleAnim_Cosine
-	jp BattleAnimFunction_Egg.tailmerge_2138 ; same as there (tools/tailmerge.py)
+	jp BattleAnimFunction_MetronomeHand.tailmerge_3452 ; same as there (tools/tailmerge.py)
 
 BattleAnimFunction_HiddenPower:
 ; Moves object in a ring around position. Uses anim_incobj to move to second phase, where it expands the radius 8 pixels at a time for 13 frames and then disappears
@@ -3822,13 +3823,7 @@ BattleAnimFunction_PerishSong:
 	add hl, bc
 	add [hl]
 	inc [hl]
-	ld hl, BATTLEANIMSTRUCT_YOFFSET
-	add hl, bc
-	ld [hl], a
-	pop de
-	pop af
-	call BattleAnim_Cosine
-	jp BattleAnimFunction_Egg.tailmerge_2138 ; same as there (tools/tailmerge.py)
+	jr BattleAnimFunction_SwaggerMorningSun.tailmerge_3730 ; same as there (tools/tailmerge.py)
 
 BattleAnimFunction_RapidSpin:
 ; Object moves upwards 4 pixels per frame until it disappears at y coord $d0
@@ -4046,13 +4041,7 @@ BattleAnim_StepCircle:
 	call BattleAnim_Sine
 	sra a
 	sra a
-	ld hl, BATTLEANIMSTRUCT_YOFFSET
-	add hl, bc
-	ld [hl], a
-	pop de
-	pop af
-	call BattleAnim_Cosine
-	jp BattleAnimFunction_Egg.tailmerge_2138 ; same as there (tools/tailmerge.py)
+	jp BattleAnimFunction_SwaggerMorningSun.tailmerge_3730 ; same as there (tools/tailmerge.py)
 
 BattleAnim_StepToTarget:
 ; Inches object towards the opponent's side, moving half as much in the Y axis as it did in the X axis. Uses lower nybble of A

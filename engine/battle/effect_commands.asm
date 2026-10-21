@@ -4364,6 +4364,7 @@ BattleCommand_StatDown:
 	inc [hl]
 .CantLower:
 	ld a, 3
+.tailmerge_4367: ; (tools/tailmerge.py)
 	ld [wFailedMessage], a
 	jp BattleCommand_CheckHit.Missed ; same as there (tools/tailmerge.py)
 
@@ -4375,8 +4376,7 @@ BattleCommand_StatDown:
 
 .Mist:
 	ld a, 2
-	ld [wFailedMessage], a
-	jp BattleCommand_CheckHit.Missed ; same as there (tools/tailmerge.py)
+	jr BattleCommand_StatDown.tailmerge_4367 ; same as there (tools/tailmerge.py)
 
 CheckMist:
 	ld a, BATTLE_VARS_MOVE_EFFECT

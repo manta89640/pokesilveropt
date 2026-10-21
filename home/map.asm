@@ -1594,6 +1594,7 @@ ScrollMapLeft::
 	ld c, 2 * SCREEN_HEIGHT
 	call ScrollBGMapPalettes
 	ld a, [wBGMapAnchor]
+.tailmerge_1597: ; (tools/tailmerge.py)
 	ld e, a
 	ld a, [wBGMapAnchor + 1]
 	ld d, a
@@ -1614,11 +1615,7 @@ ScrollMapRight::
 	add SCREEN_HEIGHT
 	and %00011111
 	or b
-	ld e, a
-	ld a, [wBGMapAnchor + 1]
-	ld d, a
-	call UpdateBGMapColumn
-	jr ScrollMapUp.tailmerge_1565 ; same as there (tools/tailmerge.py)
+	jr ScrollMapLeft.tailmerge_1597 ; same as there (tools/tailmerge.py)
 
 BackupBGMapRow::
 	ld c, 2 * SCREEN_WIDTH
@@ -2476,6 +2473,7 @@ GetAnyMapEnvironment::
 	push de
 	push bc
 	ld de, MAP_ENVIRONMENT
+.tailmerge_2479: ; (tools/tailmerge.py)
 	call GetAnyMapField
 	jp GetSpritePalette.tailmerge_11 ; same as there (tools/tailmerge.py)
 
@@ -2492,8 +2490,7 @@ GetWorldMapLocation::
 	push bc
 
 	ld de, MAP_LOCATION
-	call GetAnyMapField
-	jp GetSpritePalette.tailmerge_11 ; same as there (tools/tailmerge.py)
+	jr GetAnyMapEnvironment.tailmerge_2479 ; same as there (tools/tailmerge.py)
 
 GetMapMusic::
 	push hl

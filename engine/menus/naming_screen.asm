@@ -351,6 +351,7 @@ NamingScreenJoypadLoop:
 	ld d, 8 * TILE_WIDTH
 .got_cursor_position
 	ld a, SPRITE_ANIM_OBJ_NAMING_SCREEN_CURSOR
+.tailmerge_354: ; (tools/tailmerge.py)
 	call InitSpriteAnimStruct
 	ld a, c
 	ld [wNamingScreenCursorObjectPointer], a
@@ -1009,18 +1010,7 @@ INCBIN "gfx/naming_screen/mail.2bpp"
 .init_blinking_cursor
 	depixel 9, 2
 	ld a, SPRITE_ANIM_OBJ_COMPOSE_MAIL_CURSOR
-	call InitSpriteAnimStruct
-	ld a, c
-	ld [wNamingScreenCursorObjectPointer], a
-	ld a, b
-	ld [wNamingScreenCursorObjectPointer + 1], a
-	ld hl, SPRITEANIMSTRUCT_FRAMESET_ID
-	add hl, bc
-	ld a, [hl]
-	ld hl, SPRITEANIMSTRUCT_VAR3
-	add hl, bc
-	ld [hl], a
-	jp Pack_JumptableNext ; same as there (tools/tailmerge.py)
+	jp NamingScreenJoypadLoop.tailmerge_354 ; same as there (tools/tailmerge.py)
 
 .process_joypad
 	ld hl, hJoyPressed

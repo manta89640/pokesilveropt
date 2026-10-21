@@ -257,9 +257,7 @@ SlotsJumptable:
 	dw SlotsAction_Quit              ; 12
 
 SlotsAction_Next:
-	ld hl, wJumptableIndex
-	inc [hl]
-	ret
+	jp PokegearMap_Init.tailmerge_537 ; same as there (tools/tailmerge.py)
 
 SlotsAction_Init:
 	call SlotsAction_Next
@@ -1032,6 +1030,7 @@ ReelAction_WaitReel2SkipTo7:
 	ld a, SFX_THROW_BALL
 	call Slots_PlaySFX
 	ld hl, REEL_ACTION
+.tailmerge_1033: ; (tools/tailmerge.py)
 	add hl, bc
 	inc [hl] ; REEL_ACTION_FAST_SPIN_REEL2_UNTIL_LINED_UP_7S
 	jp ReelAction_DoubleRate ; same as there (tools/tailmerge.py)
@@ -1091,9 +1090,7 @@ ReelAction_WaitGolem:
 
 .one
 	ld hl, REEL_ACTION
-	add hl, bc
-	inc [hl] ; REEL_ACTION_END_GOLEM
-	jp ReelAction_DoubleRate ; same as there (tools/tailmerge.py)
+	jr ReelAction_WaitReel2SkipTo7.tailmerge_1033 ; same as there (tools/tailmerge.py)
 
 ReelAction_EndGolem:
 	xor a

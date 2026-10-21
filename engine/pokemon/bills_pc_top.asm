@@ -130,6 +130,7 @@ BillsPC_MovePKMNMenu:
 BillsPC_DepositMenu:
 	call LoadStandardMenuHeader
 	farcall _DepositPKMN
+.tailmerge_133: ; (tools/tailmerge.py)
 	call ReturnToMapFromSubmenu
 	call ClearPCItemScreen
 	jr BillsPC_MovePKMNMenu.quit ; same as there (tools/tailmerge.py)
@@ -167,9 +168,7 @@ CheckCurPartyMonFainted:
 BillsPC_WithdrawMenu:
 	call LoadStandardMenuHeader
 	farcall _WithdrawPKMN
-	call ReturnToMapFromSubmenu
-	call ClearPCItemScreen
-	jr BillsPC_MovePKMNMenu.quit ; same as there (tools/tailmerge.py)
+	jr BillsPC_DepositMenu.tailmerge_133 ; same as there (tools/tailmerge.py)
 
 
 BillsPC_ChangeBoxMenu:

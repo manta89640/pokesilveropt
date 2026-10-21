@@ -524,9 +524,7 @@ StartMenu_Pokemon:
 	jr z, .quit
 
 .return
-	call CloseSubmenu
-	ld a, 0
-	ret
+	jp StartMenu_Status.tailmerge_452 ; same as there (tools/tailmerge.py)
 
 .quit
 	ld a, b
