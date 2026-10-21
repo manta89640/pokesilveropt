@@ -7,9 +7,7 @@ Music_GoldSilverOpening2:
 
 Music_GoldSilverOpening2_Ch1:
 	tempo 92
-	volume 7, 7
-	duty_cycle 3
-	pitch_offset 2
+	sound_call Music_JohtoWildBattle_Shared2
 	stereo_panning FALSE, TRUE
 	note_type 12, 3, -5
 	octave 3
@@ -17,32 +15,12 @@ Music_GoldSilverOpening2_Ch1:
 .loop1:
 	note_type 12, 12, 1
 	octave 3
-	note D_, 2
-	note D_, 2
-	note D_, 2
-	volume_envelope 11, 7
-	note D#, 10
-	volume_envelope 12, 1
-	note D_, 2
-	note D_, 2
-	note D_, 2
-	volume_envelope 11, 7
-	note F_, 4
+	sound_call Music_GoldSilverOpening2_Shared3
 	note D#, 4
 	note C_, 2
 	sound_loop 2, .loop1
 	volume_envelope 12, 1
-	note D_, 2
-	note D_, 2
-	note D_, 2
-	volume_envelope 11, 7
-	note D#, 10
-	volume_envelope 12, 1
-	note D_, 2
-	note D_, 2
-	note D_, 2
-	volume_envelope 11, 7
-	note F_, 4
+	sound_call Music_GoldSilverOpening2_Shared3
 	note G_, 4
 	note A#, 2
 	volume_envelope 11, 0
@@ -62,34 +40,12 @@ Music_GoldSilverOpening2_Ch2:
 	note A#, 8
 	note_type 12, 13, 1
 	octave 3
-	note A_, 2
-	note A_, 2
-	note A_, 2
-	volume_envelope 12, 7
-	note A#, 10
-	volume_envelope 13, 1
-	note A_, 2
-	note A_, 2
-	note A_, 2
-	volume_envelope 12, 7
-	octave 4
-	note C_, 4
+	sound_call Music_GoldSilverOpening2_Shared2
 	octave 3
 	note A#, 4
 	note G_, 2
 	volume_envelope 13, 1
-	note A_, 2
-	note A_, 2
-	note A_, 2
-	volume_envelope 12, 7
-	note A#, 10
-	volume_envelope 13, 1
-	note A_, 2
-	note A_, 2
-	note A_, 2
-	volume_envelope 12, 7
-	octave 4
-	note C_, 4
+	sound_call Music_GoldSilverOpening2_Shared2
 	note C#, 4
 	note D#, 2
 	volume_envelope 12, 7
@@ -109,55 +65,15 @@ Music_GoldSilverOpening2_Ch3:
 	note_type 12, 1, 7
 	rest 8
 	octave 2
-	note A_, 1
-	rest 1
-	note A_, 1
-	rest 1
-	note A_, 1
-	rest 1
+	sound_call Music_NationalPark_Shared4
 	note A#, 8
 	rest 2
-	note A_, 1
-	rest 1
-	note A_, 1
-	rest 1
-	note A_, 1
-	rest 1
+	sound_call Music_NationalPark_Shared4
 	note D_, 4
 	note F_, 4
 	note A_, 2
-	note D_, 2
-	note A_, 2
-	note D_, 2
-	note A_, 2
-	note G#, 2
-	note E_, 2
-	note G_, 2
-	note F_, 2
-	note D_, 2
-	note A_, 2
-	note G#, 2
-	note E_, 2
-	note G_, 2
-	note F_, 2
-	note C_, 2
-	note D#, 2
-	note D_, 2
-	note A_, 2
-	note D_, 2
-	note A_, 2
-	note G#, 2
-	note E_, 2
-	note G_, 2
-	note F_, 2
-	note D_, 2
-	note A_, 2
-	note G#, 2
-	note E_, 2
-	note G_, 2
-	note F_, 2
-	note C_, 2
-	note D#, 2
+	sound_call Music_GoldSilverOpening2_Shared1
+	sound_call Music_GoldSilverOpening2_Shared1
 	note D_, 2
 	note F#, 2
 	note A#, 2
@@ -215,4 +131,52 @@ Music_GoldSilverOpening2_Ch4:
 	drum_speed 12
 	sound_loop 4, .loop1
 	drum_note 1, 16
+	sound_ret
+
+Music_GoldSilverOpening2_Shared1: ; (tools/musiccalls.py)
+	note D_, 2
+	note A_, 2
+	note D_, 2
+	note A_, 2
+	note G#, 2
+	note E_, 2
+	note G_, 2
+	note F_, 2
+	note D_, 2
+	note A_, 2
+	note G#, 2
+	note E_, 2
+	note G_, 2
+	note F_, 2
+	note C_, 2
+	note D#, 2
+	sound_ret
+
+Music_GoldSilverOpening2_Shared2: ; (tools/musiccalls.py)
+	note A_, 2
+	note A_, 2
+	note A_, 2
+	volume_envelope 12, 7
+	note A#, 10
+	volume_envelope 13, 1
+	note A_, 2
+	note A_, 2
+	note A_, 2
+	volume_envelope 12, 7
+	octave 4
+	note C_, 4
+	sound_ret
+
+Music_GoldSilverOpening2_Shared3: ; (tools/musiccalls.py)
+	note D_, 2
+	note D_, 2
+	note D_, 2
+	volume_envelope 11, 7
+	note D#, 10
+	volume_envelope 12, 1
+	note D_, 2
+	note D_, 2
+	note D_, 2
+	volume_envelope 11, 7
+	note F_, 4
 	sound_ret

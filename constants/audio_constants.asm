@@ -39,7 +39,7 @@ DEF CHANNEL_FLAGS2                      rb
 DEF CHANNEL_FLAGS3                      rb
 DEF CHANNEL_MUSIC_ADDRESS               rw
 DEF CHANNEL_LAST_MUSIC_ADDRESS          rw
-                                        rb_skip 2
+DEF CHANNEL_LAST_MUSIC_ADDRESS_2        rw ; for a subroutine called from a subroutine
 DEF CHANNEL_NOTE_FLAGS                  rb
 DEF CHANNEL_CONDITION                   rb
 DEF CHANNEL_DUTY_CYCLE                  rb

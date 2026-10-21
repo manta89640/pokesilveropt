@@ -6,11 +6,7 @@ Music_Route36:
 	channel 4, Music_Route36_Ch4
 
 Music_Route36_Ch1:
-	tempo 144
-	volume 7, 7
-	duty_cycle 3
-	pitch_offset 1
-	vibrato 16, 1, 5
+	sound_call Music_Route36_Shared2
 	stereo_panning FALSE, TRUE
 	note_type 12, 11, 3
 	octave 3
@@ -60,25 +56,16 @@ Music_Route36_Ch1:
 	volume_envelope 11, 5
 	note C_, 2
 	note F_, 2
-	note C_, 2
-	octave 3
-	note A#, 2
-	octave 4
+	sound_call Music_Route36_Shared4
 	note D#, 4
 	note D_, 4
 	note C_, 2
 	octave 3
 	note A#, 4
 	volume_envelope 11, 4
-	note A_, 2
-	octave 4
-	note D_, 2
-	octave 3
+	sound_call Music_Route36_Shared6
 	note F#, 2
-	note A_, 2
-	octave 4
-	note D_, 2
-	octave 3
+	sound_call Music_Route36_Shared6
 	note F#, 2
 	note A_, 2
 	octave 4
@@ -336,30 +323,8 @@ Music_Route36_Ch3:
 	note D#, 2
 	note E_, 2
 .mainloop:
-	note F_, 4
-	note C_, 2
-	note F_, 4
-	note C_, 2
-	note F_, 2
-	note C_, 2
-	note G_, 4
-	note D#, 2
-	note G_, 4
-	note D#, 2
-	note G_, 2
-	note D#, 2
-	note F_, 4
-	note C_, 2
-	note F_, 4
-	note C_, 2
-	note F_, 2
-	note C_, 2
-	note G_, 4
-	note D#, 2
-	note G_, 4
-	note D#, 2
-	note G_, 2
-	note D#, 2
+	sound_call Music_Route36_Shared3
+	sound_call Music_Route36_Shared3
 	note A_, 4
 	note F_, 2
 	note A_, 4
@@ -372,12 +337,7 @@ Music_Route36_Ch3:
 	note G_, 2
 	note A#, 2
 	note G_, 2
-	note F#, 4
-	note D_, 2
-	note F#, 4
-	note D_, 2
-	note F#, 2
-	note D_, 2
+	sound_call Music_Route36_Shared5
 	note D_, 4
 	octave 2
 	note A_, 2
@@ -390,52 +350,10 @@ Music_Route36_Ch3:
 	octave 2
 	note A_, 2
 	octave 3
-	note F#, 4
-	note D_, 2
-	note F#, 4
-	note D_, 2
-	note F#, 2
-	note D_, 2
-	note G_, 4
-	note E_, 2
-	note G_, 4
-	note E_, 2
-	note G_, 2
-	note E_, 2
-	note F#, 4
-	note D_, 2
-	note F#, 4
-	note D_, 2
-	note F#, 2
-	note D_, 2
-	note F#, 4
-	note D_, 2
-	note F#, 4
-	note D_, 2
+	sound_call Music_Route36_Shared1
 	note E_, 2
 	note A_, 2
-	note F#, 4
-	note D_, 2
-	note F#, 4
-	note D_, 2
-	note F#, 2
-	note D_, 2
-	note G_, 4
-	note E_, 2
-	note G_, 4
-	note E_, 2
-	note G_, 2
-	note E_, 2
-	note F#, 4
-	note D_, 2
-	note F#, 4
-	note D_, 2
-	note F#, 2
-	note D_, 2
-	note F#, 4
-	note D_, 2
-	note F#, 4
-	note D_, 2
+	sound_call Music_Route36_Shared1
 	note F#, 2
 	note D_, 2
 	note G_, 4
@@ -519,4 +437,65 @@ Music_Route36_Ch4:
 	drum_note 10, 1
 	drum_note 10, 1
 	drum_speed 12
+	sound_ret
+
+Music_Route36_Shared1: ; (tools/musiccalls.py)
+	sound_call Music_Route36_Shared5
+	note G_, 4
+	note E_, 2
+	note G_, 4
+	note E_, 2
+	note G_, 2
+	note E_, 2
+	sound_call Music_Route36_Shared5
+	note F#, 4
+	note D_, 2
+	note F#, 4
+	note D_, 2
+	sound_ret
+
+Music_Route36_Shared2: ; (tools/musiccalls.py)
+	tempo 144
+	volume 7, 7
+	duty_cycle 3
+	pitch_offset 1
+	vibrato 16, 1, 5
+	sound_ret
+
+Music_Route36_Shared3: ; (tools/musiccalls.py)
+	note F_, 4
+	note C_, 2
+	note F_, 4
+	note C_, 2
+	note F_, 2
+	note C_, 2
+	note G_, 4
+	note D#, 2
+	note G_, 4
+	note D#, 2
+	note G_, 2
+	note D#, 2
+	sound_ret
+
+Music_Route36_Shared4: ; (tools/musiccalls.py)
+	note C_, 2
+	octave 3
+	note A#, 2
+	octave 4
+	sound_ret
+
+Music_Route36_Shared5: ; (tools/musiccalls.py)
+	note F#, 4
+	note D_, 2
+	note F#, 4
+	note D_, 2
+	note F#, 2
+	note D_, 2
+	sound_ret
+
+Music_Route36_Shared6: ; (tools/musiccalls.py)
+	note A_, 2
+	octave 4
+	note D_, 2
+	octave 3
 	sound_ret

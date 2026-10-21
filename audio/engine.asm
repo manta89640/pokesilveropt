@@ -1433,10 +1433,6 @@ Music_Ret:
 ; called when $ff is encountered w/ subroutine flag set
 ; end music stream
 ; return to caller of the subroutine
-	; reset subroutine flag
-	ld hl, CHANNEL_FLAGS1
-	add hl, bc
-	res SOUND_SUBROUTINE, [hl]
 	; copy LastMusicAddress to MusicAddress
 	ld hl, CHANNEL_LAST_MUSIC_ADDRESS
 	add hl, bc
@@ -1448,17 +1444,55 @@ Music_Ret:
 	ld [hl], e
 	inc hl
 	ld [hl], d
+	; returning to a subroutine?
+	; (music data is in ROMX, so the high byte of an address isn't 0)
+	ld hl, CHANNEL_LAST_MUSIC_ADDRESS_2 + 1
+	add hl, bc
+	ld a, [hl]
+	and a
+	jr z, .not_nested
+	; move LastMusicAddress2 back to LastMusicAddress
+	ld d, a
+	xor a
+	ld [hld], a
+	ld e, [hl]
+	dec hl
+	ld [hl], d
+	dec hl
+	ld [hl], e
+	ret
+
+.not_nested
+	; reset subroutine flag
+	ld hl, CHANNEL_FLAGS1
+	add hl, bc
+	res SOUND_SUBROUTINE, [hl]
 	ret
 
 Music_Call:
 ; call music stream (subroutine)
 ; parameters: ll hh ; pointer to subroutine
+; a subroutine can call another one, but that one can't call any
 	; get pointer from next 2 bytes
 	call GetMusicByte
 	ld e, a
 	call GetMusicByte
 	ld d, a
 	push de
+	; already in a subroutine?
+	ld hl, CHANNEL_FLAGS1
+	add hl, bc
+	bit SOUND_SUBROUTINE, [hl]
+	jr z, .not_nested
+	; copy LastMusicAddress to LastMusicAddress2
+	ld hl, CHANNEL_LAST_MUSIC_ADDRESS
+	add hl, bc
+	ld a, [hli]
+	ld e, [hl]
+	inc hl
+	ld [hli], a
+	ld [hl], e
+.not_nested
 	; copy MusicAddress to LastMusicAddress
 	ld hl, CHANNEL_MUSIC_ADDRESS
 	add hl, bc

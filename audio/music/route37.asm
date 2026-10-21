@@ -6,24 +6,14 @@ Music_Route37:
 	channel 4, Music_Route37_Ch4
 
 Music_Route37_Ch1:
-	tempo 144
-	volume 7, 7
-	duty_cycle 3
+	sound_call Music_Lighthouse_Shared1
 	pitch_offset 2
 	vibrato 16, 2, 2
 	note_type 12, 11, 3
 	rest 16
 	rest 16
 .mainloop:
-	volume_envelope 11, 3
-	rest 2
-	octave 2
-	note F#, 2
-	note B_, 2
-	octave 3
-	note E_, 2
-	volume_envelope 11, 7
-	note D#, 10
+	sound_call Music_Route37_Shared3
 	volume_envelope 11, 3
 	note E_, 4
 	note D#, 4
@@ -39,15 +29,7 @@ Music_Route37_Ch1:
 	note B_, 8
 	octave 3
 	note B_, 12
-	volume_envelope 11, 3
-	rest 2
-	octave 2
-	note F#, 2
-	note B_, 2
-	octave 3
-	note E_, 2
-	volume_envelope 11, 7
-	note D#, 10
+	sound_call Music_Route37_Shared3
 	octave 2
 	note A_, 4
 	octave 3
@@ -57,10 +39,7 @@ Music_Route37_Ch1:
 	note F#, 3
 	note A_, 1
 	note B_, 6
-	octave 2
-	note B_, 2
-	octave 3
-	note D#, 2
+	sound_call Music_MtMoon_Shared1
 	note F#, 2
 	note B_, 2
 	note A_, 4
@@ -135,29 +114,11 @@ Music_Route37_Ch2:
 	octave 2
 	note B_, 2
 	note_type 12, 12, 1
-	note B_, 1
-	note B_, 1
-	volume_envelope 12, 2
-	note B_, 2
-	volume_envelope 12, 1
-	note B_, 1
-	note B_, 1
-	note B_, 1
-	note B_, 1
-	volume_envelope 12, 2
+	sound_call Music_Route37_Shared1
 	note B_, 6
 	note B_, 2
 	volume_envelope 12, 1
-	note B_, 1
-	note B_, 1
-	volume_envelope 12, 2
-	note B_, 2
-	volume_envelope 12, 1
-	note B_, 1
-	note B_, 1
-	note B_, 1
-	note B_, 1
-	volume_envelope 12, 2
+	sound_call Music_Route37_Shared1
 	note B_, 2
 .mainloop:
 	sound_call .sub1
@@ -189,14 +150,7 @@ Music_Route37_Ch2:
 	note D#, 8
 	volume_envelope 11, 7
 	note D#, 8
-	volume_envelope 12, 4
-	rest 4
-	octave 3
-	note A_, 3
-	octave 4
-	note E_, 1
-	note A_, 4
-	note G#, 4
+	sound_call Music_Route37_Shared4
 	volume_envelope 10, 0
 	note C#, 6
 	note D#, 6
@@ -218,14 +172,7 @@ Music_Route37_Ch2:
 	volume_envelope 11, 7
 	octave 4
 	note D#, 6
-	volume_envelope 12, 4
-	rest 4
-	octave 3
-	note A_, 3
-	octave 4
-	note E_, 1
-	note A_, 4
-	note G#, 4
+	sound_call Music_Route37_Shared4
 	volume_envelope 11, 0
 	note C#, 6
 	note D#, 6
@@ -248,27 +195,9 @@ Music_Route37_Ch2:
 	note D#, 6
 	volume_envelope 12, 2
 	octave 3
-	note F#, 2
-	note F#, 1
-	note F#, 1
-	note F#, 2
-	volume_envelope 12, 1
-	note F#, 1
-	note F#, 1
-	note F#, 1
-	note F#, 1
-	volume_envelope 12, 2
+	sound_call Music_Route37_Shared2
 	note F#, 6
-	note F#, 2
-	note F#, 1
-	note F#, 1
-	note F#, 2
-	volume_envelope 12, 1
-	note F#, 1
-	note F#, 1
-	note F#, 1
-	note F#, 1
-	volume_envelope 12, 2
+	sound_call Music_Route37_Shared2
 	note F#, 2
 	sound_loop 0, .mainloop
 
@@ -296,14 +225,7 @@ Music_Route37_Ch3:
 	sound_loop 4, .loop1
 .mainloop:
 	sound_call .sub1
-	note A_, 2
-	octave 3
-	note C#, 2
-	octave 2
-	note G#, 2
-	note B_, 2
-	note F#, 2
-	note A_, 2
+	sound_call Music_Route37_Shared5
 	note F#, 2
 	note E_, 2
 .loop2:
@@ -312,24 +234,14 @@ Music_Route37_Ch3:
 	sound_loop 4, .loop2
 	sound_call .sub1
 	sound_call .sub1
-	note A_, 2
-	octave 3
-	note C#, 2
-	octave 2
-	note G#, 2
-	note B_, 2
-	note F#, 2
-	note A_, 2
+	sound_call Music_Route37_Shared5
 	octave 3
 	note C#, 2
 	octave 2
 	note A_, 2
 	sound_call .sub1
 .loop3:
-	octave 2
-	note B_, 2
-	octave 3
-	note D#, 2
+	sound_call Music_MtMoon_Shared1
 	sound_loop 4, .loop3
 .loop4:
 	octave 2
@@ -375,22 +287,10 @@ Music_Route37_Ch3:
 	sound_ret
 
 .sub2:
-	octave 2
-	note B_, 2
-	octave 3
-	note D#, 2
-	octave 2
-	note B_, 2
-	octave 3
-	note D#, 2
-	octave 2
-	note B_, 2
-	octave 3
-	note D#, 2
-	octave 2
-	note B_, 2
-	octave 3
-	note D#, 2
+	sound_call Music_MtMoon_Shared1
+	sound_call Music_MtMoon_Shared1
+	sound_call Music_MtMoon_Shared1
+	sound_call Music_MtMoon_Shared1
 	sound_ret
 
 Music_Route37_Ch4:
@@ -425,4 +325,64 @@ Music_Route37_Ch4:
 	drum_note 3, 2
 	drum_note 4, 1
 	drum_note 4, 1
+	sound_ret
+
+Music_Route37_Shared1: ; (tools/musiccalls.py)
+	note B_, 1
+	note B_, 1
+	volume_envelope 12, 2
+	note B_, 2
+	volume_envelope 12, 1
+	note B_, 1
+	note B_, 1
+	note B_, 1
+	note B_, 1
+	volume_envelope 12, 2
+	sound_ret
+
+Music_Route37_Shared2: ; (tools/musiccalls.py)
+	note F#, 2
+	note F#, 1
+	note F#, 1
+	note F#, 2
+	volume_envelope 12, 1
+	note F#, 1
+	note F#, 1
+	note F#, 1
+	note F#, 1
+	volume_envelope 12, 2
+	sound_ret
+
+Music_Route37_Shared3: ; (tools/musiccalls.py)
+	volume_envelope 11, 3
+	rest 2
+	octave 2
+	note F#, 2
+	note B_, 2
+	octave 3
+	note E_, 2
+	volume_envelope 11, 7
+	note D#, 10
+	sound_ret
+
+Music_Route37_Shared4: ; (tools/musiccalls.py)
+	volume_envelope 12, 4
+	rest 4
+	octave 3
+	note A_, 3
+	octave 4
+	note E_, 1
+	note A_, 4
+	note G#, 4
+	sound_ret
+
+Music_Route37_Shared5: ; (tools/musiccalls.py)
+	note A_, 2
+	octave 3
+	note C#, 2
+	octave 2
+	note G#, 2
+	note B_, 2
+	note F#, 2
+	note A_, 2
 	sound_ret

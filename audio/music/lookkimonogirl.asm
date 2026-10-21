@@ -4,12 +4,9 @@ Music_LookKimonoGirl:
 	channel 2, Music_LookKimonoGirl_Ch2
 	channel 3, Music_LookKimonoGirl_Ch3
 
-	db $3 ; unused, leftover from a channel 4
-
 Music_LookKimonoGirl_Ch1:
 	tempo 160
-	volume 7, 7
-	stereo_panning FALSE, TRUE
+	sound_call Music_ViridianCity_Shared5
 	duty_cycle 1
 	note_type 6, 8, 7
 	pitch_offset 1
@@ -57,24 +54,7 @@ Music_LookKimonoGirl_Ch1:
 	volume_envelope 7, 4
 	octave 3
 	note F_, 1
-	volume_envelope 11, 4
-	octave 2
-	note A_, 1
-	volume_envelope 7, 4
-	octave 3
-	note A_, 1
-	volume_envelope 11, 4
-	octave 2
-	note B_, 1
-	volume_envelope 7, 4
-	octave 3
-	note B_, 1
-	volume_envelope 11, 4
-	octave 3
-	note D_, 1
-	volume_envelope 7, 4
-	octave 4
-	note D_, 1
+	sound_call Music_LookKimonoGirl_Shared1
 	sound_ret
 
 .sub2:
@@ -84,24 +64,7 @@ Music_LookKimonoGirl_Ch1:
 	volume_envelope 7, 4
 	octave 3
 	note E_, 1
-	volume_envelope 11, 4
-	octave 2
-	note A_, 1
-	volume_envelope 7, 4
-	octave 3
-	note A_, 1
-	volume_envelope 11, 4
-	octave 2
-	note B_, 1
-	volume_envelope 7, 4
-	octave 3
-	note B_, 1
-	volume_envelope 11, 4
-	octave 3
-	note D_, 1
-	volume_envelope 7, 4
-	octave 4
-	note D_, 1
+	sound_call Music_LookKimonoGirl_Shared1
 	sound_ret
 
 Music_LookKimonoGirl_Ch2:
@@ -113,19 +76,7 @@ Music_LookKimonoGirl_Ch2:
 	duty_cycle 3
 	note_type 12, 9, 1
 	octave 5
-	note E_, 1
-	note D_, 1
-	octave 4
-	note B_, 1
-	note A_, 1
-	note B_, 1
-	note A_, 1
-	note E_, 1
-	note D_, 1
-	note E_, 1
-	note D_, 1
-	octave 3
-	note B_, 1
+	sound_call Music_LookKimonoGirl_Shared2
 	note A_, 1
 	note B_, 1
 	note A_, 1
@@ -136,11 +87,7 @@ Music_LookKimonoGirl_Ch2:
 	note F_, 1
 	note D_, 1
 	octave 4
-	note B_, 1
-	note A_, 1
-	note B_, 1
-	note A_, 1
-	note F_, 1
+	sound_call Music_GoldSilverOpening_Shared4
 	note D_, 1
 	note F_, 1
 	note D_, 1
@@ -160,19 +107,7 @@ Music_LookKimonoGirl_Ch2:
 	note A_, 1
 	note E_, 1
 	note D_, 1
-	note E_, 1
-	note D_, 1
-	octave 4
-	note B_, 1
-	note A_, 1
-	note B_, 1
-	note A_, 1
-	note E_, 1
-	note D_, 1
-	note E_, 1
-	note D_, 1
-	octave 3
-	note B_, 1
+	sound_call Music_LookKimonoGirl_Shared2
 	note E_, 1
 	sound_ret
 
@@ -264,3 +199,40 @@ Music_LookKimonoGirl_Ch3:
 	note D_, 8
 	note E_, 8
 	sound_loop 0, .mainloop
+
+Music_LookKimonoGirl_Shared1: ; (tools/musiccalls.py)
+	volume_envelope 11, 4
+	octave 2
+	note A_, 1
+	volume_envelope 7, 4
+	octave 3
+	note A_, 1
+	volume_envelope 11, 4
+	octave 2
+	note B_, 1
+	volume_envelope 7, 4
+	octave 3
+	note B_, 1
+	volume_envelope 11, 4
+	octave 3
+	note D_, 1
+	volume_envelope 7, 4
+	octave 4
+	note D_, 1
+	sound_ret
+
+Music_LookKimonoGirl_Shared2: ; (tools/musiccalls.py)
+	note E_, 1
+	note D_, 1
+	octave 4
+	note B_, 1
+	note A_, 1
+	note B_, 1
+	note A_, 1
+	note E_, 1
+	note D_, 1
+	note E_, 1
+	note D_, 1
+	octave 3
+	note B_, 1
+	sound_ret

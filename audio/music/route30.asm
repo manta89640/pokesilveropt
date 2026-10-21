@@ -6,9 +6,7 @@ Music_Route30:
 	channel 4, Music_Route30_Ch4
 
 Music_Route30_Ch1:
-	tempo 144
-	volume 7, 7
-	duty_cycle 3
+	sound_call Music_Lighthouse_Shared1
 	pitch_offset 1
 	vibrato 16, 1, 5
 	stereo_panning TRUE, FALSE
@@ -76,10 +74,7 @@ Music_Route30_Ch1:
 	note C_, 2
 	octave 3
 	note B_, 2
-	note A_, 2
-	octave 4
-	note C_, 2
-	octave 3
+	sound_call Music_Route12_Shared2
 	note B_, 2
 	note A_, 2
 	note G_, 2
@@ -302,24 +297,15 @@ Music_Route30_Ch3:
 	rest 5
 	note G_, 1
 	note G_, 1
-	note G_, 1
-	rest 1
-	note G_, 1
-	rest 1
+	sound_call Music_KantoTrainerBattle_Shared7
 	note G_, 1
 	rest 3
 	note G_, 1
 	rest 5
 	note G_, 1
 	note G_, 1
-	note G_, 1
-	rest 1
-	note G_, 1
-	rest 1
-	note G_, 1
-	rest 1
-	note G_, 1
-	rest 1
+	sound_call Music_KantoTrainerBattle_Shared7
+	sound_call Music_KantoTrainerBattle_Shared7
 .mainloop:
 	note G_, 1
 	rest 1
@@ -327,29 +313,15 @@ Music_Route30_Ch3:
 	rest 2
 	note G_, 1
 	note G_, 1
-	note G_, 1
-	rest 1
-	note G_, 1
-	rest 1
-	note G_, 1
-	rest 1
-	note G_, 1
-	rest 1
+	sound_call Music_KantoTrainerBattle_Shared7
+	sound_call Music_KantoTrainerBattle_Shared7
 	note F_, 1
 	rest 1
 	octave 3
 	note D_, 2
 	note A_, 2
 	octave 2
-	note F_, 1
-	note F_, 1
-	note F_, 1
-	rest 1
-	octave 3
-	note C_, 2
-	octave 2
-	note F_, 1
-	rest 1
+	sound_call Music_Route30_Shared4
 	note F#, 1
 	rest 1
 	note G_, 1
@@ -357,18 +329,11 @@ Music_Route30_Ch3:
 	note B_, 2
 	octave 3
 	note D_, 2
-	octave 2
-	note G_, 1
-	note G_, 1
-	note G_, 1
-	rest 1
+	sound_call Music_Route30_Shared3
 	octave 3
 	note D_, 2
 	octave 2
-	note G_, 1
-	rest 1
-	note G_, 1
-	rest 1
+	sound_call Music_KantoTrainerBattle_Shared7
 	note G_, 1
 	rest 1
 	octave 3
@@ -377,29 +342,15 @@ Music_Route30_Ch3:
 	octave 2
 	note G_, 1
 	note G_, 1
-	note G_, 1
-	rest 1
-	note G_, 1
-	rest 1
-	note G_, 1
-	rest 1
-	note G_, 1
-	rest 1
+	sound_call Music_KantoTrainerBattle_Shared7
+	sound_call Music_KantoTrainerBattle_Shared7
 	note F_, 1
 	rest 1
 	octave 3
 	note C_, 2
 	octave 2
 	note A_, 2
-	note F_, 1
-	note F_, 1
-	note F_, 1
-	rest 1
-	octave 3
-	note C_, 2
-	octave 2
-	note F_, 1
-	rest 1
+	sound_call Music_Route30_Shared4
 	note F_, 1
 	rest 1
 	note F_, 1
@@ -422,64 +373,22 @@ Music_Route30_Ch3:
 	note B_, 2
 	octave 3
 	note G_, 2
-	octave 2
-	note G_, 1
-	note G_, 1
-	note G_, 1
-	rest 1
+	sound_call Music_Route30_Shared3
 	note B_, 2
-	note G_, 1
-	rest 1
-	note G_, 1
-	rest 1
+	sound_call Music_KantoTrainerBattle_Shared7
 	note G_, 1
 	rest 1
 	octave 4
 	note D_, 2
 	octave 3
 	note B_, 2
-	octave 2
-	note G_, 1
-	note G_, 1
-	note G_, 1
-	rest 1
+	sound_call Music_Route30_Shared3
 	octave 3
 	note G_, 2
 	octave 2
 	note G_, 2
 	note G#, 2
-	note A_, 1
-	rest 1
-	octave 3
-	note C_, 2
-	octave 2
-	note B_, 2
-	note A_, 1
-	note A_, 1
-	note A_, 1
-	rest 1
-	octave 3
-	note D_, 2
-	octave 2
-	note A_, 1
-	rest 1
-	note B_, 1
-	rest 1
-	octave 3
-	note C_, 1
-	rest 1
-	note F_, 2
-	note E_, 2
-	note C_, 1
-	note C_, 1
-	note C_, 1
-	rest 1
-	note A_, 2
-	note C_, 1
-	rest 1
-	note C_, 1
-	rest 1
-	octave 2
+	sound_call Music_Route30_Shared1
 	note B_, 1
 	rest 1
 	octave 3
@@ -505,42 +414,8 @@ Music_Route30_Ch3:
 	note G_, 1
 	rest 1
 	note B_, 2
-	note G_, 1
-	rest 1
-	note G_, 1
-	rest 1
-	note A_, 1
-	rest 1
-	octave 3
-	note C_, 2
-	octave 2
-	note B_, 2
-	note A_, 1
-	note A_, 1
-	note A_, 1
-	rest 1
-	octave 3
-	note D_, 2
-	octave 2
-	note A_, 1
-	rest 1
-	note B_, 1
-	rest 1
-	octave 3
-	note C_, 1
-	rest 1
-	note F_, 2
-	note E_, 2
-	note C_, 1
-	note C_, 1
-	note C_, 1
-	rest 1
-	note A_, 2
-	note C_, 1
-	rest 1
-	note C_, 1
-	rest 1
-	octave 2
+	sound_call Music_KantoTrainerBattle_Shared7
+	sound_call Music_Route30_Shared1
 	note G_, 1
 	rest 1
 	octave 3
@@ -549,36 +424,22 @@ Music_Route30_Ch3:
 	octave 2
 	note G_, 1
 	note G_, 1
-	note G_, 1
-	rest 1
-	note G_, 1
-	rest 1
-	note G_, 1
-	rest 1
-	note G_, 1
-	rest 1
+	sound_call Music_KantoTrainerBattle_Shared7
+	sound_call Music_KantoTrainerBattle_Shared7
 	note G_, 1
 	rest 1
 	octave 3
 	note E_, 2
 	note D_, 2
-	octave 2
-	note G_, 1
-	note G_, 1
-	note G_, 1
-	rest 1
+	sound_call Music_Route30_Shared3
 	octave 3
 	note D_, 2
 	octave 2
-	note G_, 1
-	rest 1
-	note G_, 1
-	rest 1
+	sound_call Music_KantoTrainerBattle_Shared7
 	sound_loop 0, .mainloop
 
 Music_Route30_Ch4:
-	toggle_noise 3
-	drum_speed 12
+	sound_call Music_PokemonCenter_Shared6
 	sound_call .sub1
 	sound_call .sub2
 .mainloop:
@@ -601,23 +462,13 @@ Music_Route30_Ch4:
 	sound_loop 0, .mainloop
 
 .sub1:
-	drum_note 3, 2
-	drum_note 7, 2
-	drum_note 7, 2
-	drum_note 3, 1
-	drum_note 3, 1
-	drum_note 3, 2
+	sound_call Music_Route30_Shared2
 	drum_note 3, 2
 	drum_note 3, 4
 	sound_ret
 
 .sub2:
-	drum_note 3, 2
-	drum_note 7, 2
-	drum_note 7, 2
-	drum_note 3, 1
-	drum_note 3, 1
-	drum_note 3, 2
+	sound_call Music_Route30_Shared2
 	drum_note 3, 2
 	drum_note 3, 1
 	drum_note 3, 1
@@ -626,45 +477,83 @@ Music_Route30_Ch4:
 	sound_ret
 
 .sub3:
-	drum_note 3, 2
-	drum_note 7, 2
-	drum_note 7, 2
-	drum_note 3, 1
-	drum_note 3, 1
-	drum_note 3, 2
+	sound_call Music_Route30_Shared2
 	drum_note 3, 2
 	drum_note 3, 2
 	drum_note 3, 2
 	sound_ret
 
 .sub4:
-	drum_note 3, 2
-	drum_note 7, 2
-	drum_note 7, 2
-	drum_note 3, 1
-	drum_note 3, 1
-	drum_note 3, 2
+	sound_call Music_Route30_Shared2
 	drum_note 7, 2
 	drum_note 3, 2
 	drum_note 3, 2
 	sound_ret
 
 .sub5:
+	sound_call Music_Route30_Shared2
 	drum_note 3, 2
-	drum_note 7, 2
-	drum_note 7, 2
-	drum_note 3, 1
-	drum_note 3, 1
-	drum_note 3, 2
-	drum_note 3, 2
-	drum_speed 6
-	drum_note 3, 1
-	drum_note 3, 1
-	drum_note 3, 1
-	drum_note 3, 1
-	drum_note 3, 1
-	drum_note 3, 1
-	drum_note 3, 1
-	drum_note 3, 1
+	sound_call Music_Route26_Shared1
 	drum_speed 12
+	sound_ret
+
+Music_Route30_Shared1: ; (tools/musiccalls.py)
+	note A_, 1
+	rest 1
+	octave 3
+	note C_, 2
+	octave 2
+	note B_, 2
+	note A_, 1
+	note A_, 1
+	note A_, 1
+	rest 1
+	octave 3
+	note D_, 2
+	octave 2
+	note A_, 1
+	rest 1
+	note B_, 1
+	rest 1
+	octave 3
+	note C_, 1
+	rest 1
+	note F_, 2
+	note E_, 2
+	note C_, 1
+	note C_, 1
+	note C_, 1
+	rest 1
+	note A_, 2
+	sound_call Music_KantoTrainerBattle_Shared15
+	octave 2
+	sound_ret
+
+Music_Route30_Shared2: ; (tools/musiccalls.py)
+	drum_note 3, 2
+	drum_note 7, 2
+	drum_note 7, 2
+	drum_note 3, 1
+	drum_note 3, 1
+	drum_note 3, 2
+	sound_ret
+
+Music_Route30_Shared3: ; (tools/musiccalls.py)
+	octave 2
+	note G_, 1
+	note G_, 1
+	note G_, 1
+	rest 1
+	sound_ret
+
+Music_Route30_Shared4: ; (tools/musiccalls.py)
+	note F_, 1
+	note F_, 1
+	note F_, 1
+	rest 1
+	octave 3
+	note C_, 2
+	octave 2
+	note F_, 1
+	rest 1
 	sound_ret

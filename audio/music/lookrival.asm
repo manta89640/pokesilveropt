@@ -321,8 +321,7 @@ Music_LookRival_Ch3:
 
 Music_LookRival_Ch4:
 	stereo_panning TRUE, FALSE
-	toggle_noise 3
-	drum_speed 12
+	sound_call Music_ViridianCity_Shared3
 	rest 8
 	rest 16
 	drum_note 4, 2

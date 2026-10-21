@@ -7,8 +7,7 @@ Music_WildPokemonVictory:
 Music_WildPokemonVictory_Ch1:
 	tempo 126
 	volume 7, 7
-	duty_cycle 3
-	pitch_offset 1
+	sound_call Music_WildPokemonVictory_Shared1
 	note_type 12, 11, 1
 	octave 3
 	note B_, 1
@@ -180,4 +179,9 @@ Music_WildPokemonVictory_Ch3:
 	note C#, 2
 	rest 4
 	note C#, 2
+	sound_ret
+
+Music_WildPokemonVictory_Shared1: ; (tools/musiccalls.py)
+	duty_cycle 3
+	pitch_offset 1
 	sound_ret

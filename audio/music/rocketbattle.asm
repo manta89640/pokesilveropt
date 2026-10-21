@@ -6,48 +6,10 @@ Music_RocketBattle:
 
 Music_RocketBattle_Ch1:
 	tempo 101
-	volume 7, 7
-	duty_cycle 3
-	pitch_offset 2
+	sound_call Music_RivalBattle_Shared3
 	vibrato 16, 1, 5
 	note_type 12, 11, 2
-	octave 4
-	note E_, 1
-	note D#, 1
-	note D_, 1
-	note C#, 1
-	note D_, 1
-	note C#, 1
-	note C_, 1
-	octave 3
-	note B_, 1
-	octave 4
-	note C_, 1
-	octave 3
-	note B_, 1
-	note A#, 1
-	note A_, 1
-	note A#, 1
-	note A_, 1
-	note G#, 1
-	note G_, 1
-	note G#, 1
-	note G_, 1
-	note F#, 1
-	note F_, 1
-	note F#, 1
-	note F_, 1
-	note E_, 1
-	note D#, 1
-	note E_, 1
-	note D#, 1
-	note D_, 1
-	note C#, 1
-	note D_, 1
-	note C#, 1
-	note C_, 1
-	octave 2
-	note B_, 1
+	sound_call Music_RivalBattle_Shared1
 .loop1:
 	volume_envelope 11, 2
 	octave 3
@@ -95,32 +57,11 @@ Music_RocketBattle_Ch1:
 	note E_, 2
 	note E_, 2
 	note A_, 2
-	note E_, 2
-	note D_, 2
-	note E_, 2
-	note F_, 2
-	note E_, 2
-	note F_, 2
-	volume_envelope 11, 5
-	note G_, 4
-	volume_envelope 11, 3
-	note G_, 2
-	note F_, 2
+	sound_call Music_RocketBattle_Shared3
 	note D#, 2
-	note D_, 2
-	note C#, 2
-	note D_, 2
-	volume_envelope 11, 5
-	note D#, 4
-	volume_envelope 11, 3
-	note D#, 2
-	note D_, 2
-	note F_, 2
+	sound_call Music_RocketBattle_Shared4
 .mainloop:
-	octave 4
-	note E_, 2
-	octave 3
-	note E_, 2
+	sound_call Music_RivalBattle_Shared7
 	note E_, 2
 	octave 4
 	note D_, 2
@@ -132,25 +73,12 @@ Music_RocketBattle_Ch1:
 	octave 3
 	note D_, 2
 	note D_, 2
-	octave 4
-	note E_, 2
-	octave 3
-	note E_, 2
+	sound_call Music_RivalBattle_Shared7
 	note E_, 2
 	octave 4
 	note D_, 2
 	octave 3
-	note E_, 2
-	note D_, 2
-	note E_, 2
-	note F_, 2
-	note E_, 2
-	note F_, 2
-	volume_envelope 11, 5
-	note G_, 4
-	volume_envelope 11, 3
-	note G_, 2
-	note F_, 2
+	sound_call Music_RocketBattle_Shared3
 	octave 4
 	note C_, 2
 	note D_, 2
@@ -266,18 +194,8 @@ Music_RocketBattle_Ch1:
 	note E_, 6
 	note E_, 6
 	note E_, 4
-	note E_, 6
-	note E_, 4
-	volume_envelope 11, 7
-	note G_, 2
-	note F_, 4
-	volume_envelope 11, 2
-	note E_, 6
-	note E_, 4
-	volume_envelope 11, 7
-	note G_, 2
-	note F_, 4
-	volume_envelope 11, 2
+	sound_call Music_RocketBattle_Shared6
+	sound_call Music_RocketBattle_Shared6
 	note E_, 6
 	octave 4
 	note D_, 1
@@ -347,10 +265,7 @@ Music_RocketBattle_Ch1:
 	note C_, 2
 	note E_, 2
 	note E_, 2
-	octave 2
-	note A#, 2
-	octave 3
-	note F_, 2
+	sound_call Music_RivalBattle_Shared2
 	note F_, 2
 	octave 2
 	note A_, 2
@@ -360,10 +275,7 @@ Music_RocketBattle_Ch1:
 	note C_, 2
 	note E_, 2
 	note E_, 2
-	octave 2
-	note A_, 2
-	octave 3
-	note E_, 2
+	sound_call Music_RocketBattle_Shared1
 	note D_, 2
 	note C_, 2
 	note C_, 2
@@ -379,21 +291,11 @@ Music_RocketBattle_Ch1:
 	octave 2
 	note A#, 2
 	octave 3
-	note D_, 2
-	note C#, 2
-	note D_, 2
-	volume_envelope 11, 5
-	note D#, 4
-	volume_envelope 11, 3
-	note D#, 2
-	note D_, 2
-	note F_, 2
+	sound_call Music_RocketBattle_Shared4
 	sound_loop 0, .mainloop
 
 Music_RocketBattle_Ch2:
-	duty_cycle 3
-	vibrato 8, 3, 6
-	pitch_offset 1
+	sound_call Music_RocketBattle_Shared7
 	note_type 12, 11, 2
 	octave 4
 	note A_, 4
@@ -402,36 +304,16 @@ Music_RocketBattle_Ch2:
 	octave 5
 	note C_, 1
 	volume_envelope 8, 2
-	octave 4
-	note G#, 1
-	note A_, 1
-	note G#, 1
-	volume_envelope 12, 2
-	octave 5
+	sound_call Music_RocketBattle_Shared2
 	note C#, 1
 	volume_envelope 9, 2
-	octave 4
-	note G#, 1
-	note A_, 1
-	note G#, 1
-	volume_envelope 12, 2
-	octave 5
+	sound_call Music_RocketBattle_Shared2
 	note D_, 1
 	volume_envelope 10, 2
-	octave 4
-	note G#, 1
-	note A_, 1
-	note G#, 1
-	volume_envelope 12, 2
-	octave 5
+	sound_call Music_RocketBattle_Shared2
 	note D#, 1
 	volume_envelope 11, 2
-	octave 4
-	note G#, 1
-	note A_, 1
-	note G#, 1
-	volume_envelope 12, 2
-	octave 5
+	sound_call Music_RocketBattle_Shared2
 	note E_, 1
 	octave 4
 	note G#, 1
@@ -477,10 +359,7 @@ Music_RocketBattle_Ch2:
 	note F_, 16
 .mainloop:
 	sound_call .sub1
-	volume_envelope 11, 0
-	note F_, 8
-	volume_envelope 11, 7
-	note F_, 8
+	sound_call Music_RivalBattle_Shared5
 	volume_envelope 11, 0
 	note A#, 8
 	volume_envelope 11, 7
@@ -582,22 +461,8 @@ Music_RocketBattle_Ch2:
 	note A_, 6
 	note A_, 6
 	note A_, 4
-	note A_, 6
-	note A_, 4
-	volume_envelope 12, 7
-	octave 4
-	note C_, 2
-	octave 3
-	note A#, 4
-	volume_envelope 12, 2
-	note A_, 6
-	note A_, 4
-	volume_envelope 12, 7
-	octave 4
-	note C_, 2
-	octave 3
-	note A#, 4
-	volume_envelope 12, 2
+	sound_call Music_RocketBattle_Shared5
+	sound_call Music_RocketBattle_Shared5
 	note A_, 6
 	volume_envelope 12, 7
 	octave 4
@@ -647,10 +512,7 @@ Music_RocketBattle_Ch2:
 	note A_, 6
 	note G#, 6
 	note E_, 4
-	volume_envelope 11, 0
-	note F_, 8
-	volume_envelope 11, 7
-	note F_, 8
+	sound_call Music_RivalBattle_Shared5
 	volume_envelope 3, -5
 	note A#, 8
 	volume_envelope 12, 7
@@ -688,10 +550,7 @@ Music_RocketBattle_Ch3:
 	note E_, 2
 	octave 3
 	note F_, 2
-	octave 4
-	note E_, 2
-	octave 3
-	note E_, 2
+	sound_call Music_RivalBattle_Shared7
 	octave 4
 	note E_, 2
 	octave 2
@@ -704,10 +563,7 @@ Music_RocketBattle_Ch3:
 .loop1:
 	sound_call .sub1
 	sound_loop 3, .loop1
-	octave 2
-	note A_, 2
-	octave 3
-	note E_, 2
+	sound_call Music_RocketBattle_Shared1
 	note D_, 2
 	octave 2
 	note A_, 2
@@ -719,10 +575,7 @@ Music_RocketBattle_Ch3:
 .loop2:
 	sound_call .sub1
 	sound_loop 3, .loop2
-	octave 2
-	note A_, 2
-	octave 3
-	note E_, 2
+	sound_call Music_RocketBattle_Shared1
 	note D_, 2
 	octave 2
 	note A_, 2
@@ -742,60 +595,30 @@ Music_RocketBattle_Ch3:
 	sound_call .sub3
 	octave 3
 	note A#, 2
-	octave 2
-	note A#, 2
-	octave 3
-	note F_, 2
-	octave 2
-	note A#, 2
-	octave 3
-	note F_, 2
-	octave 2
-	note A#, 2
-	octave 3
-	note F_, 2
+	sound_call Music_RivalBattle_Shared2
+	sound_call Music_RivalBattle_Shared2
+	sound_call Music_RivalBattle_Shared2
 	note E_, 2
 	note D_, 2
 	sound_call .sub5
-	octave 2
+	sound_call Music_RocketBattle_Shared1
 	note A_, 2
-	octave 3
-	note E_, 2
+	sound_call Music_RocketBattle_Shared1
 	note A_, 2
-	octave 2
-	note A_, 2
-	octave 3
-	note E_, 2
-	note A_, 2
-	octave 2
-	note A_, 2
-	octave 3
-	note E_, 2
+	sound_call Music_RocketBattle_Shared1
 .loop3:
-	octave 2
-	note A#, 2
-	octave 3
-	note F_, 2
+	sound_call Music_RivalBattle_Shared2
 	sound_loop 5, .loop3
 	note A#, 2
-	octave 2
-	note A#, 2
-	octave 3
-	note F_, 2
+	sound_call Music_RivalBattle_Shared2
 	note A#, 2
 	octave 2
 	note A#, 2
 	octave 3
 	note A#, 2
 	sound_call .sub5
-	octave 2
-	note A_, 2
-	octave 3
-	note E_, 2
-	octave 2
-	note A_, 2
-	octave 3
-	note E_, 2
+	sound_call Music_RocketBattle_Shared1
+	sound_call Music_RocketBattle_Shared1
 	octave 2
 	note A_, 2
 	octave 3
@@ -805,10 +628,7 @@ Music_RocketBattle_Ch3:
 	sound_call .sub5
 	sound_call .sub5
 .loop4:
-	octave 2
-	note A_, 2
-	octave 3
-	note E_, 2
+	sound_call Music_RocketBattle_Shared1
 	note D_, 2
 	octave 2
 	note A#, 2
@@ -818,10 +638,7 @@ Music_RocketBattle_Ch3:
 	note G_, 2
 	note F_, 2
 	sound_loop 7, .loop4
-	octave 2
-	note A_, 2
-	octave 3
-	note E_, 2
+	sound_call Music_RocketBattle_Shared1
 	note D_, 2
 	octave 2
 	note A#, 2
@@ -831,15 +648,9 @@ Music_RocketBattle_Ch3:
 	note G_, 2
 	note F_, 2
 .loop5:
-	octave 2
-	note A#, 2
-	octave 3
-	note F_, 2
+	sound_call Music_RivalBattle_Shared2
 	sound_loop 4, .loop5
-	octave 2
-	note A#, 2
-	octave 3
-	note F_, 2
+	sound_call Music_RivalBattle_Shared2
 	note G_, 2
 	note F_, 2
 	note E_, 2
@@ -847,10 +658,7 @@ Music_RocketBattle_Ch3:
 	note C#, 2
 	note D_, 2
 .loop6:
-	octave 2
-	note A_, 2
-	octave 3
-	note E_, 2
+	sound_call Music_RocketBattle_Shared1
 	sound_loop 13, .loop6
 	octave 2
 	note A_, 2
@@ -861,34 +669,22 @@ Music_RocketBattle_Ch3:
 	octave 2
 	note A#, 2
 .loop7:
-	octave 2
-	note A_, 2
-	octave 3
-	note E_, 2
+	sound_call Music_RocketBattle_Shared1
 	sound_loop 4, .loop7
 	octave 2
-	note A_, 2
-	octave 4
-	note D_, 2
-	octave 3
+	sound_call Music_Route36_Shared6
 	note A_, 2
 	note A#, 4
 	note A_, 2
 	note G_, 2
 	note A#, 2
 .loop8:
-	octave 2
-	note A#, 2
-	octave 3
-	note F_, 2
+	sound_call Music_RivalBattle_Shared2
 	sound_loop 7, .loop8
 	note E_, 2
 	note F_, 2
 .loop9:
-	octave 2
-	note A#, 2
-	octave 3
-	note F_, 2
+	sound_call Music_RivalBattle_Shared2
 	sound_loop 5, .loop9
 	octave 3
 	note A#, 2
@@ -907,22 +703,10 @@ Music_RocketBattle_Ch3:
 	sound_call .sub6
 	octave 3
 	note A_, 2
-	octave 2
-	note A_, 2
-	octave 3
-	note E_, 2
-	octave 2
-	note A_, 2
-	octave 3
-	note E_, 2
-	octave 2
-	note A_, 2
-	octave 3
-	note E_, 2
-	octave 2
-	note A_, 2
-	octave 3
-	note E_, 2
+	sound_call Music_RocketBattle_Shared1
+	sound_call Music_RocketBattle_Shared1
+	sound_call Music_RocketBattle_Shared1
+	sound_call Music_RocketBattle_Shared1
 	sound_call .sub2
 	sound_call .sub3
 	octave 3
@@ -931,10 +715,7 @@ Music_RocketBattle_Ch3:
 	sound_loop 0, .mainloop
 
 .sub1:
-	octave 2
-	note A_, 2
-	octave 3
-	note E_, 2
+	sound_call Music_RocketBattle_Shared1
 	note D_, 2
 	octave 2
 	note A_, 2
@@ -946,86 +727,115 @@ Music_RocketBattle_Ch3:
 	sound_ret
 
 .sub2:
-	octave 2
-	note A_, 2
-	octave 3
-	note E_, 2
-	octave 2
-	note A_, 2
-	octave 3
-	note E_, 2
-	octave 2
-	note A_, 2
-	octave 3
-	note E_, 2
+	sound_call Music_RocketBattle_Shared1
+	sound_call Music_RocketBattle_Shared1
+	sound_call Music_RocketBattle_Shared1
 	note D#, 2
 	note E_, 2
-	octave 2
-	note A_, 2
-	octave 3
-	note E_, 2
-	octave 2
-	note A_, 2
-	octave 3
-	note E_, 2
-	octave 2
-	note A_, 2
-	octave 3
-	note E_, 2
+	sound_call Music_RocketBattle_Shared1
+	sound_call Music_RocketBattle_Shared1
+	sound_call Music_RocketBattle_Shared1
 	note D#, 2
 	note D_, 2
 	sound_ret
 
 .sub3:
-	octave 2
+	sound_call Music_RivalBattle_Shared2
 	note A#, 2
-	octave 3
-	note F_, 2
-	note A#, 2
-	octave 2
-	note A#, 2
-	octave 3
-	note F_, 2
+	sound_call Music_RivalBattle_Shared2
 	note A#, 2
 	octave 2
 	note A#, 2
 	sound_ret
 
 .sub4:
-	octave 2
-	note A#, 2
-	octave 3
-	note F_, 2
+	sound_call Music_RivalBattle_Shared2
 	note A#, 2
 	note F_, 2
 	note A#, 2
 	note F_, 2
-	octave 2
-	note A#, 2
-	octave 3
-	note F_, 2
+	sound_call Music_RivalBattle_Shared2
 	sound_ret
 
 .sub5:
 .sub5loop1:
-	octave 2
-	note A_, 2
-	octave 3
-	note E_, 2
+	sound_call Music_RocketBattle_Shared1
 	sound_loop 4, .sub5loop1
 	sound_ret
 
 .sub6:
+	sound_call Music_RocketBattle_Shared1
+	note A_, 2
+	sound_call Music_RocketBattle_Shared1
+	note A_, 2
+	octave 2
+	note A_, 2
+	sound_ret
+
+Music_RocketBattle_Shared1: ; (tools/musiccalls.py)
 	octave 2
 	note A_, 2
 	octave 3
 	note E_, 2
-	note A_, 2
-	octave 2
-	note A_, 2
-	octave 3
+	sound_ret
+
+Music_RocketBattle_Shared2: ; (tools/musiccalls.py)
+	octave 4
+	note G#, 1
+	note A_, 1
+	note G#, 1
+	volume_envelope 12, 2
+	octave 5
+	sound_ret
+
+Music_RocketBattle_Shared3: ; (tools/musiccalls.py)
 	note E_, 2
-	note A_, 2
-	octave 2
-	note A_, 2
+	note D_, 2
+	note E_, 2
+	note F_, 2
+	note E_, 2
+	note F_, 2
+	volume_envelope 11, 5
+	note G_, 4
+	volume_envelope 11, 3
+	note G_, 2
+	note F_, 2
+	sound_ret
+
+Music_RocketBattle_Shared4: ; (tools/musiccalls.py)
+	note D_, 2
+	note C#, 2
+	note D_, 2
+	volume_envelope 11, 5
+	note D#, 4
+	volume_envelope 11, 3
+	note D#, 2
+	note D_, 2
+	note F_, 2
+	sound_ret
+
+Music_RocketBattle_Shared5: ; (tools/musiccalls.py)
+	note A_, 6
+	note A_, 4
+	volume_envelope 12, 7
+	octave 4
+	note C_, 2
+	octave 3
+	note A#, 4
+	volume_envelope 12, 2
+	sound_ret
+
+Music_RocketBattle_Shared6: ; (tools/musiccalls.py)
+	note E_, 6
+	note E_, 4
+	volume_envelope 11, 7
+	note G_, 2
+	note F_, 4
+	volume_envelope 11, 2
+	sound_ret
+
+Music_RocketBattle_Shared7: ; (tools/musiccalls.py)
+	duty_cycle 3
+	vibrato 8, 3, 6
+	pitch_offset 1
 	sound_ret

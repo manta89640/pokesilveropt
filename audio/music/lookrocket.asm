@@ -11,11 +11,7 @@ Music_LookRocket_Ch1:
 	transpose 0, 2
 	stereo_panning FALSE, TRUE
 	duty_cycle 3
-	vibrato 5, 6, 4
-	note_type 12, 10, 8
-	octave 4
-	note C_, 1
-	note D_, 1
+	sound_call Music_LookRocket_Shared2
 	sound_call .sub1
 	duty_cycle 1
 .mainloop:
@@ -35,14 +31,7 @@ Music_LookRocket_Ch1:
 	sound_loop 0, .mainloop
 
 .sub1:
-	note D#, 1
-	rest 1
-	note D_, 1
-	rest 1
-	note C#, 1
-	rest 1
-	note C_, 1
-	rest 3
+	sound_call Music_LookRocket_Shared4
 	octave 2
 	note F_, 1
 	note G#, 1
@@ -62,15 +51,7 @@ Music_LookRocket_Ch1:
 	octave 2
 	note A_, 2
 	octave 3
-	note D#, 1
-	note F_, 1
-	note F#, 6
-	note D#, 1
-	rest 3
-	note F#, 1
-	rest 1
-	note D#, 1
-	rest 1
+	sound_call Music_LookRocket_Shared3
 	octave 4
 	note F#, 1
 	rest 1
@@ -88,9 +69,7 @@ Music_LookRocket_Ch1:
 
 Music_LookRocket_Ch2:
 	transpose 0, 2
-	vibrato 4, 6, 4
-	duty_cycle 3
-	note_type 12, 11, 7
+	sound_call Music_LookRocket_Shared5
 	stereo_panning TRUE, TRUE
 	octave 5
 	note C_, 1
@@ -113,14 +92,7 @@ Music_LookRocket_Ch2:
 	sound_loop 0, .mainloop
 
 .sub1:
-	note D#, 1
-	rest 1
-	note D_, 1
-	rest 1
-	note C#, 1
-	rest 1
-	note C_, 1
-	rest 3
+	sound_call Music_LookRocket_Shared4
 	octave 3
 	note B_, 6
 	duty_cycle 0
@@ -134,15 +106,7 @@ Music_LookRocket_Ch2:
 	note F_, 4
 	note C_, 1
 	note D_, 1
-	note D#, 1
-	note F_, 1
-	note F#, 6
-	note D#, 1
-	rest 3
-	note F#, 1
-	rest 1
-	note D#, 1
-	rest 1
+	sound_call Music_LookRocket_Shared3
 	octave 5
 	note D#, 1
 	rest 1
@@ -220,10 +184,7 @@ Music_LookRocket_Ch3:
 	note F_, 1
 	rest 1
 	note G#, 1
-	rest 1
-	octave 4
-	note C_, 1
-	rest 1
+	sound_call Music_ViridianCity_Shared1
 	note D_, 1
 	rest 3
 	octave 3
@@ -231,22 +192,7 @@ Music_LookRocket_Ch3:
 	sound_ret
 
 .sub2:
-	octave 2
-	note G#, 1
-	rest 1
-	octave 3
-	note G#, 1
-	rest 1
-	octave 2
-	note G#, 1
-	rest 1
-	note G#, 1
-	rest 1
-	note A_, 1
-	rest 1
-	octave 3
-	note A_, 1
-	rest 1
+	sound_call Music_LookRocket_Shared1
 	note C_, 1
 	rest 1
 	note F#, 1
@@ -284,18 +230,12 @@ Music_LookRocket_Ch3:
 
 .sub4:
 	note C_, 1
-	rest 1
-	octave 4
-	note C_, 1
-	rest 1
+	sound_call Music_ViridianCity_Shared1
 	octave 3
 	note C_, 1
 	rest 1
 	note C_, 1
-	rest 1
-	octave 4
-	note C_, 1
-	rest 1
+	sound_call Music_ViridianCity_Shared1
 	octave 3
 	note C_, 1
 	rest 1
@@ -322,22 +262,7 @@ Music_LookRocket_Ch3:
 	sound_ret
 
 .sub5:
-	octave 2
-	note G#, 1
-	rest 1
-	octave 3
-	note G#, 1
-	rest 1
-	octave 2
-	note G#, 1
-	rest 1
-	note G#, 1
-	rest 1
-	note A_, 1
-	rest 1
-	octave 3
-	note A_, 1
-	rest 1
+	sound_call Music_LookRocket_Shared1
 	note G#, 1
 	note F#, 1
 	note D#, 1
@@ -345,8 +270,7 @@ Music_LookRocket_Ch3:
 	sound_ret
 
 Music_LookRocket_Ch4:
-	toggle_noise 3
-	drum_speed 12
+	sound_call Music_ViridianCity_Shared3
 	rest 2
 	sound_call .sub1
 .mainloop:
@@ -379,4 +303,60 @@ Music_LookRocket_Ch4:
 	drum_note 7, 2
 	drum_note 3, 2
 	drum_note 7, 2
+	sound_ret
+
+Music_LookRocket_Shared1: ; (tools/musiccalls.py)
+	octave 2
+	note G#, 1
+	rest 1
+	octave 3
+	note G#, 1
+	rest 1
+	octave 2
+	note G#, 1
+	rest 1
+	note G#, 1
+	rest 1
+	note A_, 1
+	rest 1
+	octave 3
+	note A_, 1
+	rest 1
+	sound_ret
+
+Music_LookRocket_Shared2: ; (tools/musiccalls.py)
+	vibrato 5, 6, 4
+	note_type 12, 10, 8
+	octave 4
+	note C_, 1
+	note D_, 1
+	sound_ret
+
+Music_LookRocket_Shared3: ; (tools/musiccalls.py)
+	note D#, 1
+	note F_, 1
+	note F#, 6
+	note D#, 1
+	rest 3
+	note F#, 1
+	rest 1
+	note D#, 1
+	rest 1
+	sound_ret
+
+Music_LookRocket_Shared4: ; (tools/musiccalls.py)
+	note D#, 1
+	rest 1
+	note D_, 1
+	rest 1
+	note C#, 1
+	rest 1
+	note C_, 1
+	rest 3
+	sound_ret
+
+Music_LookRocket_Shared5: ; (tools/musiccalls.py)
+	vibrato 4, 6, 4
+	duty_cycle 3
+	note_type 12, 11, 7
 	sound_ret

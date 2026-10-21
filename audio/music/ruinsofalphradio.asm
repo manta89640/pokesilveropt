@@ -5,8 +5,7 @@ Music_RuinsOfAlphRadio:
 	channel 3, Music_RuinsOfAlphRadio_Ch3
 
 Music_RuinsOfAlphRadio_Ch1:
-	tempo 160
-	volume 7, 7
+	sound_call Music_Route3_Shared6
 	duty_cycle 0
 	pitch_offset 280
 	vibrato 0, 15, 0

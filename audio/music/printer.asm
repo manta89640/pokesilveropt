@@ -26,55 +26,14 @@ Music_Printer_Ch3:
 	note C#, 1
 	rest 1
 	octave 4
-	note B_, 1
-	rest 1
-	note A_, 1
-	rest 1
-	note G#, 1
-	rest 1
-	note F#, 1
-	rest 1
+	sound_call Music_Printer_Shared5
 .mainloop:
-	note E_, 1
-	rest 1
-	note B_, 1
-	rest 1
-	note E_, 1
-	rest 1
-	note B_, 1
-	rest 1
-	note E_, 1
-	rest 1
-	note B_, 1
-	rest 1
-	note E_, 1
-	rest 1
-	note B_, 1
-	rest 1
-	note E_, 1
-	rest 1
-	note B_, 1
-	rest 1
-	note E_, 1
-	rest 1
-	note B_, 1
-	rest 1
-	note E_, 1
-	rest 1
-	note B_, 1
-	rest 1
-	note E_, 1
-	rest 1
-	note B_, 1
-	rest 1
+	sound_call Music_Printer_Shared2
+	sound_call Music_Printer_Shared2
+	sound_call Music_Printer_Shared2
+	sound_call Music_Printer_Shared2
 	note F#, 1
-	rest 1
-	note A_, 1
-	rest 1
-	note F#, 1
-	rest 1
-	note A_, 1
-	rest 1
+	sound_call Music_Printer_Shared4
 	note F#, 1
 	rest 1
 	octave 5
@@ -103,124 +62,16 @@ Music_Printer_Ch3:
 	octave 4
 	note D#, 1
 	rest 1
-	note E_, 1
-	rest 1
-	note B_, 1
-	rest 1
-	note E_, 1
-	rest 1
-	note B_, 1
-	rest 1
-	note E_, 1
-	rest 1
-	note B_, 1
-	rest 1
-	note E_, 1
-	rest 1
-	note B_, 1
-	rest 1
-	note E_, 1
-	rest 1
-	note B_, 1
-	rest 1
-	note E_, 1
-	rest 1
-	note B_, 1
-	rest 1
-	note E_, 1
-	rest 1
-	note B_, 1
-	rest 1
-	note E_, 1
-	rest 1
-	note B_, 1
-	rest 1
+	sound_call Music_Printer_Shared2
+	sound_call Music_Printer_Shared2
+	sound_call Music_Printer_Shared2
+	sound_call Music_Printer_Shared2
 	note F#, 1
-	rest 1
-	note A_, 1
-	rest 1
-	note F#, 1
-	rest 1
-	note A_, 1
-	rest 1
-	note B_, 1
-	rest 1
-	note A_, 1
-	rest 1
-	note G#, 1
-	rest 1
-	note F#, 1
-	rest 1
+	sound_call Music_Printer_Shared4
+	sound_call Music_Printer_Shared5
+	sound_call Music_Printer_Shared2
 	note E_, 1
-	rest 1
-	note B_, 1
-	rest 1
-	note E_, 1
-	rest 1
-	note B_, 1
-	rest 1
-	note E_, 1
-	rest 1
-	octave 3
-	note B_, 1
-	rest 1
-	octave 4
-	note C#, 1
-	rest 1
-	note D_, 1
-	rest 1
-	note D#, 1
-	rest 1
-	note F#, 1
-	rest 1
-	octave 3
-	note B_, 1
-	rest 1
-	octave 4
-	note F#, 1
-	rest 1
-	note D#, 1
-	rest 1
-	note F#, 1
-	rest 1
-	octave 3
-	note B_, 1
-	rest 1
-	octave 4
-	note F#, 1
-	rest 1
-	note E_, 1
-	rest 1
-	note G#, 1
-	rest 1
-	octave 3
-	note B_, 1
-	rest 1
-	octave 4
-	note G#, 1
-	rest 1
-	note E_, 1
-	rest 1
-	note G#, 1
-	rest 1
-	octave 3
-	note B_, 1
-	rest 1
-	octave 4
-	note G#, 1
-	rest 1
-	note F#, 1
-	rest 1
-	note A_, 1
-	rest 1
-	note C#, 1
-	rest 1
-	note A_, 1
-	rest 1
-	note F#, 1
-	rest 1
-	note A_, 1
-	rest 1
+	sound_call Music_Printer_Shared1
 	note C#, 1
 	rest 1
 	note A_, 1
@@ -234,11 +85,29 @@ Music_Printer_Ch3:
 	note F#, 1
 	rest 1
 	note G#, 1
+	sound_call Music_Printer_Shared1
+	note F#, 1
 	rest 1
-	octave 3
+	note D#, 1
+	rest 1
 	note B_, 1
 	rest 1
-	octave 4
+	note B_, 1
+	rest 1
+	note A_, 1
+	rest 1
+	note A_, 1
+	rest 1
+	note G#, 1
+	sound_call Music_Printer_Shared3
+	note C#, 1
+	rest 1
+	note D#, 1
+	rest 1
+	sound_loop 0, .mainloop
+
+Music_Printer_Shared1: ; (tools/musiccalls.py)
+	sound_call Music_Printer_Shared3
 	note C#, 1
 	rest 1
 	note D_, 1
@@ -246,41 +115,25 @@ Music_Printer_Ch3:
 	note D#, 1
 	rest 1
 	note F#, 1
-	rest 1
-	octave 3
-	note B_, 1
-	rest 1
-	octave 4
+	sound_call Music_Printer_Shared3
 	note F#, 1
 	rest 1
 	note D#, 1
 	rest 1
 	note F#, 1
-	rest 1
-	octave 3
-	note B_, 1
-	rest 1
-	octave 4
+	sound_call Music_Printer_Shared3
 	note F#, 1
 	rest 1
 	note E_, 1
 	rest 1
 	note G#, 1
-	rest 1
-	octave 3
-	note B_, 1
-	rest 1
-	octave 4
+	sound_call Music_Printer_Shared3
 	note G#, 1
 	rest 1
 	note E_, 1
 	rest 1
 	note G#, 1
-	rest 1
-	octave 3
-	note B_, 1
-	rest 1
-	octave 4
+	sound_call Music_Printer_Shared3
 	note G#, 1
 	rest 1
 	note F#, 1
@@ -288,33 +141,45 @@ Music_Printer_Ch3:
 	note A_, 1
 	rest 1
 	note C#, 1
-	rest 1
-	note A_, 1
-	rest 1
-	note F#, 1
-	rest 1
-	note A_, 1
-	rest 1
-	note F#, 1
-	rest 1
-	note D#, 1
+	sound_call Music_Printer_Shared4
+	sound_ret
+
+Music_Printer_Shared2: ; (tools/musiccalls.py)
+	note E_, 1
 	rest 1
 	note B_, 1
 	rest 1
+	note E_, 1
+	rest 1
 	note B_, 1
 	rest 1
-	note A_, 1
-	rest 1
-	note A_, 1
-	rest 1
-	note G#, 1
+	sound_ret
+
+Music_Printer_Shared3: ; (tools/musiccalls.py)
 	rest 1
 	octave 3
 	note B_, 1
 	rest 1
 	octave 4
-	note C#, 1
+	sound_ret
+
+Music_Printer_Shared4: ; (tools/musiccalls.py)
 	rest 1
-	note D#, 1
+	note A_, 1
 	rest 1
-	sound_loop 0, .mainloop
+	note F#, 1
+	rest 1
+	note A_, 1
+	rest 1
+	sound_ret
+
+Music_Printer_Shared5: ; (tools/musiccalls.py)
+	note B_, 1
+	rest 1
+	note A_, 1
+	rest 1
+	note G#, 1
+	rest 1
+	note F#, 1
+	rest 1
+	sound_ret

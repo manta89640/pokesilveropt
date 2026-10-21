@@ -7,8 +7,7 @@ Music_NationalPark:
 
 Music_NationalPark_Ch1:
 	tempo 192
-	volume 7, 7
-	stereo_panning FALSE, TRUE
+	sound_call Music_ViridianCity_Shared5
 	vibrato 24, 2, 4
 	duty_cycle 1
 	note_type 12, 7, 7
@@ -133,63 +132,7 @@ Music_NationalPark_Ch1:
 	volume_envelope 9, 7
 	note C#, 1
 	note D#, 1
-	volume_envelope 7, 7
-	note C#, 2
-	octave 3
-	note A#, 2
-	octave 4
-	note C#, 2
-	octave 3
-	note A#, 2
-	octave 4
-	note C#, 2
-	octave 3
-	note A#, 2
-	octave 4
-	note C#, 2
-	octave 3
-	note A#, 2
-	octave 4
-	note C#, 2
-	octave 3
-	note A_, 2
-	octave 4
-	note C#, 2
-	octave 3
-	note A_, 2
-	volume_envelope 4, 7
-	octave 4
-	note C#, 1
-	note D#, 1
-	volume_envelope 5, 7
-	note C#, 1
-	note D#, 1
-	volume_envelope 7, 7
-	note C#, 1
-	note D#, 1
-	volume_envelope 9, 7
-	note C#, 1
-	note D#, 1
-	volume_envelope 7, 7
-	note C_, 2
-	octave 3
-	note G#, 2
-	octave 4
-	note C_, 2
-	octave 3
-	note G#, 2
-	octave 4
-	note D#, 2
-	note C_, 2
-	note D#, 2
-	note C_, 2
-	note D_, 2
-	octave 3
-	note A#, 2
-	octave 4
-	note D_, 2
-	octave 3
-	note A#, 2
+	sound_call Music_NationalPark_Shared1
 	volume_envelope 5, 7
 	octave 4
 	note F_, 1
@@ -203,63 +146,7 @@ Music_NationalPark_Ch1:
 	volume_envelope 9, 7
 	note G#, 1
 	note A#, 1
-	volume_envelope 7, 7
-	note C#, 2
-	octave 3
-	note A#, 2
-	octave 4
-	note C#, 2
-	octave 3
-	note A#, 2
-	octave 4
-	note C#, 2
-	octave 3
-	note A#, 2
-	octave 4
-	note C#, 2
-	octave 3
-	note A#, 2
-	octave 4
-	note C#, 2
-	octave 3
-	note A_, 2
-	octave 4
-	note C#, 2
-	octave 3
-	note A_, 2
-	volume_envelope 4, 7
-	octave 4
-	note C#, 1
-	note D#, 1
-	volume_envelope 5, 7
-	note C#, 1
-	note D#, 1
-	volume_envelope 7, 7
-	note C#, 1
-	note D#, 1
-	volume_envelope 9, 7
-	note C#, 1
-	note D#, 1
-	volume_envelope 7, 7
-	note C_, 2
-	octave 3
-	note G#, 2
-	octave 4
-	note C_, 2
-	octave 3
-	note G#, 2
-	octave 4
-	note D#, 2
-	note C_, 2
-	note D#, 2
-	note C_, 2
-	note D_, 2
-	octave 3
-	note A#, 2
-	octave 4
-	note D_, 2
-	octave 3
-	note A#, 2
+	sound_call Music_NationalPark_Shared1
 	octave 4
 	note D_, 2
 	octave 3
@@ -286,12 +173,7 @@ Music_NationalPark_Ch1:
 	rest 16
 	rest 3
 	note A_, 1
-	note A_, 1
-	rest 1
-	note A_, 1
-	rest 1
-	note A_, 1
-	rest 1
+	sound_call Music_NationalPark_Shared4
 	note A_, 2
 	rest 4
 	sound_ret
@@ -372,66 +254,14 @@ Music_NationalPark_Ch2:
 	sound_loop 0, .mainloop
 
 .sub1:
-	octave 2
-	note C#, 6
-	note G#, 2
-	octave 3
+	sound_call Music_NationalPark_Shared5
 	note C#, 8
-	octave 2
-	note C#, 6
-	note A_, 2
-	octave 3
-	note C#, 8
-	octave 2
-	note C#, 6
-	note G#, 2
-	octave 3
-	note C#, 8
-	octave 2
-	note C#, 6
-	note A_, 2
-	octave 3
+	sound_call Music_NationalPark_Shared5
 	note F#, 8
-	octave 1
-	note F#, 6
-	octave 2
-	note C#, 2
-	note A#, 8
-	octave 1
-	note F#, 6
-	octave 2
-	note C#, 2
-	note A_, 8
-	octave 1
-	note F_, 6
-	octave 2
-	note C_, 2
-	note G#, 8
-	octave 1
-	note A#, 6
-	octave 2
-	note F_, 2
+	sound_call Music_NationalPark_Shared2
 	octave 3
 	note D_, 8
-	octave 1
-	note F#, 6
-	octave 2
-	note C#, 2
-	note A#, 8
-	octave 1
-	note F#, 6
-	octave 2
-	note C#, 2
-	note A_, 8
-	octave 1
-	note F_, 6
-	octave 2
-	note C_, 2
-	note G#, 8
-	octave 1
-	note A#, 6
-	octave 2
-	note F_, 2
+	sound_call Music_NationalPark_Shared2
 	sound_ret
 
 .sub2:
@@ -526,16 +356,7 @@ Music_NationalPark_Ch3:
 	note C_, 2
 	note C#, 2
 	note D#, 2
-	note F_, 2
-	note D#, 2
-	note C#, 2
-	octave 5
-	note A#, 10
-	octave 6
-	note F_, 2
-	note D#, 2
-	note C#, 2
-	octave 5
+	sound_call Music_NationalPark_Shared3
 	note A_, 9
 	octave 6
 	note D_, 1
@@ -551,16 +372,7 @@ Music_NationalPark_Ch3:
 	note F_, 14
 	note D_, 1
 	note D#, 1
-	note F_, 2
-	note D#, 2
-	note C#, 2
-	octave 5
-	note A#, 10
-	octave 6
-	note F_, 2
-	note D#, 2
-	note C#, 2
-	octave 5
+	sound_call Music_NationalPark_Shared3
 	note A_, 10
 	octave 6
 	note D#, 2
@@ -617,8 +429,7 @@ Music_NationalPark_Ch3:
 	sound_ret
 
 Music_NationalPark_Ch4:
-	toggle_noise 3
-	drum_speed 12
+	sound_call Music_ViridianCity_Shared3
 	rest 2
 .mainloop:
 .loop1:
@@ -657,3 +468,119 @@ Music_NationalPark_Ch4:
 	drum_note 11, 1
 	drum_note 4, 1
 	sound_loop 0, .mainloop
+
+Music_NationalPark_Shared1: ; (tools/musiccalls.py)
+	volume_envelope 7, 7
+	note C#, 2
+	octave 3
+	note A#, 2
+	octave 4
+	note C#, 2
+	octave 3
+	note A#, 2
+	octave 4
+	note C#, 2
+	octave 3
+	note A#, 2
+	octave 4
+	note C#, 2
+	octave 3
+	note A#, 2
+	octave 4
+	note C#, 2
+	octave 3
+	note A_, 2
+	octave 4
+	note C#, 2
+	octave 3
+	note A_, 2
+	volume_envelope 4, 7
+	octave 4
+	note C#, 1
+	note D#, 1
+	volume_envelope 5, 7
+	note C#, 1
+	note D#, 1
+	volume_envelope 7, 7
+	note C#, 1
+	note D#, 1
+	volume_envelope 9, 7
+	note C#, 1
+	note D#, 1
+	volume_envelope 7, 7
+	note C_, 2
+	octave 3
+	note G#, 2
+	octave 4
+	note C_, 2
+	octave 3
+	note G#, 2
+	octave 4
+	note D#, 2
+	note C_, 2
+	note D#, 2
+	note C_, 2
+	note D_, 2
+	octave 3
+	note A#, 2
+	octave 4
+	note D_, 2
+	octave 3
+	note A#, 2
+	sound_ret
+
+Music_NationalPark_Shared2: ; (tools/musiccalls.py)
+	octave 1
+	note F#, 6
+	octave 2
+	note C#, 2
+	note A#, 8
+	octave 1
+	note F#, 6
+	octave 2
+	note C#, 2
+	note A_, 8
+	octave 1
+	note F_, 6
+	octave 2
+	note C_, 2
+	note G#, 8
+	octave 1
+	note A#, 6
+	octave 2
+	note F_, 2
+	sound_ret
+
+Music_NationalPark_Shared3: ; (tools/musiccalls.py)
+	note F_, 2
+	note D#, 2
+	note C#, 2
+	octave 5
+	note A#, 10
+	octave 6
+	note F_, 2
+	note D#, 2
+	note C#, 2
+	octave 5
+	sound_ret
+
+Music_NationalPark_Shared4: ; (tools/musiccalls.py)
+	note A_, 1
+	rest 1
+	note A_, 1
+	rest 1
+	note A_, 1
+	rest 1
+	sound_ret
+
+Music_NationalPark_Shared5: ; (tools/musiccalls.py)
+	octave 2
+	note C#, 6
+	note G#, 2
+	octave 3
+	note C#, 8
+	octave 2
+	note C#, 6
+	note A_, 2
+	octave 3
+	sound_ret

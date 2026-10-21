@@ -103,8 +103,7 @@ Music_LookHiker_Ch3:
 	sound_ret
 
 Music_LookHiker_Ch4:
-	toggle_noise 3
-	drum_speed 12
+	sound_call Music_ViridianCity_Shared3
 	drum_note 6, 4
 	rest 16
 .mainloop:

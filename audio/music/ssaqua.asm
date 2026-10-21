@@ -14,60 +14,22 @@ Music_SSAqua_Ch1:
 	duty_cycle 2
 	note_type 6, 9, 7
 	octave 2
-	note G_, 1
-	rest 1
-	note G_, 1
-	rest 1
+	sound_call Music_SSAqua_Shared13
 .mainloop:
 	octave 2
-	note G_, 16
-	rest 8
-	note G_, 2
-	rest 2
-	note_type 12, 9, 7
-	note G_, 2
+	sound_call Music_SSAqua_Shared16
 	note G_, 10
 	rest 4
 	note_type 6, 9, 7
-	note G_, 1
-	rest 1
-	note G_, 1
-	rest 1
-	note G_, 16
-	rest 8
-	note G_, 2
-	rest 2
-	note_type 12, 9, 7
-	note G_, 2
+	sound_call Music_SSAqua_Shared13
+	sound_call Music_SSAqua_Shared16
 	note G_, 8
 	rest 8
 	duty_cycle 1
 	volume_envelope 6, 1
 	sound_call Music_SSAqua_Ch2.sub4
-	octave 5
-	note G_, 1
-	octave 4
-	note B_, 1
-	note A_, 1
-	note G_, 1
-	octave 5
-	note G_, 1
-	octave 4
-	note B_, 1
-	note A_, 1
-	note G_, 1
-	octave 5
-	note G_, 1
-	octave 4
-	note B_, 1
-	note A_, 1
-	note G_, 1
-	octave 5
-	note G_, 1
-	octave 4
-	note B_, 1
-	note A_, 1
-	note G_, 1
+	sound_call Music_SSAqua_Shared2
+	sound_call Music_SSAqua_Shared2
 	sound_call Music_SSAqua_Ch2.sub4
 	sound_call Music_SSAqua_Ch2.sub5
 	rest 16
@@ -75,12 +37,7 @@ Music_SSAqua_Ch1:
 	rest 16
 	volume_envelope 9, 7
 	rest 14
-	note_type 6, 9, 7
-	note D_, 1
-	rest 1
-	octave 3
-	note A#, 1
-	rest 1
+	sound_call Music_SSAqua_Shared17
 	note_type 12, 9, 7
 	rest 16
 	rest 16
@@ -138,12 +95,7 @@ Music_SSAqua_Ch1:
 	note D_, 4
 	octave 4
 	note A#, 2
-	note_type 6, 9, 7
-	note D_, 1
-	rest 1
-	octave 3
-	note A#, 1
-	rest 1
+	sound_call Music_SSAqua_Shared17
 	volume_envelope 9, 7
 	note G_, 16
 	note A_, 16
@@ -235,10 +187,7 @@ Music_SSAqua_Ch1:
 	note A_, 2
 	note F#, 2
 	note D_, 2
-	note A_, 2
-	octave 4
-	note D_, 2
-	octave 3
+	sound_call Music_Route36_Shared6
 	note A_, 2
 	note F#, 2
 	note A_, 2
@@ -288,10 +237,7 @@ Music_SSAqua_Ch2:
 	rest 2
 	duty_cycle 3
 	volume_envelope 11, 7
-	octave 3
-	note B_, 1
-	octave 4
-	note C_, 1
+	sound_call Music_SSAqua_Shared18
 	sound_call .sub1
 	note G_, 4
 	rest 4
@@ -308,10 +254,7 @@ Music_SSAqua_Ch2:
 	note B_, 6
 	note A_, 6
 	rest 2
-	octave 3
-	note B_, 1
-	octave 4
-	note C_, 1
+	sound_call Music_SSAqua_Shared18
 	sound_call .sub1
 	note G_, 4
 	rest 4
@@ -394,20 +337,11 @@ Music_SSAqua_Ch2:
 
 .sub1:
 	note D_, 6
-	octave 3
-	note B_, 1
-	octave 4
-	note C_, 1
+	sound_call Music_SSAqua_Shared18
 	note D_, 2
-	octave 3
-	note B_, 1
-	octave 4
-	note C_, 1
+	sound_call Music_SSAqua_Shared18
 	note D_, 2
-	octave 3
-	note B_, 1
-	octave 4
-	note C_, 1
+	sound_call Music_SSAqua_Shared18
 	note D_, 2
 	rest 2
 	note G_, 2
@@ -439,11 +373,7 @@ Music_SSAqua_Ch2:
 	rest 1
 	octave 5
 	note D_, 1
-	rest 1
-	note F#, 1
-	rest 1
-	note D_, 1
-	rest 1
+	sound_call Music_SSAqua_Shared14
 	octave 4
 	note A#, 1
 	rest 1
@@ -502,99 +432,23 @@ Music_SSAqua_Ch2:
 	sound_ret
 
 .sub4:
-	octave 5
-	note G_, 1
-	note D_, 1
-	octave 4
-	note B_, 1
-	note G_, 1
-	octave 5
-	note G_, 1
-	note D_, 1
-	octave 4
-	note B_, 1
-	note G_, 1
-	octave 5
-	note G_, 1
-	note D_, 1
-	octave 4
-	note B_, 1
-	note G_, 1
-	octave 5
-	note G_, 1
-	note D_, 1
-	octave 4
-	note B_, 1
-	note G_, 1
-	octave 5
-	note G_, 1
-	note C#, 1
-	octave 4
-	note A#, 1
-	note G_, 1
-	octave 5
-	note G_, 1
-	note C#, 1
-	octave 4
-	note A#, 1
-	note G_, 1
-	octave 5
-	note G_, 1
-	note C#, 1
-	octave 4
-	note A#, 1
-	note G_, 1
-	octave 5
-	note G_, 1
-	note C#, 1
-	octave 4
-	note A#, 1
-	note G_, 1
-	octave 5
-	note G_, 1
-	note C_, 1
-	octave 4
-	note A_, 1
-	note G_, 1
-	octave 5
-	note G_, 1
-	note C_, 1
-	octave 4
-	note A_, 1
-	note G_, 1
-	octave 5
-	note G_, 1
-	note C_, 1
-	octave 4
-	note A_, 1
-	note G_, 1
-	octave 5
-	note G_, 1
-	note C_, 1
-	octave 4
-	note A_, 1
-	note G_, 1
+	sound_call Music_SSAqua_Shared5
+	sound_call Music_SSAqua_Shared5
+	sound_call Music_SSAqua_Shared5
+	sound_call Music_SSAqua_Shared5
+	sound_call Music_SSAqua_Shared8
+	sound_call Music_SSAqua_Shared8
+	sound_call Music_SSAqua_Shared8
+	sound_call Music_SSAqua_Shared8
+	sound_call Music_SSAqua_Shared9
+	sound_call Music_SSAqua_Shared9
+	sound_call Music_SSAqua_Shared9
+	sound_call Music_SSAqua_Shared9
 	sound_ret
 
 .sub5:
-	octave 5
-	note G_, 1
-	octave 4
-	note B_, 1
-	note A_, 1
-	note G_, 1
-	octave 5
-	note G_, 1
-	octave 4
-	note B_, 1
-	note A_, 1
-	note G_, 1
-	octave 5
-	note G_, 1
-	note D_, 1
-	octave 4
-	note B_, 1
-	note G_, 1
+	sound_call Music_SSAqua_Shared2
+	sound_call Music_SSAqua_Shared5
 	note B_, 1
 	note G_, 1
 	note C#, 1
@@ -607,30 +461,14 @@ Music_SSAqua_Ch3:
 	vibrato 8, 3, 4
 	note_type 6, 1, 5
 	octave 2
-	note G_, 1
-	rest 1
-	note G_, 1
-	rest 1
+	sound_call Music_SSAqua_Shared13
 .mainloop:
-	note G_, 16
-	rest 8
-	note G_, 2
-	rest 2
-	note_type 12, 1, 5
-	note G_, 2
+	sound_call Music_SSAqua_Shared19
 	note G_, 10
 	rest 4
 	note_type 6, 1, 5
-	note G_, 1
-	rest 1
-	note G_, 1
-	rest 1
-	note G_, 16
-	rest 8
-	note G_, 2
-	rest 2
-	note_type 12, 1, 5
-	note G_, 2
+	sound_call Music_SSAqua_Shared13
+	sound_call Music_SSAqua_Shared19
 	note G_, 8
 	note B_, 1
 	octave 3
@@ -645,28 +483,10 @@ Music_SSAqua_Ch3:
 	sound_call .sub1
 	sound_call .sub1
 .loop1:
-	note G_, 2
-	rest 2
-	octave 3
-	note G_, 1
+	sound_call Music_SSAqua_Shared3
 	rest 3
 	octave 2
-	note G_, 2
-	rest 2
-	octave 3
-	note G_, 1
-	rest 3
-	octave 2
-	note G_, 2
-	rest 2
-	octave 3
-	note G_, 1
-	rest 3
-	octave 2
-	note G_, 2
-	rest 2
-	octave 3
-	note G_, 1
+	sound_call Music_SSAqua_Shared3
 	rest 1
 	octave 2
 	note G_, 1
@@ -675,75 +495,21 @@ Music_SSAqua_Ch3:
 	sound_call .sub2
 	sound_call .sub2
 	sound_call .sub3
-	octave 3
-	note E_, 2
-	rest 2
-	octave 4
-	note E_, 1
-	rest 3
-	octave 3
+	sound_call Music_SSAqua_Shared6
+	sound_call Music_SSAqua_Shared15
 	note D#, 2
 	rest 2
 	octave 4
 	note D#, 1
-	rest 3
-	octave 3
-	note D_, 2
-	rest 2
-	octave 4
-	note D_, 1
-	rest 3
-	octave 3
-	note D#, 2
-	rest 2
-	octave 4
-	note D#, 1
-	rest 3
-	octave 2
-	note A_, 2
-	rest 2
-	octave 4
+	sound_call Music_SSAqua_Shared4
 	note C_, 1
-	rest 3
-	octave 2
-	note A_, 2
-	rest 2
-	octave 4
+	sound_call Music_SSAqua_Shared4
 	note C_, 1
-	rest 3
-	octave 2
-	note A_, 2
-	rest 2
-	octave 4
+	sound_call Music_SSAqua_Shared4
 	note C#, 1
-	rest 3
-	octave 2
-	note A_, 2
-	rest 2
-	octave 4
+	sound_call Music_SSAqua_Shared4
 	note C#, 1
-	rest 3
-	octave 3
-	note D_, 2
-	rest 2
-	octave 4
-	note G_, 1
-	rest 3
-	octave 3
-	note D_, 2
-	rest 2
-	octave 4
-	note G_, 1
-	rest 3
-	octave 3
-	note D_, 2
-	rest 2
-	octave 4
-	note F#, 1
-	rest 3
-	octave 3
-	note D_, 2
-	rest 2
+	sound_call Music_SSAqua_Shared1
 	octave 4
 	note F#, 1
 	rest 3
@@ -759,30 +525,12 @@ Music_SSAqua_Ch3:
 	rest 2
 	octave 4
 	note D#, 1
-	rest 3
-	octave 2
-	note A_, 2
-	rest 2
-	octave 4
+	sound_call Music_SSAqua_Shared4
+	note C#, 1
+	sound_call Music_SSAqua_Shared4
 	note C#, 1
 	rest 3
-	octave 2
-	note A_, 2
-	rest 2
-	octave 4
-	note C#, 1
-	rest 3
-	octave 3
-	note C_, 2
-	rest 2
-	octave 4
-	note G_, 1
-	rest 3
-	octave 3
-	note C_, 2
-	rest 2
-	octave 4
-	note G_, 1
+	sound_call Music_SSAqua_Shared11
 	rest 3
 	octave 3
 	note C#, 2
@@ -795,33 +543,9 @@ Music_SSAqua_Ch3:
 	rest 2
 	octave 4
 	note G_, 1
-	rest 3
-	octave 3
-	note D_, 2
-	rest 2
-	octave 4
-	note G_, 1
-	rest 3
-	octave 3
-	note D_, 2
-	rest 2
-	octave 4
-	note G_, 1
-	rest 3
-	octave 3
-	note D_, 2
-	rest 2
-	octave 4
-	note F#, 1
-	rest 3
-	octave 3
-	note D_, 2
-	rest 2
+	sound_call Music_SSAqua_Shared1
 	octave 2
-	note G_, 1
-	rest 1
-	note G_, 1
-	rest 1
+	sound_call Music_SSAqua_Shared13
 	sound_loop 0, .mainloop
 
 .sub1:
@@ -843,16 +567,7 @@ Music_SSAqua_Ch3:
 	rest 1
 	note G_, 2
 	rest 6
-	note G_, 2
-	rest 2
-	octave 3
-	note G_, 1
-	rest 3
-	octave 2
-	note G_, 2
-	rest 2
-	octave 3
-	note G_, 1
+	sound_call Music_SSAqua_Shared3
 	rest 3
 	octave 2
 	note G_, 2
@@ -890,17 +605,9 @@ Music_SSAqua_Ch3:
 	note G_, 1
 	rest 1
 	note G_, 2
-	rest 2
-	octave 4
-	note F#, 1
-	rest 3
-	octave 2
+	sound_call Music_SSAqua_Shared7
 	note G_, 2
-	rest 2
-	octave 4
-	note F#, 1
-	rest 3
-	octave 2
+	sound_call Music_SSAqua_Shared7
 	note G_, 2
 	rest 2
 	octave 4
@@ -910,27 +617,10 @@ Music_SSAqua_Ch3:
 	rest 2
 	octave 2
 	note B_, 2
-	rest 2
-	octave 4
-	note F#, 1
-	rest 3
-	octave 2
+	sound_call Music_SSAqua_Shared7
 	note B_, 2
-	rest 2
-	octave 4
-	note F#, 1
-	rest 3
-	octave 2
-	note A#, 2
-	rest 2
-	octave 3
-	note A#, 1
-	rest 3
-	octave 2
-	note A#, 2
-	rest 2
-	octave 3
-	note A#, 1
+	sound_call Music_SSAqua_Shared7
+	sound_call Music_SSAqua_Shared12
 	rest 3
 	octave 2
 	note A_, 2
@@ -945,16 +635,7 @@ Music_SSAqua_Ch3:
 	note A_, 1
 	rest 3
 	octave 2
-	note A#, 2
-	rest 2
-	octave 3
-	note A#, 1
-	rest 3
-	octave 2
-	note A#, 2
-	rest 2
-	octave 3
-	note A#, 1
+	sound_call Music_SSAqua_Shared12
 	rest 1
 	note D#, 1
 	rest 1
@@ -963,19 +644,7 @@ Music_SSAqua_Ch3:
 	octave 4
 	note E_, 1
 	rest 3
-	octave 3
-	note E_, 2
-	rest 2
-	octave 4
-	note E_, 1
-	rest 3
-	octave 3
-	note D#, 2
-	rest 2
-	octave 4
-	note D#, 1
-	rest 3
-	octave 3
+	sound_call Music_SSAqua_Shared6
 	note D#, 2
 	rest 2
 	octave 4
@@ -984,18 +653,8 @@ Music_SSAqua_Ch3:
 	octave 3
 	note C#, 1
 	rest 1
-	note D_, 2
-	rest 2
-	octave 4
-	note D_, 1
-	rest 3
-	octave 3
-	note D_, 2
-	rest 2
-	octave 4
-	note D_, 1
-	rest 3
-	octave 3
+	sound_call Music_SSAqua_Shared15
+	sound_call Music_SSAqua_Shared15
 	note C#, 2
 	rest 2
 	octave 4
@@ -1003,51 +662,12 @@ Music_SSAqua_Ch3:
 	note G_, 4
 	note E_, 2
 	rest 2
-	octave 3
-	note C_, 2
-	rest 2
-	octave 4
-	note G_, 1
-	rest 3
-	octave 3
-	note C_, 2
-	rest 2
-	octave 4
-	note G_, 1
-	rest 3
-	octave 2
-	note A_, 2
-	rest 2
-	octave 4
+	sound_call Music_SSAqua_Shared11
+	sound_call Music_SSAqua_Shared4
 	note E_, 1
-	rest 3
-	octave 2
-	note A_, 2
-	rest 2
-	octave 4
+	sound_call Music_SSAqua_Shared4
 	note E_, 1
-	rest 3
-	octave 3
-	note D_, 2
-	rest 2
-	octave 4
-	note G_, 1
-	rest 3
-	octave 3
-	note D_, 2
-	rest 2
-	octave 4
-	note G_, 1
-	rest 3
-	octave 3
-	note D_, 2
-	rest 2
-	octave 4
-	note F#, 1
-	rest 3
-	octave 3
-	note D_, 2
-	rest 2
+	sound_call Music_SSAqua_Shared1
 	octave 4
 	note F#, 1
 	rest 3
@@ -1056,17 +676,9 @@ Music_SSAqua_Ch3:
 .sub3:
 	octave 2
 	note B_, 2
-	rest 2
-	octave 4
-	note F#, 1
-	rest 3
-	octave 2
+	sound_call Music_SSAqua_Shared7
 	note B_, 2
-	rest 2
-	octave 4
-	note F#, 1
-	rest 3
-	octave 2
+	sound_call Music_SSAqua_Shared7
 	note B_, 2
 	rest 2
 	octave 4
@@ -1130,27 +742,12 @@ Music_SSAqua_Ch4:
 	sound_loop 0, .mainloop
 
 .sub1:
-	drum_note 11, 2
-	drum_note 8, 1
-	drum_note 8, 1
-	drum_note 3, 2
-	drum_note 8, 1
-	drum_note 8, 1
-	drum_note 11, 2
-	drum_note 8, 1
-	drum_note 8, 1
-	drum_note 3, 2
-	drum_note 8, 1
-	drum_note 8, 1
+	sound_call Music_SSAqua_Shared10
+	sound_call Music_SSAqua_Shared10
 	sound_ret
 
 .sub2:
-	drum_note 11, 2
-	drum_note 8, 1
-	drum_note 8, 1
-	drum_note 3, 2
-	drum_note 8, 1
-	drum_note 8, 1
+	sound_call Music_SSAqua_Shared10
 	drum_note 11, 2
 	drum_note 8, 1
 	drum_note 8, 1
@@ -1159,15 +756,216 @@ Music_SSAqua_Ch4:
 	sound_ret
 
 .sub3:
+	sound_call Music_SSAqua_Shared10
+	drum_note 3, 1
+	drum_note 3, 1
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_note 1, 2
+	sound_ret
+
+Music_SSAqua_Shared1: ; (tools/musiccalls.py)
+	rest 3
+	octave 3
+	note D_, 2
+	rest 2
+	octave 4
+	note G_, 1
+	rest 3
+	octave 3
+	note D_, 2
+	rest 2
+	octave 4
+	note G_, 1
+	rest 3
+	octave 3
+	note D_, 2
+	rest 2
+	octave 4
+	note F#, 1
+	rest 3
+	octave 3
+	note D_, 2
+	rest 2
+	sound_ret
+
+Music_SSAqua_Shared2: ; (tools/musiccalls.py)
+	octave 5
+	note G_, 1
+	octave 4
+	note B_, 1
+	note A_, 1
+	note G_, 1
+	octave 5
+	note G_, 1
+	octave 4
+	note B_, 1
+	note A_, 1
+	note G_, 1
+	sound_ret
+
+Music_SSAqua_Shared3: ; (tools/musiccalls.py)
+	note G_, 2
+	rest 2
+	octave 3
+	note G_, 1
+	rest 3
+	octave 2
+	note G_, 2
+	rest 2
+	octave 3
+	note G_, 1
+	sound_ret
+
+Music_SSAqua_Shared4: ; (tools/musiccalls.py)
+	rest 3
+	octave 2
+	note A_, 2
+	rest 2
+	octave 4
+	sound_ret
+
+Music_SSAqua_Shared5: ; (tools/musiccalls.py)
+	octave 5
+	note G_, 1
+	note D_, 1
+	octave 4
+	note B_, 1
+	note G_, 1
+	sound_ret
+
+Music_SSAqua_Shared6: ; (tools/musiccalls.py)
+	octave 3
+	note E_, 2
+	rest 2
+	octave 4
+	note E_, 1
+	rest 3
+	octave 3
+	note D#, 2
+	rest 2
+	octave 4
+	note D#, 1
+	rest 3
+	octave 3
+	sound_ret
+
+Music_SSAqua_Shared7: ; (tools/musiccalls.py)
+	rest 2
+	octave 4
+	note F#, 1
+	rest 3
+	octave 2
+	sound_ret
+
+Music_SSAqua_Shared8: ; (tools/musiccalls.py)
+	octave 5
+	note G_, 1
+	note C#, 1
+	octave 4
+	note A#, 1
+	note G_, 1
+	sound_ret
+
+Music_SSAqua_Shared9: ; (tools/musiccalls.py)
+	octave 5
+	note G_, 1
+	note C_, 1
+	octave 4
+	note A_, 1
+	note G_, 1
+	sound_ret
+
+Music_SSAqua_Shared10: ; (tools/musiccalls.py)
 	drum_note 11, 2
 	drum_note 8, 1
 	drum_note 8, 1
 	drum_note 3, 2
 	drum_note 8, 1
 	drum_note 8, 1
-	drum_note 3, 1
-	drum_note 3, 1
-	drum_note 3, 2
-	drum_note 3, 2
-	drum_note 1, 2
+	sound_ret
+
+Music_SSAqua_Shared11: ; (tools/musiccalls.py)
+	octave 3
+	note C_, 2
+	rest 2
+	octave 4
+	note G_, 1
+	rest 3
+	octave 3
+	note C_, 2
+	rest 2
+	octave 4
+	note G_, 1
+	sound_ret
+
+Music_SSAqua_Shared12: ; (tools/musiccalls.py)
+	note A#, 2
+	rest 2
+	octave 3
+	note A#, 1
+	rest 3
+	octave 2
+	note A#, 2
+	rest 2
+	octave 3
+	note A#, 1
+	sound_ret
+
+Music_SSAqua_Shared13: ; (tools/musiccalls.py)
+	note G_, 1
+	rest 1
+	note G_, 1
+	rest 1
+	sound_ret
+
+Music_SSAqua_Shared14: ; (tools/musiccalls.py)
+	rest 1
+	note F#, 1
+	rest 1
+	note D_, 1
+	rest 1
+	sound_ret
+
+Music_SSAqua_Shared15: ; (tools/musiccalls.py)
+	note D_, 2
+	rest 2
+	octave 4
+	note D_, 1
+	rest 3
+	octave 3
+	sound_ret
+
+Music_SSAqua_Shared16: ; (tools/musiccalls.py)
+	note G_, 16
+	rest 8
+	note G_, 2
+	rest 2
+	note_type 12, 9, 7
+	note G_, 2
+	sound_ret
+
+Music_SSAqua_Shared17: ; (tools/musiccalls.py)
+	note_type 6, 9, 7
+	note D_, 1
+	rest 1
+	octave 3
+	note A#, 1
+	rest 1
+	sound_ret
+
+Music_SSAqua_Shared18: ; (tools/musiccalls.py)
+	octave 3
+	note B_, 1
+	octave 4
+	note C_, 1
+	sound_ret
+
+Music_SSAqua_Shared19: ; (tools/musiccalls.py)
+	note G_, 16
+	rest 8
+	note G_, 2
+	rest 2
+	note_type 12, 1, 5
+	note G_, 2
 	sound_ret

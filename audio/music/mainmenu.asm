@@ -8,8 +8,7 @@ Music_MainMenu:
 Music_MainMenu_Ch1:
 	tempo 160
 	volume 7, 7
-	duty_cycle 3
-	pitch_offset 1
+	sound_call Music_WildPokemonVictory_Shared1
 	vibrato 16, 1, 5
 	stereo_panning TRUE, FALSE
 	note_type 12, 0, -7
@@ -116,8 +115,7 @@ Music_MainMenu_Ch3:
 
 Music_MainMenu_Ch4:
 	stereo_panning FALSE, TRUE
-	toggle_noise 3
-	drum_speed 12
+	sound_call Music_ViridianCity_Shared3
 	rest 8
 	rest 16
 	rest 16

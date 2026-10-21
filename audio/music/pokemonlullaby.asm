@@ -7,8 +7,7 @@ Music_PokemonLullaby:
 Music_PokemonLullaby_Ch1:
 	tempo 224
 	volume 7, 7
-	duty_cycle 3
-	pitch_offset 1
+	sound_call Music_WildPokemonVictory_Shared1
 .mainloop:
 	note_type 12, 10, 7
 	octave 3

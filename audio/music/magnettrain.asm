@@ -17,47 +17,16 @@ Music_MagnetTrain_Ch1:
 	volume_envelope 11, 7
 	octave 4
 	note D_, 1
-	note C_, 1
-	octave 3
-	note G_, 1
-	octave 4
-	note C_, 1
+	sound_call Music_KantoWildBattle_Shared6
 	note D_, 1
-	note C_, 1
-	octave 3
-	note G_, 1
-	octave 4
-	note C_, 1
+	sound_call Music_KantoWildBattle_Shared6
 	note D_, 1
-	note C_, 1
-	octave 3
-	note G_, 1
-	octave 4
-	note C_, 1
+	sound_call Music_KantoWildBattle_Shared6
 	note D_, 1
-	note C_, 1
-	octave 3
-	note G_, 1
-	octave 4
-	note C_, 1
-	note E_, 1
-	note C_, 1
-	octave 3
-	note A_, 1
-	octave 4
-	note C_, 1
-	note E_, 1
-	note C_, 1
-	octave 3
-	note A_, 1
-	octave 4
-	note C_, 1
-	note E_, 1
-	note C_, 1
-	octave 3
-	note A_, 1
-	octave 4
-	note C_, 1
+	sound_call Music_KantoWildBattle_Shared6
+	sound_call Music_MagnetTrain_Shared2
+	sound_call Music_MagnetTrain_Shared2
+	sound_call Music_MagnetTrain_Shared2
 	note E_, 1
 	note C_, 1
 	note_type 6, 11, 7
@@ -136,96 +105,27 @@ Music_MagnetTrain_Ch3:
 	note C_, 1
 	note G_, 1
 	note D#, 1
-	note C_, 1
-	octave 3
-	note G_, 1
-	octave 4
-	note C_, 1
+	sound_call Music_KantoWildBattle_Shared6
 	note D#, 1
 	note G_, 1
 	note C_, 1
 	note D#, 1
-	note G_, 1
-	octave 5
-	note C_, 1
-	octave 4
-	note G_, 1
+	sound_call Music_GameCorner_Shared9
 	octave 5
 	note C_, 1
 	note D#, 1
 	note G_, 1
 	note C_, 1
-	octave 2
-	note D_, 1
-	octave 3
-	note D_, 1
-	octave 2
-	note D_, 1
-	octave 3
-	note D_, 1
-	octave 2
-	note D_, 1
-	octave 3
-	note D_, 1
-	octave 2
-	note D_, 1
-	octave 3
-	note D_, 1
-	octave 2
-	note D_, 1
-	octave 3
-	note D_, 1
-	octave 2
-	note D_, 1
-	octave 3
-	note D_, 1
-	octave 2
-	note D_, 1
-	octave 3
-	note D_, 1
-	octave 2
-	note D_, 1
-	octave 3
-	note D_, 1
-	octave 2
-	note D_, 1
-	octave 3
-	note D_, 1
-	octave 2
-	note D_, 1
-	octave 3
-	note D_, 1
-	octave 2
-	note D_, 1
-	octave 3
-	note D_, 1
-	octave 2
-	note D_, 1
-	octave 3
-	note D_, 1
-	octave 2
-	note D_, 1
-	octave 3
-	note D_, 1
-	octave 2
-	note D_, 1
-	octave 3
-	note D_, 1
-	octave 2
-	note D_, 1
-	octave 3
-	note D_, 1
-	octave 2
-	note D_, 1
-	octave 3
-	note D_, 1
+	sound_call Music_MagnetTrain_Shared1
+	sound_call Music_MagnetTrain_Shared1
+	sound_call Music_MagnetTrain_Shared1
+	sound_call Music_MagnetTrain_Shared1
 	octave 2
 	note D_, 16
 	sound_ret
 
 Music_MagnetTrain_Ch4:
-	toggle_noise 3
-	drum_speed 12
+	sound_call Music_PokemonCenter_Shared6
 	drum_note 12, 12
 	drum_note 3, 2
 	drum_note 11, 1
@@ -246,22 +146,26 @@ Music_MagnetTrain_Ch4:
 	drum_note 12, 16
 	sound_ret
 
-.sub1: ; unreferenced
-	drum_note 9, 1
-	drum_note 8, 1
-	drum_note 8, 1
-	drum_note 9, 1
-	drum_note 8, 1
-	drum_note 8, 1
-	drum_note 9, 1
-	drum_note 8, 1
-	drum_note 8, 1
-	drum_note 9, 1
-	drum_note 8, 1
-	drum_note 8, 1
+.sub2:
+	sound_call Music_MagnetTrain_Shared3
+	sound_call Music_MagnetTrain_Shared3
 	sound_ret
 
-.sub2:
+Music_MagnetTrain_Shared1: ; (tools/musiccalls.py)
+	sound_call Music_MagnetTrain_Shared4
+	sound_call Music_MagnetTrain_Shared4
+	sound_ret
+
+Music_MagnetTrain_Shared2: ; (tools/musiccalls.py)
+	note E_, 1
+	note C_, 1
+	octave 3
+	note A_, 1
+	octave 4
+	note C_, 1
+	sound_ret
+
+Music_MagnetTrain_Shared3: ; (tools/musiccalls.py)
 	drum_note 9, 2
 	drum_note 8, 2
 	drum_note 8, 2
@@ -270,12 +174,15 @@ Music_MagnetTrain_Ch4:
 	drum_note 8, 2
 	drum_note 8, 2
 	drum_note 8, 2
-	drum_note 9, 2
-	drum_note 8, 2
-	drum_note 8, 2
-	drum_note 8, 2
-	drum_note 9, 2
-	drum_note 8, 2
-	drum_note 8, 2
-	drum_note 8, 2
+	sound_ret
+
+Music_MagnetTrain_Shared4: ; (tools/musiccalls.py)
+	octave 2
+	note D_, 1
+	octave 3
+	note D_, 1
+	octave 2
+	note D_, 1
+	octave 3
+	note D_, 1
 	sound_ret

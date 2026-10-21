@@ -4,8 +4,6 @@ Music_Route1:
 	channel 2, Music_Route1_Ch2
 	channel 3, Music_Route1_Ch3
 
-	db $3 ; unused, leftover from a channel 4
-
 Music_Route1_Ch1:
 	stereo_panning FALSE, TRUE
 	tempo 184
@@ -13,17 +11,7 @@ Music_Route1_Ch1:
 	vibrato 22, 1, 1
 	duty_cycle 3
 	note_type 12, 8, 3
-	octave 4
-	note D_, 1
-	note E_, 1
-	note F#, 2
-	note F#, 2
-	note D_, 2
-	octave 3
-	note A_, 2
-	octave 4
-	note B_, 2
-	note A_, 2
+	sound_call Music_Route1_Shared2
 	note G_, 2
 	note F#, 2
 	note D_, 2
@@ -36,17 +24,7 @@ Music_Route1_Ch1:
 	note E_, 2
 	note G_, 1
 	note E_, 1
-	octave 4
-	note D_, 1
-	note E_, 1
-	note F#, 2
-	note F#, 2
-	note D_, 2
-	octave 3
-	note A_, 2
-	octave 4
-	note B_, 2
-	note A_, 2
+	sound_call Music_Route1_Shared2
 	note G_, 3
 	note E_, 1
 	note E_, 2
@@ -222,14 +200,7 @@ Music_Route1_Ch2:
 	sound_call .sub3
 	note C#, 2
 	note E_, 2
-	note D_, 2
-	volume_envelope 8, 1
-	note F#, 2
-	note F#, 2
-	volume_envelope 8, 2
-	octave 4
-	note D_, 1
-	note E_, 1
+	sound_call Music_Route1_Shared4
 	duty_cycle 2
 .mainloop:
 	volume_envelope 8, 2
@@ -281,11 +252,7 @@ Music_Route1_Ch2:
 	note A_, 2
 	octave 4
 	note B_, 4
-	note_type 8, 9, 2
-	note C#, 1
-	note D_, 1
-	note C#, 1
-	note_type 12, 9, 2
+	sound_call Music_Route1_Shared5
 	octave 3
 	note B_, 1
 	octave 4
@@ -304,23 +271,12 @@ Music_Route1_Ch2:
 	note F#, 1
 	note G_, 1
 	sound_call .sub3
-	note_type 8, 9, 2
-	note C#, 1
-	note D_, 1
-	note C#, 1
-	note_type 12, 9, 2
+	sound_call Music_Route1_Shared5
 	octave 4
 	note B_, 1
 	octave 5
 	note C#, 1
-	note D_, 2
-	volume_envelope 8, 1
-	note F#, 2
-	note F#, 2
-	volume_envelope 8, 2
-	octave 4
-	note D_, 1
-	note E_, 1
+	sound_call Music_Route1_Shared4
 	sound_loop 0, .mainloop
 
 .sub1:
@@ -342,14 +298,7 @@ Music_Route1_Ch2:
 	sound_ret
 
 .sub2:
-	note A_, 2
-	note A_, 2
-	note F#, 2
-	note D_, 2
-	octave 5
-	note D_, 2
-	note C#, 2
-	octave 4
+	sound_call Music_Route1_Shared7
 	note B_, 2
 	octave 5
 	note D_, 2
@@ -362,14 +311,7 @@ Music_Route1_Ch2:
 	sound_ret
 
 .sub3:
-	note A_, 2
-	note A_, 2
-	note F#, 2
-	note D_, 2
-	octave 5
-	note D_, 2
-	note C#, 2
-	octave 4
+	sound_call Music_Route1_Shared7
 	note B_, 3
 	note G_, 1
 	note A_, 2
@@ -468,44 +410,18 @@ Music_Route1_Ch3:
 	rest 1
 	octave 4
 	note C#, 2
-	octave 2
-	note B_, 1
-	rest 1
-	octave 3
-	note B_, 2
-	octave 2
-	note A_, 1
-	rest 1
-	octave 3
-	note A_, 2
+	sound_call Music_Route1_Shared1
 	note D_, 1
 	rest 1
 	octave 4
 	note D_, 2
-	octave 2
-	note A_, 1
-	rest 1
-	octave 3
-	note A_, 2
-	octave 2
-	note B_, 1
-	rest 1
-	octave 3
-	note B_, 2
-	octave 2
-	note A_, 1
-	rest 1
-	octave 3
-	note A_, 2
+	sound_call Music_Route1_Shared3
+	sound_call Music_Route1_Shared1
 	note C#, 1
 	rest 1
 	octave 4
 	note C#, 2
-	octave 2
-	note A_, 1
-	rest 1
-	octave 3
-	note A_, 2
+	sound_call Music_Route1_Shared3
 	octave 2
 	note B_, 1
 	rest 1
@@ -520,11 +436,7 @@ Music_Route1_Ch3:
 	rest 1
 	octave 4
 	note C#, 2
-	octave 2
-	note A_, 1
-	rest 1
-	octave 3
-	note A_, 2
+	sound_call Music_Route1_Shared3
 	octave 4
 	note D_, 2
 	note C#, 1
@@ -548,11 +460,7 @@ Music_Route1_Ch3:
 	rest 1
 	octave 3
 	note F#, 2
-	octave 2
-	note A_, 1
-	rest 1
-	octave 3
-	note A_, 2
+	sound_call Music_Route1_Shared3
 	octave 4
 	note D_, 2
 	octave 3
@@ -562,10 +470,7 @@ Music_Route1_Ch3:
 	note F#, 2
 	note E_, 2
 	octave 3
-	note E_, 1
-	rest 1
-	note E_, 1
-	rest 1
+	sound_call Music_Route1_Shared6
 	octave 4
 	note E_, 2
 	octave 3
@@ -573,16 +478,7 @@ Music_Route1_Ch3:
 	rest 1
 	octave 4
 	note C#, 2
-	octave 2
-	note B_, 1
-	rest 1
-	octave 3
-	note B_, 2
-	octave 2
-	note A_, 1
-	rest 1
-	octave 3
-	note A_, 2
+	sound_call Music_Route1_Shared1
 	octave 2
 	note G_, 1
 	rest 1
@@ -645,3 +541,71 @@ Music_Route1_Ch3:
 	note A_, 1
 	rest 3
 	sound_loop 0, .mainloop
+
+Music_Route1_Shared1: ; (tools/musiccalls.py)
+	octave 2
+	note B_, 1
+	rest 1
+	octave 3
+	note B_, 2
+	sound_call Music_Route1_Shared3
+	sound_ret
+
+Music_Route1_Shared2: ; (tools/musiccalls.py)
+	octave 4
+	note D_, 1
+	note E_, 1
+	note F#, 2
+	note F#, 2
+	note D_, 2
+	octave 3
+	note A_, 2
+	octave 4
+	note B_, 2
+	note A_, 2
+	sound_ret
+
+Music_Route1_Shared3: ; (tools/musiccalls.py)
+	octave 2
+	note A_, 1
+	rest 1
+	octave 3
+	note A_, 2
+	sound_ret
+
+Music_Route1_Shared4: ; (tools/musiccalls.py)
+	note D_, 2
+	volume_envelope 8, 1
+	note F#, 2
+	note F#, 2
+	volume_envelope 8, 2
+	octave 4
+	note D_, 1
+	note E_, 1
+	sound_ret
+
+Music_Route1_Shared5: ; (tools/musiccalls.py)
+	note_type 8, 9, 2
+	note C#, 1
+	note D_, 1
+	note C#, 1
+	note_type 12, 9, 2
+	sound_ret
+
+Music_Route1_Shared6: ; (tools/musiccalls.py)
+	note E_, 1
+	rest 1
+	note E_, 1
+	rest 1
+	sound_ret
+
+Music_Route1_Shared7: ; (tools/musiccalls.py)
+	note A_, 2
+	note A_, 2
+	note F#, 2
+	note D_, 2
+	octave 5
+	note D_, 2
+	note C#, 2
+	octave 4
+	sound_ret

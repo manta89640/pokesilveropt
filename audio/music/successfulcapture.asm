@@ -7,8 +7,7 @@ Music_SuccessfulCapture:
 Music_SuccessfulCapture_Ch1:
 	tempo 126
 	volume 7, 7
-	duty_cycle 3
-	pitch_offset 1
+	sound_call Music_WildPokemonVictory_Shared1
 	note_type 12, 10, 1
 	sound_jump Music_WildPokemonVictory_Ch1.body
 

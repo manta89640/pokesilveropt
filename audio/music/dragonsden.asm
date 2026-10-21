@@ -6,8 +6,7 @@ Music_DragonsDen:
 	channel 4, Music_DragonsDen_Ch4
 
 Music_DragonsDen_Ch1:
-	tempo 144
-	volume 7, 7
+	sound_call Music_ShowMeAround_Shared3
 	duty_cycle 0
 	pitch_offset 4
 	stereo_panning TRUE, FALSE
@@ -108,19 +107,11 @@ Music_DragonsDen_Ch3:
 	note_type 12, 1, 4
 	octave 4
 	note C#, 2
-	octave 3
-	note G#, 1
-	octave 4
-	note C#, 1
-	octave 3
+	sound_call Music_DragonsDen_Shared1
 	note G#, 2
 	octave 4
 	note C#, 2
-	octave 3
-	note G#, 1
-	octave 4
-	note C#, 1
-	octave 3
+	sound_call Music_DragonsDen_Shared1
 	note G#, 2
 	octave 4
 	note C#, 2
@@ -132,28 +123,13 @@ Music_DragonsDen_Ch3:
 	rest 16
 	note_type 6, 2, 7
 .loop2:
-	octave 3
-	note C#, 4
-	octave 2
-	note G#, 2
-	octave 3
-	note C#, 2
+	sound_call Music_DragonsDen_Shared2
 	octave 2
 	note G#, 4
-	octave 3
-	note C#, 4
-	octave 2
-	note G#, 2
-	octave 3
-	note C#, 2
+	sound_call Music_DragonsDen_Shared2
 	octave 2
 	note G#, 4
-	octave 3
-	note C#, 4
-	octave 2
-	note G#, 2
-	octave 3
-	note C#, 2
+	sound_call Music_DragonsDen_Shared2
 	sound_loop 16, .loop2
 	sound_loop 0, .mainloop
 
@@ -171,3 +147,20 @@ Music_DragonsDen_Ch4:
 	stereo_panning TRUE, FALSE
 	drum_note 7, 4
 	sound_loop 0, .mainloop
+
+Music_DragonsDen_Shared1: ; (tools/musiccalls.py)
+	octave 3
+	note G#, 1
+	octave 4
+	note C#, 1
+	octave 3
+	sound_ret
+
+Music_DragonsDen_Shared2: ; (tools/musiccalls.py)
+	octave 3
+	note C#, 4
+	octave 2
+	note G#, 2
+	octave 3
+	note C#, 2
+	sound_ret

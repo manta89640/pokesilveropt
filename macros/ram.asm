@@ -143,7 +143,7 @@ MACRO channel_struct
 \1Flags3::                   db ; 0:vibrato up/down 1:pitch slide direction
 \1MusicAddress::             dw
 \1LastMusicAddress::         dw
-                             ds 2
+\1LastMusicAddress2::        dw ; set when a subroutine calls another
 \1NoteFlags::                db ; 5:rest
 \1Condition::                db ; conditional jumps
 \1DutyCycle::                db ; bits 6-7 (0:12.5% 1:25% 2:50% 3:75%)

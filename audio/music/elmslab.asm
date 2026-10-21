@@ -6,11 +6,7 @@ Music_ElmsLab:
 	channel 4, Music_ElmsLab_Ch4
 
 Music_ElmsLab_Ch1:
-	tempo 144
-	volume 7, 7
-	duty_cycle 3
-	pitch_offset 1
-	vibrato 16, 1, 5
+	sound_call Music_Route36_Shared2
 	stereo_panning TRUE, FALSE
 	note_type 12, 11, 2
 	octave 2
@@ -159,24 +155,9 @@ Music_ElmsLab_Ch1:
 	note E_, 4
 	volume_envelope 11, 4
 	octave 3
-	note A_, 2
-	note F_, 2
-	octave 4
-	note C_, 2
-	octave 3
-	note F_, 2
-	note A_, 2
-	note F_, 2
-	octave 4
-	note C_, 2
-	octave 3
-	note F_, 2
-	note A_, 2
-	note F_, 2
-	octave 4
-	note C_, 2
-	octave 3
-	note F_, 2
+	sound_call Music_ElmsLab_Shared3
+	sound_call Music_ElmsLab_Shared3
+	sound_call Music_ElmsLab_Shared3
 	note A_, 2
 	volume_envelope 11, 2
 	note F_, 2
@@ -357,36 +338,14 @@ Music_ElmsLab_Ch3:
 	rest 14
 	octave 3
 	note C_, 2
-	note F_, 2
-	note A_, 2
-	note C_, 2
-	note A_, 2
-	note F_, 2
-	note A_, 2
-	note C_, 2
-	note A_, 2
-	note F_, 2
-	note A_, 2
-	note C_, 2
-	note A_, 2
-	note F_, 2
+	sound_call Music_ElmsLab_Shared1
+	sound_call Music_ElmsLab_Shared2
 	note C_, 2
 	note D_, 2
 	note E_, 2
 .mainloop:
-	note F_, 2
-	note A_, 2
-	note C_, 2
-	note A_, 2
-	note F_, 2
-	note A_, 2
-	note C_, 2
-	note A_, 2
-	note F_, 2
-	note A_, 2
-	note C_, 2
-	note A_, 2
-	note F_, 2
+	sound_call Music_ElmsLab_Shared1
+	sound_call Music_ElmsLab_Shared2
 	note A_, 2
 	note E_, 2
 	octave 4
@@ -402,11 +361,7 @@ Music_ElmsLab_Ch3:
 	note A_, 2
 	note D_, 2
 	note E_, 2
-	note F_, 2
-	note A_, 2
-	note C_, 2
-	note A_, 2
-	note F_, 2
+	sound_call Music_ElmsLab_Shared2
 	note C_, 2
 	note D_, 2
 	note E_, 2
@@ -453,14 +408,7 @@ Music_ElmsLab_Ch3:
 	octave 3
 	note A#, 4
 	note G_, 4
-	note F_, 2
-	note A_, 2
-	note C_, 2
-	note A_, 2
-	note F_, 2
-	note A_, 2
-	note C_, 2
-	note A_, 2
+	sound_call Music_ElmsLab_Shared1
 	note G_, 2
 	note A#, 2
 	note D_, 2
@@ -477,22 +425,11 @@ Music_ElmsLab_Ch3:
 	note G_, 2
 	note C_, 2
 	note G_, 2
-	note F_, 2
-	note A_, 2
-	note C_, 2
-	note A_, 2
-	note F_, 2
+	sound_call Music_ElmsLab_Shared2
 	note A_, 2
 	note G_, 2
 	note E_, 2
-	note F_, 2
-	note A_, 2
-	note C_, 2
-	note A_, 2
-	note F_, 2
-	note A_, 2
-	note C_, 2
-	note A_, 2
+	sound_call Music_ElmsLab_Shared1
 	note G_, 2
 	note A#, 2
 	note D_, 2
@@ -509,19 +446,8 @@ Music_ElmsLab_Ch3:
 	note F_, 4
 	note F#, 4
 	note G_, 4
-	note F_, 2
-	note A_, 2
-	note C_, 2
-	note A_, 2
-	note F_, 2
-	note A_, 2
-	note C_, 2
-	note A_, 2
-	note F_, 2
-	note A_, 2
-	note C_, 2
-	note A_, 2
-	note F_, 2
+	sound_call Music_ElmsLab_Shared1
+	sound_call Music_ElmsLab_Shared2
 	note C_, 2
 	note F_, 2
 	note A_, 2
@@ -536,3 +462,27 @@ Music_ElmsLab_Ch4:
 .mainloop:
 	drum_note 8, 4
 	sound_loop 0, .mainloop
+
+Music_ElmsLab_Shared1: ; (tools/musiccalls.py)
+	sound_call Music_ElmsLab_Shared2
+	note A_, 2
+	note C_, 2
+	note A_, 2
+	sound_ret
+
+Music_ElmsLab_Shared2: ; (tools/musiccalls.py)
+	note F_, 2
+	note A_, 2
+	note C_, 2
+	note A_, 2
+	note F_, 2
+	sound_ret
+
+Music_ElmsLab_Shared3: ; (tools/musiccalls.py)
+	note A_, 2
+	note F_, 2
+	octave 4
+	note C_, 2
+	octave 3
+	note F_, 2
+	sound_ret

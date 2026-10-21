@@ -7,10 +7,8 @@ Music_VictoryRoad:
 
 Music_VictoryRoad_Ch1:
 	tempo 144
-	volume 7, 7
-	stereo_panning FALSE, TRUE
-	duty_cycle 3
-	pitch_offset 2
+	sound_call Music_ViridianCity_Shared5
+	sound_call Music_TinTower_Shared2
 	note_type 12, 11, 3
 .mainloop:
 .loop1:
@@ -75,20 +73,10 @@ Music_VictoryRoad_Ch2:
 	rest 1
 	octave 4
 	note C_, 1
-	note_type 12, 11, 0
-	note E_, 8
-	octave 5
-	note C_, 4
-	octave 4
-	note B_, 4
+	sound_call Music_VictoryRoad_Shared1
 	note E_, 15
 	note D#, 1
-	note_type 12, 11, 0
-	note E_, 8
-	octave 5
-	note C_, 4
-	octave 4
-	note B_, 4
+	sound_call Music_VictoryRoad_Shared1
 	note_type 12, 11, 0
 	octave 5
 	note E_, 8
@@ -198,3 +186,12 @@ Music_VictoryRoad_Ch4:
 	drum_note 3, 2
 	drum_note 4, 1
 	sound_loop 0, .mainloop
+
+Music_VictoryRoad_Shared1: ; (tools/musiccalls.py)
+	note_type 12, 11, 0
+	note E_, 8
+	octave 5
+	note C_, 4
+	octave 4
+	note B_, 4
+	sound_ret

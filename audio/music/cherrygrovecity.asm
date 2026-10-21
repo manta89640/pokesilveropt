@@ -8,8 +8,7 @@ Music_CherrygroveCity:
 Music_CherrygroveCity_Ch1:
 	tempo 152
 	volume 7, 7
-	duty_cycle 3
-	pitch_offset 1
+	sound_call Music_WildPokemonVictory_Shared1
 	vibrato 8, 1, 5
 	stereo_panning TRUE, FALSE
 	note_type 12, 11, 5
@@ -177,102 +176,39 @@ Music_CherrygroveCity_Ch3:
 	note_type 12, 1, 6
 	rest 4
 	octave 4
-	note C_, 2
-	octave 3
-	note A#, 2
-	note A_, 2
-	note G_, 2
+	sound_call Music_CherrygroveCity_Shared2
 	note F_, 2
 	note E_, 2
 .mainloop:
 	note A_, 2
 	note F_, 2
 	note A_, 2
-	octave 4
-	note C_, 4
-	octave 3
-	note F_, 2
-	note G_, 2
-	note A_, 2
+	sound_call Music_CherrygroveCity_Shared3
 	note A_, 2
 	note F_, 2
 	note A_, 2
-	octave 4
-	note C_, 4
-	octave 3
-	note F_, 2
-	note G_, 2
-	note A_, 2
+	sound_call Music_CherrygroveCity_Shared3
 	note A#, 2
 	note G_, 2
 	note A#, 2
-	octave 4
-	note C_, 4
-	octave 3
-	note F_, 2
-	note G_, 2
-	note A_, 2
+	sound_call Music_CherrygroveCity_Shared3
 	note A#, 4
 	octave 4
-	note C_, 2
-	octave 3
-	note A#, 2
-	note A_, 2
-	note G_, 2
+	sound_call Music_CherrygroveCity_Shared2
 	note F_, 2
 	note E_, 2
+	sound_call Music_CherrygroveCity_Shared1
 	note D_, 2
-	note F_, 4
-	note A#, 2
-	note F_, 2
-	note A#, 2
-	note A_, 2
-	note G_, 2
-	note F_, 2
-	note A_, 4
-	note F_, 2
-	note A_, 2
-	note F_, 2
-	note E_, 2
-	note D#, 2
-	note D_, 2
-	note F_, 4
-	note A#, 2
-	note F_, 2
-	note A#, 2
-	note A_, 2
-	note G_, 2
+	sound_call Music_CherrygroveCity_Shared4
 	note E_, 2
 	note G_, 2
 	note A#, 2
 	octave 4
-	note C_, 2
-	octave 3
-	note A#, 2
-	note A_, 2
-	note G_, 2
+	sound_call Music_CherrygroveCity_Shared2
 	note F_, 2
-	note D_, 2
-	note F_, 4
-	note A#, 2
-	note F_, 2
-	note A#, 2
-	note A_, 2
-	note G_, 2
-	note F_, 2
-	note A_, 4
-	note F_, 2
-	note A_, 2
-	note F_, 2
-	note E_, 2
-	note D#, 2
+	sound_call Music_CherrygroveCity_Shared1
 	note C#, 2
-	note F_, 4
-	note A#, 2
-	note F_, 2
-	note A#, 2
-	note A_, 2
-	note G_, 2
+	sound_call Music_CherrygroveCity_Shared4
 	note F_, 2
 	note A_, 2
 	note F_, 2
@@ -284,8 +220,7 @@ Music_CherrygroveCity_Ch3:
 	sound_loop 0, .mainloop
 
 Music_CherrygroveCity_Ch4:
-	toggle_noise 3
-	drum_speed 12
+	sound_call Music_ViridianCity_Shared3
 	rest 16
 .mainloop:
 	drum_note 2, 2
@@ -304,3 +239,41 @@ Music_CherrygroveCity_Ch4:
 	drum_note 2, 2
 	drum_note 8, 2
 	sound_loop 0, .mainloop
+
+Music_CherrygroveCity_Shared1: ; (tools/musiccalls.py)
+	note D_, 2
+	sound_call Music_CherrygroveCity_Shared4
+	note F_, 2
+	note A_, 4
+	note F_, 2
+	note A_, 2
+	note F_, 2
+	note E_, 2
+	note D#, 2
+	sound_ret
+
+Music_CherrygroveCity_Shared2: ; (tools/musiccalls.py)
+	note C_, 2
+	octave 3
+	note A#, 2
+	note A_, 2
+	note G_, 2
+	sound_ret
+
+Music_CherrygroveCity_Shared3: ; (tools/musiccalls.py)
+	octave 4
+	note C_, 4
+	octave 3
+	note F_, 2
+	note G_, 2
+	note A_, 2
+	sound_ret
+
+Music_CherrygroveCity_Shared4: ; (tools/musiccalls.py)
+	note F_, 4
+	note A#, 2
+	note F_, 2
+	note A#, 2
+	note A_, 2
+	note G_, 2
+	sound_ret

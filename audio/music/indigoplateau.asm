@@ -8,8 +8,7 @@ Music_IndigoPlateau:
 Music_IndigoPlateau_Ch1:
 	tempo 128
 	volume 7, 7
-	duty_cycle 3
-	pitch_offset 2
+	sound_call Music_KantoGymBattle_Shared7
 	stereo_panning FALSE, TRUE
 .mainloop:
 	sound_call .sub1

@@ -6,9 +6,7 @@ Music_LakeOfRage:
 	channel 4, Music_LakeOfRage_Ch4
 
 Music_LakeOfRage_Ch1:
-	tempo 144
-	volume 7, 7
-	duty_cycle 3
+	sound_call Music_Lighthouse_Shared1
 	pitch_offset 2
 	vibrato 8, 2, 2
 	stereo_panning TRUE, FALSE
@@ -198,15 +196,7 @@ Music_LakeOfRage_Ch3:
 	note E_, 4
 .mainloop:
 	octave 3
-	note D_, 4
-	octave 2
-	note A_, 2
-	octave 3
-	note D_, 4
-	octave 2
-	note A_, 2
-	octave 3
-	note D_, 2
+	sound_call Music_LakeOfRage_Shared2
 	note E_, 2
 	note F_, 4
 	note C_, 2
@@ -243,19 +233,7 @@ Music_LakeOfRage_Ch3:
 	note E_, 4
 	note C_, 2
 	note E_, 2
-	note C_, 2
-	note G_, 4
-	note C_, 2
-	note G_, 4
-	note C_, 2
-	note G_, 2
-	note C_, 2
-	note F#, 4
-	note D_, 2
-	note F#, 4
-	note D_, 2
-	note F#, 2
-	note D_, 2
+	sound_call Music_LakeOfRage_Shared1
 	note A_, 2
 	note D_, 2
 	note F#, 2
@@ -270,36 +248,15 @@ Music_LakeOfRage_Ch3:
 	note G_, 4
 	note C_, 2
 	note G_, 2
-	note C_, 2
-	note G_, 4
-	note C_, 2
-	note G_, 4
-	note C_, 2
-	note G_, 2
-	note C_, 2
-	note F#, 4
-	note D_, 2
-	note F#, 4
-	note D_, 2
-	note F#, 2
-	note D_, 2
-	note D_, 4
-	octave 2
-	note A_, 2
-	octave 3
-	note D_, 4
-	octave 2
-	note A_, 2
-	octave 3
-	note D_, 2
+	sound_call Music_LakeOfRage_Shared1
+	sound_call Music_LakeOfRage_Shared2
 	octave 2
 	note A_, 2
 	sound_loop 0, .mainloop
 
 Music_LakeOfRage_Ch4:
 	stereo_panning TRUE, FALSE
-	toggle_noise 3
-	drum_speed 12
+	sound_call Music_PokemonCenter_Shared6
 .mainloop:
 	drum_note 3, 2
 	drum_note 3, 1
@@ -321,3 +278,31 @@ Music_LakeOfRage_Ch4:
 	drum_note 3, 1
 	drum_note 3, 1
 	sound_loop 0, .mainloop
+
+Music_LakeOfRage_Shared1: ; (tools/musiccalls.py)
+	note C_, 2
+	note G_, 4
+	note C_, 2
+	note G_, 4
+	note C_, 2
+	note G_, 2
+	note C_, 2
+	note F#, 4
+	note D_, 2
+	note F#, 4
+	note D_, 2
+	note F#, 2
+	note D_, 2
+	sound_ret
+
+Music_LakeOfRage_Shared2: ; (tools/musiccalls.py)
+	note D_, 4
+	octave 2
+	note A_, 2
+	octave 3
+	note D_, 4
+	octave 2
+	note A_, 2
+	octave 3
+	note D_, 2
+	sound_ret

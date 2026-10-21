@@ -4,8 +4,6 @@ Music_DancingHall:
 	channel 2, Music_DancingHall_Ch2
 	channel 3, Music_DancingHall_Ch3
 
-	db $3 ; unused, leftover from a channel 4
-
 Music_DancingHall_Ch1:
 	tempo 208
 	volume 7, 7
@@ -230,27 +228,13 @@ Music_DancingHall_Ch3:
 	octave 6
 	note D_, 1
 .mainloop:
-	note E_, 13
-	note D_, 1
-	note E_, 1
-	note A_, 1
-	note B_, 16
-	volume_envelope 1, 4
-	octave 3
-	note F_, 16
+	sound_call Music_DancingHall_Shared1
 	note E_, 14
 	volume_envelope 1, 0
 	octave 6
 	note E_, 1
 	note F_, 1
-	note E_, 13
-	note D_, 1
-	note E_, 1
-	note A_, 1
-	note B_, 16
-	volume_envelope 1, 4
-	octave 3
-	note F_, 16
+	sound_call Music_DancingHall_Shared1
 	note E_, 16
 	volume_envelope 1, 3
 	octave 4
@@ -304,3 +288,14 @@ Music_DancingHall_Ch3:
 	octave 6
 	note D_, 1
 	sound_loop 0, .mainloop
+
+Music_DancingHall_Shared1: ; (tools/musiccalls.py)
+	note E_, 13
+	note D_, 1
+	note E_, 1
+	note A_, 1
+	note B_, 16
+	volume_envelope 1, 4
+	octave 3
+	note F_, 16
+	sound_ret

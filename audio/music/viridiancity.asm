@@ -7,8 +7,7 @@ Music_ViridianCity:
 
 Music_ViridianCity_Ch1:
 	tempo 157
-	volume 7, 7
-	stereo_panning FALSE, TRUE
+	sound_call Music_ViridianCity_Shared5
 	duty_cycle 2
 	vibrato 18, 3, 4
 	note_type 12, 10, 7
@@ -32,15 +31,7 @@ Music_ViridianCity_Ch1:
 	note F#, 1
 	rest 1
 	note F#, 1
-	rest 3
-	note F#, 2
-	rest 4
-	note F#, 2
-	rest 2
-	note G_, 1
-	rest 1
-	rest 4
-	note G_, 8
+	sound_call Music_ViridianCity_Shared6
 	rest 4
 .mainloop:
 	sound_call .sub1
@@ -55,14 +46,7 @@ Music_ViridianCity_Ch1:
 	note D_, 2
 	octave 3
 	note B_, 2
-	note F#, 2
-	note E_, 2
-	note F#, 1
-	rest 1
-	note A_, 1
-	rest 3
-	note F#, 2
-	note A_, 1
+	sound_call Music_ViridianCity_Shared9
 	rest 1
 	octave 4
 	note C#, 1
@@ -109,10 +93,7 @@ Music_ViridianCity_Ch1:
 	rest 2
 	note F#, 2
 	note A_, 1
-	rest 1
-	octave 4
-	note C_, 1
-	rest 1
+	sound_call Music_ViridianCity_Shared1
 	note D#, 2
 	note C_, 2
 	octave 3
@@ -125,18 +106,8 @@ Music_ViridianCity_Ch1:
 	note D_, 2
 	note G_, 2
 	octave 3
-	note F#, 2
-	note E_, 2
-	note F#, 1
-	rest 1
-	note A_, 1
-	rest 3
-	note F#, 2
-	note A_, 1
-	rest 1
-	octave 4
-	note C_, 1
-	rest 1
+	sound_call Music_ViridianCity_Shared9
+	sound_call Music_ViridianCity_Shared1
 	rest 2
 	note E_, 2
 	rest 2
@@ -173,12 +144,7 @@ Music_ViridianCity_Ch1:
 
 .sub1:
 	octave 3
-	note A_, 1
-	rest 3
-	note A_, 2
-	rest 4
-	note A_, 2
-	rest 2
+	sound_call Music_ViridianCity_Shared7
 	note A_, 1
 	rest 1
 	octave 4
@@ -191,10 +157,7 @@ Music_ViridianCity_Ch1:
 	note C_, 2
 	octave 3
 	note A_, 1
-	rest 1
-	octave 4
-	note C_, 1
-	rest 1
+	sound_call Music_ViridianCity_Shared1
 	octave 3
 	note B_, 1
 	rest 3
@@ -236,15 +199,7 @@ Music_ViridianCity_Ch1:
 	rest 1
 	octave 3
 	note A_, 1
-	rest 3
-	note F#, 2
-	rest 4
-	note F#, 2
-	rest 2
-	note G_, 1
-	rest 1
-	rest 4
-	note G_, 8
+	sound_call Music_ViridianCity_Shared6
 	sound_ret
 
 .sub2:
@@ -277,11 +232,7 @@ Music_ViridianCity_Ch2:
 	note_type 12, 11, 7
 	stereo_panning TRUE, FALSE
 	octave 2
-	note D_, 4
-	rest 2
-	note A_, 1
-	rest 1
-	note A_, 4
+	sound_call Music_ViridianCity_Shared2
 	rest 4
 	note D_, 4
 	rest 2
@@ -294,11 +245,7 @@ Music_ViridianCity_Ch2:
 	octave 2
 	note A_, 1
 	rest 1
-	note D_, 4
-	rest 2
-	note A_, 1
-	rest 1
-	note A_, 4
+	sound_call Music_ViridianCity_Shared2
 	rest 2
 	note E_, 1
 	rest 1
@@ -341,11 +288,7 @@ Music_ViridianCity_Ch2:
 	note E_, 2
 	note B_, 2
 	note G_, 4
-	note D_, 4
-	rest 2
-	note A_, 1
-	rest 1
-	note A_, 4
+	sound_call Music_ViridianCity_Shared2
 	note C_, 2
 	note C#, 2
 	rest 2
@@ -389,11 +332,7 @@ Music_ViridianCity_Ch2:
 	rest 2
 	note G_, 1
 	rest 1
-	note D_, 4
-	rest 2
-	note A_, 1
-	rest 1
-	note A_, 4
+	sound_call Music_ViridianCity_Shared2
 	rest 2
 	note D_, 1
 	rest 1
@@ -406,11 +345,7 @@ Music_ViridianCity_Ch2:
 
 .sub1:
 	octave 2
-	note D_, 4
-	rest 2
-	note A_, 1
-	rest 1
-	note A_, 4
+	sound_call Music_ViridianCity_Shared2
 	rest 4
 	note D#, 4
 	rest 2
@@ -459,11 +394,7 @@ Music_ViridianCity_Ch2:
 	note E_, 1
 	rest 1
 	octave 2
-	note D_, 4
-	rest 2
-	note A_, 1
-	rest 1
-	note A_, 4
+	sound_call Music_ViridianCity_Shared2
 	rest 2
 	note E_, 1
 	rest 1
@@ -511,12 +442,7 @@ Music_ViridianCity_Ch3:
 	note_type 12, 1, 3
 	stereo_panning TRUE, TRUE
 	octave 4
-	note A_, 1
-	rest 3
-	note A_, 2
-	rest 4
-	note A_, 2
-	rest 2
+	sound_call Music_ViridianCity_Shared7
 	note A_, 1
 	rest 1
 	note A_, 4
@@ -529,12 +455,7 @@ Music_ViridianCity_Ch3:
 	octave 4
 	note A_, 1
 	rest 1
-	note A_, 1
-	rest 3
-	note A_, 2
-	rest 4
-	note A_, 2
-	rest 2
+	sound_call Music_ViridianCity_Shared7
 	octave 5
 	note D_, 1
 	rest 1
@@ -689,8 +610,7 @@ Music_ViridianCity_Ch3:
 	sound_ret
 
 Music_ViridianCity_Ch4:
-	toggle_noise 3
-	drum_speed 12
+	sound_call Music_ViridianCity_Shared3
 	sound_call .sub1
 	sound_call .sub2
 .mainloop:
@@ -713,15 +633,7 @@ Music_ViridianCity_Ch4:
 	sound_loop 0, .mainloop
 
 .sub1:
-	drum_note 5, 2
-	drum_note 5, 2
-	drum_note 3, 2
-	drum_note 5, 4
-	drum_note 3, 2
-	drum_note 5, 2
-	drum_note 7, 2
-	drum_note 5, 2
-	drum_note 5, 2
+	sound_call Music_ViridianCity_Shared8
 	drum_note 3, 4
 	drum_note 5, 2
 	drum_note 3, 2
@@ -730,6 +642,90 @@ Music_ViridianCity_Ch4:
 	sound_ret
 
 .sub2:
+	sound_call Music_ViridianCity_Shared8
+	drum_note 7, 4
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_note 11, 2
+	drum_note 11, 2
+	sound_ret
+
+.sub3:
+	sound_call Music_ViridianCity_Shared4
+	drum_note 7, 2
+	drum_note 3, 2
+	drum_note 4, 2
+	sound_ret
+
+.sub4:
+	sound_call Music_ViridianCity_Shared4
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_note 7, 2
+	sound_ret
+
+Music_ViridianCity_Shared1: ; (tools/musiccalls.py)
+	rest 1
+	octave 4
+	note C_, 1
+	rest 1
+	sound_ret
+
+Music_ViridianCity_Shared2: ; (tools/musiccalls.py)
+	note D_, 4
+	rest 2
+	note A_, 1
+	rest 1
+	note A_, 4
+	sound_ret
+
+Music_ViridianCity_Shared3: ; (tools/musiccalls.py)
+	toggle_noise 3
+	drum_speed 12
+	sound_ret
+
+Music_ViridianCity_Shared4: ; (tools/musiccalls.py)
+	drum_note 4, 2
+	drum_note 7, 2
+	drum_note 3, 2
+	drum_note 4, 2
+	drum_note 4, 2
+	drum_note 7, 2
+	drum_note 3, 4
+	drum_note 4, 2
+	drum_note 7, 2
+	drum_note 3, 2
+	drum_note 4, 2
+	drum_note 4, 2
+	sound_ret
+
+Music_ViridianCity_Shared5: ; (tools/musiccalls.py)
+	volume 7, 7
+	stereo_panning FALSE, TRUE
+	sound_ret
+
+Music_ViridianCity_Shared6: ; (tools/musiccalls.py)
+	rest 3
+	note F#, 2
+	rest 4
+	note F#, 2
+	rest 2
+	note G_, 1
+	rest 1
+	rest 4
+	note G_, 8
+	sound_ret
+
+Music_ViridianCity_Shared7: ; (tools/musiccalls.py)
+	note A_, 1
+	rest 3
+	note A_, 2
+	rest 4
+	note A_, 2
+	rest 2
+	sound_ret
+
+Music_ViridianCity_Shared8: ; (tools/musiccalls.py)
 	drum_note 5, 2
 	drum_note 5, 2
 	drum_note 3, 2
@@ -739,45 +735,15 @@ Music_ViridianCity_Ch4:
 	drum_note 7, 2
 	drum_note 5, 2
 	drum_note 5, 2
-	drum_note 7, 4
-	drum_note 3, 2
-	drum_note 3, 2
-	drum_note 11, 2
-	drum_note 11, 2
 	sound_ret
 
-.sub3:
-	drum_note 4, 2
-	drum_note 7, 2
-	drum_note 3, 2
-	drum_note 4, 2
-	drum_note 4, 2
-	drum_note 7, 2
-	drum_note 3, 4
-	drum_note 4, 2
-	drum_note 7, 2
-	drum_note 3, 2
-	drum_note 4, 2
-	drum_note 4, 2
-	drum_note 7, 2
-	drum_note 3, 2
-	drum_note 4, 2
-	sound_ret
-
-.sub4:
-	drum_note 4, 2
-	drum_note 7, 2
-	drum_note 3, 2
-	drum_note 4, 2
-	drum_note 4, 2
-	drum_note 7, 2
-	drum_note 3, 4
-	drum_note 4, 2
-	drum_note 7, 2
-	drum_note 3, 2
-	drum_note 4, 2
-	drum_note 4, 2
-	drum_note 3, 2
-	drum_note 3, 2
-	drum_note 7, 2
+Music_ViridianCity_Shared9: ; (tools/musiccalls.py)
+	note F#, 2
+	note E_, 2
+	note F#, 1
+	rest 1
+	note A_, 1
+	rest 3
+	note F#, 2
+	note A_, 1
 	sound_ret

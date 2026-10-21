@@ -14,14 +14,7 @@ Music_LookSage_Ch1:
 	sound_call .sub1
 	volume_envelope 11, 3
 	octave 3
-	note D_, 2
-	volume_envelope 9, 3
-	note D_, 2
-	volume_envelope 11, 3
-	note E_, 2
-	volume_envelope 9, 3
-	note E_, 2
-	volume_envelope 11, 3
+	sound_call Music_LookSage_Shared2
 	note A_, 2
 	volume_envelope 9, 3
 	note A_, 2
@@ -30,75 +23,21 @@ Music_LookSage_Ch1:
 	volume_envelope 9, 3
 	note F_, 2
 .mainloop:
-	volume_envelope 11, 3
-	note D_, 2
-	volume_envelope 9, 3
-	note D_, 2
-	volume_envelope 11, 3
-	octave 2
-	note B_, 2
-	volume_envelope 9, 3
-	note B_, 2
-	volume_envelope 11, 3
-	note A_, 2
-	volume_envelope 9, 3
-	note A_, 2
-	volume_envelope 11, 3
-	note B_, 2
-	volume_envelope 9, 3
-	note B_, 2
+	sound_call Music_LookSage_Shared1
 	volume_envelope 11, 3
 	octave 3
-	note D_, 2
-	volume_envelope 9, 3
-	note D_, 2
-	volume_envelope 11, 3
-	octave 2
-	note B_, 2
-	volume_envelope 9, 3
-	note B_, 2
-	volume_envelope 11, 3
+	sound_call Music_LookSage_Shared3
 	octave 3
-	note D_, 2
-	volume_envelope 9, 3
-	note D_, 2
-	volume_envelope 11, 3
-	note E_, 2
-	volume_envelope 9, 3
-	note E_, 2
-	volume_envelope 11, 3
+	sound_call Music_LookSage_Shared2
 	note F_, 2
 	volume_envelope 9, 3
 	note F_, 2
 	volume_envelope 11, 3
-	note D_, 2
-	volume_envelope 9, 3
-	note D_, 2
-	volume_envelope 11, 3
-	note E_, 2
-	volume_envelope 9, 3
-	note E_, 2
-	volume_envelope 11, 3
+	sound_call Music_LookSage_Shared2
 	note A_, 2
 	volume_envelope 9, 3
 	note A_, 2
-	volume_envelope 11, 3
-	note D_, 2
-	volume_envelope 9, 3
-	note D_, 2
-	volume_envelope 11, 3
-	octave 2
-	note B_, 2
-	volume_envelope 9, 3
-	note B_, 2
-	volume_envelope 11, 3
-	note A_, 2
-	volume_envelope 9, 3
-	note A_, 2
-	volume_envelope 11, 3
-	note B_, 2
-	volume_envelope 9, 3
-	note B_, 2
+	sound_call Music_LookSage_Shared1
 	sound_call .sub1
 	sound_loop 0, .mainloop
 
@@ -109,13 +48,7 @@ Music_LookSage_Ch1:
 	volume_envelope 9, 3
 	note E_, 2
 	volume_envelope 11, 3
-	note A_, 2
-	volume_envelope 9, 3
-	note A_, 2
-	volume_envelope 11, 3
-	note B_, 2
-	volume_envelope 9, 3
-	note B_, 2
+	sound_call Music_LookSage_Shared4
 	volume_envelope 11, 3
 	note A_, 2
 	volume_envelope 9, 3
@@ -177,3 +110,42 @@ Music_LookSage_Ch3:
 	note G_, 1
 	note G#, 1
 	sound_loop 0, .mainloop
+
+Music_LookSage_Shared1: ; (tools/musiccalls.py)
+	volume_envelope 11, 3
+	sound_call Music_LookSage_Shared3
+	sound_call Music_LookSage_Shared4
+	sound_ret
+
+Music_LookSage_Shared2: ; (tools/musiccalls.py)
+	note D_, 2
+	volume_envelope 9, 3
+	note D_, 2
+	volume_envelope 11, 3
+	note E_, 2
+	volume_envelope 9, 3
+	note E_, 2
+	volume_envelope 11, 3
+	sound_ret
+
+Music_LookSage_Shared3: ; (tools/musiccalls.py)
+	note D_, 2
+	volume_envelope 9, 3
+	note D_, 2
+	volume_envelope 11, 3
+	octave 2
+	note B_, 2
+	volume_envelope 9, 3
+	note B_, 2
+	volume_envelope 11, 3
+	sound_ret
+
+Music_LookSage_Shared4: ; (tools/musiccalls.py)
+	note A_, 2
+	volume_envelope 9, 3
+	note A_, 2
+	volume_envelope 11, 3
+	note B_, 2
+	volume_envelope 9, 3
+	note B_, 2
+	sound_ret

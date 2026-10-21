@@ -8,8 +8,7 @@ Music_PokeFluteChannel_Ch1:
 	tempo 240
 	volume 7, 7
 	stereo_panning TRUE, FALSE
-	duty_cycle 3
-	pitch_offset 2
+	sound_call Music_TinTower_Shared2
 	note_type 12, 11, 4
 	rest 4
 	octave 3
@@ -20,11 +19,7 @@ Music_PokeFluteChannel_Ch1:
 	note E_, 2
 	note D_, 2
 	note C_, 2
-	octave 4
-	note C_, 2
-	octave 3
-	note B_, 2
-	note A_, 2
+	sound_call Music_Gym_Shared3
 	note B_, 16
 	rest 2
 	octave 2
@@ -71,8 +66,7 @@ Music_PokeFluteChannel_Ch1:
 
 Music_PokeFluteChannel_Ch2:
 	stereo_panning FALSE, TRUE
-	duty_cycle 3
-	pitch_offset 1
+	sound_call Music_WildPokemonVictory_Shared1
 	note_type 12, 12, 4
 	rest 4
 	octave 3
@@ -96,16 +90,7 @@ Music_PokeFluteChannel_Ch2:
 	note E_, 2
 	note D_, 2
 	octave 2
-	note E_, 2
-	octave 3
-	note C_, 2
-	octave 2
-	note F_, 2
-	octave 3
-	note C_, 2
-	octave 2
-	note E_, 2
-	note G_, 2
+	sound_call Music_PokeFluteChannel_Shared1
 .mainloop:
 	octave 3
 	note C_, 2
@@ -158,16 +143,7 @@ Music_PokeFluteChannel_Ch2:
 	octave 2
 	note G_, 2
 	note B_, 2
-	note E_, 2
-	octave 3
-	note C_, 2
-	octave 2
-	note F_, 2
-	octave 3
-	note C_, 2
-	octave 2
-	note E_, 2
-	note G_, 2
+	sound_call Music_PokeFluteChannel_Shared1
 	sound_loop 0, .mainloop
 
 Music_PokeFluteChannel_Ch3:
@@ -225,4 +201,17 @@ Music_PokeFluteChannel_Ch3:
 	note A_, 2
 	note F_, 2
 	note G_, 4
+	sound_ret
+
+Music_PokeFluteChannel_Shared1: ; (tools/musiccalls.py)
+	note E_, 2
+	octave 3
+	note C_, 2
+	octave 2
+	note F_, 2
+	octave 3
+	note C_, 2
+	octave 2
+	note E_, 2
+	note G_, 2
 	sound_ret

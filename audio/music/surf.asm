@@ -4,8 +4,6 @@ Music_Surf:
 	channel 2, Music_Surf_Ch2
 	channel 3, Music_Surf_Ch3
 
-	db $3 ; unused, leftover from a channel 4
-
 Music_Surf_Ch1:
 	tempo 108
 	volume 7, 7
@@ -17,23 +15,9 @@ Music_Surf_Ch1:
 	volume_envelope 7, 3
 	octave 3
 	note F_, 1
-	rest 1
-	note D#, 1
-	rest 1
-	volume_envelope 7, 3
-	note F_, 1
-	rest 1
-	note D#, 1
-	rest 1
+	sound_call Music_Surf_Shared3
 	note G#, 1
-	rest 1
-	note D#, 1
-	rest 1
-	volume_envelope 7, 3
-	note F_, 1
-	rest 1
-	note D#, 1
-	rest 1
+	sound_call Music_Surf_Shared3
 	note F_, 1
 	rest 1
 	note D#, 1
@@ -122,84 +106,32 @@ Music_Surf_Ch1:
 
 .sub1:
 	note_type 12, 10, 7
-	octave 3
-	note D#, 4
-	note A#, 1
-	rest 1
-	octave 4
-	note D#, 1
-	rest 1
-	octave 3
-	note A#, 1
-	rest 1
-	octave 4
-	note D#, 1
-	rest 1
-	octave 3
-	note D#, 4
-	note A#, 1
-	rest 1
-	octave 4
-	note D#, 1
-	rest 1
-	octave 3
-	note A#, 1
-	rest 1
-	octave 4
-	note D#, 1
-	rest 1
+	sound_call Music_Surf_Shared2
+	sound_call Music_Surf_Shared2
 	octave 3
 	note C#, 4
 	note A#, 1
-	rest 1
-	octave 4
-	note C#, 1
-	rest 1
-	octave 3
+	sound_call Music_Surf_Shared1
 	note A#, 1
-	rest 1
-	octave 4
-	note C#, 1
-	rest 1
-	octave 3
+	sound_call Music_Surf_Shared1
 	note C#, 4
 	note A#, 1
-	rest 1
-	octave 4
-	note C#, 1
-	rest 1
-	octave 3
+	sound_call Music_Surf_Shared1
 	note A#, 1
-	rest 1
-	octave 4
-	note C#, 1
-	rest 1
+	sound_call Music_Surf_Shared1
+	note C_, 4
+	note G#, 1
+	sound_call Music_ViridianCity_Shared1
+	octave 3
+	note G#, 1
+	sound_call Music_ViridianCity_Shared1
 	octave 3
 	note C_, 4
 	note G#, 1
-	rest 1
-	octave 4
-	note C_, 1
-	rest 1
+	sound_call Music_ViridianCity_Shared1
 	octave 3
 	note G#, 1
-	rest 1
-	octave 4
-	note C_, 1
-	rest 1
-	octave 3
-	note C_, 4
-	note G#, 1
-	rest 1
-	octave 4
-	note C_, 1
-	rest 1
-	octave 3
-	note G#, 1
-	rest 1
-	octave 4
-	note C_, 1
-	rest 1
+	sound_call Music_ViridianCity_Shared1
 	note_type 6, 10, 7
 	octave 3
 	note A#, 1
@@ -288,11 +220,7 @@ Music_Surf_Ch1:
 	octave 4
 	note D#, 9
 	note_type 6, 5, 8
-	note D_, 1
-	note C#, 1
-	note C_, 1
-	octave 3
-	note B_, 1
+	sound_call Music_Surf_Shared4
 	note A#, 1
 	note A_, 1
 	note G#, 1
@@ -319,11 +247,7 @@ Music_Surf_Ch1:
 	note F_, 12
 	volume_envelope 5, 8
 	note D#, 1
-	note D_, 1
-	note C#, 1
-	note C_, 1
-	octave 3
-	note B_, 1
+	sound_call Music_Surf_Shared4
 	note A#, 1
 	note A_, 1
 	note G_, 1
@@ -494,11 +418,7 @@ Music_Surf_Ch2:
 	note F_, 1
 	note E_, 1
 	note D#, 1
-	note D_, 1
-	note C#, 1
-	note C_, 1
-	octave 3
-	note B_, 1
+	sound_call Music_Surf_Shared4
 	note A_, 1
 	sound_ret
 
@@ -613,14 +533,7 @@ Music_Surf_Ch3:
 	note D_, 4
 	note D#, 4
 	note_type 6, 1, 3
-	note D_, 1
-	note D#, 15
-	note D_, 4
-	note C_, 4
-	octave 5
-	note D_, 16
-	octave 6
-	note D_, 8
+	sound_call Music_Surf_Shared5
 	note_type 12, 1, 3
 	octave 5
 	note A#, 12
@@ -641,14 +554,7 @@ Music_Surf_Ch3:
 	note D_, 4
 	note D#, 4
 	note_type 6, 1, 4
-	note D_, 1
-	note D#, 15
-	note D_, 4
-	note C_, 4
-	octave 5
-	note D_, 16
-	octave 6
-	note D_, 8
+	sound_call Music_Surf_Shared5
 	note_type 12, 1, 4
 	octave 5
 	note A#, 12
@@ -720,4 +626,58 @@ Music_Surf_Ch3:
 	rest 3
 	note G#, 1
 	rest 3
+	sound_ret
+
+Music_Surf_Shared1: ; (tools/musiccalls.py)
+	rest 1
+	octave 4
+	note C#, 1
+	rest 1
+	octave 3
+	sound_ret
+
+Music_Surf_Shared2: ; (tools/musiccalls.py)
+	octave 3
+	note D#, 4
+	note A#, 1
+	rest 1
+	octave 4
+	note D#, 1
+	rest 1
+	octave 3
+	note A#, 1
+	rest 1
+	octave 4
+	note D#, 1
+	rest 1
+	sound_ret
+
+Music_Surf_Shared3: ; (tools/musiccalls.py)
+	rest 1
+	note D#, 1
+	rest 1
+	volume_envelope 7, 3
+	note F_, 1
+	rest 1
+	note D#, 1
+	rest 1
+	sound_ret
+
+Music_Surf_Shared4: ; (tools/musiccalls.py)
+	note D_, 1
+	note C#, 1
+	note C_, 1
+	octave 3
+	note B_, 1
+	sound_ret
+
+Music_Surf_Shared5: ; (tools/musiccalls.py)
+	note D_, 1
+	note D#, 15
+	note D_, 4
+	note C_, 4
+	octave 5
+	note D_, 16
+	octave 6
+	note D_, 8
 	sound_ret

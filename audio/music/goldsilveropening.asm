@@ -225,14 +225,7 @@ Music_GoldSilverOpening_Ch2:
 	octave 4
 	note D#, 4
 	note D#, 4
-	octave 1
-	note A#, 4
-	octave 3
-	note D_, 4
-	note D_, 4
-	octave 1
-	note B_, 4
-	octave 3
+	sound_call Music_GoldSilverOpening_Shared5
 	note D_, 4
 	note D_, 4
 	octave 2
@@ -245,14 +238,7 @@ Music_GoldSilverOpening_Ch2:
 	octave 3
 	note D#, 4
 	note F#, 4
-	octave 1
-	note A#, 4
-	octave 3
-	note D_, 4
-	note D_, 4
-	octave 1
-	note B_, 4
-	octave 3
+	sound_call Music_GoldSilverOpening_Shared5
 	note D_, 6
 	note D_, 2
 	octave 2
@@ -320,43 +306,7 @@ Music_GoldSilverOpening_Ch3:
 	rest 12
 	rest 8
 	note_type 6, 1, 0
-	octave 2
-	note D#, 1
-	rest 1
-	note G_, 1
-	rest 1
-	note A#, 1
-	rest 1
-	octave 3
-	note D_, 1
-	rest 1
-	note D#, 1
-	rest 1
-	note G_, 1
-	rest 1
-	note A#, 1
-	rest 1
-	octave 4
-	note D_, 1
-	rest 1
-	note D#, 1
-	rest 1
-	note G_, 1
-	rest 1
-	note A#, 1
-	rest 1
-	octave 5
-	note D_, 1
-	rest 1
-	note D#, 1
-	rest 1
-	note G_, 1
-	rest 1
-	note A#, 1
-	rest 1
-	octave 6
-	note D_, 1
-	rest 1
+	sound_call Music_GoldSilverOpening_Shared1
 	octave 2
 	note F_, 1
 	rest 1
@@ -370,10 +320,7 @@ Music_GoldSilverOpening_Ch3:
 	note F_, 1
 	rest 1
 	note A_, 1
-	rest 1
-	octave 4
-	note C_, 1
-	rest 1
+	sound_call Music_ViridianCity_Shared1
 	note E_, 1
 	rest 1
 	note F_, 1
@@ -394,51 +341,11 @@ Music_GoldSilverOpening_Ch3:
 	rest 1
 	note E_, 1
 	rest 1
-	octave 2
-	note D#, 1
-	rest 1
-	note G_, 1
-	rest 1
-	note A#, 1
-	rest 1
-	octave 3
-	note D_, 1
-	rest 1
-	note D#, 1
-	rest 1
-	note G_, 1
-	rest 1
-	note A#, 1
-	rest 1
-	octave 4
-	note D_, 1
-	rest 1
-	note D#, 1
-	rest 1
-	note G_, 1
-	rest 1
-	note A#, 1
-	rest 1
-	octave 5
-	note D_, 1
-	rest 1
-	note D#, 1
-	rest 1
-	note G_, 1
-	rest 1
-	note A#, 1
-	rest 1
-	octave 6
-	note D_, 1
-	rest 1
+	sound_call Music_GoldSilverOpening_Shared1
 	note_type 8, 1, 0
 	note F_, 1
 	octave 5
-	note B_, 1
-	note A_, 1
-	note B_, 1
-	note A_, 1
-	note F_, 1
+	sound_call Music_GoldSilverOpening_Shared4
 	note A_, 1
 	note F_, 1
 	octave 4
@@ -446,11 +353,7 @@ Music_GoldSilverOpening_Ch3:
 	octave 5
 	note F_, 1
 	octave 4
-	note B_, 1
-	note A_, 1
-	note B_, 1
-	note A_, 1
-	note F_, 1
+	sound_call Music_GoldSilverOpening_Shared4
 	note A_, 1
 	note F_, 1
 	octave 3
@@ -458,11 +361,7 @@ Music_GoldSilverOpening_Ch3:
 	octave 4
 	note F_, 1
 	octave 3
-	note B_, 1
-	note A_, 1
-	note B_, 1
-	note A_, 1
-	note F_, 1
+	sound_call Music_GoldSilverOpening_Shared4
 	octave 5
 	note A_, 3
 	note_type 12, 1, 0
@@ -513,28 +412,10 @@ Music_GoldSilverOpening_Ch3:
 	note D#, 4
 	note F_, 2
 	rest 2
-	octave 4
-	note A#, 1
-	rest 1
-	octave 5
+	sound_call Music_GoldSilverOpening_Shared2
 	note D_, 1
 	rest 1
-	octave 4
-	note A#, 1
-	rest 1
-	octave 5
-	note D_, 1
-	rest 1
-	octave 4
-	note A#, 1
-	rest 1
-	octave 5
-	note D_, 1
-	rest 1
-	octave 4
-	note A#, 1
-	rest 1
-	octave 5
+	sound_call Music_GoldSilverOpening_Shared2
 	note C_, 1
 	rest 1
 	octave 4
@@ -549,28 +430,10 @@ Music_GoldSilverOpening_Ch3:
 	octave 5
 	note C_, 1
 	rest 1
-	octave 4
-	note A#, 1
-	rest 1
-	octave 5
+	sound_call Music_GoldSilverOpening_Shared2
 	note D_, 1
 	rest 1
-	octave 4
-	note A#, 1
-	rest 1
-	octave 5
-	note D_, 1
-	rest 1
-	octave 4
-	note A#, 1
-	rest 1
-	octave 5
-	note D_, 1
-	rest 1
-	octave 4
-	note A#, 1
-	rest 1
-	octave 5
+	sound_call Music_GoldSilverOpening_Shared2
 	note C_, 1
 	rest 1
 	note D_, 1
@@ -580,19 +443,11 @@ Music_GoldSilverOpening_Ch3:
 	note D_, 1
 	rest 1
 	note F_, 1
-	rest 1
+	sound_call Music_GoldSilverOpening_Shared3
 	note G_, 1
 	rest 1
 	note A#, 1
-	rest 1
-	note G_, 1
-	rest 1
-	note A#, 1
-	rest 1
-	note G_, 1
-	rest 1
-	note A#, 1
-	rest 1
+	sound_call Music_GoldSilverOpening_Shared3
 	note F#, 1
 	rest 1
 	note A#, 1
@@ -613,4 +468,68 @@ Music_GoldSilverOpening_Ch3:
 	rest 1
 	note C_, 1
 	rest 13
+	sound_ret
+
+Music_GoldSilverOpening_Shared1: ; (tools/musiccalls.py)
+	octave 2
+	note D#, 1
+	sound_call Music_GoldSilverOpening_Shared3
+	octave 3
+	note D_, 1
+	rest 1
+	note D#, 1
+	sound_call Music_GoldSilverOpening_Shared3
+	octave 4
+	note D_, 1
+	rest 1
+	note D#, 1
+	sound_call Music_GoldSilverOpening_Shared3
+	octave 5
+	note D_, 1
+	rest 1
+	note D#, 1
+	sound_call Music_GoldSilverOpening_Shared3
+	octave 6
+	note D_, 1
+	rest 1
+	sound_ret
+
+Music_GoldSilverOpening_Shared2: ; (tools/musiccalls.py)
+	octave 4
+	note A#, 1
+	rest 1
+	octave 5
+	note D_, 1
+	rest 1
+	octave 4
+	note A#, 1
+	rest 1
+	octave 5
+	sound_ret
+
+Music_GoldSilverOpening_Shared3: ; (tools/musiccalls.py)
+	rest 1
+	note G_, 1
+	rest 1
+	note A#, 1
+	rest 1
+	sound_ret
+
+Music_GoldSilverOpening_Shared4: ; (tools/musiccalls.py)
+	note B_, 1
+	note A_, 1
+	note B_, 1
+	note A_, 1
+	note F_, 1
+	sound_ret
+
+Music_GoldSilverOpening_Shared5: ; (tools/musiccalls.py)
+	octave 1
+	note A#, 4
+	octave 3
+	note D_, 4
+	note D_, 4
+	octave 1
+	note B_, 4
+	octave 3
 	sound_ret

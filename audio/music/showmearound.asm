@@ -6,8 +6,7 @@ Music_ShowMeAround:
 	channel 4, Music_ShowMeAround_Ch4
 
 Music_ShowMeAround_Ch1:
-	tempo 144
-	volume 7, 7
+	sound_call Music_ShowMeAround_Shared3
 	stereo_panning FALSE, TRUE
 	duty_cycle 2
 	note_type 12, 11, 1
@@ -54,10 +53,7 @@ Music_ShowMeAround_Ch1:
 	note G#, 1
 	rest 1
 	octave 4
-	note E_, 1
-	rest 1
-	note E_, 1
-	rest 1
+	sound_call Music_Route1_Shared6
 	note E_, 1
 	rest 3
 	sound_ret
@@ -116,10 +112,7 @@ Music_ShowMeAround_Ch2:
 	note A_, 2
 	note A_, 4
 	note G#, 1
-	note G_, 1
-	note F#, 1
-	note F_, 1
-	note E_, 1
+	sound_call Music_KantoWildBattle_Shared13
 	rest 1
 	note D#, 1
 	note E_, 1
@@ -230,23 +223,7 @@ Music_ShowMeAround_Ch3:
 	sound_loop 0, .mainloop
 
 .sub1:
-	octave 2
-	note A_, 2
-	rest 6
-	octave 4
-	note E_, 2
-	rest 2
-	octave 2
-	note A_, 2
-	rest 2
-	octave 3
-	note D_, 2
-	rest 2
-	octave 4
-	note F#, 8
-	note D#, 2
-	rest 2
-	octave 2
+	sound_call Music_ShowMeAround_Shared1
 	note A_, 2
 	rest 2
 	octave 4
@@ -264,23 +241,7 @@ Music_ShowMeAround_Ch3:
 	sound_ret
 
 .sub2:
-	octave 2
-	note A_, 2
-	rest 6
-	octave 4
-	note E_, 2
-	rest 2
-	octave 2
-	note A_, 2
-	rest 2
-	octave 3
-	note D_, 2
-	rest 2
-	octave 4
-	note F#, 8
-	note D#, 2
-	rest 2
-	octave 2
+	sound_call Music_ShowMeAround_Shared1
 	note G#, 2
 	rest 6
 	octave 4
@@ -299,8 +260,7 @@ Music_ShowMeAround_Ch3:
 	sound_ret
 
 Music_ShowMeAround_Ch4:
-	toggle_noise 3
-	drum_speed 12
+	sound_call Music_PokemonCenter_Shared6
 	rest 16
 	rest 8
 	drum_note 3, 2
@@ -316,16 +276,7 @@ Music_ShowMeAround_Ch4:
 	sound_loop 0, .mainloop
 
 .sub1:
-	drum_note 4, 2
-	drum_note 7, 2
-	drum_note 3, 2
-	drum_note 8, 2
-	drum_note 8, 2
-	drum_note 7, 4
-	drum_note 3, 2
-	drum_note 4, 2
-	drum_note 7, 4
-	drum_note 3, 2
+	sound_call Music_ShowMeAround_Shared2
 	drum_note 8, 2
 	drum_note 8, 2
 	drum_note 3, 2
@@ -333,6 +284,34 @@ Music_ShowMeAround_Ch4:
 	sound_ret
 
 .sub2:
+	sound_call Music_ShowMeAround_Shared2
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_note 7, 2
+	sound_ret
+
+Music_ShowMeAround_Shared1: ; (tools/musiccalls.py)
+	octave 2
+	note A_, 2
+	rest 6
+	octave 4
+	note E_, 2
+	rest 2
+	octave 2
+	note A_, 2
+	rest 2
+	octave 3
+	note D_, 2
+	rest 2
+	octave 4
+	note F#, 8
+	note D#, 2
+	rest 2
+	octave 2
+	sound_ret
+
+Music_ShowMeAround_Shared2: ; (tools/musiccalls.py)
 	drum_note 4, 2
 	drum_note 7, 2
 	drum_note 3, 2
@@ -343,8 +322,9 @@ Music_ShowMeAround_Ch4:
 	drum_note 4, 2
 	drum_note 7, 4
 	drum_note 3, 2
-	drum_note 3, 2
-	drum_note 3, 2
-	drum_note 3, 2
-	drum_note 7, 2
+	sound_ret
+
+Music_ShowMeAround_Shared3: ; (tools/musiccalls.py)
+	tempo 144
+	volume 7, 7
 	sound_ret

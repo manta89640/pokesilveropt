@@ -82,33 +82,9 @@ Music_HallOfFame_Ch3:
 .mainloop:
 	note_type 12, 2, 8
 .loop1:
-	octave 3
-	note D_, 2
-	note G_, 2
-	note D_, 2
-	note G_, 2
-	note D_, 2
-	note G_, 2
-	note D_, 2
-	note G_, 2
-	octave 3
-	note D_, 2
-	note G_, 2
-	note D_, 2
-	note G_, 2
-	note D_, 2
-	note G_, 2
-	note D_, 2
-	note G_, 2
-	octave 3
-	note D_, 2
-	note G_, 2
-	note D_, 2
-	note G_, 2
-	note D_, 2
-	note G_, 2
-	note D_, 2
-	note G_, 2
+	sound_call Music_HallOfFame_Shared1
+	sound_call Music_HallOfFame_Shared1
+	sound_call Music_HallOfFame_Shared1
 	octave 3
 	note C_, 2
 	note F_, 2
@@ -172,3 +148,15 @@ Music_HallOfFame_Ch4:
 	drum_note 11, 1
 	drum_note 11, 1
 	sound_loop 0, .mainloop
+
+Music_HallOfFame_Shared1: ; (tools/musiccalls.py)
+	octave 3
+	note D_, 2
+	note G_, 2
+	note D_, 2
+	note G_, 2
+	note D_, 2
+	note G_, 2
+	note D_, 2
+	note G_, 2
+	sound_ret

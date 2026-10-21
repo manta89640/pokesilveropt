@@ -7,8 +7,7 @@ Music_Gym:
 
 Music_Gym_Ch1:
 	tempo 156
-	volume 7, 7
-	stereo_panning FALSE, TRUE
+	sound_call Music_ViridianCity_Shared5
 	vibrato 18, 2, 4
 	duty_cycle 1
 	note_type 12, 11, 7
@@ -57,11 +56,7 @@ Music_Gym_Ch1:
 	note E_, 1
 	note E_, 2
 	note C_, 2
-	octave 4
-	note C_, 2
-	octave 3
-	note B_, 2
-	note A_, 2
+	sound_call Music_Gym_Shared3
 	note G_, 2
 	note F#, 8
 	note A_, 4
@@ -72,11 +67,7 @@ Music_Gym_Ch1:
 	note E_, 1
 	note F#, 1
 	note G_, 4
-	octave 4
-	note C_, 2
-	octave 3
-	note B_, 2
-	note A_, 2
+	sound_call Music_Gym_Shared3
 	octave 4
 	note C_, 2
 	note D_, 6
@@ -114,14 +105,7 @@ Music_Gym_Ch1:
 	note E_, 1
 	note G_, 4
 	note D_, 6
-	octave 3
-	note A_, 1
-	rest 3
-	note A_, 1
-	rest 1
-	note A_, 1
-	octave 4
-	note F#, 3
+	sound_call Music_Gym_Shared6
 	note G_, 4
 	note F#, 4
 	note E_, 4
@@ -150,14 +134,7 @@ Music_Gym_Ch1:
 	octave 4
 	note E_, 4
 	note F#, 6
-	octave 3
-	note A_, 1
-	rest 3
-	note A_, 1
-	rest 1
-	note A_, 1
-	octave 4
-	note F#, 3
+	sound_call Music_Gym_Shared6
 	note A_, 4
 	note G_, 4
 	note F#, 4
@@ -253,98 +230,32 @@ Music_Gym_Ch2:
 	note A#, 2
 	note F_, 1
 	note F_, 1
-	note G_, 1
-	octave 2
-	note C_, 1
-	octave 1
-	note G_, 2
-	octave 2
+	sound_call Music_Gym_Shared5
 	note G_, 2
 	note E_, 2
 	sound_call .sub2
 	octave 1
-	note G_, 1
-	octave 2
-	note C_, 1
-	octave 1
-	note G_, 2
-	octave 2
+	sound_call Music_Gym_Shared5
 	note E_, 2
 	note C_, 2
-	note D_, 4
-	note D_, 2
-	octave 1
-	note A_, 1
-	note A_, 1
-	note A_, 1
-	octave 2
-	note D_, 1
-	octave 1
-	note A_, 2
-	octave 2
+	sound_call Music_Gym_Shared4
 	note F#, 2
 	note D_, 2
 	sound_loop 0, .mainloop
 
 .sub1:
 	octave 3
-	note D_, 3
-	octave 2
-	note D_, 3
-	note D_, 2
-	note D_, 1
-	note D_, 1
-	note D_, 2
-	octave 3
-	note D_, 2
-	octave 2
-	note A_, 2
-	octave 3
-	note C_, 3
-	octave 2
-	note C_, 3
-	note C_, 2
-	note C_, 1
-	note C_, 1
-	note C_, 2
+	sound_call Music_Gym_Shared1
 	octave 3
 	note E_, 2
 	note C_, 1
 	note C#, 1
-	note D_, 3
-	octave 2
-	note D_, 3
-	note D_, 2
-	note D_, 1
-	note D_, 1
-	note D_, 2
-	octave 3
-	note D_, 2
-	octave 2
-	note A_, 2
-	octave 3
-	note C_, 3
-	octave 2
-	note C_, 3
-	note C_, 2
-	note C_, 1
-	note C_, 1
-	note C_, 2
+	sound_call Music_Gym_Shared1
 	sound_ret
 
 .sub2:
 	octave 2
-	note D_, 4
-	note D_, 2
-	octave 1
-	note A_, 1
-	note A_, 1
-	note A_, 1
-	octave 2
-	note D_, 1
-	octave 1
-	note A_, 2
-	octave 2
+	sound_call Music_Gym_Shared4
 	note A_, 2
 	note D_, 2
 	note C_, 4
@@ -352,12 +263,7 @@ Music_Gym_Ch2:
 	octave 1
 	note G_, 1
 	note G_, 1
-	note G_, 1
-	octave 2
-	note C_, 1
-	octave 1
-	note G_, 2
-	octave 2
+	sound_call Music_Gym_Shared5
 	note G_, 2
 	note C_, 2
 	octave 1
@@ -536,14 +442,7 @@ Music_Gym_Ch4:
 	drum_note 3, 2
 	drum_note 3, 2
 	drum_note 3, 4
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
+	sound_call Music_Gym_Shared2
 	drum_note 3, 6
 	drum_note 3, 6
 	drum_note 3, 4
@@ -565,3 +464,78 @@ Music_Gym_Ch4:
 	drum_note 7, 4
 	sound_loop 8, .loop2
 	sound_loop 0, .mainloop
+
+Music_Gym_Shared1: ; (tools/musiccalls.py)
+	note D_, 3
+	octave 2
+	note D_, 3
+	note D_, 2
+	note D_, 1
+	note D_, 1
+	note D_, 2
+	octave 3
+	note D_, 2
+	octave 2
+	note A_, 2
+	octave 3
+	note C_, 3
+	octave 2
+	note C_, 3
+	note C_, 2
+	note C_, 1
+	note C_, 1
+	note C_, 2
+	sound_ret
+
+Music_Gym_Shared2: ; (tools/musiccalls.py)
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	sound_ret
+
+Music_Gym_Shared3: ; (tools/musiccalls.py)
+	octave 4
+	note C_, 2
+	octave 3
+	note B_, 2
+	note A_, 2
+	sound_ret
+
+Music_Gym_Shared4: ; (tools/musiccalls.py)
+	note D_, 4
+	note D_, 2
+	octave 1
+	note A_, 1
+	note A_, 1
+	note A_, 1
+	octave 2
+	note D_, 1
+	octave 1
+	note A_, 2
+	octave 2
+	sound_ret
+
+Music_Gym_Shared5: ; (tools/musiccalls.py)
+	note G_, 1
+	octave 2
+	note C_, 1
+	octave 1
+	note G_, 2
+	octave 2
+	sound_ret
+
+Music_Gym_Shared6: ; (tools/musiccalls.py)
+	octave 3
+	note A_, 1
+	rest 3
+	note A_, 1
+	rest 1
+	note A_, 1
+	octave 4
+	note F#, 3
+	sound_ret

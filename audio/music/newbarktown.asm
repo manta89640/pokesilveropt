@@ -4,8 +4,6 @@ Music_NewBarkTown:
 	channel 2, Music_NewBarkTown_Ch2
 	channel 3, Music_NewBarkTown_Ch3
 
-	db $3 ; unused, leftover from a channel 4
-
 Music_NewBarkTown_Ch1:
 	tempo 187
 	volume 7, 7
@@ -67,21 +65,7 @@ Music_NewBarkTown_Ch1:
 	sound_call .sub2
 	sound_call .sub2
 	sound_call .sub2
-	octave 2
-	note G_, 2
-	note B_, 2
-	octave 3
-	note D_, 2
-	note F#, 4
-	note G_, 4
-	note D_, 2
-	octave 2
-	note A_, 2
-	octave 3
-	note C#, 2
-	note E_, 2
-	note G_, 4
-	note A_, 4
+	sound_call Music_NewBarkTown_Shared1
 	note B_, 2
 	volume_envelope 8, 7
 	sound_loop 0, .mainloop
@@ -94,25 +78,13 @@ Music_NewBarkTown_Ch1:
 	rest 1
 	note A_, 2
 	note D_, 1
-	rest 1
-	note F#, 1
-	rest 1
-	note D_, 1
-	rest 1
+	sound_call Music_SSAqua_Shared14
 	note A#, 2
 	note D_, 1
-	rest 1
-	note F#, 1
-	rest 1
-	note D_, 1
-	rest 1
+	sound_call Music_SSAqua_Shared14
 	note B_, 2
 	note F#, 1
-	rest 1
-	note F#, 1
-	rest 1
-	note D_, 1
-	rest 1
+	sound_call Music_SSAqua_Shared14
 	octave 4
 	note C_, 2
 	octave 3
@@ -140,21 +112,7 @@ Music_NewBarkTown_Ch1:
 	sound_ret
 
 .sub2:
-	octave 2
-	note G_, 2
-	note B_, 2
-	octave 3
-	note D_, 2
-	note F#, 4
-	note G_, 4
-	note D_, 2
-	octave 2
-	note A_, 2
-	octave 3
-	note C#, 2
-	note E_, 2
-	note G_, 4
-	note A_, 4
+	sound_call Music_NewBarkTown_Shared1
 	note E_, 2
 	sound_ret
 
@@ -169,57 +127,26 @@ Music_NewBarkTown_Ch2:
 	sound_call .sub1
 	sound_call .sub1
 	sound_call .sub2
-	volume_envelope 8, 7
-	octave 5
-	note B_, 6
-	note A_, 6
-	volume_envelope 7, 7
-	octave 6
-	note D_, 4
+	sound_call Music_NewBarkTown_Shared2
 	note C#, 16
 	sound_call .sub2
-	volume_envelope 8, 7
-	octave 5
-	note B_, 6
-	note A_, 6
-	volume_envelope 7, 7
-	octave 6
-	note D_, 4
+	sound_call Music_NewBarkTown_Shared2
 	note E_, 16
 	sound_loop 0, .mainloop
 
 .sub1:
 	octave 2
-	note D_, 4
-	rest 8
-	note D_, 1
-	rest 1
-	note D_, 1
-	rest 1
-	note D_, 2
-	rest 2
-	note D_, 8
+	sound_call Music_NewBarkTown_Shared3
 	note A#, 2
 	rest 2
-	note D_, 4
-	rest 8
-	note D_, 1
-	rest 1
-	note D_, 1
-	rest 1
-	note D_, 2
-	rest 2
-	note D_, 8
+	sound_call Music_NewBarkTown_Shared3
 	octave 3
 	note C_, 2
 	rest 2
 	octave 2
 	note G_, 4
 	rest 8
-	note G_, 1
-	rest 1
-	note G_, 1
-	rest 1
+	sound_call Music_SSAqua_Shared13
 	octave 1
 	note G#, 2
 	rest 2
@@ -323,3 +250,43 @@ Music_NewBarkTown_Ch3:
 	note D_, 1
 	note E_, 1
 	sound_loop 0, .mainloop
+
+Music_NewBarkTown_Shared1: ; (tools/musiccalls.py)
+	octave 2
+	note G_, 2
+	note B_, 2
+	octave 3
+	note D_, 2
+	note F#, 4
+	note G_, 4
+	note D_, 2
+	octave 2
+	note A_, 2
+	octave 3
+	note C#, 2
+	note E_, 2
+	note G_, 4
+	note A_, 4
+	sound_ret
+
+Music_NewBarkTown_Shared2: ; (tools/musiccalls.py)
+	volume_envelope 8, 7
+	octave 5
+	note B_, 6
+	note A_, 6
+	volume_envelope 7, 7
+	octave 6
+	note D_, 4
+	sound_ret
+
+Music_NewBarkTown_Shared3: ; (tools/musiccalls.py)
+	note D_, 4
+	rest 8
+	note D_, 1
+	rest 1
+	note D_, 1
+	rest 1
+	note D_, 2
+	rest 2
+	note D_, 8
+	sound_ret

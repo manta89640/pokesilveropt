@@ -89,10 +89,7 @@ Music_PokemonChannel_Ch2:
 	note D_, 4
 	duty_cycle 0
 	octave 3
-	note G_, 1
-	rest 1
-	note G_, 1
-	rest 1
+	sound_call Music_KantoTrainerBattle_Shared7
 	note_type 6, 11, 3
 	note D_, 1
 	rest 1
@@ -189,11 +186,7 @@ Music_PokemonChannel_Ch3:
 	note G_, 1
 	note B_, 1
 	note G_, 1
-	note D_, 1
-	octave 2
-	note B_, 1
-	octave 3
-	note D_, 1
+	sound_call Music_Route3_Shared5
 	octave 2
 	note G_, 1
 	rest 3
@@ -202,8 +195,7 @@ Music_PokemonChannel_Ch3:
 	sound_ret
 
 Music_PokemonChannel_Ch4:
-	toggle_noise 3
-	drum_speed 12
+	sound_call Music_PokemonCenter_Shared6
 .loop1:
 	drum_note 11, 3
 	drum_note 11, 1

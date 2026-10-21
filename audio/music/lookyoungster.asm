@@ -6,8 +6,7 @@ Music_LookYoungster:
 
 Music_LookYoungster_Ch1:
 	tempo 118
-	volume 7, 7
-	stereo_panning FALSE, TRUE
+	sound_call Music_ViridianCity_Shared5
 	duty_cycle 3
 	note_type 12, 10, 3
 	octave 3
@@ -26,41 +25,9 @@ Music_LookYoungster_Ch1:
 	note C_, 6
 	volume_envelope 11, 3
 .mainloop:
-	rest 2
-	octave 3
-	note G_, 1
-	rest 1
-	note B_, 1
-	rest 1
-	note G_, 1
-	rest 1
-	octave 4
-	note D_, 1
-	rest 1
-	note C_, 1
-	rest 3
-	note C_, 1
-	rest 1
-	rest 16
-	rest 2
-	octave 3
-	note G_, 1
-	rest 1
-	note B_, 1
-	rest 1
-	note G_, 1
-	rest 1
-	octave 4
-	note D_, 1
-	rest 1
-	note C_, 1
-	rest 3
-	note C_, 1
-	rest 1
-	rest 16
+	sound_call Music_LookYoungster_Shared2
+	sound_call Music_LookYoungster_Shared2
 	sound_loop 0, .mainloop
-
-	sound_ret ; unused
 
 Music_LookYoungster_Ch2:
 	stereo_panning TRUE, FALSE
@@ -88,21 +55,7 @@ Music_LookYoungster_Ch2:
 	volume_envelope 11, 3
 	rest 2
 	octave 3
-	note B_, 1
-	rest 1
-	octave 4
-	note D_, 1
-	rest 1
-	octave 3
-	note B_, 1
-	rest 1
-	octave 4
-	note G_, 1
-	rest 1
-	note F_, 1
-	rest 3
-	note F_, 1
-	rest 1
+	sound_call Music_LookYoungster_Shared3
 	volume_envelope 9, 7
 	duty_cycle 2
 	note D#, 1
@@ -123,21 +76,7 @@ Music_LookYoungster_Ch2:
 	duty_cycle 3
 	volume_envelope 11, 3
 	rest 2
-	note B_, 1
-	rest 1
-	octave 4
-	note D_, 1
-	rest 1
-	octave 3
-	note B_, 1
-	rest 1
-	octave 4
-	note G_, 1
-	rest 1
-	note F_, 1
-	rest 3
-	note F_, 1
-	rest 1
+	sound_call Music_LookYoungster_Shared3
 	duty_cycle 2
 	volume_envelope 9, 7
 	note G#, 1
@@ -152,44 +91,18 @@ Music_LookYoungster_Ch2:
 	note G#, 1
 	rest 1
 	note A#, 1
-	rest 1
-	octave 4
-	note C_, 1
-	rest 1
+	sound_call Music_ViridianCity_Shared1
 	sound_loop 0, .mainloop
-
-	sound_ret ; unused
 
 Music_LookYoungster_Ch3:
 	stereo_panning TRUE, TRUE
 	vibrato 2, 2, 4
 	note_type 12, 2, 5
 	rest 4
-	octave 2
-	note G_, 1
-	rest 1
-	octave 3
-	note G_, 1
-	rest 1
-	octave 2
-	note G_, 1
-	rest 1
-	octave 3
-	note G_, 1
-	rest 1
-	octave 2
-	note G_, 1
-	rest 1
-	octave 3
-	note G_, 1
-	rest 1
+	sound_call Music_LookYoungster_Shared1
+	sound_call Music_LookYoungster_Shared4
 	volume_envelope 1, 5
-	octave 2
-	note G_, 1
-	rest 1
-	octave 3
-	note G_, 1
-	rest 1
+	sound_call Music_LookYoungster_Shared4
 	note D_, 1
 	rest 3
 	note D_, 4
@@ -197,100 +110,88 @@ Music_LookYoungster_Ch3:
 	note G#, 6
 	volume_envelope 2, 5
 .mainloop:
-	octave 2
-	note G_, 1
-	rest 1
-	octave 3
-	note G_, 1
-	rest 1
-	octave 2
-	note G_, 1
-	rest 1
-	octave 3
-	note G_, 1
-	rest 1
-	octave 2
-	note G_, 1
-	rest 1
-	octave 3
-	note G_, 1
-	rest 1
-	octave 2
-	note G_, 1
-	rest 1
-	octave 3
-	note G_, 1
-	rest 1
-	octave 2
-	note F_, 1
-	rest 1
-	octave 3
-	note D#, 1
-	rest 1
-	octave 2
-	note F_, 1
-	rest 1
-	octave 3
-	note D#, 1
-	rest 1
-	octave 2
-	note F_, 1
-	rest 1
-	octave 3
-	note D#, 1
-	rest 1
-	octave 2
-	note F_, 1
-	rest 1
-	octave 3
-	note D#, 1
-	rest 1
-	octave 2
-	note G_, 1
-	rest 1
-	octave 3
-	note G_, 1
-	rest 1
-	octave 2
-	note G_, 1
-	rest 1
-	octave 3
-	note G_, 1
-	rest 1
-	octave 2
-	note G_, 1
-	rest 1
-	octave 3
-	note G_, 1
-	rest 1
-	octave 2
-	note G_, 1
-	rest 1
-	octave 3
-	note G_, 1
-	rest 1
-	octave 2
-	note G#, 1
-	rest 1
-	octave 3
-	note D#, 1
-	rest 1
-	octave 2
-	note G#, 1
-	rest 1
-	octave 3
-	note D#, 1
-	rest 1
-	octave 2
-	note G#, 1
-	rest 1
-	octave 3
-	note D#, 1
-	rest 1
+	sound_call Music_LookYoungster_Shared1
+	sound_call Music_LookYoungster_Shared1
+	sound_call Music_LookYoungster_Shared5
+	sound_call Music_LookYoungster_Shared5
+	sound_call Music_LookYoungster_Shared5
+	sound_call Music_LookYoungster_Shared5
+	sound_call Music_LookYoungster_Shared1
+	sound_call Music_LookYoungster_Shared1
+	sound_call Music_LookYoungster_Shared6
+	sound_call Music_LookYoungster_Shared6
+	sound_call Music_LookYoungster_Shared6
 	note G_, 1
 	rest 1
 	note G#, 1
 	rest 1
 	sound_loop 0, .mainloop
 
-	sound_ret ; unused
+Music_LookYoungster_Shared1: ; (tools/musiccalls.py)
+	sound_call Music_LookYoungster_Shared4
+	sound_call Music_LookYoungster_Shared4
+	sound_ret
+
+Music_LookYoungster_Shared2: ; (tools/musiccalls.py)
+	rest 2
+	octave 3
+	note G_, 1
+	rest 1
+	note B_, 1
+	rest 1
+	note G_, 1
+	rest 1
+	octave 4
+	note D_, 1
+	rest 1
+	note C_, 1
+	rest 3
+	note C_, 1
+	rest 1
+	rest 16
+	sound_ret
+
+Music_LookYoungster_Shared3: ; (tools/musiccalls.py)
+	note B_, 1
+	rest 1
+	octave 4
+	note D_, 1
+	rest 1
+	octave 3
+	note B_, 1
+	rest 1
+	octave 4
+	note G_, 1
+	rest 1
+	note F_, 1
+	rest 3
+	note F_, 1
+	rest 1
+	sound_ret
+
+Music_LookYoungster_Shared4: ; (tools/musiccalls.py)
+	octave 2
+	note G_, 1
+	rest 1
+	octave 3
+	note G_, 1
+	rest 1
+	sound_ret
+
+Music_LookYoungster_Shared5: ; (tools/musiccalls.py)
+	octave 2
+	note F_, 1
+	rest 1
+	octave 3
+	note D#, 1
+	rest 1
+	sound_ret
+
+Music_LookYoungster_Shared6: ; (tools/musiccalls.py)
+	octave 2
+	note G#, 1
+	rest 1
+	octave 3
+	note D#, 1
+	rest 1
+	sound_ret

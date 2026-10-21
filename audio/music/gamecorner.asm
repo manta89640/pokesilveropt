@@ -58,11 +58,7 @@ Music_GameCorner_Ch1:
 .loop3:
 	octave 4
 	note D#, 1
-	note G_, 1
-	octave 5
-	note C_, 1
-	octave 4
-	note G_, 1
+	sound_call Music_GameCorner_Shared9
 	sound_loop 4, .loop3
 .loop4:
 	octave 4
@@ -106,14 +102,7 @@ Music_GameCorner_Ch1:
 	sound_loop 0, .mainloop
 
 .sub1:
-	rest 2
-	octave 4
-	note A#, 3
-	note G_, 3
-	note D#, 3
-	octave 3
-	note F_, 3
-	note F_, 2
+	sound_call Music_GameCorner_Shared10
 	rest 2
 	note G#, 3
 	note G#, 3
@@ -124,14 +113,7 @@ Music_GameCorner_Ch1:
 	sound_ret
 
 .sub2:
-	rest 2
-	octave 4
-	note A#, 3
-	note G_, 3
-	note D#, 3
-	octave 3
-	note F_, 3
-	note F_, 2
+	sound_call Music_GameCorner_Shared10
 	sound_ret
 
 Music_GameCorner_Ch2:
@@ -169,14 +151,7 @@ Music_GameCorner_Ch2:
 	note F_, 4
 	duty_cycle 2
 	volume_envelope 12, 7
-	octave 3
-	note D#, 1
-	note F_, 1
-	note G_, 6
-	note F_, 6
-	note C_, 4
-	note D_, 6
-	note D#, 6
+	sound_call Music_GameCorner_Shared11
 	note F_, 4
 	note D_, 6
 	note C_, 6
@@ -184,14 +159,7 @@ Music_GameCorner_Ch2:
 	note A#, 4
 	note A_, 4
 	rest 10
-	octave 3
-	note D#, 1
-	note F_, 1
-	note G_, 6
-	note F_, 6
-	note C_, 4
-	note D_, 6
-	note D#, 6
+	sound_call Music_GameCorner_Shared11
 	note F_, 2
 	note D#, 1
 	note F_, 1
@@ -206,70 +174,15 @@ Music_GameCorner_Ch2:
 	sound_loop 0, .mainloop
 
 .sub1:
-	octave 1
-	note C_, 2
-	octave 3
-	note D#, 3
-	note D#, 3
-	note D#, 3
-	note F_, 3
-	note F_, 2
-	octave 1
-	note C_, 2
-	octave 3
-	note D#, 3
-	note D#, 3
-	note F_, 2
+	sound_call Music_GameCorner_Shared7
 	note F_, 2
 	note D#, 1
 	note F_, 3
-	octave 1
-	note C_, 2
-	octave 3
-	note D#, 3
-	note D#, 3
-	note D#, 3
-	note F_, 3
-	note F_, 2
-	octave 1
-	note C_, 2
-	octave 3
-	note D#, 3
-	note D#, 3
-	note F_, 2
+	sound_call Music_GameCorner_Shared7
 	note C_, 2
 	note D#, 1
 	note F_, 3
-	octave 1
-	note C_, 2
-	octave 5
-	note D_, 3
-	octave 4
-	note A#, 3
-	note G_, 2
-	note C_, 2
-	note D_, 2
-	note D#, 2
-	note F_, 2
-	note D#, 2
-	note F_, 1
-	note D#, 2
-	volume_envelope 10, 4
-	note F_, 3
-	note G_, 4
-	volume_envelope 9, 2
-	note F#, 1
-	note F_, 1
-	octave 1
-	note C_, 2
-	octave 5
-	note D_, 3
-	octave 4
-	note A#, 3
-	note G_, 2
-	note C_, 2
-	note D_, 2
-	note D#, 2
+	sound_call Music_GameCorner_Shared2
 	octave 1
 	note F_, 1
 	octave 4
@@ -284,36 +197,7 @@ Music_GameCorner_Ch2:
 	note A#, 1
 	octave 5
 	note C_, 3
-	octave 1
-	note C_, 2
-	octave 5
-	note D_, 3
-	octave 4
-	note A#, 3
-	note G_, 2
-	note C_, 2
-	note D_, 2
-	note D#, 2
-	note F_, 2
-	note D#, 2
-	note F_, 1
-	note D#, 2
-	volume_envelope 10, 4
-	note F_, 3
-	note G_, 4
-	volume_envelope 9, 2
-	note F#, 1
-	note F_, 1
-	octave 1
-	note C_, 2
-	octave 5
-	note D_, 3
-	octave 4
-	note A#, 3
-	note G_, 2
-	note C_, 2
-	note D_, 2
-	note D#, 2
+	sound_call Music_GameCorner_Shared2
 	sound_ret
 
 Music_GameCorner_Ch3:
@@ -383,28 +267,7 @@ Music_GameCorner_Ch3:
 	sound_call .sub1
 	sound_call .sub3
 	sound_call .sub1
-	octave 2
-	note F_, 1
-	octave 3
-	note F_, 1
-	octave 5
-	note C_, 1
-	octave 4
-	note F_, 1
-	octave 3
-	note F_, 1
-	octave 5
-	note C_, 1
-	octave 4
-	note F_, 1
-	octave 3
-	note F_, 1
-	octave 5
-	note D#, 1
-	rest 1
-	note D_, 1
-	rest 1
-	note C_, 1
+	sound_call Music_GameCorner_Shared1
 	rest 1
 	octave 4
 	note A#, 1
@@ -433,43 +296,9 @@ Music_GameCorner_Ch3:
 	rest 1
 	octave 3
 	note C_, 1
-	octave 2
-	note F_, 2
-	rest 1
-	note F_, 1
-	octave 3
-	note F_, 1
-	octave 2
-	note F_, 1
-	rest 1
-	note F_, 1
-	note F_, 1
-	octave 3
-	note F_, 1
-	octave 2
-	note F_, 2
-	octave 3
-	note F_, 1
-	octave 2
-	note F_, 1
-	rest 1
-	octave 3
-	note F_, 1
+	sound_call Music_GameCorner_Shared3
 	sound_call .sub5
-	octave 2
-	note G_, 2
-	rest 1
-	note G_, 1
-	octave 3
-	note G_, 1
-	octave 2
-	note G_, 1
-	rest 1
-	note G_, 1
-	note G_, 1
-	octave 3
-	note G_, 1
-	octave 2
+	sound_call Music_GameCorner_Shared8
 	note G_, 2
 	octave 3
 	note G_, 1
@@ -502,25 +331,9 @@ Music_GameCorner_Ch3:
 
 .sub1:
 	octave 2
-	note C_, 1
-	octave 3
-	note C_, 1
-	octave 4
+	sound_call Music_GameCorner_Shared6
 	note G_, 1
-	note C_, 1
-	octave 3
-	note C_, 1
-	octave 4
-	note G_, 1
-	note C_, 1
-	octave 3
-	note C_, 1
-	octave 4
-	note G_, 1
-	note C_, 1
-	octave 3
-	note C_, 1
-	octave 4
+	sound_call Music_GameCorner_Shared6
 	note A_, 1
 	note C_, 1
 	octave 3
@@ -531,15 +344,7 @@ Music_GameCorner_Ch3:
 
 .sub2:
 	octave 2
-	note C_, 1
-	octave 3
-	note C_, 1
-	octave 4
-	note G_, 1
-	note C_, 1
-	octave 3
-	note C_, 1
-	octave 4
+	sound_call Music_GameCorner_Shared6
 	note G_, 1
 	note C_, 1
 	octave 3
@@ -552,54 +357,12 @@ Music_GameCorner_Ch3:
 	sound_ret
 
 .sub3:
-	octave 2
-	note F_, 1
-	octave 3
-	note F_, 1
-	octave 5
-	note C_, 1
-	octave 4
-	note F_, 1
-	octave 3
-	note F_, 1
-	octave 5
-	note C_, 1
-	octave 4
-	note F_, 1
-	octave 3
-	note F_, 1
-	octave 5
-	note D#, 1
-	rest 1
-	note D_, 1
-	rest 1
-	note C_, 1
+	sound_call Music_GameCorner_Shared1
 	note D_, 3
 	sound_ret
 
 .sub4:
-	octave 2
-	note F_, 1
-	octave 3
-	note F_, 1
-	octave 5
-	note C_, 1
-	octave 4
-	note F_, 1
-	octave 3
-	note F_, 1
-	octave 5
-	note C_, 1
-	octave 4
-	note F_, 1
-	octave 3
-	note F_, 1
-	octave 5
-	note D#, 1
-	rest 1
-	note D_, 1
-	rest 1
-	note C_, 1
+	sound_call Music_GameCorner_Shared1
 	note D_, 1
 	octave 3
 	note F_, 1
@@ -607,42 +370,8 @@ Music_GameCorner_Ch3:
 	sound_ret
 
 .sub5:
-	octave 2
-	note F_, 2
-	rest 1
-	note F_, 1
-	octave 3
-	note F_, 1
-	octave 2
-	note F_, 1
-	rest 1
-	note F_, 1
-	note F_, 1
-	octave 3
-	note F_, 1
-	octave 2
-	note F_, 2
-	octave 3
-	note F_, 1
-	octave 2
-	note F_, 1
-	rest 1
-	octave 3
-	note F_, 1
-	octave 2
-	note G_, 2
-	rest 1
-	note G_, 1
-	octave 3
-	note G_, 1
-	octave 2
-	note G_, 1
-	rest 1
-	note G_, 1
-	note G_, 1
-	octave 3
-	note G_, 1
-	octave 2
+	sound_call Music_GameCorner_Shared3
+	sound_call Music_GameCorner_Shared8
 	note F_, 1
 	octave 3
 	note F_, 1
@@ -657,8 +386,7 @@ Music_GameCorner_Ch3:
 	sound_ret
 
 Music_GameCorner_Ch4:
-	toggle_noise 3
-	drum_speed 12
+	sound_call Music_PokemonCenter_Shared6
 	drum_speed 8
 	drum_note 3, 1
 	drum_note 3, 1
@@ -673,24 +401,12 @@ Music_GameCorner_Ch4:
 	sound_call .sub1
 .loop1:
 	drum_note 11, 2
-	drum_note 7, 2
-	drum_note 3, 2
-	drum_note 7, 2
-	drum_note 11, 2
-	drum_note 7, 2
-	drum_note 3, 2
-	drum_note 7, 2
+	sound_call Music_GameCorner_Shared5
 	sound_loop 6, .loop1
 	sound_call .sub2
 .loop2:
 	drum_note 11, 2
-	drum_note 7, 2
-	drum_note 3, 2
-	drum_note 7, 2
-	drum_note 11, 2
-	drum_note 7, 2
-	drum_note 3, 2
-	drum_note 7, 2
+	sound_call Music_GameCorner_Shared5
 	sound_loop 3, .loop2
 	rest 12
 	drum_note 3, 1
@@ -699,24 +415,12 @@ Music_GameCorner_Ch4:
 	sound_call .sub1
 .loop3:
 	drum_note 11, 2
-	drum_note 7, 2
-	drum_note 3, 2
-	drum_note 7, 2
-	drum_note 11, 2
-	drum_note 7, 2
-	drum_note 3, 2
-	drum_note 7, 2
+	sound_call Music_GameCorner_Shared5
 	sound_loop 6, .loop3
 	sound_call .sub2
 .loop4:
 	drum_note 11, 2
-	drum_note 7, 2
-	drum_note 3, 2
-	drum_note 7, 2
-	drum_note 11, 2
-	drum_note 7, 2
-	drum_note 3, 2
-	drum_note 7, 2
+	sound_call Music_GameCorner_Shared5
 	sound_loop 3, .loop4
 	drum_note 11, 2
 	drum_note 7, 2
@@ -729,47 +433,14 @@ Music_GameCorner_Ch4:
 	drum_note 3, 1
 	drum_note 3, 1
 .loop5:
-	drum_note 11, 2
-	drum_note 7, 1
-	drum_note 4, 1
-	drum_note 3, 1
-	drum_note 4, 1
-	drum_note 7, 1
-	drum_note 4, 1
-	drum_note 4, 1
-	drum_note 3, 1
-	drum_note 7, 1
-	drum_note 4, 1
-	drum_note 3, 2
+	sound_call Music_GameCorner_Shared4
 	drum_note 7, 2
 	sound_loop 3, .loop5
-	drum_note 11, 2
-	drum_note 7, 1
-	drum_note 4, 1
-	drum_note 3, 1
-	drum_note 4, 1
-	drum_note 7, 1
-	drum_note 4, 1
-	drum_note 4, 1
-	drum_note 3, 1
-	drum_note 7, 1
-	drum_note 4, 1
-	drum_note 3, 2
+	sound_call Music_GameCorner_Shared4
 	drum_note 3, 1
 	drum_note 3, 1
 .loop6:
-	drum_note 11, 2
-	drum_note 7, 1
-	drum_note 4, 1
-	drum_note 3, 1
-	drum_note 4, 1
-	drum_note 7, 1
-	drum_note 4, 1
-	drum_note 4, 1
-	drum_note 3, 1
-	drum_note 7, 1
-	drum_note 4, 1
-	drum_note 3, 2
+	sound_call Music_GameCorner_Shared4
 	drum_note 7, 2
 	sound_loop 3, .loop6
 	drum_note 3, 1
@@ -785,13 +456,7 @@ Music_GameCorner_Ch4:
 
 .sub1:
 	drum_note 1, 2
-	drum_note 7, 2
-	drum_note 3, 2
-	drum_note 7, 2
-	drum_note 11, 2
-	drum_note 7, 2
-	drum_note 3, 2
-	drum_note 7, 2
+	sound_call Music_GameCorner_Shared5
 	sound_ret
 
 .sub2:
@@ -804,4 +469,188 @@ Music_GameCorner_Ch4:
 	drum_note 3, 1
 	drum_note 3, 1
 	drum_note 7, 2
+	sound_ret
+
+Music_GameCorner_Shared1: ; (tools/musiccalls.py)
+	octave 2
+	note F_, 1
+	octave 3
+	note F_, 1
+	octave 5
+	note C_, 1
+	octave 4
+	note F_, 1
+	octave 3
+	note F_, 1
+	octave 5
+	note C_, 1
+	octave 4
+	note F_, 1
+	octave 3
+	note F_, 1
+	octave 5
+	note D#, 1
+	rest 1
+	note D_, 1
+	rest 1
+	note C_, 1
+	sound_ret
+
+Music_GameCorner_Shared2: ; (tools/musiccalls.py)
+	octave 1
+	note C_, 2
+	octave 5
+	note D_, 3
+	octave 4
+	note A#, 3
+	note G_, 2
+	note C_, 2
+	note D_, 2
+	note D#, 2
+	note F_, 2
+	note D#, 2
+	note F_, 1
+	note D#, 2
+	volume_envelope 10, 4
+	note F_, 3
+	note G_, 4
+	volume_envelope 9, 2
+	note F#, 1
+	note F_, 1
+	octave 1
+	note C_, 2
+	octave 5
+	note D_, 3
+	octave 4
+	note A#, 3
+	note G_, 2
+	note C_, 2
+	note D_, 2
+	note D#, 2
+	sound_ret
+
+Music_GameCorner_Shared3: ; (tools/musiccalls.py)
+	octave 2
+	note F_, 2
+	rest 1
+	note F_, 1
+	octave 3
+	note F_, 1
+	octave 2
+	note F_, 1
+	rest 1
+	note F_, 1
+	note F_, 1
+	octave 3
+	note F_, 1
+	octave 2
+	note F_, 2
+	octave 3
+	note F_, 1
+	octave 2
+	note F_, 1
+	rest 1
+	octave 3
+	note F_, 1
+	sound_ret
+
+Music_GameCorner_Shared4: ; (tools/musiccalls.py)
+	drum_note 11, 2
+	drum_note 7, 1
+	drum_note 4, 1
+	drum_note 3, 1
+	drum_note 4, 1
+	drum_note 7, 1
+	drum_note 4, 1
+	drum_note 4, 1
+	drum_note 3, 1
+	drum_note 7, 1
+	drum_note 4, 1
+	drum_note 3, 2
+	sound_ret
+
+Music_GameCorner_Shared5: ; (tools/musiccalls.py)
+	drum_note 7, 2
+	drum_note 3, 2
+	drum_note 7, 2
+	drum_note 11, 2
+	drum_note 7, 2
+	drum_note 3, 2
+	drum_note 7, 2
+	sound_ret
+
+Music_GameCorner_Shared6: ; (tools/musiccalls.py)
+	note C_, 1
+	octave 3
+	note C_, 1
+	octave 4
+	note G_, 1
+	note C_, 1
+	octave 3
+	note C_, 1
+	octave 4
+	sound_ret
+
+Music_GameCorner_Shared7: ; (tools/musiccalls.py)
+	octave 1
+	note C_, 2
+	octave 3
+	note D#, 3
+	note D#, 3
+	note D#, 3
+	note F_, 3
+	note F_, 2
+	octave 1
+	note C_, 2
+	octave 3
+	note D#, 3
+	note D#, 3
+	note F_, 2
+	sound_ret
+
+Music_GameCorner_Shared8: ; (tools/musiccalls.py)
+	octave 2
+	note G_, 2
+	rest 1
+	note G_, 1
+	octave 3
+	note G_, 1
+	octave 2
+	note G_, 1
+	rest 1
+	note G_, 1
+	note G_, 1
+	octave 3
+	note G_, 1
+	octave 2
+	sound_ret
+
+Music_GameCorner_Shared9: ; (tools/musiccalls.py)
+	note G_, 1
+	octave 5
+	note C_, 1
+	octave 4
+	note G_, 1
+	sound_ret
+
+Music_GameCorner_Shared10: ; (tools/musiccalls.py)
+	rest 2
+	octave 4
+	note A#, 3
+	note G_, 3
+	note D#, 3
+	octave 3
+	note F_, 3
+	note F_, 2
+	sound_ret
+
+Music_GameCorner_Shared11: ; (tools/musiccalls.py)
+	octave 3
+	note D#, 1
+	note F_, 1
+	note G_, 6
+	note F_, 6
+	note C_, 4
+	note D_, 6
+	note D#, 6
 	sound_ret

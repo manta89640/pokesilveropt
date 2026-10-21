@@ -143,12 +143,7 @@ Music_Route26_Ch1:
 	note C#, 8
 	note_type 8, 10, 5
 	octave 3
-	note C#, 1
-	rest 1
-	note C#, 1
-	rest 1
-	note C#, 1
-	rest 1
+	sound_call Music_KantoWildBattle_Shared12
 	note C#, 6
 	note_type 6, 10, 5
 	rest 7
@@ -157,10 +152,7 @@ Music_Route26_Ch1:
 	note E_, 8
 	note_type 8, 10, 5
 	octave 3
-	note E_, 1
-	rest 1
-	note E_, 1
-	rest 1
+	sound_call Music_Route1_Shared6
 	note E_, 1
 	rest 1
 	note E_, 6
@@ -470,10 +462,7 @@ Music_Route26_Ch3:
 	octave 2
 	note G#, 2
 	rest 6
-	note G#, 1
-	rest 1
-	note G#, 1
-	rest 1
+	sound_call Music_KantoWildBattle_Shared9
 	note G#, 2
 	rest 2
 	note G#, 2
@@ -514,10 +503,7 @@ Music_Route26_Ch3:
 	octave 4
 	note C_, 6
 	octave 3
-	note C_, 1
-	rest 1
-	note C_, 1
-	rest 1
+	sound_call Music_KantoTrainerBattle_Shared15
 	note C_, 1
 	rest 1
 	note C_, 6
@@ -587,15 +573,7 @@ Music_Route26_Ch4:
 	sound_call .sub1
 	sound_call .sub2
 .loop3:
-	drum_speed 6
-	drum_note 3, 1
-	drum_note 3, 1
-	drum_note 3, 1
-	drum_note 3, 1
-	drum_note 3, 1
-	drum_note 3, 1
-	drum_note 3, 1
-	drum_note 3, 1
+	sound_call Music_Route26_Shared1
 	drum_speed 8
 	drum_note 3, 2
 	drum_note 3, 2
@@ -613,14 +591,7 @@ Music_Route26_Ch4:
 	drum_note 3, 2
 	drum_note 3, 4
 	drum_note 3, 4
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
+	sound_call Music_Route3_Shared1
 	sound_ret
 
 .sub2:
@@ -635,32 +606,23 @@ Music_Route26_Ch4:
 
 .sub3:
 	drum_speed 6
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
+	sound_call Music_Route3_Shared1
+	sound_call Music_Route3_Shared1
+	sound_call Music_Route3_Shared1
 	drum_speed 8
 	drum_note 3, 2
 	drum_note 3, 2
 	drum_note 5, 2
+	sound_ret
+
+Music_Route26_Shared1: ; (tools/musiccalls.py)
+	drum_speed 6
+	drum_note 3, 1
+	drum_note 3, 1
+	drum_note 3, 1
+	drum_note 3, 1
+	drum_note 3, 1
+	drum_note 3, 1
+	drum_note 3, 1
+	drum_note 3, 1
 	sound_ret

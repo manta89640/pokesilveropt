@@ -80,15 +80,7 @@ Music_EcruteakCity_Ch1:
 	note A_, 2
 	note B_, 2
 	note A_, 2
-	note B_, 2
-	octave 5
-	note D_, 2
-	octave 4
-	note B_, 2
-	octave 5
-	note D_, 2
-	octave 4
-	note B_, 2
+	sound_call Music_EcruteakCity_Shared1
 	note A_, 2
 	note B_, 2
 	note A_, 2
@@ -117,28 +109,10 @@ Music_EcruteakCity_Ch1:
 	note E_, 2
 	note C#, 2
 	sound_call .sub1
+	sound_call Music_EcruteakCity_Shared2
 	note D_, 2
 	note C_, 2
-	octave 4
-	note G#, 2
-	octave 5
-	note C_, 2
-	octave 4
-	note G#, 2
-	octave 5
-	note C_, 2
-	note D_, 2
-	note C_, 2
-	note D_, 2
-	note C_, 2
-	octave 4
-	note G#, 2
-	octave 5
-	note C_, 2
-	octave 4
-	note G#, 2
-	octave 5
-	note C_, 2
+	sound_call Music_EcruteakCity_Shared2
 	octave 4
 	note G#, 2
 	octave 5
@@ -149,15 +123,7 @@ Music_EcruteakCity_Ch1:
 .sub1:
 	octave 5
 	note E_, 2
-	note C_, 2
-	octave 4
-	note A_, 2
-	octave 5
-	note C_, 2
-	octave 4
-	note A_, 2
-	octave 5
-	note C_, 2
+	sound_call Music_EcruteakCity_Shared3
 	note E_, 2
 	note C_, 2
 	sound_loop 2, .sub1
@@ -171,15 +137,7 @@ Music_EcruteakCity_Ch1:
 	note G_, 2
 	note B_, 2
 	note G_, 2
-	note B_, 2
-	octave 5
-	note D_, 2
-	octave 4
-	note B_, 2
-	octave 5
-	note D_, 2
-	octave 4
-	note B_, 2
+	sound_call Music_EcruteakCity_Shared1
 	note G_, 2
 	note B_, 2
 	note G_, 2
@@ -214,29 +172,13 @@ Music_EcruteakCity_Ch1:
 	note F_, 2
 	note A_, 2
 	octave 5
-	note C_, 2
-	octave 4
-	note A_, 2
-	octave 5
-	note C_, 2
-	octave 4
-	note A_, 2
-	octave 5
-	note C_, 2
+	sound_call Music_EcruteakCity_Shared3
 	note F_, 2
 	sound_loop 2, .sub2loop1
 .sub2loop2:
 	octave 4
 	note G_, 2
-	note B_, 2
-	octave 5
-	note D_, 2
-	octave 4
-	note B_, 2
-	octave 5
-	note D_, 2
-	octave 4
-	note B_, 2
+	sound_call Music_EcruteakCity_Shared1
 	octave 5
 	note D_, 2
 	note G_, 2
@@ -605,16 +547,7 @@ Music_EcruteakCity_Ch3:
 	rest 2
 	note C_, 1
 	rest 1
-	note F_, 4
-	rest 2
-	note F_, 1
-	rest 1
-	note F_, 1
-	rest 1
-	note F_, 2
-	rest 2
-	note F_, 1
-	rest 1
+	sound_call Music_Route2_Shared1
 	note E_, 4
 	rest 2
 	note B_, 1
@@ -632,11 +565,7 @@ Music_EcruteakCity_Ch3:
 	note G#, 1
 	rest 1
 	note G#, 1
-	rest 1
-	note G_, 1
-	rest 1
-	note F#, 1
-	rest 1
+	sound_call Music_PokemonCenter_Shared4
 	note D_, 4
 	rest 2
 	note A_, 1
@@ -655,14 +584,48 @@ Music_EcruteakCity_Ch3:
 	note D_, 1
 	rest 1
 	octave 3
-	note G_, 1
-	rest 1
-	note G_, 1
-	rest 1
+	sound_call Music_KantoTrainerBattle_Shared7
 	note A_, 1
 	rest 1
 	note A#, 1
 	note_type 6, 2, 5
 	rest 1
 	note B_, 1
+	sound_ret
+
+Music_EcruteakCity_Shared1: ; (tools/musiccalls.py)
+	note B_, 2
+	octave 5
+	note D_, 2
+	octave 4
+	note B_, 2
+	octave 5
+	note D_, 2
+	octave 4
+	note B_, 2
+	sound_ret
+
+Music_EcruteakCity_Shared2: ; (tools/musiccalls.py)
+	note D_, 2
+	note C_, 2
+	octave 4
+	note G#, 2
+	octave 5
+	note C_, 2
+	octave 4
+	note G#, 2
+	octave 5
+	note C_, 2
+	sound_ret
+
+Music_EcruteakCity_Shared3: ; (tools/musiccalls.py)
+	note C_, 2
+	octave 4
+	note A_, 2
+	octave 5
+	note C_, 2
+	octave 4
+	note A_, 2
+	octave 5
+	note C_, 2
 	sound_ret

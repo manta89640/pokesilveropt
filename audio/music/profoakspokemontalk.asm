@@ -4,26 +4,14 @@ Music_ProfOaksPokemonTalk:
 	channel 2, Music_ProfOaksPokemonTalk_Ch2
 	channel 3, Music_ProfOaksPokemonTalk_Ch3
 
-	db $3 ; unused, leftover from a channel 4
-
 Music_ProfOaksPokemonTalk_Ch1:
 	tempo 164
-	volume 7, 7
-	stereo_panning FALSE, TRUE
+	sound_call Music_ViridianCity_Shared5
 	vibrato 6, 2, 5
 	duty_cycle 1
 	note_type 12, 9, 4
 	rest 8
-	octave 3
-	note B_, 1
-	octave 4
-	note C#, 1
-	note D#, 1
-	note E_, 1
-	note C#, 1
-	note D#, 1
-	note E_, 1
-	note F#, 1
+	sound_call Music_ProfOaksPokemonTalk_Shared1
 .mainloop:
 	note D#, 6
 	note C#, 1
@@ -138,16 +126,7 @@ Music_ProfOaksPokemonTalk_Ch2:
 	duty_cycle 3
 	note_type 12, 10, 7
 	stereo_panning TRUE, TRUE
-	octave 3
-	note B_, 1
-	octave 4
-	note C#, 1
-	note D#, 1
-	note E_, 1
-	note C#, 1
-	note D#, 1
-	note E_, 1
-	note F#, 1
+	sound_call Music_ProfOaksPokemonTalk_Shared1
 	note D#, 1
 	note E_, 1
 	note F#, 1
@@ -306,3 +285,16 @@ Music_ProfOaksPokemonTalk_Ch3:
 	note A#, 1
 	rest 1
 	sound_loop 0, .mainloop
+
+Music_ProfOaksPokemonTalk_Shared1: ; (tools/musiccalls.py)
+	octave 3
+	note B_, 1
+	octave 4
+	note C#, 1
+	note D#, 1
+	note E_, 1
+	note C#, 1
+	note D#, 1
+	note E_, 1
+	note F#, 1
+	sound_ret

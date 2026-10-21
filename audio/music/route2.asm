@@ -72,22 +72,8 @@ Music_Route2_Ch1:
 	sound_ret
 
 .sub2:
-	octave 2
-	note B_, 2
-	octave 3
-	note E_, 2
-	octave 2
-	note B_, 2
-	octave 3
-	note E_, 2
-	octave 2
-	note B_, 2
-	octave 3
-	note E_, 2
-	octave 2
-	note B_, 2
-	octave 3
-	note E_, 2
+	sound_call Music_Route2_Shared3
+	sound_call Music_Route2_Shared3
 	note E_, 2
 	note A#, 2
 	note E_, 2
@@ -144,18 +130,9 @@ Music_Route2_Ch1:
 	octave 4
 	note C_, 2
 	octave 3
-	note A_, 2
-	octave 4
-	note C_, 2
-	octave 3
-	note A_, 2
-	octave 4
-	note C_, 2
-	octave 3
-	note A_, 2
-	octave 4
-	note C_, 2
-	octave 3
+	sound_call Music_Route12_Shared2
+	sound_call Music_Route12_Shared2
+	sound_call Music_Route12_Shared2
 	note A_, 2
 	sound_ret
 
@@ -211,36 +188,13 @@ Music_Route2_Ch2:
 
 .sub2:
 	octave 2
-	note C_, 4
-	rest 2
-	note C_, 1
-	rest 1
-	note C_, 1
-	rest 1
-	note C_, 2
-	rest 2
-	note C_, 1
-	rest 1
-	note G_, 4
-	rest 2
-	note G_, 1
-	rest 1
-	note G_, 1
-	rest 1
+	sound_call Music_Route2_Shared2
+	sound_call Music_KantoTrainerBattle_Shared7
 	note G_, 2
 	rest 2
 	note G_, 1
 	rest 1
-	note F_, 4
-	rest 2
-	note F_, 1
-	rest 1
-	note F_, 1
-	rest 1
-	note F_, 2
-	rest 2
-	note F_, 1
-	rest 1
+	sound_call Music_Route2_Shared1
 	note F_, 4
 	rest 2
 	note F_, 1
@@ -253,10 +207,7 @@ Music_Route2_Ch2:
 	octave 2
 	note E_, 4
 	rest 2
-	note E_, 1
-	rest 1
-	note E_, 1
-	rest 1
+	sound_call Music_Route1_Shared6
 	note E_, 2
 	rest 2
 	note E_, 1
@@ -283,10 +234,7 @@ Music_Route2_Ch2:
 	rest 1
 	note G_, 4
 	rest 2
-	note G_, 1
-	rest 1
-	note G_, 1
-	rest 1
+	sound_call Music_KantoTrainerBattle_Shared7
 	note G_, 2
 	rest 2
 	note G_, 1
@@ -321,22 +269,8 @@ Music_Route2_Ch3:
 .mainloop:
 	note_type 12, 1, 5
 	octave 3
-	note C_, 4
-	rest 2
-	note C_, 1
-	rest 1
-	note C_, 1
-	rest 1
-	note C_, 2
-	rest 2
-	note C_, 1
-	rest 1
-	note G_, 4
-	rest 2
-	note G_, 1
-	rest 1
-	note G_, 1
-	rest 1
+	sound_call Music_Route2_Shared2
+	sound_call Music_KantoTrainerBattle_Shared7
 	note G_, 2
 	rest 2
 	note G_, 1
@@ -386,16 +320,7 @@ Music_Route2_Ch3:
 
 .sub1:
 	octave 3
-	note F_, 4
-	rest 2
-	note F_, 1
-	rest 1
-	note F_, 1
-	rest 1
-	note F_, 2
-	rest 2
-	note F_, 1
-	rest 1
+	sound_call Music_Route2_Shared1
 	note F_, 4
 	rest 2
 	note F_, 1
@@ -514,3 +439,42 @@ Music_Route2_Ch4:
 	drum_note 3, 2
 	drum_note 4, 4
 	sound_loop 0, .mainloop
+
+Music_Route2_Shared1: ; (tools/musiccalls.py)
+	note F_, 4
+	rest 2
+	note F_, 1
+	rest 1
+	note F_, 1
+	rest 1
+	note F_, 2
+	rest 2
+	note F_, 1
+	rest 1
+	sound_ret
+
+Music_Route2_Shared2: ; (tools/musiccalls.py)
+	note C_, 4
+	rest 2
+	note C_, 1
+	rest 1
+	note C_, 1
+	rest 1
+	note C_, 2
+	rest 2
+	note C_, 1
+	rest 1
+	note G_, 4
+	rest 2
+	sound_ret
+
+Music_Route2_Shared3: ; (tools/musiccalls.py)
+	octave 2
+	note B_, 2
+	octave 3
+	note E_, 2
+	octave 2
+	note B_, 2
+	octave 3
+	note E_, 2
+	sound_ret

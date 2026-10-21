@@ -6,8 +6,7 @@ Music_ContestResults:
 	channel 4, Music_ContestResults_Ch4
 
 Music_ContestResults_Ch1:
-	tempo 144
-	volume 7, 7
+	sound_call Music_ShowMeAround_Shared3
 	note_type 12, 5, 1
 .mainloop:
 	rest 2
@@ -23,21 +22,11 @@ Music_ContestResults_Ch1:
 	rest 2
 	note A_, 1
 	rest 3
-	note A_, 1
-	rest 3
-	note A_, 1
-	rest 3
-	note A_, 1
-	rest 1
+	sound_call Music_PokemonCenter_Shared5
 	rest 2
 	note A_, 1
 	rest 3
-	note A_, 1
-	rest 3
-	note A_, 1
-	rest 3
-	note A_, 1
-	rest 1
+	sound_call Music_PokemonCenter_Shared5
 	rest 2
 	note B_, 1
 	rest 3
@@ -72,16 +61,7 @@ Music_ContestResults_Ch2:
 	octave 3
 	note E_, 1
 	rest 1
-	octave 2
-	note D_, 2
-	octave 3
-	note F_, 1
-	rest 1
-	octave 1
-	note A_, 2
-	octave 3
-	note F_, 1
-	rest 1
+	sound_call Music_ContestResults_Shared1
 	octave 1
 	note B_, 2
 	octave 3
@@ -93,16 +73,7 @@ Music_ContestResults_Ch2:
 	note F_, 1
 	rest 1
 .loop1:
-	octave 2
-	note D_, 2
-	octave 3
-	note F_, 1
-	rest 1
-	octave 1
-	note A_, 2
-	octave 3
-	note F_, 1
-	rest 1
+	sound_call Music_ContestResults_Shared1
 	sound_loop 2, .loop1
 	octave 2
 	note G_, 2
@@ -172,3 +143,16 @@ Music_ContestResults_Ch4:
 	drum_note 8, 1
 	drum_note 8, 1
 	sound_loop 0, .mainloop
+
+Music_ContestResults_Shared1: ; (tools/musiccalls.py)
+	octave 2
+	note D_, 2
+	octave 3
+	note F_, 1
+	rest 1
+	octave 1
+	note A_, 2
+	octave 3
+	note F_, 1
+	rest 1
+	sound_ret

@@ -10,11 +10,7 @@ Music_RocketTheme_Ch1:
 	volume 7, 7
 	duty_cycle 3
 	stereo_panning FALSE, TRUE
-	vibrato 5, 6, 4
-	note_type 12, 10, 8
-	octave 4
-	note C_, 1
-	note D_, 1
+	sound_call Music_LookRocket_Shared2
 .mainloop:
 	duty_cycle 3
 	note_type 12, 10, 8
@@ -40,14 +36,7 @@ Music_RocketTheme_Ch1:
 	octave 4
 	note F_, 1
 	note F#, 3
-	note F_, 2
-	rest 2
-	note D#, 2
-	rest 2
-	note C_, 2
-	note D_, 2
-	note D#, 2
-	note C_, 2
+	sound_call Music_RocketTheme_Shared1
 	octave 3
 	note A#, 2
 	note G_, 2
@@ -65,14 +54,7 @@ Music_RocketTheme_Ch1:
 	octave 3
 	note F#, 1
 	note G_, 3
-	note F_, 2
-	rest 2
-	note D#, 2
-	rest 2
-	note C_, 2
-	note D_, 2
-	note D#, 2
-	note C_, 2
+	sound_call Music_RocketTheme_Shared1
 	octave 2
 	note A#, 2
 	note G_, 2
@@ -156,9 +138,7 @@ Music_RocketTheme_Ch1:
 
 Music_RocketTheme_Ch2:
 	stereo_panning TRUE, TRUE
-	vibrato 4, 6, 4
-	duty_cycle 3
-	note_type 12, 11, 7
+	sound_call Music_LookRocket_Shared5
 	octave 5
 	note C_, 1
 	note D_, 1
@@ -356,21 +336,14 @@ Music_RocketTheme_Ch3:
 	sound_call Music_LookRocket_Ch3.sub2
 	octave 3
 	note C_, 1
-	rest 1
-	octave 4
-	note C_, 1
-	rest 1
+	sound_call Music_ViridianCity_Shared1
 	octave 3
 	note C_, 1
 	rest 1
 	note C_, 1
 	rest 1
 	note C#, 1
-	rest 1
-	octave 4
-	note C#, 1
-	rest 1
-	octave 3
+	sound_call Music_Surf_Shared1
 	note A#, 1
 	note G_, 1
 	note E_, 1
@@ -396,11 +369,7 @@ Music_RocketTheme_Ch3:
 	note F#, 1
 	note D#, 1
 	note E_, 1
-	rest 1
-	octave 4
-	note C#, 1
-	rest 1
-	octave 3
+	sound_call Music_Surf_Shared1
 	note F_, 1
 	rest 1
 	octave 4
@@ -444,8 +413,7 @@ Music_RocketTheme_Ch3:
 	sound_loop 0, .mainloop
 
 Music_RocketTheme_Ch4:
-	toggle_noise 3
-	drum_speed 12
+	sound_call Music_ViridianCity_Shared3
 	rest 2
 .mainloop:
 	sound_call Music_LookRocket_Ch4.sub1
@@ -473,3 +441,14 @@ Music_RocketTheme_Ch4:
 	sound_call Music_LookRocket_Ch4.sub1
 	sound_call Music_LookRocket_Ch4.sub1
 	sound_loop 0, .mainloop
+
+Music_RocketTheme_Shared1: ; (tools/musiccalls.py)
+	note F_, 2
+	rest 2
+	note D#, 2
+	rest 2
+	note C_, 2
+	note D_, 2
+	note D#, 2
+	note C_, 2
+	sound_ret
