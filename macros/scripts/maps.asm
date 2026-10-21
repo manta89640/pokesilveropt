@@ -82,9 +82,7 @@ MACRO coord_event
 ;\3: scene id: a SCENE_* constant; controlled by setscene/setmapscene
 ;\4: script pointer
 	db \3, \2, \1
-	db 0 ; filler
 	dw \4
-	dw 0 ; filler
 	DEF {_NUM_COORD_EVENTS} += 1
 ENDM
 
@@ -127,16 +125,43 @@ MACRO object_event
 ;\<11>: sight range: applies to OBJECTTYPE_TRAINER
 ;\<12>: script pointer
 ;\<13>: event flag: an EVENT_* constant, or -1 to always appear
-	db \3, \2 + 4, \1 + 4, \4
-	dn \6, \5
-	db \7, \8
-	dn \9, \<10>
-	db \<11>
-	dw \<12>, \<13>
-	; the dummy PlayerObjectTemplate object_event has no def_object_events
-	if DEF(_NUM_OBJECT_EVENTS)
-		DEF {_NUM_OBJECT_EVENTS} += 1
+; Fields that have their usual value are left out, and a first byte says
+; which are there (see CopyMapObjectEvents).
+	DEF _mask = 0
+	if (\5) || (\6)
+		DEF _mask |= 1 << OBJECT_EVENT_RADIUS_F
 	endc
+	if (\7) != -1 || (\8) != -1
+		DEF _mask |= 1 << OBJECT_EVENT_HOURS_F
+	endc
+	if (\9) || (\<10>) != OBJECTTYPE_SCRIPT
+		DEF _mask |= 1 << OBJECT_EVENT_PALETTE_TYPE_F
+	endc
+	if \<11>
+		DEF _mask |= 1 << OBJECT_EVENT_SIGHT_RANGE_F
+	endc
+	if (\<13>) != -1
+		DEF _mask |= 1 << OBJECT_EVENT_FLAG_F
+	endc
+	db _mask
+	db \3, \2 + 4, \1 + 4, \4
+	if _mask & (1 << OBJECT_EVENT_RADIUS_F)
+		dn \6, \5
+	endc
+	if _mask & (1 << OBJECT_EVENT_HOURS_F)
+		db \7, \8
+	endc
+	if _mask & (1 << OBJECT_EVENT_PALETTE_TYPE_F)
+		dn \9, \<10>
+	endc
+	if _mask & (1 << OBJECT_EVENT_SIGHT_RANGE_F)
+		db \<11>
+	endc
+	dw \<12>
+	if _mask & (1 << OBJECT_EVENT_FLAG_F)
+		dw \<13>
+	endc
+	DEF {_NUM_OBJECT_EVENTS} += 1
 ENDM
 
 MACRO trainer

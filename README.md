@@ -5,8 +5,8 @@ This is a fork of [pret/pokegold](https://github.com/pret/pokegold), the disasse
 | | Original | This fork |
 |-|-|-|
 | ROM file | 2,097,152 bytes (128 banks) | **1,048,576 bytes (64 banks)** |
-| Content | 1,154,855 bytes | 949,804 bytes |
-| Free space | 942,297 bytes | 98,772 bytes |
+| Content | 1,154,855 bytes | 943,900 bytes |
+| Free space | 942,297 bytes | 104,676 bytes |
 
 The figures are for Silver, from the summary in rgblink's map file; Gold is within a few hundred bytes. The debug ROMs, which add the debug room, are 1 MB too.
 
@@ -26,6 +26,8 @@ To set up the repository, see [INSTALL.md](INSTALL.md). `make` builds `pokegold.
 **Compressed overworld sprites** (`engine/overworld/overworld.asm`). Overworld sprite tiles are LZ-compressed, except the player, rival, Mom, Poké Ball and monster, whose tiles other code loads directly (the monster is Substitute's doll). `GetSprite` decompresses them to a 384-byte SRAM buffer placed in space the save layout leaves free. Nine standing sprites have fewer tiles than `GetSprite` loads, so the original games load the start of the next sprites after them; their compressed graphics include those tiles.
 
 **Unused tileset blocks** (`tools/trim_metatiles.py`). Indoor tilesets had blocks that no map can show: not in any map's blocks or border, nor placed by a script, Cut, Whirlpool or a decoration in the player's room. Their metatiles and collision are removed, blocks that look and behave the same as an earlier one are merged into it, and the other blocks are renumbered in the maps' blocks and everything else that refers to them. (Outdoor tilesets keep their numbering, since the edges of connected maps are drawn with the current map's tileset.) Then the tiles of the tilesets' graphics that no metatile shows (nor the Magnet Train, which draws with the station's tiles) are blanked, which compresses better (`tools/blank_unused_tiles.py`).
+
+**Compact map events** (`macros/scripts/maps.asm`, `home/map.asm`). Each map object's `object_event` leaves out the fields that have their usual value (no movement radius, no hour limits, the sprite's own palette, a plain script, no sight range, no event flag), and starts with a byte that says which are there; 1,343 objects take 13 bytes each in the original. `CopyMapObjectEvents` fills in the rest, so the map objects in RAM are the same as before. Coordinate events leave out their three filler bytes.
 
 **Base data** (`home/pokemon.asm`). Each species' base data leaves out the 7 bytes that are the same for every species (the dex number, two unknown values and the unused beta pic pointers); `GetBaseData` fills them in, so `wCurBaseData` is the same as before.
 

@@ -775,24 +775,26 @@ ReloadObjectEventScripts:
 	ld a, [hli]
 	and a
 	ret z
-	ld bc, MAPOBJECT_SCRIPT_POINTER - 1
-	add hl, bc
 	ld d, h
 	ld e, l
 	ld hl, wMap2Object + MAPOBJECT_SCRIPT_POINTER
 .loop
 	push af
-	ld a, [de]
+	push hl
+	; read the object event into a buffer on the stack
+	add sp, -OBJECT_EVENT_SIZE
+	ld hl, sp + 0
+	call DecodeObjectEvent
+	ld hl, sp + MAPOBJECT_SCRIPT_POINTER - MAPOBJECT_SPRITE
+	ld a, [hli]
+	ld c, a
+	ld b, [hl]
+	add sp, OBJECT_EVENT_SIZE
+	pop hl
+	ld a, c
 	ld [hli], a
-	inc de
-	ld a, [de]
+	ld a, b
 	ld [hld], a
-	ld a, e
-	add OBJECT_EVENT_SIZE - 1
-	ld e, a
-	adc d
-	sub e
-	ld d, a
 	ld bc, MAPOBJECT_LENGTH
 	add hl, bc
 	pop af
@@ -996,20 +998,56 @@ CopyMapObjectEvents::
 	push hl
 	ld a, $ff
 	ld [hli], a
-	ld b, OBJECT_EVENT_SIZE
-.loop2
-	ld a, [de]
-	inc de
-	ld [hli], a
-	dec b
-	jr nz, .loop2
-
+	call DecodeObjectEvent
 	pop hl
 	ld bc, MAPOBJECT_LENGTH
 	add hl, bc
 	pop bc
 	dec c
 	jr nz, .loop
+	ret
+
+DecodeObjectEvent:
+; Read the object_event at de into the OBJECT_EVENT_SIZE bytes at hl, as a
+; map object from MAPOBJECT_SPRITE on, filling in the fields it leaves out.
+; Returns de after it.
+	ld a, [de] ; which fields are there (OBJECT_EVENT_*_F)
+	inc de
+	ld b, a
+	ld c, 4 ; sprite, y, x and movement are always there
+	call .Copy
+	ld c, 1 ; radius
+	xor a
+	call .Field
+	ld c, 2 ; hours
+	ld a, -1
+	call .Field
+	ld c, 1 ; palette and type
+	xor a
+	call .Field
+	ld c, 1 ; sight range
+	xor a
+	call .Field
+	ld c, 2 ; script pointer, which is always there
+	call .Copy
+	ld c, 2 ; event flag
+	ld a, -1
+.Field:
+; Copy c bytes from de if the next bit of b is set; otherwise write a c times.
+	srl b
+	jr c, .Copy
+.Fill:
+	ld [hli], a
+	dec c
+	jr nz, .Fill
+	ret
+
+.Copy:
+	ld a, [de]
+	inc de
+	ld [hli], a
+	dec c
+	jr nz, .Copy
 	ret
 
 ClearObjectStructs::
@@ -2222,10 +2260,23 @@ CheckCurrentMapCoordEvents::
 	ret
 
 .copy_coord_event
+; Copy the event to wCurCoordEvent, with zeros for its filler bytes (and for
+; the two bytes after it, which the original event's filler was copied to)
 	pop hl
 	ld de, wCurCoordEvent
-	ld bc, COORD_EVENT_SIZE
-	jr CheckIfFacingTileCoordIsBGEvent.tailmerge_2164 ; same as there (tools/tailmerge.py)
+	ld bc, wCurCoordEventScriptAddr - wCurCoordEvent - 1 ; scene ID, y, x
+	call CopyBytes
+	xor a
+	ld [de], a
+	inc de
+	ld c, 2 ; script address
+	call CopyBytes
+	xor a
+	ld [de], a
+	inc de
+	ld [de], a
+	scf
+	ret
 
 FadeToMenu::
 	xor a

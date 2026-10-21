@@ -104,10 +104,19 @@ DEF NUM_PLAYER_MOVEMENTS EQU const_value
 DEF SCENE_SCRIPT_SIZE EQU  4 ; scene_script
 DEF CALLBACK_SIZE     EQU  3 ; callback
 DEF WARP_EVENT_SIZE   EQU  5 ; warp_event
-DEF COORD_EVENT_SIZE  EQU  8 ; coord_event
+DEF COORD_EVENT_SIZE  EQU  5 ; coord_event (without the filler bytes of wCurCoordEvent)
 DEF BG_EVENT_SIZE     EQU  5 ; bg_event
 ; An object_event is a map_object without its initial MAPOBJECT_OBJECT_STRUCT_ID or final padding
-DEF OBJECT_EVENT_SIZE EQU MAPOBJECT_LENGTH - 3 ; 13
+DEF OBJECT_EVENT_SIZE EQU MAPOBJECT_LENGTH - 3 ; 13, once read into a map object
+
+; object_event leaves out the fields that have their usual value, and starts
+; with a byte that says which are there (see CopyMapObjectEvents)
+	const_def
+	const OBJECT_EVENT_RADIUS_F       ; 0 (default 0)
+	const OBJECT_EVENT_HOURS_F        ; 1 (default -1, -1)
+	const OBJECT_EVENT_PALETTE_TYPE_F ; 2 (default 0, OBJECTTYPE_SCRIPT)
+	const OBJECT_EVENT_SIGHT_RANGE_F  ; 3 (default 0)
+	const OBJECT_EVENT_FLAG_F         ; 4 (default -1)
 
 ; A coord_event for scene -1 will always activate,
 ; regardless of the map's scene variable value.

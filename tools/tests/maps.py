@@ -7,8 +7,8 @@ Usage: tools/tests/maps.py rom.gbc save.ram > maps.txt
 Starting from a save, each map is entered like the warp script command does,
 then wOverworldMapBlocks (the map's blocks plus the strips of connected
 maps), the tilemap, the sprite tiles in VRAM (those of the player and every
-NPC on the map) and the graphics of the background tiles on the screen are
-hashed. Run it on two ROMs and diff the output.
+NPC on the map), the graphics of the background tiles on the screen and the
+map objects (without their script addresses) are hashed. Run it on two ROMs and diff the output.
 """
 
 import hashlib
@@ -28,6 +28,9 @@ MAPSETUP_WARP = 0xf1
 SPAWN_N_A = 0xff
 MAPSTATUS_ENTER = 1
 MAPSTATUS_HANDLE = 2
+MAPOBJECT_LENGTH = 16
+MAPOBJECT_SCRIPT_POINTER = 10
+NUM_OBJECTS = 16
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -103,6 +106,11 @@ def main():
 		data = bytes(mem[blocks + i] for i in range(1300))
 		screen = bytes(mem[tilemap + i] for i in range(20 * 18))
 		sprites = bytes(mem[0x8000 + i] for i in range(0x1000))  # vTiles0 and vTiles1
+		# The map objects, without their script addresses
+		objects = bytearray(mem[sym['wMapObjects'] + i] for i in range(MAPOBJECT_LENGTH * NUM_OBJECTS))
+		for o in range(NUM_OBJECTS):
+			objects[o * MAPOBJECT_LENGTH + MAPOBJECT_SCRIPT_POINTER] = 0
+			objects[o * MAPOBJECT_LENGTH + MAPOBJECT_SCRIPT_POINTER + 1] = 0
 		# The graphics of the background tiles on the screen
 		bgtiles = b''.join(bytes(mem[(0x9000 + t * 16 if t < 0x80 else 0x8800 + (t - 0x80) * 16) + i]
 			for i in range(16)) for t in sorted(set(screen)))
@@ -112,7 +120,8 @@ def main():
 		print(f'{name} {group}:{number} blocks={hashlib.md5(data).hexdigest()[:12]} '
 			f'tilemap={hashlib.md5(screen).hexdigest()[:12]} '
 			f'sprites={hashlib.md5(sprites).hexdigest()[:12]} '
-			f'bgtiles={hashlib.md5(bgtiles).hexdigest()[:12]}', flush=True)
+			f'bgtiles={hashlib.md5(bgtiles).hexdigest()[:12]} '
+			f'objects={hashlib.md5(objects).hexdigest()[:12]}', flush=True)
 	pb.stop(save=False)
 	shutil.rmtree(tmp)
 

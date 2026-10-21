@@ -36,10 +36,16 @@ SpawnPlayer:
 	ret
 
 PlayerObjectTemplate:
-; A dummy map object used to initialize the player object.
+; A dummy map object used to initialize the player object, laid out like a
+; map object (not like a compact object_event).
 ; Shorter than the actual amount copied by two bytes.
 ; Said bytes seem to be unused.
-	object_event -4, -4, SPRITE_CHRIS, SPRITEMOVEDATA_PLAYER, 15, 15, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, 0, -1
+	db SPRITE_CHRIS, -4 + 4, -4 + 4, SPRITEMOVEDATA_PLAYER ; sprite, y, x, movement
+	dn 15, 15 ; radius
+	db -1, -1 ; hours
+	dn 0, OBJECTTYPE_SCRIPT ; palette, type
+	db 0 ; sight range
+	dw 0, -1 ; script, event flag
 
 CopyDECoordsToMapObject::
 	push de
