@@ -72,4 +72,4 @@ _PredefIndexed::
 	pop hl
 	pop af
 	ld a, [wPredefID]
-	jp Predef
+	jr Predef

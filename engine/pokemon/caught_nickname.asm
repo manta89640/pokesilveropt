@@ -8,7 +8,7 @@ CheckPartyFullAfterContest:
 	ld hl, wPartyCount
 	ld a, [hl]
 	cp PARTY_LENGTH
-	jp nc, .TryAddToBox
+	jr nc, .TryAddToBox
 	inc a
 	ld [hl], a
 	ld c, a

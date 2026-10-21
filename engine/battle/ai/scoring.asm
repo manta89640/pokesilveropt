@@ -498,7 +498,7 @@ AI_Smart_LockOn:
 
 .maybe_encourage
 	pop hl
-	jp AI_Smart_Sleep.encourage ; same as there (tools/tailmerge.py)
+	jr AI_Smart_Sleep.encourage ; same as there (tools/tailmerge.py)
 
 .player_locked_on
 	push hl

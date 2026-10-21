@@ -498,7 +498,7 @@ RegisterItem:
 GiveItem:
 	ld a, [wPartyCount]
 	and a
-	jp z, .NoPokemon
+	jr z, .NoPokemon
 	ld a, [wOptions]
 	push af
 	res NO_TEXT_SCROLL, a
@@ -606,7 +606,7 @@ BattlePack:
 	lb bc, PACKSTATE_INITTMHMPOCKET, PACKSTATE_INITBALLSPOCKET ; left ; right
 	call Pack_InterpretJoypad
 	ret c
-	jp ItemSubmenu
+	jr ItemSubmenu
 
 .InitKeyItemsPocket:
 	jp Pack.InitKeyItemsPocket ; same as there (tools/tailmerge.py)

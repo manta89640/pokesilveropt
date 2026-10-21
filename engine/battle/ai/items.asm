@@ -100,14 +100,14 @@ SwitchRarely:
 
 SwitchSometimes:
 	call SwitchOften_Shared ; callfar CheckAbleToSwitch / ld a, [wEnemySwitchMonParam] / and $f0
-	jp z, DontSwitch
+	jr z, DontSwitch
 
 	cp $10
 	jr nz, .not_10
 	call Random
 	cp 20 percent - 1
 	jr c, .switch
-	jp DontSwitch
+	jr DontSwitch
 .not_10
 
 	cp $20
@@ -115,7 +115,7 @@ SwitchSometimes:
 	call Random
 	cp 50 percent + 1
 	jr c, .switch
-	jp DontSwitch
+	jr DontSwitch
 .not_20
 
 	; $30

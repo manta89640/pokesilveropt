@@ -4018,7 +4018,7 @@ BattleCommand_StatUp:
 	ld a, [wFailedMessage]
 	and a
 	ret nz
-	jp MinimizeDropSub
+	jr MinimizeDropSub
 
 RaiseStat:
 	ld a, b

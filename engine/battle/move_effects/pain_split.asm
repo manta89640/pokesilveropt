@@ -3,7 +3,7 @@ BattleCommand_PainSplit:
 	and a
 	jp nz, .ButItFailed
 	call CheckSubstituteOpp
-	jp nz, .ButItFailed
+	jr nz, .ButItFailed
 	call AnimateCurrentMove
 	ld hl, wBattleMonMaxHP + 1
 	ld de, wEnemyMonMaxHP + 1

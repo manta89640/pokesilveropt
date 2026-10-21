@@ -1498,7 +1498,7 @@ Script_getnum:
 	lb bc, PRINTNUM_LEFTALIGN | 1, 3
 	call PrintNum
 	ld de, wStringBuffer1
-	jp GetStringBuffer
+	jr GetStringBuffer
 
 ResetStringBuffer1:
 	ld hl, wStringBuffer1

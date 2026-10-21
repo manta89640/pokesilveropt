@@ -1355,23 +1355,23 @@ RadioChannels:
 .PokemonMusic:
 	call .InJohto
 	jr nc, .NoSignal
-	jp LoadStation_PokemonMusic
+	jr LoadStation_PokemonMusic
 
 .LuckyChannel:
 	call .InJohto
 	jr nc, .NoSignal
-	jp LoadStation_LuckyChannel
+	jr LoadStation_LuckyChannel
 
 .RuinsOfAlphRadio:
 	ld a, [wPokegearMapPlayerIconLandmark]
 	cp LANDMARK_RUINS_OF_ALPH
 	jr nz, .NoSignal
-	jp LoadStation_UnownRadio
+	jr LoadStation_UnownRadio
 
 .PlacesAndPeople:
 	call .InJohto
 	jr c, .NoSignal
-	jp LoadStation_PlacesAndPeople
+	jr LoadStation_PlacesAndPeople
 
 .LetsAllSing:
 	call .InJohto
@@ -1399,7 +1399,7 @@ RadioChannels:
 	cp LANDMARK_LAKE_OF_RAGE
 	jr nz, .NoSignal
 .ok
-	jp LoadStation_EvolutionRadio
+	jr LoadStation_EvolutionRadio
 
 .NoSignal:
 	jp NoRadioStation

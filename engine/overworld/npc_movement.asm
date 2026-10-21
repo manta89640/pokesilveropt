@@ -64,7 +64,7 @@ WillObjectBumpIntoWater:
 	ld hl, OBJECT_PALETTE
 	add hl, bc
 	bit B_OAM_PRIO, [hl]
-	jp nz, WillObjectRemainOnWater
+	jr nz, WillObjectRemainOnWater
 	call NormalStep_Shared2 ; ld hl, OBJECT_TILE_COLLISION / add hl, bc / ld a, [hl]
 	ld d, a
 	call GetTilePermission

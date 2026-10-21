@@ -418,7 +418,7 @@ DetermineMoveOrder:
 .use_move
 	ld a, [wBattlePlayerAction]
 	and a ; BATTLEPLAYERACTION_USEMOVE?
-	jp nz, .player_first
+	jr nz, .player_first
 	call CompareMovePriority
 	jr z, .equal_priority
 	jr c, .player_first ; player goes first
@@ -545,7 +545,7 @@ CheckPlayerLockedIn:
 
 ParsePlayerAction:
 	call CheckPlayerLockedIn
-	jp c, .locked_in
+	jr c, .locked_in
 	ld hl, wPlayerSubStatus5
 	bit SUBSTATUS_ENCORED, [hl]
 	jr z, .not_encored
@@ -5265,7 +5265,7 @@ ParseEnemyAction:
 .loop
 	ld a, [hl]
 	and a
-	jp z, .struggle
+	jr z, .struggle
 	ld a, [wEnemyDisabledMove]
 	cp [hl]
 	jr z, .disabled
@@ -7167,7 +7167,7 @@ FillInExpBar:
 	pop hl
 	ld de, 7
 	add hl, de
-	jp PlaceExpBar
+	jr PlaceExpBar
 
 CalcExpBar:
 ; Calculate the percent exp between this level and the next

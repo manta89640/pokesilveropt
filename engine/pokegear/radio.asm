@@ -1279,7 +1279,7 @@ RocketRadio9:
 RocketRadio10:
 	ld hl, RocketRadioText10
 	ld a, ROCKET_RADIO
-	jp NextRadioLine
+	jr NextRadioLine
 
 RocketRadioText1:
 	text_far _RocketRadioText1

@@ -359,7 +359,7 @@ SlotsAction_WaitStopReel3:
 	ld bc, wReel3
 	ld de, wReel3Stopped
 	call Slots_LoadReelState
-	jp SlotsAction_WaitStart.proceed ; same as there (tools/tailmerge.py)
+	jr SlotsAction_WaitStart.proceed ; same as there (tools/tailmerge.py)
 
 SlotsAction_FlashIfWin:
 	ld a, [wSlotMatched]

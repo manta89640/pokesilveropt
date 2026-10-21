@@ -106,7 +106,7 @@ MoveMailFromPCToParty:
 	ld [hl], d
 	call CloseSRAM
 	pop bc
-	jp DeleteMailFromPC
+	jr DeleteMailFromPC
 
 GetMailboxCount:
 	ld a, BANK(sMailboxCount)

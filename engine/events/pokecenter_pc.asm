@@ -397,7 +397,7 @@ PlayerTossItemMenu:
 	jr .loop
 
 .quit
-	jp PlayerWithdrawItemMenu.quit ; same as there (tools/tailmerge.py)
+	jr PlayerWithdrawItemMenu.quit ; same as there (tools/tailmerge.py)
 
 PlayerDecorationMenu:
 	farcall _PlayerDecorationMenu

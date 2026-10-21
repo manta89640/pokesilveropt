@@ -5,8 +5,8 @@ This is a fork of [pret/pokegold](https://github.com/pret/pokegold), the disasse
 | | Original | This fork |
 |-|-|-|
 | ROM file | 2,097,152 bytes (128 banks) | **1,048,576 bytes (64 banks)** |
-| Content | 1,154,855 bytes | 949,849 bytes |
-| Free space | 942,297 bytes | 98,727 bytes |
+| Content | 1,154,855 bytes | 949,804 bytes |
+| Free space | 942,297 bytes | 98,772 bytes |
 
 The figures are for Silver, from the summary in rgblink's map file; Gold is within a few hundred bytes. The debug ROMs, which add the debug room, are 1 MB too.
 
@@ -39,7 +39,7 @@ To set up the repository, see [INSTALL.md](INSTALL.md). `make` builds `pokegold.
 
 **Indexed far calls** (`tools/farcall_targets.py`, `home/farcall.asm`, `home/predef.asm`). A `farcall` or `callfar` is 6 bytes. To one of the 146 functions that are far-called more than once, it is now `rst FarCallIndexed` and an index into a table in ROM0, 2 bytes, which calls the function with the same registers and flags. Likewise `predef` is `rst PredefIndexed` and the predef's id, 2 bytes instead of 5. These used the two `rst` vectors that were free.
 
-Savings by step (Silver, bytes): text dictionary 121,811; dead code 18,254; LZ 13,867; overworld sprites 10,708; map blocks 10,684; duplicate graphics 3,944; peephole 1,854; duplicate code 3,245; `jumptext` 1,357; base data 1,728; music and sound effects 3,231; battle animations 925; indexed far calls 2,207; outlined code 1,595; tileset blocks 7,911.
+Savings by step (Silver, bytes): text dictionary 121,811; dead code 18,254; LZ 13,867; overworld sprites 10,708; map blocks 10,684; duplicate graphics 3,944; peephole 1,899; duplicate code 3,245; `jumptext` 1,357; base data 1,728; music and sound effects 3,231; battle animations 925; indexed far calls 2,207; outlined code 1,595; tileset blocks 7,911.
 
 
 ## What is unchanged

@@ -3,7 +3,7 @@ _NameRater:
 	ld hl, NameRaterHelloText
 	call PrintText
 	call YesNoBox
-	jp c, .cancel
+	jr c, .cancel
 ; Select a Pokemon from your party
 	ld hl, NameRaterWhichMonText
 	call PrintText

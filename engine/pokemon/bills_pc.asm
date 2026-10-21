@@ -152,7 +152,7 @@ BillsPCDepositJumptable:
 
 BillsPCDepositFuncDeposit:
 	call BillsPC_CheckMail_PreventBlackout
-	jp c, BillsPCDepositFuncCancel
+	jr c, BillsPCDepositFuncCancel
 	call DepositPokemon
 	jr c, .box_full
 .shared1: ; (tools/outline.py)
@@ -321,7 +321,7 @@ BillsPC_Withdraw:
 	ld a, [wMenuCursorY]
 	call StoreMenuCursorPosition
 	call VerticalMenu
-	jp c, .cancel
+	jr c, .cancel
 	ld a, [wMenuCursorY]
 	dec a
 	and %11
@@ -343,7 +343,7 @@ BillsPC_Withdraw:
 
 .withdraw
 	call BillsPC_CheckMail_PreventBlackout
-	jp c, .cancel
+	jr c, .cancel
 	call TryWithdrawPokemon
 	jr c, .FailedWithdraw
 	ld a, $0
@@ -691,7 +691,7 @@ Withdraw_UpDown:
 	and PAD_DOWN
 	jr nz, BillsPC_PressDown
 .empty
-	jp BillsPC_JoypadDidNothing
+	jr BillsPC_JoypadDidNothing
 
 MoveMonWithoutMail_DPad:
 	call Withdraw_UpDown_Shared ; ld hl, hJoyLast / ld a, [wBillsPC_NumMonsOnScreen] / ld d, a / ...
@@ -1731,7 +1731,7 @@ MovePKMNWithoutMail_InsertMon:
 .same_box
 	call .CopyFromBox
 	call .CheckTrivialMove
-	jp .CopyToBox
+	jr .CopyToBox
 
 .PartyToBox:
 	call .CopyFromParty

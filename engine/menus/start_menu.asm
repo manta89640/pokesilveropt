@@ -522,7 +522,7 @@ StartMenu_Pokemon:
 	jr z, .quit
 
 .return
-	jp StartMenu_Status.tailmerge_452 ; same as there (tools/tailmerge.py)
+	jr StartMenu_Status.tailmerge_452 ; same as there (tools/tailmerge.py)
 
 .quit
 	ld a, b

@@ -61,4 +61,4 @@ _FarCallIndexed::
 	pop de
 	pop af
 	ld a, [wTempBank]
-	jp FarCall_hl
+	jr FarCall_hl

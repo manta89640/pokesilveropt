@@ -161,7 +161,7 @@ Intro_LoadAllPal0:
 	ldh a, [hSGB]
 	and a
 	ret z
-	jp SGB_ApplyCreditsPals.tailmerge_98 ; same as there (tools/tailmerge.py)
+	jr SGB_ApplyCreditsPals.tailmerge_98 ; same as there (tools/tailmerge.py)
 
 
 Intro_LoadMonPalette:

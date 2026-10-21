@@ -193,7 +193,7 @@ TrainerCard_Page3_Joypad:
 	ret
 
 .left
-	jp TrainerCard_Page1_Joypad.pressed_right_a ; same as there (tools/tailmerge.py)
+	jr TrainerCard_Page1_Joypad.pressed_right_a ; same as there (tools/tailmerge.py)
 
 .right
 	jr TrainerCard_Page2_Joypad.d_left ; same as there (tools/tailmerge.py)

@@ -277,7 +277,7 @@ DecoOrnamentMenu:
 FindOwnedOrnaments:
 	ld hl, .ornaments
 	ld c, DOLLS
-	jp FindOwnedDecosInCategory
+	jr FindOwnedDecosInCategory
 
 .ornaments:
 	db DECO_PIKACHU_DOLL ; 1e
@@ -584,7 +584,7 @@ DecoAction_setupcarpet:
 
 DecoAction_putawaycarpet:
 	ld hl, wDecoCarpet
-	jp DecoAction_TryPutItAway
+	jr DecoAction_TryPutItAway
 
 DecoAction_setupplant:
 	ld hl, wDecoPlant

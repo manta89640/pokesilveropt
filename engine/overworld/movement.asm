@@ -532,19 +532,19 @@ Movement_jump_step_right:
 
 Movement_fast_jump_step_down:
 	ld a, STEP_BIKE << 2 | DOWN
-	jp JumpStep
+	jr JumpStep
 
 Movement_fast_jump_step_up:
 	ld a, STEP_BIKE << 2 | UP
-	jp JumpStep
+	jr JumpStep
 
 Movement_fast_jump_step_left:
 	ld a, STEP_BIKE << 2 | LEFT
-	jp JumpStep
+	jr JumpStep
 
 Movement_fast_jump_step_right:
 	ld a, STEP_BIKE << 2 | RIGHT
-	jp JumpStep
+	jr JumpStep
 
 Movement_turn_step_down:
 	ld a, OW_DOWN

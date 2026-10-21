@@ -1,7 +1,7 @@
 CheckBreedmonCompatibility:
 	call .CheckBreedingGroupCompatibility
 	ld c, $0
-	jp nc, .done
+	jr nc, .done
 	call CheckBreedmonCompatibility_Shared ; ld a, [wBreedMon1Species] / ld [wCurPartySpecies], a / ld a, [wBreedMon1DVs] / ...
 	jr c, .genderless
 	ld b, $1

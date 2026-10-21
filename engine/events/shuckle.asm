@@ -125,7 +125,7 @@ ReturnShuckie:
 	ret
 
 .DontReturn:
-	jp GiveShuckle.NotGiven ; same as there (tools/tailmerge.py)
+	jr GiveShuckle.NotGiven ; same as there (tools/tailmerge.py)
 
 .fainted
 	ld a, SHUCKIE_FAINTED

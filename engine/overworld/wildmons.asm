@@ -918,7 +918,7 @@ RandomPhoneMon:
 	inc hl ; species
 	ld a, BANK(Trainers)
 	call GetFarByte
-	jp RandomPhoneWildMon.tailmerge_875 ; same as there (tools/tailmerge.py)
+	jr RandomPhoneWildMon.tailmerge_875 ; same as there (tools/tailmerge.py)
 
 INCLUDE "data/wild/johto_grass.asm"
 INCLUDE "data/wild/johto_water.asm"

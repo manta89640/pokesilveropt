@@ -69,7 +69,7 @@ ScrollingMenuJoyAction:
 	bit B_PAD_START, a
 	jr nz, .start
 	bit B_PAD_RIGHT, a
-	jp nz, .d_right
+	jr nz, .d_right
 	bit B_PAD_LEFT, a
 	jr nz, .d_left
 	bit B_PAD_UP, a
