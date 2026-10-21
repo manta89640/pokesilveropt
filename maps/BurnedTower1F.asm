@@ -116,23 +116,14 @@ FirebreatherDickFight:
 	end
 
 FirebreatherDickPostBattle:
-	faceplayer
-	opentext
-	writetext FirebreatherDickAfterText
-	waitbutton
-	closetext
-	end
+	jumptextfaceplayer FirebreatherDickAfterText
 
 TrainerFirebreatherNed:
 	trainer FIREBREATHER, NED, EVENT_BEAT_FIREBREATHER_NED, FirebreatherNedSeenText, FirebreatherNedBeatenText, 0, .Script
 
 .Script
 	endifjustbattled
-	opentext
-	writetext FirebreatherNedAfterText
-	waitbutton
-	closetext
-	end
+	jumptext FirebreatherNedAfterText
 
 BurnedTower1FRock:
 	jumpstd SmashRockScript

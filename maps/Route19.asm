@@ -29,44 +29,28 @@ TrainerSwimmerfDawn:
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext SwimmerfDawnAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext SwimmerfDawnAfterBattleText
 
 TrainerSwimmermHarold:
 	trainer SWIMMERM, HAROLD, EVENT_BEAT_SWIMMERM_HAROLD, SwimmermHaroldSeenText, SwimmermHaroldBeatenText, 0, .Script
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext SwimmermHaroldAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext SwimmermHaroldAfterBattleText
 
 TrainerSwimmermJerome:
 	trainer SWIMMERM, JEROME, EVENT_BEAT_SWIMMERM_JEROME, SwimmermJeromeSeenText, SwimmermJeromeBeatenText, 0, .Script
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext SwimmermJeromeAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext SwimmermJeromeAfterBattleText
 
 TrainerSwimmermTucker:
 	trainer SWIMMERM, TUCKER, EVENT_BEAT_SWIMMERM_TUCKER, SwimmermTuckerSeenText, SwimmermTuckerBeatenText, 0, .Script
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext SwimmermTuckerAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext SwimmermTuckerAfterBattleText
 
 Route19Fisher1Script:
 	faceplayer

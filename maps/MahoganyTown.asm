@@ -44,11 +44,7 @@ RageCandyBarMerchantScript:
 	end
 
 .ClearedRocketHideout:
-	opentext
-	writetext RageCandyBarMerchantSoldOutText
-	waitbutton
-	closetext
-	end
+	jumptext RageCandyBarMerchantSoldOutText
 
 .SellRageCandyBars:
 	opentext

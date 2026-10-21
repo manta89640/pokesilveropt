@@ -101,22 +101,14 @@ TrainerPokemaniacShane:
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext PokemaniacShaneAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext PokemaniacShaneAfterBattleText
 
 TrainerHikerBenjamin:
 	trainer HIKER, BENJAMIN, EVENT_BEAT_HIKER_BENJAMIN, HikerBenjaminSeenText, HikerBenjaminBeatenText, 0, .Script
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext HikerBenjaminAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext HikerBenjaminAfterBattleText
 
 Route42Sign1:
 	jumptext Route42Sign1Text

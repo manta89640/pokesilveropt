@@ -43,11 +43,7 @@ TrainerCamperJerry:
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext CamperJerryAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext CamperJerryAfterBattleText
 
 PewterGymGuideScript:
 	faceplayer

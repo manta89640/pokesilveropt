@@ -12,11 +12,7 @@ TrainerGentlemanAlfred:
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext GentlemanAlfredAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext GentlemanAlfredAfterBattleText
 
 TrainerSailorHuey:
 	trainer SAILOR, HUEY1, EVENT_BEAT_SAILOR_HUEY, SailorHueySeenText, SailorHueyBeatenText, 0, .Script

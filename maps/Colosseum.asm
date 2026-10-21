@@ -40,11 +40,7 @@ ColosseumConsoleScript:
 	end
 
 CableClubFriendScript:
-	opentext
-	writetext .FriendReadyText
-	waitbutton
-	closetext
-	end
+	jumptext .FriendReadyText
 
 .FriendReadyText:
 	text "Your friend is"

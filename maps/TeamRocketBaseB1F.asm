@@ -483,22 +483,14 @@ TrainerScientistJed:
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext ScientistJedAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext ScientistJedAfterBattleText
 
 TrainerGruntM16:
 	trainer GRUNTM, GRUNTM_16, EVENT_BEAT_ROCKET_GRUNTM_16, GruntM16SeenText, GruntM16BeatenText, 0, .Script
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext GruntM16AfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext GruntM16AfterBattleText
 
 TeamRocketBaseB1FSecurityCamera:
 	jumptext TeamRocketBaseB1FSecurityCameraText

@@ -19,55 +19,35 @@ TrainerPokemaniacLarry:
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext PokemaniacLarryAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext PokemaniacLarryAfterBattleText
 
 TrainerHikerRussell:
 	trainer HIKER, RUSSELL, EVENT_BEAT_HIKER_RUSSELL, HikerRussellSeenText, HikerRussellBeatenText, 0, .Script
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext HikerRussellAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext HikerRussellAfterBattleText
 
 TrainerHikerDaniel:
 	trainer HIKER, DANIEL, EVENT_BEAT_HIKER_DANIEL, HikerDanielSeenText, HikerDanielBeatenText, 0, .Script
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext HikerDanielAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext HikerDanielAfterBattleText
 
 TrainerFirebreatherBill:
 	trainer FIREBREATHER, BILL, EVENT_BEAT_FIREBREATHER_BILL, FirebreatherBillSeenText, FirebreatherBillBeatenText, 0, .Script
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext FirebreatherBillAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext FirebreatherBillAfterBattleText
 
 TrainerFirebreatherRay:
 	trainer FIREBREATHER, RAY, EVENT_BEAT_FIREBREATHER_RAY, FirebreatherRaySeenText, FirebreatherRayBeatenText, 0, .Script
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext FirebreatherRayAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext FirebreatherRayAfterBattleText
 
 UnionCave1FGreatBall:
 	itemball GREAT_BALL

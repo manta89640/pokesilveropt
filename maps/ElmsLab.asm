@@ -243,11 +243,7 @@ ElmDescribesMrPokemonScript:
 	end
 
 LookAtElmPokeBallScript:
-	opentext
-	writetext ElmPokeBallText
-	waitbutton
-	closetext
-	end
+	jumptext ElmPokeBallText
 
 ElmsLabHealingMachine:
 	opentext

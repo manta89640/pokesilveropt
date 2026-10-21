@@ -42,11 +42,7 @@ BlackthornGym2FSetUpStoneTableCallback:
 .Fall:
 	pause 30
 	scall .FX
-	opentext
-	writetext BlackthornGym2FBoulderFellText
-	waitbutton
-	closetext
-	end
+	jumptext BlackthornGym2FBoulderFellText
 
 .FX:
 	playsound SFX_STRENGTH
@@ -61,22 +57,14 @@ TrainerCooltrainermCody:
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext CooltrainermCodyAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext CooltrainermCodyAfterBattleText
 
 TrainerCooltrainerfFran:
 	trainer COOLTRAINERF, FRAN, EVENT_BEAT_COOLTRAINERF_FRAN, CooltrainerfFranSeenText, CooltrainerfFranBeatenText, 0, .Script
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext CooltrainerfFranAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext CooltrainerfFranAfterBattleText
 
 CooltrainermCodySeenText:
 	text "It's not as if we"

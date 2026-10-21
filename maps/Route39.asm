@@ -110,33 +110,21 @@ TrainerPokefanfRuth:
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext PokefanfRuthAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext PokefanfRuthAfterBattleText
 
 TrainerSailorEugene:
 	trainer SAILOR, EUGENE, EVENT_BEAT_SAILOR_EUGENE, SailorEugeneSeenText, SailorEugeneBeatenText, 0, .Script
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext SailorEugeneAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext SailorEugeneAfterBattleText
 
 TrainerPsychicNorman:
 	trainer PSYCHIC_T, NORMAN, EVENT_BEAT_PSYCHIC_NORMAN, PsychicNormanSeenText, PsychicNormanBeatenText, 0, .Script
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext PsychicNormanAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext PsychicNormanAfterBattleText
 
 Route39Sign:
 	jumptext Route39SignText

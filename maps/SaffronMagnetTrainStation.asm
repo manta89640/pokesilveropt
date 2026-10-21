@@ -56,11 +56,7 @@ Script_ArriveFromGoldenrod:
 	applymovement SAFFRONMAGNETTRAINSTATION_OFFICER, SaffronMagnetTrainStationOfficerApproachTrainDoorMovement
 	applymovement PLAYER, SaffronMagnetTrainStationPlayerLeaveTrainAndEnterStationMovement
 	applymovement SAFFRONMAGNETTRAINSTATION_OFFICER, SaffronMagnetTrainStationOfficerReturnToBoardingGateMovement
-	opentext
-	writetext SaffronMagnetTrainStationOfficerArrivedInSaffronText
-	waitbutton
-	closetext
-	end
+	jumptext SaffronMagnetTrainStationOfficerArrivedInSaffronText
 
 SaffronMagnetTrainStationGymGuideScript:
 	faceplayer

@@ -30,44 +30,28 @@ TrainerSwimmerfElaine:
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext SwimmerfElaineAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext SwimmerfElaineAfterBattleText
 
 TrainerSwimmerfPaula:
 	trainer SWIMMERF, PAULA, EVENT_BEAT_SWIMMERF_PAULA, SwimmerfPaulaSeenText, SwimmerfPaulaBeatenText, 0, .Script
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext SwimmerfPaulaAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext SwimmerfPaulaAfterBattleText
 
 TrainerSwimmermSimon:
 	trainer SWIMMERM, SIMON, EVENT_BEAT_SWIMMERM_SIMON, SwimmermSimonSeenText, SwimmermSimonBeatenText, 0, .Script
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext SwimmermSimonAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext SwimmermSimonAfterBattleText
 
 TrainerSwimmermRandall:
 	trainer SWIMMERM, RANDALL, EVENT_BEAT_SWIMMERM_RANDALL, SwimmermRandallSeenText, SwimmermRandallBeatenText, 0, .Script
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext SwimmermRandallAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext SwimmermRandallAfterBattleText
 
 Route40Lass1Script:
 	jumptextfaceplayer Route40Lass1Text

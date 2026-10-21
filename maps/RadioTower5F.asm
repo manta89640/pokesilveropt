@@ -69,11 +69,7 @@ TrainerExecutivef1:
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext Executivef1AfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext Executivef1AfterBattleText
 
 RadioTower5FRocketBossScript:
 	applymovement PLAYER, RadioTower5FPlayerTwoStepsLeftMovement

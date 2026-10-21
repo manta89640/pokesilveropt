@@ -73,11 +73,7 @@ TrainerPsychicNathan:
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext PsychicNathanAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext PsychicNathanAfterBattleText
 
 
 RuinsOfAlphOutsideMysteryChamberSign:

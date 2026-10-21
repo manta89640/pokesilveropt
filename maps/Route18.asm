@@ -12,22 +12,14 @@ TrainerBirdKeeperBoris:
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext BirdKeeperBorisAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext BirdKeeperBorisAfterBattleText
 
 TrainerBirdKeeperBob:
 	trainer BIRD_KEEPER, BOB, EVENT_BEAT_BIRD_KEEPER_BOB, BirdKeeperBobSeenText, BirdKeeperBobBeatenText, 0, .Script
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext BirdKeeperBobAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext BirdKeeperBobAfterBattleText
 
 Route18Sign:
 	jumptext Route18SignText

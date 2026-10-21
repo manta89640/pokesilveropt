@@ -22,33 +22,21 @@ TrainerPokefanmCarter:
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext PokefanmCarterAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext PokefanmCarterAfterBattleText
 
 TrainerBirdKeeperRoy:
 	trainer BIRD_KEEPER, ROY, EVENT_BEAT_BIRD_KEEPER_ROY, BirdKeeperRoySeenText, BirdKeeperRoyBeatenText, 0, .Script
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext BirdKeeperRoyAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext BirdKeeperRoyAfterBattleText
 
 TrainerPokefanmTrevor:
 	trainer POKEFANM, TREVOR, EVENT_BEAT_POKEFANM_TREVOR, PokefanmTrevorSeenText, PokefanmTrevorBeatenText, 0, .Script
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext PokefanmTrevorAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext PokefanmTrevorAfterBattleText
 
 PokefanmCarterSeenText:
 	text "Let me tell you,"

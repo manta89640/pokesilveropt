@@ -72,72 +72,44 @@ TrainerTwinsAmyandmay1:
 
 .AfterScript:
 	endifjustbattled
-	opentext
-	writetext TwinsAmyandmay1AfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext TwinsAmyandmay1AfterBattleText
 
 TrainerTwinsAmyandmay2:
 	trainer TWINS, AMYANDMAY2, EVENT_BEAT_TWINS_AMY_AND_MAY, TwinsAmyandmay2SeenText, TwinsAmyandmay2BeatenText, 0, .AfterScript
 
 .AfterScript:
 	endifjustbattled
-	opentext
-	writetext TwinsAmyandmay2AfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext TwinsAmyandmay2AfterBattleText
 
 TrainerBugCatcherBenny:
 	trainer BUG_CATCHER, BENNY, EVENT_BEAT_BUG_CATCHER_BENNY, BugCatcherBennySeenText, BugCatcherBennyBeatenText, 0, .AfterScript
 
 .AfterScript:
 	endifjustbattled
-	opentext
-	writetext BugCatcherBennyAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext BugCatcherBennyAfterBattleText
 
 TrainerBugCatcherAl:
 	trainer BUG_CATCHER, AL, EVENT_BEAT_BUG_CATCHER_AL, BugCatcherAlSeenText, BugCatcherAlBeatenText, 0, .AfterScript
 
 .AfterScript:
 	endifjustbattled
-	opentext
-	writetext BugCatcherAlAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext BugCatcherAlAfterBattleText
 
 TrainerBugCatcherJosh:
 	trainer BUG_CATCHER, JOSH, EVENT_BEAT_BUG_CATCHER_JOSH, BugCatcherJoshSeenText, BugCatcherJoshBeatenText, 0, .AfterScript
 
 .AfterScript:
 	endifjustbattled
-	opentext
-	writetext BugCatcherJoshAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext BugCatcherJoshAfterBattleText
 
 AzaleaGymGuideScript:
 	faceplayer
 	checkevent EVENT_BEAT_BUGSY
 	iftrue .AzaleaGymGuideWinScript
-	opentext
-	writetext AzaleaGymGuideText
-	waitbutton
-	closetext
-	end
+	jumptext AzaleaGymGuideText
 
 .AzaleaGymGuideWinScript:
-	opentext
-	writetext AzaleaGymGuideWinText
-	waitbutton
-	closetext
-	end
+	jumptext AzaleaGymGuideWinText
 
 AzaleaGymStatue:
 	checkflag ENGINE_HIVEBADGE

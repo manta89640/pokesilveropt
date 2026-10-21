@@ -17,66 +17,42 @@ TrainerCooltrainermSean:
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext CooltrainermSeanAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext CooltrainermSeanAfterBattleText
 
 TrainerCooltrainerfCarol:
 	trainer COOLTRAINERF, CAROL, EVENT_BEAT_COOLTRAINERF_CAROL, CooltrainerfCarolSeenText, CooltrainerfCarolBeatenText, 0, .Script
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext CooltrainerfCarolAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext CooltrainerfCarolAfterBattleText
 
 TrainerPokemaniacEthan:
 	trainer POKEMANIAC, ETHAN, EVENT_BEAT_POKEMANIAC_ETHAN, PokemaniacEthanSeenText, PokemaniacEthanBeatenText, 0, .Script
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext PokemaniacEthanAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext PokemaniacEthanAfterBattleText
 
 TrainerHikerNoland:
 	trainer HIKER, NOLAND, EVENT_BEAT_HIKER_NOLAND, HikerNolandSeenText, HikerNolandBeatenText, 0, .Script
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext HikerNolandAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext HikerNolandAfterBattleText
 
 TrainerGentlemanEdward:
 	trainer GENTLEMAN, EDWARD, EVENT_BEAT_GENTLEMAN_EDWARD, GentlemanEdwardSeenText, GentlemanEdwardBeatenText, 0, .Script
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext GentlemanEdwardAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext GentlemanEdwardAfterBattleText
 
 TrainerBurglarCorey:
 	trainer BURGLAR, COREY, EVENT_BEAT_BURGLAR_COREY, BurglarCoreySeenText, BurglarCoreyBeatenText, 0, .Script
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext BurglarCoreyAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext BurglarCoreyAfterBattleText
 
 FastShipLazySailorScript:
 	playmusic MUSIC_HIKER_ENCOUNTER

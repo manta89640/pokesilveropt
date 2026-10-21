@@ -105,22 +105,14 @@ TrainerHikerErik:
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext HikerErikAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext HikerErikAfterBattleText
 
 TrainerHikerMichael:
 	trainer HIKER, MICHAEL, EVENT_BEAT_HIKER_MICHAEL, HikerMichaelSeenText, HikerMichaelBeatenText, 0, .Script
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext HikerMichaelAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext HikerMichaelAfterBattleText
 
 TrainerHikerParry:
 	trainer HIKER, PARRY3, EVENT_BEAT_HIKER_PARRY, HikerParry3SeenText, HikerParry3BeatenText, 0, .Script
@@ -182,33 +174,21 @@ TrainerHikerTimothy:
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext HikerTimothyAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext HikerTimothyAfterBattleText
 
 TrainerCooltrainermRyan:
 	trainer COOLTRAINERM, RYAN, EVENT_BEAT_COOLTRAINERM_RYAN, CooltrainermRyanSeenText, CooltrainermRyanBeatenText, 0, .Script
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext CooltrainermRyanAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext CooltrainermRyanAfterBattleText
 
 TrainerCooltrainerfKelly:
 	trainer COOLTRAINERF, KELLY, EVENT_BEAT_COOLTRAINERF_KELLY, CooltrainerfKellySeenText, CooltrainerfKellyBeatenText, 0, .Script
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext CooltrainerfKellyAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext CooltrainerfKellyAfterBattleText
 
 Route45Sign:
 	jumptext Route45SignText

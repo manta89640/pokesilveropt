@@ -15,44 +15,28 @@ TrainerYoungsterOwen:
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext YoungsterOwenAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext YoungsterOwenAfterBattleText
 
 TrainerYoungsterJason:
 	trainer YOUNGSTER, JASON, EVENT_BEAT_YOUNGSTER_JASON, YoungsterJasonSeenText, YoungsterJasonBeatenText, 0, .Script
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext YoungsterJasonAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext YoungsterJasonAfterBattleText
 
 TrainerPsychicHerman:
 	trainer PSYCHIC_T, HERMAN, EVENT_BEAT_PSYCHIC_HERMAN, PsychicHermanSeenText, PsychicHermanBeatenText, 0, .Script
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext PsychicHermanAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext PsychicHermanAfterBattleText
 
 TrainerPsychicFidel:
 	trainer PSYCHIC_T, FIDEL, EVENT_BEAT_PSYCHIC_FIDEL, PsychicFidelSeenText, PsychicFidelBeatenText, 0, .Script
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext PsychicFidelAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext PsychicFidelAfterBattleText
 
 Route11Sign:
 	jumptext Route11SignText

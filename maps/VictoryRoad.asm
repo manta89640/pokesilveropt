@@ -88,11 +88,7 @@ VictoryRoadRivalNext:
 
 .AfterBattle:
 	playmusic MUSIC_RIVAL_AFTER
-	opentext
-	writetext VictoryRoadRivalAfterText
-	waitbutton
-	closetext
-	end
+	jumptext VictoryRoadRivalAfterText
 
 VictoryRoadTMEarthquake:
 	itemball TM_EARTHQUAKE

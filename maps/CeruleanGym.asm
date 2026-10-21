@@ -88,33 +88,21 @@ TrainerSwimmerfDiana:
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext SwimmerfDianaAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext SwimmerfDianaAfterBattleText
 
 TrainerSwimmerfBriana:
 	trainer SWIMMERF, BRIANA, EVENT_BEAT_SWIMMERF_BRIANA, SwimmerfBrianaSeenText, SwimmerfBrianaBeatenText, 0, .Script
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext SwimmerfBrianaAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext SwimmerfBrianaAfterBattleText
 
 TrainerSwimmermParker:
 	trainer SWIMMERM, PARKER, EVENT_BEAT_SWIMMERM_PARKER, SwimmermParkerSeenText, SwimmermParkerBeatenText, 0, .Script
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext SwimmermParkerAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext SwimmermParkerAfterBattleText
 
 CeruleanGymGuideScript:
 	faceplayer
@@ -138,20 +126,12 @@ CeruleanGymHiddenMachinePart:
 CeruleanGymStatue1:
 	checkevent EVENT_TRAINERS_IN_CERULEAN_GYM
 	iffalse CeruleanGymStatue
-	opentext
-	writetext CeruleanGymNote1Text
-	waitbutton
-	closetext
-	end
+	jumptext CeruleanGymNote1Text
 
 CeruleanGymStatue2:
 	checkevent EVENT_TRAINERS_IN_CERULEAN_GYM
 	iffalse CeruleanGymStatue
-	opentext
-	writetext CeruleanGymNote2Text
-	waitbutton
-	closetext
-	end
+	jumptext CeruleanGymNote2Text
 
 CeruleanGymStatue:
 	checkflag ENGINE_CASCADEBADGE

@@ -14,33 +14,21 @@ TrainerBirdKeeperHank:
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext BirdKeeperHankAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext BirdKeeperHankAfterBattleText
 
 TrainerPicnickerHope:
 	trainer PICNICKER, HOPE, EVENT_BEAT_PICNICKER_HOPE, PicnickerHopeSeenText, PicnickerHopeBeatenText, 0, .Script
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext PicnickerHopeAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext PicnickerHopeAfterBattleText
 
 TrainerPicnickerSharon:
 	trainer PICNICKER, SHARON, EVENT_BEAT_PICNICKER_SHARON, PicnickerSharonSeenText, PicnickerSharonBeatenText, 0, .Script
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext PicnickerSharonAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext PicnickerSharonAfterBattleText
 
 MtMoonSquareSign:
 	jumptext MtMoonSquareSignText

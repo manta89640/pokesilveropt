@@ -12,22 +12,14 @@ TrainerLassConnie:
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext LassConnie1AfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext LassConnie1AfterBattleText
 
 TrainerSailorKent:
 	trainer SAILOR, KENT, EVENT_BEAT_SAILOR_KENT, SailorKentSeenText, SailorKentBeatenText, 0, .Script
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext SailorKentAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext SailorKentAfterBattleText
 
 SailorKentSeenText:
 	text "JASMINE must be"

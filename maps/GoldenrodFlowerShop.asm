@@ -22,11 +22,7 @@ FlowerShopTeacherScript:
 
 .Lalala:
 	turnobject GOLDENRODFLOWERSHOP_TEACHER, LEFT
-	opentext
-	writetext GoldenrodFlowerShopTeacherLalalaHavePlentyOfWaterText
-	waitbutton
-	closetext
-	end
+	jumptext GoldenrodFlowerShopTeacherLalalaHavePlentyOfWaterText
 
 FlowerShopFloriaScript:
 	faceplayer

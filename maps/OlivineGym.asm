@@ -64,25 +64,13 @@ OlivineGymGuideScript:
 	iftrue .OlivineGymGuideWinScript
 	checkevent EVENT_JASMINE_RETURNED_TO_GYM
 	iffalse .OlivineGymGuidePreScript
-	opentext
-	writetext OlivineGymGuideText
-	waitbutton
-	closetext
-	end
+	jumptext OlivineGymGuideText
 
 .OlivineGymGuideWinScript:
-	opentext
-	writetext OlivineGymGuideWinText
-	waitbutton
-	closetext
-	end
+	jumptext OlivineGymGuideWinText
 
 .OlivineGymGuidePreScript:
-	opentext
-	writetext OlivineGymGuidePreText
-	waitbutton
-	closetext
-	end
+	jumptext OlivineGymGuidePreText
 
 OlivineGymStatue:
 	checkflag ENGINE_MINERALBADGE

@@ -55,44 +55,28 @@ TrainerGruntM4:
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext GruntM4AfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext GruntM4AfterBattleText
 
 TrainerGruntM5:
 	trainer GRUNTM, GRUNTM_5, EVENT_BEAT_ROCKET_GRUNTM_5, GruntM5SeenText, GruntM5BeatenText, 0, .Script
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext GruntM5AfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext GruntM5AfterBattleText
 
 TrainerGruntM6:
 	trainer GRUNTM, GRUNTM_6, EVENT_BEAT_ROCKET_GRUNTM_6, GruntM6SeenText, GruntM6BeatenText, 0, .Script
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext GruntM6AfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext GruntM6AfterBattleText
 
 TrainerGruntF2:
 	trainer GRUNTF, GRUNTF_2, EVENT_BEAT_ROCKET_GRUNTF_2, GruntF2SeenText, GruntF2BeatenText, 0, .Script
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext GruntF2AfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext GruntF2AfterBattleText
 
 RadioTower2FSalesSign:
 	jumptext RadioTower2FSalesSignText

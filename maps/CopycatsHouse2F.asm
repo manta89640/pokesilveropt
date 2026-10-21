@@ -32,11 +32,7 @@ Copycat:
 	faceplayer
 	variablesprite SPRITE_COPYCAT, SPRITE_LASS
 	special LoadUsedSpritesGFX
-	opentext
-	writetext CopycatText_QuickMimicking
-	waitbutton
-	closetext
-	end
+	jumptext CopycatText_QuickMimicking
 
 .TalkAboutLostItem:
 	opentext

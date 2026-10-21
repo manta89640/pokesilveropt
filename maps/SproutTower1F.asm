@@ -28,11 +28,7 @@ TrainerSageChow:
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext SageChowAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext SageChowAfterBattleText
 
 SproutTower1FParlyzHeal:
 	itemball PARLYZ_HEAL

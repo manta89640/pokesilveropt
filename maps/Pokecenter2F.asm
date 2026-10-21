@@ -41,20 +41,10 @@ Pokecenter2F_AppearMysteryGiftDeliveryGuy:
 	end
 
 Script_TradeCenterClosed:
-	faceplayer
-	opentext
-	writetext Text_TradeRoomClosed
-	waitbutton
-	closetext
-	end
+	jumptextfaceplayer Text_TradeRoomClosed
 
 Script_BattleRoomClosed:
-	faceplayer
-	opentext
-	writetext Text_BattleRoomClosed
-	waitbutton
-	closetext
-	end
+	jumptextfaceplayer Text_BattleRoomClosed
 
 LinkReceptionistScript_Trade:
 	checkevent EVENT_GAVE_MYSTERY_EGG_TO_ELM
@@ -179,12 +169,7 @@ LinkReceptionistScript_Battle:
 	end
 
 Script_TimeCapsuleClosed:
-	faceplayer
-	opentext
-	writetext Text_TimeCapsuleClosed
-	waitbutton
-	closetext
-	end
+	jumptextfaceplayer Text_TimeCapsuleClosed
 
 LinkReceptionistScript_TimeCapsule:
 	checkevent EVENT_MET_BILL

@@ -22,11 +22,7 @@ TrainerGruntM29:
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext GruntM29AfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext GruntM29AfterBattleText
 
 TrainerGruntM1:
 	trainer GRUNTM, GRUNTM_1, EVENT_BEAT_ROCKET_GRUNTM_1, GruntM1SeenText, GruntM1BeatenText, 0, .Script
@@ -76,22 +72,14 @@ TrainerGruntM2:
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext GruntM2AfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext GruntM2AfterBattleText
 
 TrainerGruntF1:
 	trainer GRUNTF, GRUNTF_1, EVENT_BEAT_ROCKET_GRUNTF_1, GruntF1SeenText, GruntF1BeatenText, 0, .Script
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext GruntF1AfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext GruntF1AfterBattleText
 
 SlowpokeWellB1FSlowpokeWithMailScript:
 	faceplayer

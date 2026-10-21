@@ -91,11 +91,7 @@ OlivineLighthouseJasmine:
 	turnobject OLIVINELIGHTHOUSE6F_JASMINE, RIGHT
 	pause 15
 	turnobject OLIVINELIGHTHOUSE6F_MONSTER, LEFT
-	opentext
-	writetext JasmineAmphyHangOnText
-	waitbutton
-	closetext
-	end
+	jumptext JasmineAmphyHangOnText
 
 .Unused: ; unreferenced
 	end

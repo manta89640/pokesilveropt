@@ -89,44 +89,28 @@ TrainerBlackbeltYoshi:
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext BlackbeltYoshiAfterText
-	waitbutton
-	closetext
-	end
+	jumptext BlackbeltYoshiAfterText
 
 TrainerBlackbeltLao:
 	trainer BLACKBELT_T, LAO, EVENT_BEAT_BLACKBELT_LAO, BlackbeltLaoSeenText, BlackbeltLaoBeatenText, 0, .Script
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext BlackbeltLaoAfterText
-	waitbutton
-	closetext
-	end
+	jumptext BlackbeltLaoAfterText
 
 TrainerBlackbeltNob:
 	trainer BLACKBELT_T, NOB, EVENT_BEAT_BLACKBELT_NOB, BlackbeltNobSeenText, BlackbeltNobBeatenText, 0, .Script
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext BlackbeltNobAfterText
-	waitbutton
-	closetext
-	end
+	jumptext BlackbeltNobAfterText
 
 TrainerBlackbeltLung:
 	trainer BLACKBELT_T, LUNG, EVENT_BEAT_BLACKBELT_LUNG, BlackbeltLungSeenText, BlackbeltLungBeatenText, 0, .Script
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext BlackbeltLungAfterText
-	waitbutton
-	closetext
-	end
+	jumptext BlackbeltLungAfterText
 
 CianwoodGymBoulder:
 	jumpstd StrengthBoulderScript

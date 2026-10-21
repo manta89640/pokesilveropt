@@ -60,7 +60,7 @@ def main():
 		sheet = Image.new('RGB', (340 * 3, 154 * ((len(shown) + 2) // 3)), 'white')
 		for i, shot in enumerate(shown):
 			for side, d in enumerate(dirs):
-				image = Image.open(os.path.join(d, shot + '.png'))
+				image = Image.open(os.path.join(d, shot + '.png')).convert('RGB')
 				sheet.paste(image, ((i % 3) * 340 + side * 165, (i // 3) * 154))
 		path = os.path.join(args.out, f'{name}_diff.png')
 		sheet.save(path)

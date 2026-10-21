@@ -59,11 +59,7 @@ CeruleanCityCooltrainerFScript:
 	cry SLOWBRO
 	waitbutton
 	closetext
-	opentext
-	writetext CeruleanCityCooltrainerFText3
-	waitbutton
-	closetext
-	end
+	jumptext CeruleanCityCooltrainerFText3
 
 CeruleanCityFisherScript:
 	faceplayer
@@ -114,11 +110,7 @@ CeruleanCityYoungsterScript:
 	waitsfx
 	showemote EMOTE_SHOCK, CERULEANCITY_YOUNGSTER, 15
 	turnobject CERULEANCITY_YOUNGSTER, LEFT
-	opentext
-	writetext CeruleanCityYoungsterText2
-	waitbutton
-	closetext
-	end
+	jumptext CeruleanCityYoungsterText2
 
 CeruleanCitySign:
 	jumptext CeruleanCitySignText

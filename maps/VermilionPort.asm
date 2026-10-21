@@ -185,12 +185,7 @@ VermilionPortSailorScript:
 	end
 
 VermilionPortSuperNerdScript:
-	faceplayer
-	opentext
-	writetext VermilionPortSuperNerdText
-	waitbutton
-	closetext
-	end
+	jumptextfaceplayer VermilionPortSuperNerdText
 
 VermilionPortHiddenIron:
 	hiddenitem IRON, EVENT_VERMILION_PORT_HIDDEN_IRON

@@ -95,11 +95,7 @@ TrainerLassCarrie:
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext LassCarrieAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext LassCarrieAfterBattleText
 
 WhitneyCriesScript:
 	showemote EMOTE_SHOCK, GOLDENRODGYM_LASS2, 15
@@ -119,50 +115,30 @@ TrainerLassBridget:
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext LassBridgetAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext LassBridgetAfterBattleText
 
 TrainerBeautyVictoria:
 	trainer BEAUTY, VICTORIA, EVENT_BEAT_BEAUTY_VICTORIA, BeautyVictoriaSeenText, BeautyVictoriaBeatenText, 0, .Script
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext BeautyVictoriaAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext BeautyVictoriaAfterBattleText
 
 TrainerBeautySamantha:
 	trainer BEAUTY, SAMANTHA, EVENT_BEAT_BEAUTY_SAMANTHA, BeautySamanthaSeenText, BeautySamanthaBeatenText, 0, .Script
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext BeautySamanthaAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext BeautySamanthaAfterBattleText
 
 GoldenrodGymGuideScript:
 	faceplayer
 	checkevent EVENT_BEAT_WHITNEY
 	iftrue .GoldenrodGymGuideWinScript
-	opentext
-	writetext GoldenrodGymGuideText
-	waitbutton
-	closetext
-	end
+	jumptext GoldenrodGymGuideText
 
 .GoldenrodGymGuideWinScript:
-	opentext
-	writetext GoldenrodGymGuideWinText
-	waitbutton
-	closetext
-	end
+	jumptext GoldenrodGymGuideWinText
 
 GoldenrodGymStatue:
 	checkflag ENGINE_PLAINBADGE

@@ -200,11 +200,7 @@ TrainerPsychicMark:
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext PsychicMarkAfterBattleText
-	waitbutton
-	closetext
-	end
+	jumptext PsychicMarkAfterBattleText
 
 ArthurScript:
 	faceplayer

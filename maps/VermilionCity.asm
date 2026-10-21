@@ -29,11 +29,7 @@ VermilionMachop:
 	waitbutton
 	closetext
 	earthquake 30
-	opentext
-	writetext VermilionMachopText2
-	waitbutton
-	closetext
-	end
+	jumptext VermilionMachopText2
 
 VermilionCitySuperNerdScript:
 	jumptextfaceplayer VermilionCitySuperNerdText

@@ -18,18 +18,10 @@ CianwoodGymGuideScript:
 	faceplayer
 	checkevent EVENT_BEAT_CHUCK
 	iftrue .CianwoodGymGuideWinScript
-	opentext
-	writetext CianwoodGymGuideText
-	waitbutton
-	closetext
-	end
+	jumptext CianwoodGymGuideText
 
 .CianwoodGymGuideWinScript:
-	opentext
-	writetext CianwoodGymGuideWinText
-	waitbutton
-	closetext
-	end
+	jumptext CianwoodGymGuideWinText
 
 CianwoodPokecenter1FLassText:
 	text "Did you meet the"

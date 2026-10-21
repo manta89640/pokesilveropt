@@ -19,11 +19,7 @@ Route26HealHouseTeacherScript:
 	pause 60
 	special FadeInFromBlack
 	special RestartMapMusic
-	opentext
-	writetext Route26HealHouseKeepAtItText
-	waitbutton
-	closetext
-	end
+	jumptext Route26HealHouseKeepAtItText
 
 Route26HealHouseBookshelf:
 	jumpstd PictureBookshelfScript

@@ -146,22 +146,14 @@ TrainerCamperRoland:
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext CamperRolandAfterText
-	waitbutton
-	closetext
-	end
+	jumptext CamperRolandAfterText
 
 TrainerFisherJustin:
 	trainer FISHER, JUSTIN, EVENT_BEAT_FISHER_JUSTIN, FisherJustinSeenText, FisherJustinBeatenText, 0, .Script
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext FisherJustinAfterText
-	waitbutton
-	closetext
-	end
+	jumptext FisherJustinAfterText
 
 TrainerFisherRalph1:
 	trainer FISHER, RALPH1, EVENT_BEAT_FISHER_RALPH, FisherRalph1SeenText, FisherRalph1BeatenText, 0, .Script
@@ -251,11 +243,7 @@ TrainerFisherHenry:
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext FisherHenryAfterText
-	waitbutton
-	closetext
-	end
+	jumptext FisherHenryAfterText
 
 TrainerPicnickerLiz1:
 	trainer PICNICKER, LIZ1, EVENT_BEAT_PICNICKER_LIZ, PicnickerLiz1SeenText, PicnickerLiz1BeatenText, 0, .Script
@@ -345,33 +333,21 @@ TrainerYoungsterAlbert:
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext YoungsterAlbertAfterText
-	waitbutton
-	closetext
-	end
+	jumptext YoungsterAlbertAfterText
 
 TrainerYoungsterGordon:
 	trainer YOUNGSTER, GORDON, EVENT_BEAT_YOUNGSTER_GORDON, YoungsterGordonSeenText, YoungsterGordonBeatenText, 0, .Script
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext YoungsterGordonAfterText
-	waitbutton
-	closetext
-	end
+	jumptext YoungsterGordonAfterText
 
 TrainerBirdKeeperPeter:
 	trainer BIRD_KEEPER, PETER, EVENT_BEAT_BIRD_KEEPER_PETER, BirdKeeperPeterSeenText, BirdKeeperPeterBeatenText, 0, .Script
 
 .Script:
 	endifjustbattled
-	opentext
-	writetext BirdKeeperPeterAfterText
-	waitbutton
-	closetext
-	end
+	jumptext BirdKeeperPeterAfterText
 
 FriedaScript:
 	faceplayer
