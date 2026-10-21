@@ -404,12 +404,10 @@ def main():
 		f.write('; Text macros (see macros/scripts/text.asm) encode strings with this charmap.\n\n')
 		f.write(f'DEF NUM_DICT_PREFIXES EQU {args.prefixes}\n\n')
 		f.write('\tnewcharmap dict, main\n')
-		f.write('if !DEF(_DEBUG)\n')
 		for slot in sorted(by_slot):
 			i = by_slot[slot]
 			vals = ', '.join(f'${v:02x}' for v in codes[i])
 			f.write(f'\tcharmap {asm_string(expansions[i])}, {vals}\n')
-		f.write('endc\n')
 		f.write('\tsetcharmap main\n')
 
 	with open(os.path.join(ROOT, 'data/text/dictionary.asm'), 'w', encoding='utf-8') as f:

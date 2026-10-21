@@ -4,7 +4,6 @@
 DEF NUM_DICT_PREFIXES EQU 16
 
 	newcharmap dict, main
-if !DEF(_DEBUG)
 	charmap "e ", $11
 	charmap "th", $12
 	charmap "it", $13
@@ -2615,5 +2614,4 @@ if !DEF(_DEBUG)
 	charmap "100", $10, $fd
 	charmap "panel", $10, $fe
 	charmap "lates", $10, $ff
-endc
 	setcharmap main

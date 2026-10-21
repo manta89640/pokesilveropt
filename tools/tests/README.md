@@ -18,6 +18,8 @@ for s in continue pokedex pack pokegear phone radio trainer_card battle services
 done
 ```
 
+`debug_room.txt` is for the debug ROMs (`original/pokesilver_debug.gbc` and `pokesilver_debug.gbc`), from the same save.
+
 `maps.py` enters every map from the save and prints a hash of its blocks (with the strips of connected maps), so two ROMs can be compared map by map:
 
 ```sh

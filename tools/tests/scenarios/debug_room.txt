@@ -1,0 +1,44 @@
+# Debug ROMs only: open the debug room (hold Select+Start and pick it), then
+# the #MON GET! and ITEM GET! editors, which print item and move names
+wait 400
+press start 60
+press a 120
+press down 30
+press down 30
+press down 30
+push select
+push start
+wait 10
+press a 30
+release start
+release select
+wait 60
+shot room0
+mash down 7 20
+press a 60
+shot page2
+press a 80
+shot monget0
+mash right 3 20
+shot monget1
+press down 30
+mash right 5 20
+shot monget2
+press down 30
+mash right 4 20
+shot monget3
+press down 30
+mash right 4 20
+shot monget4
+press b 80
+shot page2b
+press down 30
+press a 80
+shot itemget0
+mash right 4 20
+shot itemget1
+mash up 1 20
+mash right 1 20
+shot itemget2
+press b 80
+shot page2c

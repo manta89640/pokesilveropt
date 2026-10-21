@@ -381,11 +381,9 @@ SECTION "Credits Strings", ROMX
 INCLUDE "data/credits_strings.asm"
 
 
-if !DEF(_DEBUG)
 SECTION "Text Dictionary", ROMX
 
 INCLUDE "data/text/dictionary.asm"
-endc
 
 
 SECTION "Stadium 2 Checksums", ROMX

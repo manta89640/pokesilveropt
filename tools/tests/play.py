@@ -12,6 +12,7 @@ Scenario commands:
   wait N                     run N frames
   press BUTTON [N]           press a button for 4 frames, then wait N (20) frames
   hold BUTTON N              hold a button for N frames
+  push BUTTON                press a button and keep it held, until "release BUTTON"
   mash BUTTON COUNT N        press a button COUNT times, N frames apart
   mashshot BUTTON COUNT N P  like mash, with a screenshot named P### after each press
   walk DIR N                 take N steps
@@ -135,6 +136,10 @@ def main():
 		elif cmd == 'hold':
 			pb.button_press(args[1])
 			tick(int(args[2]))
+			pb.button_release(args[1])
+		elif cmd == 'push':
+			pb.button_press(args[1])
+		elif cmd == 'release':
 			pb.button_release(args[1])
 		elif cmd == 'mash':
 			for _ in range(int(args[2])):

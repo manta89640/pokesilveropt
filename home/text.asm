@@ -196,11 +196,6 @@ ENDM
 	dict '<MOM>',     PrintMomsName
 	dict '<PLAYER>',  PrintPlayerName
 	dict '<RIVAL>',   PrintRivalName
-if DEF(_DEBUG)
-	dict '<ROUTE>',   PlaceJPRoute
-	dict '<WATASHI>', PlaceWatashi
-	dict '<KOKO_WA>', PlaceKokoWa
-endc
 	dict '<RED>',     PrintRedsName
 	dict '<GREEN>',   PrintGreensName
 	dict '#',         PlacePOKe
@@ -208,9 +203,6 @@ endc
 	dict '<ROCKET>',  RocketChar
 	dict '<TM>',      TMChar
 	dict '<TRAINER>', TrainerChar
-if DEF(_DEBUG)
-	dict '<KOUGEKI>', PlaceKougeki
-endc
 	dict '<LF>',      LineFeedChar
 	dict '<CONT>',    ContText
 	dict '<……>',      SixDotsChar
@@ -236,39 +228,7 @@ endc
 .not_diacritic
 	cp FIRST_REGULAR_TEXT_CHAR
 	jr nc, .place
-if !DEF(_DEBUG)
 	jp PlaceDictEntry
-else
-; dakuten or handakuten
-	cp 'パ'
-	jr nc, .handakuten
-; dakuten
-	cp FIRST_HIRAGANA_DAKUTEN_CHAR
-	jr nc, .hiragana_dakuten
-; katakana dakuten
-	add 'カ' - 'ガ'
-	jr .place_dakuten
-
-.hiragana_dakuten
-	add 'か' - 'が'
-.place_dakuten
-	ld b, 'ﾞ' ; dakuten
-	call Diacritic
-	jr .place
-
-.handakuten
-	cp 'ぱ'
-	jr nc, .hiragana_handakuten
-; katakana handakuten
-	add 'ハ' - 'パ'
-	jr .place_handakuten
-
-.hiragana_handakuten
-	add 'は' - 'ぱ'
-.place_handakuten
-	ld b, 'ﾟ' ; handakuten
-	call Diacritic
-endc
 
 .place
 	ld [hli], a
@@ -295,12 +255,6 @@ PlacePOKe:    print_name PlacePOKeText
 SixDotsChar:  print_name SixDotsCharText
 PlacePKMN:    print_name PlacePKMNText
 PlacePOKE:    print_name PlacePOKEText
-if DEF(_DEBUG)
-PlaceKougeki: print_name KougekiText
-PlaceJPRoute: print_name PlaceJPRouteText
-PlaceWatashi: print_name PlaceWatashiText
-PlaceKokoWa:  print_name PlaceKokoWaText
-endc
 
 PlaceMoveTargetsName::
 	ldh a, [hBattleTurn]
@@ -367,7 +321,6 @@ PlaceCommandCharacter::
 	pop de
 	jp NextChar
 
-if !DEF(_DEBUG)
 PlaceDictEntry:
 ; Print the text dictionary entry for code a (see data/text/dictionary.asm).
 ; Codes 1 to NUM_DICT_PREFIXES are followed by a second byte from $60 to $ff.
@@ -428,7 +381,6 @@ PlaceDictEntry:
 	ld l, c
 	pop de
 	jp NextChar
-endc
 
 TMCharText::      db "TM@"
 TrainerCharText:: db "TRAINER@"
@@ -440,13 +392,6 @@ EnemyText::       db "Enemy @"
 PlacePKMNText::   db "<PK><MN>@"
 PlacePOKEText::   db "<PO><KE>@"
 String_Space::    db " @"
-if DEF(_DEBUG)
-KougekiText::     db "こうげき@"
-; These strings have been dummied out.
-PlaceJPRouteText::
-PlaceWatashiText::
-PlaceKokoWaText:: db "@"
-endc
 
 NextLineChar::
 	pop hl
