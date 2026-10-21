@@ -2348,19 +2348,19 @@ Pokedex_LoadCurrentFootprint:
 Pokedex_LoadAnyFootprint:
 	ld a, [wTempSpecies]
 	dec a
-	and %11111000
-	srl a
-	srl a
-	srl a
-	ld e, 0
-	ld d, a
-	ld a, [wTempSpecies]
-	dec a
-	and %111
-	swap a ; * $10
+	ld e, a
+	ld d, 0
+	ld hl, FootprintIndices
+	add hl, de
+	ld a, BANK(FootprintIndices)
+	call GetFarByte
 	ld l, a
 	ld h, 0
-	add hl, de
+	add hl, hl
+	add hl, hl
+	add hl, hl
+	add hl, hl
+	add hl, hl ; * 4 * TILE_1BPP_SIZE
 	ld de, Footprints
 	add hl, de
 
@@ -2372,9 +2372,7 @@ Pokedex_LoadAnyFootprint:
 	call Request1bpp
 	pop hl
 
-	; Whoever was editing footprints forgot to fix their
-	; tile editor. Now each bottom half is 8 tiles off.
-	ld de, 8 tiles
+	ld de, 2 * TILE_1BPP_SIZE
 	add hl, de
 
 	ld e, l
