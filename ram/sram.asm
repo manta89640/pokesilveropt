@@ -173,3 +173,10 @@ sBackupChecksum:: dw
 sBackupCheckValue2:: db ; loaded with SAVE_CHECK_VALUE_2, used to check save corruption
 
 ENDSECTION
+
+
+SECTION "Sprite Buffer", SRAM
+
+; Compressed overworld sprites are decompressed here (see GetSprite).
+; This was free space in the original save layout.
+sSpriteBuffer:: ds 24 tiles

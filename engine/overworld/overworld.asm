@@ -183,6 +183,7 @@ GetUsedSprites:
 	push bc
 	ldh a, [hUsedSpriteTile]
 	call CopyToVram
+	call CloseSRAM
 	pop bc
 	pop hl
 	ldh a, [hUsedSpriteTile]
@@ -213,6 +214,7 @@ LoadStillSpriteTiles:
 	call GetSprite
 	ld hl, vTiles0 tile $78
 	call Get2bpp
+	call CloseSRAM
 .no_still_sprite_1
 	ld a, $78
 	ld [wUsedSprites + (SPRITE_GFX_LIST_CAPACITY - 2) * 2 + 1], a
@@ -223,6 +225,7 @@ LoadStillSpriteTiles:
 	call GetSprite
 	ld hl, vTiles0 tile $7c
 	call Get2bpp
+	call CloseSRAM
 .no_still_sprite_2
 	ld a, $7c
 	ld [wUsedSprites + (SPRITE_GFX_LIST_CAPACITY - 1) * 2 + 1], a
@@ -264,9 +267,27 @@ GetSprite:
 	ld a, [hli]
 	swap a
 	ld c, a
-	; load the sprite bank into both b and h
+	; load the sprite bank into b
 	ld b, [hl]
 	pop hl
+	assert SPRITE_GFX_COMPRESSED == 1
+	bit 4, c
+	ret z
+	res 4, c
+; Decompress the tiles to sSpriteBuffer, and leave SRAM open for the caller to
+; copy them; it must call CloseSRAM afterward.
+	push hl
+	push bc
+	ld a, BANK(sSpriteBuffer)
+	call OpenSRAM
+	ld h, d
+	ld l, e
+	ld a, b
+	ld de, sSpriteBuffer
+	call FarDecompress
+	pop bc
+	pop hl
+	ld de, sSpriteBuffer
 	ret
 
 GetMonSprite:
@@ -434,7 +455,8 @@ GetUsedSprite:
 	ldh [hUsedSpriteIndex], a
 	call GetSprite
 	pop af
-	jr CopyToVram
+	call CopyToVram
+	jp CloseSRAM
 
 LoadEmote::
 ; Get the address of the pointer to emote c.

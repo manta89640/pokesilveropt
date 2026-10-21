@@ -7,6 +7,9 @@ DEF SPRITEDATA_TYPE    rb ; 4
 DEF SPRITEDATA_PALETTE rb ; 5
 DEF NUM_SPRITEDATA_FIELDS EQU _RS
 
+; SPRITEDATA_SIZE flag: the sprite's tiles are LZ-compressed
+DEF SPRITE_GFX_COMPRESSED EQU 1
+
 ; sprite types
 	const_def 1
 	const WALKING_SPRITE  ; 1

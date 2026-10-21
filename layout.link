@@ -211,6 +211,7 @@ SRAM $01
 	"Backup Save 2"
 SRAM $02
 	"Boxes 1-7"
+	"Sprite Buffer"
 SRAM $03
 	"Boxes 8-14"
 	"Backup Save 3"

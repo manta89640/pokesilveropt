@@ -1,7 +1,13 @@
 MACRO overworld_sprite
 ; pointer, length, type, palette
+; Sprites are LZ-compressed, except the ones other code loads directly
 	dw \1
-	db \2 tiles, BANK(\1), \3, \4
+	if STRFIND("ChrisSpriteGFX RivalSpriteGFX MomSpriteGFX PokeBallSpriteGFX", "\1") != -1
+		db \2 tiles
+	else
+		db \2 tiles | SPRITE_GFX_COMPRESSED
+	endc
+	db BANK(\1), \3, \4
 ENDM
 
 OverworldSprites:
