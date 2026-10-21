@@ -304,6 +304,9 @@ gfx/pack/pack_items.2bpp: gfx/pack/pack.2bpp ; tail -c +241 $< | head -c 240 > $
 gfx/pack/pack_tmhm.2bpp: gfx/pack/pack.2bpp ; tail -c +481 $< | head -c 240 > $@
 gfx/pack/pack_balls.2bpp: gfx/pack/pack.2bpp ; tail -c +721 $< | head -c 240 > $@
 
+gfx/trainer_card/chris_and_card.2bpp: gfx/trainer_card/chris_card.2bpp gfx/trainer_card/trainer_card.2bpp ; cat $^ > $@
+gfx/trainer_card/status_and_leaders.2bpp: gfx/trainer_card/card_status.2bpp gfx/trainer_card/leaders.2bpp ; cat $^ > $@
+
 gfx/new_game/shrink1.2bpp: RGBGFXFLAGS += --columns
 gfx/new_game/shrink2.2bpp: RGBGFXFLAGS += --columns
 

@@ -46,15 +46,15 @@ TrainerCard:
 
 	ld hl, ChrisPicAndTrainerCardGFX
 	ld de, vTiles2
-	ld bc, (35 + 6) tiles
 	ld a, BANK(ChrisPicAndTrainerCardGFX)
-	call FarCopyBytes
+	call FarDecompress
 
-	ld hl, CardStatusGFX
+	call TrainerCard_DecompressStatusAndLeaderGFX
+	ld hl, sScratch
 	ld de, vTiles2 tile $29
 	ld bc, 86 tiles
-	ld a, BANK(CardStatusGFX)
-	call FarCopyBytes
+	call CopyBytes
+	call CloseSRAM
 
 	call TrainerCard_PrintTopHalfOfCard
 
@@ -105,10 +105,12 @@ TrainerCard_Page1_LoadGFX:
 	ld d, 6
 	call TrainerCard_InitBorder
 	call WaitBGMap
-	ld de, CardStatusGFX
+	call TrainerCard_DecompressStatusAndLeaderGFX
+	ld de, sScratch
 	ld hl, vTiles2 tile $29
-	lb bc, BANK(CardStatusGFX), 86
+	lb bc, BANK(CardStatusAndLeaderGFX), 86
 	call Request2bpp
+	call CloseSRAM
 	call TrainerCard_Page1_PrintDexCaught_GameTime
 	jr TrainerCard_IncrementJumptable
 
@@ -139,14 +141,7 @@ TrainerCard_Page2_LoadGFX:
 	ld d, 6
 	call TrainerCard_InitBorder
 	call WaitBGMap
-	ld de, LeaderGFX
-	ld hl, vTiles2 tile $29
-	lb bc, BANK(LeaderGFX), 86
-	call Request2bpp
-	ld de, BadgeGFX
-	ld hl, vTiles0 tile $00
-	lb bc, BANK(BadgeGFX), 44
-	call Request2bpp
+	call TrainerCard_LoadLeaderAndBadgeGFX
 	call TrainerCard_Page2_3_InitObjectsAndStrings
 	jr TrainerCard_IncrementJumptable
 
@@ -181,14 +176,7 @@ TrainerCard_Page3_LoadGFX:
 	ld d, 6
 	call TrainerCard_InitBorder
 	call WaitBGMap
-	ld de, LeaderGFX2
-	ld hl, vTiles2 tile $29
-	lb bc, BANK(LeaderGFX2), 86
-	call Request2bpp
-	ld de, BadgeGFX2
-	ld hl, vTiles0 tile $00
-	lb bc, BANK(BadgeGFX2), 44
-	call Request2bpp
+	call TrainerCard_LoadLeaderAndBadgeGFX
 	call TrainerCard_Page2_3_InitObjectsAndStrings
 	jp TrainerCard_IncrementJumptable
 
@@ -606,14 +594,30 @@ TrainerCard_JohtoBadgesOAM:
 	db $1c,            $20, $24, $20 | (1 << 7)
 	db $1c | (1 << 7), $20, $24, $20 | (1 << 7)
 
-ChrisPicAndTrainerCardGFX:
-INCBIN "gfx/trainer_card/chris_card.2bpp"
-INCBIN "gfx/trainer_card/trainer_card.2bpp"
+TrainerCard_DecompressStatusAndLeaderGFX:
+; Decompress the card status and leader tiles to sScratch, and leave SRAM open.
+	ld a, BANK(sScratch)
+	call OpenSRAM
+	ld hl, CardStatusAndLeaderGFX
+	ld de, sScratch
+	ld a, BANK(CardStatusAndLeaderGFX)
+	jp FarDecompress
 
-CardStatusGFX: INCBIN "gfx/trainer_card/card_status.2bpp"
-
+TrainerCard_LoadLeaderAndBadgeGFX:
 ; Pages 2 and 3 use the same graphics
-LeaderGFX:
-LeaderGFX2: INCBIN "gfx/trainer_card/leaders.2bpp"
-BadgeGFX:
-BadgeGFX2:  INCBIN "gfx/trainer_card/badges.2bpp"
+	call TrainerCard_DecompressStatusAndLeaderGFX
+	ld de, sScratch + 6 tiles ; leaders
+	ld hl, vTiles2 tile $29
+	lb bc, BANK(CardStatusAndLeaderGFX), 86
+	call Request2bpp
+	call CloseSRAM
+	ld hl, BadgeGFX
+	ld de, vTiles0 tile $00
+	lb bc, BANK(BadgeGFX), 44
+	jp DecompressRequest2bpp
+
+ChrisPicAndTrainerCardGFX: INCBIN "gfx/trainer_card/chris_and_card.2bpp.lz"
+
+; Page 1 loads 86 tiles of the card status, which go on into the leaders
+CardStatusAndLeaderGFX: INCBIN "gfx/trainer_card/status_and_leaders.2bpp.lz"
+BadgeGFX: INCBIN "gfx/trainer_card/badges.2bpp.lz"
