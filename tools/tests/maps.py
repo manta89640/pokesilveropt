@@ -4,7 +4,7 @@ Load every map and print a hash of its blocks, including connections.
 
 Usage: tools/tests/maps.py rom.gbc save.ram > maps.txt
 
-Starting from a save, each map is entered as if continuing a saved game,
+Starting from a save, each map is entered like the warp script command does,
 then wOverworldMapBlocks (the map's blocks plus the strips of connected
 maps) and the tilemap are hashed. Run it on two ROMs and diff the output.
 """
@@ -22,7 +22,8 @@ time.time = lambda: 1700000000.0 + FRAMES[0] / 59.7275
 
 from pyboy import PyBoy  # noqa: E402
 
-MAPSETUP_CONTINUE = 0xf2
+MAPSETUP_WARP = 0xf1
+SPAWN_N_A = 0xff
 MAPSTATUS_ENTER = 1
 MAPSTATUS_HANDLE = 2
 
@@ -90,7 +91,8 @@ def main():
 		# Stand near the middle, so connections to every side are loaded
 		mem[sym['wXCoord']] = width
 		mem[sym['wYCoord']] = height
-		mem[sym['hMapEntryMethod']] = MAPSETUP_CONTINUE
+		mem[sym['wDefaultSpawnpoint']] = SPAWN_N_A
+		mem[sym['hMapEntryMethod']] = MAPSETUP_WARP
 		mem[sym['wMapStatus']] = MAPSTATUS_ENTER
 		for _ in range(600):
 			tick(1)

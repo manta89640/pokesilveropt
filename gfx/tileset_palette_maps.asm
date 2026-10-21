@@ -85,6 +85,8 @@ INCLUDE "gfx/tilesets/lighthouse_palette_map.asm"
 TilesetPlayersRoomPalMap:
 INCLUDE "gfx/tilesets/players_room_palette_map.asm"
 
+; Unused, but kept: palettes of tiles $60 and up are read past the end of a
+; tileset's palette map, so this is where those of TilesetPlayersRoom come from.
 INCLUDE "gfx/tilesets/unused_museum_palette_map.asm"
 
 TilesetIcePathPalMap:
