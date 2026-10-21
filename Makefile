@@ -203,9 +203,6 @@ pokesilver_vc.gbc:    RGBFIXFLAGS += -t POKEMON_SLV -i AAXE
 
 ### LZ compression rules
 
-# Delete this line if you don't care about matching and just want optimal compression.
-include gfx/lz.mk
-
 %.lz: %
 	tools/lzcompress $(LZFLAGS) -- $< $@
 
