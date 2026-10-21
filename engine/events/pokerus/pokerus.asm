@@ -53,6 +53,7 @@ GivePokerusAndConvertBerries:
 .load_pkrs
 	ld b, a ; this should come before the label
 	swap b
+.tailmerge_56: ; (tools/tailmerge.py)
 	and $3
 	inc a
 	add b
@@ -115,11 +116,7 @@ GivePokerusAndConvertBerries:
 	ld b, a
 	ld a, c
 	swap a
-	and $3
-	inc a
-	add b
-	ld [hl], a
-	ret
+	jr GivePokerusAndConvertBerries.tailmerge_56 ; same as there (tools/tailmerge.py)
 
 ConvertBerriesToBerryJuice:
 ; If we haven't been to Goldenrod City at least once,

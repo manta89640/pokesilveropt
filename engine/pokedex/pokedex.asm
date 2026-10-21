@@ -295,6 +295,7 @@ Pokedex_UpdateMainScreen:
 .select
 	call Pokedex_BlackOutBG
 	ld a, DEXSTATE_OPTION_SCR
+.tailmerge_298: ; (tools/tailmerge.py)
 	ld [wJumptableIndex], a
 	xor a
 	ldh [hSCX], a
@@ -305,12 +306,7 @@ Pokedex_UpdateMainScreen:
 .start
 	call Pokedex_BlackOutBG
 	ld a, DEXSTATE_SEARCH_SCR
-	ld [wJumptableIndex], a
-	xor a
-	ldh [hSCX], a
-	ld a, $a7
-	ldh [hWX], a
-	jp DelayFrame
+	jr Pokedex_UpdateMainScreen.tailmerge_298 ; same as there (tools/tailmerge.py)
 
 .b
 	ld a, DEXSTATE_EXIT
@@ -506,8 +502,10 @@ Pokedex_InitOptionScreen:
 	ld a, [wCurDexMode]
 	ld [wDexArrowCursorPosIndex], a
 	call Pokedex_DisplayModeDescription
+.tailmerge_509: ; (tools/tailmerge.py)
 	call WaitBGMap
 	ld a, SCGB_POKEDEX_SEARCH_OPTION
+.tailmerge_511: ; (tools/tailmerge.py)
 	call Pokedex_GetSGBLayout
 	jp Pokedex_IncrementDexPointer
 
@@ -610,10 +608,7 @@ Pokedex_InitSearchScreen:
 	xor a
 	ld [wDexSearchSlowpokeFrame], a
 	farcall DoDexSearchSlowpokeFrame
-	call WaitBGMap
-	ld a, SCGB_POKEDEX_SEARCH_OPTION
-	call Pokedex_GetSGBLayout
-	jp Pokedex_IncrementDexPointer
+	jp Pokedex_InitOptionScreen.tailmerge_509 ; same as there (tools/tailmerge.py)
 
 Pokedex_UpdateSearchScreen:
 	ld de, .ArrowCursorData
@@ -722,8 +717,7 @@ Pokedex_InitSearchResultsScreen:
 	ld a, -1
 	ld [wCurPartySpecies], a
 	ld a, SCGB_POKEDEX
-	call Pokedex_GetSGBLayout
-	jp Pokedex_IncrementDexPointer
+	jp Pokedex_InitOptionScreen.tailmerge_511 ; same as there (tools/tailmerge.py)
 
 Pokedex_UpdateSearchResultsScreen:
 	ld hl, hJoyPressed
@@ -780,8 +774,7 @@ Pokedex_InitUnownMode:
 	farcall PrintUnownWord
 	call WaitBGMap
 	ld a, SCGB_POKEDEX_UNOWN_MODE
-	call Pokedex_GetSGBLayout
-	jp Pokedex_IncrementDexPointer
+	jp Pokedex_InitOptionScreen.tailmerge_511 ; same as there (tools/tailmerge.py)
 
 Pokedex_UpdateUnownMode:
 	ld hl, hJoyPressed
@@ -2223,6 +2216,7 @@ Pokedex_GetArrowCursorPos:
 	add a
 	ld l, a
 	ld h, 0
+.tailmerge_2226: ; (tools/tailmerge.py)
 	add hl, de
 	ld a, [hli]
 	ld h, [hl]
@@ -2300,11 +2294,7 @@ Pokedex_LoadPointer:
 	ld e, a
 	ld d, 0
 	add hl, de
-	add hl, de
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	ret
+	jr Pokedex_GetArrowCursorPos.tailmerge_2226 ; same as there (tools/tailmerge.py)
 
 Pokedex_LoadSelectedMonTiles:
 ; Loads the tiles of the currently selected Pokémon.
@@ -2500,15 +2490,14 @@ _NewPokedexEntry:
 
 Pokedex_SetBGMapMode3:
 	ld a, $3
+.tailmerge_2503: ; (tools/tailmerge.py)
 	ldh [hBGMapMode], a
 	ld c, 4
 	jp DelayFrames
 
 Pokedex_SetBGMapMode4:
 	ld a, $4
-	ldh [hBGMapMode], a
-	ld c, 4
-	jp DelayFrames
+	jr Pokedex_SetBGMapMode3.tailmerge_2503 ; same as there (tools/tailmerge.py)
 
 Pokedex_SetBGMapMode_3ifDMG_4ifCGB:
 	ldh a, [hCGB]

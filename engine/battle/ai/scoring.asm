@@ -508,12 +508,7 @@ AI_Smart_LockOn:
 
 .maybe_encourage
 	pop hl
-	call AI_50_50
-	ret c
-
-	dec [hl]
-	dec [hl]
-	ret
+	jp AI_Smart_Sleep.encourage ; same as there (tools/tailmerge.py)
 
 .player_locked_on
 	push hl
@@ -574,6 +569,7 @@ AI_Smart_DreamEater:
 ; Dream Eater is only used against sleeping targets.
 	call Random
 	cp 10 percent
+.tailmerge_577: ; (tools/tailmerge.py)
 	ret c
 	dec [hl]
 	dec [hl]
@@ -892,7 +888,9 @@ AI_Smart_Bide:
 
 	call AICheckEnemyMaxHP
 	ret c
+.tailmerge_895: ; (tools/tailmerge.py)
 	call Random
+.tailmerge_896: ; (tools/tailmerge.py)
 	cp 10 percent
 	ret c
 	inc [hl]
@@ -953,6 +951,7 @@ AI_Smart_Reflect:
 	call AICheckEnemyMaxHP
 	ret c
 	call Random
+.tailmerge_956: ; (tools/tailmerge.py)
 	cp 8 percent
 	ret c
 	inc [hl]
@@ -967,10 +966,7 @@ AI_Smart_Ohko:
 	ld a, [wEnemyMonLevel]
 	cp b
 	jp c, AIDiscourageMove
-	call AICheckPlayerHalfHP
-	ret c
-	inc [hl]
-	ret
+	jr AI_Smart_LeechSeed ; same as there (tools/tailmerge.py)
 
 AI_Smart_TrapTarget:
 ; Bind, Wrap, Fire Spin, Clamp
@@ -1005,11 +1001,7 @@ AI_Smart_TrapTarget:
 .encourage
 	call AICheckEnemyQuarterHP
 	ret nc
-	call AI_50_50
-	ret c
-	dec [hl]
-	dec [hl]
-	ret
+	jp AI_Smart_Sleep.encourage ; same as there (tools/tailmerge.py)
 
 AI_Smart_RazorWind:
 AI_Smart_Unused2B:
@@ -1120,6 +1112,7 @@ AI_Smart_Fly:
 	ret z
 
 	call AICompareSpeed
+.tailmerge_1123: ; (tools/tailmerge.py)
 	ret nc
 
 	dec [hl]
@@ -1200,10 +1193,7 @@ AI_Smart_HyperBeam:
 	cp 35 percent + 1
 	ret c
 	inc [hl]
-	call AI_50_50
-	ret c
-	inc [hl]
-	ret
+	jp AI_Smart_TrapTarget.discourage ; same as there (tools/tailmerge.py)
 
 AI_Smart_Rage:
 	ld a, [wEnemySubStatus4]
@@ -1280,10 +1270,7 @@ AI_Smart_Mimic:
 
 	pop hl
 	ret nc
-	call AI_50_50
-	ret c
-	dec [hl]
-	ret
+	jp AI_Smart_EvasionUp.maybe_encourage ; same as there (tools/tailmerge.py)
 
 .dismiss
 ; Dismiss this move if the enemy is faster than the player.
@@ -1570,11 +1557,7 @@ AI_Smart_HealBell:
 .ok
 	and 1 << FRZ | SLP_MASK
 	ret z
-	call AI_50_50
-	ret c
-	dec [hl]
-	dec [hl]
-	ret
+	jp AI_Smart_Sleep.encourage ; same as there (tools/tailmerge.py)
 
 .no_status
 	ld a, [wEnemyMonStatus]
@@ -1608,11 +1591,7 @@ AI_Smart_PriorityHit:
 	cp c
 	ld a, [wBattleMonHP]
 	sbc b
-	ret nc
-	dec [hl]
-	dec [hl]
-	dec [hl]
-	ret
+	jp AI_Smart_Fly.tailmerge_1123 ; same as there (tools/tailmerge.py)
 
 AI_Smart_Thief:
 ; Don't use Thief unless it's the only move available.
@@ -1657,10 +1636,7 @@ AI_Smart_Conversion2:
 
 .discourage
 	call Random
-	cp 10 percent
-	ret c
-	inc [hl]
-	ret
+	jp AI_Smart_Bide.tailmerge_896 ; same as there (tools/tailmerge.py)
 
 AI_Smart_Disable:
 	call AICompareSpeed
@@ -1688,10 +1664,7 @@ AI_Smart_Disable:
 
 .discourage
 	call Random
-	cp 8 percent
-	ret c
-	inc [hl]
-	ret
+	jp AI_Smart_Reflect.tailmerge_956 ; same as there (tools/tailmerge.py)
 
 AI_Smart_MeanLook:
 	call AICheckEnemyHalfHP
@@ -1728,11 +1701,7 @@ AI_Smart_MeanLook:
 
 .encourage
 	call AI_80_20
-	ret c
-	dec [hl]
-	dec [hl]
-	dec [hl]
-	ret
+	jp AI_Smart_DreamEater.tailmerge_577 ; same as there (tools/tailmerge.py)
 
 AICheckLastPlayerMon:
 	ld a, [wPartyCount]
@@ -2029,12 +1998,7 @@ AI_Smart_Endure:
 	ret z
 
 ; 50% chance to greatly encourage this move.
-	call AI_50_50
-	ret c
-
-	dec [hl]
-	dec [hl]
-	ret
+	jp AI_Smart_Sleep.encourage ; same as there (tools/tailmerge.py)
 
 .greatly_discourage
 	inc [hl]
@@ -2131,10 +2095,7 @@ AI_Smart_Safeguard:
 
 	call AICheckPlayerHalfHP
 	ret c
-	call AI_80_20
-	ret c
-	inc [hl]
-	ret
+	jr AI_Smart_Rollout.maybe_discourage ; same as there (tools/tailmerge.py)
 
 AI_Smart_Magnitude:
 AI_Smart_Earthquake:
@@ -2160,11 +2121,7 @@ AI_Smart_Earthquake:
 	call AICompareSpeed
 	ret c
 
-	call AI_50_50
-	ret c
-
-	dec [hl]
-	ret
+	jp AI_Smart_EvasionUp.maybe_encourage ; same as there (tools/tailmerge.py)
 
 AI_Smart_BatonPass:
 	jp AI_Smart_ForceSwitch ; same as there (tools/tailmerge.py)
@@ -2295,11 +2252,7 @@ AI_Smart_WeatherMove:
 	jr nc, AIBadWeatherType
 
 ; 50% chance to encourage this move otherwise.
-	call AI_50_50
-	ret c
-
-	dec [hl]
-	ret
+	jp AI_Smart_EvasionUp.maybe_encourage ; same as there (tools/tailmerge.py)
 
 AIBadWeatherType:
 	jp AI_Smart_Selfdestruct.discourage ; same as there (tools/tailmerge.py)
@@ -2513,11 +2466,7 @@ AI_Smart_Stomp:
 	and a
 	ret z
 
-	call AI_80_20
-	ret c
-
-	dec [hl]
-	ret
+	jp AI_Smart_Protect.encourage ; same as there (tools/tailmerge.py)
 
 AI_Smart_Solarbeam:
 ; 80% chance to encourage this move when it's sunny.
@@ -2548,12 +2497,7 @@ AI_Smart_Thunder:
 	cp WEATHER_SUN
 	ret nz
 
-	call Random
-	cp 10 percent
-	ret c
-
-	inc [hl]
-	ret
+	jp AI_Smart_Bide.tailmerge_895 ; same as there (tools/tailmerge.py)
 
 AICompareSpeed:
 ; Return carry if enemy is faster than player.
@@ -2618,6 +2562,7 @@ AICheckPlayerHalfHP:
 	ld b, [hl]
 	inc hl
 	ld c, [hl]
+.tailmerge_2621: ; (tools/tailmerge.py)
 	sla c
 	rl b
 	inc hl
@@ -2637,6 +2582,7 @@ AICheckEnemyHalfHP:
 	ld b, [hl]
 	inc hl
 	ld c, [hl]
+.tailmerge_2640: ; (tools/tailmerge.py)
 	sla c
 	rl b
 	inc hl
@@ -2660,18 +2606,7 @@ AICheckEnemyQuarterHP:
 	ld c, [hl]
 	sla c
 	rl b
-	sla c
-	rl b
-	inc hl
-	inc hl
-	ld a, [hld]
-	cp c
-	ld a, [hl]
-	sbc b
-	pop bc
-	pop de
-	pop hl
-	ret
+	jr AICheckEnemyHalfHP.tailmerge_2640 ; same as there (tools/tailmerge.py)
 
 AICheckPlayerQuarterHP:
 	push hl
@@ -2681,16 +2616,7 @@ AICheckPlayerQuarterHP:
 	ld c, [hl]
 	sla c
 	rl b
-	sla c
-	rl b
-	inc hl
-	inc hl
-	ld a, [hld]
-	cp c
-	ld a, [hl]
-	sbc b
-	pop hl
-	ret
+	jr AICheckPlayerHalfHP.tailmerge_2621 ; same as there (tools/tailmerge.py)
 
 AIHasMoveEffect:
 ; Return carry if the enemy has move b.

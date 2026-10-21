@@ -1199,9 +1199,7 @@ PlaceMoveData:
 .description
 	hlcoord 1, 14
 	predef PrintMoveDescription
-	ld a, $1
-	ldh [hBGMapMode], a
-	ret
+	jp NamingScreenJoypadLoop.tailmerge_334 ; same as there (tools/tailmerge.py)
 
 String_MoveType_Top:
 	db "┌─────┐@"

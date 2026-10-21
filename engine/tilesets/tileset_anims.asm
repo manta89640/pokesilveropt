@@ -440,7 +440,9 @@ AnimateWaterPalette:
 
 .color0
 	ld hl, wBGPals1 palette PAL_BG_WATER color 0
+.tailmerge_443: ; (tools/tailmerge.py)
 	ld a, [hli]
+.tailmerge_444: ; (tools/tailmerge.py)
 	ldh [rBGPD], a
 	ld a, [hli]
 	ldh [rBGPD], a
@@ -448,11 +450,7 @@ AnimateWaterPalette:
 
 .color2
 	ld hl, wBGPals1 palette PAL_BG_WATER color 2
-	ld a, [hli]
-	ldh [rBGPD], a
-	ld a, [hli]
-	ldh [rBGPD], a
-	ret
+	jr AnimateWaterPalette.tailmerge_443 ; same as there (tools/tailmerge.py)
 
 FlickeringCaveEntrancePalette:
 ; Don't update the palette on DMG
@@ -490,10 +488,7 @@ FlickeringCaveEntrancePalette:
 
 .okay
 	ld a, [hli]
-	ldh [rBGPD], a
-	ld a, [hli]
-	ldh [rBGPD], a
-	ret
+	jr AnimateWaterPalette.tailmerge_444 ; same as there (tools/tailmerge.py)
 
 TowerPillarTilePointer1:  dw vTiles2 tile $2d, TowerPillarTile1
 TowerPillarTilePointer2:  dw vTiles2 tile $2f, TowerPillarTile2

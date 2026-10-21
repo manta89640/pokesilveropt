@@ -121,6 +121,7 @@ GetFrontpic:
 Load2bppToSRAM:
 	ld de, sDecompressScratch
 	ld c, 7 * 7
+.tailmerge_124: ; (tools/tailmerge.py)
 	ldh a, [hROMBank]
 	ld b, a
 	call Get2bpp
@@ -176,10 +177,7 @@ GetMonBackpic:
 	call FixBackpicAlignment
 	pop hl
 	ld de, sDecompressBuffer
-	ldh a, [hROMBank]
-	ld b, a
-	call Get2bpp
-	jp CloseSRAM
+	jr Load2bppToSRAM.tailmerge_124 ; same as there (tools/tailmerge.py)
 
 FixPicBank:
 ; Precondition:  a = defined bank for pic
@@ -295,10 +293,7 @@ DecompressGet2bpp:
 	pop bc
 	ld de, sDecompressBuffer
 	pop hl
-	ldh a, [hROMBank]
-	ld b, a
-	call Get2bpp
-	jp CloseSRAM
+	jp Load2bppToSRAM.tailmerge_124 ; same as there (tools/tailmerge.py)
 
 FixBackpicAlignment:
 	push de

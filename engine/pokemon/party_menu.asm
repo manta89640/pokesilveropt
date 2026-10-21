@@ -5,6 +5,7 @@ SelectMonFromParty:
 	call ClearBGPalettes
 	call InitPartyMenuLayout
 	call WaitBGMap
+.tailmerge_8: ; (tools/tailmerge.py)
 	call SetDefaultBGPAndOBP
 	call DelayFrame
 	call PartyMenuSelect
@@ -19,10 +20,7 @@ SelectTradeOrDayCareMon:
 	call WaitBGMap
 	ld b, SCGB_PARTY_MENU
 	call GetSGBLayout
-	call SetDefaultBGPAndOBP
-	call DelayFrame
-	call PartyMenuSelect
-	jp ReturnToMapWithSpeechTextbox
+	jr SelectMonFromParty.tailmerge_8 ; same as there (tools/tailmerge.py)
 
 InitPartyMenuLayout:
 	call LoadPartyMenuGFX
@@ -645,9 +643,7 @@ PlacePartyMenuText:
 	ld [wOptions], a
 	hlcoord 1, 16 ; Coord
 	call PlaceString
-	pop af
-	ld [wOptions], a
-	ret
+	jp WritePartyMenuTilemap.end ; same as there (tools/tailmerge.py)
 
 PartyMenuStrings:
 	dw ChooseAMonString
@@ -757,6 +753,4 @@ PrintPartyMenuActionText:
 	set NO_TEXT_SCROLL, a
 	ld [wOptions], a
 	call PrintText
-	pop af
-	ld [wOptions], a
-	ret
+	jp WritePartyMenuTilemap.end ; same as there (tools/tailmerge.py)

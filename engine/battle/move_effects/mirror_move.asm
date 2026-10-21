@@ -16,8 +16,7 @@ BattleCommand_MirrorMove:
 	call AnimateFailedMove
 
 	ld hl, MirrorMoveFailedText
-	call StdBattleTextbox
-	jp EndMoveEffect
+	jp BattleCommand_StoreEnergy.tailmerge_67 ; same as there (tools/tailmerge.py)
 
 .use
 	ld a, b

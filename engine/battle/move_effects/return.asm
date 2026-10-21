@@ -12,6 +12,7 @@ BattleCommand_HappinessPower:
 	ldh [hMultiplicand + 1], a
 	ld a, [hl]
 	ldh [hMultiplicand + 2], a
+.tailmerge_15: ; (tools/tailmerge.py)
 	ld a, 10
 	ldh [hMultiplier], a
 	call Multiply

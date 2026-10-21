@@ -59,6 +59,7 @@ _DepositPKMN:
 	ld a, $5
 	ld [wBillsPC_NumMonsOnScreen], a
 	call BillsPC_RefreshTextboxes
+.tailmerge_62: ; (tools/tailmerge.py)
 	call PCMonInfo
 	ld a, $ff
 	ld [wCurPartySpecies], a
@@ -280,24 +281,7 @@ _WithdrawPKMN:
 .Init:
 	ld a, NUM_BOXES + 1
 	ld [wBillsPC_LoadedBox], a
-	xor a
-	ldh [hBGMapMode], a
-	call ClearSprites
-	call CopyBoxmonSpecies
-	call BillsPC_BoxName
-	ld de, PCString_ChooseaPKMN
-	call BillsPC_PlaceString
-	ld a, $5
-	ld [wBillsPC_NumMonsOnScreen], a
-	call BillsPC_RefreshTextboxes
-	call PCMonInfo
-	ld a, $ff
-	ld [wCurPartySpecies], a
-	ld a, SCGB_BILLS_PC
-	call BillsPC_ApplyPalettes
-	call WaitBGMap
-	call BillsPC_UpdateSelectionCursor
-	jp BillsPC_IncrementJumptableIndex
+	jp _DepositPKMN.Init ; same as there (tools/tailmerge.py)
 
 .Joypad:
 	ld hl, hJoyPressed
@@ -490,14 +474,7 @@ _MovePKMNWithoutMail:
 	ld [wBillsPC_NumMonsOnScreen], a
 	call BillsPC_RefreshTextboxes
 	call BillsPC_MoveMonWOMail_BoxNameAndArrows
-	call PCMonInfo
-	ld a, $ff
-	ld [wCurPartySpecies], a
-	ld a, SCGB_BILLS_PC
-	call BillsPC_ApplyPalettes
-	call WaitBGMap
-	call BillsPC_UpdateSelectionCursor
-	jp BillsPC_IncrementJumptableIndex
+	jp _DepositPKMN.tailmerge_62 ; same as there (tools/tailmerge.py)
 
 .Joypad:
 	ld hl, hJoyPressed
@@ -525,9 +502,7 @@ _MovePKMNWithoutMail:
 	xor a
 	ld [wBillsPC_CursorPosition], a
 	ld [wBillsPC_ScrollPosition], a
-	ld a, $0
-	ld [wJumptableIndex], a
-	ret
+	jp BillsPCDepositFuncCancel ; same as there (tools/tailmerge.py)
 
 .a_button
 	call BillsPC_GetSelectedPokemonSpecies
@@ -647,9 +622,7 @@ _MovePKMNWithoutMail:
 	xor a
 	ld [wBillsPC_CursorPosition], a
 	ld [wBillsPC_ScrollPosition], a
-	ld a, $4
-	ld [wJumptableIndex], a
-	ret
+	jp _DepositPKMN.b_button ; same as there (tools/tailmerge.py)
 
 .a_button_2
 	call BillsPC_CheckSpaceInDestination
@@ -669,9 +642,7 @@ _MovePKMNWithoutMail:
 	ld [wBillsPC_CursorPosition], a
 	ld a, [wBillsPC_BackupLoadedBox]
 	ld [wBillsPC_LoadedBox], a
-	ld a, $0
-	ld [wJumptableIndex], a
-	ret
+	jp BillsPCDepositFuncCancel ; same as there (tools/tailmerge.py)
 
 BillsPC_InitRAM:
 	call ClearBGPalettes
@@ -1445,7 +1416,9 @@ BillsPC_CheckSpaceInDestination:
 
 .no_room
 	ld de, PCString_TheresNoRoom
+.tailmerge_1448: ; (tools/tailmerge.py)
 	call BillsPC_PlaceString
+.tailmerge_1449: ; (tools/tailmerge.py)
 	ld de, SFX_WRONG
 	call WaitPlaySFX
 	call WaitSFX
@@ -1486,13 +1459,7 @@ BillsPC_CheckMail_PreventBlackout:
 	ld de, PCString_ItsYourLastPKMN
 .NotOkay:
 	call BillsPC_PlaceString
-	ld de, SFX_WRONG
-	call WaitPlaySFX
-	call WaitSFX
-	ld c, 50
-	call DelayFrames
-	scf
-	ret
+	jr BillsPC_CheckSpaceInDestination.tailmerge_1449 ; same as there (tools/tailmerge.py)
 
 BillsPC_IsMonAnEgg:
 	ld a, [wCurPartySpecies]
@@ -1503,14 +1470,7 @@ BillsPC_IsMonAnEgg:
 
 .egg
 	ld de, PCString_NoReleasingEGGS
-	call BillsPC_PlaceString
-	ld de, SFX_WRONG
-	call WaitPlaySFX
-	call WaitSFX
-	ld c, 50
-	call DelayFrames
-	scf
-	ret
+	jr BillsPC_CheckSpaceInDestination.tailmerge_1448 ; same as there (tools/tailmerge.py)
 
 BillsPC_StatsScreen:
 	call LowVolume
@@ -1666,14 +1626,7 @@ DepositPokemon:
 
 .BoxFull:
 	ld de, PCString_BoxFull
-	call BillsPC_PlaceString
-	ld de, SFX_WRONG
-	call WaitPlaySFX
-	call WaitSFX
-	ld c, 50
-	call DelayFrames
-	scf
-	ret
+	jp BillsPC_CheckSpaceInDestination.tailmerge_1448 ; same as there (tools/tailmerge.py)
 
 TryWithdrawPokemon:
 	ld a, [wBillsPC_CursorPosition]
@@ -1721,14 +1674,7 @@ TryWithdrawPokemon:
 
 .PartyFull:
 	ld de, PCString_PartyFull
-	call BillsPC_PlaceString
-	ld de, SFX_WRONG
-	call WaitPlaySFX
-	call WaitSFX
-	ld c, 50
-	call DelayFrames
-	scf
-	ret
+	jp BillsPC_CheckSpaceInDestination.tailmerge_1448 ; same as there (tools/tailmerge.py)
 
 ReleasePKMN_ByePKMN:
 	hlcoord 0, 0
@@ -1915,6 +1861,7 @@ MovePKMNWithoutMail_InsertMon:
 	call CloseSRAM
 	farcall CalcBufferMonStats
 	ld a, REMOVE_BOX
+.tailmerge_1918: ; (tools/tailmerge.py)
 	ld [wPokemonWithdrawDepositParameter], a
 	farcall RemoveMonFromPartyOrBox
 	ret
@@ -1946,9 +1893,7 @@ MovePKMNWithoutMail_InsertMon:
 	ld bc, PARTYMON_STRUCT_LENGTH
 	call CopyMonToTemp
 	xor a ; REMOVE_PARTY
-	ld [wPokemonWithdrawDepositParameter], a
-	farcall RemoveMonFromPartyOrBox
-	ret
+	jr MovePKMNWithoutMail_InsertMon.tailmerge_1918 ; same as there (tools/tailmerge.py)
 
 .CopyToParty:
 	ld a, [wBillsPC_CursorPosition]

@@ -8,6 +8,7 @@ GetSpritePalette::
 
 	farcall _GetSpritePalette
 
+.tailmerge_11: ; (tools/tailmerge.py)
 	ld a, c
 	pop bc
 	pop de
@@ -199,6 +200,7 @@ GetMapObject::
 ; Return the location of map object a in bc.
 	ld hl, wMapObjects
 	ld bc, MAPOBJECT_LENGTH
+.tailmerge_202: ; (tools/tailmerge.py)
 	call AddNTimes
 	ld b, h
 	ld c, l
@@ -548,10 +550,7 @@ UpdateSprites::
 GetObjectStruct::
 	ld bc, OBJECT_LENGTH
 	ld hl, wObjectStructs
-	call AddNTimes
-	ld b, h
-	ld c, l
-	ret
+	jp GetMapObject.tailmerge_202 ; same as there (tools/tailmerge.py)
 
 DoesObjectHaveASprite::
 	ld hl, OBJECT_SPRITE

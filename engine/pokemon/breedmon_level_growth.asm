@@ -5,6 +5,7 @@ GetBreedMon1LevelGrowth:
 	call CopyBytes
 	callfar CalcLevel
 	ld a, [wBreedMon1Level]
+.tailmerge_8: ; (tools/tailmerge.py)
 	ld b, a
 	ld a, d
 	ld e, a
@@ -19,9 +20,4 @@ GetBreedMon2LevelGrowth:
 	call CopyBytes
 	callfar CalcLevel
 	ld a, [wBreedMon2Level]
-	ld b, a
-	ld a, d
-	ld e, a
-	sub b
-	ld d, a
-	ret
+	jr GetBreedMon1LevelGrowth.tailmerge_8 ; same as there (tools/tailmerge.py)

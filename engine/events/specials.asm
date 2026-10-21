@@ -153,9 +153,7 @@ GetMysteryGiftItem:
 
 .no_room
 	call CloseSRAM
-	xor a
-	ld [wScriptVar], a
-	ret
+	jp FoundNone ; same as there (tools/tailmerge.py)
 
 .ReceiveItemText:
 	text_far _ReceiveItemText
@@ -438,7 +436,6 @@ TrainerHouse:
 	ld a, BANK(sMysteryGiftTrainerHouseFlag)
 	call OpenSRAM
 	ld a, [sMysteryGiftTrainerHouseFlag]
-	ld [wScriptVar], a
-	jp CloseSRAM
+	jp CheckMysteryGift.no ; same as there (tools/tailmerge.py)
 
 	nop ; unused

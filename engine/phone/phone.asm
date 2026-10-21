@@ -540,6 +540,7 @@ Phone_StartRinging:
 	call PlaySFX
 	call Phone_CallerTextbox
 	call UpdateSprites
+.tailmerge_543: ; (tools/tailmerge.py)
 	farcall PhoneRing_CopyTilemapAtOnce
 	ret
 
@@ -549,8 +550,7 @@ HangUp_Wait20Frames:
 Phone_Wait20Frames:
 	ld c, 20
 	call DelayFrames
-	farcall PhoneRing_CopyTilemapAtOnce
-	ret
+	jr Phone_StartRinging.tailmerge_543 ; same as there (tools/tailmerge.py)
 
 Phone_TextboxWithName:
 	push bc

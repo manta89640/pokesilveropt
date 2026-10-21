@@ -637,9 +637,7 @@ IntroScene7:
 	ld a, -1
 	ld [wIntroFrameCounter1], a
 	call Intro_InitPikachu
-	ld hl, wIntroJumptableIndex
-	inc [hl]
-	ret
+	jp IntroScene5.next ; same as there (tools/tailmerge.py)
 
 IntroScene8:
 ; stop scrolling, Pikachu attacks
@@ -1015,18 +1013,17 @@ Intro_FlashSilhouette:
 
 Intro_LoadChikoritaPalette:
 	ld c, CHIKORITA
+.tailmerge_1018: ; (tools/tailmerge.py)
 	farcall Intro_LoadMonPalette
 	ret
 
 Intro_LoadCyndaquilPalette:
 	ld c, CYNDAQUIL
-	farcall Intro_LoadMonPalette
-	ret
+	jr Intro_LoadChikoritaPalette.tailmerge_1018 ; same as there (tools/tailmerge.py)
 
 Intro_LoadTotodilePalette:
 	ld c, TOTODILE
-	farcall Intro_LoadMonPalette
-	ret
+	jr Intro_LoadChikoritaPalette.tailmerge_1018 ; same as there (tools/tailmerge.py)
 
 Intro_LoadCharizardPalette:
 	ldh a, [hCGB]

@@ -95,6 +95,7 @@ SGB_ApplyCreditsPals::
 	ld [wSGBPals + 6], a
 	ld hl, wSGBPals
 	call PushSGBPals
+.tailmerge_98: ; (tools/tailmerge.py)
 	ld hl, BlkPacket_AllPal0
 	jp PushSGBPals
 
@@ -171,8 +172,7 @@ Intro_LoadAllPal0:
 	ldh a, [hSGB]
 	and a
 	ret z
-	ld hl, BlkPacket_AllPal0
-	jp PushSGBPals
+	jp SGB_ApplyCreditsPals.tailmerge_98 ; same as there (tools/tailmerge.py)
 
 
 Intro_LoadMonPalette:
@@ -223,7 +223,9 @@ ApplyMonOrTrainerPals:
 
 .load_palettes
 	ld de, wBGPals1
+.tailmerge_226: ; (tools/tailmerge.py)
 	call LoadPalette_White_Col1_Col2_Black
+.tailmerge_227: ; (tools/tailmerge.py)
 	call WipeAttrmap
 	call ApplyAttrmap
 	jp ApplyPals
@@ -254,6 +256,7 @@ ApplyHPBarPals:
 	add hl, bc
 	ld bc, 4
 	call CopyBytes
+.tailmerge_257: ; (tools/tailmerge.py)
 	ld a, TRUE
 	ldh [hCGBPalUpdate], a
 	ret
@@ -291,9 +294,7 @@ LoadStatsScreenPals:
 	ld [wBGPals1 palette 0 + 1], a
 	ld [wBGPals1 palette 2 + 1], a
 	call ApplyPals
-	ld a, TRUE
-	ldh [hCGBPalUpdate], a
-	ret
+	jr ApplyHPBarPals.tailmerge_257 ; same as there (tools/tailmerge.py)
 
 LoadMailPalettes:
 	ld l, e
@@ -329,8 +330,10 @@ LoadMailPalettes:
 .cgb
 	ld de, wBGPals1
 	ld bc, 1 palettes
+.tailmerge_332: ; (tools/tailmerge.py)
 	call CopyBytes
 	call ApplyPals
+.tailmerge_334: ; (tools/tailmerge.py)
 	call WipeAttrmap
 	jp ApplyAttrmap
 

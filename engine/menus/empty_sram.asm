@@ -12,6 +12,7 @@ EmptyAllSRAMBanks:
 	call OpenSRAM
 	ld hl, STARTOF(SRAM)
 	ld bc, SIZEOF(SRAM)
+.tailmerge_15: ; (tools/tailmerge.py)
 	xor a
 	call ByteFill
 	jp CloseSRAM

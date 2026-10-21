@@ -159,9 +159,7 @@ _CGB_PokegearPals:
 	ld bc, 6 palettes
 	call CopyBytes
 	call ApplyPals
-	ld a, TRUE
-	ldh [hCGBPalUpdate], a
-	ret
+	jp ApplyHPBarPals.tailmerge_257 ; same as there (tools/tailmerge.py)
 
 _CGB_StatsScreenHPPals:
 	ld de, wBGPals1
@@ -212,9 +210,7 @@ _CGB_StatsScreenHPPals:
 
 	call ApplyAttrmap
 	call ApplyPals
-	ld a, TRUE
-	ldh [hCGBPalUpdate], a
-	ret
+	jp ApplyHPBarPals.tailmerge_257 ; same as there (tools/tailmerge.py)
 
 StatsScreenPagePals:
 INCLUDE "gfx/stats/pages.pal"
@@ -226,6 +222,7 @@ _CGB_Pokedex:
 	call _CGB_Pokedex_Init
 	hlcoord 1, 1, wAttrmap
 	lb bc, 7, 7
+.tailmerge_229: ; (tools/tailmerge.py)
 	ld a, $1
 	call FillBoxCGB
 	jr _CGB_Pokedex_Resume
@@ -234,9 +231,7 @@ _CGB_Pokedex_5x5:
 	call _CGB_Pokedex_Init
 	hlcoord 1, 1, wAttrmap
 	lb bc, 5, 5
-	ld a, $1
-	call FillBoxCGB
-	jr _CGB_Pokedex_Resume
+	jr _CGB_Pokedex.tailmerge_229 ; same as there (tools/tailmerge.py)
 
 _CGB_Pokedex_Init:
 	ld de, wBGPals1
@@ -264,9 +259,7 @@ _CGB_Pokedex_Resume:
 	call CopyBytes
 	call ApplyAttrmap
 	call ApplyPals
-	ld a, TRUE
-	ldh [hCGBPalUpdate], a
-	ret
+	jp ApplyHPBarPals.tailmerge_257 ; same as there (tools/tailmerge.py)
 
 PokedexCursorPalette:
 INCLUDE "gfx/pokedex/cursor.pal"
@@ -299,9 +292,7 @@ _CGB_BillsPC:
 	call InitPartyMenuOBPals
 	call ApplyAttrmap
 	call ApplyPals
-	ld a, TRUE
-	ldh [hCGBPalUpdate], a
-	ret
+	jp ApplyHPBarPals.tailmerge_257 ; same as there (tools/tailmerge.py)
 
 
 BillsPCOrangePalette:
@@ -323,9 +314,7 @@ _CGB_PokedexUnownMode:
 	call InitPartyMenuOBPals
 	call ApplyAttrmap
 	call ApplyPals
-	ld a, TRUE
-	ldh [hCGBPalUpdate], a
-	ret
+	jp ApplyHPBarPals.tailmerge_257 ; same as there (tools/tailmerge.py)
 
 _CGB_SlotMachine:
 	ld hl, SlotMachinePals
@@ -375,9 +364,7 @@ _CGB_SlotMachine:
 	call ByteFill
 	call ApplyAttrmap
 	call ApplyPals
-	ld a, TRUE
-	ldh [hCGBPalUpdate], a
-	ret
+	jp ApplyHPBarPals.tailmerge_257 ; same as there (tools/tailmerge.py)
 
 _CGB_BetaTitleScreen:
 	ld hl, PalPacket_BetaTitleScreen + 1
@@ -393,9 +380,7 @@ _CGB_BetaTitleScreen:
 	call FillBoxCGB
 	call ApplyAttrmap
 	call ApplyPals
-	ld a, TRUE
-	ldh [hCGBPalUpdate], a
-	ret
+	jp ApplyHPBarPals.tailmerge_257 ; same as there (tools/tailmerge.py)
 
 _CGB_GSIntro:
 	ld b, 0
@@ -436,6 +421,7 @@ INCLUDE "gfx/intro/shellder_lapras_ob.pal"
 
 	ld de, wOBPals1
 	ld a, PREDEFPAL_GS_INTRO_JIGGLYPUFF_PIKACHU_OB
+.tailmerge_439: ; (tools/tailmerge.py)
 	call GetPredefPal
 	call LoadHLPaletteIntoDE
 	jp WipeAttrmap
@@ -445,18 +431,13 @@ INCLUDE "gfx/intro/shellder_lapras_ob.pal"
 	call CopyFourPalettes
 	ld de, wOBPals1
 	ld a, PREDEFPAL_GS_INTRO_STARTERS_TRANSITION
-	call GetPredefPal
-	call LoadHLPaletteIntoDE
-	jp WipeAttrmap
+	jr _CGB_GSIntro.tailmerge_439 ; same as there (tools/tailmerge.py)
 
 _CGB_BetaPoker:
 	ld hl, BetaPokerPals
 	ld de, wBGPals1
 	ld bc, 5 palettes
-	call CopyBytes
-	call ApplyPals
-	call WipeAttrmap
-	jp ApplyAttrmap
+	jp LoadMailPalettes.tailmerge_332 ; same as there (tools/tailmerge.py)
 
 _CGB_Diploma:
 	ld hl, DiplomaPalettes
@@ -467,8 +448,7 @@ _CGB_Diploma:
 
 	ld hl, PalPacket_Diploma + 1
 	call CopyFourPalettes
-	call WipeAttrmap
-	jp ApplyAttrmap
+	jp LoadMailPalettes.tailmerge_334 ; same as there (tools/tailmerge.py)
 
 _CGB_MapPals:
 	call LoadMapPals
@@ -511,9 +491,7 @@ _CGB_Evolution:
 	call WipeAttrmap
 	call ApplyAttrmap
 	call ApplyPals
-	ld a, TRUE
-	ldh [hCGBPalUpdate], a
-	ret
+	jp ApplyHPBarPals.tailmerge_257 ; same as there (tools/tailmerge.py)
 
 _CGB_GSTitleScreen:
 	ld hl, GSTitleBGPals
@@ -527,15 +505,12 @@ _CGB_GSTitleScreen:
 	ld a, SCGB_DIPLOMA
 	ld [wDefaultSGBLayout], a
 	call ApplyPals
-	ld a, TRUE
-	ldh [hCGBPalUpdate], a
-	ret
+	jp ApplyHPBarPals.tailmerge_257 ; same as there (tools/tailmerge.py)
 
 _CGB_Unused0D:
 	ld hl, PalPacket_Diploma + 1
 	call CopyFourPalettes
-	call WipeAttrmap
-	jp ApplyAttrmap
+	jp LoadMailPalettes.tailmerge_334 ; same as there (tools/tailmerge.py)
 
 _CGB_UnownPuzzle:
 	ld hl, PalPacket_UnownPuzzle + 1
@@ -549,8 +524,7 @@ _CGB_UnownPuzzle:
 	ld [hli], a
 	ld a, HIGH(palred 31 + palgreen 0 + palblue 0)
 	ld [hl], a
-	call WipeAttrmap
-	jp ApplyAttrmap
+	jp LoadMailPalettes.tailmerge_334 ; same as there (tools/tailmerge.py)
 
 _CGB_TrainerCard:
 	ld de, wBGPals1
@@ -625,9 +599,7 @@ _CGB_TrainerCard:
 	call FillBoxCGB
 	call ApplyAttrmap
 	call ApplyPals
-	ld a, TRUE
-	ldh [hCGBPalUpdate], a
-	ret
+	jp ApplyHPBarPals.tailmerge_257 ; same as there (tools/tailmerge.py)
 
 _CGB_MoveList:
 	ld de, wBGPals1
@@ -649,9 +621,7 @@ _CGB_MoveList:
 	call FillBoxCGB
 	call ApplyAttrmap
 	call ApplyPals
-	ld a, TRUE
-	ldh [hCGBPalUpdate], a
-	ret
+	jp ApplyHPBarPals.tailmerge_257 ; same as there (tools/tailmerge.py)
 
 _CGB_BetaPikachuMinigame:
 	ld hl, PalPacket_BetaPikachuMinigame + 1
@@ -659,9 +629,7 @@ _CGB_BetaPikachuMinigame:
 	call WipeAttrmap
 	call ApplyAttrmap
 	call ApplyPals
-	ld a, TRUE
-	ldh [hCGBPalUpdate], a
-	ret
+	jp ApplyHPBarPals.tailmerge_257 ; same as there (tools/tailmerge.py)
 
 _CGB_PokedexSearchOption:
 	ld de, wBGPals1
@@ -671,9 +639,7 @@ _CGB_PokedexSearchOption:
 	call WipeAttrmap
 	call ApplyAttrmap
 	call ApplyPals
-	ld a, TRUE
-	ldh [hCGBPalUpdate], a
-	ret
+	jp ApplyHPBarPals.tailmerge_257 ; same as there (tools/tailmerge.py)
 
 _CGB_PackPals:
 	ld de, wBGPals1
@@ -758,9 +724,7 @@ _CGB_MagnetTrain: ; unused
 	call FillBoxCGB
 	call ApplyAttrmap
 	call ApplyPals
-	ld a, TRUE
-	ldh [hCGBPalUpdate], a
-	ret
+	jp ApplyHPBarPals.tailmerge_257 ; same as there (tools/tailmerge.py)
 
 _CGB_GamefreakLogo:
 	ld de, wBGPals1
@@ -775,27 +739,21 @@ _CGB_GamefreakLogo:
 	ld a, PREDEFPAL_GAMEFREAK_LOGO_OB
 	call GetPredefPal
 	call LoadHLPaletteIntoDE
-	call WipeAttrmap
-	call ApplyAttrmap
-	jp ApplyPals
+	jp ApplyMonOrTrainerPals.tailmerge_227 ; same as there (tools/tailmerge.py)
 
 _CGB_PlayerOrMonFrontpicPals:
 	ld de, wBGPals1
 	ld a, [wCurPartySpecies]
 	ld bc, wTempMonDVs
 	call GetPlayerOrMonPalettePointer
-	call LoadPalette_White_Col1_Col2_Black
-	call WipeAttrmap
-	call ApplyAttrmap
-	jp ApplyPals
+	jp ApplyMonOrTrainerPals.tailmerge_226 ; same as there (tools/tailmerge.py)
 
 _CGB_Unused1E:
 	ld de, wBGPals1
 	ld a, [wCurPartySpecies]
 	call GetMonPalettePointer
 	call LoadPalette_White_Col1_Col2_Black
-	call WipeAttrmap
-	jp ApplyAttrmap
+	jp LoadMailPalettes.tailmerge_334 ; same as there (tools/tailmerge.py)
 
 _CGB_TradeTube:
 	ld hl, PalPacket_TradeTube + 1
@@ -806,19 +764,14 @@ _CGB_TradeTube:
 	call CopyBytes
 	ld de, wOBPals1 palette 7
 	ld a, PREDEFPAL_TRADE_TUBE
-	call GetPredefPal
-	call LoadHLPaletteIntoDE
-	jp WipeAttrmap
+	jp _CGB_GSIntro.tailmerge_439 ; same as there (tools/tailmerge.py)
 
 _CGB_TrainerOrMonFrontpicPals:
 	ld de, wBGPals1
 	ld a, [wCurPartySpecies]
 	ld bc, wTempMonDVs
 	call GetFrontpicPalettePointer
-	call LoadPalette_White_Col1_Col2_Black
-	call WipeAttrmap
-	call ApplyAttrmap
-	jp ApplyPals
+	jp ApplyMonOrTrainerPals.tailmerge_226 ; same as there (tools/tailmerge.py)
 
 _CGB_MysteryGift:
 	ld hl, .MysteryGiftPalette

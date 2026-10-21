@@ -366,10 +366,7 @@ SlotsAction_WaitStopReel3:
 	ld bc, wReel3
 	ld de, wReel3Stopped
 	call Slots_LoadReelState
-	call SlotsAction_Next
-	xor a
-	ldh [hJoypadSum], a
-	ret
+	jp SlotsAction_WaitStart.proceed ; same as there (tools/tailmerge.py)
 
 SlotsAction_FlashIfWin:
 	ld a, [wSlotMatched]
@@ -1016,6 +1013,7 @@ ReelAction_SetUpReel2SkipTo7:
 	ld hl, REEL_MANIP_DELAY
 	add hl, bc
 	ld [hl], 32
+.tailmerge_1019: ; (tools/tailmerge.py)
 	ld hl, REEL_SPIN_RATE
 	add hl, bc
 	ld [hl], 0
@@ -1036,10 +1034,7 @@ ReelAction_WaitReel2SkipTo7:
 	ld hl, REEL_ACTION
 	add hl, bc
 	inc [hl] ; REEL_ACTION_FAST_SPIN_REEL2_UNTIL_LINED_UP_7S
-	ld hl, REEL_SPIN_RATE
-	add hl, bc
-	ld [hl], 8
-	ret
+	jp ReelAction_DoubleRate ; same as there (tools/tailmerge.py)
 
 ReelAction_FastSpinReel2UntilLinedUp7s:
 	call Slots_CheckMatchedFirstTwoReels
@@ -1098,10 +1093,7 @@ ReelAction_WaitGolem:
 	ld hl, REEL_ACTION
 	add hl, bc
 	inc [hl] ; REEL_ACTION_END_GOLEM
-	ld hl, REEL_SPIN_RATE
-	add hl, bc
-	ld [hl], 8
-	ret
+	jp ReelAction_DoubleRate ; same as there (tools/tailmerge.py)
 
 ReelAction_EndGolem:
 	xor a
@@ -1109,10 +1101,7 @@ ReelAction_EndGolem:
 	ld hl, REEL_ACTION
 	add hl, bc
 	dec [hl] ; REEL_ACTION_WAIT_GOLEM
-	ld hl, REEL_SPIN_RATE
-	add hl, bc
-	ld [hl], 0
-	ret
+	jr ReelAction_SetUpReel2SkipTo7.tailmerge_1019 ; same as there (tools/tailmerge.py)
 
 ReelAction_InitChansey:
 ; Ensures the lining up of SEVEN symbols, but this mode is only possible
@@ -1238,10 +1227,7 @@ ReelAction_WaitDropReel:
 	ld hl, REEL_ACTION
 	add hl, bc
 	dec [hl] ; REEL_ACTION_CHECK_DROP_REEL
-	ld hl, REEL_SPIN_RATE
-	add hl, bc
-	ld [hl], 8
-	ret
+	jp ReelAction_DoubleRate ; same as there (tools/tailmerge.py)
 
 ReelAction_StartSlowAdvanceReel3:
 ; Ensures SEVENs are lined up if there's bias to SEVEN.
@@ -1865,13 +1851,13 @@ endr
 
 .LinedUpPokeballs:
 	ld a, SFX_3RD_PLACE
+.tailmerge_1868: ; (tools/tailmerge.py)
 	call Slots_PlaySFX
 	jp WaitSFX
 
 .LinedUpMonOrCherry:
 	ld a, SFX_PRESENT
-	call Slots_PlaySFX
-	jp WaitSFX
+	jr Slots_PayoutText.tailmerge_1868 ; same as there (tools/tailmerge.py)
 
 Slots_AnimateGolem:
 	ld hl, SPRITEANIMSTRUCT_JUMPTABLE_INDEX

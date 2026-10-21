@@ -872,6 +872,7 @@ RandomPhoneWildMon:
 	add hl, bc
 	inc hl
 	ld a, [hl]
+.tailmerge_875: ; (tools/tailmerge.py)
 	ld [wNamedObjectIndex], a
 	call GetPokemonName
 	ld hl, wStringBuffer1
@@ -955,12 +956,7 @@ RandomPhoneMon:
 	inc hl ; species
 	ld a, BANK(Trainers)
 	call GetFarByte
-	ld [wNamedObjectIndex], a
-	call GetPokemonName
-	ld hl, wStringBuffer1
-	ld de, wStringBuffer4
-	ld bc, MON_NAME_LENGTH
-	jp CopyBytes
+	jp RandomPhoneWildMon.tailmerge_875 ; same as there (tools/tailmerge.py)
 
 INCLUDE "data/wild/johto_grass.asm"
 INCLUDE "data/wild/johto_water.asm"

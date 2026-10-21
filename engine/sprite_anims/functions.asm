@@ -74,9 +74,7 @@ AnimSeq_PartyMon:
 	ld [hl], 8 * 2
 
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
-	add hl, bc
-	ld [hl], 0
-	ret
+	jp DeinitializeSprite.tailmerge_211 ; same as there (tools/tailmerge.py)
 
 AnimSeq_PartyMonSwitch:
 	ld hl, SPRITEANIMSTRUCT_XCOORD
@@ -592,6 +590,7 @@ AnimSeq_GSIntroFireball:
 	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld a, [hl]
+.tailmerge_595: ; (tools/tailmerge.py)
 	push af
 	push de
 	call AnimSeqs_Sine
@@ -601,6 +600,7 @@ AnimSeq_GSIntroFireball:
 	ld [hl], a
 	pop de
 	pop af
+.tailmerge_604: ; (tools/tailmerge.py)
 	call AnimSeqs_Cosine
 
 	ld hl, SPRITEANIMSTRUCT_XOFFSET
@@ -647,12 +647,7 @@ AnimSeq_GSIntroChikoritaTotodile:
 	inc [hl]
 	inc [hl]
 	ld d, $90
-	call AnimSeqs_Cosine
-
-	ld hl, SPRITEANIMSTRUCT_XOFFSET
-	add hl, bc
-	ld [hl], a
-	ret
+	jr AnimSeq_GSIntroFireball.tailmerge_604 ; same as there (tools/tailmerge.py)
 
 AnimSeq_GSIntroCyndaquil:
 	jp AnimSeq_GSIntroMagikarp ; same as there (tools/tailmerge.py)
@@ -1273,21 +1268,7 @@ AnimSeq_CutLeaves:
 	inc [hl]
 	inc [hl]
 	inc [hl]
-	push af
-	push de
-	call AnimSeqs_Sine
-
-	ld hl, SPRITEANIMSTRUCT_YOFFSET
-	add hl, bc
-	ld [hl], a
-	pop de
-	pop af
-	call AnimSeqs_Cosine
-
-	ld hl, SPRITEANIMSTRUCT_XOFFSET
-	add hl, bc
-	ld [hl], a
-	ret
+	jp AnimSeq_GSIntroFireball.tailmerge_595 ; same as there (tools/tailmerge.py)
 
 AnimSeq_FlyFrom:
 	ld hl, SPRITEANIMSTRUCT_YCOORD
@@ -1321,12 +1302,7 @@ AnimSeq_FlyFrom:
 	add hl, bc
 	ld a, [hl]
 	inc [hl]
-	call AnimSeqs_Cosine
-
-	ld hl, SPRITEANIMSTRUCT_XOFFSET
-	add hl, bc
-	ld [hl], a
-	ret
+	jp AnimSeq_GSIntroFireball.tailmerge_604 ; same as there (tools/tailmerge.py)
 
 AnimSeq_FlyLeaf:
 	ld hl, SPRITEANIMSTRUCT_XCOORD

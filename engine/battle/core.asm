@@ -681,6 +681,7 @@ HandleEncore:
 	ld hl, wPlayerSubStatus5
 	res SUBSTATUS_ENCORED, [hl]
 	call SetEnemyTurn
+.tailmerge_684: ; (tools/tailmerge.py)
 	ld hl, BattleText_TargetsEncoreEnded
 	jp StdBattleTextbox
 
@@ -705,8 +706,7 @@ HandleEncore:
 	ld hl, wEnemySubStatus5
 	res SUBSTATUS_ENCORED, [hl]
 	call SetPlayerTurn
-	ld hl, BattleText_TargetsEncoreEnded
-	jp StdBattleTextbox
+	jr HandleEncore.tailmerge_684 ; same as there (tools/tailmerge.py)
 
 TryEnemyFlee:
 	ld a, [wBattleMode]
@@ -852,7 +852,9 @@ Battle_EnemyFirst:
 	call SetPlayerTurn
 	call ResidualDamage
 	jp z, HandlePlayerMonFaint
+.tailmerge_855: ; (tools/tailmerge.py)
 	call RefreshBattleHuds
+.tailmerge_856: ; (tools/tailmerge.py)
 	xor a ; BATTLEPLAYERACTION_USEMOVE
 	ld [wBattlePlayerAction], a
 	ret
@@ -897,10 +899,7 @@ Battle_PlayerFirst:
 	call SetEnemyTurn
 	call ResidualDamage
 	jp z, HandleEnemyMonFaint
-	call RefreshBattleHuds
-	xor a ; BATTLEPLAYERACTION_USEMOVE
-	ld [wBattlePlayerAction], a
-	ret
+	jr Battle_EnemyFirst.tailmerge_855 ; same as there (tools/tailmerge.py)
 
 PlayerTurn_EndOpponentProtectEndureDestinyBond:
 	call SetPlayerTurn
@@ -920,15 +919,14 @@ EndOpponentProtectEndureDestinyBond:
 	res SUBSTATUS_PROTECT, [hl]
 	res SUBSTATUS_ENDURE, [hl]
 	ld a, BATTLE_VARS_SUBSTATUS5_OPP
+.tailmerge_923: ; (tools/tailmerge.py)
 	call GetBattleVarAddr
 	res SUBSTATUS_DESTINY_BOND, [hl]
 	ret
 
 EndUserDestinyBond:
 	ld a, BATTLE_VARS_SUBSTATUS5
-	call GetBattleVarAddr
-	res SUBSTATUS_DESTINY_BOND, [hl]
-	ret
+	jr EndOpponentProtectEndureDestinyBond.tailmerge_923 ; same as there (tools/tailmerge.py)
 
 HasUserFainted:
 	ldh a, [hBattleTurn]
@@ -1078,6 +1076,7 @@ ResidualDamage:
 .fainted
 	call RefreshBattleHuds
 	ld c, 20
+.tailmerge_1081: ; (tools/tailmerge.py)
 	call DelayFrames
 	xor a
 	ret
@@ -1494,6 +1493,7 @@ HandleDefrost:
 	ld [hl], 0
 	call UpdateBattleHuds
 	call SetEnemyTurn
+.tailmerge_1497: ; (tools/tailmerge.py)
 	ld hl, DefrostedOpponentText
 	jp StdBattleTextbox
 
@@ -1521,8 +1521,7 @@ HandleDefrost:
 
 	call UpdateBattleHuds
 	call SetPlayerTurn
-	ld hl, DefrostedOpponentText
-	jp StdBattleTextbox
+	jr HandleDefrost.tailmerge_1497 ; same as there (tools/tailmerge.py)
 
 HandleSafeguard:
 	ldh a, [hSerialConnectionStatus]
@@ -1991,9 +1990,7 @@ HandleEnemyMonFaint:
 	ld [wBattlePlayerAction], a
 	call HandleEnemySwitch
 	jp z, WildFled_EnemyFled_LinkBattleCanceled
-	xor a ; BATTLEPLAYERACTION_USEMOVE
-	ld [wBattlePlayerAction], a
-	ret
+	jp Battle_EnemyFirst.tailmerge_856 ; same as there (tools/tailmerge.py)
 
 DoubleSwitch:
 	ldh a, [hSerialConnectionStatus]
@@ -2365,6 +2362,7 @@ WinTrainerBattle:
 	push bc
 	ld hl, wBattleReward + 2
 	ld de, wMomsMoney + 2
+.tailmerge_2368: ; (tools/tailmerge.py)
 	call AddBattleMoneyToAccount
 	pop bc
 	ret
@@ -2373,9 +2371,7 @@ WinTrainerBattle:
 	push bc
 	ld hl, wBattleReward + 2
 	ld de, wMoney + 2
-	call AddBattleMoneyToAccount
-	pop bc
-	ret
+	jr WinTrainerBattle.tailmerge_2368 ; same as there (tools/tailmerge.py)
 
 .DoubleReward:
 	ld hl, wBattleReward + 2
@@ -2666,6 +2662,7 @@ PlayerPartyMonEntrance:
 	call SendOutMonText
 	call NewBattleMonStatus
 	call BreakAttraction
+.tailmerge_2669: ; (tools/tailmerge.py)
 	call SendOutPlayerMon
 	call EmptyBattleTextbox
 	call LoadTilemapToTempTilemap
@@ -3363,6 +3360,7 @@ ShowSetEnemyMonAndSendOutAnimation:
 	ld a, [wTempEnemyMonSpecies]
 	call PlayStereoCry
 	call UpdateEnemyHUD
+.tailmerge_3366: ; (tools/tailmerge.py)
 	ld a, $1
 	ldh [hBGMapMode], a
 	ret
@@ -3815,9 +3813,7 @@ SendOutPlayerMon:
 	ld a, [wCurPartySpecies]
 	call PlayStereoCry
 	call UpdatePlayerHUD
-	ld a, $1
-	ldh [hBGMapMode], a
-	ret
+	jp ShowSetEnemyMonAndSendOutAnimation.tailmerge_3366 ; same as there (tools/tailmerge.py)
 
 NewBattleMonStatus:
 	xor a
@@ -4930,9 +4926,7 @@ PlayerSwitch:
 
 .player_1
 	call EnemyMonEntrance
-	call BattleMonEntrance
-	and a
-	ret
+	jr PlayerSwitch.switch ; same as there (tools/tailmerge.py)
 
 EnemyMonEntrance:
 	callfar AI_Switch
@@ -4990,11 +4984,7 @@ PassedBattleMonEntrance:
 	xor a ; FALSE
 	ld [wApplyStatLevelMultipliersToEnemy], a
 	call ApplyStatLevelMultiplierOnAllStats
-	call SendOutPlayerMon
-	call EmptyBattleTextbox
-	call LoadTilemapToTempTilemap
-	call SetPlayerTurn
-	jp SpikesDamage
+	jp PlayerPartyMonEntrance.tailmerge_2669 ; same as there (tools/tailmerge.py)
 
 BattleMenu_Run:
 	call SafeLoadTempTilemapToTilemap
@@ -5284,9 +5274,7 @@ MoveSelectionScreen:
 	ld hl, BattleText_MonHasNoMovesLeft
 	call StdBattleTextbox
 	ld c, 60
-	call DelayFrames
-	xor a
-	ret
+	jp ResidualDamage.tailmerge_1081 ; same as there (tools/tailmerge.py)
 
 .pressed_select
 	ld a, [wSwappingMove]
@@ -5342,6 +5330,7 @@ MoveSelectionScreen:
 
 .transformed
 	xor a
+.tailmerge_5345: ; (tools/tailmerge.py)
 	ld [wSwappingMove], a
 	jp MoveSelectionScreen
 
@@ -5369,8 +5358,7 @@ MoveSelectionScreen:
 
 .start_swap
 	ld a, [wMenuCursorY]
-	ld [wSwappingMove], a
-	jp MoveSelectionScreen
+	jr MoveSelectionScreen.tailmerge_5345 ; same as there (tools/tailmerge.py)
 
 MoveInfoBox:
 	xor a
@@ -7614,6 +7602,7 @@ DropPlayerSub:
 	predef GetUnownLetter
 	ld de, vTiles2 tile $31
 	predef GetMonBackpic
+.tailmerge_7617: ; (tools/tailmerge.py)
 	pop af
 	ld [wCurPartySpecies], a
 	ret
@@ -7623,6 +7612,7 @@ GetBattleMonBackpic_DoAnim:
 	push af
 	xor a
 	ldh [hBattleTurn], a
+.tailmerge_7626: ; (tools/tailmerge.py)
 	ld a, BANK(BattleAnimCommands)
 	rst FarCall
 	pop af
@@ -7651,19 +7641,13 @@ DropEnemySub:
 	predef GetUnownLetter
 	ld de, vTiles2
 	predef GetMonFrontpic
-	pop af
-	ld [wCurPartySpecies], a
-	ret
+	jr DropPlayerSub.tailmerge_7617 ; same as there (tools/tailmerge.py)
 
 GetEnemyMonFrontpic_DoAnim:
 	ldh a, [hBattleTurn]
 	push af
 	call SetEnemyTurn
-	ld a, BANK(BattleAnimCommands)
-	rst FarCall
-	pop af
-	ldh [hBattleTurn], a
-	ret
+	jr GetBattleMonBackpic_DoAnim.tailmerge_7626 ; same as there (tools/tailmerge.py)
 
 StartBattle:
 ; This check prevents you from entering a battle without any Pokemon.

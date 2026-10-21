@@ -145,6 +145,7 @@ CopyMenuData::
 	ld de, wMenuData
 	ld bc, wMenuDataEnd - wMenuData
 	call CopyBytes
+.tailmerge_148: ; (tools/tailmerge.py)
 	pop af
 	pop bc
 	pop de
@@ -742,13 +743,7 @@ Place2DMenuItemName::
 	ldh a, [hROMBank]
 	push af
 	ld a, [wTempBank]
-	rst Bankswitch
-
-	call PlaceString
-	pop af
-	rst Bankswitch
-
-	ret
+	jp PlaceFarString.tailmerge_576 ; same as there (tools/tailmerge.py)
 
 _2DMenu::
 	call CopyMenuData

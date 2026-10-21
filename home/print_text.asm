@@ -105,6 +105,7 @@ FarPrintText::
 	ldh a, [hROMBank]
 	push af
 	ld a, [wTempBank]
+.tailmerge_108: ; (tools/tailmerge.py)
 	rst Bankswitch
 
 	call PrintText

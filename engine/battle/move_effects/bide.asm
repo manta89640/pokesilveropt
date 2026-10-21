@@ -64,6 +64,7 @@ BattleCommand_StoreEnergy:
 
 .still_storing
 	ld hl, StoringEnergyText
+.tailmerge_67: ; (tools/tailmerge.py)
 	call StdBattleTextbox
 	jp EndMoveEffect
 

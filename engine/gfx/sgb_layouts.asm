@@ -278,6 +278,7 @@ SGBLayoutJumptable:
 	ld [hl], LOW(palred 26 + palgreen 10 + palblue 6)
 	inc hl
 	ld [hl], HIGH(palred 26 + palgreen 10 + palblue 6)
+.tailmerge_281: ; (tools/tailmerge.py)
 	ld hl, wSGBPals
 	ld de, BlkPacket_AllPal0
 	ret
@@ -472,9 +473,7 @@ endr
 	ld [wSGBPals + 5], a
 	ld a, [hl]
 	ld [wSGBPals + 6], a
-	ld hl, wSGBPals
-	ld de, BlkPacket_AllPal0
-	ret
+	jp SGBLayoutJumptable.tailmerge_281 ; same as there (tools/tailmerge.py)
 
 .SGB_GamefreakLogo:
 	ld hl, PalPacket_GamefreakLogo
@@ -497,9 +496,7 @@ endr
 	ld [wSGBPals + 5], a
 	ld a, [hl]
 	ld [wSGBPals + 6], a
-	ld hl, wSGBPals
-	ld de, BlkPacket_AllPal0
-	ret
+	jp SGBLayoutJumptable.tailmerge_281 ; same as there (tools/tailmerge.py)
 
 .SGB_TradeTube:
 	ld hl, PalPacket_TradeTube
@@ -522,9 +519,7 @@ endr
 	ld [wSGBPals + 5], a
 	ld a, [hl]
 	ld [wSGBPals + 6], a
-	ld hl, wSGBPals
-	ld de, BlkPacket_AllPal0
-	ret
+	jp SGBLayoutJumptable.tailmerge_281 ; same as there (tools/tailmerge.py)
 
 .GetMapPalsIndex:
 	ld a, [wTimeOfDayPal]

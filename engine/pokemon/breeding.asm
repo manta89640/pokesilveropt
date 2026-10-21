@@ -591,15 +591,14 @@ GetHeritableMoves:
 
 .inherit_mon2_moves
 	ld hl, wBreedMon2Moves
+.tailmerge_594: ; (tools/tailmerge.py)
 	pop af
 	ld [wCurPartySpecies], a
 	ret
 
 .inherit_mon1_moves
 	ld hl, wBreedMon1Moves
-	pop af
-	ld [wCurPartySpecies], a
-	ret
+	jr GetHeritableMoves.tailmerge_594 ; same as there (tools/tailmerge.py)
 
 GetBreedmonMovePointer:
 	ld hl, wBreedMon1Moves
@@ -855,6 +854,7 @@ DayCareMon1:
 	jr z, DayCareMonCursor
 	call PromptButton
 	ld hl, wBreedMon2Nickname
+.tailmerge_858: ; (tools/tailmerge.py)
 	call DayCareMonCompatibilityText
 	jp PrintText
 
@@ -868,8 +868,7 @@ DayCareMon2:
 	jr z, DayCareMonCursor
 	call PromptButton
 	ld hl, wBreedMon1Nickname
-	call DayCareMonCompatibilityText
-	jp PrintText
+	jr DayCareMon1.tailmerge_858 ; same as there (tools/tailmerge.py)
 
 DayCareMonCursor:
 	jp WaitPressAorB_BlinkCursor

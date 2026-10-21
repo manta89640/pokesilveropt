@@ -14,6 +14,7 @@ GetFirstPokemonHappiness:
 	ld [wNamedObjectIndex], a
 	ld a, [hl]
 	ld [wScriptVar], a
+.tailmerge_17: ; (tools/tailmerge.py)
 	call GetPokemonName
 	jp CopyPokemonName_Buffer1_Buffer3
 
@@ -27,8 +28,7 @@ CheckFirstMonIsEgg:
 
 .egg
 	ld [wScriptVar], a
-	call GetPokemonName
-	jp CopyPokemonName_Buffer1_Buffer3
+	jr GetFirstPokemonHappiness.tailmerge_17 ; same as there (tools/tailmerge.py)
 
 ChangeHappiness:
 ; Perform happiness action c on wCurPartyMon

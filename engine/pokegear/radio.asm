@@ -117,6 +117,7 @@ PrintRadioLine:
 	call PrintTextboxText
 .skip
 	ld a, RADIO_SCROLL
+.tailmerge_120: ; (tools/tailmerge.py)
 	ld [wCurRadioLine], a
 	ld a, 100
 	ld [wRadioTextDelay], a
@@ -513,10 +514,7 @@ OaksPKMNTalk10:
 	ld hl, OPT_PokemonChannelText
 	call PrintText
 	ld a, OAKS_POKEMON_TALK_11
-	ld [wCurRadioLine], a
-	ld a, 100
-	ld [wRadioTextDelay], a
-	ret
+	jp PrintRadioLine.tailmerge_120 ; same as there (tools/tailmerge.py)
 
 OPT_PokemonChannelText:
 	text_far _OPT_PokemonChannelText
@@ -765,6 +763,7 @@ BenMonMusic2:
 
 BenMonMusic3:
 	ld hl, BenIntroText3
+.tailmerge_768: ; (tools/tailmerge.py)
 	ld a, POKEMON_MUSIC_4
 	jp NextRadioLine
 
@@ -776,8 +775,7 @@ FernMonMusic1:
 
 FernMonMusic2:
 	ld hl, FernIntroText2
-	ld a, POKEMON_MUSIC_4
-	jp NextRadioLine
+	jr BenMonMusic3.tailmerge_768 ; same as there (tools/tailmerge.py)
 
 BenFernMusic4:
 	ld hl, BenFernText1
@@ -1384,8 +1382,7 @@ StartRadioStation:
 	ld e, [hl]
 	inc hl
 	ld d, [hl]
-	callfar RadioMusicRestartDE
-	ret
+	jp StartPokemonMusicChannel.SunTueThurSun ; same as there (tools/tailmerge.py)
 
 INCLUDE "data/radio/channel_music.asm"
 

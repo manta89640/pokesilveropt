@@ -139,6 +139,7 @@ NamingScreen_InitAnimatedMonIcon:
 	xor a
 	call GetIconGFX
 	depixel 4, 4, 4, 0
+.tailmerge_142: ; (tools/tailmerge.py)
 	ld a, SPRITE_ANIM_OBJ_PARTY_MON
 	call _InitSpriteAnimStruct
 	ld hl, SPRITEANIMSTRUCT_ANIM_SEQ_ID
@@ -153,12 +154,7 @@ MoveList_InitAnimatedMonIcon:
 	xor a
 	call GetIconGFX
 	lb de, 3 * TILE_WIDTH + 2, 4 * TILE_WIDTH + 4 ; depixel 3, 4, 2, 4
-	ld a, SPRITE_ANIM_OBJ_PARTY_MON
-	call _InitSpriteAnimStruct
-	ld hl, SPRITEANIMSTRUCT_ANIM_SEQ_ID
-	add hl, bc
-	ld [hl], SPRITE_ANIM_FUNC_NULL
-	ret
+	jr NamingScreen_InitAnimatedMonIcon.tailmerge_142 ; same as there (tools/tailmerge.py)
 
 Trade_LoadMonIconGFX:
 	ld a, [wTempIconSpecies]

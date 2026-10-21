@@ -145,12 +145,14 @@ CutFunction:
 
 .DoCut:
 	ld hl, Script_CutFromMenu
+.tailmerge_148: ; (tools/tailmerge.py)
 	call QueueScript
 	ld a, JUMPTABLE_EXIT | $1
 	ret
 
 .FailCut:
 	ld hl, CutNothingText
+.tailmerge_154: ; (tools/tailmerge.py)
 	call MenuTextboxBackup
 	ld a, JUMPTABLE_EXIT
 	ret
@@ -223,6 +225,7 @@ CutDownTreeOrGrass:
 	ld a, [wCutWhirlpoolAnimationType]
 	ld e, a
 	farcall OWCutAnimation
+.tailmerge_226: ; (tools/tailmerge.py)
 	call BufferScreen
 	jp GetMovementPermissions
 
@@ -367,21 +370,15 @@ SurfFunction:
 	ld [wSurfingPlayerState], a
 	call GetPartyNickname
 	ld hl, SurfFromMenuScript
-	call QueueScript
-	ld a, JUMPTABLE_EXIT | $1
-	ret
+	jp CutFunction.tailmerge_148 ; same as there (tools/tailmerge.py)
 
 .FailSurf:
 	ld hl, CantSurfText
-	call MenuTextboxBackup
-	ld a, JUMPTABLE_EXIT
-	ret
+	jp CutFunction.tailmerge_154 ; same as there (tools/tailmerge.py)
 
 .AlreadySurfing:
 	ld hl, AlreadySurfingText
-	call MenuTextboxBackup
-	ld a, JUMPTABLE_EXIT
-	ret
+	jp CutFunction.tailmerge_154 ; same as there (tools/tailmerge.py)
 
 SurfFromMenuScript:
 	special UpdateTimePals
@@ -692,6 +689,7 @@ TryWaterfallOW::
 .failed
 	ld a, BANK(Script_CantDoWaterfall)
 	ld hl, Script_CantDoWaterfall
+.tailmerge_695: ; (tools/tailmerge.py)
 	call CallScript
 	scf
 	ret
@@ -953,9 +951,7 @@ StrengthFunction:
 
 .UseStrength:
 	ld hl, Script_StrengthFromMenu
-	call QueueScript
-	ld a, JUMPTABLE_EXIT | $1
-	ret
+	jp CutFunction.tailmerge_148 ; same as there (tools/tailmerge.py)
 
 SetStrengthFlag:
 	ld hl, wBikeFlags
@@ -1084,9 +1080,7 @@ WhirlpoolFunction:
 
 .DoWhirlpool:
 	ld hl, Script_WhirlpoolFromMenu
-	call QueueScript
-	ld a, JUMPTABLE_EXIT | $1
-	ret
+	jp CutFunction.tailmerge_148 ; same as there (tools/tailmerge.py)
 
 .FailWhirlpool:
 	jp FlashFunction.notadarkcave ; same as there (tools/tailmerge.py)
@@ -1150,8 +1144,7 @@ DisappearWhirlpool:
 	ld a, [wCutWhirlpoolAnimationType]
 	ld e, a
 	farcall PlayWhirlpoolSound
-	call BufferScreen
-	jp GetMovementPermissions
+	jp CutDownTreeOrGrass.tailmerge_226 ; same as there (tools/tailmerge.py)
 
 TryWhirlpoolOW::
 	ld d, WHIRLPOOL
@@ -1171,9 +1164,7 @@ TryWhirlpoolOW::
 .failed
 	ld a, BANK(Script_MightyWhirlpool)
 	ld hl, Script_MightyWhirlpool
-	call CallScript
-	scf
-	ret
+	jp TryWaterfallOW.tailmerge_695 ; same as there (tools/tailmerge.py)
 
 Script_MightyWhirlpool:
 	jumptext .MayPassWhirlpoolText
@@ -1196,6 +1187,7 @@ AskWhirlpoolText:
 
 HeadbuttFunction:
 	call TryHeadbuttFromMenu
+.tailmerge_1199: ; (tools/tailmerge.py)
 	and JUMPTABLE_INDEX_MASK
 	ld [wFieldMoveSucceeded], a
 	ret
@@ -1275,9 +1267,7 @@ AskHeadbuttText:
 
 RockSmashFunction:
 	call TryRockSmashFromMenu
-	and JUMPTABLE_INDEX_MASK
-	ld [wFieldMoveSucceeded], a
-	ret
+	jr HeadbuttFunction.tailmerge_1199 ; same as there (tools/tailmerge.py)
 
 TryRockSmashFromMenu:
 	call GetFacingObject
@@ -1452,25 +1442,19 @@ FishFunction:
 	ld a, $1
 	ld [wFishingResult], a
 	ld hl, Script_GotABite
-	call QueueScript
-	ld a, JUMPTABLE_EXIT | $1
-	ret
+	jp CutFunction.tailmerge_148 ; same as there (tools/tailmerge.py)
 
 .FishNoBite:
 	ld a, $2
 	ld [wFishingResult], a
 	ld hl, Script_NotEvenANibble
-	call QueueScript
-	ld a, JUMPTABLE_EXIT | $1
-	ret
+	jp CutFunction.tailmerge_148 ; same as there (tools/tailmerge.py)
 
 .FishNoFish:
 	ld a, $0
 	ld [wFishingResult], a
 	ld hl, Script_NotEvenANibble2
-	call QueueScript
-	ld a, JUMPTABLE_EXIT | $1
-	ret
+	jp CutFunction.tailmerge_148 ; same as there (tools/tailmerge.py)
 
 Script_NotEvenANibble:
 	scall Script_FishCastRod
@@ -1732,9 +1716,7 @@ TryCutOW::
 .cant_cut
 	ld a, BANK(CantCutScript)
 	ld hl, CantCutScript
-	call CallScript
-	scf
-	ret
+	jp TryWaterfallOW.tailmerge_695 ; same as there (tools/tailmerge.py)
 
 AskCutScript:
 	opentext
@@ -1752,9 +1734,7 @@ AskCutScript:
 	ld [wScriptVar], a
 	call CheckMapForSomethingToCut
 	ret c
-	ld a, TRUE
-	ld [wScriptVar], a
-	ret
+	jp FoundOne ; same as there (tools/tailmerge.py)
 
 AskCutText:
 	text_far _AskCutText

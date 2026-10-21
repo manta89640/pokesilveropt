@@ -396,6 +396,7 @@ String_Space::    db " @"
 NextLineChar::
 	pop hl
 	ld bc, SCREEN_WIDTH * 2
+.tailmerge_399: ; (tools/tailmerge.py)
 	add hl, bc
 	push hl
 	jp NextChar
@@ -403,9 +404,7 @@ NextLineChar::
 LineFeedChar::
 	pop hl
 	ld bc, SCREEN_WIDTH
-	add hl, bc
-	push hl
-	jp NextChar
+	jr NextLineChar.tailmerge_399 ; same as there (tools/tailmerge.py)
 
 LineChar::
 	pop hl
@@ -573,6 +572,7 @@ PlaceFarString::
 	push af
 
 	ld a, b
+.tailmerge_576: ; (tools/tailmerge.py)
 	rst Bankswitch
 	call PlaceString
 
@@ -665,6 +665,7 @@ TextCommand_RAM::
 	ld a, [hli]
 	ld d, a
 	push hl
+.tailmerge_668: ; (tools/tailmerge.py)
 	ld h, b
 	ld l, c
 	call PlaceString
@@ -691,7 +692,9 @@ TextCommand_FAR::
 	call DoTextUntilTerminator
 	pop hl
 
+.tailmerge_694: ; (tools/tailmerge.py)
 	pop af
+.tailmerge_695: ; (tools/tailmerge.py)
 	ldh [hROMBank], a
 	ld [rROMB], a
 	ret
@@ -914,11 +917,7 @@ TextCommand_STRINGBUFFER::
 	call GetFarWord
 	ld d, h
 	ld e, l
-	ld h, b
-	ld l, c
-	call PlaceString
-	pop hl
-	ret
+	jp TextCommand_RAM.tailmerge_668 ; same as there (tools/tailmerge.py)
 
 TextCommand_DAY::
 ; print the day of the week

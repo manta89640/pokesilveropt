@@ -1560,8 +1560,10 @@ ScrollMapUp::
 	ld a, [wBGMapAnchor]
 	ld e, a
 	ld a, [wBGMapAnchor + 1]
+.tailmerge_1563: ; (tools/tailmerge.py)
 	ld d, a
 	call UpdateBGMapRow
+.tailmerge_1565: ; (tools/tailmerge.py)
 	ld a, $1
 	ldh [hBGMapUpdate], a
 	ret
@@ -1583,11 +1585,7 @@ ScrollMapDown::
 	and %00000011
 	or HIGH(vBGMap0)
 	ld e, l
-	ld d, a
-	call UpdateBGMapRow
-	ld a, $1
-	ldh [hBGMapUpdate], a
-	ret
+	jr ScrollMapUp.tailmerge_1563 ; same as there (tools/tailmerge.py)
 
 ScrollMapLeft::
 	hlcoord 0, 0
@@ -1600,9 +1598,7 @@ ScrollMapLeft::
 	ld a, [wBGMapAnchor + 1]
 	ld d, a
 	call UpdateBGMapColumn
-	ld a, $1
-	ldh [hBGMapUpdate], a
-	ret
+	jr ScrollMapUp.tailmerge_1565 ; same as there (tools/tailmerge.py)
 
 ScrollMapRight::
 	hlcoord SCREEN_WIDTH - 2, 0
@@ -1622,9 +1618,7 @@ ScrollMapRight::
 	ld a, [wBGMapAnchor + 1]
 	ld d, a
 	call UpdateBGMapColumn
-	ld a, $1
-	ldh [hBGMapUpdate], a
-	ret
+	jr ScrollMapUp.tailmerge_1565 ; same as there (tools/tailmerge.py)
 
 BackupBGMapRow::
 	ld c, 2 * SCREEN_WIDTH
@@ -2161,6 +2155,7 @@ CheckIfFacingTileCoordIsBGEvent::
 	pop hl
 	ld de, wCurBGEvent
 	ld bc, BG_EVENT_SIZE
+.tailmerge_2164: ; (tools/tailmerge.py)
 	call CopyBytes
 	scf
 	ret
@@ -2233,9 +2228,7 @@ CheckCurrentMapCoordEvents::
 	pop hl
 	ld de, wCurCoordEvent
 	ld bc, COORD_EVENT_SIZE
-	call CopyBytes
-	scf
-	ret
+	jr CheckIfFacingTileCoordIsBGEvent.tailmerge_2164 ; same as there (tools/tailmerge.py)
 
 FadeToMenu::
 	xor a
@@ -2410,11 +2403,7 @@ CopyMapPartial::
 	call GetMapPointer
 	ld de, wMapPartial
 	ld bc, wMapPartialEnd - wMapPartial
-	call CopyBytes
-
-	pop af
-	rst Bankswitch
-	ret
+	jp FarCopyBytes.tailmerge_47 ; same as there (tools/tailmerge.py)
 
 SwitchToMapScriptsBank::
 	ld a, [wMapScriptsBank]
@@ -2479,11 +2468,7 @@ GetMapEnvironment::
 	push bc
 	ld de, MAP_ENVIRONMENT
 	call GetMapField
-	ld a, c
-	pop bc
-	pop de
-	pop hl
-	ret
+	jp GetSpritePalette.tailmerge_11 ; same as there (tools/tailmerge.py)
 
 
 GetAnyMapEnvironment::
@@ -2492,11 +2477,7 @@ GetAnyMapEnvironment::
 	push bc
 	ld de, MAP_ENVIRONMENT
 	call GetAnyMapField
-	ld a, c
-	pop bc
-	pop de
-	pop hl
-	ret
+	jp GetSpritePalette.tailmerge_11 ; same as there (tools/tailmerge.py)
 
 GetAnyMapTileset::
 	ld de, MAP_TILESET
@@ -2512,12 +2493,7 @@ GetWorldMapLocation::
 
 	ld de, MAP_LOCATION
 	call GetAnyMapField
-	ld a, c
-
-	pop bc
-	pop de
-	pop hl
-	ret
+	jp GetSpritePalette.tailmerge_11 ; same as there (tools/tailmerge.py)
 
 GetMapMusic::
 	push hl

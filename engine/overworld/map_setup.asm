@@ -102,6 +102,7 @@ CheckUpdatePlayerSprite::
 	bit BIKEFLAGS_ALWAYS_ON_BIKE_F, [hl]
 	ret z
 	ld a, PLAYER_BIKE
+.tailmerge_105: ; (tools/tailmerge.py)
 	ld [wPlayerState], a
 	scf
 	ret
@@ -130,9 +131,7 @@ CheckUpdatePlayerSprite::
 	jr nz, .nope
 .surfing
 	ld a, PLAYER_NORMAL
-	ld [wPlayerState], a
-	scf
-	ret
+	jr CheckUpdatePlayerSprite.tailmerge_105 ; same as there (tools/tailmerge.py)
 
 .nope
 	and a

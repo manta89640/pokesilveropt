@@ -481,9 +481,7 @@ PokegearClock_Joypad:
 	xor a
 	ldh [hBGMapMode], a
 	call Pokegear_UpdateClock
-	ld a, $1
-	ldh [hBGMapMode], a
-	ret
+	jp InitClock.tailmerge_127 ; same as there (tools/tailmerge.py)
 
 Pokegear_UpdateClock:
 	hlcoord 3, 5
@@ -534,6 +532,7 @@ PokegearMap_Init:
 	ld [wPokegearMapCursorObjectPointer], a
 	ld a, b
 	ld [wPokegearMapCursorObjectPointer + 1], a
+.tailmerge_537: ; (tools/tailmerge.py)
 	ld hl, wJumptableIndex
 	inc [hl]
 	ret
@@ -627,6 +626,7 @@ PokegearMap_ContinueMap:
 PokegearMap_InitPlayerIcon:
 	push af
 	depixel 0, 0
+.tailmerge_630: ; (tools/tailmerge.py)
 	ld a, SPRITE_ANIM_OBJ_RED_WALK
 	call InitSpriteAnimStruct
 	ld hl, SPRITEANIMSTRUCT_TILE_ID
@@ -635,6 +635,7 @@ PokegearMap_InitPlayerIcon:
 	pop af
 	ld e, a
 	push bc
+.tailmerge_638: ; (tools/tailmerge.py)
 	farcall GetLandmarkCoords
 	pop bc
 	ld hl, SPRITEANIMSTRUCT_XCOORD
@@ -680,15 +681,7 @@ PokegearMap_UpdateLandmarkName:
 PokegearMap_UpdateCursorPosition:
 	push bc
 	ld e, a
-	farcall GetLandmarkCoords
-	pop bc
-	ld hl, SPRITEANIMSTRUCT_XCOORD
-	add hl, bc
-	ld [hl], e
-	ld hl, SPRITEANIMSTRUCT_YCOORD
-	add hl, bc
-	ld [hl], d
-	ret
+	jr PokegearMap_InitPlayerIcon.tailmerge_638 ; same as there (tools/tailmerge.py)
 
 TownMap_GetKantoLandmarkLimits:
 	ld a, [wStatusFlags]
@@ -710,9 +703,7 @@ PokegearRadio_Init:
 	add hl, bc
 	ld [hl], $08
 	call _UpdateRadioStation
-	ld hl, wJumptableIndex
-	inc [hl]
-	ret
+	jp PokegearMap_Init.tailmerge_537 ; same as there (tools/tailmerge.py)
 
 PokegearRadio_Joypad:
 	ld hl, hJoyLast
@@ -766,6 +757,7 @@ PokegearPhone_Init:
 	ld [wPokegearPhoneSelectedPerson], a
 	call InitPokegearTilemap
 	call ExitPokegearRadio_HandleMusic
+.tailmerge_769: ; (tools/tailmerge.py)
 	ld hl, PokegearAskWhoCallText
 	jp PrintText
 
@@ -897,8 +889,7 @@ PokegearPhone_FinishPhoneCall:
 	farcall HangUp
 	ld a, POKEGEARSTATE_PHONEJOYPAD
 	ld [wJumptableIndex], a
-	ld hl, PokegearAskWhoCallText
-	jp PrintText
+	jp PokegearPhone_Init.tailmerge_769 ; same as there (tools/tailmerge.py)
 
 PokegearPhone_GetDPad:
 	ld hl, hJoyLast
@@ -1372,9 +1363,7 @@ UpdateRadioStation:
 	ldh [hBGMapMode], a
 	hlcoord 2, 9
 	call PlaceString
-	ld a, $1
-	ldh [hBGMapMode], a
-	ret
+	jp InitClock.tailmerge_127 ; same as there (tools/tailmerge.py)
 
 
 RadioChannels:
@@ -1513,6 +1502,7 @@ LoadStation_LuckyChannel:
 
 LoadStation_UnownRadio:
 	ld a, UNOWN_RADIO
+.tailmerge_1516: ; (tools/tailmerge.py)
 	ld [wCurRadioLine], a
 	xor a
 	ld [wNumRadioLinesPrinted], a
@@ -1535,6 +1525,7 @@ LoadStation_PlacesAndPeople:
 
 LoadStation_LetsAllSing:
 	ld a, LETS_ALL_SING
+.tailmerge_1538: ; (tools/tailmerge.py)
 	ld [wCurRadioLine], a
 	xor a
 	ld [wNumRadioLinesPrinted], a
@@ -1546,14 +1537,7 @@ LoadStation_LetsAllSing:
 
 LoadStation_RocketRadio:
 	ld a, ROCKET_RADIO
-	ld [wCurRadioLine], a
-	xor a
-	ld [wNumRadioLinesPrinted], a
-	ld a, BANK(PlayRadioShow)
-	ld hl, PlayRadioShow
-	call Radio_BackUpFarCallParams
-	ld de, LetsAllSingName
-	ret
+	jr LoadStation_LetsAllSing.tailmerge_1538 ; same as there (tools/tailmerge.py)
 
 LoadStation_PokeFluteRadio:
 	ld a, POKE_FLUTE_RADIO
@@ -1568,14 +1552,7 @@ LoadStation_PokeFluteRadio:
 
 LoadStation_EvolutionRadio:
 	ld a, EVOLUTION_RADIO
-	ld [wCurRadioLine], a
-	xor a
-	ld [wNumRadioLinesPrinted], a
-	ld a, BANK(PlayRadioShow)
-	ld hl, PlayRadioShow
-	call Radio_BackUpFarCallParams
-	ld de, UnownStationName
-	ret
+	jr LoadStation_UnownRadio.tailmerge_1516 ; same as there (tools/tailmerge.py)
 
 
 RadioMusicRestartDE:
@@ -1629,9 +1606,7 @@ NoRadioStation:
 	ld [wPokegearRadioChannelBank], a
 	ld [wPokegearRadioChannelAddr], a
 	ld [wPokegearRadioChannelAddr + 1], a
-	ld a, $1
-	ldh [hBGMapMode], a
-	ret
+	jp InitClock.tailmerge_127 ; same as there (tools/tailmerge.py)
 
 OaksPKMNTalkName:     db "OAK's <PK><MN> Talk@"
 PokedexShowName:      db "#DEX Show@"
@@ -2321,6 +2296,7 @@ Pokedex_GetArea:
 .copy_sprites
 	hlcoord 0, 0
 	ld de, wShadowOAM
+.tailmerge_2324: ; (tools/tailmerge.py)
 	ld bc, wShadowOAMEnd - wShadowOAM
 	jp CopyBytes
 
@@ -2381,8 +2357,7 @@ Pokedex_GetArea:
 .done_nest
 	ld hl, wShadowOAM
 	decoord 0, 0
-	ld bc, wShadowOAMEnd - wShadowOAM
-	jp CopyBytes
+	jr Pokedex_GetArea.tailmerge_2324 ; same as there (tools/tailmerge.py)
 
 .HideNestsShowPlayer:
 	call .CheckPlayerLocation
@@ -2612,23 +2587,7 @@ TownMapPlayerIcon:
 	call Request2bpp
 ; Animation/palette
 	depixel 0, 0
-	ld a, SPRITE_ANIM_OBJ_RED_WALK
-	call InitSpriteAnimStruct
-	ld hl, SPRITEANIMSTRUCT_TILE_ID
-	add hl, bc
-	ld [hl], $10
-	pop af
-	ld e, a
-	push bc
-	farcall GetLandmarkCoords
-	pop bc
-	ld hl, SPRITEANIMSTRUCT_XCOORD
-	add hl, bc
-	ld [hl], e
-	ld hl, SPRITEANIMSTRUCT_YCOORD
-	add hl, bc
-	ld [hl], d
-	ret
+	jp PokegearMap_InitPlayerIcon.tailmerge_630 ; same as there (tools/tailmerge.py)
 
 LoadTownMapGFX:
 	ld hl, TownMapGFX

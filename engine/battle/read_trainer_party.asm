@@ -367,8 +367,6 @@ CopyTrainerName:
 	ld de, wStringBuffer1
 	push de
 	ld bc, NAME_LENGTH
-	call CopyBytes
-	pop de
-	ret
+	jp GetTrainerClassName.tailmerge_18 ; same as there (tools/tailmerge.py)
 
 INCLUDE "data/trainers/parties.asm"

@@ -62,9 +62,11 @@ Pack:
 
 .InitItemsPocket:
 	xor a ; ITEM_POCKET
+.tailmerge_65: ; (tools/tailmerge.py)
 	ld [wCurPocket], a
 	call ClearPocketList
 	call DrawPocketName
+.tailmerge_68: ; (tools/tailmerge.py)
 	call WaitBGMap_DrawPackGFX
 	jp Pack_JumptableNext
 
@@ -87,11 +89,7 @@ Pack:
 
 .InitKeyItemsPocket:
 	ld a, KEY_ITEM_POCKET
-	ld [wCurPocket], a
-	call ClearPocketList
-	call DrawPocketName
-	call WaitBGMap_DrawPackGFX
-	jp Pack_JumptableNext
+	jr Pack.tailmerge_65 ; same as there (tools/tailmerge.py)
 
 .KeyItemsPocketMenu:
 	ld hl, KeyItemsPocketMenuHeader
@@ -117,8 +115,7 @@ Pack:
 	call DrawPocketName
 	xor a
 	ldh [hBGMapMode], a
-	call WaitBGMap_DrawPackGFX
-	jp Pack_JumptableNext
+	jr Pack.tailmerge_68 ; same as there (tools/tailmerge.py)
 
 .TMHMPocketMenu:
 	farcall TMHMPocket
@@ -203,11 +200,7 @@ Pack:
 
 .InitBallsPocket:
 	ld a, BALL_POCKET
-	ld [wCurPocket], a
-	call ClearPocketList
-	call DrawPocketName
-	call WaitBGMap_DrawPackGFX
-	jp Pack_JumptableNext
+	jp Pack.tailmerge_65 ; same as there (tools/tailmerge.py)
 
 .BallsPocketMenu:
 	ld hl, BallsPocketMenuHeader
@@ -548,11 +541,7 @@ GiveItem:
 .finish
 	pop af
 	ld [wOptions], a
-	xor a
-	ldh [hBGMapMode], a
-	call Pack_InitGFX
-	call WaitBGMap_DrawPackGFX
-	jp Pack_InitColors
+	jp Pack.declined ; same as there (tools/tailmerge.py)
 
 .NoPokemon:
 	jp UseItem.NoPokemon ; same as there (tools/tailmerge.py)
@@ -638,6 +627,7 @@ BattlePack:
 	ld a, [wMenuCursorY]
 	ld [wKeyItemsPocketCursor], a
 	lb bc, PACKSTATE_INITBALLSPOCKET, PACKSTATE_INITTMHMPOCKET ; left ; right
+.tailmerge_641: ; (tools/tailmerge.py)
 	call Pack_InterpretJoypad
 	ret c
 	jr ItemSubmenu
@@ -678,9 +668,7 @@ BattlePack:
 	ld a, [wMenuCursorY]
 	ld [wBallsPocketCursor], a
 	lb bc, PACKSTATE_INITITEMSPOCKET, PACKSTATE_INITKEYITEMSPOCKET ; left ; right
-	call Pack_InterpretJoypad
-	ret c
-	jr ItemSubmenu
+	jr BattlePack.tailmerge_641 ; same as there (tools/tailmerge.py)
 
 ItemSubmenu:
 	farcall CheckItemContext
@@ -919,21 +907,22 @@ DepositSellTutorial_InterpretJoypad:
 
 .a_button
 	ld a, TRUE
+.tailmerge_922: ; (tools/tailmerge.py)
 	ld [wPackUsedItem], a
 	and a
 	ret
 
 .b_button
 	xor a ; FALSE
-	ld [wPackUsedItem], a
-	and a
-	ret
+	jr DepositSellTutorial_InterpretJoypad.tailmerge_922 ; same as there (tools/tailmerge.py)
 
 .d_left
 	ld a, [wJumptableIndex]
 	dec a
 	maskbits NUM_POCKETS
+.tailmerge_936: ; (tools/tailmerge.py)
 	ld [wJumptableIndex], a
+.tailmerge_937: ; (tools/tailmerge.py)
 	push de
 	ld de, SFX_SWITCH_POCKETS
 	call PlaySFX
@@ -945,13 +934,7 @@ DepositSellTutorial_InterpretJoypad:
 	ld a, [wJumptableIndex]
 	inc a
 	maskbits NUM_POCKETS
-	ld [wJumptableIndex], a
-	push de
-	ld de, SFX_SWITCH_POCKETS
-	call PlaySFX
-	pop de
-	scf
-	ret
+	jr DepositSellTutorial_InterpretJoypad.tailmerge_936 ; same as there (tools/tailmerge.py)
 
 TutorialPack:
 	call DepositSellInitPackBuffers
@@ -1085,6 +1068,7 @@ Pack_PrintTextNoScroll:
 	set NO_TEXT_SCROLL, a
 	ld [wOptions], a
 	call PrintText
+.tailmerge_1088: ; (tools/tailmerge.py)
 	pop af
 	ld [wOptions], a
 	ret
@@ -1149,23 +1133,13 @@ Pack_InterpretJoypad:
 	ld a, b
 	ld [wJumptableIndex], a
 	ld [wPackJumptableIndex], a
-	push de
-	ld de, SFX_SWITCH_POCKETS
-	call PlaySFX
-	pop de
-	scf
-	ret
+	jp DepositSellTutorial_InterpretJoypad.tailmerge_937 ; same as there (tools/tailmerge.py)
 
 .d_right
 	ld a, c
 	ld [wJumptableIndex], a
 	ld [wPackJumptableIndex], a
-	push de
-	ld de, SFX_SWITCH_POCKETS
-	call PlaySFX
-	pop de
-	scf
-	ret
+	jp DepositSellTutorial_InterpretJoypad.tailmerge_937 ; same as there (tools/tailmerge.py)
 
 .select
 	farcall SwitchItemsInBag

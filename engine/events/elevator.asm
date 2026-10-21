@@ -153,9 +153,7 @@ Elevator_GetCurrentFloorText:
 	call PlaceString
 	hlcoord 4, 4
 	call Elevator_GetCurrentFloorString
-	pop af
-	ld [wOptions], a
-	ret
+	jp Pack_PrintTextNoScroll.tailmerge_1088 ; same as there (tools/tailmerge.py)
 
 Elevator_CurrentFloorText:
 	db "Now on:@"

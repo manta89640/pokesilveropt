@@ -92,6 +92,7 @@ _PlayerDecorationMenu:
 .AppendToStringBuffer2:
 	ld hl, wStringBuffer2
 	inc [hl]
+.tailmerge_95: ; (tools/tailmerge.py)
 	ld e, [hl]
 	ld d, 0
 	add hl, de
@@ -166,11 +167,7 @@ AppendDecoIndex:
 	ld hl, wNumOwnedDecoCategories
 	inc [hl]
 	assert wNumOwnedDecoCategories + 1 == wOwnedDecoCategories
-	ld e, [hl]
-	ld d, 0
-	add hl, de
-	ld [hl], a
-	ret
+	jr _PlayerDecorationMenu.tailmerge_95 ; same as there (tools/tailmerge.py)
 
 FindOwnedDecosInCategory:
 	push bc
@@ -192,6 +189,7 @@ FindOwnedDecosInCategory:
 
 DecoBedMenu:
 	call FindOwnedBeds
+.tailmerge_195: ; (tools/tailmerge.py)
 	call PopulateDecoCategoryMenu
 	xor a
 	ret
@@ -210,9 +208,7 @@ FindOwnedBeds:
 
 DecoCarpetMenu:
 	call FindOwnedCarpets
-	call PopulateDecoCategoryMenu
-	xor a
-	ret
+	jr DecoBedMenu.tailmerge_195 ; same as there (tools/tailmerge.py)
 
 FindOwnedCarpets:
 	ld hl, .carpets
@@ -228,9 +224,7 @@ FindOwnedCarpets:
 
 DecoPlantMenu:
 	call FindOwnedPlants
-	call PopulateDecoCategoryMenu
-	xor a
-	ret
+	jr DecoBedMenu.tailmerge_195 ; same as there (tools/tailmerge.py)
 
 FindOwnedPlants:
 	ld hl, .plants
@@ -245,9 +239,7 @@ FindOwnedPlants:
 
 DecoPosterMenu:
 	call FindOwnedPosters
-	call PopulateDecoCategoryMenu
-	xor a
-	ret
+	jr DecoBedMenu.tailmerge_195 ; same as there (tools/tailmerge.py)
 
 FindOwnedPosters:
 	ld hl, .posters
@@ -263,9 +255,7 @@ FindOwnedPosters:
 
 DecoConsoleMenu:
 	call FindOwnedConsoles
-	call PopulateDecoCategoryMenu
-	xor a
-	ret
+	jr DecoBedMenu.tailmerge_195 ; same as there (tools/tailmerge.py)
 
 FindOwnedConsoles:
 	ld hl, .consoles
@@ -281,9 +271,7 @@ FindOwnedConsoles:
 
 DecoOrnamentMenu:
 	call FindOwnedOrnaments
-	call PopulateDecoCategoryMenu
-	xor a
-	ret
+	jr DecoBedMenu.tailmerge_195 ; same as there (tools/tailmerge.py)
 
 FindOwnedOrnaments:
 	ld hl, .ornaments
@@ -318,9 +306,7 @@ FindOwnedOrnaments:
 
 DecoBigDollMenu:
 	call FindOwnedBigDolls
-	call PopulateDecoCategoryMenu
-	xor a
-	ret
+	jr DecoBedMenu.tailmerge_195 ; same as there (tools/tailmerge.py)
 
 FindOwnedBigDolls:
 	ld hl, .big_dolls
@@ -677,6 +663,7 @@ DecoAction_SetItUp:
 	ld hl, wStringBuffer3
 	call GetDecorationName
 	ld hl, SetUpTheDecoText
+.tailmerge_680: ; (tools/tailmerge.py)
 	call MenuTextboxBackup
 	xor a
 	ret
@@ -710,9 +697,7 @@ DecoAction_TryPutItAway:
 
 .nothingthere
 	ld hl, NothingToPutAwayText
-	call MenuTextboxBackup
-	xor a
-	ret
+	jr DecoAction_SetItUp.tailmerge_680 ; same as there (tools/tailmerge.py)
 
 DecoAction_setupornament:
 	ld hl, WhichSidePutOnText

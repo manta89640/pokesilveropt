@@ -14,6 +14,7 @@ ProfOaksPCBoot:
 	ld hl, OakPCText2
 	call PrintText
 	call Rate
+.tailmerge_17: ; (tools/tailmerge.py)
 	call PlaySFX ; sfx loaded by previous Rate function call
 	call JoyWaitAorB
 	jp WaitSFX
@@ -24,9 +25,7 @@ ProfOaksPCRating:
 	ld de, MUSIC_NONE
 	call PlayMusic
 	pop de
-	call PlaySFX
-	call JoyWaitAorB
-	jp WaitSFX
+	jr ProfOaksPCBoot.tailmerge_17 ; same as there (tools/tailmerge.py)
 
 Rate:
 ; calculate Seen/Owned

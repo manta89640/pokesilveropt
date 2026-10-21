@@ -206,6 +206,7 @@ VBlank_Cutscene::
 	ld a, [wROMBankBackup]
 	rst Bankswitch
 	; enable ints
+.tailmerge_209: ; (tools/tailmerge.py)
 	ld a, IE_DEFAULT
 	ldh [rIE], a
 	ret
@@ -302,9 +303,7 @@ VBlank_Credits::
 	xor a
 	ldh [rIF], a
 	; enable ints
-	ld a, IE_DEFAULT
-	ldh [rIE], a
-	ret
+	jr VBlank_Cutscene.tailmerge_209 ; same as there (tools/tailmerge.py)
 
 VBlank_SoundOnly::
 ; sound only
@@ -402,6 +401,4 @@ VBlank_Unused::
 	xor a
 	ldh [rIF], a
 	; enable ints
-	ld a, IE_DEFAULT
-	ldh [rIE], a
-	ret
+	jp VBlank_Cutscene.tailmerge_209 ; same as there (tools/tailmerge.py)

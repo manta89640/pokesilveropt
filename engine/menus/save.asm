@@ -343,27 +343,21 @@ EraseLinkBattleStats:
 	call OpenSRAM
 	ld hl, sLinkBattleStats
 	ld bc, sLinkBattleStatsEnd - sLinkBattleStats
-	xor a
-	call ByteFill
-	jp CloseSRAM
+	jp EmptyAllSRAMBanks.tailmerge_15 ; same as there (tools/tailmerge.py)
 
 EraseMysteryGift:
 	ld a, BANK(sBackupMysteryGiftItem)
 	call OpenSRAM
 	ld hl, sBackupMysteryGiftItem
 	ld bc, sBackupMysteryGiftItemEnd - sBackupMysteryGiftItem
-	xor a
-	call ByteFill
-	jp CloseSRAM
+	jp EmptyAllSRAMBanks.tailmerge_15 ; same as there (tools/tailmerge.py)
 
 EraseHallOfFame:
 	ld a, BANK(sHallOfFame)
 	call OpenSRAM
 	ld hl, sHallOfFame
 	ld bc, sHallOfFameEnd - sHallOfFame
-	xor a
-	call ByteFill
-	jp CloseSRAM
+	jp EmptyAllSRAMBanks.tailmerge_15 ; same as there (tools/tailmerge.py)
 
 ValidateSave:
 	ld a, BANK(sCheckValue1) ; aka BANK(sCheckValue2)
@@ -395,7 +389,9 @@ SavePlayerData:
 	call CopyBytes
 	ld hl, wCurMapData
 	ld de, sCurMapData
+.tailmerge_398: ; (tools/tailmerge.py)
 	ld bc, wCurMapDataEnd - wCurMapData
+.tailmerge_399: ; (tools/tailmerge.py)
 	call CopyBytes
 	jp CloseSRAM
 
@@ -405,8 +401,7 @@ SavePokemonData:
 	ld hl, wPokemonData
 	ld de, sPokemonData
 	ld bc, wPokemonDataEnd - wPokemonData
-	call CopyBytes
-	jp CloseSRAM
+	jr SavePlayerData.tailmerge_399 ; same as there (tools/tailmerge.py)
 
 SaveBox:
 	call GetBoxAddress
@@ -439,8 +434,7 @@ SaveBackupOptions:
 	ld hl, wOptions
 	ld de, sBackupOptions
 	ld bc, wOptionsEnd - wOptions
-	call CopyBytes
-	jp CloseSRAM
+	jr SavePlayerData.tailmerge_399 ; same as there (tools/tailmerge.py)
 
 SaveBackupPlayerData:
 	ld a, BANK(sBackupPlayerData3)
@@ -465,9 +459,7 @@ SaveBackupPlayerData:
 	call OpenSRAM
 	ld hl, wCurMapData
 	ld de, sBackupCurMapData
-	ld bc, wCurMapDataEnd - wCurMapData
-	call CopyBytes
-	jp CloseSRAM
+	jp SavePlayerData.tailmerge_398 ; same as there (tools/tailmerge.py)
 
 SaveBackupPokemonData:
 	ld a, BANK(sBackupPokemonData)
@@ -475,8 +467,7 @@ SaveBackupPokemonData:
 	ld hl, wPokemonData
 	ld de, sBackupPokemonData
 	ld bc, wPokemonDataEnd - wPokemonData
-	call CopyBytes
-	jp CloseSRAM
+	jp SavePlayerData.tailmerge_399 ; same as there (tools/tailmerge.py)
 
 SaveBackupChecksum:
 	ld a, BANK(sBackupPlayerData3)
@@ -671,9 +662,7 @@ LoadPlayerData:
 	call CopyBytes
 	ld hl, sCurMapData
 	ld de, wCurMapData
-	ld bc, wCurMapDataEnd - wCurMapData
-	call CopyBytes
-	jp CloseSRAM
+	jp SavePlayerData.tailmerge_398 ; same as there (tools/tailmerge.py)
 
 LoadPokemonData:
 	ld a, BANK(sPokemonData)
@@ -681,8 +670,7 @@ LoadPokemonData:
 	ld hl, sPokemonData
 	ld de, wPokemonData
 	ld bc, wPokemonDataEnd - wPokemonData
-	call CopyBytes
-	jp CloseSRAM
+	jp SavePlayerData.tailmerge_399 ; same as there (tools/tailmerge.py)
 
 LoadBox:
 	call GetBoxAddress
@@ -731,9 +719,7 @@ LoadBackupPlayerData:
 	call OpenSRAM
 	ld hl, sBackupCurMapData
 	ld de, wCurMapData
-	ld bc, wCurMapDataEnd - wCurMapData
-	call CopyBytes
-	jp CloseSRAM
+	jp SavePlayerData.tailmerge_398 ; same as there (tools/tailmerge.py)
 
 LoadBackupPokemonData:
 	ld a, BANK(sBackupPokemonData)
@@ -741,8 +727,7 @@ LoadBackupPokemonData:
 	ld hl, sBackupPokemonData
 	ld de, wPokemonData
 	ld bc, wPokemonDataEnd - wPokemonData
-	call CopyBytes
-	jp CloseSRAM
+	jp SavePlayerData.tailmerge_399 ; same as there (tools/tailmerge.py)
 
 VerifyBackupChecksum:
 	ld a, BANK(sBackupPokemonData)
@@ -888,6 +873,7 @@ SaveBoxAddress:
 ; Save it to the final part of the target box.
 	call OpenSRAM
 	ld hl, wBoxPartialData
+.tailmerge_891: ; (tools/tailmerge.py)
 	ld bc, sBoxEnd - (sBox + (wBoxPartialDataEnd - wBoxPartialData) * 2) ; $8e
 	call CopyBytes
 	call CloseSRAM
@@ -951,12 +937,7 @@ LoadBoxAddress:
 	call OpenSRAM
 	ld hl, wBoxPartialData
 	ld de, sBox + (wBoxPartialDataEnd - wBoxPartialData) * 2
-	ld bc, sBoxEnd - (sBox + (wBoxPartialDataEnd - wBoxPartialData) * 2) ; $8e
-	call CopyBytes
-	call CloseSRAM
-
-	pop hl
-	ret
+	jr SaveBoxAddress.tailmerge_891 ; same as there (tools/tailmerge.py)
 
 EraseBoxes:
 	ld hl, BoxAddresses

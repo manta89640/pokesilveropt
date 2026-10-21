@@ -124,6 +124,7 @@ InitClock:
 	ld bc, SCREEN_AREA
 	xor a
 	call ByteFill
+.tailmerge_127: ; (tools/tailmerge.py)
 	ld a, $1
 	ldh [hBGMapMode], a
 	ret
@@ -172,6 +173,7 @@ SetHour:
 	call ByteFill
 	hlcoord 4, 9
 	call DisplayHourOClock
+.tailmerge_175: ; (tools/tailmerge.py)
 	call WaitBGMap
 	and a
 	ret
@@ -236,9 +238,7 @@ SetMinutes:
 	call ByteFill
 	hlcoord 12, 9
 	call DisplayMinutesWithMinString
-	call WaitBGMap
-	and a
-	ret
+	jr SetHour.tailmerge_175 ; same as there (tools/tailmerge.py)
 .a_button
 	scf
 	ret

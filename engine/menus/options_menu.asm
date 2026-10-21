@@ -219,6 +219,7 @@ Options_BattleScene:
 
 .Display:
 	hlcoord 11, 5
+.tailmerge_222: ; (tools/tailmerge.py)
 	call PlaceString
 	and a
 	ret
@@ -257,9 +258,7 @@ Options_BattleStyle:
 
 .Display:
 	hlcoord 11, 7
-	call PlaceString
-	and a
-	ret
+	jr Options_BattleScene.tailmerge_222 ; same as there (tools/tailmerge.py)
 
 .Shift: db "SHIFT@"
 .Set:   db "SET  @"
@@ -302,9 +301,7 @@ Options_Sound:
 
 .Display:
 	hlcoord 11, 9
-	call PlaceString
-	and a
-	ret
+	jr Options_BattleScene.tailmerge_222 ; same as there (tools/tailmerge.py)
 
 .Mono:   db "MONO  @"
 .Stereo: db "STEREO@"
@@ -442,9 +439,7 @@ Options_MenuAccount:
 
 .Display:
 	hlcoord 11, 13
-	call PlaceString
-	and a
-	ret
+	jp Options_BattleScene.tailmerge_222 ; same as there (tools/tailmerge.py)
 
 .Off: db "OFF@"
 .On:  db "ON @"

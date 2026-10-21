@@ -518,6 +518,7 @@ DoPlayerMovement::
 	ld a, 0
 	ld [wPlayerTurningDirection], a
 	ld a, movement_step_sleep
+.tailmerge_521: ; (tools/tailmerge.py)
 	ld [wMovementAnimation], a
 	xor a
 	ret
@@ -526,9 +527,7 @@ DoPlayerMovement::
 	ld a, 0
 	ld [wPlayerTurningDirection], a
 	ld a, movement_step_bump
-	ld [wMovementAnimation], a
-	xor a
-	ret
+	jr DoPlayerMovement.tailmerge_521 ; same as there (tools/tailmerge.py)
 
 .CheckForced:
 ; When sliding on ice, input is forced to remain in the same direction.

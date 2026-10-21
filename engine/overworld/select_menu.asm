@@ -127,6 +127,7 @@ UseRegisteredItem:
 .NoFunction:
 	call OpenText
 	call CantUseItem
+.tailmerge_130: ; (tools/tailmerge.py)
 	call CloseText
 	and a
 	ret
@@ -134,18 +135,14 @@ UseRegisteredItem:
 .Current:
 	call OpenText
 	call DoItemEffect
-	call CloseText
-	and a
-	ret
+	jr UseRegisteredItem.tailmerge_130 ; same as there (tools/tailmerge.py)
 
 .Party:
 	call ReanchorMap
 	call FadeToMenu
 	call DoItemEffect
 	call CloseSubmenu
-	call CloseText
-	and a
-	ret
+	jr UseRegisteredItem.tailmerge_130 ; same as there (tools/tailmerge.py)
 
 .Overworld:
 	call ReanchorMap
@@ -167,6 +164,4 @@ UseRegisteredItem:
 
 ._cantuse
 	call CantUseItem
-	call CloseText
-	and a
-	ret
+	jr UseRegisteredItem.tailmerge_130 ; same as there (tools/tailmerge.py)

@@ -6,6 +6,7 @@ StopRTC: ; unreferenced
 	ld [rRAMB], a
 	ld a, [rRTCREG]
 	set B_RTCREG_DH_HALT, a
+.tailmerge_9: ; (tools/tailmerge.py)
 	ld [rRTCREG], a
 	jp CloseSRAM
 
@@ -17,8 +18,7 @@ StartRTC:
 	ld [rRAMB], a
 	ld a, [rRTCREG]
 	res B_RTCREG_DH_HALT, a
-	ld [rRTCREG], a
-	jp CloseSRAM
+	jr StopRTC.tailmerge_9 ; same as there (tools/tailmerge.py)
 
 GetTimeOfDay::
 ; get time of day based on the current hour

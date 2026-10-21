@@ -28,13 +28,13 @@ PlaceMenuItemQuantity:
 
 PlaceMoneyTopRight:
 	ld hl, MoneyTopRightMenuHeader
+.tailmerge_31: ; (tools/tailmerge.py)
 	call CopyMenuHeader
 	jr PlaceMoneyTextbox
 
 PlaceMoneyBottomLeft:
 	ld hl, MoneyBottomLeftMenuHeader
-	call CopyMenuHeader
-	jr PlaceMoneyTextbox
+	jr PlaceMoneyTopRight.tailmerge_31 ; same as there (tools/tailmerge.py)
 
 PlaceMoneyAtTopLeftOfTextbox:
 	ld hl, MoneyTopRightMenuHeader

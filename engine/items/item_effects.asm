@@ -707,6 +707,7 @@ PokeBallEffect:
 .toss
 	ld hl, wNumItems
 	inc a
+.tailmerge_710: ; (tools/tailmerge.py)
 	ld [wItemQuantityChange], a
 	jp TossItem
 
@@ -744,6 +745,7 @@ ParkBallMultiplier:
 	ld a, b
 	srl a
 	add b
+.tailmerge_747: ; (tools/tailmerge.py)
 	ld b, a
 	ret nc
 	ld b, $ff
@@ -834,10 +836,7 @@ endr
 	inc hl
 	ld a, b
 	add [hl]
-	ld b, a
-	ret nc
-	ld b, $ff
-	ret
+	jr ParkBallMultiplier.tailmerge_747 ; same as there (tools/tailmerge.py)
 
 .lightmon
 	ld a, b
@@ -1394,6 +1393,7 @@ UseStatusHealer:
 	ld [wPartyMenuActionText], a
 	call HealStatus
 	call Play_SFX_FULL_HEAL
+.tailmerge_1397: ; (tools/tailmerge.py)
 	call ItemActionTextWaitButton
 	call UseDisposableItem
 	ld a, FALSE
@@ -1547,10 +1547,7 @@ RevivePokemon:
 	call HealHP_SFX_GFX
 	ld a, PARTYMENUTEXT_REVIVE
 	ld [wPartyMenuActionText], a
-	call ItemActionTextWaitButton
-	call UseDisposableItem
-	ld a, FALSE
-	ret
+	jp UseStatusHealer.tailmerge_1397 ; same as there (tools/tailmerge.py)
 
 FullRestoreEffect:
 	ld b, PARTYMENUACTION_HEALING_ITEM
@@ -1579,6 +1576,7 @@ FullRestoreEffect:
 	ld [hli], a
 	ld [hl], a
 	call HealStatus
+.tailmerge_1582: ; (tools/tailmerge.py)
 	call BattlemonRestoreHealth
 	call HealHP_SFX_GFX
 	ld a, PARTYMENUTEXT_HEAL_HP
@@ -1650,14 +1648,7 @@ ItemRestoreHP:
 	ld [wLowHealthAlarm], a
 	call GetHealingItemAmount
 	call RestoreHealth
-	call BattlemonRestoreHealth
-	call HealHP_SFX_GFX
-	ld a, PARTYMENUTEXT_HEAL_HP
-	ld [wPartyMenuActionText], a
-	call ItemActionTextWaitButton
-	call UseDisposableItem
-	ld a, 0
-	ret
+	jr FullRestoreEffect.tailmerge_1582 ; same as there (tools/tailmerge.py)
 
 HealHP_SFX_GFX:
 	push de
@@ -2422,9 +2413,7 @@ PPRestoreItem_NoEffect:
 
 PPRestoreItem_Cancel:
 	call ClearPalettes
-	xor a
-	ld [wItemEffectSucceeded], a
-	ret
+	jp EvoStoneEffect.DecidedNotToUse ; same as there (tools/tailmerge.py)
 
 RestorePP:
 	xor a ; PARTYMON
@@ -2546,8 +2535,7 @@ UseItemText:
 UseDisposableItem:
 	ld hl, wNumItems
 	ld a, 1
-	ld [wItemQuantityChange], a
-	jp TossItem
+	jp PokeBallEffect.tailmerge_710 ; same as there (tools/tailmerge.py)
 
 UseBallInTrainerBattle:
 	call ReturnToBattle_UseBall
@@ -2569,6 +2557,7 @@ UseBallInTrainerBattle:
 
 WontHaveAnyEffect_NotUsedMessage:
 	ld hl, ItemWontHaveEffectText
+.tailmerge_2572: ; (tools/tailmerge.py)
 	call PrintText
 
 	; Item wasn't used.
@@ -2582,12 +2571,7 @@ LooksBitterMessage:
 
 Ball_BoxIsFullMessage:
 	ld hl, BallBoxFullText
-	call PrintText
-
-	; Item wasn't used.
-	ld a, $2
-	ld [wItemEffectSucceeded], a
-	ret
+	jr WontHaveAnyEffect_NotUsedMessage.tailmerge_2572 ; same as there (tools/tailmerge.py)
 
 CantUseOnEggMessage:
 	ld hl, ItemCantUseOnEggText

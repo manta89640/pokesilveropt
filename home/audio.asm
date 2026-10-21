@@ -18,11 +18,7 @@ InitSound::
 	ldh [hROMBank], a
 	ld [rROMB], a
 
-	pop af
-	pop bc
-	pop de
-	pop hl
-	ret
+	jp CopyMenuData.tailmerge_148 ; same as there (tools/tailmerge.py)
 
 UpdateSound::
 	push hl
@@ -42,11 +38,7 @@ UpdateSound::
 	ldh [hROMBank], a
 	ld [rROMB], a
 
-	pop af
-	pop bc
-	pop de
-	pop hl
-	ret
+	jp CopyMenuData.tailmerge_148 ; same as there (tools/tailmerge.py)
 
 _LoadMusicByte::
 ; [wCurMusicByte] = [a:de]
@@ -57,9 +49,7 @@ _LoadMusicByte::
 	ld [wCurMusicByte], a
 	ld a, BANK(LoadMusicByte)
 
-	ldh [hROMBank], a
-	ld [rROMB], a
-	ret
+	jp TextCommand_FAR.tailmerge_695 ; same as there (tools/tailmerge.py)
 
 PlayMusic::
 ; Play music de.
@@ -89,11 +79,7 @@ PlayMusic::
 	pop af
 	ldh [hROMBank], a
 	ld [rROMB], a
-	pop af
-	pop bc
-	pop de
-	pop hl
-	ret
+	jp CopyMenuData.tailmerge_148 ; same as there (tools/tailmerge.py)
 
 PlayMusic2::
 ; Stop playing music, then play music de.
@@ -120,11 +106,7 @@ PlayMusic2::
 	ldh [hROMBank], a
 	ld [rROMB], a
 
-	pop af
-	pop bc
-	pop de
-	pop hl
-	ret
+	jp CopyMenuData.tailmerge_148 ; same as there (tools/tailmerge.py)
 
 PlayCry::
 ; Play cry de.
@@ -344,11 +326,7 @@ PlayMapMusicBike::
 	ld [wMapMusic], a
 	call PlayMusic
 
-	pop af
-	pop bc
-	pop de
-	pop hl
-	ret
+	jp CopyMenuData.tailmerge_148 ; same as there (tools/tailmerge.py)
 
 TryRestartMapMusic::
 	ld a, [wDontPlayMapMusicOnReload]
@@ -375,11 +353,7 @@ RestartMapMusic::
 	ld e, a
 	ld d, 0
 	call PlayMusic
-	pop af
-	pop bc
-	pop de
-	pop hl
-	ret
+	jp CopyMenuData.tailmerge_148 ; same as there (tools/tailmerge.py)
 
 SpecialMapMusic::
 	ld a, [wPlayerState]

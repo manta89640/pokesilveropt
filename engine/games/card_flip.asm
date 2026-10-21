@@ -611,6 +611,7 @@ CardFlip_BlankDiscardedCardSlot:
 
 .discarded2
 	hlcoord 13, 3
+.tailmerge_614: ; (tools/tailmerge.py)
 	add hl, bc
 	add hl, bc
 	ld [hl], $36
@@ -636,6 +637,7 @@ CardFlip_BlankDiscardedCardSlot:
 
 .discarded1
 	hlcoord 13, 4
+.tailmerge_639: ; (tools/tailmerge.py)
 	add hl, bc
 	add hl, bc
 	ld [hl], $3d
@@ -661,13 +663,7 @@ CardFlip_BlankDiscardedCardSlot:
 
 .discarded4
 	hlcoord 13, 6
-	add hl, bc
-	add hl, bc
-	ld [hl], $36
-	ld bc, SCREEN_WIDTH
-	add hl, bc
-	ld [hl], $3d
-	ret
+	jr CardFlip_BlankDiscardedCardSlot.tailmerge_614 ; same as there (tools/tailmerge.py)
 
 .Level4:
 	ld hl, wDiscardPile - 4
@@ -686,13 +682,7 @@ CardFlip_BlankDiscardedCardSlot:
 
 .discarded3
 	hlcoord 13, 7
-	add hl, bc
-	add hl, bc
-	ld [hl], $3d
-	ld bc, SCREEN_WIDTH
-	add hl, bc
-	ld [hl], $3a
-	ret
+	jr CardFlip_BlankDiscardedCardSlot.tailmerge_639 ; same as there (tools/tailmerge.py)
 
 .Level5:
 	ld hl, wDiscardPile + 4
@@ -711,13 +701,7 @@ CardFlip_BlankDiscardedCardSlot:
 
 .discarded6
 	hlcoord 13, 9
-	add hl, bc
-	add hl, bc
-	ld [hl], $36
-	ld bc, SCREEN_WIDTH
-	add hl, bc
-	ld [hl], $3d
-	ret
+	jr CardFlip_BlankDiscardedCardSlot.tailmerge_614 ; same as there (tools/tailmerge.py)
 
 .Level6:
 	ld hl, wDiscardPile - 4
@@ -736,13 +720,7 @@ CardFlip_BlankDiscardedCardSlot:
 
 .discarded5
 	hlcoord 13, 10
-	add hl, bc
-	add hl, bc
-	ld [hl], $3d
-	ld bc, SCREEN_WIDTH
-	add hl, bc
-	ld [hl], $3a
-	ret
+	jr CardFlip_BlankDiscardedCardSlot.tailmerge_639 ; same as there (tools/tailmerge.py)
 
 CardFlip_CheckWinCondition:
 	call CollapseCursorPosition

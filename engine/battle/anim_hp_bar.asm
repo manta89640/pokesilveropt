@@ -201,6 +201,7 @@ ShortHPBarAnim_UpdateTiles:
 	ld a, [wCurHPBarPixels]
 	ld e, a
 	ld c, a
+.tailmerge_204: ; (tools/tailmerge.py)
 	push de
 	call HPBarAnim_RedrawHPBar
 	pop de
@@ -222,10 +223,7 @@ LongHPBarAnim_UpdateTiles:
 	ld a, [wWhichHPBar]
 	and $1
 	ld b, a
-	push de
-	call HPBarAnim_RedrawHPBar
-	pop de
-	jr HPBarAnim_PaletteUpdate
+	jr ShortHPBarAnim_UpdateTiles.tailmerge_204 ; same as there (tools/tailmerge.py)
 
 HPBarAnim_RedrawHPBar:
 	ld a, [wWhichHPBar]
@@ -334,6 +332,7 @@ HPBarAnim_BGMapUpdate:
 	call DelayFrame
 	ld a, $1
 	ldh [hBGMapMode], a
+.tailmerge_337: ; (tools/tailmerge.py)
 	ld a, c
 	ldh [hBGMapThird], a
 	jp DelayFrame
@@ -346,9 +345,7 @@ HPBarAnim_BGMapUpdate:
 	ld c, $1
 .finish
 	call DelayFrame
-	ld a, c
-	ldh [hBGMapThird], a
-	jp DelayFrame
+	jr HPBarAnim_BGMapUpdate.tailmerge_337 ; same as there (tools/tailmerge.py)
 
 ShortHPBar_CalcPixelFrame:
 	ld a, [wCurHPAnimMaxHP]

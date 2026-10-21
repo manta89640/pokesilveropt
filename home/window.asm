@@ -6,6 +6,7 @@ ReanchorMap::
 	rst Bankswitch
 
 	call ReanchorBGMap_NoOAMUpdate
+.tailmerge_9: ; (tools/tailmerge.py)
 	call HDMATransferTilemapAndAttrmap_Menu
 	call LoadFonts_NoOAMUpdate
 
@@ -51,12 +52,7 @@ OpenText::
 
 	call ReanchorBGMap_NoOAMUpdate ; anchor bgmap
 	call SpeechTextbox
-	call HDMATransferTilemapAndAttrmap_Menu ; transfer bgmap
-	call LoadFonts_NoOAMUpdate ; load font
-	pop af
-	rst Bankswitch
-
-	ret
+	jr ReanchorMap.tailmerge_9 ; same as there (tools/tailmerge.py)
 
 HDMATransferTilemapAndAttrmap_Menu::
 	ldh a, [hOAMUpdate]

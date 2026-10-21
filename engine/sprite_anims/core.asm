@@ -208,6 +208,7 @@ _InitSpriteAnimStruct::
 DeinitializeSprite:
 ; Clear the index field of the struct in bc.
 	ld hl, SPRITEANIMSTRUCT_INDEX
+.tailmerge_211: ; (tools/tailmerge.py)
 	add hl, bc
 	ld [hl], 0
 	ret

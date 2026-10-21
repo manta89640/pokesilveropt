@@ -1,5 +1,6 @@
 SelectQuantityToToss:
 	ld hl, TossItem_MenuHeader
+.tailmerge_3: ; (tools/tailmerge.py)
 	call LoadMenuHeader
 	jr Toss_Sell_Loop
 
@@ -10,8 +11,7 @@ SelectQuantityToBuy:
 	ld a, e
 	ld [wBuySellItemPrice + 1], a
 	ld hl, BuyItem_MenuHeader
-	call LoadMenuHeader
-	jr Toss_Sell_Loop
+	jr SelectQuantityToToss.tailmerge_3 ; same as there (tools/tailmerge.py)
 
 SelectQuantityToSell:
 	farcall GetItemPrice
@@ -20,8 +20,7 @@ SelectQuantityToSell:
 	ld a, e
 	ld [wBuySellItemPrice + 1], a
 	ld hl, SellItem_MenuHeader
-	call LoadMenuHeader
-	jr Toss_Sell_Loop
+	jr SelectQuantityToToss.tailmerge_3 ; same as there (tools/tailmerge.py)
 
 Toss_Sell_Loop:
 	ld a, 1
@@ -113,9 +112,7 @@ BuySellToss_InterpretJoypad:
 
 .finish_right
 	ld a, b
-	ld [wItemQuantityChange], a
-	and a
-	ret
+	jr BuySellToss_InterpretJoypad.finish_left ; same as there (tools/tailmerge.py)
 
 BuySellToss_UpdateQuantityDisplay:
 	call MenuBox

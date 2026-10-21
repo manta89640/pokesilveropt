@@ -271,6 +271,7 @@ RunBattleAnimCommand:
 	ld d, 0
 	ld hl, BattleAnimCommands
 	add hl, de
+.tailmerge_274: ; (tools/tailmerge.py)
 	add hl, de
 	ld a, [hli]
 	ld h, [hl]
@@ -345,6 +346,7 @@ BattleAnimCmd_Ret:
 	ld e, [hl]
 	inc hl
 	ld d, [hl]
+.tailmerge_348: ; (tools/tailmerge.py)
 	ld hl, wBattleAnimAddress
 	ld [hl], e
 	inc hl
@@ -379,11 +381,7 @@ BattleAnimCmd_Jump:
 	ld e, a
 	call GetBattleAnimByte
 	ld d, a
-	ld hl, wBattleAnimAddress
-	ld [hl], e
-	inc hl
-	ld [hl], d
-	ret
+	jr BattleAnimCmd_Ret.tailmerge_348 ; same as there (tools/tailmerge.py)
 
 BattleAnimCmd_Loop:
 	call GetBattleAnimByte
@@ -408,6 +406,7 @@ BattleAnimCmd_Loop:
 	ld hl, wBattleAnimFlags
 	res BATTLEANIM_IN_LOOP_F, [hl]
 	ld hl, wBattleAnimAddress
+.tailmerge_411: ; (tools/tailmerge.py)
 	ld e, [hl]
 	inc hl
 	ld d, [hl]
@@ -437,15 +436,7 @@ BattleAnimCmd_JumpUntil:
 
 .dont_jump
 	ld hl, wBattleAnimAddress
-	ld e, [hl]
-	inc hl
-	ld d, [hl]
-	inc de
-	inc de
-	ld [hl], d
-	dec hl
-	ld [hl], e
-	ret
+	jr BattleAnimCmd_Loop.tailmerge_411 ; same as there (tools/tailmerge.py)
 
 BattleAnimCmd_SetVar:
 	call GetBattleAnimByte
@@ -475,7 +466,7 @@ BattleAnimCmd_IfVarEqual:
 	ret
 
 .jump
-	jp BattleAnimCmd_Jump ; same as there (tools/tailmerge.py)
+	jr BattleAnimCmd_Jump ; same as there (tools/tailmerge.py)
 
 BattleAnimCmd_IfParamEqual:
 	call GetBattleAnimByte
@@ -688,6 +679,7 @@ BattleAnimCmd_SetObj:
 
 .found
 	call GetBattleAnimByte
+.tailmerge_691: ; (tools/tailmerge.py)
 	ld hl, BATTLEANIMSTRUCT_JUMPTABLE_INDEX
 	add hl, bc
 	ld [hl], a
@@ -1233,6 +1225,7 @@ BattleAnim_SetBGPals:
 	ld hl, wOBPals2
 	ld de, wOBPals1
 	ldh a, [rBGP]
+.tailmerge_1236: ; (tools/tailmerge.py)
 	ld b, a
 	ld c, 2
 	call CopyPals
@@ -1248,12 +1241,7 @@ BattleAnim_SetOBPals:
 	ld hl, wOBPals2 palette PAL_BATTLE_OB_GRAY
 	ld de, wOBPals1 palette PAL_BATTLE_OB_GRAY
 	ldh a, [rOBP0]
-	ld b, a
-	ld c, 2
-	call CopyPals
-	ld a, TRUE
-	ldh [hCGBPalUpdate], a
-	ret
+	jr BattleAnim_SetBGPals.tailmerge_1236 ; same as there (tools/tailmerge.py)
 
 BattleAnim_UpdateOAM_All:
 	ld a, 0

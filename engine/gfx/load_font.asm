@@ -16,6 +16,7 @@ _LoadFontsExtra::
 	ld de, FontExtra + 3 tiles ; '<BOLD_D>'
 	ld hl, vTiles2 tile '<BOLD_D>'
 	lb bc, BANK(FontExtra), 22 ; '<BOLD_D>' to 'ぉ'
+.tailmerge_19: ; (tools/tailmerge.py)
 	call Get2bpp
 	jr LoadFrame
 
@@ -23,8 +24,7 @@ _LoadFontsBattleExtra::
 	ld de, FontBattleExtra
 	ld hl, vTiles2 tile $60
 	lb bc, BANK(FontBattleExtra), 25
-	call Get2bpp
-	jr LoadFrame
+	jr _LoadFontsExtra.tailmerge_19 ; same as there (tools/tailmerge.py)
 
 LoadFrame:
 	ld a, [wTextboxFrame]

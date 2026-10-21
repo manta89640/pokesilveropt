@@ -273,9 +273,7 @@ EndSpriteMovement:
 	ld [hli], a ; OBJECT_1D
 	ld [hl], a  ; OBJECT_1E
 	ld hl, OBJECT_WALKING
-	add hl, bc
-	ld [hl], STANDING
-	ret
+	jp SetFacingStanding.tailmerge_25 ; same as there (tools/tailmerge.py)
 
 InitStep:
 	ld hl, OBJECT_WALKING
@@ -435,6 +433,7 @@ ObjectMovement_DecAnonJumptableIndex:
 
 ObjectMovement_AnonJumptable:
 	ld hl, OBJECT_MOVEMENT_INDEX
+.tailmerge_438: ; (tools/tailmerge.py)
 	add hl, bc
 	ld a, [hl]
 	pop hl
@@ -455,11 +454,7 @@ ObjectStep_IncAnonJumptableIndex:
 
 ObjectStep_AnonJumptable:
 	ld hl, OBJECT_STEP_INDEX
-	add hl, bc
-	ld a, [hl]
-	pop hl
-	rst JumpTable
-	ret
+	jr ObjectMovement_AnonJumptable.tailmerge_438 ; same as there (tools/tailmerge.py)
 
 
 StepFunction_Reset:
@@ -477,6 +472,7 @@ StepFunction_Reset:
 	ld [hl], a
 	call CopyCoordsTileToLastCoordsTile
 	call EndSpriteMovement
+.tailmerge_480: ; (tools/tailmerge.py)
 	ld hl, OBJECT_STEP_TYPE
 	add hl, bc
 	ld [hl], STEP_TYPE_FROM_MOVEMENT
@@ -654,9 +650,7 @@ MovementFunction_Strength:
 	call CopyLastCoordsToCoords
 .ok
 	ld hl, OBJECT_WALKING
-	add hl, bc
-	ld [hl], STANDING
-	ret
+	jp SetFacingStanding.tailmerge_25 ; same as there (tools/tailmerge.py)
 
 .on_pit
 	call ObjectMovement_IncAnonJumptableIndex
@@ -733,6 +727,7 @@ MovementFunction_BigStanding:
 	ld hl, OBJECT_ACTION
 	add hl, bc
 	ld [hl], OBJECT_ACTION_BIG_DOLL_SYM
+.tailmerge_736: ; (tools/tailmerge.py)
 	ld hl, OBJECT_STEP_TYPE
 	add hl, bc
 	ld [hl], STEP_TYPE_STANDING
@@ -746,10 +741,7 @@ MovementFunction_Bouncing:
 	ld hl, OBJECT_ACTION
 	add hl, bc
 	ld [hl], OBJECT_ACTION_BOUNCE
-	ld hl, OBJECT_STEP_TYPE
-	add hl, bc
-	ld [hl], STEP_TYPE_STANDING
-	ret
+	jr MovementFunction_BigStanding.tailmerge_736 ; same as there (tools/tailmerge.py)
 
 MovementFunction_SpinCounterclockwise:
 	call ObjectMovement_AnonJumptable
@@ -854,9 +846,11 @@ MovementFunction_Shadow:
 	ld hl, OBJECT_SPRITE_Y_OFFSET
 	add hl, bc
 	ld [hl], d
+.tailmerge_857: ; (tools/tailmerge.py)
 	ld hl, OBJECT_SPRITE_X_OFFSET
 	add hl, bc
 	ld [hl], 0
+.tailmerge_860: ; (tools/tailmerge.py)
 	ld hl, OBJECT_STEP_TYPE
 	add hl, bc
 	ld [hl], STEP_TYPE_TRACKING_OBJECT
@@ -874,13 +868,7 @@ MovementFunction_Emote:
 	ld hl, OBJECT_SPRITE_Y_OFFSET
 	add hl, bc
 	ld [hl], -2 * TILE_WIDTH
-	ld hl, OBJECT_SPRITE_X_OFFSET
-	add hl, bc
-	ld [hl], 0
-	ld hl, OBJECT_STEP_TYPE
-	add hl, bc
-	ld [hl], STEP_TYPE_TRACKING_OBJECT
-	ret
+	jr MovementFunction_Shadow.tailmerge_857 ; same as there (tools/tailmerge.py)
 
 MovementFunction_BoulderDust:
 	call EndSpriteMovement
@@ -939,10 +927,7 @@ MovementFunction_ShakingGrass:
 	ld hl, OBJECT_STEP_DURATION
 	add hl, bc
 	ld [hl], a
-	ld hl, OBJECT_STEP_TYPE
-	add hl, bc
-	ld [hl], STEP_TYPE_TRACKING_OBJECT
-	ret
+	jr MovementFunction_Shadow.tailmerge_860 ; same as there (tools/tailmerge.py)
 
 InitMovementField1dField1e:
 	ld hl, OBJECT_RANGE
@@ -1085,10 +1070,7 @@ WaitStep_InPlace:
 	add hl, bc
 	dec [hl]
 	ret nz
-	ld hl, OBJECT_STEP_TYPE
-	add hl, bc
-	ld [hl], STEP_TYPE_FROM_MOVEMENT
-	ret
+	jp StepFunction_Reset.tailmerge_480 ; same as there (tools/tailmerge.py)
 
 StepFunction_NPCJump:
 	call ObjectStep_AnonJumptable
@@ -1119,10 +1101,7 @@ StepFunction_NPCJump:
 	dec [hl]
 	ret nz
 	call CopyCoordsTileToLastCoordsTile
-	ld hl, OBJECT_STEP_TYPE
-	add hl, bc
-	ld [hl], STEP_TYPE_FROM_MOVEMENT
-	ret
+	jp StepFunction_Reset.tailmerge_480 ; same as there (tools/tailmerge.py)
 
 StepFunction_PlayerJump:
 	call ObjectStep_AnonJumptable
@@ -1168,10 +1147,7 @@ StepFunction_PlayerJump:
 	ld hl, wPlayerStepFlags
 	set PLAYERSTEP_STOP_F, [hl]
 	call CopyCoordsTileToLastCoordsTile
-	ld hl, OBJECT_STEP_TYPE
-	add hl, bc
-	ld [hl], STEP_TYPE_FROM_MOVEMENT
-	ret
+	jp StepFunction_Reset.tailmerge_480 ; same as there (tools/tailmerge.py)
 
 StepFunction_TeleportFrom:
 	call ObjectStep_AnonJumptable
@@ -1236,10 +1212,7 @@ StepFunction_TeleportFrom:
 	ld hl, OBJECT_STEP_FRAME
 	add hl, bc
 	ld [hl], 0
-	ld hl, OBJECT_STEP_TYPE
-	add hl, bc
-	ld [hl], STEP_TYPE_FROM_MOVEMENT
-	ret
+	jp StepFunction_Reset.tailmerge_480 ; same as there (tools/tailmerge.py)
 
 StepFunction_TeleportTo:
 	call ObjectStep_AnonJumptable
@@ -1256,7 +1229,9 @@ StepFunction_TeleportTo:
 	ld hl, OBJECT_ACTION
 	add hl, bc
 	ld [hl], OBJECT_ACTION_00
+.tailmerge_1259: ; (tools/tailmerge.py)
 	ld hl, OBJECT_STEP_DURATION
+.tailmerge_1260: ; (tools/tailmerge.py)
 	add hl, bc
 	ld [hl], 16
 	call ObjectStep_IncAnonJumptableIndex
@@ -1275,11 +1250,7 @@ StepFunction_TeleportTo:
 	ld hl, OBJECT_JUMP_HEIGHT
 	add hl, bc
 	ld [hl], 0
-	ld hl, OBJECT_STEP_DURATION
-	add hl, bc
-	ld [hl], 16
-	call ObjectStep_IncAnonJumptableIndex
-	ret
+	jr StepFunction_TeleportTo.tailmerge_1259 ; same as there (tools/tailmerge.py)
 
 .DoDescent:
 	ld hl, OBJECT_ACTION
@@ -1303,10 +1274,7 @@ StepFunction_TeleportTo:
 	call ObjectStep_IncAnonJumptableIndex
 .InitFinalSpin:
 	ld hl, OBJECT_STEP_DURATION
-	add hl, bc
-	ld [hl], 16
-	call ObjectStep_IncAnonJumptableIndex
-	ret
+	jr StepFunction_TeleportTo.tailmerge_1260 ; same as there (tools/tailmerge.py)
 
 .DoFinalSpin:
 	ld hl, OBJECT_ACTION
@@ -1323,10 +1291,7 @@ StepFunction_TeleportTo:
 	ld hl, OBJECT_SPRITE_Y_OFFSET
 	add hl, bc
 	ld [hl], 0
-	ld hl, OBJECT_STEP_TYPE
-	add hl, bc
-	ld [hl], STEP_TYPE_FROM_MOVEMENT
-	ret
+	jp StepFunction_Reset.tailmerge_480 ; same as there (tools/tailmerge.py)
 
 StepFunction_Skyfall:
 	call ObjectStep_AnonJumptable
@@ -1409,10 +1374,7 @@ StepFunction_GotBite:
 	ld hl, OBJECT_SPRITE_Y_OFFSET
 	add hl, bc
 	ld [hl], 0
-	ld hl, OBJECT_STEP_TYPE
-	add hl, bc
-	ld [hl], STEP_TYPE_FROM_MOVEMENT
-	ret
+	jp StepFunction_Reset.tailmerge_480 ; same as there (tools/tailmerge.py)
 
 StepFunction_RockSmash:
 	call .Step
@@ -1454,10 +1416,7 @@ StepFunction_Sleep:
 	add hl, bc
 	dec [hl]
 	ret nz
-	ld hl, OBJECT_STEP_TYPE
-	add hl, bc
-	ld [hl], STEP_TYPE_FROM_MOVEMENT
-	ret
+	jp StepFunction_Reset.tailmerge_480 ; same as there (tools/tailmerge.py)
 
 StepFunction_Delete:
 	ld hl, OBJECT_WALKING
@@ -1490,9 +1449,7 @@ StepFunction_Restore:
 StepFunction_Standing:
 	call Stubbed_UpdateYOffset
 	ld hl, OBJECT_WALKING
-	add hl, bc
-	ld [hl], STANDING
-	ret
+	jp SetFacingStanding.tailmerge_25 ; same as there (tools/tailmerge.py)
 
 StepFunction_NPCWalk:
 	call Stubbed_UpdateYOffset
@@ -1505,10 +1462,7 @@ StepFunction_NPCWalk:
 	ld hl, OBJECT_WALKING
 	add hl, bc
 	ld [hl], STANDING
-	ld hl, OBJECT_STEP_TYPE
-	add hl, bc
-	ld [hl], STEP_TYPE_FROM_MOVEMENT
-	ret
+	jp StepFunction_Reset.tailmerge_480 ; same as there (tools/tailmerge.py)
 
 StepFunction_ContinueWalk:
 	call AddStepVector
@@ -1541,10 +1495,7 @@ StepFunction_PlayerWalk:
 	ld hl, OBJECT_WALKING
 	add hl, bc
 	ld [hl], STANDING
-	ld hl, OBJECT_STEP_TYPE
-	add hl, bc
-	ld [hl], STEP_TYPE_FROM_MOVEMENT
-	ret
+	jp StepFunction_Reset.tailmerge_480 ; same as there (tools/tailmerge.py)
 
 StepFunction_Turn:
 	call ObjectStep_AnonJumptable
@@ -1612,10 +1563,7 @@ StepFunction_StrengthBoulder:
 	ld hl, OBJECT_WALKING
 	add hl, bc
 	ld [hl], STANDING
-	ld hl, OBJECT_STEP_TYPE
-	add hl, bc
-	ld [hl], STEP_TYPE_FROM_MOVEMENT
-	ret
+	jp StepFunction_Reset.tailmerge_480 ; same as there (tools/tailmerge.py)
 
 StepFunction_TrackingObject:
 	ld hl, OBJECT_1D
@@ -1779,6 +1727,7 @@ GetIndexedMovementIndex1:
 	inc [hl]
 	ld d, 0
 	ld hl, wMovementObject
+.tailmerge_1782: ; (tools/tailmerge.py)
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
@@ -1793,12 +1742,7 @@ GetIndexedMovementIndex2:
 	inc [hl]
 	ld d, 0
 	ld hl, wIndexedMovement2Pointer
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	add hl, de
-	ld a, [hl]
-	ret
+	jr GetIndexedMovementIndex1.tailmerge_1782 ; same as there (tools/tailmerge.py)
 
 _GetMovementObject:
 	ld hl, GetMovementObject
@@ -2150,6 +2094,7 @@ UpdateObjectFrozen:
 	call CheckObjectOnScreen
 	jr c, SetFacing_Standing
 	call UpdateObjectTile
+.tailmerge_2153: ; (tools/tailmerge.py)
 	farcall HandleFrozenObjectAction ; no need to farcall
 	xor a
 	ret
@@ -2157,9 +2102,7 @@ UpdateObjectFrozen:
 UpdateRespawnedObjectFrozen:
 	call CheckObjectOnScreen
 	jr c, SetFacing_Standing
-	farcall HandleFrozenObjectAction ; no need to farcall
-	xor a
-	ret
+	jr UpdateObjectFrozen.tailmerge_2153 ; same as there (tools/tailmerge.py)
 
 SetFacing_Standing:
 	ld hl, OBJECT_FACING

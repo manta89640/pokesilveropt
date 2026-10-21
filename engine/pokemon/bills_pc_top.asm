@@ -132,9 +132,7 @@ BillsPC_DepositMenu:
 	farcall _DepositPKMN
 	call ReturnToMapFromSubmenu
 	call ClearPCItemScreen
-	call CloseWindow
-	and a
-	ret
+	jr BillsPC_MovePKMNMenu.quit ; same as there (tools/tailmerge.py)
 
 
 CheckCurPartyMonFainted:
@@ -171,9 +169,7 @@ BillsPC_WithdrawMenu:
 	farcall _WithdrawPKMN
 	call ReturnToMapFromSubmenu
 	call ClearPCItemScreen
-	call CloseWindow
-	and a
-	ret
+	jr BillsPC_MovePKMNMenu.quit ; same as there (tools/tailmerge.py)
 
 
 BillsPC_ChangeBoxMenu:

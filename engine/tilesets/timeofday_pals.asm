@@ -63,6 +63,7 @@ _UpdateTimePals::
 
 FadeInFromWhite::
 	ld c, $12
+.tailmerge_66: ; (tools/tailmerge.py)
 	call GetTimePalFade
 	ld b, $4
 	jp ConvertTimePalsDecHL
@@ -70,21 +71,18 @@ FadeInFromWhite::
 FadeOutToWhite::
 	call FillWhiteBGColor
 	ld c, $9
+.tailmerge_73: ; (tools/tailmerge.py)
 	call GetTimePalFade
 	ld b, $4
 	jp ConvertTimePalsIncHL
 
 FadeInFromBlack:
 	ld c, $0
-	call GetTimePalFade
-	ld b, $4
-	jp ConvertTimePalsIncHL
+	jr FadeOutToWhite.tailmerge_73 ; same as there (tools/tailmerge.py)
 
 FadeOutToBlack:
 	ld c, $9
-	call GetTimePalFade
-	ld b, $4
-	jp ConvertTimePalsDecHL
+	jr FadeInFromWhite.tailmerge_66 ; same as there (tools/tailmerge.py)
 
 FillWhiteBGColor:
 	ld hl, wBGPals1

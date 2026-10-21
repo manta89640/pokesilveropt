@@ -15,6 +15,7 @@ GetTrainerClassName:
 	ld de, wStringBuffer1
 	push de
 	ld bc, TRAINER_CLASS_NAME_LENGTH
+.tailmerge_18: ; (tools/tailmerge.py)
 	call CopyBytes
 	pop de
 	ret
@@ -40,9 +41,7 @@ GetOTName:
 	ld bc, TRAINER_CLASS_NAME_LENGTH
 	ld de, wOTClassName
 	push de
-	call CopyBytes
-	pop de
-	ret
+	jr GetTrainerClassName.tailmerge_18 ; same as there (tools/tailmerge.py)
 
 GetTrainerAttributes:
 	ld a, [wTrainerClass]

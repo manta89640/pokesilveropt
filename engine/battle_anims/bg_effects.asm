@@ -71,6 +71,7 @@ DoBattleBGEffectFunction:
 	ld d, 0
 	ld hl, BattleBGEffects
 	add hl, de
+.tailmerge_74: ; (tools/tailmerge.py)
 	add hl, de
 	ld a, [hli]
 	ld h, [hl]
@@ -158,11 +159,7 @@ DummyPredef2F::
 	ld l, [hl]
 	ld h, 0
 	add hl, hl
-	add hl, de
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	jp hl
+	jp DoBattleBGEffectFunction.tailmerge_74 ; same as there (tools/tailmerge.py)
 
 BattleBGEffects_IncAnonJumptableIndex:
 	ld hl, BG_EFFECT_STRUCT_JT_INDEX
@@ -357,6 +354,7 @@ BattleBGEffect_HideMon:
 .got_pointer
 	call ClearBox
 	pop bc
+.tailmerge_360: ; (tools/tailmerge.py)
 	ld a, $1
 	ldh [hBGMapMode], a
 	ret
@@ -700,9 +698,7 @@ BattleBGEffect_RunPicResizeScript:
 	call .PlaceGraphic
 .skip
 	call BattleBGEffects_IncAnonJumptableIndex
-	ld a, $1
-	ldh [hBGMapMode], a
-	ret
+	jp BattleBGEffect_HideMon.tailmerge_360 ; same as there (tools/tailmerge.py)
 
 .clear
 	call .ClearBox
@@ -712,6 +708,7 @@ BattleBGEffect_RunPicResizeScript:
 	xor a
 	ldh [hBGMapMode], a
 	ld hl, BG_EFFECT_STRUCT_JT_INDEX
+.tailmerge_715: ; (tools/tailmerge.py)
 	add hl, bc
 	ld [hl], $0
 	ret
@@ -1016,9 +1013,7 @@ BattleBGEffect_Psychic:
 	lb de, 6, 5
 	call DeformScreen
 	ld hl, BG_EFFECT_STRUCT_PARAM
-	add hl, bc
-	ld [hl], $0
-	ret
+	jp BattleBGEffect_RunPicResizeScript.tailmerge_715 ; same as there (tools/tailmerge.py)
 
 .one
 	ld hl, BG_EFFECT_STRUCT_PARAM
@@ -1096,9 +1091,7 @@ BattleBGEffect_DoubleTeam:
 	inc a
 	ldh [hLYOverrideEnd], a
 	ld hl, BG_EFFECT_STRUCT_BATTLE_TURN
-	add hl, bc
-	ld [hl], $0
-	ret
+	jp BattleBGEffect_RunPicResizeScript.tailmerge_715 ; same as there (tools/tailmerge.py)
 
 .one
 	ld hl, BG_EFFECT_STRUCT_PARAM
@@ -1296,9 +1289,7 @@ BattleBGEffect_Dig:
 	add hl, bc
 	ld [hl], $2
 	ld hl, BG_EFFECT_STRUCT_PARAM
-	add hl, bc
-	ld [hl], $0
-	ret
+	jp BattleBGEffect_RunPicResizeScript.tailmerge_715 ; same as there (tools/tailmerge.py)
 
 .one
 	ld hl, BG_EFFECT_STRUCT_PARAM
@@ -1395,6 +1386,7 @@ Tackle_MoveForward:
 	ld hl, BG_EFFECT_STRUCT_BATTLE_TURN
 	add hl, bc
 	ld a, [hl]
+.tailmerge_1398: ; (tools/tailmerge.py)
 	ld hl, BG_EFFECT_STRUCT_PARAM
 	add hl, bc
 	add [hl]
@@ -1418,11 +1410,7 @@ Tackle_ReturnMove:
 	ld a, [hl]
 	xor $ff
 	inc a
-	ld hl, BG_EFFECT_STRUCT_PARAM
-	add hl, bc
-	add [hl]
-	ld [hl], a
-	ret
+	jr Tackle_MoveForward.tailmerge_1398 ; same as there (tools/tailmerge.py)
 
 Rollout_FillLYOverridesBackup:
 	push af
@@ -1542,9 +1530,7 @@ BattleBGEffect_WobbleMon:
 	inc a
 	ldh [hLYOverrideEnd], a
 	ld hl, BG_EFFECT_STRUCT_PARAM
-	add hl, bc
-	ld [hl], $0
-	ret
+	jp BattleBGEffect_RunPicResizeScript.tailmerge_715 ; same as there (tools/tailmerge.py)
 
 .one
 	ld hl, BG_EFFECT_STRUCT_PARAM
@@ -1665,6 +1651,7 @@ BattleBGEffect_BounceDown:
 	call BattleBGEffects_IncAnonJumptableIndex
 	call BattleBGEffects_ClearLYOverrides
 	ld a, LOW(rSCY)
+.tailmerge_1668: ; (tools/tailmerge.py)
 	call BattleBGEffect_SetLCDStatCustoms1
 	ldh a, [hLYOverrideEnd]
 	inc a
@@ -1939,9 +1926,7 @@ BattleBGEffect_FadeMonsToBlackRepeating:
 .cgb_zero
 	call BattleBGEffects_IncAnonJumptableIndex
 	ld hl, BG_EFFECT_STRUCT_PARAM
-	add hl, bc
-	ld [hl], $0
-	ret
+	jp BattleBGEffect_RunPicResizeScript.tailmerge_715 ; same as there (tools/tailmerge.py)
 
 .cgb_one
 	ld hl, BG_EFFECT_STRUCT_PARAM
@@ -1983,6 +1968,7 @@ BattleBGEffect_FadeMonsToBlackRepeating:
 	ld a, $e4
 	call BGEffects_LoadPlayerPals
 	ld a, $e4
+.tailmerge_1986: ; (tools/tailmerge.py)
 	call BGEffects_LoadEnemyPals
 	jp EndBattleBGEffect
 
@@ -2080,17 +2066,7 @@ BattleBGEffect_VibrateMon:
 	call BattleBGEffects_IncAnonJumptableIndex
 	call BattleBGEffects_ClearLYOverrides
 	ld a, LOW(rSCX)
-	call BattleBGEffect_SetLCDStatCustoms1
-	ldh a, [hLYOverrideEnd]
-	inc a
-	ldh [hLYOverrideEnd], a
-	ld hl, BG_EFFECT_STRUCT_BATTLE_TURN
-	add hl, bc
-	ld [hl], $1
-	ld hl, BG_EFFECT_STRUCT_PARAM
-	add hl, bc
-	ld [hl], $20
-	ret
+	jp BattleBGEffect_BounceDown.tailmerge_1668 ; same as there (tools/tailmerge.py)
 
 .one
 	ld hl, BG_EFFECT_STRUCT_PARAM
@@ -2130,9 +2106,7 @@ BattleBGEffect_WobblePlayer:
 	ld a, $37
 	ldh [hLYOverrideEnd], a
 	ld hl, BG_EFFECT_STRUCT_PARAM
-	add hl, bc
-	ld [hl], $0
-	ret
+	jp BattleBGEffect_RunPicResizeScript.tailmerge_715 ; same as there (tools/tailmerge.py)
 
 .one
 	ld hl, BG_EFFECT_STRUCT_PARAM
@@ -2291,6 +2265,7 @@ BGEffect_RapidCyclePals:
 	ldh a, [hLYOverrideEnd]
 	inc a
 	ldh [hLYOverrideEnd], a
+.tailmerge_2294: ; (tools/tailmerge.py)
 	ld hl, BG_EFFECT_STRUCT_PARAM
 	add hl, bc
 	ld a, [hl]
@@ -2351,14 +2326,7 @@ BGEffect_RapidCyclePals:
 	call BattleBGEffects_IncAnonJumptableIndex
 .player_turn_cgb
 	call BattleBGEffects_IncAnonJumptableIndex
-	ld hl, BG_EFFECT_STRUCT_PARAM
-	add hl, bc
-	ld a, [hl]
-	ld [hl], $0
-	ld hl, BG_EFFECT_STRUCT_BATTLE_TURN
-	add hl, bc
-	ld [hl], a
-	ret
+	jr BGEffect_RapidCyclePals.tailmerge_2294 ; same as there (tools/tailmerge.py)
 
 .one_cgb
 	ld hl, BG_EFFECT_STRUCT_BATTLE_TURN
@@ -2409,8 +2377,7 @@ BGEffect_RapidCyclePals:
 
 .four_cgb
 	ld a, $e4
-	call BGEffects_LoadEnemyPals
-	jp EndBattleBGEffect
+	jp BattleBGEffect_FadeMonsToBlackRepeating.tailmerge_1986 ; same as there (tools/tailmerge.py)
 
 BGEffects_LoadPlayerPals:
 	push bc
@@ -2422,6 +2389,7 @@ BGEffects_LoadPlayerPals:
 	call CopyPals
 	ld hl, wOBPals2 palette PAL_BATTLE_OB_PLAYER
 	ld de, wOBPals1 palette PAL_BATTLE_OB_PLAYER
+.tailmerge_2425: ; (tools/tailmerge.py)
 	pop af
 	ld b, a
 	ld c, $1
@@ -2441,14 +2409,7 @@ BGEffects_LoadEnemyPals:
 	call CopyPals
 	ld hl, wOBPals2 palette PAL_BATTLE_OB_ENEMY
 	ld de, wOBPals1 palette PAL_BATTLE_OB_ENEMY
-	pop af
-	ld b, a
-	ld c, $1
-	call CopyPals
-	pop bc
-	ld a, TRUE
-	ldh [hCGBPalUpdate], a
-	ret
+	jr BGEffects_LoadPlayerPals.tailmerge_2425 ; same as there (tools/tailmerge.py)
 
 BattleBGEffect_GetFirstDMGPal:
 	ld hl, BG_EFFECT_STRUCT_PARAM

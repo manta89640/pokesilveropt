@@ -512,7 +512,9 @@ CheckSelectableItem:
 CheckItemPocket::
 ; Return the pocket for wCurItem in wItemAttributeValue.
 	ld a, ITEMATTR_POCKET
+.tailmerge_515: ; (tools/tailmerge.py)
 	call GetItemAttr
+.tailmerge_516: ; (tools/tailmerge.py)
 	and $f
 	ld [wItemAttributeValue], a
 	ret
@@ -520,19 +522,14 @@ CheckItemPocket::
 CheckItemContext:
 ; Return the context for wCurItem in wItemAttributeValue.
 	ld a, ITEMATTR_HELP
-	call GetItemAttr
-	and $f
-	ld [wItemAttributeValue], a
-	ret
+	jr CheckItemPocket.tailmerge_515 ; same as there (tools/tailmerge.py)
 
 CheckItemMenu:
 ; Return the menu for wCurItem in wItemAttributeValue.
 	ld a, ITEMATTR_HELP
 	call GetItemAttr
 	swap a
-	and $f
-	ld [wItemAttributeValue], a
-	ret
+	jr CheckItemPocket.tailmerge_516 ; same as there (tools/tailmerge.py)
 
 GetItemAttr:
 ; Get attribute a of wCurItem.

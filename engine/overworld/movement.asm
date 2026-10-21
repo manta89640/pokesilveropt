@@ -128,9 +128,7 @@ Movement_step_dig:
 	add hl, bc
 	ld [hl], STEP_TYPE_SLEEP
 	ld hl, OBJECT_WALKING
-	add hl, bc
-	ld [hl], STANDING
-	ret
+	jp SetFacingStanding.tailmerge_25 ; same as there (tools/tailmerge.py)
 
 Movement_return_dig:
 	call GetSpriteDirection
@@ -177,10 +175,7 @@ Movement_fish_cast_rod:
 	ld hl, OBJECT_ACTION
 	add hl, bc
 	ld [hl], OBJECT_ACTION_FISHING
-	ld hl, OBJECT_STEP_TYPE
-	add hl, bc
-	ld [hl], STEP_TYPE_FROM_MOVEMENT
-	ret
+	jp StepFunction_Reset.tailmerge_480 ; same as there (tools/tailmerge.py)
 
 Movement_step_loop:
 	ld hl, OBJECT_MOVEMENT_INDEX
@@ -201,10 +196,7 @@ Movement_step_end:
 	ld hl, wStateFlags
 	res SCRIPTED_MOVEMENT_STATE_F, [hl]
 
-	ld hl, OBJECT_STEP_TYPE
-	add hl, bc
-	ld [hl], STEP_TYPE_FROM_MOVEMENT
-	ret
+	jp StepFunction_Reset.tailmerge_480 ; same as there (tools/tailmerge.py)
 
 Movement_step_wait_end:
 	call RestoreDefaultMovement
@@ -225,6 +217,7 @@ Movement_step_wait_end:
 	add hl, bc
 	ld [hl], STEP_TYPE_SLEEP
 
+.tailmerge_228: ; (tools/tailmerge.py)
 	ld hl, wStateFlags
 	res SCRIPTED_MOVEMENT_STATE_F, [hl]
 	ret
@@ -251,9 +244,7 @@ Movement_step_stop:
 	add hl, bc
 	ld [hl], STEP_TYPE_STANDING
 
-	ld hl, wStateFlags
-	res SCRIPTED_MOVEMENT_STATE_F, [hl]
-	ret
+	jr Movement_step_wait_end.tailmerge_228 ; same as there (tools/tailmerge.py)
 
 Movement_step_sleep_1:
 	ld a, 1
@@ -308,9 +299,7 @@ Movement_step_sleep_common:
 	ld [hl], OBJECT_ACTION_STAND
 
 	ld hl, OBJECT_WALKING
-	add hl, bc
-	ld [hl], STANDING
-	ret
+	jp SetFacingStanding.tailmerge_25 ; same as there (tools/tailmerge.py)
 
 Movement_step_bump:
 	ld a, 1
@@ -327,9 +316,7 @@ Movement_step_bump:
 	ld [hl], OBJECT_ACTION_BUMP
 
 	ld hl, OBJECT_WALKING
-	add hl, bc
-	ld [hl], STANDING
-	ret
+	jp SetFacingStanding.tailmerge_25 ; same as there (tools/tailmerge.py)
 
 Movement_tree_shake:
 	ld a, 24
@@ -346,9 +333,7 @@ Movement_tree_shake:
 	ld [hl], OBJECT_ACTION_WEIRD_TREE
 
 	ld hl, OBJECT_WALKING
-	add hl, bc
-	ld [hl], STANDING
-	ret
+	jp SetFacingStanding.tailmerge_25 ; same as there (tools/tailmerge.py)
 
 Movement_remove_sliding:
 	ld hl, OBJECT_FLAGS1
@@ -428,9 +413,7 @@ TurnHead:
 	ld [hl], OBJECT_ACTION_STAND
 
 	ld hl, OBJECT_WALKING
-	add hl, bc
-	ld [hl], STANDING
-	ret
+	jp SetFacingStanding.tailmerge_25 ; same as there (tools/tailmerge.py)
 
 Movement_slow_step_down:
 	ld a, STEP_SLOW << 2 | DOWN

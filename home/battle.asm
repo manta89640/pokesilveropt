@@ -6,6 +6,7 @@ GetPartyParamLocation::
 	ld b, 0
 	add hl, bc
 	ld a, [wCurPartyMon]
+.tailmerge_9: ; (tools/tailmerge.py)
 	call GetPartyLocation
 	pop bc
 	ret
@@ -46,9 +47,7 @@ BattlePartyAttr::
 	ld hl, wPartyMons
 	add hl, bc
 	ld a, [wCurBattleMon]
-	call GetPartyLocation
-	pop bc
-	ret
+	jr GetPartyParamLocation.tailmerge_9 ; same as there (tools/tailmerge.py)
 
 OTPartyAttr::
 ; Get attribute a from the party struct of the active enemy mon.
@@ -58,9 +57,7 @@ OTPartyAttr::
 	ld hl, wOTPartyMon1Species
 	add hl, bc
 	ld a, [wCurOTMon]
-	call GetPartyLocation
-	pop bc
-	ret
+	jr GetPartyParamLocation.tailmerge_9 ; same as there (tools/tailmerge.py)
 
 ResetDamage::
 	xor a
@@ -154,10 +151,7 @@ FarCopyRadioText::
 	ld de, wRadioText
 	ld bc, 2 * SCREEN_WIDTH
 	call CopyBytes
-	pop af
-	ldh [hROMBank], a
-	ld [rROMB], a
-	ret
+	jp TextCommand_FAR.tailmerge_694 ; same as there (tools/tailmerge.py)
 
 
 StdBattleTextbox::
@@ -167,13 +161,7 @@ StdBattleTextbox::
 	push af
 
 	ld a, BANK(BattleText)
-	rst Bankswitch
-
-	call PrintText
-
-	pop af
-	rst Bankswitch
-	ret
+	jp FarPrintText.tailmerge_108 ; same as there (tools/tailmerge.py)
 
 GetBattleAnimPointer::
 	ld a, BANK(BattleAnimations)

@@ -22,13 +22,16 @@ ObjectActionPairPointers:
 
 SetFacingStanding:
 	ld hl, OBJECT_FACING
+.tailmerge_25: ; (tools/tailmerge.py)
 	add hl, bc
 	ld [hl], STANDING
 	ret
 
 SetFacingCurrent:
 	call GetSpriteDirection
+.tailmerge_31: ; (tools/tailmerge.py)
 	or FACING_STEP_DOWN_0 ; useless
+.tailmerge_32: ; (tools/tailmerge.py)
 	ld hl, OBJECT_FACING
 	add hl, bc
 	ld [hl], a
@@ -63,10 +66,7 @@ SetFacingStepAction:
 	call GetSpriteDirection
 	or FACING_STEP_DOWN_0 ; useless
 	or d
-	ld hl, OBJECT_FACING
-	add hl, bc
-	ld [hl], a
-	ret
+	jr SetFacingCurrent.tailmerge_32 ; same as there (tools/tailmerge.py)
 
 SetFacingBumpAction:
 	ld hl, OBJECT_FLAGS1
@@ -88,21 +88,14 @@ SetFacingBumpAction:
 	call GetSpriteDirection
 	or FACING_STEP_DOWN_0 ; useless
 	or d
-	ld hl, OBJECT_FACING
-	add hl, bc
-	ld [hl], a
-	ret
+	jr SetFacingCurrent.tailmerge_32 ; same as there (tools/tailmerge.py)
 
 SetFacingCounterclockwiseSpin:
 	call CounterclockwiseSpinAction
 	ld hl, OBJECT_DIRECTION
 	add hl, bc
 	ld a, [hl]
-	or FACING_STEP_DOWN_0 ; useless
-	ld hl, OBJECT_FACING
-	add hl, bc
-	ld [hl], a
-	ret
+	jr SetFacingCurrent.tailmerge_31 ; same as there (tools/tailmerge.py)
 
 SetFacingCounterclockwiseSpin2:
 	call CounterclockwiseSpinAction
@@ -158,10 +151,7 @@ SetFacingFish:
 	rrca
 	rrca
 	add FACING_FISH_DOWN
-	ld hl, OBJECT_FACING
-	add hl, bc
-	ld [hl], a
-	ret
+	jp SetFacingCurrent.tailmerge_32 ; same as there (tools/tailmerge.py)
 
 SetFacingShadow:
 	ld hl, OBJECT_FACING
@@ -211,10 +201,7 @@ SetFacingWeirdTree:
 	rrca
 	rrca
 	add FACING_WEIRD_TREE_0
-	ld hl, OBJECT_FACING
-	add hl, bc
-	ld [hl], a
-	ret
+	jp SetFacingCurrent.tailmerge_32 ; same as there (tools/tailmerge.py)
 
 SetFacingBigDollAsym:
 	ld hl, OBJECT_FACING

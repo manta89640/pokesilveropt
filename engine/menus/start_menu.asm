@@ -449,6 +449,7 @@ StartMenu_Status:
 
 	call FadeToMenu
 	farcall TrainerCard
+.tailmerge_452: ; (tools/tailmerge.py)
 	call CloseSubmenu
 	ld a, 0
 	ret
@@ -469,9 +470,7 @@ StartMenu_Pokedex:
 StartMenu_Pokegear:
 	call FadeToMenu
 	farcall PokeGear
-	call CloseSubmenu
-	ld a, 0
-	ret
+	jr StartMenu_Status.tailmerge_452 ; same as there (tools/tailmerge.py)
 
 StartMenu_Pack:
 	call FadeToMenu

@@ -139,6 +139,7 @@ StandardMart:
 .HowMayIHelpYou:
 	call LoadStandardMenuHeader
 	ld hl, MartWelcomeText
+.tailmerge_142: ; (tools/tailmerge.py)
 	call PrintText
 	ld a, STANDARDMART_TOPMENU
 	ret
@@ -187,9 +188,7 @@ StandardMart:
 .AnythingElse:
 	call LoadStandardMenuHeader
 	ld hl, MartAskMoreText
-	call PrintText
-	ld a, STANDARDMART_TOPMENU
-	ret
+	jr StandardMart.tailmerge_142 ; same as there (tools/tailmerge.py)
 
 FarReadMart:
 	ld hl, wMartPointer
@@ -457,6 +456,7 @@ BuyMenuLoop:
 
 .insufficient_bag_space
 	ld a, MARTTEXT_BAG_FULL
+.tailmerge_460: ; (tools/tailmerge.py)
 	call LoadBuyMenuText
 	call JoyWaitAorB
 	and a
@@ -464,10 +464,7 @@ BuyMenuLoop:
 
 .insufficient_funds
 	ld a, MARTTEXT_NOT_ENOUGH_MONEY
-	call LoadBuyMenuText
-	call JoyWaitAorB
-	and a
-	ret
+	jr BuyMenuLoop.tailmerge_460 ; same as there (tools/tailmerge.py)
 
 StandardMartAskPurchaseQuantity:
 	ld a, MAX_ITEM_STACK

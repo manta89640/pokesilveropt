@@ -71,9 +71,7 @@ _MemoryGame:
 
 .RestartGame:
 	call MemoryGame_InitStrings
-	ld hl, wJumptableIndex
-	inc [hl]
-	ret
+	jp _CardFlip.Increment ; same as there (tools/tailmerge.py)
 
 .ResetBoard:
 	call UnusedCursor_InterpretJoypad_AnimateCursor
@@ -111,9 +109,7 @@ endr
 	call InitSpriteAnimStruct
 	ld a, 5
 	ld [wMemoryGameNumberTriesRemaining], a
-	ld hl, wJumptableIndex
-	inc [hl]
-	ret
+	jp _CardFlip.Increment ; same as there (tools/tailmerge.py)
 
 .CheckTriesRemaining:
 	ld a, [wMemoryGameNumberTriesRemaining]
@@ -154,9 +150,7 @@ endr
 	call MemoryGame_PlaceCard
 	xor a
 	ld [wMemoryGameCardChoice], a
-	ld hl, wJumptableIndex
-	inc [hl]
-	ret
+	jp _CardFlip.Increment ; same as there (tools/tailmerge.py)
 
 .PickCard2:
 	ld a, [wMemoryGameCardChoice]
@@ -424,6 +418,7 @@ MemoryGame_PlaceCard:
 	add hl, bc
 	ld [hli], a
 	inc a
+.tailmerge_427: ; (tools/tailmerge.py)
 	ld [hl], a
 	ld c, 3
 	jp DelayFrames
@@ -435,9 +430,7 @@ MemoryGame_DeleteCard:
 	ld bc, SCREEN_WIDTH
 	add hl, bc
 	ld [hli], a
-	ld [hl], a
-	ld c, 3
-	jp DelayFrames
+	jr MemoryGame_PlaceCard.tailmerge_427 ; same as there (tools/tailmerge.py)
 
 MemoryGame_InitStrings:
 	hlcoord 0, 0

@@ -305,6 +305,7 @@ CheckTileEvent:
 
 .coord_event
 	ld hl, wCurCoordEventScriptAddr
+.tailmerge_308: ; (tools/tailmerge.py)
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
@@ -417,6 +418,7 @@ CheckTimeEvents:
 .end_bug_contest
 	ld a, BANK(BugCatchingContestOverScript)
 	ld hl, BugCatchingContestOverScript
+.tailmerge_420: ; (tools/tailmerge.py)
 	call CallScript
 	scf
 	ret
@@ -529,11 +531,7 @@ ObjectEventTypeArray:
 .script
 	ld hl, MAPOBJECT_SCRIPT_POINTER
 	add hl, bc
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	call GetMapScriptsBank
-	jp CallScript
+	jp CheckTileEvent.tailmerge_308 ; same as there (tools/tailmerge.py)
 
 .itemball
 	ld hl, MAPOBJECT_SCRIPT_POINTER
@@ -624,9 +622,7 @@ BGEventJumptable:
 	ld h, [hl]
 	ld l, a
 	call GetMapScriptsBank
-	call CallScript
-	scf
-	ret
+	jp CheckTimeEvents.tailmerge_420 ; same as there (tools/tailmerge.py)
 
 .itemifset:
 	call CheckBGEventFlag
@@ -668,9 +664,7 @@ BGEventJumptable:
 	call GetMapScriptsBank
 	call GetFarWord
 	call GetMapScriptsBank
-	call CallScript
-	scf
-	ret
+	jp CheckTimeEvents.tailmerge_420 ; same as there (tools/tailmerge.py)
 
 .dontread:
 	xor a
@@ -780,9 +774,7 @@ CheckMenuOW:
 	call PlayTalkObject
 	ld a, BANK(SelectMenuScript)
 	ld hl, SelectMenuScript
-	call CallScript
-	scf
-	ret
+	jp CheckTimeEvents.tailmerge_420 ; same as there (tools/tailmerge.py)
 
 StartMenuScript:
 	callasm StartMenu
@@ -886,9 +878,7 @@ DoRepelStep:
 
 	ld a, BANK(RepelWoreOffScript)
 	ld hl, RepelWoreOffScript
-	call CallScript
-	scf
-	ret
+	jp CheckTimeEvents.tailmerge_420 ; same as there (tools/tailmerge.py)
 
 DoPlayerEvent:
 	ld a, [wScriptRunning]

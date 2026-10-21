@@ -245,6 +245,7 @@ BackupPartyMonMail:
 	call CopyBytes
 	ld hl, sMailboxCount
 	ld de, sMailboxCountBackup
+.tailmerge_248: ; (tools/tailmerge.py)
 	ld bc, 1 + MAILBOX_CAPACITY * MAIL_STRUCT_LENGTH
 	call CopyBytes
 	jp CloseSRAM
@@ -258,9 +259,7 @@ RestorePartyMonMail:
 	call CopyBytes
 	ld hl, sMailboxCountBackup
 	ld de, sMailboxCount
-	ld bc, 1 + MAILBOX_CAPACITY * MAIL_STRUCT_LENGTH
-	call CopyBytes
-	jp CloseSRAM
+	jr BackupPartyMonMail.tailmerge_248 ; same as there (tools/tailmerge.py)
 
 DeletePartyMonMail:
 	ld a, BANK(sPartyMail)

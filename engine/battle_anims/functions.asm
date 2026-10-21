@@ -215,6 +215,7 @@ BattleAnimFunction_MoveInCircle:
 	ld hl, BATTLEANIMSTRUCT_PARAM
 	add hl, bc
 	ld d, [hl]
+.tailmerge_218: ; (tools/tailmerge.py)
 	push af
 	push de
 	call BattleAnim_Sine
@@ -246,8 +247,10 @@ BattleAnimFunction_MoveFromUserToTarget:
 	add hl, bc
 	ld a, [hl]
 	cp $84
+.tailmerge_249: ; (tools/tailmerge.py)
 	ret nc
 	ld hl, BATTLEANIMSTRUCT_PARAM
+.tailmerge_251: ; (tools/tailmerge.py)
 	add hl, bc
 	ld a, [hl]
 	jp BattleAnim_StepToTarget
@@ -298,6 +301,7 @@ BattleAnimFunction_PokeBall:
 	add [hl]
 	ld [hl], a
 	ld a, BATTLE_ANIM_FRAMESET_POKE_BALL_3
+.tailmerge_301: ; (tools/tailmerge.py)
 	call ReinitBattleAnimFrameset
 	call BattleAnim_IncAnonJumptableIndex
 	ret
@@ -335,9 +339,7 @@ BattleAnimFunction_PokeBall:
 	ld [hl], a
 	ret nz
 	ld a, BATTLE_ANIM_FRAMESET_POKE_BALL_4
-	call ReinitBattleAnimFrameset
-	call BattleAnim_IncAnonJumptableIndex
-	ret
+	jr BattleAnimFunction_PokeBall.tailmerge_301 ; same as there (tools/tailmerge.py)
 
 .six
 	ld a, BATTLE_ANIM_FRAMESET_POKE_BALL_5
@@ -455,21 +457,14 @@ BattleAnimFunction_Ember:
 	ld a, [hl]
 	swap a
 	and $f
-	ld hl, BATTLEANIMSTRUCT_JUMPTABLE_INDEX
-	add hl, bc
-	ld [hl], a
-	ret
+	jp BattleAnimCmd_SetObj.tailmerge_691 ; same as there (tools/tailmerge.py)
 
 .one
 	ld hl, BATTLEANIMSTRUCT_XCOORD
 	add hl, bc
 	ld a, [hl]
 	cp $88
-	ret nc
-	ld hl, BATTLEANIMSTRUCT_PARAM
-	add hl, bc
-	ld a, [hl]
-	jp BattleAnim_StepToTarget
+	jp BattleAnimFunction_MoveFromUserToTarget.tailmerge_249 ; same as there (tools/tailmerge.py)
 
 .two
 	jp DeinitBattleAnimation
@@ -673,12 +668,14 @@ BattleAnimFunction_Shake:
 	ld a, [hl]
 	swap a
 	and $f
+.tailmerge_676: ; (tools/tailmerge.py)
 	ld hl, BATTLEANIMSTRUCT_VAR1
 	add hl, bc
 	ld [hl], a
 	ld hl, BATTLEANIMSTRUCT_XOFFSET
 	add hl, bc
 	ld a, [hl]
+.tailmerge_682: ; (tools/tailmerge.py)
 	xor $ff
 	inc a
 	ld [hl], a
@@ -734,22 +731,7 @@ BattleAnimFunction_FireBlast:
 	add hl, bc
 	ld a, [hl]
 	ld d, $10
-	push af
-	push de
-	call BattleAnim_Sine
-	ld hl, BATTLEANIMSTRUCT_YOFFSET
-	add hl, bc
-	ld [hl], a
-	pop de
-	pop af
-	call BattleAnim_Cosine
-	ld hl, BATTLEANIMSTRUCT_XOFFSET
-	add hl, bc
-	ld [hl], a
-	ld hl, BATTLEANIMSTRUCT_VAR1
-	add hl, bc
-	inc [hl]
-	ret
+	jp BattleAnimFunction_MoveInCircle.tailmerge_218 ; same as there (tools/tailmerge.py)
 
 .nine
 	jp DeinitBattleAnimation
@@ -855,6 +837,7 @@ BattleAnimFunction_RazorLeaf:
 	ld e, l
 	ld d, h
 	ld hl, BATTLEANIMSTRUCT_XCOORD
+.tailmerge_858: ; (tools/tailmerge.py)
 	add hl, bc
 	ld [hl], d
 	ld hl, BATTLEANIMSTRUCT_VAR2
@@ -905,12 +888,7 @@ BattleAnimFunction_RazorLeaf:
 	ld e, l
 	ld d, h
 	ld hl, BATTLEANIMSTRUCT_YOFFSET
-	add hl, bc
-	ld [hl], d
-	ld hl, BATTLEANIMSTRUCT_VAR2
-	add hl, bc
-	ld [hl], e
-	ret
+	jr BattleAnimFunction_RazorLeaf.tailmerge_858 ; same as there (tools/tailmerge.py)
 
 .three
 	ld a, BATTLE_ANIM_FRAMESET_RAZOR_LEAF_1
@@ -1206,6 +1184,7 @@ BattleAnimFunction_Sing:
 	add hl, bc
 	ld a, [hl]
 	dec [hl]
+.tailmerge_1209: ; (tools/tailmerge.py)
 	ld d, $8
 	call BattleAnim_Sine
 	ld hl, BATTLEANIMSTRUCT_YOFFSET
@@ -1798,6 +1777,7 @@ BattleAnimFunction_LeechSeed:
 .zero
 	call BattleAnim_IncAnonJumptableIndex
 	ld hl, BATTLEANIMSTRUCT_VAR2
+.tailmerge_1801: ; (tools/tailmerge.py)
 	add hl, bc
 	ld [hl], $40
 	ret
@@ -1813,9 +1793,7 @@ BattleAnimFunction_LeechSeed:
 .sprout
 	ld [hl], $40
 	ld a, BATTLE_ANIM_FRAMESET_LEECH_SEED_2
-	call ReinitBattleAnimFrameset
-	call BattleAnim_IncAnonJumptableIndex
-	ret
+	jp BattleAnimFunction_PokeBall.tailmerge_301 ; same as there (tools/tailmerge.py)
 
 .two
 	ld hl, BATTLEANIMSTRUCT_VAR2
@@ -1877,6 +1855,7 @@ BattleAnim_StepThrownToTarget:
 	ld a, [hl]
 	and $1
 	ret nz
+.tailmerge_1880: ; (tools/tailmerge.py)
 	ld hl, BATTLEANIMSTRUCT_YCOORD
 	add hl, bc
 	dec [hl]
@@ -1965,10 +1944,7 @@ BattleAnimFunction_Kick:
 	ld hl, BATTLEANIMSTRUCT_DURATION
 	add hl, bc
 	ld [hl], $2
-	ld hl, BATTLEANIMSTRUCT_YCOORD
-	add hl, bc
-	dec [hl]
-	ret
+	jr BattleAnim_StepThrownToTarget.tailmerge_1880 ; same as there (tools/tailmerge.py)
 
 .three
 	call BattleAnim_IncAnonJumptableIndex
@@ -1993,12 +1969,7 @@ BattleAnimFunction_Kick:
 	add hl, bc
 	ld a, [hl]
 	inc [hl]
-	ld d, $8
-	call BattleAnim_Sine
-	ld hl, BATTLEANIMSTRUCT_YOFFSET
-	add hl, bc
-	ld [hl], a
-	ret
+	jp BattleAnimFunction_Sing.tailmerge_1209 ; same as there (tools/tailmerge.py)
 
 BattleAnimFunction_Egg:
 ; Used by Egg Bomb and Softboiled
@@ -2030,10 +2001,7 @@ BattleAnimFunction_Egg:
 	ld hl, BATTLEANIMSTRUCT_PARAM
 	add hl, bc
 	ld a, [hl]
-	ld hl, BATTLEANIMSTRUCT_JUMPTABLE_INDEX
-	add hl, bc
-	ld [hl], a
-	ret
+	jp BattleAnimCmd_SetObj.tailmerge_691 ; same as there (tools/tailmerge.py)
 
 .one
 	; Initial Egg Bomb arc movement to x coord $40
@@ -2108,6 +2076,7 @@ BattleAnimFunction_Egg:
 	ld e, l
 	ld d, h
 	ld hl, BATTLEANIMSTRUCT_YCOORD
+.tailmerge_2111: ; (tools/tailmerge.py)
 	add hl, bc
 	ld [hl], d
 	ld hl, BATTLEANIMSTRUCT_VAR1
@@ -2122,9 +2091,7 @@ BattleAnimFunction_Egg:
 .seven
 	; Switches Softboiled frameset to egg wobbling
 	ld a, BATTLE_ANIM_FRAMESET_EGG_WOBBLE ; Egg wobbling
-	call ReinitBattleAnimFrameset
-	call BattleAnim_IncAnonJumptableIndex
-	ret
+	jp BattleAnimFunction_PokeBall.tailmerge_301 ; same as there (tools/tailmerge.py)
 
 .eight
 	; Softboiled object waves slightly side to side
@@ -2135,6 +2102,7 @@ BattleAnimFunction_Egg:
 	inc [hl]
 	ld d, $2
 	call BattleAnim_Sine
+.tailmerge_2138: ; (tools/tailmerge.py)
 	ld hl, BATTLEANIMSTRUCT_XOFFSET
 	add hl, bc
 	ld [hl], a
@@ -2156,9 +2124,7 @@ BattleAnimFunction_Egg:
 	call ReinitBattleAnimFrameset
 	call BattleAnim_IncAnonJumptableIndex
 	ld hl, BATTLEANIMSTRUCT_VAR1
-	add hl, bc
-	ld [hl], $40
-	ret
+	jp BattleAnimFunction_LeechSeed.tailmerge_1801 ; same as there (tools/tailmerge.py)
 
 .twelve
 	; Top half of egg moves upward for $30 frames
@@ -2213,6 +2179,7 @@ BattleAnimFunction_Egg:
 	ld hl, BATTLEANIMSTRUCT_VAR1
 	add hl, bc
 	ld [hli], a
+.tailmerge_2216: ; (tools/tailmerge.py)
 	ld [hl], a
 	call BattleAnim_IncAnonJumptableIndex
 	ret
@@ -2314,10 +2281,7 @@ BattleAnimFunction_Sound:
 	ld hl, BATTLEANIMSTRUCT_YOFFSET
 	add hl, bc
 	ld a, d
-	xor $ff
-	inc a
-	ld [hl], a
-	ret
+	jp BattleAnimFunction_Shake.tailmerge_682 ; same as there (tools/tailmerge.py)
 
 BattleAnimFunction_ConfuseRay:
 ; Creates the Confuse Ray object and moves it across the screen until x coord $80
@@ -2384,6 +2348,7 @@ BattleAnimFunction_ConfuseRay:
 .skip_vertical_movement
 	and $1
 	ret nz
+.tailmerge_2387: ; (tools/tailmerge.py)
 	ld hl, BATTLEANIMSTRUCT_XCOORD
 	add hl, bc
 	inc [hl]
@@ -2525,12 +2490,7 @@ BattleAnimFunction_FloatUp:
 	ld e, l
 	ld d, h
 	ld hl, BATTLEANIMSTRUCT_YOFFSET
-	add hl, bc
-	ld [hl], d
-	ld hl, BATTLEANIMSTRUCT_VAR2
-	add hl, bc
-	ld [hl], e
-	ret
+	jp BattleAnimFunction_RazorLeaf.tailmerge_858 ; same as there (tools/tailmerge.py)
 
 BattleAnimFunction_Dig:
 ; Object moves up then down with a wave motion, while also moving away from the user 1 pixel per frame
@@ -2544,10 +2504,7 @@ BattleAnimFunction_Dig:
 	ld hl, BATTLEANIMSTRUCT_YOFFSET
 	add hl, bc
 	ld [hl], a
-	ld hl, BATTLEANIMSTRUCT_XCOORD
-	add hl, bc
-	inc [hl]
-	ret
+	jp BattleAnimFunction_ConfuseRay.tailmerge_2387 ; same as there (tools/tailmerge.py)
 
 BattleAnimFunction_String:
 	call BattleAnim_AnonJumptable
@@ -2626,16 +2583,7 @@ BattleAnimFunction_Paralyzed:
 	ld hl, BATTLEANIMSTRUCT_PARAM
 	add hl, bc
 	ld a, [hl]
-	ld hl, BATTLEANIMSTRUCT_VAR1
-	add hl, bc
-	ld [hl], a
-	ld hl, BATTLEANIMSTRUCT_XOFFSET
-	add hl, bc
-	ld a, [hl]
-	xor $ff
-	inc a
-	ld [hl], a
-	ret
+	jp BattleAnimFunction_Shake.tailmerge_676 ; same as there (tools/tailmerge.py)
 
 BattleAnimFunction_SpiralDescent:
 	ld hl, BATTLEANIMSTRUCT_VAR1
@@ -2958,6 +2906,7 @@ BattleAnimFunction_Horn:
 	add hl, bc
 	ld [hl], a
 	ld hl, BATTLEANIMSTRUCT_VAR2
+.tailmerge_2961: ; (tools/tailmerge.py)
 	add hl, bc
 	ld a, [hl]
 	add $8
@@ -2979,10 +2928,7 @@ BattleAnimFunction_Needle:
 	ld a, [hl]
 	and $f0
 	swap a
-	ld hl, BATTLEANIMSTRUCT_JUMPTABLE_INDEX
-	add hl, bc
-	ld [hl], a
-	ret
+	jp BattleAnimCmd_SetObj.tailmerge_691 ; same as there (tools/tailmerge.py)
 
 .two
 	; Pin Missile needle (arc)
@@ -3013,9 +2959,7 @@ BattleAnimFunction_Needle:
 
 .move_to_target
 	ld hl, BATTLEANIMSTRUCT_PARAM
-	add hl, bc
-	ld a, [hl]
-	jp BattleAnim_StepToTarget
+	jp BattleAnimFunction_MoveFromUserToTarget.tailmerge_251 ; same as there (tools/tailmerge.py)
 
 BattleAnimFunction_ThiefPayday:
 ; Object drops off target and bounces once on the floor
@@ -3392,12 +3336,7 @@ BattleAnimFunction_StrengthSeismicToss:
 	ld e, l
 	ld d, h
 	ld hl, BATTLEANIMSTRUCT_YOFFSET
-	add hl, bc
-	ld [hl], d
-	ld hl, BATTLEANIMSTRUCT_VAR1
-	add hl, bc
-	ld [hl], e
-	ret
+	jp BattleAnimFunction_Egg.tailmerge_2111 ; same as there (tools/tailmerge.py)
 
 .one
 	ld hl, BATTLEANIMSTRUCT_VAR2
@@ -3511,10 +3450,7 @@ BattleAnimFunction_MetronomeHand:
 	pop af
 	ld d, $8
 	call BattleAnim_Cosine
-	ld hl, BATTLEANIMSTRUCT_XOFFSET
-	add hl, bc
-	ld [hl], a
-	ret
+	jp BattleAnimFunction_Egg.tailmerge_2138 ; same as there (tools/tailmerge.py)
 
 BattleAnimFunction_MetronomeSparkleSketch:
 ; Sideways wave motion while also moving downward until it disappears at y coord $20
@@ -3659,11 +3595,7 @@ BattleAnimFunction_LockOnMindReader:
 .two
 	ld hl, BATTLEANIMSTRUCT_VAR1
 	add hl, bc
-	ld a, [hl]
-	dec [hl]
-	and a
-	ret nz
-	jp DeinitBattleAnimation
+	jp BattleAnimFunction_Conversion.shrink ; same as there (tools/tailmerge.py)
 
 BattleAnimFunction_HealBellNotes:
 ; Object moves horizontally in a sine wave, while also moving left every other frame and downwards for $38 frames after which it disappears
@@ -3800,10 +3732,7 @@ BattleAnimFunction_SwaggerMorningSun:
 	pop de
 	pop af
 	call BattleAnim_Cosine
-	ld hl, BATTLEANIMSTRUCT_XOFFSET
-	add hl, bc
-	ld [hl], a
-	ret
+	jp BattleAnimFunction_Egg.tailmerge_2138 ; same as there (tools/tailmerge.py)
 
 BattleAnimFunction_HiddenPower:
 ; Moves object in a ring around position. Uses anim_incobj to move to second phase, where it expands the radius 8 pixels at a time for 13 frames and then disappears
@@ -3899,10 +3828,7 @@ BattleAnimFunction_PerishSong:
 	pop de
 	pop af
 	call BattleAnim_Cosine
-	ld hl, BATTLEANIMSTRUCT_XOFFSET
-	add hl, bc
-	ld [hl], a
-	ret
+	jp BattleAnimFunction_Egg.tailmerge_2138 ; same as there (tools/tailmerge.py)
 
 BattleAnimFunction_RapidSpin:
 ; Object moves upwards 4 pixels per frame until it disappears at y coord $d0
@@ -3990,9 +3916,7 @@ BattleAnimFunction_RainSandstorm:
 	ld a, [hl]
 	ld hl, BATTLEANIMSTRUCT_JUMPTABLE_INDEX
 	add hl, bc
-	ld [hl], a
-	call BattleAnim_IncAnonJumptableIndex
-	ret
+	jp BattleAnimFunction_Egg.tailmerge_2216 ; same as there (tools/tailmerge.py)
 
 .one ; Obj Param 0
 	ld hl, BATTLEANIMSTRUCT_YOFFSET
@@ -4021,11 +3945,7 @@ BattleAnimFunction_RainSandstorm:
 .dont_reset_y_offset_two
 	ld [hl], a
 	ld hl, BATTLEANIMSTRUCT_XOFFSET
-	add hl, bc
-	ld a, [hl]
-	add $8
-	ld [hl], a
-	ret
+	jp BattleAnimFunction_Horn.tailmerge_2961 ; same as there (tools/tailmerge.py)
 
 .three ; Obj Param 2
 	ld hl, BATTLEANIMSTRUCT_YOFFSET
@@ -4070,12 +3990,7 @@ BattleAnimFunction_AnimObjB0: ; unused
 	ld e, l
 	ld d, h
 	ld hl, BATTLEANIMSTRUCT_XCOORD
-	add hl, bc
-	ld [hl], d
-	ld hl, BATTLEANIMSTRUCT_VAR1
-	add hl, bc
-	ld [hl], e
-	ret
+	jp BattleAnimFunction_Egg.tailmerge_2111 ; same as there (tools/tailmerge.py)
 
 BattleAnimFunction_PsychUp:
 ; Object moves in a circle
@@ -4137,10 +4052,7 @@ BattleAnim_StepCircle:
 	pop de
 	pop af
 	call BattleAnim_Cosine
-	ld hl, BATTLEANIMSTRUCT_XOFFSET
-	add hl, bc
-	ld [hl], a
-	ret
+	jp BattleAnimFunction_Egg.tailmerge_2138 ; same as there (tools/tailmerge.py)
 
 BattleAnim_StepToTarget:
 ; Inches object towards the opponent's side, moving half as much in the Y axis as it did in the X axis. Uses lower nybble of A
@@ -4166,11 +4078,7 @@ BattleAnim_AnonJumptable:
 	ld l, [hl]
 	ld h, $0
 	add hl, hl
-	add hl, de
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	jp hl
+	jp RunBattleAnimCommand.tailmerge_274 ; same as there (tools/tailmerge.py)
 
 BattleAnim_IncAnonJumptableIndex:
 	jp BattleAnimCmd_IncObj.found ; same as there (tools/tailmerge.py)

@@ -255,6 +255,7 @@ LoadEonMailGFX:
 	ld a, $35
 	call Mail_Draw16TileRow
 	inc a
+.tailmerge_258: ; (tools/tailmerge.py)
 	hlcoord 15, 14
 	call Mail_Draw3x2Graphic
 	call LovelyEonMail_PlaceIcons
@@ -285,11 +286,7 @@ LoadLovelyMailGFX:
 	ld a, $3c
 	call Mail_Draw16TileRow
 	ld a, $36
-	hlcoord 15, 14
-	call Mail_Draw3x2Graphic
-	call LovelyEonMail_PlaceIcons
-	pop hl
-	jp MailGFX_PlaceMessage
+	jr LoadEonMailGFX.tailmerge_258 ; same as there (tools/tailmerge.py)
 
 LovelyEonMail_PlaceIcons:
 	ld a, $3d
@@ -470,6 +467,7 @@ LoadBlueSkyMailGFX:
 	call Mail_Draw16TileRow
 	inc a
 	hlcoord 10, 3
+.tailmerge_473: ; (tools/tailmerge.py)
 	call Mail_Draw2x2Graphic
 	pop hl
 	jp MailGFX_PlaceMessage
@@ -533,9 +531,7 @@ LoadFlowerMailGFX:
 	hlcoord 2, 10
 	call Mail_Draw2x2Graphic
 	hlcoord 14, 11
-	call Mail_Draw2x2Graphic
-	pop hl
-	jp MailGFX_PlaceMessage
+	jp LoadBlueSkyMailGFX.tailmerge_473 ; same as there (tools/tailmerge.py)
 
 LoadPortraitMailGFX:
 	push bc
@@ -603,11 +599,7 @@ LoadMusicMailGFX:
 	hlcoord 2, 15
 	call Mail_Place14TileAlternatingRow
 	ld a, $37
-	hlcoord 15, 14
-	call Mail_Draw3x2Graphic
-	call LovelyEonMail_PlaceIcons
-	pop hl
-	jp MailGFX_PlaceMessage
+	jp LoadEonMailGFX.tailmerge_258 ; same as there (tools/tailmerge.py)
 
 LoadMirageMailGFX:
 	push bc

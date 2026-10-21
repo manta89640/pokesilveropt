@@ -2611,6 +2611,7 @@ PlayerAttackDamage:
 	call TruncateHL_BC
 
 	ld a, [wBattleMonLevel]
+.tailmerge_2614: ; (tools/tailmerge.py)
 	ld e, a
 	call DittoMetalPowder
 
@@ -2706,6 +2707,7 @@ ThickClubBoost:
 	push de
 	lb bc, CUBONE, MAROWAK
 	ld d, THICK_CLUB
+.tailmerge_2709: ; (tools/tailmerge.py)
 	call SpeciesItemBoost
 	pop de
 	pop bc
@@ -2720,10 +2722,7 @@ LightBallBoost:
 	push de
 	lb bc, PIKACHU, PIKACHU
 	ld d, LIGHT_BALL
-	call SpeciesItemBoost
-	pop de
-	pop bc
-	ret
+	jr ThickClubBoost.tailmerge_2709 ; same as there (tools/tailmerge.py)
 
 SpeciesItemBoost:
 ; Return in hl the stat value at hl.
@@ -2836,12 +2835,7 @@ EnemyAttackDamage:
 	call TruncateHL_BC
 
 	ld a, [wEnemyMonLevel]
-	ld e, a
-	call DittoMetalPowder
-
-	ld a, 1
-	and a
-	ret
+	jp PlayerAttackDamage.tailmerge_2614 ; same as there (tools/tailmerge.py)
 
 INCLUDE "engine/battle/move_effects/beat_up.asm"
 
@@ -3653,6 +3647,7 @@ BattleCommand_PoisonTarget:
 	call RefreshBattleHuds
 
 	ld hl, WasPoisonedText
+.tailmerge_3656: ; (tools/tailmerge.py)
 	call StdBattleTextbox
 
 	farcall UseHeldStatusHealingItem
@@ -3914,10 +3909,7 @@ BattleCommand_BurnTarget:
 	call RefreshBattleHuds
 
 	ld hl, WasBurnedText
-	call StdBattleTextbox
-
-	farcall UseHeldStatusHealingItem
-	ret
+	jp BattleCommand_PoisonTarget.tailmerge_3656 ; same as there (tools/tailmerge.py)
 
 Defrost:
 	ld a, [hl]
@@ -4179,6 +4171,7 @@ RaiseStat:
 .cant_raise_stat
 	ld a, $2
 	ld [wFailedMessage], a
+.tailmerge_4182: ; (tools/tailmerge.py)
 	ld a, $1
 	ld [wAttackMissed], a
 	ret
@@ -4372,9 +4365,7 @@ BattleCommand_StatDown:
 .CantLower:
 	ld a, 3
 	ld [wFailedMessage], a
-	ld a, 1
-	ld [wAttackMissed], a
-	ret
+	jp BattleCommand_CheckHit.Missed ; same as there (tools/tailmerge.py)
 
 .Failed:
 	ld a, 1
@@ -4385,9 +4376,7 @@ BattleCommand_StatDown:
 .Mist:
 	ld a, 2
 	ld [wFailedMessage], a
-	ld a, 1
-	ld [wAttackMissed], a
-	ret
+	jp BattleCommand_CheckHit.Missed ; same as there (tools/tailmerge.py)
 
 CheckMist:
 	ld a, BATTLE_VARS_MOVE_EFFECT
@@ -4529,6 +4518,7 @@ BattleCommand_StatUpFailText:
 	ld b, a
 	inc b
 	call GetStatName
+.tailmerge_4532: ; (tools/tailmerge.py)
 	ld hl, WontRiseAnymoreText
 	jp StdBattleTextbox
 
@@ -4728,6 +4718,7 @@ CalcPlayerStats:
 	ld hl, BadgeStatBoosts
 	call CallBattleCore
 
+.tailmerge_4731: ; (tools/tailmerge.py)
 	call BattleCommand_SwitchTurn
 
 	ld hl, ApplyPrzEffectOnSpeed
@@ -4746,15 +4737,7 @@ CalcEnemyStats:
 	ld a, NUM_BATTLE_STATS
 	call CalcBattleStats
 
-	call BattleCommand_SwitchTurn
-
-	ld hl, ApplyPrzEffectOnSpeed
-	call CallBattleCore
-
-	ld hl, ApplyBrnEffectOnAttack
-	call CallBattleCore
-
-	jp BattleCommand_SwitchTurn
+	jr CalcPlayerStats.tailmerge_4731 ; same as there (tools/tailmerge.py)
 
 CalcBattleStats:
 .loop
@@ -5391,9 +5374,7 @@ BattleCommand_OHKO:
 .no_effect
 	ld a, $ff
 	ld [wCriticalHit], a
-	ld a, $1
-	ld [wAttackMissed], a
-	ret
+	jp RaiseStat.tailmerge_4182 ; same as there (tools/tailmerge.py)
 
 BattleCommand_CheckCharge:
 	ld a, BATTLE_VARS_SUBSTATUS3
@@ -5403,6 +5384,7 @@ BattleCommand_CheckCharge:
 	res SUBSTATUS_CHARGED, [hl]
 	res SUBSTATUS_UNDERGROUND, [hl]
 	res SUBSTATUS_FLYING, [hl]
+.tailmerge_5406: ; (tools/tailmerge.py)
 	ld b, charge_command
 	jp SkipToBattleCommand
 
@@ -6323,8 +6305,7 @@ BattleCommand_CheckSafeguard:
 	ld [wAttackMissed], a
 	call BattleCommand_MoveDelay
 	ld hl, SafeguardProtectText
-	call StdBattleTextbox
-	jp EndMoveEffect
+	jp BattleCommand_StoreEnergy.tailmerge_67 ; same as there (tools/tailmerge.py)
 
 INCLUDE "engine/battle/move_effects/magnitude.asm"
 
@@ -6450,8 +6431,7 @@ BattleCommand_SkipSunCharge:
 	ld a, [wBattleWeather]
 	cp WEATHER_SUN
 	ret nz
-	ld b, charge_command
-	jp SkipToBattleCommand
+	jp BattleCommand_CheckCharge.tailmerge_5406 ; same as there (tools/tailmerge.py)
 
 INCLUDE "engine/battle/move_effects/future_sight.asm"
 
@@ -6516,6 +6496,7 @@ AnimateCurrentMoveEitherSide:
 	pop af
 	ld [wBattleAnimParam], a
 	call PlayDamageAnim
+.tailmerge_6519: ; (tools/tailmerge.py)
 	call BattleCommand_RaiseSub
 	pop bc
 	pop de
@@ -6532,11 +6513,7 @@ AnimateCurrentMove:
 	pop af
 	ld [wBattleAnimParam], a
 	call LoadMoveAnim
-	call BattleCommand_RaiseSub
-	pop bc
-	pop de
-	pop hl
-	ret
+	jr AnimateCurrentMoveEitherSide.tailmerge_6519 ; same as there (tools/tailmerge.py)
 
 PlayDamageAnim:
 	xor a

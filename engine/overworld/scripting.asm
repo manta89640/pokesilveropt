@@ -31,6 +31,7 @@ WaitScript:
 
 	ld hl, wScriptDelay
 	dec [hl]
+.tailmerge_34: ; (tools/tailmerge.py)
 	ret nz
 
 	farcall UnfreezeAllObjects
@@ -44,13 +45,7 @@ WaitScriptMovement:
 
 	ld hl, wStateFlags
 	bit SCRIPTED_MOVEMENT_STATE_F, [hl]
-	ret nz
-
-	farcall UnfreezeAllObjects
-
-	ld a, SCRIPT_READ
-	ld [wScriptMode], a
-	jp StartScript
+	jr WaitScript.tailmerge_34 ; same as there (tools/tailmerge.py)
 
 RunScriptCommand:
 	call GetScriptByte
@@ -526,7 +521,9 @@ Script_elevator:
 	ld a, [wScriptBank]
 	ld b, a
 	farcall Elevator
+.tailmerge_529: ; (tools/tailmerge.py)
 	ret c
+.tailmerge_530: ; (tools/tailmerge.py)
 	ld a, TRUE
 	ld [wScriptVar], a
 	ret
@@ -628,9 +625,7 @@ Script_trainerflagaction:
 	ld a, c
 	and a
 	ret z
-	ld a, TRUE
-	ld [wScriptVar], a
-	ret
+	jp Script_elevator.tailmerge_530 ; same as there (tools/tailmerge.py)
 
 Script_winlosstext:
 	ld hl, wWinTextPointer
@@ -746,6 +741,7 @@ ApplyMovement:
 	ret c
 
 	ld a, SCRIPT_WAIT_MOVEMENT
+.tailmerge_749: ; (tools/tailmerge.py)
 	ld [wScriptMode], a
 	jp StopScript
 
@@ -845,6 +841,7 @@ Script_variablesprite:
 	ld d, 0
 	ld hl, wVariableSprites
 	add hl, de
+.tailmerge_848: ; (tools/tailmerge.py)
 	call GetScriptByte
 	ld [hl], a
 	ret
@@ -1080,13 +1077,16 @@ Script_reloadmap:
 	xor a
 	ld [wBattleScriptFlags], a
 	ld a, MAPSETUP_RELOADMAP
+.tailmerge_1083: ; (tools/tailmerge.py)
 	ldh [hMapEntryMethod], a
 	ld a, MAPSTATUS_ENTER
+.tailmerge_1085: ; (tools/tailmerge.py)
 	call LoadMapStatus
 	jp StopScript
 
 Script_scall:
 	ld a, [wScriptBank]
+.tailmerge_1090: ; (tools/tailmerge.py)
 	ld b, a
 	call GetScriptByte
 	ld e, a
@@ -1096,12 +1096,7 @@ Script_scall:
 
 Script_farscall:
 	call GetScriptByte
-	ld b, a
-	call GetScriptByte
-	ld e, a
-	call GetScriptByte
-	ld d, a
-	jr ScriptCall
+	jr Script_scall.tailmerge_1090 ; same as there (tools/tailmerge.py)
 
 Script_memcall:
 	call GetScriptByte
@@ -1208,6 +1203,7 @@ Script_ifgreater:
 	ld a, [wScriptVar]
 	ld b, a
 	call GetScriptByte
+.tailmerge_1211: ; (tools/tailmerge.py)
 	cp b
 	jr c, Script_sjump
 	jr SkipTwoScriptBytes
@@ -1216,9 +1212,7 @@ Script_ifless:
 	call GetScriptByte
 	ld b, a
 	ld a, [wScriptVar]
-	cp b
-	jr c, Script_sjump
-	jr SkipTwoScriptBytes
+	jr Script_ifgreater.tailmerge_1211 ; same as there (tools/tailmerge.py)
 
 Script_jumpstd:
 	call StdScript
@@ -1342,9 +1336,7 @@ Script_loadmem:
 	ld l, a
 	call GetScriptByte
 	ld h, a
-	call GetScriptByte
-	ld [hl], a
-	ret
+	jp Script_variablesprite.tailmerge_848 ; same as there (tools/tailmerge.py)
 
 Script_setval:
 	call GetScriptByte
@@ -1473,6 +1465,7 @@ Script_getitemname:
 .ok
 	ld [wNamedObjectIndex], a
 	call GetItemName
+.tailmerge_1476: ; (tools/tailmerge.py)
 	ld de, wStringBuffer1
 	jr GetStringBuffer
 
@@ -1484,8 +1477,7 @@ Script_getcurlandmarkname:
 	call GetWorldMapLocation
 	ld e, a
 	farcall GetLandmarkName
-	ld de, wStringBuffer1
-	jr GetStringBuffer
+	jr Script_getitemname.tailmerge_1476 ; same as there (tools/tailmerge.py)
 
 Script_gettrainername:
 	call GetScriptByte
@@ -1501,8 +1493,7 @@ Script_getmoney:
 	ld hl, wStringBuffer1
 	lb bc, PRINTNUM_LEFTALIGN | 3, 6
 	call PrintNum
-	ld de, wStringBuffer1
-	jr GetStringBuffer
+	jr Script_getitemname.tailmerge_1476 ; same as there (tools/tailmerge.py)
 
 Script_getcoins:
 	call ResetStringBuffer1
@@ -1510,8 +1501,7 @@ Script_getcoins:
 	ld de, wCoins
 	lb bc, PRINTNUM_LEFTALIGN | 2, 6
 	call PrintNum
-	ld de, wStringBuffer1
-	jr GetStringBuffer
+	jr Script_getitemname.tailmerge_1476 ; same as there (tools/tailmerge.py)
 
 Script_getnum:
 	call ResetStringBuffer1
@@ -1599,9 +1589,7 @@ Script_takeitem:
 	ld hl, wNumItems
 	call TossItem
 	ret nc
-	ld a, TRUE
-	ld [wScriptVar], a
-	ret
+	jp Script_elevator.tailmerge_530 ; same as there (tools/tailmerge.py)
 
 Script_checkitem:
 	xor a
@@ -1611,9 +1599,7 @@ Script_checkitem:
 	ld hl, wNumItems
 	call CheckItem
 	ret nc
-	ld a, TRUE
-	ld [wScriptVar], a
-	ret
+	jp Script_elevator.tailmerge_530 ; same as there (tools/tailmerge.py)
 
 Script_givemoney:
 	call GetMoneyAccount
@@ -1697,9 +1683,7 @@ Script_checktime:
 	call GetScriptByte
 	and c
 	ret z
-	ld a, TRUE
-	ld [wScriptVar], a
-	ret
+	jp Script_elevator.tailmerge_530 ; same as there (tools/tailmerge.py)
 
 Script_checkpoke:
 	xor a
@@ -1709,9 +1693,7 @@ Script_checkpoke:
 	ld de, 1
 	call IsInArray
 	ret nc
-	ld a, TRUE
-	ld [wScriptVar], a
-	ret
+	jp Script_elevator.tailmerge_530 ; same as there (tools/tailmerge.py)
 
 Script_addcellnum:
 	xor a
@@ -1720,9 +1702,7 @@ Script_addcellnum:
 	ld c, a
 	farcall AddPhoneNumber
 	ret nc
-	ld a, TRUE
-	ld [wScriptVar], a
-	ret
+	jp Script_elevator.tailmerge_530 ; same as there (tools/tailmerge.py)
 
 Script_delcellnum:
 	xor a
@@ -1731,9 +1711,7 @@ Script_delcellnum:
 	ld c, a
 	farcall DelCellNum
 	ret nc
-	ld a, TRUE
-	ld [wScriptVar], a
-	ret
+	jp Script_elevator.tailmerge_530 ; same as there (tools/tailmerge.py)
 
 Script_checkcellnum:
 ; returns false if the cell number is not in your phone
@@ -1744,9 +1722,7 @@ Script_checkcellnum:
 	ld c, a
 	farcall CheckCellNum
 	ret nc
-	ld a, TRUE
-	ld [wScriptVar], a
-	ret
+	jp Script_elevator.tailmerge_530 ; same as there (tools/tailmerge.py)
 
 Script_specialphonecall:
 	call GetScriptByte
@@ -1924,10 +1900,7 @@ Script_warp:
 	ld a, SPAWN_N_A
 	ld [wDefaultSpawnpoint], a
 	ld a, MAPSETUP_BADWARP
-	ldh [hMapEntryMethod], a
-	ld a, MAPSTATUS_ENTER
-	call LoadMapStatus
-	jp StopScript
+	jp Script_reloadmap.tailmerge_1083 ; same as there (tools/tailmerge.py)
 
 Script_warpmod:
 	call GetScriptByte
@@ -1966,10 +1939,7 @@ Script_delcmdqueue:
 	call GetScriptByte
 	ld b, a
 	farcall DelCmdQueue ; no need to farcall
-	ret c
-	ld a, TRUE
-	ld [wScriptVar], a
-	ret
+	jp Script_elevator.tailmerge_529 ; same as there (tools/tailmerge.py)
 
 Script_changemapblocks:
 	call GetScriptByte
@@ -2010,10 +1980,7 @@ Script_warpcheck:
 
 Script_newloadmap:
 	call GetScriptByte
-	ldh [hMapEntryMethod], a
-	ld a, MAPSTATUS_ENTER
-	call LoadMapStatus
-	jp StopScript
+	jp Script_reloadmap.tailmerge_1083 ; same as there (tools/tailmerge.py)
 
 Script_reloadend:
 	call Script_newloadmap
@@ -2072,8 +2039,7 @@ Script_deactivatefacing:
 	ld [wScriptDelay], a
 .no_time
 	ld a, SCRIPT_WAIT
-	ld [wScriptMode], a
-	jp StopScript
+	jp ApplyMovement.tailmerge_749 ; same as there (tools/tailmerge.py)
 
 Script_stopandsjump:
 	call StopScript
@@ -2086,10 +2052,12 @@ Script_end:
 
 .resume
 	xor a
+.tailmerge_2089: ; (tools/tailmerge.py)
 	ld [wScriptRunning], a
 	ld a, SCRIPT_OFF
 	ld [wScriptMode], a
 	ld hl, wScriptFlags
+.tailmerge_2093: ; (tools/tailmerge.py)
 	res UNUSED_SCRIPT_FLAG_0, [hl]
 	jp StopScript
 
@@ -2098,8 +2066,7 @@ Script_endcallback:
 	jr c, .dummy
 .dummy
 	ld hl, wScriptFlags
-	res UNUSED_SCRIPT_FLAG_0, [hl]
-	jp StopScript
+	jr Script_end.tailmerge_2093 ; same as there (tools/tailmerge.py)
 
 ExitScriptSubroutine:
 ; Return carry if there's no parent to return to.
@@ -2134,12 +2101,7 @@ ExitScriptSubroutine:
 Script_endall:
 	xor a
 	ld [wScriptStackSize], a
-	ld [wScriptRunning], a
-	ld a, SCRIPT_OFF
-	ld [wScriptMode], a
-	ld hl, wScriptFlags
-	res UNUSED_SCRIPT_FLAG_0, [hl]
-	jp StopScript
+	jr Script_end.tailmerge_2089 ; same as there (tools/tailmerge.py)
 
 Script_halloffame:
 	ld hl, wGameTimerPaused
@@ -2154,6 +2116,5 @@ Script_credits:
 ReturnFromCredits:
 	call Script_endall
 	ld a, MAPSTATUS_DONE
-	call LoadMapStatus
-	jp StopScript
+	jp Script_reloadmap.tailmerge_1085 ; same as there (tools/tailmerge.py)
 

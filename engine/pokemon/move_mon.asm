@@ -784,6 +784,7 @@ RetrieveMonFromDayCareMan:
 	ld a, e
 	ld [wCurPartyLevel], a
 	xor a
+.tailmerge_787: ; (tools/tailmerge.py)
 	ld [wPokemonWithdrawDepositParameter], a
 	jr RetrieveBreedmon
 
@@ -799,8 +800,7 @@ RetrieveMonFromDayCareLady:
 	ld a, e
 	ld [wCurPartyLevel], a
 	ld a, PC_DEPOSIT
-	ld [wPokemonWithdrawDepositParameter], a
-	jr RetrieveBreedmon ; pointless
+	jr RetrieveMonFromDayCareMan.tailmerge_787 ; same as there (tools/tailmerge.py)
 
 RetrieveBreedmon:
 	ld hl, wPartyCount
@@ -911,6 +911,7 @@ GetLastPartyMon:
 
 DepositMonWithDayCareMan:
 	ld de, wBreedMon1Nickname
+.tailmerge_914: ; (tools/tailmerge.py)
 	call DepositBreedmon
 	xor a ; REMOVE_PARTY
 	ld [wPokemonWithdrawDepositParameter], a
@@ -918,10 +919,7 @@ DepositMonWithDayCareMan:
 
 DepositMonWithDayCareLady:
 	ld de, wBreedMon2Nickname
-	call DepositBreedmon
-	xor a ; REMOVE_PARTY
-	ld [wPokemonWithdrawDepositParameter], a
-	jp RemoveMonFromPartyOrBox
+	jr DepositMonWithDayCareMan.tailmerge_914 ; same as there (tools/tailmerge.py)
 
 DepositBreedmon:
 	ld a, [wCurPartyMon]
@@ -1062,9 +1060,7 @@ SendMonIntoBox:
 	ld b, 0
 	call RestorePPOfDepositedPokemon
 
-	call CloseSRAM
-	scf
-	ret
+	jp CloseSRAM_And_SetCarryFlag ; same as there (tools/tailmerge.py)
 
 .full
 	jp SendGetMonIntoFromBox.CloseSRAM_And_ClearCarryFlag ; same as there (tools/tailmerge.py)

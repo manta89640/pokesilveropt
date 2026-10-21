@@ -330,7 +330,9 @@ NamingScreenJoypadLoop:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
+.tailmerge_333: ; (tools/tailmerge.py)
 	call PlaceString
+.tailmerge_334: ; (tools/tailmerge.py)
 	ld a, $1
 	ldh [hBGMapMode], a
 	ret
@@ -360,9 +362,7 @@ NamingScreenJoypadLoop:
 	ld hl, SPRITEANIMSTRUCT_VAR3
 	add hl, bc
 	ld [hl], a
-	ld hl, wJumptableIndex
-	inc [hl]
-	ret
+	jp Pack_JumptableNext ; same as there (tools/tailmerge.py)
 
 .ReadButtons:
 	ld hl, hJoyPressed
@@ -403,6 +403,7 @@ NamingScreenJoypadLoop:
 	ld hl, SPRITEANIMSTRUCT_VAR2
 	add hl, bc
 	ld [hl], $4
+.tailmerge_406: ; (tools/tailmerge.py)
 	call NamingScreen_IsTargetBox
 	ret nz
 	inc [hl]
@@ -503,6 +504,7 @@ NamingScreen_AnimateCursor:
 	add hl, bc
 	ld l, [hl]
 	ld h, $0
+.tailmerge_506: ; (tools/tailmerge.py)
 	add hl, de
 	ld a, [hl]
 	ld hl, SPRITEANIMSTRUCT_XOFFSET
@@ -584,13 +586,7 @@ NamingScreen_AnimateCursor:
 .no_wrap_target_right
 	dec a
 	dec a
-	ld e, a
-	add a
-	add e
-	ld hl, SPRITEANIMSTRUCT_VAR1
-	add hl, bc
-	ld [hl], a
-	ret
+	jr NamingScreen_AnimateCursor.no_wrap_target_left ; same as there (tools/tailmerge.py)
 
 .down
 	ld hl, SPRITEANIMSTRUCT_VAR2
@@ -624,10 +620,7 @@ NamingScreen_AnimateCursor:
 
 .wrap_down
 	ld [hl], $4
-	call NamingScreen_IsTargetBox
-	ret nz
-	inc [hl]
-	ret
+	jp NamingScreenJoypadLoop.tailmerge_406 ; same as there (tools/tailmerge.py)
 
 NamingScreen_TryAddCharacter:
 	ld a, [wNamingScreenLastCharacter]
@@ -1004,10 +997,7 @@ INCBIN "gfx/naming_screen/mail.2bpp"
 	inc hl
 	ld d, [hl]
 	hlcoord 2, 2
-	call PlaceString
-	ld a, $1
-	ldh [hBGMapMode], a
-	ret
+	jp NamingScreenJoypadLoop.tailmerge_333 ; same as there (tools/tailmerge.py)
 
 .DoJumptable:
 	jumptable .Jumptable, wJumptableIndex
@@ -1030,9 +1020,7 @@ INCBIN "gfx/naming_screen/mail.2bpp"
 	ld hl, SPRITEANIMSTRUCT_VAR3
 	add hl, bc
 	ld [hl], a
-	ld hl, wJumptableIndex
-	inc [hl]
-	ret
+	jp Pack_JumptableNext ; same as there (tools/tailmerge.py)
 
 .process_joypad
 	ld hl, hJoyPressed
@@ -1143,12 +1131,7 @@ ComposeMail_AnimateCursor:
 	add hl, bc
 	ld l, [hl]
 	ld h, 0
-	add hl, de
-	ld a, [hl]
-	ld hl, SPRITEANIMSTRUCT_XOFFSET
-	add hl, bc
-	ld [hl], a
-	ret
+	jp NamingScreen_AnimateCursor.tailmerge_506 ; same as there (tools/tailmerge.py)
 
 .LetterEntries:
 	db $00, $10, $20, $30, $40, $50, $60, $70, $80, $90

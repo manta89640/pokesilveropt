@@ -44,6 +44,7 @@ FarCopyBytes::
 	ld a, [wTempBank]
 	rst Bankswitch
 
+.tailmerge_47: ; (tools/tailmerge.py)
 	call CopyBytes
 
 	pop af

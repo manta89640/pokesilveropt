@@ -23,6 +23,7 @@ TossItem::
 
 	call _TossItem
 
+.tailmerge_26: ; (tools/tailmerge.py)
 	pop bc
 	ld a, b
 	rst Bankswitch
@@ -43,12 +44,7 @@ ReceiveItem::
 	call _ReceiveItem
 
 	pop de
-	pop hl
-	pop bc
-	ld a, b
-	rst Bankswitch
-	pop bc
-	ret
+	jp GetMapSceneID.done ; same as there (tools/tailmerge.py)
 
 CheckItem::
 	push hl
@@ -61,10 +57,4 @@ CheckItem::
 
 	call _CheckItem
 
-	pop bc
-	ld a, b
-	rst Bankswitch
-	pop bc
-	pop de
-	pop hl
-	ret
+	jr TossItem.tailmerge_26 ; same as there (tools/tailmerge.py)

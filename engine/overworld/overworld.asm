@@ -12,6 +12,7 @@ LoadStandingSpritesGFX::
 	push af
 	res SPRITES_SKIP_STANDING_GFX_F, [hl]
 	set SPRITES_SKIP_WALKING_GFX_F, [hl]
+.tailmerge_15: ; (tools/tailmerge.py)
 	call LoadUsedSpritesGFX
 	pop af
 	ld [wSpriteFlags], a
@@ -23,10 +24,7 @@ LoadWalkingSpritesGFX::
 	push af
 	set SPRITES_SKIP_STANDING_GFX_F, [hl]
 	res SPRITES_SKIP_WALKING_GFX_F, [hl]
-	call LoadUsedSpritesGFX
-	pop af
-	ld [wSpriteFlags], a
-	ret
+	jr LoadStandingSpritesGFX.tailmerge_15 ; same as there (tools/tailmerge.py)
 
 RefreshSprites::
 	call .Refresh

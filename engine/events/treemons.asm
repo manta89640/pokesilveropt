@@ -254,6 +254,7 @@ GetTreeScore:
 	ldh a, [hQuotient + 2]
 	ldh [hDividend], a
 	ldh a, [hQuotient + 3]
+.tailmerge_257: ; (tools/tailmerge.py)
 	ldh [hDividend + 1], a
 	ld a, 10
 	ldh [hDivisor], a
@@ -267,10 +268,4 @@ GetTreeScore:
 	ld a, [wPlayerID]
 	ldh [hDividend], a
 	ld a, [wPlayerID + 1]
-	ldh [hDividend + 1], a
-	ld a, 10
-	ldh [hDivisor], a
-	ld b, 2
-	call Divide
-	ldh a, [hRemainder]
-	ret
+	jr GetTreeScore.tailmerge_257 ; same as there (tools/tailmerge.py)

@@ -349,9 +349,7 @@ endr
 	call DelayFrame
 	xor a
 	ldh [hBGMapMode], a
-	ld a, BATTLETRANSITION_FINISH
-	ld [wJumptableIndex], a
-	ret
+	jr StartTrainerBattle_SineWave.end ; same as there (tools/tailmerge.py)
 
 ; quadrants
 	const_def

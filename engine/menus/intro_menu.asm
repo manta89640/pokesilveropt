@@ -365,6 +365,7 @@ DisplayNormalContinueData:
 	call Continue_LoadMenuHeader
 	call Continue_DisplayBadgesDex
 	call Continue_PrintGameTime
+.tailmerge_368: ; (tools/tailmerge.py)
 	call LoadFontsExtra
 	jp UpdateSprites
 
@@ -372,8 +373,7 @@ DisplayContinueDataWithRTCError:
 	call Continue_LoadMenuHeader
 	call Continue_DisplayBadgesDex
 	call Continue_UnknownGameTime
-	call LoadFontsExtra
-	jp UpdateSprites
+	jr DisplayNormalContinueData.tailmerge_368 ; same as there (tools/tailmerge.py)
 
 Continue_LoadMenuHeader:
 	xor a
@@ -640,8 +640,7 @@ ShowPlayerNamingChoices:
 
 StorePlayerName:
 	ld hl, wStringBuffer2
-	ld bc, NAME_LENGTH
-	jp CopyBytes
+	jp InitializeNPCNames.Copy ; same as there (tools/tailmerge.py)
 
 ShrinkPlayer:
 	ldh a, [hROMBank]
@@ -762,6 +761,7 @@ Intro_WipeInFrontpic:
 Intro_PrepTrainerPic:
 	ld de, vTiles2
 	farcall GetTrainerPic
+.tailmerge_765: ; (tools/tailmerge.py)
 	xor a
 	ldh [hGraphicStartTile], a
 	hlcoord 6, 4
@@ -773,12 +773,7 @@ ShrinkFrame:
 	ld de, vTiles2
 	ld c, 7 * 7
 	predef DecompressGet2bpp
-	xor a
-	ldh [hGraphicStartTile], a
-	hlcoord 6, 4
-	lb bc, 7, 7
-	predef PlaceGraphic
-	ret
+	jr Intro_PrepTrainerPic.tailmerge_765 ; same as there (tools/tailmerge.py)
 
 Intro_PlaceChrisSprite:
 	ld de, ChrisSpriteGFX
@@ -1008,12 +1003,7 @@ TitleScreenMain:
 
 .reset_clock
 	ld a, TITLESCREENOPTION_RESET_CLOCK
-	ld [wTitleScreenSelectedOption], a
-
-; Return to the intro sequence.
-	ld hl, wJumptableIndex
-	set JUMPTABLE_EXIT_F, [hl]
-	ret
+	jr TitleScreenMain.done ; same as there (tools/tailmerge.py)
 
 TitleScreenEnd:
 ; Wait until the music is done fading.
@@ -1026,12 +1016,7 @@ TitleScreenEnd:
 	ret nz
 
 	ld a, TITLESCREENOPTION_RESTART
-	ld [wTitleScreenSelectedOption], a
-
-; Back to the intro.
-	ld hl, wJumptableIndex
-	set JUMPTABLE_EXIT_F, [hl]
-	ret
+	jr TitleScreenMain.done ; same as there (tools/tailmerge.py)
 
 DeleteSaveData:
 	farcall _DeleteSaveData

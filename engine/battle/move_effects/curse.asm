@@ -86,5 +86,4 @@ BattleCommand_Curse:
 	ld b, ABILITY + 1
 	call GetStatName
 	call AnimateFailedMove
-	ld hl, WontRiseAnymoreText
-	jp StdBattleTextbox
+	jp BattleCommand_StatUpFailText.tailmerge_4532 ; same as there (tools/tailmerge.py)

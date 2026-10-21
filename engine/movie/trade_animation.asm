@@ -374,8 +374,10 @@ TradeAnim_TubeToOT2:
 	add $2
 	ldh [hSCX], a
 	cp $50
+.tailmerge_377: ; (tools/tailmerge.py)
 	ret nz
 	ld a, TRADEANIMSTATE_1
+.tailmerge_379: ; (tools/tailmerge.py)
 	call TradeAnim_TubeAnimJumptable
 	jp TradeAnim_IncrementJumptableIndex
 
@@ -387,13 +389,13 @@ TradeAnim_TubeToOT3:
 	cp $a0
 	ret nz
 	ld a, TRADEANIMSTATE_2
-	call TradeAnim_TubeAnimJumptable
-	jp TradeAnim_IncrementJumptableIndex
+	jr TradeAnim_TubeToOT2.tailmerge_379 ; same as there (tools/tailmerge.py)
 
 TradeAnim_TubeToOT4:
 	call TradeAnim_FlashBGPals
 	ldh a, [hSCX]
 	add $2
+.tailmerge_397: ; (tools/tailmerge.py)
 	ldh [hSCX], a
 	and a
 	ret nz
@@ -405,10 +407,7 @@ TradeAnim_TubeToPlayer3:
 	sub $2
 	ldh [hSCX], a
 	cp $b0
-	ret nz
-	ld a, TRADEANIMSTATE_1
-	call TradeAnim_TubeAnimJumptable
-	jp TradeAnim_IncrementJumptableIndex
+	jr TradeAnim_TubeToOT2.tailmerge_377 ; same as there (tools/tailmerge.py)
 
 TradeAnim_TubeToPlayer4:
 	call TradeAnim_FlashBGPals
@@ -418,17 +417,13 @@ TradeAnim_TubeToPlayer4:
 	cp $60
 	ret nz
 	xor a ; TRADEANIMSTATE_0
-	call TradeAnim_TubeAnimJumptable
-	jp TradeAnim_IncrementJumptableIndex
+	jr TradeAnim_TubeToOT2.tailmerge_379 ; same as there (tools/tailmerge.py)
 
 TradeAnim_TubeToPlayer5:
 	call TradeAnim_FlashBGPals
 	ldh a, [hSCX]
 	sub $2
-	ldh [hSCX], a
-	and a
-	ret nz
-	jp TradeAnim_IncrementJumptableIndex
+	jr TradeAnim_TubeToOT4.tailmerge_397 ; same as there (tools/tailmerge.py)
 
 TradeAnim_TubeToOT6:
 TradeAnim_TubeToPlayer6:
@@ -634,6 +629,7 @@ TradeAnim_ExitLinkTube:
 
 .done
 	call ClearTilemap
+.tailmerge_637: ; (tools/tailmerge.py)
 	xor a
 	ldh [hSCX], a
 	jp TradeAnim_AdvanceScriptPointer
@@ -643,7 +639,9 @@ TradeAnim_SetupGivemonScroll:
 	ldh [hWX], a
 	ld a, $88
 	ldh [hSCX], a
+.tailmerge_646: ; (tools/tailmerge.py)
 	ld a, $50
+.tailmerge_647: ; (tools/tailmerge.py)
 	ldh [hWY], a
 	jp TradeAnim_AdvanceScriptPointer
 
@@ -661,23 +659,18 @@ TradeAnim_DoGivemonScroll:
 .done
 	ld a, $7
 	ldh [hWX], a
-	xor a
-	ldh [hSCX], a
-	jp TradeAnim_AdvanceScriptPointer
+	jr TradeAnim_ExitLinkTube.tailmerge_637 ; same as there (tools/tailmerge.py)
 
 TradeAnim_FrontpicScrollStart:
 	ld a, $7
 	ldh [hWX], a
-	ld a, $50
-	ldh [hWY], a
-	jp TradeAnim_AdvanceScriptPointer
+	jr TradeAnim_SetupGivemonScroll.tailmerge_646 ; same as there (tools/tailmerge.py)
 
 TradeAnim_TextboxScrollStart:
 	ld a, $7
 	ldh [hWX], a
 	ld a, $90
-	ldh [hWY], a
-	jp TradeAnim_AdvanceScriptPointer
+	jr TradeAnim_SetupGivemonScroll.tailmerge_647 ; same as there (tools/tailmerge.py)
 
 TradeAnim_ScrollOutRight:
 	call WaitTop
@@ -782,6 +775,7 @@ TradeAnim_GetNickname:
 	call GetPokemonName
 	ld hl, wStringBuffer1
 	pop de
+.tailmerge_785: ; (tools/tailmerge.py)
 	ld bc, NAME_LENGTH
 	jp CopyBytes
 
@@ -1052,10 +1046,7 @@ TradeAnim_AnimateTrademonInTube:
 	dec [hl]
 	and a
 	ret nz
-	ld hl, SPRITEANIMSTRUCT_INDEX
-	add hl, bc
-	ld [hl], $0
-	ret
+	jr TradeAnim_AnimateTrademonInTube.done_move_down ; same as there (tools/tailmerge.py)
 
 TradeAnim_SentToOTText:
 	ld a, [wLinkMode]
@@ -1204,8 +1195,7 @@ LinkTradeAnim_LoadTradePlayerNames:
 	call CopyBytes
 	pop hl
 	ld de, wLinkPlayer2Name
-	ld bc, NAME_LENGTH
-	jp CopyBytes
+	jp TradeAnim_GetNickname.tailmerge_785 ; same as there (tools/tailmerge.py)
 
 LinkTradeAnim_LoadTradeMonSpecies:
 	ld a, [hl]
@@ -1235,6 +1225,7 @@ LoadTradeBallAndCableGFX:
 	ld de, TradeCableGFX
 	ld hl, vTiles0 tile $74
 	lb bc, BANK(TradeCableGFX), 4
+.tailmerge_1238: ; (tools/tailmerge.py)
 	call Request2bpp
 	xor a ; SPRITE_ANIM_DICT_DEFAULT
 	ld hl, wSpriteAnimDict
@@ -1249,12 +1240,7 @@ LoadTradeBubbleGFX:
 	ld de, TradeBubbleGFX
 	ld hl, vTiles0 tile $72
 	lb bc, BANK(TradeBubbleGFX), 4
-	call Request2bpp
-	xor a
-	ld hl, wSpriteAnimDict
-	ld [hli], a
-	ld [hl], $62
-	ret
+	jr LoadTradeBallAndCableGFX.tailmerge_1238 ; same as there (tools/tailmerge.py)
 
 TradeAnim_WaitAnim:
 	ld hl, wFrameCounter

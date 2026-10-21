@@ -184,9 +184,7 @@ Cut_SpawnAnimateLeaves:
 	ld a, 32 ; frames
 	ld [wFrameCounter], a
 ; Cut_StartWaiting
-	ld hl, wJumptableIndex
-	inc [hl]
-	ret
+	jp StartTrainerBattle_NextScene ; same as there (tools/tailmerge.py)
 
 Cut_StartWaiting:
 	ld a, 1
