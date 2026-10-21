@@ -839,23 +839,13 @@ AI_Smart_AccuracyDown:
 ; 70% chance to greatly encourage this move.
 ; This would counter any previous discouragement.
 .maybe_greatly_encourage
-	call Random
-	cp 31 percent + 1
-	ret c
-
-	dec [hl]
-	dec [hl]
-	ret
+	jp AI_Smart_EvasionUp.maybe_greatly_encourage ; same as there (tools/tailmerge.py)
 
 ; Player is seeded.
 ; 50% chance to encourage this move.
 ; This would partly counter any previous discouragement.
 .encourage
-	call AI_50_50
-	ret c
-
-	dec [hl]
-	ret
+	jp AI_Smart_EvasionUp.maybe_encourage ; same as there (tools/tailmerge.py)
 
 AI_Smart_ResetStats:
 ; 85% chance to encourage this move if any of enemy's stat levels is lower than -2.
@@ -1113,11 +1103,7 @@ AI_Smart_SpDefenseUp2:
 	ret c
 
 .encourage
-	call AI_80_20
-	ret c
-	dec [hl]
-	dec [hl]
-	ret
+	jp AI_Smart_AlwaysHit.encourage ; same as there (tools/tailmerge.py)
 
 .discourage
 	inc [hl]
@@ -1142,12 +1128,7 @@ AI_Smart_Fly:
 	ret
 
 AI_Smart_SuperFang:
-; Discourage this move if player's HP is below 25%.
-
-	call AICheckPlayerQuarterHP
-	ret c
-	inc [hl]
-	ret
+	jr AI_Smart_Confuse.discourage ; same as there (tools/tailmerge.py)
 
 AI_Smart_Paralyze:
 ; 50% chance to discourage this move if player's HP is below 25%.
@@ -1167,10 +1148,7 @@ AI_Smart_Paralyze:
 	ret
 
 .discourage
-	call AI_50_50
-	ret c
-	inc [hl]
-	ret
+	jp AI_Smart_TrapTarget.discourage ; same as there (tools/tailmerge.py)
 
 AI_Smart_SpeedDownHit:
 ; Icy Wind
@@ -1425,10 +1403,7 @@ AI_Smart_Encore:
 	ret
 
 .discourage
-	inc [hl]
-	inc [hl]
-	inc [hl]
-	ret
+	jp AI_Smart_Selfdestruct.discourage ; same as there (tools/tailmerge.py)
 
 INCLUDE "data/battle/ai/encore_moves.asm"
 
@@ -1468,10 +1443,7 @@ AI_Smart_SleepTalk:
 	ret
 
 .discourage
-	inc [hl]
-	inc [hl]
-	inc [hl]
-	ret
+	jp AI_Smart_Selfdestruct.discourage ; same as there (tools/tailmerge.py)
 
 AI_Smart_DefrostOpponent:
 ; Greatly encourage this move if enemy is frozen.
@@ -1788,14 +1760,7 @@ AICheckLastPlayerMon:
 	ret
 
 AI_Smart_Nightmare:
-; 50% chance to encourage this move.
-; The AI_Basic layer will make sure that
-; Dream Eater is only used against sleeping targets.
-
-	call AI_50_50
-	ret c
-	dec [hl]
-	ret
+	jp AI_Smart_EvasionUp.maybe_encourage ; same as there (tools/tailmerge.py)
 
 AI_Smart_FlameWheel:
 ; Use this move if the enemy is frozen.
@@ -1954,13 +1919,7 @@ AI_Smart_Foresight:
 	ret
 
 .encourage
-	call Random
-	cp 39 percent + 1
-	ret c
-
-	dec [hl]
-	dec [hl]
-	ret
+	jp AI_Smart_Spite.encourage ; same as there (tools/tailmerge.py)
 
 AI_Smart_PerishSong:
 	push hl
@@ -1986,11 +1945,7 @@ AI_Smart_PerishSong:
 	ret
 
 .yes
-	call AI_50_50
-	ret c
-
-	dec [hl]
-	ret
+	jp AI_Smart_EvasionUp.maybe_encourage ; same as there (tools/tailmerge.py)
 
 .no
 	ld a, [hl]
@@ -2212,17 +2167,7 @@ AI_Smart_Earthquake:
 	ret
 
 AI_Smart_BatonPass:
-; Discourage this move if the player hasn't shown super-effective moves against the enemy.
-; Consider player's type(s) if its moves are unknown.
-
-	push hl
-	callfar CheckPlayerMoveTypeMatchups
-	ld a, [wEnemyAISwitchScore]
-	cp BASE_AI_SWITCH_SCORE
-	pop hl
-	ret c
-	inc [hl]
-	ret
+	jp AI_Smart_ForceSwitch ; same as there (tools/tailmerge.py)
 
 AI_Smart_Pursuit:
 ; 50% chance to greatly encourage this move if player's HP is below 25%.
@@ -2236,11 +2181,7 @@ AI_Smart_Pursuit:
 	ret
 
 .encourage
-	call AI_50_50
-	ret c
-	dec [hl]
-	dec [hl]
-	ret
+	jp AI_Smart_Sleep.encourage ; same as there (tools/tailmerge.py)
 
 AI_Smart_RapidSpin:
 ; 80% chance to greatly encourage this move if the enemy is
@@ -2259,12 +2200,7 @@ AI_Smart_RapidSpin:
 	ret z
 
 .encourage
-	call AI_80_20
-	ret c
-
-	dec [hl]
-	dec [hl]
-	ret
+	jp AI_Smart_AlwaysHit.encourage ; same as there (tools/tailmerge.py)
 
 AI_Smart_HiddenPower:
 	push hl
@@ -2366,10 +2302,7 @@ AI_Smart_WeatherMove:
 	ret
 
 AIBadWeatherType:
-	inc [hl]
-	inc [hl]
-	inc [hl]
-	ret
+	jp AI_Smart_Selfdestruct.discourage ; same as there (tools/tailmerge.py)
 
 AIGoodWeatherType:
 ; Rain Dance, Sunny Day
@@ -2413,10 +2346,7 @@ AI_Smart_BellyDrum:
 	ret c
 
 .discourage
-	ld a, [hl]
-	add 5
-	ld [hl], a
-	ret
+	jp AI_Smart_PerishSong.no ; same as there (tools/tailmerge.py)
 
 AI_Smart_PsychUp:
 	push hl
@@ -2559,14 +2489,7 @@ AI_Smart_Gust:
 
 ; Try to predict if the player will use Fly this turn.
 .couldFly
-
-; 50% chance to encourage this move if the enemy is slower than the player.
-	call AICompareSpeed
-	ret c
-	call AI_50_50
-	ret c
-	dec [hl]
-	ret
+	jp AI_Smart_Earthquake.could_dig ; same as there (tools/tailmerge.py)
 
 AI_Smart_FutureSight:
 ; Greatly encourage this move if the player is
@@ -2616,12 +2539,7 @@ AI_Smart_Solarbeam:
 	ret
 
 .encourage
-	call AI_80_20
-	ret c
-
-	dec [hl]
-	dec [hl]
-	ret
+	jp AI_Smart_AlwaysHit.encourage ; same as there (tools/tailmerge.py)
 
 AI_Smart_Thunder:
 ; 90% chance to discourage this move when it's sunny.

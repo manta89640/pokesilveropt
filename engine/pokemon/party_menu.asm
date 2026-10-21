@@ -570,10 +570,7 @@ InitPartyMenuNoCancel:
 .skip
 	ld a, 1
 .done
-	ld [wMenuCursorY], a
-	ld a, PAD_A | PAD_B
-	ld [wMenuJoypadFilter], a
-	ret
+	jr InitPartyMenuWithCancel.done ; same as there (tools/tailmerge.py)
 
 PartyMenu2DMenuData:
 	db 1, 0 ; cursor start y, x

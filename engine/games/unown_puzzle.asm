@@ -330,9 +330,7 @@ UnownPuzzle_A:
 	ld a, TRUE
 	ld [wSolvedUnownPuzzle], a
 UnownPuzzle_Quit:
-	ld hl, wJumptableIndex
-	set JUMPTABLE_EXIT_F, [hl]
-	ret
+	jp _CardFlip.Quit ; same as there (tools/tailmerge.py)
 
 UnownPuzzle_InvalidAction:
 	ld de, SFX_WRONG

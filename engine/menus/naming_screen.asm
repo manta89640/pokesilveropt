@@ -991,13 +991,7 @@ INCBIN "gfx/naming_screen/mail.2bpp"
 	ret
 
 .exit_mail
-	callfar ClearSpriteAnims
-	call ClearSprites
-	xor a
-	ldh [hSCX], a
-	ldh [hSCY], a
-	scf
-	ret
+	jp NamingScreenJoypadLoop.quit ; same as there (tools/tailmerge.py)
 
 .Update:
 	xor a
@@ -1105,10 +1099,7 @@ INCBIN "gfx/naming_screen/mail.2bpp"
 	ret
 
 .finished
-	call NamingScreen_StoreEntry
-	ld hl, wJumptableIndex
-	set JUMPTABLE_EXIT_F, [hl]
-	ret
+	jp NamingScreenJoypadLoop.end ; same as there (tools/tailmerge.py)
 
 .select
 	ld hl, wNamingScreenLetterCase
@@ -1202,13 +1193,7 @@ ComposeMail_AnimateCursor:
 	jr nz, .wrap_around_command_right
 	xor a
 .wrap_around_command_right
-	ld e, a
-	add a
-	add e
-	ld hl, SPRITEANIMSTRUCT_VAR1
-	add hl, bc
-	ld [hl], a
-	ret
+	jp NamingScreen_AnimateCursor.no_wrap_target_left ; same as there (tools/tailmerge.py)
 
 .left
 	call ComposeMail_GetCursorPosition
@@ -1231,15 +1216,7 @@ ComposeMail_AnimateCursor:
 	jr nz, .wrap_around_command_left
 	ld a, $4
 .wrap_around_command_left
-	dec a
-	dec a
-	ld e, a
-	add a
-	add e
-	ld hl, SPRITEANIMSTRUCT_VAR1
-	add hl, bc
-	ld [hl], a
-	ret
+	jp NamingScreen_AnimateCursor.no_wrap_target_right ; same as there (tools/tailmerge.py)
 
 .down
 	ld hl, SPRITEANIMSTRUCT_VAR2

@@ -129,11 +129,7 @@ CheckGrassTile::
 	ret
 ; For some reason, the above code is duplicated down here.
 .water
-	ld a, d
-	and LO_NYBBLE_GRASS
-	ret z
-	scf
-	ret
+	jr CheckGrassTile.grass ; same as there (tools/tailmerge.py)
 
 CheckSuperTallGrassTile::
 	cp COLL_LONG_GRASS

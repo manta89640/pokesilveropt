@@ -684,9 +684,7 @@ IntroScene9:
 	ret
 
 .next
-	ld hl, wIntroJumptableIndex
-	inc [hl]
-	ret
+	jp IntroScene5.next ; same as there (tools/tailmerge.py)
 
 .palettes:
 	db %11100100
@@ -926,9 +924,7 @@ IntroScene16:
 	jp DmgToCgbObjPals
 
 .next
-	ld hl, wIntroJumptableIndex
-	inc [hl]
-	ret
+	jp IntroScene5.next ; same as there (tools/tailmerge.py)
 
 .palettes:
 	db %11100100

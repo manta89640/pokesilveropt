@@ -364,9 +364,7 @@ _2DMenuInterpretJoypad:
 	ret
 
 .wrap_around_right
-	ld [hl], $1
-	xor a
-	ret
+	jr _2DMenuInterpretJoypad.wrap_around_down ; same as there (tools/tailmerge.py)
 
 .a_b_start_select
 	xor a

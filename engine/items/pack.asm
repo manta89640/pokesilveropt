@@ -284,16 +284,7 @@ Pack:
 	ld hl, MenuHeader_HoldableItem
 	ld de, Jumptable_GiveTossQuit
 .build_menu
-	push de
-	call LoadMenuHeader
-	call VerticalMenu
-	call ExitMenu
-	pop hl
-	ret c
-	ld a, [wMenuCursorY]
-	dec a
-	call Pack_GetJumptablePointer
-	jp hl
+	jp Pack.load_jump ; same as there (tools/tailmerge.py)
 
 MenuHeader_UsableKeyItem:
 	db MENU_BACKUP_TILES ; flags
@@ -564,8 +555,7 @@ GiveItem:
 	jp Pack_InitColors
 
 .NoPokemon:
-	ld hl, YouDontHaveAMonText
-	jp Pack_PrintTextNoScroll
+	jp UseItem.NoPokemon ; same as there (tools/tailmerge.py)
 .AnEggCantHoldAnItemText:
 	text_far _AnEggCantHoldAnItemText
 	text_end
@@ -587,11 +577,7 @@ BattlePack:
 	jr .loop
 
 .end
-	ld a, [wCurPocket]
-	ld [wLastPocket], a
-	ld hl, wOptions
-	res NO_TEXT_SCROLL, [hl]
-	ret
+	jp Pack.done ; same as there (tools/tailmerge.py)
 
 .RunJumptable:
 	ld a, [wJumptableIndex]
@@ -614,20 +600,10 @@ BattlePack:
 	dw Pack_QuitRunScript  ; 10
 
 .InitGFX:
-	xor a
-	ldh [hBGMapMode], a
-	call Pack_InitGFX
-	ld a, [wPackJumptableIndex]
-	ld [wJumptableIndex], a
-	jp Pack_InitColors
+	jp Pack.InitGFX ; same as there (tools/tailmerge.py)
 
 .InitItemsPocket:
-	xor a ; ITEM_POCKET
-	ld [wCurPocket], a
-	call ClearPocketList
-	call DrawPocketName
-	call WaitBGMap_DrawPackGFX
-	jp Pack_JumptableNext
+	jp Pack.InitItemsPocket ; same as there (tools/tailmerge.py)
 
 .ItemsPocketMenu:
 	ld hl, ItemsPocketMenuHeader
@@ -647,12 +623,7 @@ BattlePack:
 	jp ItemSubmenu
 
 .InitKeyItemsPocket:
-	ld a, KEY_ITEM_POCKET
-	ld [wCurPocket], a
-	call ClearPocketList
-	call DrawPocketName
-	call WaitBGMap_DrawPackGFX
-	jp Pack_JumptableNext
+	jp Pack.InitKeyItemsPocket ; same as there (tools/tailmerge.py)
 
 .KeyItemsPocketMenu:
 	ld hl, KeyItemsPocketMenuHeader
@@ -692,12 +663,7 @@ BattlePack:
 	jr TMHMSubmenu
 
 .InitBallsPocket:
-	ld a, BALL_POCKET
-	ld [wCurPocket], a
-	call ClearPocketList
-	call DrawPocketName
-	call WaitBGMap_DrawPackGFX
-	jp Pack_JumptableNext
+	jp Pack.InitBallsPocket ; same as there (tools/tailmerge.py)
 
 .BallsPocketMenu:
 	ld hl, BallsPocketMenuHeader
@@ -730,16 +696,7 @@ TMHMSubmenu:
 	ld hl, .UnusableMenuHeader
 	ld de, .UnusableJumptable
 .proceed
-	push de
-	call LoadMenuHeader
-	call VerticalMenu
-	call ExitMenu
-	pop hl
-	ret c
-	ld a, [wMenuCursorY]
-	dec a
-	call Pack_GetJumptablePointer
-	jp hl
+	jp Pack.load_jump ; same as there (tools/tailmerge.py)
 
 .UsableMenuHeader:
 	db MENU_BACKUP_TILES ; flags
@@ -789,8 +746,7 @@ TMHMSubmenu:
 	dw .BattleOnly  ; ITEMMENU_CLOSE
 
 .Oak:
-	ld hl, OakThisIsntTheTimeText
-	jp Pack_PrintTextNoScroll
+	jp UseItem.Oak ; same as there (tools/tailmerge.py)
 
 .Unused:
 	call DoItemEffect
@@ -1065,13 +1021,7 @@ TutorialPack:
 	dba UpdateItemDescription
 
 .TMHM:
-	ld a, TM_HM_POCKET
-	call InitPocket
-	call WaitBGMap_DrawPackGFX
-	farcall TMHMPocket
-	ld a, [wCurItem]
-	ld [wCurItem], a
-	ret
+	jp DepositSellPack.TMHMPocket ; same as there (tools/tailmerge.py)
 
 .Balls:
 	ld a, BALL_POCKET

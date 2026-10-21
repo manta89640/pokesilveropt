@@ -19,10 +19,7 @@ WaitBGMap2::
 	call DelayFrames
 
 .bg0
-	ld a, 1
-	ldh [hBGMapMode], a
-	ld c, 4
-	jp DelayFrames
+	jr WaitBGMap ; same as there (tools/tailmerge.py)
 
 IsCGB::
 	ldh a, [hCGB]
@@ -43,11 +40,7 @@ ApplyTilemap::
 	jr CopyTilemapAtOnce
 
 .dmg
-; WaitBGMap
-	ld a, 1
-	ldh [hBGMapMode], a
-	ld c, 4
-	jp DelayFrames
+	jr WaitBGMap ; same as there (tools/tailmerge.py)
 
 CGBOnly_CopyTilemapAtOnce::
 	ldh a, [hCGB]

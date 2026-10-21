@@ -643,8 +643,4 @@ FindEnemyMonsWithAtLeastQuarterMaxHP:
 	jr .loop
 
 .done
-	ld a, c
-	pop bc
-	and c
-	ld c, a
-	ret
+	jr FindEnemyMonsThatResistPlayer.done ; same as there (tools/tailmerge.py)

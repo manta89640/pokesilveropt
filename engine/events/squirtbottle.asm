@@ -40,6 +40,4 @@ _Squirtbottle:
 	ret
 
 .nope
-	xor a
-	ld [wScriptVar], a
-	ret
+	jr SweetScentEncounter.no_battle ; same as there (tools/tailmerge.py)

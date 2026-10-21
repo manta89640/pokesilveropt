@@ -90,10 +90,7 @@ ItemsOakWarningText:
 	text_end
 
 PartyMonItemName:
-	ld a, [wCurItem]
-	ld [wNamedObjectIndex], a
-	call GetItemName
-	jp CopyName1
+	jp Pack_GetItemName ; same as there (tools/tailmerge.py)
 
 CancelPokemonAction:
 	farcall InitPartyMenuWithCancel

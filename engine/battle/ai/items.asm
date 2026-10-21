@@ -100,11 +100,7 @@ SwitchRarely:
 	jr c, DontSwitch
 
 .switch
-	ld a, [wEnemySwitchMonParam]
-	and $f
-	inc a
-	ld [wEnemySwitchMonIndex], a
-	jp AI_TrySwitch
+	jr SwitchOften.switch ; same as there (tools/tailmerge.py)
 
 SwitchSometimes:
 	callfar CheckAbleToSwitch
@@ -134,11 +130,7 @@ SwitchSometimes:
 	jp c, DontSwitch
 
 .switch
-	ld a, [wEnemySwitchMonParam]
-	and $f
-	inc a
-	ld [wEnemySwitchMonIndex], a
-	jp AI_TrySwitch
+	jr SwitchOften.switch ; same as there (tools/tailmerge.py)
 
 
 AI_TryItem:

@@ -2070,9 +2070,7 @@ PokeDollEffect:
 	jp UseItemText
 
 .not_wild
-	xor a
-	ld [wItemEffectSucceeded], a
-	ret
+	jp EvoStoneEffect.DecidedNotToUse ; same as there (tools/tailmerge.py)
 
 GuardSpecEffect:
 	ld hl, wPlayerSubStatus4

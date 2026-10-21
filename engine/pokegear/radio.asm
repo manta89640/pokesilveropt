@@ -1356,16 +1356,10 @@ PokeFluteRadio:
 	ret
 
 UnownRadio:
-	call StartRadioStation
-	ld a, 1
-	ld [wNumRadioLinesPrinted], a
-	ret
+	jr PokeFluteRadio ; same as there (tools/tailmerge.py)
 
 EvolutionRadio:
-	call StartRadioStation
-	ld a, 1
-	ld [wNumRadioLinesPrinted], a
-	ret
+	jr PokeFluteRadio ; same as there (tools/tailmerge.py)
 
 CopyRadioTextToRAM:
 	ld a, [hl]

@@ -518,9 +518,7 @@ CGB_ApplyPartyMenuHPPals:
 	dec a
 	jr .loop
 .done
-	lb bc, 2, 8
-	ld a, e
-	jp FillBoxCGB
+	jp ApplyHPBarPals.done ; same as there (tools/tailmerge.py)
 
 InitPartyMenuOBPals:
 	ld hl, PartyMenuOBPals

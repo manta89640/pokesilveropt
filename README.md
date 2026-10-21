@@ -5,8 +5,8 @@ This is a fork of [pret/pokegold](https://github.com/pret/pokegold), the disasse
 | | Original | This fork |
 |-|-|-|
 | ROM file | 2,097,152 bytes (128 banks) | **1,048,576 bytes (64 banks)** |
-| Content | 1,154,855 bytes | 975,911 bytes |
-| Free space | 942,297 bytes | 72,665 bytes |
+| Content | 1,154,855 bytes | 973,428 bytes |
+| Free space | 942,297 bytes | 75,148 bytes |
 
 The figures are for Silver, from the summary in rgblink's map file; Gold is within a few hundred bytes. The debug ROMs, which add the debug room, are 1 MB too.
 
@@ -19,7 +19,7 @@ To set up the repository, see [INSTALL.md](INSTALL.md). `make` builds `pokegold.
 
 **1 MB layout** (`layout.link`). Sections that lived in banks `$40`–`$7f` now float, and rgblink packs them into free space in banks `$01`–`$3f`. Each map's scripts are their own section so they can fill small gaps. `tools/section_xref.py` reads the object files and reports code that uses another section's addresses without asking for its bank. It found which sections must share a bank: three pairs of maps, glued with `SECTION FRAGMENT`. The Pokédex entries stay in four consecutive banks because their bank is computed from the species. The Stadium 2 checksums move to the end of the 1 MB ROM, and `tools/stadium` handles any ROM size.
 
-**Optimal LZ compression.** Graphics are compressed with `tools/lzcompress`'s optimal mode instead of byte-for-byte matching settings.
+**Optimal LZ compression.** Graphics are compressed with `tools/lzcompress`'s optimal mode instead of byte-for-byte matching settings. The Pack's graphics, which were stored uncompressed, are compressed too.
 
 **Compressed map blocks** (`home/map.asm`). Map block data is LZ-compressed like graphics. When a map loads, its blocks and those of each connected map are decompressed in turn to the SRAM scratch buffer, and copied from there.
 
@@ -29,16 +29,16 @@ To set up the repository, see [INSTALL.md](INSTALL.md). `make` builds `pokegold.
 
 **Dead code and data** (`tools/find_dead_code.py`). Code and data that nothing can reach are removed: beta map blocks, unused graphics and text, the debug color picker, Safari Zone leftovers, and so on. The tool follows references and fallthrough from code and scripts.
 
-**Peephole optimizations** (`tools/peephole.py`). Tail calls become jumps, jumps to `ret` become `ret cc`, near `jp`s become `jr`, and pairs of constant loads become `lb`. Every rewrite is smaller and no slower; serial, link, printer and infrared code is left alone. Scripts that only open a text box, show one text and close it use `jumptext` or `jumptextfaceplayer`, which do the same.
+**Peephole optimizations** (`tools/peephole.py`). Tail calls become jumps, jumps to `ret` become `ret cc`, near `jp`s become `jr`, and pairs of constant loads become `lb`. Every rewrite is smaller and no slower; serial, link, printer and infrared code is left alone. Scripts that only open a text box, show one text and close it use `jumptext` or `jumptextfaceplayer`, which do the same. `tools/tailmerge.py` replaces each code block that is identical to an earlier one in the same section with a jump to it.
 
-Savings by step (Silver, bytes): text dictionary 120,661; dead code 18,254; overworld sprites 10,708; LZ 11,456; map blocks 10,684; duplicate graphics 3,944; peephole 1,854; `jumptext` 1,357.
+Savings by step (Silver, bytes): text dictionary 120,661; dead code 18,254; LZ 12,914; overworld sprites 10,708; map blocks 10,684; duplicate graphics 3,944; peephole 1,854; `jumptext` 1,357; duplicate code 1,025.
 
 
 ## What is unchanged
 
 - RAM, SRAM and link data layouts, so trades and battles with the original games still work, and their saves load in this fork. (The sprite buffer uses SRAM that the save layout leaves free.) A save holds the script addresses of the people and items on the current map, and those moved, so Continue reloads them from the map. The original games don't, so moving a save the other way is not safe.
 - All text, as printed on screen. `tools/verify_text.py` decodes every text in a build and compares it with the original ROM.
-- Gameplay timing. Text prints at the same speed; some code runs slightly faster.
+- Gameplay timing. Text prints at the same speed; some code runs slightly faster, and loading compressed graphics can take a frame longer.
 
 
 ## Verification

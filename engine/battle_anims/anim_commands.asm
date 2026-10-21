@@ -402,15 +402,7 @@ BattleAnimCmd_Loop:
 	jr z, .return_from_loop
 	dec [hl]
 .perpetual
-	call GetBattleAnimByte
-	ld e, a
-	call GetBattleAnimByte
-	ld d, a
-	ld hl, wBattleAnimAddress
-	ld [hl], e
-	inc hl
-	ld [hl], d
-	ret
+	jr BattleAnimCmd_Jump ; same as there (tools/tailmerge.py)
 
 .return_from_loop
 	ld hl, wBattleAnimFlags
@@ -483,15 +475,7 @@ BattleAnimCmd_IfVarEqual:
 	ret
 
 .jump
-	call GetBattleAnimByte
-	ld e, a
-	call GetBattleAnimByte
-	ld d, a
-	ld hl, wBattleAnimAddress
-	ld [hl], e
-	inc hl
-	ld [hl], d
-	ret
+	jp BattleAnimCmd_Jump ; same as there (tools/tailmerge.py)
 
 BattleAnimCmd_IfParamEqual:
 	call GetBattleAnimByte
@@ -511,15 +495,7 @@ BattleAnimCmd_IfParamEqual:
 	ret
 
 .jump
-	call GetBattleAnimByte
-	ld e, a
-	call GetBattleAnimByte
-	ld d, a
-	ld hl, wBattleAnimAddress
-	ld [hl], e
-	inc hl
-	ld [hl], d
-	ret
+	jp BattleAnimCmd_Jump ; same as there (tools/tailmerge.py)
 
 BattleAnimCmd_IfParamAnd:
 	call GetBattleAnimByte
@@ -540,15 +516,7 @@ BattleAnimCmd_IfParamAnd:
 	ret
 
 .jump
-	call GetBattleAnimByte
-	ld e, a
-	call GetBattleAnimByte
-	ld d, a
-	ld hl, wBattleAnimAddress
-	ld [hl], e
-	inc hl
-	ld [hl], d
-	ret
+	jp BattleAnimCmd_Jump ; same as there (tools/tailmerge.py)
 
 BattleAnimCmd_Obj:
 ; index, x, y, param
@@ -995,9 +963,7 @@ BattleAnimCmd_DropSub:
 	callfar DropPlayerSub
 
 .done
-	pop af
-	ld [wCurPartySpecies], a
-	ret
+	jp BattleAnimCmd_Transform.done ; same as there (tools/tailmerge.py)
 
 BattleAnimCmd_BeatUp:
 	ld a, [wCurPartySpecies]

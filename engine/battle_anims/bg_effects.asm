@@ -309,9 +309,7 @@ BattleBGEffect_CycleMidOBPalsGrayAndYellow:
 .sgb
 	ld de, .PalsSGB
 .okay
-	call BattleBGEffect_GetNthDMGPal
-	ld [wOBP0], a
-	ret
+	jr BattleBGEffect_CycleOBPalsGrayAndYellow.okay ; same as there (tools/tailmerge.py)
 
 .PalsCGB:
 	dc 3, 2, 1, 0
@@ -456,9 +454,7 @@ BattleBGEffect_BattlerObj_1Row:
 	ret
 
 .five
-	xor a
-	ldh [hBGMapMode], a
-	jp EndBattleBGEffect
+	jp BattleBGEffect_HideMon.four ; same as there (tools/tailmerge.py)
 
 BattleBGEffect_BattlerObj_2Row:
 	call BattleBGEffects_AnonJumptable
@@ -492,14 +488,7 @@ BattleBGEffect_BattlerObj_2Row:
 	ld [wBattleObjectTempID], a
 	ld a, 6 * TILE_WIDTH
 .okay
-	ld [wBattleObjectTempXCoord], a
-	ld a, 8 * TILE_WIDTH
-	ld [wBattleObjectTempYCoord], a
-	xor a
-	ld [wBattleObjectTempParam], a
-	call _QueueBattleAnimation
-	pop bc
-	ret
+	jr BattleBGEffect_BattlerObj_1Row.okay ; same as there (tools/tailmerge.py)
 
 .one
 	call BattleBGEffects_IncAnonJumptableIndex
@@ -514,16 +503,10 @@ BattleBGEffect_BattlerObj_2Row:
 	hlcoord 2, 6
 	lb bc, 2, 6
 .okay2
-	call ClearBox
-	ld a, $1
-	ldh [hBGMapMode], a
-	pop bc
-	ret
+	jr BattleBGEffect_BattlerObj_1Row.okay2 ; same as there (tools/tailmerge.py)
 
 .five
-	xor a
-	ldh [hBGMapMode], a
-	jp EndBattleBGEffect
+	jp BattleBGEffect_HideMon.four ; same as there (tools/tailmerge.py)
 
 _QueueBattleAnimation:
 	callfar QueueBattleAnimation
@@ -664,11 +647,7 @@ BattleBGEffect_ReturnMon:
 .player_turn
 	ld de, .PlayerData
 .okay
-	ld a, e
-	ld [wBattlePicResizeTempPointer], a
-	ld a, d
-	ld [wBattlePicResizeTempPointer + 1], a
-	jr BattleBGEffect_RunPicResizeScript
+	jr BattleBGEffect_EnterMon.okay ; same as there (tools/tailmerge.py)
 
 .PlayerData:
 	db  0, $31, 0
@@ -738,9 +717,7 @@ BattleBGEffect_RunPicResizeScript:
 	ret
 
 .end
-	xor a
-	ldh [hBGMapMode], a
-	jp EndBattleBGEffect
+	jp BattleBGEffect_HideMon.four ; same as there (tools/tailmerge.py)
 
 .ClearBox:
 ; get dims
@@ -1790,8 +1767,7 @@ BattleBGEffect_BetaSendOutMon1: ; unused
 	ret
 
 .finish
-	call BattleBGEffects_IncAnonJumptableIndex
-	ret
+	jp BattleBGEffect_DoubleTeam.next ; same as there (tools/tailmerge.py)
 
 .SetLYOverridesBackup:
 	ld e, a
@@ -2403,10 +2379,7 @@ BGEffect_RapidCyclePals:
 	jr BGEffects_LoadPlayerPals
 
 .okay_2_cgb
-	ld hl, BG_EFFECT_STRUCT_PARAM
-	add hl, bc
-	dec [hl]
-	ret
+	jr BGEffect_RapidCyclePals.okay_2_dmg ; same as there (tools/tailmerge.py)
 
 .two_cgb
 	ld a, $e4
@@ -2432,10 +2405,7 @@ BGEffect_RapidCyclePals:
 	jr BGEffects_LoadEnemyPals
 
 .okay_4_cgb
-	ld hl, BG_EFFECT_STRUCT_PARAM
-	add hl, bc
-	dec [hl]
-	ret
+	jr BGEffect_RapidCyclePals.okay_2_dmg ; same as there (tools/tailmerge.py)
 
 .four_cgb
 	ld a, $e4

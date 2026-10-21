@@ -81,8 +81,7 @@ BankOfMom:
 	ld a, $7
 
 .done_2
-	ld [wJumptableIndex], a
-	ret
+	jr BankOfMom.done_0 ; same as there (tools/tailmerge.py)
 
 .AccessBankOfMom:
 	ld hl, MomBankWhatDoYouWantToDoText
@@ -117,8 +116,7 @@ BankOfMom:
 	ld a, $6
 
 .done_3
-	ld [wJumptableIndex], a
-	ret
+	jr BankOfMom.done_0 ; same as there (tools/tailmerge.py)
 
 .StoreMoney:
 	ld hl, MomStoreMoneyText
@@ -181,8 +179,7 @@ BankOfMom:
 	ld a, $7
 
 .done_4
-	ld [wJumptableIndex], a
-	ret
+	jp BankOfMom.done_0 ; same as there (tools/tailmerge.py)
 
 .TakeMoney:
 	ld hl, MomTakeMoneyText
@@ -245,8 +242,7 @@ BankOfMom:
 	ld a, $7
 
 .done_5
-	ld [wJumptableIndex], a
-	ret
+	jp BankOfMom.done_0 ; same as there (tools/tailmerge.py)
 
 .StopOrStartSavingMoney:
 	ld hl, MomSaveMoneyText

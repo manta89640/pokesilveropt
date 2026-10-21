@@ -623,9 +623,7 @@ WaterfallFunction:
 	ret
 
 .failed
-	call FieldMoveFailed
-	ld a, JUMPTABLE_EXIT
-	ret
+	jp FlashFunction.notadarkcave ; same as there (tools/tailmerge.py)
 
 CheckMapCanWaterfall:
 	ld a, [wPlayerDirection]
@@ -1050,8 +1048,7 @@ TryStrengthOW:
 	jr .done
 
 .done
-	ld [wScriptVar], a
-	ret
+	jp SnorlaxAwake.done ; same as there (tools/tailmerge.py)
 
 WhirlpoolFunction:
 	call FieldMoveJumptableReset
@@ -1092,9 +1089,7 @@ WhirlpoolFunction:
 	ret
 
 .FailWhirlpool:
-	call FieldMoveFailed
-	ld a, JUMPTABLE_EXIT
-	ret
+	jp FlashFunction.notadarkcave ; same as there (tools/tailmerge.py)
 
 UseWhirlpoolText:
 	text_far _UseWhirlpoolText
@@ -1216,9 +1211,7 @@ TryHeadbuttFromMenu:
 	ret
 
 .no_tree
-	call FieldMoveFailed
-	ld a, JUMPTABLE_EXIT
-	ret
+	jp FlashFunction.notadarkcave ; same as there (tools/tailmerge.py)
 
 UseHeadbuttText:
 	text_far _UseHeadbuttText
@@ -1299,9 +1292,7 @@ TryRockSmashFromMenu:
 	ret
 
 .no_rock
-	call FieldMoveFailed
-	ld a, JUMPTABLE_EXIT
-	ret
+	jp FlashFunction.notadarkcave ; same as there (tools/tailmerge.py)
 
 GetFacingObject:
 	farcall CheckFacingObject
@@ -1388,8 +1379,7 @@ HasRockSmash:
 	xor a
 	jr .done
 .done
-	ld [wScriptVar], a
-	ret
+	jp SnorlaxAwake.done ; same as there (tools/tailmerge.py)
 
 FishFunction:
 	ld a, e
@@ -1548,8 +1538,7 @@ Fishing_CheckFacingUp:
 	xor a
 
 .up
-	ld [wScriptVar], a
-	ret
+	jp SnorlaxAwake.done ; same as there (tools/tailmerge.py)
 
 Script_FishCastRod:
 	refreshmap

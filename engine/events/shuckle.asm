@@ -128,9 +128,7 @@ ReturnShuckie:
 	ret
 
 .DontReturn:
-	xor a ; SHUCKIE_WRONG_MON
-	ld [wScriptVar], a
-	ret
+	jp GiveShuckle.NotGiven ; same as there (tools/tailmerge.py)
 
 .fainted
 	ld a, SHUCKIE_FAINTED

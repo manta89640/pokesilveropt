@@ -792,10 +792,7 @@ VerifyBackupChecksum:
 	ld a, [sBackupChecksum + 1]
 	cp d
 .fail
-	push af
-	call CloseSRAM
-	pop af
-	ret
+	jp VerifyChecksum.fail ; same as there (tools/tailmerge.py)
 
 GetBoxAddress:
 	ld a, [wCurBox]

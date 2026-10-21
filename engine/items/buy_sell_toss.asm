@@ -57,9 +57,7 @@ BuySellToss_InterpretJoypad:
 	ret
 
 .b
-	ld a, -1
-	scf
-	ret
+	jp CheckObjectFlag.masked ; same as there (tools/tailmerge.py)
 
 .a
 	ld a, 0

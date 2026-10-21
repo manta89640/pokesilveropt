@@ -603,8 +603,7 @@ MovementFunction_0c:
 	jp _GetMovementObject
 
 MovementFunction_0d:
-	ld hl, GetPlayerNextMovementIndex
-	jp HandleMovementData
+	jr MovementFunction_ObeyDPad ; same as there (tools/tailmerge.py)
 
 MovementFunction_0e:
 	jp _GetMovementObject
@@ -662,10 +661,7 @@ MovementFunction_Strength:
 .on_pit
 	call ObjectMovement_IncAnonJumptableIndex
 .stop:
-	ld hl, OBJECT_WALKING
-	add hl, bc
-	ld [hl], STANDING
-	ret
+	jr MovementFunction_Strength.ok ; same as there (tools/tailmerge.py)
 
 MovementFunction_FollowNotExact:
 	ld hl, OBJECT_MAP_X
@@ -1384,16 +1380,7 @@ StepFunction_Skyfall:
 	ret nz
 	call ObjectStep_IncAnonJumptableIndex
 .Finish:
-	ld hl, OBJECT_STEP_FRAME
-	add hl, bc
-	ld [hl], 0
-	ld hl, OBJECT_SPRITE_Y_OFFSET
-	add hl, bc
-	ld [hl], 0
-	ld hl, OBJECT_STEP_TYPE
-	add hl, bc
-	ld [hl], STEP_TYPE_FROM_MOVEMENT
-	ret
+	jr StepFunction_TeleportTo.FinishStep ; same as there (tools/tailmerge.py)
 
 StepFunction_GotBite:
 	call ObjectStep_AnonJumptable
@@ -1483,14 +1470,7 @@ StepFunction_Delete:
 	jp DeleteMapObject
 
 StepFunction_Bump:
-	ld hl, OBJECT_STEP_DURATION
-	add hl, bc
-	dec [hl]
-	ret nz
-	ld hl, OBJECT_STEP_TYPE
-	add hl, bc
-	ld [hl], STEP_TYPE_FROM_MOVEMENT
-	ret
+	jp WaitStep_InPlace ; same as there (tools/tailmerge.py)
 
 StepFunction_Restore:
 	call ObjectStep_AnonJumptable
@@ -1604,14 +1584,7 @@ StepFunction_Turn:
 	ld [hl], 2
 	call ObjectStep_IncAnonJumptableIndex
 .step2
-	ld hl, OBJECT_STEP_DURATION
-	add hl, bc
-	dec [hl]
-	ret nz
-	ld hl, OBJECT_STEP_TYPE
-	add hl, bc
-	ld [hl], STEP_TYPE_FROM_MOVEMENT
-	ret
+	jp WaitStep_InPlace ; same as there (tools/tailmerge.py)
 
 StepFunction_StrengthBoulder:
 	call AddStepVector

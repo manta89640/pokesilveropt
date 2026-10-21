@@ -91,8 +91,7 @@ DayCareLady:
 	call PrintDayCareText
 
 .cancel
-	ld a, DAYCARETEXT_COME_AGAIN
-	jp PrintDayCareText
+	jr DayCareMan.cancel ; same as there (tools/tailmerge.py)
 
 DayCareIntroText:
 	bit DAYCARE_INTRO_SEEN_F, [hl]
@@ -199,9 +198,7 @@ DayCare_AskWithdrawBreedMon:
 	ret
 
 .refused
-	ld a, DAYCARETEXT_OH_FINE
-	scf
-	ret
+	jr DayCareAskDepositPokemon.Declined ; same as there (tools/tailmerge.py)
 
 .not_enough_money
 	ld a, DAYCARETEXT_NOT_ENOUGH_MONEY

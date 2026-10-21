@@ -77,8 +77,7 @@ BattleCommand_Curse:
 	jp StdBattleTextbox
 
 .failed
-	call AnimateFailedMove
-	jp PrintButItFailed
+	jp BattleCommand_Teleport.failed ; same as there (tools/tailmerge.py)
 
 .cantraise
 

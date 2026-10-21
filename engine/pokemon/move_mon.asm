@@ -1067,9 +1067,7 @@ SendMonIntoBox:
 	ret
 
 .full
-	call CloseSRAM
-	and a
-	ret
+	jp SendGetMonIntoFromBox.CloseSRAM_And_ClearCarryFlag ; same as there (tools/tailmerge.py)
 
 ShiftBoxMon:
 	ld hl, sBoxMonOTs

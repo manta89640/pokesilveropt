@@ -414,8 +414,7 @@ Script__2dmenu:
 	jr nc, .ok
 	xor a
 .ok
-	ld [wScriptVar], a
-	ret
+	jr Script_verticalmenu.ok ; same as there (tools/tailmerge.py)
 
 Script_verbosegiveitem:
 	call Script_giveitem
@@ -568,8 +567,7 @@ Script_askforphonenumber:
 	call GetScriptByte
 	ld a, PHONE_CONTACT_REFUSED
 .done
-	ld [wScriptVar], a
-	ret
+	jp Script_verticalmenu.ok ; same as there (tools/tailmerge.py)
 
 Script_describedecoration:
 	call GetScriptByte
@@ -1297,9 +1295,7 @@ Script_checkmapscene:
 	ret
 
 .no_scene
-	ld a, $ff
-	ld [wScriptVar], a
-	ret
+	jr Script_checkscene.no_scene ; same as there (tools/tailmerge.py)
 
 Script_setscene:
 	ld a, [wMapGroup]
@@ -1647,8 +1643,7 @@ CompareMoneyAction:
 .less
 	ld a, HAVE_LESS
 .done
-	ld [wScriptVar], a
-	ret
+	jp Script_verticalmenu.ok ; same as there (tools/tailmerge.py)
 
 GetMoneyAccount:
 	call GetScriptByte
@@ -1768,8 +1763,7 @@ Script_checkphonecall:
 	jr z, .ok
 	ld a, TRUE
 .ok
-	ld [wScriptVar], a
-	ret
+	jp Script_verticalmenu.ok ; same as there (tools/tailmerge.py)
 
 Script_givepoke:
 	call GetScriptByte
@@ -1840,8 +1834,7 @@ Script_checkevent:
 	jr z, .false
 	ld a, TRUE
 .false
-	ld [wScriptVar], a
-	ret
+	jp Script_verticalmenu.ok ; same as there (tools/tailmerge.py)
 
 Script_setflag:
 	call GetScriptByte
@@ -1871,8 +1864,7 @@ Script_checkflag:
 	jr z, .false
 	ld a, TRUE
 .false
-	ld [wScriptVar], a
-	ret
+	jp Script_verticalmenu.ok ; same as there (tools/tailmerge.py)
 
 _EngineFlagAction:
 	farcall EngineFlagAction

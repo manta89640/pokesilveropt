@@ -390,9 +390,7 @@ BattleAnimFunction_PokeBallBlocked:
 	dw .one
 	dw .two
 .zero
-	call GetBallAnimPal
-	call BattleAnim_IncAnonJumptableIndex
-	ret
+	jp BattleAnimFunction_PokeBall.zero ; same as there (tools/tailmerge.py)
 
 .one
 	ld hl, BATTLEANIMSTRUCT_XCOORD
@@ -1008,37 +1006,7 @@ BattleAnimFunction_RockSmash:
 	jp DeinitBattleAnimation
 
 .sine_cosine
-	ld hl, BATTLEANIMSTRUCT_PARAM
-	add hl, bc
-	ld a, [hl]
-	and $3f
-	ld d, a
-	ld hl, BATTLEANIMSTRUCT_VAR1
-	add hl, bc
-	ld a, [hl]
-	dec [hl]
-	call BattleAnim_Sine
-	ld hl, BATTLEANIMSTRUCT_YOFFSET
-	add hl, bc
-	ld [hl], a
-	call BattleAnim_ScatterHorizontal
-	ld hl, BATTLEANIMSTRUCT_VAR2
-	add hl, bc
-	ld a, [hl]
-	ld hl, BATTLEANIMSTRUCT_XCOORD
-	add hl, bc
-	ld h, [hl]
-	ld l, a
-	add hl, de
-	ld e, l
-	ld d, h
-	ld hl, BATTLEANIMSTRUCT_XCOORD
-	add hl, bc
-	ld [hl], d
-	ld hl, BATTLEANIMSTRUCT_VAR2
-	add hl, bc
-	ld [hl], e
-	ret
+	jp BattleAnimFunction_RazorLeaf.sine_cosine ; same as there (tools/tailmerge.py)
 
 BattleAnimFunction_Bubble:
 	call BattleAnim_AnonJumptable
@@ -1503,8 +1471,7 @@ BattleAnimFunction_Clamp_Encore:
 .three
 .four
 .five
-	call BattleAnim_IncAnonJumptableIndex
-	ret
+	jp BattleAnimFunction_RazorLeaf.seven ; same as there (tools/tailmerge.py)
 
 .six
 	ld hl, BATTLEANIMSTRUCT_JUMPTABLE_INDEX
@@ -1580,14 +1547,10 @@ BattleAnimFunction_Bite:
 .three
 .four
 .five
-	call BattleAnim_IncAnonJumptableIndex
-	ret
+	jp BattleAnimFunction_RazorLeaf.seven ; same as there (tools/tailmerge.py)
 
 .six
-	ld hl, BATTLEANIMSTRUCT_JUMPTABLE_INDEX
-	add hl, bc
-	ld [hl], $1
-	ret
+	jr BattleAnimFunction_Clamp_Encore.six ; same as there (tools/tailmerge.py)
 
 BattleAnimFunction_SolarBeam:
 ; Solar Beam charge up animation
@@ -1928,11 +1891,7 @@ BattleAnimFunction_Spikes:
 	dw .two
 
 .zero
-	call BattleAnim_IncAnonJumptableIndex
-	ld hl, BATTLEANIMSTRUCT_VAR2
-	add hl, bc
-	ld [hl], $40
-	ret
+	jp BattleAnimFunction_LeechSeed.zero ; same as there (tools/tailmerge.py)
 
 .one
 	ld hl, BATTLEANIMSTRUCT_VAR2
@@ -2792,8 +2751,7 @@ BattleAnimFunction_PoisonGas:
 	ret
 
 .next
-	call BattleAnim_IncAnonJumptableIndex
-	ret
+	jp BattleAnimFunction_RazorLeaf.seven ; same as there (tools/tailmerge.py)
 
 BattleAnimFunction_SmokeFlameWheel:
 ; Object spins around target while also moving upward until it disappears at x coord $e8
@@ -3504,10 +3462,7 @@ BattleAnimFunction_SpeedLine:
 	ret
 
 .inverted
-	ld hl, BATTLEANIMSTRUCT_XOFFSET
-	add hl, bc
-	dec [hl]
-	ret
+	jp BattleAnimFunction_FireBlast.two ; same as there (tools/tailmerge.py)
 
 BattleAnimFunction_Sludge:
 ; Object moves upward for $c frames and switches to BATTLE_ANIM_FRAMESET_SLUDGE_BUBBLE_BURST
@@ -3538,10 +3493,7 @@ BattleAnimFunction_Sludge:
 	ld a, BATTLE_ANIM_FRAMESET_SLUDGE_BUBBLE_BURST
 	call ReinitBattleAnimFrameset
 .two
-	ld hl, BATTLEANIMSTRUCT_YOFFSET
-	add hl, bc
-	dec [hl]
-	ret
+	jp BattleAnimFunction_FireBlast.one ; same as there (tools/tailmerge.py)
 
 BattleAnimFunction_MetronomeHand:
 ; Fast circular motion with an x radius of $8 and y radius of $2
@@ -4221,10 +4173,7 @@ BattleAnim_AnonJumptable:
 	jp hl
 
 BattleAnim_IncAnonJumptableIndex:
-	ld hl, BATTLEANIMSTRUCT_JUMPTABLE_INDEX
-	add hl, bc
-	inc [hl]
-	ret
+	jp BattleAnimCmd_IncObj.found ; same as there (tools/tailmerge.py)
 
 BattleAnim_Cosine:
 ; a = d * cos(a * pi/32)

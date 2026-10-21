@@ -405,9 +405,7 @@ PlayerTossItemMenu:
 	jr .loop
 
 .quit
-	call CloseSubmenu
-	xor a
-	ret
+	jp PlayerWithdrawItemMenu.quit ; same as there (tools/tailmerge.py)
 
 PlayerDecorationMenu:
 	farcall _PlayerDecorationMenu

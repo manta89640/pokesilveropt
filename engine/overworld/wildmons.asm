@@ -739,10 +739,7 @@ JumpRoamMon:
 	dec hl
 ; Return the map group and number in bc.
 .done
-	ld a, [hli]
-	ld b, a
-	ld c, [hl]
-	ret
+	jr UpdateRoamMons.done ; same as there (tools/tailmerge.py)
 
 _BackUpMapIndices:
 	ld a, [wRoamMons_CurMapNumber]

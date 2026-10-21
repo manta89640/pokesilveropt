@@ -9,5 +9,4 @@ BattleCommand_Mist:
 	jp StdBattleTextbox
 
 .already_mist
-	call AnimateFailedMove
-	jp PrintButItFailed
+	jp BattleCommand_Teleport.failed ; same as there (tools/tailmerge.py)

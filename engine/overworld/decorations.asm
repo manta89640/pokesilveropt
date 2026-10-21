@@ -782,10 +782,7 @@ DecoAction_SetItUp_Ornament:
 	ret
 
 .failed
-	ld hl, AlreadySetUpText
-	call MenuTextboxBackup
-	scf
-	ret
+	jp DecoAction_SetItUp.alreadythere ; same as there (tools/tailmerge.py)
 
 .getwhichside
 	ld a, [wMenuSelection]
@@ -817,10 +814,7 @@ DecoAction_PutItAway_Ornament:
 	ret
 
 .nothingthere
-	ld hl, NothingToPutAwayText
-	call MenuTextboxBackup
-	xor a
-	ret
+	jp DecoAction_TryPutItAway.nothingthere ; same as there (tools/tailmerge.py)
 
 WhichSidePutAwayText:
 	text_far _WhichSidePutAwayText

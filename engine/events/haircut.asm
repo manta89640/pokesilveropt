@@ -8,9 +8,7 @@ BillsGrandfather:
 	jr CopyPokemonName_Buffer1_Buffer3
 
 .cancel
-	xor a
-	ld [wScriptVar], a
-	ret
+	jp GiveShuckle.NotGiven ; same as there (tools/tailmerge.py)
 
 OlderHaircutBrother:
 	ld hl, HappinessData_OlderHaircutBrother
@@ -53,9 +51,7 @@ HaircutOrGrooming:
 	jp ChangeHappiness
 
 .nope
-	xor a
-	ld [wScriptVar], a
-	ret
+	jp GiveShuckle.NotGiven ; same as there (tools/tailmerge.py)
 
 .egg
 	ld a, 1

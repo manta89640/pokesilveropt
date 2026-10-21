@@ -248,8 +248,7 @@ AnimSeq_UnusedIntroAerodactyl:
 	jp DeinitializeSprite
 
 AnimSeq_GSIntroLapras:
-	call AnimSeqs_AnonJumptable
-	jp hl
+	jr AnimSeq_GSIntroMagikarp ; same as there (tools/tailmerge.py)
 .anon_dw
 	dw .zero
 	dw .one
@@ -324,8 +323,7 @@ AnimSeq_GSIntroLapras:
 	ret
 
 AnimSeq_GSIntroNote:
-	call AnimSeqs_AnonJumptable
-	jp hl
+	jp AnimSeq_GSIntroMagikarp ; same as there (tools/tailmerge.py)
 .anon_dw
 	dw .zero
 	dw .one
@@ -377,8 +375,7 @@ AnimSeq_GSIntroNote:
 	jp DeinitializeSprite
 
 AnimSeq_GSIntroJigglypuff:
-	call AnimSeqs_AnonJumptable
-	jp hl
+	jp AnimSeq_GSIntroMagikarp ; same as there (tools/tailmerge.py)
 .anon_dw
 	dw .zero
 	dw .one
@@ -405,8 +402,7 @@ AnimSeq_GSIntroJigglypuff:
 	jp DeinitializeSprite
 
 AnimSeq_GSIntroPikachu:
-	call AnimSeqs_AnonJumptable
-	jp hl
+	jp AnimSeq_GSIntroMagikarp ; same as there (tools/tailmerge.py)
 .anon_dw
 	dw .zero
 	dw .one
@@ -486,8 +482,7 @@ AnimSeq_GSIntroPikachu:
 	jp DeinitializeSprite
 
 AnimSeq_GSIntroPikachuTail:
-	call AnimSeqs_AnonJumptable
-	jp hl
+	jp AnimSeq_GSIntroMagikarp ; same as there (tools/tailmerge.py)
 .anon_dw
 	dw .zero
 	dw .one
@@ -524,8 +519,7 @@ AnimSeq_GSIntroPikachuTail:
 	jp _ReinitSpriteAnimFrame
 
 .next2
-	call AnimSeqs_IncAnonJumptableIndex
-	ret
+	jp AnimSeq_GSIntroLapras.next2 ; same as there (tools/tailmerge.py)
 
 .two
 	ld hl, SPRITEANIMSTRUCT_VAR1
@@ -558,8 +552,7 @@ AnimSeq_GSIntroPikachuTail:
 	jp DeinitializeSprite
 
 AnimSeq_GSIntroFireball:
-	call AnimSeqs_AnonJumptable
-	jp hl
+	jp AnimSeq_GSIntroMagikarp ; same as there (tools/tailmerge.py)
 .anon_dw
 	dw .zero
 	dw .one
@@ -616,8 +609,7 @@ AnimSeq_GSIntroFireball:
 	ret
 
 AnimSeq_GSIntroChikoritaTotodile:
-	call AnimSeqs_AnonJumptable
-	jp hl
+	jp AnimSeq_GSIntroMagikarp ; same as there (tools/tailmerge.py)
 .anon_dw
 	dw .zero
 	dw .one
@@ -663,8 +655,7 @@ AnimSeq_GSIntroChikoritaTotodile:
 	ret
 
 AnimSeq_GSIntroCyndaquil:
-	call AnimSeqs_AnonJumptable
-	jp hl
+	jp AnimSeq_GSIntroMagikarp ; same as there (tools/tailmerge.py)
 .anon_dw
 	dw .zero
 	dw .one
@@ -680,34 +671,10 @@ AnimSeq_GSIntroCyndaquil:
 	ret
 
 .one
-; flash down/left
-	ld hl, SPRITEANIMSTRUCT_VAR1
-	add hl, bc
-	ld a, [hl]
-	cp $3c
-	ret nc
-	inc [hl]
-	inc [hl]
-	ld d, $90
-	call AnimSeqs_Sine
-	ld hl, SPRITEANIMSTRUCT_YOFFSET
-	add hl, bc
-	ld [hl], a
-	ld hl, SPRITEANIMSTRUCT_VAR2
-	add hl, bc
-	ld a, [hl]
-	inc [hl]
-	inc [hl]
-	ld d, $90
-	call AnimSeqs_Cosine
-	ld hl, SPRITEANIMSTRUCT_XOFFSET
-	add hl, bc
-	ld [hl], a
-	ret
+	jr AnimSeq_GSIntroChikoritaTotodile.one ; same as there (tools/tailmerge.py)
 
 AnimSeq_GSTitleTrail:
-	call AnimSeqs_AnonJumptable
-	jp hl
+	jp AnimSeq_GSIntroMagikarp ; same as there (tools/tailmerge.py)
 .anon_dw
 	dw .zero
 	dw .one
@@ -851,8 +818,7 @@ AnimSeq_UnusedPikachuTail:
 	ret
 
 AnimSeq_UnusedNote:
-	call AnimSeqs_AnonJumptable
-	jp hl
+	jp AnimSeq_GSIntroMagikarp ; same as there (tools/tailmerge.py)
 .anon_dw
 	dw .zero
 	dw .delete
@@ -1105,8 +1071,7 @@ AnimSeq_MemoryGameCursor:
 	ret
 
 AnimSeq_TradePokeBall:
-	call AnimSeqs_AnonJumptable
-	jp hl
+	jp AnimSeq_GSIntroMagikarp ; same as there (tools/tailmerge.py)
 .anon_dw
 	dw .zero
 	dw .one
@@ -1412,16 +1377,7 @@ AnimSeq_FlyTo:
 	sub $2
 	ld [hl], a
 .stay
-	ld hl, SPRITEANIMSTRUCT_VAR3
-	add hl, bc
-	ld a, [hl]
-	inc [hl]
-	call AnimSeqs_Cosine
-
-	ld hl, SPRITEANIMSTRUCT_XOFFSET
-	add hl, bc
-	ld [hl], a
-	ret
+	jr AnimSeq_FlyFrom.skip ; same as there (tools/tailmerge.py)
 
 AnimSeqs_AnonJumptable:
 	ld hl, sp+0

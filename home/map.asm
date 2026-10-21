@@ -1956,9 +1956,7 @@ GetMovementPermissions::
 	ret nz
 
 .ok_up
-	ld hl, wTilePermissions
-	set RIGHT, [hl]
-	ret
+	jr GetMovementPermissions.ok_down ; same as there (tools/tailmerge.py)
 
 .Right:
 	call .CheckHiNybble
@@ -1973,9 +1971,7 @@ GetMovementPermissions::
 	ret nz
 
 .ok_right
-	ld hl, wTilePermissions
-	set RIGHT, [hl]
-	ret
+	jr GetMovementPermissions.ok_down ; same as there (tools/tailmerge.py)
 
 .Left:
 	call .CheckHiNybble
@@ -1990,9 +1986,7 @@ GetMovementPermissions::
 	ret nz
 
 .ok_left
-	ld hl, wTilePermissions
-	set RIGHT, [hl]
-	ret
+	jr GetMovementPermissions.ok_down ; same as there (tools/tailmerge.py)
 
 .CheckHiNybble:
 	and $f0

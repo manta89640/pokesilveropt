@@ -112,5 +112,4 @@ BattleCommand_Sketch:
 	jp StdBattleTextbox
 
 .fail
-	call AnimateFailedMove
-	jp PrintDidntAffect
+	jp BattleCommand_LockOn.fail ; same as there (tools/tailmerge.py)

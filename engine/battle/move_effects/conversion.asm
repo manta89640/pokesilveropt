@@ -59,8 +59,7 @@ BattleCommand_Conversion:
 	jr .loop2
 
 .fail
-	call AnimateFailedMove
-	jp PrintButItFailed
+	jp BattleCommand_Teleport.failed ; same as there (tools/tailmerge.py)
 
 .done
 .loop3

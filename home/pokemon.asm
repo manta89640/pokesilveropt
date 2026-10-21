@@ -119,10 +119,7 @@ _PlayMonCry::
 	call WaitSFX
 
 .done
-	pop bc
-	pop de
-	pop hl
-	ret
+	jr DrawBattleHPBar.done ; same as there (tools/tailmerge.py)
 
 LoadCry::
 ; Load cry bc.

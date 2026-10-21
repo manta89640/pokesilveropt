@@ -416,9 +416,7 @@ FlyFunction_FrameTimer:
 	jp PlaySFX
 
 .exit
-	ld hl, wJumptableIndex
-	set JUMPTABLE_EXIT_F, [hl]
-	ret
+	jp Cut_WaitAnimSFX.finished ; same as there (tools/tailmerge.py)
 
 .SpawnLeaf:
 	ld hl, wFrameCounter2

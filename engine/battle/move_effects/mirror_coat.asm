@@ -52,7 +52,4 @@ BattleCommand_MirrorCoat:
 	ld [hli], a
 	ld [hl], a
 .capped
-
-	xor a
-	ld [wAttackMissed], a
-	ret
+	jp BattleCommand_Counter.capped ; same as there (tools/tailmerge.py)

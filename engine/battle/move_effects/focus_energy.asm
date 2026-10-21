@@ -9,5 +9,4 @@ BattleCommand_FocusEnergy:
 	jp StdBattleTextbox
 
 .already_pumped
-	call AnimateFailedMove
-	jp PrintButItFailed
+	jp BattleCommand_Teleport.failed ; same as there (tools/tailmerge.py)

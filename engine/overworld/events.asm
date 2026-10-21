@@ -868,9 +868,7 @@ CountStep:
 	ret
 
 .hatch
-	ld a, PLAYEREVENT_HATCH
-	scf
-	ret
+	jp CheckTimeEvents.hatch ; same as there (tools/tailmerge.py)
 
 .whiteout ; unreferenced
 	ld a, PLAYEREVENT_WHITEOUT

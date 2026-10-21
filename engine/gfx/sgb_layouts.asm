@@ -408,9 +408,7 @@ endr
 
 .SGB_Unused0D:
 .SGB_TrainerCard:
-	ld hl, PalPacket_Diploma
-	ld de, BlkPacket_AllPal0
-	ret
+	jp SGBLayoutJumptable.SGB_MysteryGift ; same as there (tools/tailmerge.py)
 
 .SGB_UnownPuzzle:
 	ld hl, PalPacket_UnownPuzzle

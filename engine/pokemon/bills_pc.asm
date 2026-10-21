@@ -262,14 +262,7 @@ _WithdrawPKMN:
 	call DelayFrame
 	jr .loop
 .done
-	call ClearSprites
-	pop af
-	ldh [hInMenu], a
-	pop af
-	ld [wStateFlags], a
-	pop af
-	ld [wOptions], a
-	ret
+	jp _DepositPKMN.done ; same as there (tools/tailmerge.py)
 
 .RunJumptable:
 	ld a, [wJumptableIndex]
@@ -337,28 +330,13 @@ _WithdrawPKMN:
 	ret
 
 .go_back ; unreferenced
-	ld hl, wJumptableIndex
-	dec [hl]
-	ret
+	jp _DepositPKMN.go_back ; same as there (tools/tailmerge.py)
 
 .b_button
-	ld a, $4
-	ld [wJumptableIndex], a
-	ret
+	jp _DepositPKMN.b_button ; same as there (tools/tailmerge.py)
 
 .PrepSubmenu:
-	xor a
-	ldh [hBGMapMode], a
-	call ClearSprites
-	call BillsPC_GetSelectedPokemonSpecies
-	ld [wCurPartySpecies], a
-	ld a, SCGB_BILLS_PC
-	call BillsPC_ApplyPalettes
-	ld de, PCString_WhatsUp
-	call BillsPC_PlaceString
-	ld a, $1
-	ld [wMenuCursorY], a
-	jp BillsPC_IncrementJumptableIndex
+	jp _DepositPKMN.WhatsUp ; same as there (tools/tailmerge.py)
 
 BillsPC_Withdraw:
 	ld hl, .MenuHeader
@@ -398,18 +376,10 @@ BillsPC_Withdraw:
 	ld [wBillsPC_ScrollPosition], a
 	ret
 .FailedWithdraw:
-	ld de, PCString_WhatsUp
-	jp BillsPC_PlaceString
+	jp BillsPCDepositFuncDeposit.box_full ; same as there (tools/tailmerge.py)
 
 .stats
-	call LoadStandardMenuHeader
-	call BillsPC_StatsScreen
-	call ExitMenu
-	call PCMonInfo
-	call BillsPC_GetSelectedPokemonSpecies
-	ld [wCurPartySpecies], a
-	ld a, SCGB_BILLS_PC
-	jp BillsPC_ApplyPalettes
+	jp BillsPCDepositFuncStats ; same as there (tools/tailmerge.py)
 
 .release
 	ld a, [wMenuCursorY]
@@ -442,16 +412,10 @@ BillsPC_Withdraw:
 	pop af
 	ret
 .FailedRelease:
-	ld de, PCString_WhatsUp
-	call BillsPC_PlaceString
-	pop af
-	ld [wMenuCursorY], a
-	ret
+	jp BillsPCDepositFuncRelease.failed_release ; same as there (tools/tailmerge.py)
 
 .cancel
-	ld a, $0
-	ld [wJumptableIndex], a
-	ret
+	jp BillsPCDepositFuncCancel ; same as there (tools/tailmerge.py)
 
 .MenuHeader:
 	db MENU_BACKUP_TILES ; flags
@@ -498,14 +462,7 @@ _MovePKMNWithoutMail:
 	jr .loop
 
 .done
-	call ClearSprites
-	pop af
-	ldh [hInMenu], a
-	pop af
-	ld [wStateFlags], a
-	pop af
-	ld [wOptions], a
-	ret
+	jp _DepositPKMN.done ; same as there (tools/tailmerge.py)
 
 .RunJumptable:
 	ld a, [wJumptableIndex]
@@ -583,9 +540,7 @@ _MovePKMNWithoutMail:
 	ret
 
 .go_back ; unreferenced
-	ld hl, wJumptableIndex
-	dec [hl]
-	ret
+	jp _DepositPKMN.go_back ; same as there (tools/tailmerge.py)
 
 .b_button
 	ld a, $6
@@ -593,18 +548,7 @@ _MovePKMNWithoutMail:
 	ret
 
 .PrepSubmenu:
-	xor a
-	ldh [hBGMapMode], a
-	call ClearSprites
-	call BillsPC_GetSelectedPokemonSpecies
-	ld [wCurPartySpecies], a
-	ld a, SCGB_BILLS_PC
-	call BillsPC_ApplyPalettes
-	ld de, PCString_WhatsUp
-	call BillsPC_PlaceString
-	ld a, $1
-	ld [wMenuCursorY], a
-	jp BillsPC_IncrementJumptableIndex
+	jp _DepositPKMN.WhatsUp ; same as there (tools/tailmerge.py)
 
 .MoveMonWOMailSubmenu:
 	ld hl, .MenuHeader
@@ -645,19 +589,10 @@ _MovePKMNWithoutMail:
 	ret
 
 .Stats:
-	call LoadStandardMenuHeader
-	call BillsPC_StatsScreen
-	call ExitMenu
-	call PCMonInfo
-	call BillsPC_GetSelectedPokemonSpecies
-	ld [wCurPartySpecies], a
-	ld a, SCGB_BILLS_PC
-	jp BillsPC_ApplyPalettes
+	jp BillsPCDepositFuncStats ; same as there (tools/tailmerge.py)
 
 .Cancel:
-	ld a, $0
-	ld [wJumptableIndex], a
-	ret
+	jp BillsPCDepositFuncCancel ; same as there (tools/tailmerge.py)
 
 .MenuHeader:
 	db MENU_BACKUP_TILES ; flags
@@ -725,9 +660,7 @@ _MovePKMNWithoutMail:
 	ret
 
 .no_space
-	ld hl, wJumptableIndex
-	dec [hl]
-	ret
+	jp _DepositPKMN.go_back ; same as there (tools/tailmerge.py)
 
 .b_button_2
 	ld a, [wBillsPC_BackupScrollPosition]
@@ -759,14 +692,10 @@ BillsPC_InitRAM:
 	ret
 
 BillsPC_IncrementJumptableIndex:
-	ld hl, wJumptableIndex
-	inc [hl]
-	ret
+	jp _CardFlip.Increment ; same as there (tools/tailmerge.py)
 
 BillsPC_EndJumptableLoop:
-	ld hl, wJumptableIndex
-	set JUMPTABLE_EXIT_F, [hl]
-	ret
+	jp _CardFlip.Quit ; same as there (tools/tailmerge.py)
 
 _StatsScreenDPad:
 	ld a, [wBillsPC_NumMonsOnScreen]
@@ -845,13 +774,7 @@ MoveMonWithoutMail_DPad_2:
 	jr nz, BillsPC_PressDown
 
 .check_left_right
-	ld a, [hl]
-	and PAD_LEFT
-	jr nz, BillsPC_PressLeft
-	ld a, [hl]
-	and PAD_RIGHT
-	jr nz, BillsPC_PressRight
-	jr BillsPC_JoypadDidNothing
+	jr MoveMonWithoutMail_DPad.check_left_right ; same as there (tools/tailmerge.py)
 
 BillsPC_PressUp:
 	ld hl, wBillsPC_CursorPosition

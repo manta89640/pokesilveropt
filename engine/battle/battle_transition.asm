@@ -477,16 +477,7 @@ StartTrainerBattle_SpeckleToBlack:
 	ret
 
 .done
-	ld a, 1
-	ldh [hBGMapMode], a
-	call DelayFrame
-	call DelayFrame
-	call DelayFrame
-	xor a
-	ldh [hBGMapMode], a
-	ld a, BATTLETRANSITION_FINISH
-	ld [wJumptableIndex], a
-	ret
+	jp StartTrainerBattle_SpinToBlack.end ; same as there (tools/tailmerge.py)
 
 .BlackOutRandomTile:
 .y_loop
@@ -695,9 +686,7 @@ StartTrainerBattle_ZoomToBlack:
 	jr .loop
 
 .done
-	ld a, BATTLETRANSITION_FINISH
-	ld [wJumptableIndex], a
-	ret
+	jp StartTrainerBattle_SineWave.end ; same as there (tools/tailmerge.py)
 
 .boxes:
 MACRO zoombox

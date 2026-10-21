@@ -806,9 +806,7 @@ TradeAnim_ShowFrontpic:
 	jp WaitBGMap
 
 TradeAnim_Wait80:
-	ld c, 80
-	call DelayFrames
-	jp TradeAnim_AdvanceScriptPointer
+	jp TradeAnim_EnterLinkTube2.done ; same as there (tools/tailmerge.py)
 
 ShowPlayerTrademonStats:
 	ld de, wPlayerTrademonSpecies

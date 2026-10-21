@@ -1704,9 +1704,7 @@ BattleCommand_CheckHit:
 	ret z
 
 .not_draining_sub
-	ld a, 1
-	and a
-	ret
+	jr BattleCommand_CheckHit.LockedOn ; same as there (tools/tailmerge.py)
 
 .FlyDigMoves:
 ; Check for moves that can hit underground/flying opponents.
@@ -3093,11 +3091,7 @@ DEF DAMAGE_CAP EQU MAX_DAMAGE - MIN_DAMAGE
 	jr nc, .dont_floor
 	inc [hl]
 .dont_floor
-
-; Returns nz and nc.
-	ld a, 1
-	and a
-	ret
+	jp BattleCommand_CheckHit.LockedOn ; same as there (tools/tailmerge.py)
 
 .CriticalMultiplier:
 	ld a, [wCriticalHit]
@@ -3741,8 +3735,7 @@ BattleCommand_Poison:
 	ret
 
 .failed
-	call AnimateFailedMove
-	jp StdBattleTextbox
+	jp BattleCommand_SleepTarget.fail ; same as there (tools/tailmerge.py)
 
 .apply_poison
 	call AnimateCurrentMove
@@ -4520,9 +4513,7 @@ TryLowerStat:
 	call CalcEnemyStats
 	call BattleCommand_SwitchTurn
 .end
-	ld a, 1
-	and a
-	ret
+	jp BattleCommand_CheckHit.LockedOn ; same as there (tools/tailmerge.py)
 
 BattleCommand_StatUpFailText:
 	ld a, [wFailedMessage]
@@ -4610,9 +4601,7 @@ BattleCommand_AllStatsUp:
 	jp   BattleCommand_StatUpMessage
 
 ResetMiss:
-	xor a
-	ld [wAttackMissed], a
-	ret
+	jp BattleCommand_Counter.capped ; same as there (tools/tailmerge.py)
 
 LowerStat:
 	ld [wLoweredStat], a
@@ -4673,9 +4662,7 @@ LowerStat:
 	call CalcPlayerStats
 
 .finish
-	xor a
-	ld [wFailedMessage], a
-	ret
+	jp BattleCommand_StatDown.Hit ; same as there (tools/tailmerge.py)
 
 .failed
 	inc [hl]
@@ -4728,10 +4715,7 @@ BattleCommand_LowerSubNoAnim:
 	jr z, .PlayerTurn
 	ld hl, DropEnemySub
 .PlayerTurn:
-	xor a
-	ldh [hBGMapMode], a
-	call CallBattleCore
-	jp WaitBGMap
+	jr BattleCommand_RaiseSubNoAnim.PlayerTurn ; same as there (tools/tailmerge.py)
 
 CalcPlayerStats:
 	ld hl, wPlayerAtkLevel
@@ -5302,9 +5286,7 @@ BattleCommand_FakeOut:
 	jr z, FlinchTarget
 
 .fail
-	ld a, 1
-	ld [wAttackMissed], a
-	ret
+	jp BattleCommand_CheckHit.Missed ; same as there (tools/tailmerge.py)
 
 BattleCommand_FlinchTarget:
 	call CheckSubstituteOpp
@@ -6132,8 +6114,7 @@ BattleCommand_Screen:
 	jp StdBattleTextbox
 
 .failed
-	call AnimateFailedMove
-	jr PrintButItFailed
+	jr BattleEffect_ButItFailed ; same as there (tools/tailmerge.py)
 
 PrintDoesntAffect:
 	ld hl, DoesntAffectText
@@ -6251,8 +6232,7 @@ BattleCommand_ArenaTrap:
 	jp StdBattleTextbox
 
 .failed
-	call AnimateFailedMove
-	jp PrintButItFailed
+	jp BattleCommand_Teleport.failed ; same as there (tools/tailmerge.py)
 
 INCLUDE "engine/battle/move_effects/nightmare.asm"
 
@@ -6436,11 +6416,7 @@ BattleCommand_TimeBasedHealContinue:
 	jp StdBattleTextbox
 
 .Full:
-	call AnimateFailedMove
-
-; 'hp is full!'
-	ld hl, HPIsFullText
-	jp StdBattleTextbox
+	jp BattleCommand_Heal.hp_full ; same as there (tools/tailmerge.py)
 
 .Multipliers:
 	dw GetEighthMaxHP
@@ -6467,18 +6443,7 @@ BattleCommand_DoubleMinimizeDamage:
 	jr z, .ok
 	ld hl, wPlayerMinimized
 .ok
-	ld a, [hl]
-	and a
-	ret z
-	ld hl, wCurDamage + 1
-	sla [hl]
-	dec hl
-	rl [hl]
-	ret nc
-	ld a, $ff
-	ld [hli], a
-	ld [hl], a
-	ret
+	jp BattleCommand_Pursuit.ok ; same as there (tools/tailmerge.py)
 
 BattleCommand_SkipSunCharge:
 ; mimicsuncharge

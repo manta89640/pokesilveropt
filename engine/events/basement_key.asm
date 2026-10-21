@@ -23,9 +23,7 @@ _BasementKey:
 	ret
 
 .nope
-	ld a, FALSE
-	ld [wItemEffectSucceeded], a
-	ret
+	jr _CardKey.nope ; same as there (tools/tailmerge.py)
 
 .BasementKeyScript:
 	closetext

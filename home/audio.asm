@@ -294,11 +294,7 @@ FadeToMapMusic::
 	ld [wMapMusic], a
 
 .done
-	pop af
-	pop bc
-	pop de
-	pop hl
-	ret
+	jr PlaySFX.done ; same as there (tools/tailmerge.py)
 
 PlayMapMusic::
 	push hl
@@ -321,11 +317,7 @@ PlayMapMusic::
 	call PlayMusic
 
 .done
-	pop af
-	pop bc
-	pop de
-	pop hl
-	ret
+	jp PlaySFX.done ; same as there (tools/tailmerge.py)
 
 PlayMapMusicBike::
 ; If the player's on a bike, play the bike music instead of the map music

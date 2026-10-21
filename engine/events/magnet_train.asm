@@ -281,9 +281,7 @@ MagnetTrain_Jumptable:
 	dw .TrainArrived
 
 .Next:
-	ld hl, wJumptableIndex
-	inc [hl]
-	ret
+	jp StartTrainerBattle_NextScene ; same as there (tools/tailmerge.py)
 
 .InitPlayerSpriteAnim:
 	ld d, (8 + 2) * TILE_WIDTH + 5

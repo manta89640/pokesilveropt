@@ -588,10 +588,7 @@ Pokedex_UpdateOptionScreen:
 	call Pokedex_InitCursorPosition
 
 .skip_changing_mode
-	call Pokedex_BlackOutBG
-	ld a, DEXSTATE_MAIN_SCR
-	ld [wJumptableIndex], a
-	ret
+	jr Pokedex_UpdateOptionScreen.return_to_main_screen ; same as there (tools/tailmerge.py)
 
 .MenuAction_UnownMode:
 	call Pokedex_BlackOutBG
@@ -639,10 +636,7 @@ Pokedex_UpdateSearchScreen:
 	jp hl
 
 .cancel
-	call Pokedex_BlackOutBG
-	ld a, DEXSTATE_MAIN_SCR
-	ld [wJumptableIndex], a
-	ret
+	jp Pokedex_UpdateOptionScreen.return_to_main_screen ; same as there (tools/tailmerge.py)
 
 .ArrowCursorData:
 	db PAD_UP | PAD_DOWN, 4
@@ -695,10 +689,7 @@ Pokedex_UpdateSearchScreen:
 	ret
 
 .MenuAction_Cancel:
-	call Pokedex_BlackOutBG
-	ld a, DEXSTATE_MAIN_SCR
-	ld [wJumptableIndex], a
-	ret
+	jp Pokedex_UpdateOptionScreen.return_to_main_screen ; same as there (tools/tailmerge.py)
 
 Pokedex_InitSearchResultsScreen:
 	xor a

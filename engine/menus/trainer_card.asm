@@ -168,12 +168,7 @@ TrainerCard_Page2_Joypad:
 	ret
 
 .KantoBadgeCheck: ; unreferenced
-	ld a, [wKantoBadges]
-	and a
-	ret z
-	ld a, TRAINERCARDSTATE_PAGE3_LOADGFX
-	ld [wJumptableIndex], a
-	ret
+	jr TrainerCard_Page1_Joypad.KantoBadgeCheck ; same as there (tools/tailmerge.py)
 
 .Quit:
 	ld a, TRAINERCARDSTATE_QUIT
@@ -210,14 +205,10 @@ TrainerCard_Page3_Joypad:
 	ret
 
 .left
-	ld a, TRAINERCARDSTATE_PAGE2_LOADGFX
-	ld [wJumptableIndex], a
-	ret
+	jp TrainerCard_Page1_Joypad.pressed_right_a ; same as there (tools/tailmerge.py)
 
 .right
-	ld a, TRAINERCARDSTATE_PAGE1_LOADGFX
-	ld [wJumptableIndex], a
-	ret
+	jr TrainerCard_Page2_Joypad.d_left ; same as there (tools/tailmerge.py)
 
 TrainerCard_PrintTopHalfOfCard:
 	hlcoord 0, 0

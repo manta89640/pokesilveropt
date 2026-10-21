@@ -685,10 +685,7 @@ NormalStep:
 	ret
 
 .player
-	ld hl, OBJECT_STEP_TYPE
-	add hl, bc
-	ld [hl], STEP_TYPE_PLAYER_WALK
-	ret
+	jp _RandomWalkContinue.centered ; same as there (tools/tailmerge.py)
 
 TurningStep:
 	call InitStep
@@ -709,10 +706,7 @@ TurningStep:
 	ret
 
 .player
-	ld hl, OBJECT_STEP_TYPE
-	add hl, bc
-	ld [hl], STEP_TYPE_PLAYER_WALK
-	ret
+	jp _RandomWalkContinue.centered ; same as there (tools/tailmerge.py)
 
 SlideStep:
 	call InitStep
@@ -733,10 +727,7 @@ SlideStep:
 	ret
 
 .player
-	ld hl, OBJECT_STEP_TYPE
-	add hl, bc
-	ld [hl], STEP_TYPE_PLAYER_WALK
-	ret
+	jp _RandomWalkContinue.centered ; same as there (tools/tailmerge.py)
 
 JumpStep:
 	call InitStep

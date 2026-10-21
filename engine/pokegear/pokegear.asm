@@ -580,9 +580,7 @@ PokegearMap_ContinueMap:
 	jp Pokegear_SwitchPage
 
 .cancel
-	ld hl, wJumptableIndex
-	set JUMPTABLE_EXIT_F, [hl]
-	ret
+	jp PokegearClock_Joypad.quit ; same as there (tools/tailmerge.py)
 
 .DPad:
 	ld hl, hJoyLast
@@ -757,9 +755,7 @@ PokegearRadio_Joypad:
 	jp Pokegear_SwitchPage
 
 .cancel
-	ld hl, wJumptableIndex
-	set JUMPTABLE_EXIT_F, [hl]
-	ret
+	jp PokegearClock_Joypad.quit ; same as there (tools/tailmerge.py)
 
 PokegearPhone_Init:
 	ld hl, wJumptableIndex
@@ -813,9 +809,7 @@ PokegearPhone_Joypad:
 	jp Pokegear_SwitchPage
 
 .b
-	ld hl, wJumptableIndex
-	set JUMPTABLE_EXIT_F, [hl]
-	ret
+	jp PokegearClock_Joypad.quit ; same as there (tools/tailmerge.py)
 
 .a
 	ld hl, wPhoneList

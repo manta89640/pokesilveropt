@@ -413,8 +413,7 @@ GameboyCheck:
 .cgb
 	ld a, GBCHECK_CGB
 .done
-	ld [wScriptVar], a
-	ret
+	jr SnorlaxAwake.done ; same as there (tools/tailmerge.py)
 
 FadeOutMusic:
 	ld a, LOW(MUSIC_NONE)

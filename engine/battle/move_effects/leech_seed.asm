@@ -30,8 +30,7 @@ BattleCommand_LeechSeed:
 	jp StdBattleTextbox
 
 .grass
-	call AnimateFailedMove
-	jp PrintDoesntAffect
+	jp BattleCommand_Paralyze.didnt_affect ; same as there (tools/tailmerge.py)
 
 .evaded
 	call AnimateFailedMove
