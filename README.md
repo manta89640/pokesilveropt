@@ -51,7 +51,7 @@ Savings by step (Silver, bytes): text dictionary 120,661; dead code 18,254; LZ 1
 
 - `tools/verify_text.py original.gbc pokesilver.gbc` checks every compressed string, 5,276 in all: texts, Pokédex entries, move and item descriptions, item, move and trainer class names, trainer names and parties, landmark names, and the credits.
 - `tools/tests/verify_music.py` follows every channel of every song, sound effect and cry in a build and in the original ROM, through calls, loops and jumps, and checks that they play the same notes and commands. `tools/tests/music.py` plays them all in an emulator and hashes the sound engine's channel state at each update, to compare with the original ROM.
-- `tools/tests/maps.py` loads all 368 maps and checks that their blocks, with the strips of connected maps, the screen and the sprite tiles match the original ROM. `tools/tests/verify_sprites.py` checks the tiles of every overworld sprite.
+- `tools/tests/maps.py` loads all 368 maps and checks that the screen and the sprite tiles match the original ROM, and outdoor maps' blocks, with the strips of connected maps. (Indoor tilesets' blocks are renumbered.) `tools/tests/verify_sprites.py` checks the tiles of every overworld sprite.
 - The changes were also played in an emulator (PyBoy) next to the original ROMs with the scenarios in `tools/tests`: the intro and new game, Elm's lab, menus, every Pokédex entry, the Pack, the Pokégear phone and radio, a Pokémon Center, a Mart, wild and trainer battles, Substitute, the Hall of Fame and credits, and the debug room. Apart from timing, the screens match. See [tools/tests/README.md](tools/tests/README.md).
 
 
