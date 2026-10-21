@@ -296,6 +296,14 @@ $(eval $(call padded_sprite,gfx/sprites/big_onix,gfx/sprites/n64 gfx/sprites/sud
 $(eval $(call padded_sprite,gfx/sprites/sudowoodo,gfx/sprites/surf))
 $(eval $(call padded_sprite,gfx/sprites/old_link_receptionist,gfx/sprites/rock gfx/sprites/boulder gfx/sprites/snes gfx/sprites/famicom gfx/sprites/fruit_tree))
 
+# Pack_InitGFX loads $60 tiles of the pack menu, which go on into the pack
+# pictures; DrawPackGFX loads one 15-tile picture per pocket.
+gfx/pack/pack_menu_padded.2bpp: gfx/pack/pack_menu.2bpp gfx/pack/pack.2bpp ; cat $^ | head -c 1536 > $@
+gfx/pack/pack_key_items.2bpp: gfx/pack/pack.2bpp ; head -c 240 $< > $@
+gfx/pack/pack_items.2bpp: gfx/pack/pack.2bpp ; tail -c +241 $< | head -c 240 > $@
+gfx/pack/pack_tmhm.2bpp: gfx/pack/pack.2bpp ; tail -c +481 $< | head -c 240 > $@
+gfx/pack/pack_balls.2bpp: gfx/pack/pack.2bpp ; tail -c +721 $< | head -c 240 > $@
+
 gfx/new_game/shrink1.2bpp: RGBGFXFLAGS += --columns
 gfx/new_game/shrink2.2bpp: RGBGFXFLAGS += --columns
 

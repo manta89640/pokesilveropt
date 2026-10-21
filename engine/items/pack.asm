@@ -1150,17 +1150,17 @@ DrawPackGFX:
 	add hl, de
 	add hl, de
 	ld a, [hli]
-	ld e, a
-	ld d, [hl]
-	ld hl, vTiles2 tile $50
+	ld h, [hl]
+	ld l, a
+	ld de, vTiles2 tile $50
 	lb bc, BANK(PackGFX), 15
-	jp Request2bpp
+	jp DecompressRequest2bpp
 
 PackGFXPointers:
-	dw PackGFX + (15 tiles) * 1 ; ITEM_POCKET
-	dw PackGFX + (15 tiles) * 3 ; BALL_POCKET
-	dw PackGFX + (15 tiles) * 0 ; KEY_ITEM_POCKET
-	dw PackGFX + (15 tiles) * 2 ; TM_HM_POCKET
+	dw PackItemsGFX    ; ITEM_POCKET
+	dw PackBallsGFX    ; BALL_POCKET
+	dw PackKeyItemsGFX ; KEY_ITEM_POCKET
+	dw PackTMHMGFX     ; TM_HM_POCKET
 
 Pack_InterpretJoypad:
 	ld hl, wMenuJoypad
@@ -1253,9 +1253,8 @@ Pack_InitGFX:
 	call DisableLCD
 	ld hl, PackMenuGFX
 	ld de, vTiles2
-	ld bc, $60 tiles
 	ld a, BANK(PackMenuGFX)
-	call FarCopyBytes
+	call FarDecompress
 ; Background
 	hlcoord 0, 1
 	ld bc, 11 * SCREEN_WIDTH
@@ -1482,6 +1481,10 @@ PackEmptyText:
 
 
 PackMenuGFX:
-INCBIN "gfx/pack/pack_menu.2bpp"
-PackGFX:
-INCBIN "gfx/pack/pack.2bpp"
+; Pack_InitGFX loads $60 tiles, which go on into the first pack picture
+INCBIN "gfx/pack/pack_menu_padded.2bpp.lz"
+PackGFX: ; used only for BANK(PackGFX)
+PackKeyItemsGFX: INCBIN "gfx/pack/pack_key_items.2bpp.lz"
+PackItemsGFX:    INCBIN "gfx/pack/pack_items.2bpp.lz"
+PackTMHMGFX:     INCBIN "gfx/pack/pack_tmhm.2bpp.lz"
+PackBallsGFX:    INCBIN "gfx/pack/pack_balls.2bpp.lz"
