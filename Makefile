@@ -90,6 +90,7 @@ gold_vc:      pokegold.patch
 silver_vc:    pokesilver.patch
 
 clean: tidy
+	$(RM) maps/*.blk.lz
 	find gfx \
 	     \( -iname "*.[12]bpp" \
 	        -o -iname "*.lz" \

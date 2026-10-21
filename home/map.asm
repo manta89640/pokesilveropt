@@ -1093,8 +1093,16 @@ LoadBlockData::
 	jp RunMapCallback
 
 ChangeMap::
-	ldh a, [hROMBank]
-	push af
+; Map blocks are compressed; decompress them to sScratch first.
+	ld a, BANK(sScratch)
+	call OpenSRAM
+	ld hl, wMapBlocksPointer
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld a, [wMapBlocksBank]
+	ld de, sScratch
+	call FarDecompress
 
 	ld hl, wOverworldMapBlocks
 	ld a, [wMapWidth]
@@ -1108,13 +1116,7 @@ ChangeMap::
 	add hl, bc
 	ld c, 3
 	add hl, bc
-	ld a, [wMapBlocksBank]
-	rst Bankswitch
-
-	ld a, [wMapBlocksPointer]
-	ld e, a
-	ld a, [wMapBlocksPointer + 1]
-	ld d, a
+	ld de, sScratch
 	ld a, [wMapHeight]
 	ld b, a
 .row
@@ -1136,12 +1138,13 @@ ChangeMap::
 .okay
 	dec b
 	jr nz, .row
-
-	pop af
-	rst Bankswitch
-	ret
+	jp CloseSRAM
 
 FillMapConnections::
+; Each connected map's blocks are decompressed to sScratch in turn.
+	ld a, BANK(sScratch)
+	call OpenSRAM
+
 ; North
 	ld a, [wNorthConnectedMapGroup]
 	cp $ff
@@ -1149,7 +1152,7 @@ FillMapConnections::
 	ld b, a
 	ld a, [wNorthConnectedMapNumber]
 	ld c, a
-	call GetAnyMapBlocksBank
+	call DecompressAnyMapBlocks
 
 	ld a, [wNorthConnectionStripPointer]
 	ld l, a
@@ -1172,7 +1175,7 @@ FillMapConnections::
 	ld b, a
 	ld a, [wSouthConnectedMapNumber]
 	ld c, a
-	call GetAnyMapBlocksBank
+	call DecompressAnyMapBlocks
 
 	ld a, [wSouthConnectionStripPointer]
 	ld l, a
@@ -1195,7 +1198,7 @@ FillMapConnections::
 	ld b, a
 	ld a, [wWestConnectedMapNumber]
 	ld c, a
-	call GetAnyMapBlocksBank
+	call DecompressAnyMapBlocks
 
 	ld a, [wWestConnectionStripPointer]
 	ld l, a
@@ -1214,11 +1217,11 @@ FillMapConnections::
 .East:
 	ld a, [wEastConnectedMapGroup]
 	cp $ff
-	ret z
+	jp z, CloseSRAM
 	ld b, a
 	ld a, [wEastConnectedMapNumber]
 	ld c, a
-	call GetAnyMapBlocksBank
+	call DecompressAnyMapBlocks
 
 	ld a, [wEastConnectionStripPointer]
 	ld l, a
@@ -1233,9 +1236,7 @@ FillMapConnections::
 	ld a, [wEastConnectedMapWidth]
 	ldh [hConnectionStripLength], a
 	call FillEastConnectionStrip
-
-.Done:
-	ret
+	jp CloseSRAM
 
 FillNorthConnectionStrip::
 FillSouthConnectionStrip::
@@ -2402,8 +2403,8 @@ GetMapScriptsBank::
 	ld a, [wMapScriptsBank]
 	ret
 
-GetAnyMapBlocksBank::
-; Return the blockdata bank for group b map c.
+DecompressAnyMapBlocks::
+; Decompress the blocks of group b map c to sScratch, which must be open.
 	push hl
 	push de
 	push bc
@@ -2420,11 +2421,18 @@ GetAnyMapBlocksBank::
 	call GetAnyMapField
 	pop hl
 
-	ld de, MAP_MAPATTRIBUTES ; blockdata bank
-	add hl, de
+	inc hl
+	inc hl
+	inc hl ; blocks bank, then blocks pointer
 	ld a, c
 	call GetFarByte
-	rst Bankswitch
+	push af
+	inc hl
+	ld a, c
+	call GetFarWord
+	pop af
+	ld de, sScratch
+	call FarDecompress
 
 	pop bc
 	pop de

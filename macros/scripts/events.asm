@@ -767,7 +767,7 @@ ENDM
 	const changemapblocks_command ; $78
 MACRO changemapblocks
 	db changemapblocks_command
-	dba \1 ; map_data_pointer
+	dba \1 ; map_data_pointer (compressed blocks)
 ENDM
 
 	const changeblock_command ; $79

@@ -17,6 +17,14 @@ for s in continue pokedex pack pokegear battle; do
 done
 ```
 
+`maps.py` enters every map from the save and prints a hash of its blocks (with the strips of connected maps), so two ROMs can be compared map by map:
+
+```sh
+tools/tests/maps.py original/pokesilver.gbc test_output/save/save.ram > original.txt
+tools/tests/maps.py pokesilver.gbc test_output/save/save.ram > new.txt
+diff original.txt new.txt
+```
+
 `compare.py` writes the differing screenshots side by side to `test_output/<scenario>_diff.png`. Changed code can shift timing by a frame, so expect some differences in partly printed text, blinking cursors, wandering NPCs and random battles; look at the sheet. `intro.txt` matches exactly.
 
 Separately, `tools/verify_text.py original.gbc new.gbc` checks every text in the ROM without an emulator.

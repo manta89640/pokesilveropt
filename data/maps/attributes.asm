@@ -105,7 +105,7 @@ MACRO connection
 		endc
 
 		map_id \3
-		dw \2_Blocks + _blk
+		dw sScratch + _blk ; decompressed by FillMapConnections
 		dw wOverworldMapBlocks + _map
 		db _len - _src
 		db \3_WIDTH
