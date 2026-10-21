@@ -1521,21 +1521,6 @@ endr
 	dbsprite 19, 4, 0, 7, $07, 0
 	db -1
 
-BillsPC_FillBox: ; unreferenced
-.row
-	push bc
-	push hl
-.col
-	ld [hli], a
-	dec c
-	jr nz, .col
-	pop hl
-	ld bc, SCREEN_WIDTH
-	add hl, bc
-	pop bc
-	dec b
-	jr nz, .row
-	ret
 
 BillsPC_CheckSpaceInDestination:
 ; If moving within a box, no need to be here.
@@ -2194,7 +2179,6 @@ PCString_ReleasedPKMN: db "Released <PK><MN>.@"
 PCString_Bye: db "Bye,@"
 PCString_Stored: db "Stored @"
 PCString_Got: db "Got @"
-PCString_Non: db "Non.@" ; unreferenced
 PCString_BoxFull: db "The BOX is full.@"
 PCString_PartyFull: db "The party's full!@"
 PCString_NoReleasingEGGS: db "No releasing EGGS!@"

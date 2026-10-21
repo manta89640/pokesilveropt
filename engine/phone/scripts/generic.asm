@@ -83,23 +83,12 @@ Phone_GenericCall_Male_SkipMon:
 	promptbutton
 	sjump PhoneScript_SeeYouLater
 
-Phone_GenericCall_Female_SkipMon: ; unreferenced
-	special RandomPhoneMon
-	scall PhoneScript_Random2
-	ifequal 0, Phone_DressedUp_Female_SkipMon
-	writetext PhoneFemaleTopShapeText
-	promptbutton
-	sjump PhoneScript_ByeBye
 
 Phone_LookingAwesome_Male_SkipMon:
 	writetext PhoneMaleLookingAwesomeText
 	promptbutton
 	sjump PhoneScript_ByeBye
 
-Phone_DressedUp_Female_SkipMon:
-	writetext PhoneFemaleDressedUpText
-	promptbutton
-	sjump PhoneScript_ByeBye
 
 Phone_GenericCall_Male:
 	special RandomPhoneMon

@@ -44,14 +44,6 @@ FlowerShopFloriaScript:
 	closetext
 	end
 
-FlowerShopShelf1: ; unreferenced
-	jumpstd PictureBookshelfScript
-
-FlowerShopShelf2: ; unreferenced
-	jumpstd MagazineBookshelfScript
-
-FlowerShopRadio: ; unreferenced
-	jumpstd Radio2Script
 
 GoldenrodFlowerShopTeacherBetterThanWhitneyText:
 	text "Oh, you're better"

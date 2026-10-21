@@ -127,20 +127,6 @@ Route40_StepRightUp6Movement: ; unreferenced
 	step UP
 	step_end
 
-Route40_StepUp5Movement: ; unreferenced
-	step UP
-	step UP
-	step UP
-	step UP
-	step UP
-	step_end
-
-Route40_StepUp4Movement: ; unreferenced
-	step UP
-	step UP
-	step UP
-	step UP
-	step_end
 
 SwimmermSimonSeenText:
 	text "You have to warm"

@@ -95,8 +95,6 @@ ManiaScript:
 	closetext
 	end
 
-ManiasHouseUnusedBookshelf: ; unreferenced
-	jumpstd PictureBookshelfScript
 
 ManiaText_AskLookAfterShuckle:
 	text "I, I'm in shock!"

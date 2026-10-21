@@ -191,24 +191,6 @@ ClearActorHud:
 	call ClearBox
 	ret
 
-PlaceWindowOverBattleTextbox: ; unreferenced
-	xor a
-	ldh [hBGMapMode], a
-	; bgcoord hBGMapAddress, 0, 20
-	ld a, LOW(vBGMap0 + 20 * TILEMAP_WIDTH)
-	ldh [hBGMapAddress], a
-	ld a, HIGH(vBGMap0 + 20 * TILEMAP_WIDTH)
-	ldh [hBGMapAddress + 1], a
-	call WaitBGMap2
-	ld a, (SCREEN_HEIGHT - TEXTBOX_HEIGHT) * TILE_WIDTH
-	ldh [hWY], a
-	; bgcoord hBGMapAddress, 0, 0
-	xor a ; LOW(vBGMap0)
-	ldh [hBGMapAddress], a
-	ld a, HIGH(vBGMap0)
-	ldh [hBGMapAddress + 1], a
-	call BattleAnimDelayFrame
-	ret
 
 BattleAnim_ClearOAM:
 	ld a, [wBattleAnimFlags]

@@ -113,16 +113,6 @@ RefreshPlayerCoords:
 	ret nz
 	ret
 
-SpawnObject1: ; unreferenced
-	ld a, 1
-	ld hl, UnusedObject1Template
-	call CopyPlayerObjectTemplate
-	ld b, 1
-	call PlayerSpawn_ConvertCoords
-	ret
-
-UnusedObject1Template:
-	object_event -4, -4, SPRITE_CHRIS, SPRITEMOVEDATA_12, 15, 15, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, 0, -1
 
 CopyObjectStruct::
 	call CheckObjectMask

@@ -160,10 +160,6 @@ _RodNothingText::
 	text "Not even a nibble!"
 	prompt
 
-_UnusedNothingHereText::
-	text "Looks like there's"
-	line "nothing here."
-	prompt
 
 _CantGetOffBikeText::
 	text "You can't get off"
@@ -271,9 +267,6 @@ _AnEggCantHoldAnItemText::
 	line "an item."
 	prompt
 
-_PackNoItemText::
-	text "No items."
-	done
 
 _AskThrowAwayText::
 	text "Throw away how"
@@ -328,10 +321,6 @@ _PackEmptyText::
 	text_start
 	done
 
-_YouCantUseItInABattleText::
-	text "You can't use it"
-	line "in a battle."
-	prompt
 
 _ActorNameText::
 	text "<USER>@@"
@@ -571,20 +560,6 @@ _PCMonHoldingMailText::
 	line "MAIL."
 	prompt
 
-_PCNoSingleMonText::
-	text "You don't have a"
-	line "single #MON!"
-	prompt
-
-_PCCantDepositLastMonText::
-	text "You can't deposit"
-	line "your last #MON!"
-	prompt
-
-_PCCantTakeText::
-	text "You can't take any"
-	line "more #MON."
-	prompt
 
 _ContestCaughtMonText::
 	text "Caught @"
@@ -1315,31 +1290,17 @@ _MoveMonWOMailSaveText::
 	cont "will be saved. OK?"
 	done
 
-_WindowAreaExceededErrorText:: ; unreferenced
-	text "The window save"
-	line "area was exceeded."
-	done
 
 _WindowPoppingErrorText::
 	text "No windows avail-"
 	line "able for popping."
 	done
 
-_CorruptedEventText:: ; unreferenced
-	text "Corrupted event!"
-	prompt
 
 _ObjectEventText::
 	text "Object event."
 	done
 
-_BGEventText::
-	text "BG event"
-	done
-
-_CoordinatesEventText::
-	text "Coordinates event"
-	done
 
 _ReceivedItemText::
 	text "<PLAYER> received"

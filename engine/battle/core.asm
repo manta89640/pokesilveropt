@@ -1852,24 +1852,6 @@ GetMaxHP:
 	ld c, a
 	ret
 
-GetHalfHP: ; unreferenced
-	ld hl, wBattleMonHP
-	ldh a, [hBattleTurn]
-	and a
-	jr z, .ok
-	ld hl, wEnemyMonHP
-.ok
-	ld a, [hli]
-	ld b, a
-	ld a, [hli]
-	ld c, a
-	srl b
-	rr c
-	ld a, [hli]
-	ld [wHPBuffer1 + 1], a
-	ld a, [hl]
-	ld [wHPBuffer1], a
-	ret
 
 CheckUserHasEnoughHP:
 	ld hl, wBattleMonHP + 1
@@ -6265,16 +6247,6 @@ CheckUnownLetter:
 
 INCLUDE "data/wild/unlocked_unowns.asm"
 
-SwapBattlerLevels: ; unreferenced
-	push bc
-	ld a, [wBattleMonLevel]
-	ld b, a
-	ld a, [wEnemyMonLevel]
-	ld [wBattleMonLevel], a
-	ld a, b
-	ld [wEnemyMonLevel], a
-	pop bc
-	ret
 
 BattleWinSlideInEnemyTrainerFrontpic:
 	xor a
@@ -6626,19 +6598,6 @@ _LoadHPBar:
 	callfar LoadHPBar
 	ret
 
-LoadHPExpBarGFX: ; unreferenced
-	ld de, EnemyHPBarBorderGFX
-	ld hl, vTiles2 tile $6c
-	lb bc, BANK(EnemyHPBarBorderGFX), 4
-	call Get1bpp
-	ld de, HPExpBarBorderGFX
-	ld hl, vTiles2 tile $73
-	lb bc, BANK(HPExpBarBorderGFX), 6
-	call Get1bpp
-	ld de, ExpBarGFX
-	ld hl, vTiles2 tile $55
-	lb bc, BANK(ExpBarGFX), 8
-	jp Get2bpp
 
 EmptyBattleTextbox:
 	ld hl, .empty
@@ -7512,37 +7471,6 @@ ComeBackText:
 	text_far _ComeBackText
 	text_end
 
-HandleSafariAngerEatingStatus: ; unreferenced
-	ld hl, wSafariMonEating
-	ld a, [hl]
-	and a
-	jr z, .angry
-	dec [hl]
-	ld hl, BattleText_WildMonIsEating
-	jr .finish
-
-.angry
-	dec hl
-	assert wSafariMonEating - 1 == wSafariMonAngerCount
-	ld a, [hl]
-	and a
-	ret z
-	dec [hl]
-	ld hl, BattleText_WildMonIsAngry
-	jr nz, .finish
-	push hl
-	ld a, [wEnemyMonSpecies]
-	ld [wCurSpecies], a
-	call GetBaseData
-	ld a, [wBaseCatchRate]
-	ld [wEnemyMonCatchRate], a
-	pop hl
-
-.finish
-	push hl
-	call SafeLoadTempTilemapToTilemap
-	pop hl
-	jp StdBattleTextbox
 
 FillInExpBar:
 	push hl
@@ -7911,56 +7839,6 @@ InitEnemyWildmon:
 	predef PlaceGraphic
 	ret
 
-FillEnemyMovesFromMoveIndicesBuffer: ; unreferenced
-	ld hl, wEnemyMonMoves
-	ld de, wListMoves_MoveIndicesBuffer
-	ld b, NUM_MOVES
-.loop
-	ld a, [de]
-	inc de
-	ld [hli], a
-	and a
-	jr z, .clearpp
-
-	push bc
-	push hl
-
-	push hl
-	dec a
-	ld hl, Moves + MOVE_PP
-	ld bc, MOVE_LENGTH
-	call AddNTimes
-	ld a, BANK(Moves)
-	call GetFarByte
-	pop hl
-
-	ld bc, wEnemyMonPP - (wEnemyMonMoves + 1)
-	add hl, bc
-	ld [hl], a
-
-	pop hl
-	pop bc
-
-	dec b
-	jr nz, .loop
-	ret
-
-.clear
-	xor a
-	ld [hli], a
-
-.clearpp
-	push bc
-	push hl
-	ld bc, wEnemyMonPP - (wEnemyMonMoves + 1)
-	add hl, bc
-	xor a
-	ld [hl], a
-	pop hl
-	pop bc
-	dec b
-	jr nz, .clear
-	ret
 
 ExitBattle:
 	call IsLinkBattle
@@ -8041,9 +7919,6 @@ CheckPayDay:
 	call StdBattleTextbox
 	ret
 
-PlayerPickedUpPayDayMoney: ; unreferenced
-	text_far _PlayerPickedUpPayDayMoney
-	text_end
 
 ShowLinkBattleParticipantsAfterEnd:
 	ld a, [wCurOTMon]

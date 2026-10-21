@@ -385,13 +385,6 @@ AnimateTileset::
 	rst Bankswitch
 	ret
 
-Video_DummyFunction:: ; unreferenced
-	ret
-
-EnableSpriteDisplay:: ; unreferenced
-	ld hl, rLCDC
-	set B_LCDC_OBJS, [hl]
-	ret
 
 FillBGMap0WithBlack::
 	nop

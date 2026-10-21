@@ -39,23 +39,6 @@ GoldenrodDeptStore2FDirectory:
 GoldenrodDeptStore2FElevatorButton:
 	jumpstd ElevatorButtonScript
 
-GoldenrodDeptStore2FUnusedText1: ; unreferenced
-	text "We intend to sell"
-	line "items for #MON"
-	cont "to hold."
-
-	para "This is a free"
-	line "gift. Have a #-"
-	cont "MON hold it."
-	done
-
-GoldenrodDeptStore2FUnusedText2: ; unreferenced
-	text "Giving #MON"
-	line "items to hold dur-"
-	cont "ing battle could "
-	cont "tip the scales in"
-	cont "your favor."
-	done
 
 GoldenrodDeptStore2FYoungsterText:
 	text "#GEAR can store"

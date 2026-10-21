@@ -33,13 +33,6 @@ HandleCmdQueue::
 	jr nz, .loop
 	ret
 
-GetNthCmdQueueEntry: ; unreferenced
-	ld hl, wCmdQueue
-	ld bc, CMDQUEUE_ENTRY_SIZE
-	call AddNTimes
-	ld b, h
-	ld c, l
-	ret
 
 WriteCmdQueue::
 	push bc
@@ -148,11 +141,6 @@ CmdQueues_IncAnonJumptableIndex:
 	inc [hl]
 	ret
 
-CmdQueues_DecAnonJumptableIndex: ; unreferenced
-	ld hl, CMDQUEUE_JUMPTABLE_INDEX
-	add hl, bc
-	dec [hl]
-	ret
 
 CmdQueue_Null:
 	ret

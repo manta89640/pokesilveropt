@@ -1593,9 +1593,6 @@ RodNothingText:
 	text_far _RodNothingText
 	text_end
 
-UnusedNothingHereText: ; unreferenced
-	text_far _UnusedNothingHereText
-	text_end
 
 BikeFunction:
 	call .TryBike
@@ -1699,9 +1696,6 @@ Script_GetOnBike_Register:
 	special UpdatePlayerSprite
 	end
 
-Overworld_DummyFunction: ; unreferenced
-	nop
-	ret
 
 Script_GetOffBike:
 	refreshmap

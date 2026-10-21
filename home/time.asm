@@ -1,7 +1,5 @@
 ; Functions relating to the timer interrupt and the real-time-clock.
 
-Timer:: ; unreferenced
-	reti
 
 LatchClock::
 ; latch clock counter data
@@ -249,16 +247,6 @@ SetClock::
 	call CloseSRAM ; unlatch clock, disable clock r/w
 	ret
 
-ClearRTCStatus:: ; unreferenced
-; clear sRTCStatusFlags
-	xor a
-	push af
-	ld a, BANK(sRTCStatusFlags)
-	call OpenSRAM
-	pop af
-	ld [sRTCStatusFlags], a
-	call CloseSRAM
-	ret
 
 RecordRTCStatus::
 ; append flags to sRTCStatusFlags

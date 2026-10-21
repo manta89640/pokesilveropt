@@ -125,9 +125,6 @@ SpeechTextbox::
 	ld c, TEXTBOX_INNERW
 	jp Textbox
 
-GameFreakText:: ; unreferenced
-	text "ゲームフりーク！" ; "GAMEFREAK!"
-	done
 
 RadioTerminator::
 	ld hl, .stop
@@ -166,8 +163,6 @@ PlaceNextChar::
 	pop hl
 	ret
 
-DummyChar:: ; unreferenced
-	pop de
 	; fallthrough
 
 NextChar::
@@ -643,12 +638,6 @@ PlaceFarString::
 	rst Bankswitch
 	ret
 
-PokeFluteTerminator:: ; unreferenced
-	ld hl, .stop
-	ret
-
-.stop:
-	text_end
 
 PrintTextboxTextAt::
 	ld a, [wTextboxFlags]
@@ -915,17 +904,6 @@ TextCommand_SOUND::
 	pop bc
 	ret
 
-TextCommand_CRY:: ; unreferenced
-; play a pokemon cry
-	push de
-	ld e, [hl]
-	inc hl
-	ld d, [hl]
-	call PlayMonCry
-	pop de
-	pop hl
-	pop bc
-	ret
 
 TextSFX::
 	dbw TX_SOUND_DEX_FANFARE_50_79,  SFX_DEX_FANFARE_50_79

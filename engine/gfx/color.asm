@@ -176,35 +176,6 @@ Intro_LoadAllPal0:
 	ld hl, BlkPacket_AllPal0
 	jp PushSGBPals
 
-Intro_LoadBetaIntroVenusaurPalettes: ; unreferenced
-	call CheckCGB
-	jr nz, .cgb
-	ldh a, [hSGB]
-	and a
-	ret z
-	ld hl, PalPacket_BetaIntroVenusaur
-	jp PushSGBPals
-
-.cgb
-	ld de, wOBPals1
-	ld a, PREDEFPAL_BETA_INTRO_VENUSAUR
-	call GetPredefPal
-	jp LoadHLPaletteIntoDE
-
-Intro_LoadPackPalettes: ; unreferenced
-	call CheckCGB
-	jr nz, .cgb
-	ldh a, [hSGB]
-	and a
-	ret z
-	ld hl, PalPacket_Pack
-	jp PushSGBPals
-
-.cgb
-	ld de, wOBPals1
-	ld a, PREDEFPAL_PACK
-	call GetPredefPal
-	jp LoadHLPaletteIntoDE
 
 Intro_LoadMonPalette:
 	call CheckCGB
@@ -238,35 +209,6 @@ Intro_LoadMonPalette:
 	call LoadPalette_White_Col1_Col2_Black
 	ret
 
-LoadBetaPokerPalettes: ; unreferenced
-	ldh a, [hCGB]
-	and a
-	jr nz, .cgb
-	ld hl, wBetaPokerSGBPals
-	jp PushSGBPals
-
-.cgb
-	ld a, [wBetaPokerSGBCol]
-	ld c, a
-	ld a, [wBetaPokerSGBRow]
-	hlcoord 0, 0, wAttrmap
-	ld de, SCREEN_WIDTH
-.loop
-	and a
-	jr z, .done
-	add hl, de
-	dec a
-	jr .loop
-
-.done
-	ld b, 0
-	add hl, bc
-	lb bc, 6, 4
-	ld a, [wBetaPokerSGBAttr]
-	and $3
-	call FillBoxCGB
-	call CopyTilemapAtOnce
-	ret
 
 ApplyMonOrTrainerPals:
 	call CheckCGB
@@ -641,25 +583,6 @@ GetMonPalettePointer:
 	call _GetMonPalettePointer
 	ret
 
-CGBCopyBattleObjectPals: ; unreferenced
-; dummied out
-	ret
-	call CheckCGB
-	ret z
-	ld hl, BattleObjectPals
-	ld a, OBPI_AUTOINC | $10
-	ldh [rOBPI], a
-	ld c, 6 palettes
-.loop
-	ld a, [hli]
-	ldh [rOBPD], a
-	dec c
-	jr nz, .loop
-	ld hl, BattleObjectPals
-	ld de, wOBPals1 palette PAL_BATTLE_OB_GRAY
-	ld bc, 2 palettes
-	call CopyBytes
-	ret
 
 BattleObjectPals:
 INCLUDE "gfx/battle_anims/battle_anims.pal"
@@ -869,19 +792,6 @@ _InitSGBBorderPals:
 	dw DataSndPacket7
 	dw DataSndPacket8
 
-UpdateSGBBorder: ; unreferenced
-	di
-	xor a
-	ldh [rJOYP], a
-	ld hl, MaskEnFreezePacket
-	call _PushSGBPals
-	call PushSGBBorder
-	call SGBDelayCycles
-	call SGB_ClearVRAM
-	ld hl, MaskEnCancelPacket
-	call _PushSGBPals
-	ei
-	ret
 
 PushSGBBorder:
 	call .LoadSGBBorderPointers

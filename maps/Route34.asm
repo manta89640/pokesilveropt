@@ -372,8 +372,6 @@ TrainerCooltrainerfKate:
 	closetext
 	end
 
-Route34IlexForestSign: ; unreferenced
-	jumptext Route34IlexForestSignText
 
 Route34Sign:
 	jumptext Route34SignText
@@ -602,10 +600,6 @@ CooltrainerfKateAfterText:
 	line "startled us."
 	done
 
-Route34IlexForestSignText:
-	text "ILEX FOREST"
-	line "Through the Gate"
-	done
 
 Route34SignText:
 	text "ROUTE 34"

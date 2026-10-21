@@ -386,10 +386,6 @@ CooltrainerfKellyAfterBattleText:
 	cont "to harm #MON."
 	done
 
-Route45DummyText: ; unreferenced
-	text "I'm pretty good at"
-	line "#MON too."
-	done
 
 Route45SignText:
 	text "ROUTE 45"

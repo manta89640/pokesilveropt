@@ -65,22 +65,6 @@ ReleaseTheBeasts:
 	special InitRoamMons
 	end
 
-UnusedEnteiScript: ; unreferenced
-	opentext
-	writetext UnusedEnteiText
-	cry ENTEI
-	waitbutton
-	closetext
-	loadwildmon ENTEI, 40
-	startbattle
-	ifequal DRAW, .draw
-	disappear BURNEDTOWERB1F_ENTEI1
-	reloadmapafterbattle
-	end
-.draw
-	reloadmapafterbattle
-	disappear BURNEDTOWERB1F_ENTEI1
-	end
 
 BurnedTowerB1FHPUp:
 	itemball HP_UP
@@ -124,9 +108,6 @@ BurnedTowerSuicuneMovement:
 	remove_sliding
 	step_end
 
-UnusedEnteiText:
-	text "ENTEI: Bufuu!"
-	done
 
 BurnedTowerB1F_MapEvents:
 	db 0, 0 ; filler

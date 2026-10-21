@@ -163,8 +163,6 @@ BlankBGMap::
 	ld a, ' '
 	jr FillBGMap
 
-FillBGMap_l:: ; unreferenced
-	ld a, l
 	; fallthrough
 
 FillBGMap::

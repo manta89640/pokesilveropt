@@ -121,8 +121,6 @@ MahoganyGymSign:
 MahoganyTownPokecenterSign:
 	jumpstd PokecenterSignScript
 
-MahoganyTownMartSign: ; unreferenced
-	jumpstd MartSignScript
 
 MahoganyTownPlayerStepLeftMovement:
 	step LEFT

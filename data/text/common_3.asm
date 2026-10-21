@@ -78,13 +78,6 @@ _PhoneJustTalkToThemText::
 	line "that person!"
 	done
 
-_PhoneThankYouText::
-	text "Thank you!"
-	done
-
-_SpaceSpaceColonText:: ; unreferenced
-	text "  :"
-	done
 
 _PasswordAskResetText::
 	text "Password OK."
@@ -224,18 +217,6 @@ _CardFlipDarnText::
 	text "Darn…"
 	done
 
-_BallDodgedText::
-	text "It dodged the"
-	line "thrown BALL!"
-
-	para "This #MON"
-	line "can't be caught!"
-	prompt
-
-_BallMissedText::
-	text "You missed the"
-	line "#MON!"
-	prompt
 
 _BallBrokeFreeText::
 	text "Oh no! The #MON"
@@ -393,10 +374,6 @@ _ItemOakWarningText::
 	cont "time to use that!"
 	prompt
 
-_ItemBelongsToSomeoneElseText::
-	text "That belongs to"
-	line "someone else!"
-	prompt
 
 _ItemWontHaveEffectText::
 	text "It won't have any"
@@ -412,17 +389,6 @@ _BallDontBeAThiefText::
 	text "Don't be a thief!"
 	prompt
 
-_NoCyclingText::
-	text "Cycling isn't"
-	line "allowed here."
-	prompt
-
-_ItemCantGetOnText::
-	text "Can't get on your"
-	line "@"
-	text_ram wStringBuffer1
-	text " now."
-	prompt
 
 _BallBoxFullText::
 	text "The #MON BOX"
@@ -437,20 +403,6 @@ _ItemUsedText::
 	text "."
 	done
 
-_ItemGotOnText::
-	text "<PLAYER> got on the@"
-	text_low
-	text_ram wStringBuffer2
-	text "."
-	prompt
-
-_ItemGotOffText::
-	text "<PLAYER> got off@"
-	text_low
-	text "the @"
-	text_ram wStringBuffer2
-	text "."
-	prompt
 
 _KnowsMoveText::
 	text_ram wStringBuffer1

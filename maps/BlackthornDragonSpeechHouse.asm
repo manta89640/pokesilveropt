@@ -18,11 +18,6 @@ BlackthornDragonSpeechHouseDratiniScript:
 	closetext
 	end
 
-BlackthornDragonSpeechHousePictureBookshelf: ; unreferenced
-	jumpstd PictureBookshelfScript
-
-BlackthornDragonSpeechHouseMagazineBookshelf: ; unreferenced
-	jumpstd MagazineBookshelfScript
 
 BlackthornDragonSpeechHouseGrannyText:
 	text "CLAIR and LANCE"

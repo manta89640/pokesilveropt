@@ -138,8 +138,6 @@ AcademyNotebook:
 	closetext
 	end
 
-AcademyStickerMachine: ; unreferenced
-	jumptext AcademyStickerMachineText
 
 AcademyBookshelf:
 	jumpstd DifficultBookshelfScript
@@ -270,9 +268,6 @@ AcademyBlackboardText:
 	line "battle."
 	done
 
-AcademyBlackboardText2: ; unreferenced
-	text "Read which topic?"
-	done
 
 AcademyPoisonText:
 	text "If poisoned, a"
@@ -400,12 +395,6 @@ AcademyNotebookText3:
 	line "anymore…"
 	done
 
-AcademyStickerMachineText:
-	text "This super machine"
-	line "prints data out as"
-
-	para "stickers!"
-	done
 
 EarlsPokemonAcademy_MapEvents:
 	db 0, 0 ; filler

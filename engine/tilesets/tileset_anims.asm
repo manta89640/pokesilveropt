@@ -4,9 +4,6 @@ DummyPredef3A_DummyData: ; unreferenced
 DummyPredef3A:
 	ret
 
-DummyPredef3A_DummyFunction: ; unreferenced
-	ret
-
 
 _AnimateTileset::
 ; Increment [hTileAnimFrame] and run that frame's function
@@ -72,15 +69,6 @@ ScrollTileRightLeft:
 	jr nz, ScrollTileLeft
 	jr ScrollTileRight
 
-ScrollTileUpDown: ; unreferenced
-; Scroll up for 4 ticks, then down for 4 ticks.
-	ld a, [wTileAnimationTimer]
-	inc a
-	and %111
-	ld [wTileAnimationTimer], a
-	and %100
-	jr nz, ScrollTileDown
-	jr ScrollTileUp
 
 ScrollTileLeft:
 	ld h, d
@@ -110,31 +98,6 @@ endr
 	jr nz, .loop
 	ret
 
-ScrollTileUp:
-	ld h, d
-	ld l, e
-	ld d, [hl]
-	inc hl
-	ld e, [hl]
-	ld bc, TILE_SIZE - 2
-	add hl, bc
-	ld a, TILE_SIZE / 4
-.loop
-	ld c, [hl]
-	ld [hl], e
-	dec hl
-	ld b, [hl]
-	ld [hl], d
-	dec hl
-	ld e, [hl]
-	ld [hl], c
-	dec hl
-	ld d, [hl]
-	ld [hl], b
-	dec hl
-	dec a
-	jr nz, .loop
-	ret
 
 ScrollTileDown:
 	ld h, d
@@ -564,5 +527,3 @@ WhirlpoolTiles2: INCBIN "gfx/tilesets/whirlpool/2.2bpp"
 WhirlpoolTiles3: INCBIN "gfx/tilesets/whirlpool/3.2bpp"
 WhirlpoolTiles4: INCBIN "gfx/tilesets/whirlpool/4.2bpp"
 
-TilesetAnims_DummyFunction: ; unreferenced
-	ret

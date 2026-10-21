@@ -138,14 +138,6 @@ AzaleaTownSlowpokeScript:
 	closetext
 	end
 
-UnusedWoosterScript: ; unreferenced
-	faceplayer
-	opentext
-	writetext WoosterText
-	cry QUAGSIRE
-	waitbutton
-	closetext
-	end
 
 AzaleaTownSign:
 	jumptext AzaleaTownSignText
@@ -340,9 +332,6 @@ AzaleaTownSlowpokeText2:
 	text "<……> <……>Yawn?"
 	done
 
-WoosterText:
-	text "WOOSTER: Gugyoo…"
-	done
 
 AzaleaTownSignText:
 	text "AZALEA TOWN"
