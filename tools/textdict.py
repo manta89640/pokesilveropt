@@ -110,6 +110,7 @@ def iter_asm_files():
 		if rel.startswith(SKIP_DIRS):
 			dirs[:] = []
 			continue
+		dirs.sort()
 		for name in sorted(files):
 			if name.endswith('.asm'):
 				path = os.path.join(root, name)
@@ -175,7 +176,11 @@ def select_entries(runs, num_entries, num_singles, max_ngram=6):
 	Repeatedly picks the n-gram of units (or of previously picked entries)
 	that saves the most bytes, and replaces it in the corpus.
 	Returns a list of expansions (tuples of units)."""
-	seqs = {r: list(r) for r in runs}
+	# Runs are numbered so that iteration order (and thus the result) does not
+	# depend on Python's string hashing
+	run_list = list(runs)
+	weights = [runs[r] for r in run_list]
+	seqs = [list(r) for r in run_list]
 	expansions = []
 	exp_len = []
 	counts = collections.Counter()
@@ -187,11 +192,11 @@ def select_entries(runs, num_entries, num_singles, max_ngram=6):
 			for length in range(2, min(max_ngram, n - i) + 1):
 				yield tuple(s[i:i + length])
 
-	for r, weight in runs.items():
-		for g in ngrams(seqs[r]):
-			counts[g] += weight
+	for k, r in enumerate(run_list):
+		for g in ngrams(seqs[k]):
+			counts[g] += weights[k]
 		for u in r:
-			index[u].add(r)
+			index[u].add(k)
 
 	def savings(g, code_cost):
 		length = sum(exp_len[x] if isinstance(x, int) else 1 for x in g)
@@ -234,9 +239,9 @@ def select_entries(runs, num_entries, num_singles, max_ngram=6):
 		expansions.append(expansion)
 		exp_len.append(len(expansion))
 		n = len(best)
-		rarest = min(set(best), key=lambda x: len(index[x]))
-		for r in list(index[rarest]):
-			s = seqs[r]
+		rarest = min(best, key=lambda x: (len(index[x]), str(x)))
+		for k in sorted(index[rarest]):
+			s = seqs[k]
 			out = []
 			i = 0
 			changed = False
@@ -250,17 +255,17 @@ def select_entries(runs, num_entries, num_singles, max_ngram=6):
 					i += 1
 			if not changed:
 				continue
-			weight = runs[r]
+			weight = weights[k]
 			for g in ngrams(s):
 				counts[g] -= weight
-			seqs[r] = out
+			seqs[k] = out
 			for g in ngrams(out):
 				counts[g] += weight
 				if new_id in g:
 					sav = savings(g, code_cost)
 					if sav > 0:
 						heapq.heappush(heap, (-sav, next(tiebreak), g))
-			index[new_id].add(r)
+			index[new_id].add(k)
 		if it % 50 == 0:
 			print(f'  {it}: {"".join(expansion)!r} saves ~{best_savings:.0f}', file=sys.stderr)
 	return expansions
@@ -318,7 +323,7 @@ def asm_string(units):
 def main():
 	ap = argparse.ArgumentParser()
 	ap.add_argument('--entries', type=int, default=0, help='total entries (default: fill all codes)')
-	ap.add_argument('--prefixes', type=int, default=4)
+	ap.add_argument('--prefixes', type=int, default=16)
 	args = ap.parse_args()
 
 	charmap = read_charmap()
