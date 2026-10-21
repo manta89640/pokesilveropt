@@ -1517,13 +1517,9 @@ Cry_Drowzee_Ch6:
 	square_note 4, 0, 8, 0
 	square_note 5, 15, 2, 1617
 	square_note 9, 13, 1, 1633
-	square_note 5, 14, 2, 1556
-	square_note 8, 12, 1, 1572
-	square_note 5, 15, 2, 1553
+	sound_call Cry_Shared1
 	square_note 12, 13, 1, 1569
-	square_note 5, 14, 2, 1556
-	square_note 8, 12, 1, 1572
-	square_note 5, 15, 2, 1553
+	sound_call Cry_Shared1
 	square_note 4, 13, 1, 1569
 	sound_ret
 
@@ -2084,4 +2080,10 @@ Cry_Rattata_Ch8:
 	noise_note 7, 11, 5, 41
 	noise_note 1, 10, 2, 57
 	noise_note 8, 9, 1, 73
+	sound_ret
+
+Cry_Shared1: ; (tools/musiccalls.py)
+	square_note 5, 14, 2, 1556
+	square_note 8, 12, 1, 1572
+	square_note 5, 15, 2, 1553
 	sound_ret

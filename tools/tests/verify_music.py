@@ -1,15 +1,17 @@
 #!/usr/bin/env python3
 """
-Check that every song plays the same notes and commands as in a reference ROM.
+Check that every song, sound effect and cry plays the same notes and commands
+as in a reference ROM.
 
 Usage: tools/tests/verify_music.py reference.gbc modified.gbc
 
-For each entry of the Music table, this follows each channel's data the way
-the sound engine does (sound_call, sound_ret, sound_loop and sound_jump),
-and compares everything else it reads: the notes and the other commands with
-their parameters, in order. It stops after STEPS of them, or where the
-channel ends. The reference ROM's engine can only call one level deep; the
-modified one can call two. Both ROMs need their .sym files.
+For each entry of the Music, SFX and Cries tables, this follows each
+channel's data the way the sound engine does (sound_call, sound_ret,
+sound_loop and sound_jump), and compares everything else it reads: the notes
+and the other commands with their parameters, in order. It stops after STEPS
+of them, or where the channel ends. The reference ROM's engine can only call
+one level deep; the modified one can call two. Both ROMs need their .sym
+files.
 """
 
 import os
@@ -29,7 +31,8 @@ for cmd in range(0xd0, 0xd8):
 	PARAMS[cmd] = 0
 for cmd in range(0xf1, 0xf9):
 	PARAMS[cmd] = 0
-TOGGLE_NOISE = 0xe3
+TOGGLE_NOISE, SFX_TOGGLE_NOISE = 0xe3, 0xf0
+TOGGLE_SFX = 0xdf
 NOTE_TYPE = 0xd8
 JUMP_IF, JUMP, LOOP, CALL, RET = 0xfb, 0xfc, 0xfd, 0xfe, 0xff
 
@@ -50,8 +53,9 @@ class Rom:
 		return self.byte(bank, addr) | self.byte(bank, addr + 1) << 8
 
 
-def play_channel(rom, bank, addr, channel, depth):
-	"""Returns the list of notes and commands that a channel plays."""
+def play_channel(rom, bank, addr, channel, depth, sfx):
+	"""Returns the list of notes and commands that a channel plays. Sound effects
+	and cries start with notes that have a volume envelope and frequency."""
 	out = []
 	stack = []
 	looping = False
@@ -62,7 +66,12 @@ def play_channel(rom, bank, addr, channel, depth):
 		cmd = rom.byte(bank, addr)
 		addr += 1
 		if cmd < FIRST_MUSIC_CMD:
-			out.append((cmd,))
+			if sfx:
+				n = 2 if channel & 3 == CHAN4 else 3
+				out.append((cmd,) + tuple(rom.byte(bank, addr + i) for i in range(n)))
+				addr += n
+			else:
+				out.append((cmd,))
 		elif cmd == RET:
 			if not stack:
 				out.append(('end',))
@@ -95,10 +104,13 @@ def play_channel(rom, bank, addr, channel, depth):
 				addr = rom.word(bank, addr + 1)
 		else:
 			if cmd == NOTE_TYPE:
-				n = 1 if channel == CHAN4 else 2
-			elif cmd == TOGGLE_NOISE:
+				n = 1 if channel & 3 == CHAN4 else 2
+			elif cmd in (TOGGLE_NOISE, SFX_TOGGLE_NOISE):
 				n = 0 if noise else 1
 				noise = not noise
+			elif cmd == TOGGLE_SFX:
+				n = 0
+				sfx = not sfx
 			elif PARAMS.get(cmd) is None:
 				out.append(('unknown command', cmd))
 				break
@@ -112,8 +124,8 @@ def play_channel(rom, bank, addr, channel, depth):
 	return out
 
 
-def play_song(rom, song, depth):
-	table_bank, table = rom.syms['Music']
+def play_song(rom, table, song, depth):
+	table_bank, table = rom.syms[table]
 	entry = table + song * 3
 	bank = rom.byte(table_bank, entry)
 	header = rom.word(table_bank, entry + 1)
@@ -122,24 +134,29 @@ def play_song(rom, song, depth):
 	for i in range(count):
 		channel = rom.byte(bank, header + i * 3) & 0xf
 		addr = rom.word(bank, header + i * 3 + 1)
-		channels.append((channel, play_channel(rom, bank, addr, channel, depth)))
+		channels.append((channel, play_channel(rom, bank, addr, channel, depth,
+			table != rom.syms['Music'][1])))
 	return channels
 
 
 def main():
 	ref, new = Rom(sys.argv[1]), Rom(sys.argv[2])
-	songs = sum(1 for line in open(os.path.join(ROOT, 'audio/music_pointers.asm'))
-		if re.match(r'\s+dba\b', line))
 	bad = 0
-	for song in range(songs):
-		a = play_song(ref, song, 1)
-		b = play_song(new, song, 2)
-		problems = [x for channel in a + b for x in channel[1] if x[0] in
-			('call too deep', 'unknown command')]
-		if a != b or problems:
-			bad += 1
-			print(f'song {song} differs', problems[:1])
-	print(f'{songs} songs checked, {bad} differ')
+	for table, path in (('Music', 'music_pointers'), ('SFX', 'sfx_pointers'),
+			('Cries', 'cry_pointers')):
+		count = sum(1 for line in open(os.path.join(ROOT, f'audio/{path}.asm'))
+			if re.match(r'\s+dba\b', line))
+		differ = 0
+		for i in range(count):
+			a = play_song(ref, table, i, 1)
+			b = play_song(new, table, i, 2)
+			problems = [x for channel in a + b for x in channel[1] if x[0] in
+				('call too deep', 'unknown command')]
+			if a != b or problems:
+				differ += 1
+				print(f'{table} {i} differs', problems[:1])
+		print(f'{table}: {count} checked, {differ} differ')
+		bad += differ
 	sys.exit(1 if bad else 0)
 
 

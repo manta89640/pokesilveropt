@@ -4,10 +4,10 @@ Move repeated phrases of music into subroutines.
 
 Usage: tools/musiccalls.py [--apply]
 
-Within each song section of audio.asm, this looks for runs of notes and
-commands that appear more than once, and replaces them with a sound_call to
-one copy of the run, which it adds at the end of a song file with a
-sound_ret. If a copy is followed by a sound_ret already, it stays where it is
+Within each section of songs, sound effects or cries in audio.asm, this looks
+for runs of notes and commands that appear more than once, and replaces them
+with a sound_call to one copy of the run, which it adds at the end of a file
+with a sound_ret. If a copy is followed by a sound_ret already, it stays where it is
 instead, with a label for the others to call. It picks the run that saves the
 most bytes, and repeats until no run saves any. A run doesn't include labels
 or sound_call, sound_ret, sound_loop or sound_jump. Then a sound_call
@@ -36,27 +36,27 @@ SIZES = {'note': 1, 'rest': 1, 'drum_note': 1, 'octave': 1, 'transpose': 2, 'tem
 	'toggle_sfx': 1, 'pitch_slide': 3, 'vibrato': 3, 'force_stereo_panning': 2, 'volume': 2,
 	'pitch_offset': 3, 'tempo_relative': 2, 'sfx_priority_on': 1, 'sfx_priority_off': 1,
 	'stereo_panning': 2, 'set_condition': 2, 'sound_jump_if': 4, 'sound_jump': 3,
-	'sound_loop': 4, 'sound_call': 3, 'sound_ret': 1}
+	'sound_loop': 4, 'sound_call': 3, 'sound_ret': 1, 'square_note': 4, 'noise_note': 3}
 FLOW = ('sound_jump_if', 'sound_jump', 'sound_loop', 'sound_call', 'sound_ret')
 
 
 def command_size(op, args):
 	if op in ('note_type', 'drum_speed'):
 		return 2 if len(args) == 1 else 3
-	if op == 'toggle_noise':
+	if op in ('toggle_noise', 'sfx_toggle_noise'):
 		return 2 if args else 1
 	return SIZES[op]
 
 
 def song_sections():
-	"""Returns {section: [song files]}."""
+	"""Returns {section: [files of songs, sound effects or cries]}."""
 	sections = {}
 	section = None
 	for line in open(os.path.join(ROOT, 'audio.asm')):
 		m = re.match(r'SECTION "(.*)"', line)
 		if m:
 			section = m.group(1)
-		m = re.match(r'INCLUDE "(audio/music/.*)"', line)
+		m = re.match(r'INCLUDE "(audio/(music/.*|sfx.asm|cries.asm))"', line)
 		if m:
 			sections.setdefault(section, []).append(m.group(1))
 	return sections
@@ -86,7 +86,7 @@ def parse(path):
 			continue
 		op, _, rest = code.strip().partition(' ')
 		args = [a.strip() for a in rest.split(',')] if rest.strip() else []
-		if op in ('channel_count', 'channel', 'db'):
+		if op in ('channel_count', 'channel', 'db', 'assert'):
 			items.append(Item(path, i, 'header', op=op, args=args))
 			continue
 		args = [scope + a if a.startswith('.') else a for a in args]
@@ -282,10 +282,13 @@ def plan_section(files):
 
 
 def apply(items, source, subs):
+	# Name new labels after the song, or Sfx_ or Cry_ for the sound effects and
+	# cries, which are all in one file
 	songs = {}
 	for item in items:
 		if item.kind == 'label':
-			songs.setdefault(item.path, item.name)
+			songs.setdefault(item.path, item.name if '/music/' in item.path else
+				item.name.split('_')[0])
 	counters = collections.Counter()
 
 	def name(sub, path):

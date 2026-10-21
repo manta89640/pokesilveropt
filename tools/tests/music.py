@@ -1,16 +1,19 @@
 #!/usr/bin/env python3
 """
-Play every song in PyBoy and print a hash of the sound engine's state.
+Play every song, sound effect and cry in PyBoy and print a hash of the sound
+engine's state.
 
 Usage: tools/tests/music.py rom.gbc save.ram [FRAMES]
 
 Continues from the save, and while the player stands in the overworld, has
 the sound engine fade to each song in turn, then hashes the state of the
 music channels each time _UpdateSound runs, FRAMES times (default 3600) from
-when the song starts.
-The addresses in the music data and the subroutine flag are left out, so the
-output of two ROMs whose music data is laid out differently can be compared.
-Needs `pip install pyboy`, and the ROM's .sym file for RAM addresses.
+when the song starts. Then it plays each sound effect, and each Pokémon's
+cry, by calling PlaySFX or PlayCry from DelayFrame, and hashes the state of
+the sound effect channels until they stop. The addresses in the sound data
+and the subroutine flag are left out, so the output of two ROMs whose sound
+data is laid out differently can be compared. Needs `pip install pyboy`, and
+the ROM's .sym file for RAM addresses.
 """
 
 import hashlib
@@ -29,10 +32,17 @@ from pyboy import PyBoy  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 NUM_MUSIC_CHANS = 4
+NUM_POKEMON = 251
 CHANNEL_STRUCT_LENGTH = 0x32
 CHANNEL_FLAGS1 = 3
 ADDRESSES = range(6, 12)  # CHANNEL_MUSIC_ADDRESS to CHANNEL_LAST_MUSIC_ADDRESS_2
+SOUND_CHANNEL_ON = 1 << 0
 SOUND_SUBROUTINE = 1 << 1
+MAX_SFX_UPDATES = 3600
+
+
+def count_entries(path):
+	return sum(1 for line in open(os.path.join(ROOT, path)) if re.match(r'\s+dba\b', line))
 
 
 def main():
@@ -45,8 +55,6 @@ def main():
 		if m:
 			sym[m.group(3)] = int(m.group(2), 16)
 			banks[m.group(3)] = int(m.group(1), 16)
-	songs = sum(1 for line in open(os.path.join(ROOT, 'audio/music_pointers.asm'))
-		if re.match(r'\s+dba\b', line))
 
 	tmp = tempfile.mkdtemp()
 	copy = os.path.join(tmp, 'rom.gbc')
@@ -77,37 +85,85 @@ def main():
 	press('a', 200)
 	press('a', 300)
 
-	channels = sym['wChannel1']
-	recording = []
-
-	def update_sound(_):
-		# Start with the first update after the song starts
-		if not recording or (not recording[1] and
-				(mem[sym['wMusicID']] != recording[2] or mem[sym['wMusicFade']])):
-			return
-		state = bytearray(mem[channels:channels + CHANNEL_STRUCT_LENGTH * NUM_MUSIC_CHANS])
+	def state(first):
+		start = sym['wChannel1'] + first * CHANNEL_STRUCT_LENGTH
+		data = bytearray(mem[start:start + CHANNEL_STRUCT_LENGTH * NUM_MUSIC_CHANS])
 		for c in range(NUM_MUSIC_CHANS):
 			base = c * CHANNEL_STRUCT_LENGTH
 			for i in ADDRESSES:
-				state[base + i] = 0
-			state[base + CHANNEL_FLAGS1] &= ~SOUND_SUBROUTINE
-		recording[0].update(state)
+				data[base + i] = 0
+			data[base + CHANNEL_FLAGS1] &= ~SOUND_SUBROUTINE
+		return data
+
+	def sfx_playing():
+		return any(mem[sym['wChannel5Flags1'] + c * CHANNEL_STRUCT_LENGTH] & SOUND_CHANNEL_ON
+			for c in range(NUM_MUSIC_CHANS))
+
+	# recording: [hash, updates so far, what starts it, what ends it, first channel, done]
+	recording = []
+
+	def update_sound(_):
+		# _UpdateSound does nothing while a sound is being set up
+		if not recording or recording[5] or not mem[sym['wMusicPlaying']]:
+			return
+		h, updates, start, stop, first, _ = recording
+		if not updates and not start():
+			return
+		if updates and stop():
+			recording[5] = True
+			return
+		h.update(state(first))
 		recording[1] += 1
 
 	pb.hook_register(banks['_UpdateSound'], sym['_UpdateSound'], update_sound, None)
-	for song in range(1, songs):
+
+	# Calls PlaySFX or PlayCry with de from DelayFrame, as if DelayFrame called it
+	calls = []
+
+	def delay_frame(_):
+		if not calls:
+			return
+		function, de = calls.pop()
+		r = pb.register_file
+		sp = r.SP - 2
+		mem[sp] = r.PC & 0xff
+		mem[sp + 1] = r.PC >> 8
+		r.SP = sp
+		r.D = de >> 8
+		r.E = de & 0xff
+		r.PC = function
+
+	pb.hook_register(0, sym['DelayFrame'], delay_frame, None)
+
+	for song in range(1, count_entries('audio/music_pointers.asm')):
 		mem[sym['wMusicFadeID']] = song
 		mem[sym['wMusicFadeID'] + 1] = 0
 		mem[sym['wMusicFade']] = 1
-		recording[:] = [hashlib.md5(), 0, song]
+		recording[:] = [hashlib.md5(), 0,
+			lambda: mem[sym['wMusicID']] == song and not mem[sym['wMusicFade']],
+			lambda: recording[1] >= frames, 0, False]
 		for _ in range(frames + 600):
 			tick()
-			if recording[1] >= frames:
+			if recording[5]:
 				break
 		else:
 			print(f'song {song} did not start')
-			continue
 		print(f'song {song} {recording[0].hexdigest()[:12]}')
+		recording.clear()
+
+	sounds = [('sfx', i, 'PlaySFX') for i in range(count_entries('audio/sfx_pointers.asm'))]
+	sounds += [('cry', i, 'PlayCry') for i in range(NUM_POKEMON)]
+	for kind, i, function in sounds:
+		while sfx_playing():
+			tick()
+		calls.append((sym[function], i))
+		recording[:] = [hashlib.md5(), 0, lambda: not calls and sfx_playing(),
+			lambda: recording[1] >= MAX_SFX_UPDATES or not sfx_playing(), NUM_MUSIC_CHANS, False]
+		for _ in range(MAX_SFX_UPDATES + 600):
+			tick()
+			if recording[5]:
+				break
+		print(f'{kind} {i} {recording[0].hexdigest()[:12]} {recording[1]}')
 		recording.clear()
 	pb.stop(save=False)
 	shutil.rmtree(tmp)

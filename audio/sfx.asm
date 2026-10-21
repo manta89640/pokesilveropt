@@ -499,9 +499,7 @@ Sfx_DexFanfare5079:
 
 Sfx_LevelUp_Ch5:
 Sfx_DexFanfare5079_Ch5:
-	toggle_sfx
-	tempo 120
-	volume 7, 7
+	sound_call Sfx_Shared1
 	duty_cycle 2
 	note_type 8, 11, 1
 	octave 3
@@ -546,9 +544,7 @@ Sfx_DexFanfare5079_Ch7:
 
 Sfx_LevelUp_Ch8:
 Sfx_DexFanfare5079_Ch8:
-	toggle_sfx
-	sfx_toggle_noise 4
-	drum_speed 12
+	sound_call Sfx_Shared6
 	drum_note 1, 12
 	sound_ret
 
@@ -560,9 +556,7 @@ Sfx_KeyItem:
 	channel 8, Sfx_KeyItem_Ch8
 
 Sfx_KeyItem_Ch5:
-	toggle_sfx
-	tempo 120
-	volume 7, 7
+	sound_call Sfx_Shared1
 	duty_cycle 2
 	note_type 6, 11, 1
 	octave 3
@@ -612,9 +606,7 @@ Sfx_KeyItem_Ch7:
 	sound_ret
 
 Sfx_KeyItem_Ch8:
-	toggle_sfx
-	sfx_toggle_noise 4
-	drum_speed 12
+	sound_call Sfx_Shared6
 	drum_note 1, 16
 	sound_ret
 
@@ -628,8 +620,7 @@ Sfx_DexFanfare2049:
 Sfx_DexFanfare2049_Ch5:
 	toggle_sfx
 	tempo 104
-	volume 7, 7
-	duty_cycle 2
+	sound_call Sfx_Shared16.shared39
 	note_type 12, 8, 8
 	octave 3
 	note A_, 4
@@ -671,8 +662,7 @@ Sfx_DexFanfare2049_Ch6:
 	sound_ret
 
 Sfx_DexFanfare2049_Ch7:
-	toggle_sfx
-	note_type 12, 2, 5
+	sound_call Sfx_Shared10
 	octave 4
 	note F_, 4
 	rest 2
@@ -691,9 +681,8 @@ Sfx_DexFanfare2049_Ch7:
 	sound_ret
 
 Sfx_DexFanfare2049_Ch8:
-	toggle_sfx
-	sfx_toggle_noise 4
-	drum_speed 12
+.shared23: ; (tools/musiccalls.py)
+	sound_call Sfx_Shared6
 	drum_note 1, 16
 	rest 16
 	sound_ret
@@ -709,8 +698,7 @@ Sfx_Item_Ch5:
 	toggle_sfx
 	tempo 108
 	volume 7, 7
-	vibrato 8, 2, 7
-	duty_cycle 2
+	sound_call Sfx_Shared2
 	note_type 8, 11, 2
 	octave 4
 	note C_, 6
@@ -726,8 +714,7 @@ Sfx_Item_Ch5:
 
 Sfx_Item_Ch6:
 	toggle_sfx
-	vibrato 8, 2, 7
-	duty_cycle 2
+	sound_call Sfx_Shared2
 	note_type 8, 12, 3
 	octave 4
 	note A_, 6
@@ -766,12 +753,7 @@ Sfx_Item_Ch7:
 	sound_ret
 
 Sfx_Item_Ch8:
-	toggle_sfx
-	sfx_toggle_noise 4
-	drum_speed 12
-	drum_note 1, 16
-	rest 16
-	sound_ret
+	sound_jump Sfx_DexFanfare2049_Ch8.shared23
 
 Sfx_CaughtMon:
 	channel_count 4
@@ -781,11 +763,8 @@ Sfx_CaughtMon:
 	channel 8, Sfx_CaughtMon_Ch8
 
 Sfx_CaughtMon_Ch5:
-	toggle_sfx
-	tempo 112
-	volume 7, 7
-	vibrato 8, 2, 7
-	duty_cycle 2
+	sound_call Sfx_Shared8
+	sound_call Sfx_Shared2
 	note_type 8, 11, 3
 	octave 4
 	note C_, 6
@@ -825,9 +804,7 @@ Sfx_CaughtMon_Ch6:
 	sound_ret
 
 Sfx_CaughtMon_Ch7:
-	toggle_sfx
-	note_type 8, 2, 5
-	octave 3
+	sound_call Sfx_Shared7
 	note C_, 12
 	note C_, 6
 	octave 2
@@ -844,12 +821,7 @@ Sfx_CaughtMon_Ch7:
 	sound_ret
 
 Sfx_CaughtMon_Ch8:
-	toggle_sfx
-	sfx_toggle_noise 4
-	drum_speed 12
-	drum_note 1, 16
-	rest 16
-	sound_ret
+	sound_jump Sfx_DexFanfare2049_Ch8.shared23
 
 Sfx_DexFanfare80109:
 	channel_count 4
@@ -859,11 +831,8 @@ Sfx_DexFanfare80109:
 	channel 8, Sfx_DexFanfare80109_Ch8
 
 Sfx_DexFanfare80109_Ch5:
-	toggle_sfx
-	tempo 112
-	volume 7, 7
-	vibrato 8, 2, 7
-	duty_cycle 2
+	sound_call Sfx_Shared8
+	sound_call Sfx_Shared2
 	note_type 12, 11, 1
 	octave 4
 	note D#, 2
@@ -886,8 +855,7 @@ Sfx_DexFanfare80109_Ch5:
 
 Sfx_DexFanfare80109_Ch6:
 	toggle_sfx
-	vibrato 8, 2, 7
-	duty_cycle 2
+	sound_call Sfx_Shared2
 	note_type 12, 12, 1
 	octave 4
 	note G_, 2
@@ -908,8 +876,7 @@ Sfx_DexFanfare80109_Ch6:
 	sound_ret
 
 Sfx_DexFanfare80109_Ch7:
-	toggle_sfx
-	note_type 12, 2, 5
+	sound_call Sfx_Shared10
 	octave 4
 	note D#, 1
 	rest 1
@@ -935,12 +902,7 @@ Sfx_DexFanfare80109_Ch7:
 	sound_ret
 
 Sfx_DexFanfare80109_Ch8:
-	toggle_sfx
-	sfx_toggle_noise 4
-	drum_speed 12
-	drum_note 1, 16
-	rest 16
-	sound_ret
+	sound_jump Sfx_DexFanfare2049_Ch8.shared23
 
 Sfx_Fanfare2:
 	channel_count 3
@@ -956,11 +918,8 @@ Sfx_Unused: ; unreferenced
 	channel 8, Sfx_Unused_Ch8
 
 Sfx_Unused_Ch5:
-	toggle_sfx
-	tempo 124
-	volume 7, 7
-	vibrato 8, 2, 7
-	duty_cycle 2
+	sound_call Sfx_Shared3
+	sound_call Sfx_Shared2
 	note_type 12, 11, 1
 	octave 4
 	note F_, 2
@@ -981,8 +940,7 @@ Sfx_Unused_Ch5:
 
 Sfx_Unused_Ch6:
 	toggle_sfx
-	vibrato 8, 2, 7
-	duty_cycle 2
+	sound_call Sfx_Shared2
 	note_type 12, 12, 1
 	octave 4
 	note A_, 2
@@ -1004,8 +962,7 @@ Sfx_Unused_Ch6:
 	sound_ret
 
 Sfx_Unused_Ch7:
-	toggle_sfx
-	note_type 12, 2, 5
+	sound_call Sfx_Shared10
 	octave 4
 	note F_, 8
 	note C_, 2
@@ -1019,12 +976,7 @@ Sfx_Unused_Ch7:
 	sound_ret
 
 Sfx_Unused_Ch8:
-	toggle_sfx
-	sfx_toggle_noise 4
-	drum_speed 12
-	drum_note 1, 16
-	rest 16
-	sound_ret
+	sound_jump Sfx_DexFanfare2049_Ch8.shared23
 
 Sfx_Fanfare:
 	channel_count 3
@@ -1040,9 +992,7 @@ Sfx_RegisterPhoneNumber:
 	channel 8, Sfx_RegisterPhoneNumber_Ch8
 
 Sfx_RegisterPhoneNumber_Ch5:
-	toggle_sfx
-	tempo 124
-	volume 7, 7
+	sound_call Sfx_Shared3
 	duty_cycle 3
 	note_type 12, 10, 2
 	rest 2
@@ -1090,8 +1040,7 @@ Sfx_RegisterPhoneNumber_Ch6:
 	toggle_sfx ; unused
 
 Sfx_RegisterPhoneNumber_Ch7:
-	toggle_sfx
-	note_type 12, 2, 5
+	sound_call Sfx_Shared10
 	rest 2
 	octave 3
 	note D#, 7
@@ -1111,9 +1060,7 @@ Sfx_RegisterPhoneNumber_Ch7:
 	toggle_sfx ; unused
 
 Sfx_RegisterPhoneNumber_Ch8:
-	toggle_sfx
-	sfx_toggle_noise 4
-	drum_speed 12
+	sound_call Sfx_Shared6
 	drum_note 1, 2
 	rest 16
 	rest 16
@@ -1128,9 +1075,7 @@ Sfx_3rdPlace:
 	channel 7, Sfx_3rdPlace_Ch7
 
 Sfx_3rdPlace_Ch5:
-	toggle_sfx
-	tempo 120
-	volume 7, 7
+	sound_call Sfx_Shared1
 	duty_cycle 2
 	note_type 12, 10, 4
 	octave 4
@@ -1164,8 +1109,7 @@ Sfx_3rdPlace_Ch6:
 	toggle_sfx ; unused
 
 Sfx_3rdPlace_Ch7:
-	toggle_sfx
-	note_type 12, 2, 5
+	sound_call Sfx_Shared10
 	octave 3
 	note A_, 1
 	note F_, 1
@@ -1188,9 +1132,7 @@ Sfx_GetEgg:
 	channel 8, Sfx_GetEgg_Ch8
 
 Sfx_GetEgg_Ch5:
-	toggle_sfx
-	tempo 120
-	volume 7, 7
+	sound_call Sfx_Shared1
 	vibrato 18, 3, 4
 	duty_cycle 2
 	note_type 8, 10, 1
@@ -1221,8 +1163,7 @@ Sfx_GetEgg_Ch5:
 
 Sfx_GetEgg_Ch6:
 	toggle_sfx
-	vibrato 18, 3, 4
-	duty_cycle 3
+	sound_call Sfx_Shared4
 	note_type 8, 12, 2
 	rest 2
 	octave 4
@@ -1268,9 +1209,7 @@ Sfx_GetEgg_Ch7:
 	toggle_sfx ; unused
 
 Sfx_GetEgg_Ch8:
-	toggle_sfx
-	sfx_toggle_noise 4
-	drum_speed 8
+	sound_call Sfx_Shared11
 	rest 2
 	drum_speed 12
 	rest 16
@@ -1287,10 +1226,7 @@ Sfx_MoveDeleted:
 	channel 8, Sfx_MoveDeleted_Ch8
 
 Sfx_MoveDeleted_Ch5:
-	toggle_sfx
-	tempo 116
-	volume 7, 7
-	duty_cycle 2
+	sound_call Sfx_Shared16
 	vibrato 12, 4, 4
 	note_type 12, 10, 4
 	rest 8
@@ -1399,10 +1335,7 @@ Sfx_2ndPlace:
 	channel 8, Sfx_2ndPlace_Ch8
 
 Sfx_2ndPlace_Ch5:
-	toggle_sfx
-	tempo 116
-	volume 7, 7
-	duty_cycle 2
+	sound_call Sfx_Shared16
 	vibrato 12, 3, 4
 	note_type 8, 10, 1
 	octave 4
@@ -1457,9 +1390,7 @@ Sfx_2ndPlace_Ch6:
 	toggle_sfx ; unused
 
 Sfx_2ndPlace_Ch7:
-	toggle_sfx
-	note_type 8, 2, 5
-	octave 3
+	sound_call Sfx_Shared7
 	note C_, 1
 	rest 1
 	note C_, 1
@@ -1483,11 +1414,7 @@ Sfx_2ndPlace_Ch7:
 	note F_, 2
 	note D_, 1
 	rest 1
-	note D_, 1
-	rest 1
-	note D_, 1
-	rest 1
-	octave 2
+	sound_call Sfx_Shared12
 	note G_, 12
 	rest 6
 	sound_ret
@@ -1517,9 +1444,7 @@ Sfx_1stPlace:
 	channel 8, Sfx_1stPlace_Ch8
 
 Sfx_1stPlace_Ch5:
-	toggle_sfx
-	tempo 124
-	volume 7, 7
+	sound_call Sfx_Shared3
 	duty_cycle 3
 	vibrato 12, 3, 4
 	note_type 12, 10, 1
@@ -1582,8 +1507,7 @@ Sfx_1stPlace_Ch6:
 	toggle_sfx ; unused
 
 Sfx_1stPlace_Ch7:
-	toggle_sfx
-	note_type 12, 2, 5
+	sound_call Sfx_Shared10
 	octave 2
 	note G_, 1
 	rest 1
@@ -1606,9 +1530,7 @@ Sfx_1stPlace_Ch7:
 	toggle_sfx ; unused
 
 Sfx_1stPlace_Ch8:
-	toggle_sfx
-	sfx_toggle_noise 4
-	drum_speed 6
+	sound_call Sfx_Shared13
 	drum_note 3, 4
 	drum_note 3, 4
 	drum_note 3, 4
@@ -1683,26 +1605,11 @@ Sfx_ChooseACard_Ch6:
 	toggle_sfx
 	duty_cycle 3
 	note_type 6, 11, 4
-	octave 3
-	note A_, 1
-	rest 1
-	note A_, 1
-	rest 1
-	octave 4
+	sound_call Sfx_Shared14
 	note E_, 4
-	octave 3
-	note A_, 1
-	rest 1
-	note A_, 1
-	rest 1
-	octave 4
+	sound_call Sfx_Shared14
 	note F_, 4
-	octave 3
-	note A_, 1
-	rest 1
-	note A_, 1
-	rest 1
-	octave 4
+	sound_call Sfx_Shared14
 	note G_, 4
 	note G#, 8
 	note A_, 4
@@ -1722,11 +1629,7 @@ Sfx_ChooseACard_Ch7:
 	octave 2
 	note A_, 4
 	octave 3
-	note D_, 1
-	rest 1
-	note D_, 1
-	rest 1
-	octave 2
+	sound_call Sfx_Shared12
 	note A_, 4
 	octave 3
 	note C_, 1
@@ -1748,9 +1651,7 @@ Sfx_ChooseACard_Ch7:
 	toggle_sfx ; unused
 
 Sfx_ChooseACard_Ch8:
-	toggle_sfx
-	sfx_toggle_noise 4
-	drum_speed 6
+	sound_call Sfx_Shared13
 	drum_note 3, 2
 	drum_note 2, 2
 	drum_note 12, 4
@@ -1860,9 +1761,7 @@ Sfx_GetTm_Ch7:
 	toggle_sfx ; unused
 
 Sfx_GetTm_Ch8:
-	toggle_sfx
-	sfx_toggle_noise 4
-	drum_speed 6
+	sound_call Sfx_Shared13
 	drum_note 3, 4
 	drum_note 2, 2
 	drum_note 3, 2
@@ -1887,9 +1786,7 @@ Sfx_GetBadge:
 	channel 8, Sfx_GetBadge_Ch8
 
 Sfx_GetBadge_Ch5:
-	toggle_sfx
-	tempo 120
-	volume 7, 7
+	sound_call Sfx_Shared1
 	duty_cycle 2
 	vibrato 8, 2, 4
 	note_type 6, 9, 2
@@ -1909,18 +1806,14 @@ Sfx_GetBadge_Ch5:
 
 .sub1:
 	rest 5
-	octave 3
-	note F_, 2
-	note G#, 2
-	octave 4
-	note C#, 2
-	note F_, 2
+	sound_call Sfx_GetBadge_Ch5.shared24
 	note C#, 2
 	octave 3
 	note F_, 2
 	note G#, 2
 	octave 4
 	note C#, 2
+.shared24: ; (tools/musiccalls.py)
 	octave 3
 	note F_, 2
 	note G#, 2
@@ -2018,9 +1911,7 @@ Sfx_GetBadge_Ch7:
 	toggle_sfx ; unused
 
 Sfx_GetBadge_Ch8:
-	toggle_sfx
-	sfx_toggle_noise 4
-	drum_speed 6
+	sound_call Sfx_Shared13
 .loop1:
 	drum_note 12, 12
 	drum_note 3, 1
@@ -2029,12 +1920,7 @@ Sfx_GetBadge_Ch8:
 	drum_note 3, 4
 	drum_note 3, 4
 	drum_note 3, 1
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
+	sound_call Sfx_Shared15
 	drum_note 2, 1
 	sound_loop 2, .loop1
 	drum_note 12, 16
@@ -2053,8 +1939,7 @@ Sfx_QuitSlots:
 Sfx_QuitSlots_Ch5:
 	toggle_sfx
 	tempo 144
-	volume 7, 7
-	duty_cycle 2
+	sound_call Sfx_Shared16.shared39
 	note_type 8, 8, 2
 	octave 3
 	note G#, 2
@@ -2110,9 +1995,7 @@ Sfx_QuitSlots_Ch6:
 	toggle_sfx ; unused
 
 Sfx_QuitSlots_Ch7:
-	toggle_sfx
-	note_type 8, 2, 5
-	octave 3
+	sound_call Sfx_Shared7
 	note C#, 2
 	rest 2
 	note F_, 2
@@ -2568,22 +2451,14 @@ Sfx_PerishSong:
 	channel 6, Sfx_PerishSong_Ch6
 
 Sfx_PerishSong_Ch5:
-	toggle_sfx
-	duty_cycle 0
-	vibrato 18, 5, 3
-	note_type 8, 10, -7
-	octave 4
+	sound_call Sfx_Shared9
 	note A_, 9
 	note G#, 9
 	toggle_sfx
 	sound_ret
 
 Sfx_PerishSong_Ch6:
-	toggle_sfx
-	duty_cycle 0
-	vibrato 18, 5, 3
-	note_type 8, 10, -7
-	octave 4
+	sound_call Sfx_Shared9
 	note C_, 9
 	octave 3
 	note B_, 9
@@ -3030,9 +2905,7 @@ Sfx_DexFanfareLessThan20:
 	channel 8, Sfx_DexFanfareLessThan20_Ch8
 
 Sfx_DexFanfareLessThan20_Ch5:
-	toggle_sfx
-	tempo 124
-	volume 7, 7
+	sound_call Sfx_Shared3
 	note_type 8, 11, 1
 	octave 3
 	note A_, 4
@@ -3098,9 +2971,7 @@ Sfx_DexFanfareLessThan20_Ch7:
 	toggle_sfx ; unused
 
 Sfx_DexFanfareLessThan20_Ch8:
-	toggle_sfx
-	sfx_toggle_noise 4
-	drum_speed 12
+	sound_call Sfx_Shared6
 	drum_note 2, 6
 	rest 16
 	rest 12
@@ -3116,9 +2987,7 @@ Sfx_DexFanfare140169:
 	channel 8, Sfx_DexFanfare140169_Ch8
 
 Sfx_DexFanfare140169_Ch5:
-	toggle_sfx
-	tempo 120
-	volume 7, 7
+	sound_call Sfx_Shared1
 	duty_cycle 3
 	vibrato 18, 3, 4
 	note_type 6, 11, 1
@@ -3171,8 +3040,7 @@ Sfx_DexFanfare140169_Ch6:
 	toggle_sfx ; unused
 
 Sfx_DexFanfare140169_Ch7:
-	toggle_sfx
-	note_type 12, 2, 5
+	sound_call Sfx_Shared10
 	rest 4
 	octave 2
 	note A_, 1
@@ -3205,16 +3073,11 @@ Sfx_DexFanfare140169_Ch7:
 	toggle_sfx ; unused
 
 Sfx_DexFanfare140169_Ch8:
-	toggle_sfx
-	sfx_toggle_noise 4
-	drum_speed 12
+	sound_call Sfx_Shared6
 	drum_note 1, 4
 .loop1:
 	drum_note 3, 4
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
+	sound_call Sfx_Shared15.shared38
 	sound_loop 3, .loop1
 	drum_note 3, 8
 	sound_ret
@@ -3229,11 +3092,8 @@ Sfx_DexFanfare170199:
 	channel 8, Sfx_DexFanfare170199_Ch8
 
 Sfx_DexFanfare170199_Ch5:
-	toggle_sfx
-	tempo 112
-	volume 7, 7
-	vibrato 18, 3, 4
-	duty_cycle 3
+	sound_call Sfx_Shared8
+	sound_call Sfx_Shared4
 	note_type 8, 11, 4
 	octave 3
 	note G_, 1
@@ -3259,8 +3119,7 @@ Sfx_DexFanfare170199_Ch5:
 
 Sfx_DexFanfare170199_Ch6:
 	toggle_sfx
-	vibrato 18, 3, 4
-	duty_cycle 3
+	sound_call Sfx_Shared4
 	note_type 8, 12, 4
 	octave 3
 	note A#, 1
@@ -3286,9 +3145,7 @@ Sfx_DexFanfare170199_Ch6:
 	toggle_sfx ; unused
 
 Sfx_DexFanfare170199_Ch7:
-	toggle_sfx
-	note_type 8, 2, 5
-	octave 3
+	sound_call Sfx_Shared7
 	note D#, 1
 	rest 1
 	note D#, 1
@@ -3314,9 +3171,7 @@ Sfx_DexFanfare170199_Ch7:
 	toggle_sfx ; unused
 
 Sfx_DexFanfare170199_Ch8:
-	toggle_sfx
-	sfx_toggle_noise 4
-	drum_speed 8
+	sound_call Sfx_Shared11
 	drum_note 3, 2
 	drum_note 3, 2
 	drum_note 3, 4
@@ -3325,15 +3180,10 @@ Sfx_DexFanfare170199_Ch8:
 	drum_note 3, 2
 	drum_note 3, 4
 	drum_note 3, 4
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
+	sound_call Sfx_Shared15.shared38
 	drum_speed 12
 	drum_note 12, 16
 	sound_ret
-
-	db sound_loop_cmd ; unused
 
 Sfx_DexFanfare200229:
 	channel_count 4
@@ -3343,11 +3193,8 @@ Sfx_DexFanfare200229:
 	channel 8, Sfx_DexFanfare200229_Ch8
 
 Sfx_DexFanfare200229_Ch5:
-	toggle_sfx
-	tempo 124
-	volume 7, 7
-	vibrato 18, 3, 4
-	duty_cycle 3
+	sound_call Sfx_Shared3
+	sound_call Sfx_Shared4
 	note_type 8, 11, 2
 	octave 3
 	note C_, 2
@@ -3371,8 +3218,7 @@ Sfx_DexFanfare200229_Ch5:
 
 Sfx_DexFanfare200229_Ch6:
 	toggle_sfx
-	vibrato 18, 3, 4
-	duty_cycle 3
+	sound_call Sfx_Shared4
 	note_type 8, 11, 2
 	octave 3
 	note E_, 2
@@ -3393,9 +3239,7 @@ Sfx_DexFanfare200229_Ch6:
 	toggle_sfx ; unused
 
 Sfx_DexFanfare200229_Ch7:
-	toggle_sfx
-	note_type 8, 2, 5
-	octave 3
+	sound_call Sfx_Shared7
 	note C_, 1
 	rest 1
 	note C_, 1
@@ -3416,18 +3260,10 @@ Sfx_DexFanfare200229_Ch7:
 	note D#, 2
 	octave 3
 	note D#, 4
-	note D_, 1
-	rest 1
-	note D_, 1
-	rest 1
-	octave 2
+	sound_call Sfx_Shared12
 	note A_, 2
 	octave 3
-	note D_, 1
-	rest 1
-	note D_, 1
-	rest 1
-	octave 2
+	sound_call Sfx_Shared12
 	note A_, 2
 	octave 3
 	note D_, 6
@@ -3437,24 +3273,14 @@ Sfx_DexFanfare200229_Ch7:
 	toggle_sfx ; unused
 
 Sfx_DexFanfare200229_Ch8:
-	toggle_sfx
-	sfx_toggle_noise 4
-	drum_speed 8
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
+	sound_call Sfx_Shared11
+	sound_call Sfx_Shared15
 	drum_note 3, 4
 	drum_note 3, 4
 	drum_note 3, 4
 	drum_note 3, 4
 	drum_note 3, 4
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
+	sound_call Sfx_Shared15.shared38
 	drum_note 3, 4
 	drum_note 3, 2
 	drum_note 3, 2
@@ -3473,11 +3299,8 @@ Sfx_DexFanfare230Plus:
 	channel 8, Sfx_DexFanfare230Plus_Ch8
 
 Sfx_DexFanfare230Plus_Ch5:
-	toggle_sfx
-	tempo 112
-	volume 7, 7
-	vibrato 18, 3, 4
-	duty_cycle 3
+	sound_call Sfx_Shared8
+	sound_call Sfx_Shared4
 	note_type 8, 10, 5
 	octave 3
 	note B_, 2
@@ -3485,29 +3308,11 @@ Sfx_DexFanfare230Plus_Ch5:
 	note B_, 2
 	octave 4
 	note D_, 14
-	rest 2
-	duty_cycle 2
-	volume_envelope 8, 5
-	octave 2
-	note F_, 1
-	rest 1
-	note F_, 6
-	volume_envelope 10, 5
-	duty_cycle 3
-	octave 3
+	sound_call Sfx_Shared5
 	note A_, 2
 	note G_, 2
 	note F_, 10
-	rest 2
-	duty_cycle 2
-	volume_envelope 8, 5
-	octave 2
-	note F_, 1
-	rest 1
-	note F_, 6
-	volume_envelope 10, 5
-	duty_cycle 3
-	octave 3
+	sound_call Sfx_Shared5
 	note A#, 12
 	volume_envelope 11, 2
 	note G_, 4
@@ -3522,8 +3327,7 @@ Sfx_DexFanfare230Plus_Ch5:
 
 Sfx_DexFanfare230Plus_Ch6:
 	toggle_sfx
-	vibrato 18, 3, 4
-	duty_cycle 3
+	sound_call Sfx_Shared4
 	note_type 8, 11, 5
 	octave 4
 	note G_, 2
@@ -3556,9 +3360,7 @@ Sfx_DexFanfare230Plus_Ch6:
 	toggle_sfx ; unused
 
 Sfx_DexFanfare230Plus_Ch7:
-	toggle_sfx
-	note_type 8, 2, 5
-	octave 3
+	sound_call Sfx_Shared7
 	note G_, 6
 	note A#, 4
 	note F_, 2
@@ -3605,9 +3407,7 @@ Sfx_DexFanfare230Plus_Ch7:
 	toggle_sfx ; unused
 
 Sfx_DexFanfare230Plus_Ch8:
-	toggle_sfx
-	sfx_toggle_noise 4
-	drum_speed 8
+	sound_call Sfx_Shared11
 	drum_note 3, 2
 	drum_note 3, 2
 	drum_note 3, 2
@@ -3617,12 +3417,7 @@ Sfx_DexFanfare230Plus_Ch8:
 	drum_note 3, 2
 	drum_note 3, 2
 	drum_note 3, 6
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
-	drum_note 2, 1
+	sound_call Sfx_Shared15
 	sound_loop 2, .loop1
 	drum_note 3, 6
 	drum_note 3, 2
@@ -3679,8 +3474,7 @@ Sfx_BallBounce:
 	channel 6, Sfx_BallBounce_Ch6
 
 Sfx_BallBounce_Ch5:
-	duty_cycle 2
-	square_note 8, 14, 1, 1856
+	sound_call Sfx_SwitchPokemon_Ch5.shared26
 	square_note 23, 0, 0, 0
 	square_note 8, 11, 1, 1856
 	square_note 23, 0, 0, 0
@@ -3691,9 +3485,7 @@ Sfx_BallBounce_Ch5:
 	sound_ret
 
 Sfx_BallBounce_Ch6:
-	duty_cycle 2
-	square_note 2, 0, 8, 0
-	square_note 8, 11, 1, 1857
+	sound_call Sfx_SwitchPokemon_Ch6.shared27
 	square_note 23, 0, 0, 0
 	square_note 8, 8, 1, 1857
 	square_note 23, 0, 0, 0
@@ -3866,6 +3658,7 @@ Sfx_Pokeflute_Ch7:
 	sound_ret
 
 Sfx_PlacePuzzlePieceDown_Ch8:
+.shared25: ; (tools/musiccalls.py)
 	noise_note 2, 15, 7, 36
 	noise_note 2, 15, 7, 52
 	noise_note 4, 15, 7, 68
@@ -3879,11 +3672,13 @@ Sfx_EnterDoor_Ch8:
 	sound_ret
 
 Sfx_SwitchPokemon_Ch5:
+.shared26: ; (tools/musiccalls.py)
 	duty_cycle 2
 	square_note 8, 14, 1, 1856
 	sound_ret
 
 Sfx_SwitchPokemon_Ch6:
+.shared27: ; (tools/musiccalls.py)
 	duty_cycle 2
 	square_note 2, 0, 8, 0
 	square_note 8, 11, 1, 1857
@@ -3891,6 +3686,7 @@ Sfx_SwitchPokemon_Ch6:
 
 Sfx_PokeballsPlacedOnTable_Ch5:
 	duty_cycle 2
+.shared28: ; (tools/musiccalls.py)
 	pitch_sweep 3, -2
 	square_note 4, 15, 2, 512
 	pitch_sweep 2, 2
@@ -3958,10 +3754,9 @@ Sfx_ReadText2_Ch5:
 Sfx_Potion_Ch5:
 	duty_cycle 2
 	pitch_sweep 1, 7
+.shared29: ; (tools/musiccalls.py)
 	square_note 15, 15, 0, 1264
-	square_note 15, 15, 2, 1616
-	pitch_sweep 0, 8
-	sound_ret
+	sound_jump Sfx_SlotMachineStart_Ch5.shared33
 
 Sfx_Poison_Ch5:
 	duty_cycle 0
@@ -3985,21 +3780,16 @@ Sfx_FullHeal_Ch5:
 Sfx_GotSafariBalls_Ch5:
 	duty_cycle 2
 	pitch_sweep 1, 5
-	square_note 15, 15, 0, 1264
-	square_note 15, 15, 2, 1616
-	pitch_sweep 0, 8
-	sound_ret
+	sound_jump Sfx_Potion_Ch5.shared29
 
 Sfx_BootPc_Ch5:
 	duty_cycle 2
 	square_note 15, 15, 2, 1984
 	square_note 15, 0, 0, 0
-	square_note 3, 10, 1, 1920
-	square_note 3, 10, 1, 1792
+	sound_call Sfx_Shared17
 	square_note 3, 10, 1, 1856
 	square_note 3, 10, 1, 1792
-	square_note 3, 10, 1, 1920
-	square_note 3, 10, 1, 1792
+	sound_call Sfx_Shared17
 	square_note 3, 10, 1, 1984
 	square_note 8, 10, 1, 1792
 	sound_ret
@@ -4082,6 +3872,7 @@ Sfx_ChangeDexMode_Ch5:
 Sfx_JumpOverLedge_Ch5:
 	duty_cycle 2
 	pitch_sweep 9, 5
+.shared30: ; (tools/musiccalls.py)
 	square_note 15, 15, 2, 1024
 	pitch_sweep 0, 8
 	sound_ret
@@ -4116,8 +3907,7 @@ Sfx_Wrong_Ch5:
 	duty_cycle 3
 	pitch_sweep 5, -2
 	square_note 4, 15, 0, 1280
-	pitch_sweep 0, 8
-	square_note 4, 0, 0, 0
+	sound_call Sfx_Call_Ch5.shared34
 	square_note 15, 15, 0, 1280
 	square_note 1, 0, 0, 0
 	sound_ret
@@ -4141,21 +3931,14 @@ Sfx_Strength_Ch8:
 	noise_note 4, 10, 2, 35
 	noise_note 8, 15, 1, 52
 	noise_note 15, 0, 0, 0
-	noise_note 2, 15, 7, 36
-	noise_note 2, 15, 7, 52
-	noise_note 4, 15, 7, 68
-	noise_note 8, 15, 4, 85
-	noise_note 8, 15, 1, 68
-	sound_ret
+	sound_jump Sfx_PlacePuzzlePieceDown_Ch8.shared25
 
 Sfx_Boat_Ch5:
 	duty_cycle 2
 	square_note 15, 15, 0, 1280
 	square_note 4, 0, 0, 0
-	square_note 15, 15, 0, 1280
-	square_note 15, 15, 0, 1280
-	square_note 15, 15, 0, 1280
-	square_note 15, 15, 0, 1280
+	sound_call Sfx_Shared18
+	sound_call Sfx_Shared18
 	square_note 15, 15, 2, 1280
 	sound_ret
 
@@ -4163,10 +3946,8 @@ Sfx_Boat_Ch6:
 	duty_cycle 3
 	square_note 15, 15, 0, 1154
 	square_note 4, 0, 0, 0
-	square_note 15, 15, 0, 1154
-	square_note 15, 15, 0, 1154
-	square_note 15, 15, 0, 1154
-	square_note 15, 15, 0, 1154
+	sound_call Sfx_Shared19
+	sound_call Sfx_Shared19
 	square_note 15, 15, 2, 1154
 	sound_ret
 
@@ -4184,6 +3965,7 @@ Sfx_WallOpen_Ch5:
 	sound_ret
 
 Sfx_ElevatorEnd_Ch5:
+.shared31: ; (tools/musiccalls.py)
 	duty_cycle 2
 	square_note 15, 15, 3, 1840
 	square_note 8, 6, 5, 1840
@@ -4217,9 +3999,7 @@ Sfx_Shine_Ch5:
 Sfx_BallPoof_Ch5:
 	duty_cycle 2
 	pitch_sweep 1, 6
-	square_note 15, 15, 2, 1024
-	pitch_sweep 0, 8
-	sound_ret
+	sound_jump Sfx_JumpOverLedge_Ch5.shared30
 
 Sfx_BallPoof_Ch8:
 	noise_note 15, 10, 2, 34
@@ -4232,6 +4012,7 @@ Sfx_Faint_Ch5:
 
 Sfx_Faint_Ch8:
 	noise_note 4, 15, 5, 51
+.shared32: ; (tools/musiccalls.py)
 	noise_note 8, 15, 4, 34
 	noise_note 15, 15, 2, 33
 	sound_ret
@@ -4255,6 +4036,7 @@ Sfx_SlotMachineStart_Ch5:
 	pitch_sweep 4, 4
 	square_note 15, 15, 0, 1264
 	pitch_sweep 1, 7
+.shared33: ; (tools/musiccalls.py)
 	square_note 15, 15, 2, 1616
 	pitch_sweep 0, 8
 	sound_ret
@@ -4267,11 +4049,10 @@ Sfx_SlotMachineStart_Ch6:
 
 Sfx_Call_Ch5:
 	pitch_sweep 6, 7
+	sound_call Sfx_Shared20
+	sound_call Sfx_Shared20
 	square_note 4, 15, 7, 1952
-	square_note 4, 15, 7, 1952
-	square_note 4, 15, 7, 1952
-	square_note 4, 15, 7, 1952
-	square_note 4, 15, 7, 1952
+.shared34: ; (tools/musiccalls.py)
 	pitch_sweep 0, 8
 	square_note 4, 0, 0, 0
 	sound_ret
@@ -4335,9 +4116,7 @@ Sfx_RazorWind_Ch8:
 Sfx_Cut_Ch8:
 	noise_note 4, 8, -7, 85
 	noise_note 2, 15, 4, 68
-	noise_note 8, 15, 4, 34
-	noise_note 15, 15, 2, 33
-	sound_ret
+	sound_jump Sfx_Faint_Ch8.shared32
 
 Sfx_WingAttack_Ch8:
 	noise_note 8, 4, -7, 35
@@ -4418,12 +4197,7 @@ Sfx_Doubleslap_Ch8:
 
 Sfx_Bite_Ch5:
 	duty_cycle 0
-	pitch_sweep 3, -2
-	square_note 4, 15, 2, 512
-	pitch_sweep 2, 2
-	square_note 8, 14, 2, 512
-	pitch_sweep 0, 8
-	sound_ret
+	sound_jump Sfx_PokeballsPlacedOnTable_Ch5.shared28
 
 Sfx_Bite_Ch8:
 	noise_note 0, 13, 1, 66
@@ -4453,6 +4227,7 @@ Sfx_TailWhip_Ch8:
 	sound_ret
 
 Sfx_KarateChop_Ch8:
+.shared35: ; (tools/musiccalls.py)
 	noise_note 2, 13, 2, 50
 	noise_note 15, 15, 2, 67
 	sound_ret
@@ -4732,19 +4507,15 @@ Sfx_Psychic_Ch8:
 
 Sfx_Screech_Ch5:
 	duty_cycle 2
-	square_note 15, 15, -7, 2016
-	square_note 15, 15, -7, 2016
-	square_note 15, 15, -7, 2016
-	square_note 15, 15, -7, 2016
+	sound_call Sfx_Shared21
+	sound_call Sfx_Shared21
 	square_note 15, 15, 2, 2016
 	sound_ret
 
 Sfx_Screech_Ch6:
 	duty_cycle 3
-	square_note 15, 15, -7, 2018
-	square_note 15, 15, -7, 2017
-	square_note 15, 15, -7, 2018
-	square_note 15, 15, -7, 2017
+	sound_call Sfx_Shared22
+	sound_call Sfx_Shared22
 	square_note 15, 15, 2, 2018
 	sound_ret
 
@@ -4806,6 +4577,7 @@ Sfx_Sing_Ch5:
 	note_type 10, 8, 7
 	octave 5
 	note G_, 8
+.shared36: ; (tools/musiccalls.py)
 	octave 6
 	note F_, 4
 	note D#, 4
@@ -4821,12 +4593,7 @@ Sfx_Sing_Ch6:
 	octave 5
 	note G_, 8
 	note_type 10, 6, 7
-	octave 6
-	note F_, 4
-	note D#, 4
-	octave 5
-	note G_, 8
-	sound_ret
+	sound_jump Sfx_Sing_Ch5.shared36
 
 Sfx_HyperBeam_Ch5:
 	duty_cycle 0
@@ -4900,9 +4667,7 @@ Sfx_Unknown63_Ch8:
 	sound_ret
 
 Sfx_Burn_Ch8:
-	noise_note 2, 13, 2, 50
-	noise_note 15, 15, 2, 67
-	sound_ret
+	sound_jump Sfx_KarateChop_Ch8.shared35
 
 Sfx_TitleScreenEntrance_Ch8:
 	noise_note 8, 3, 12, 32
@@ -4988,6 +4753,7 @@ Sfx_Fanfare2_Ch5:
 	octave 4
 	note C_, 4
 	note C_, 2
+.shared37: ; (tools/musiccalls.py)
 	note_type 4, 11, 6
 	note C#, 12
 	sfx_priority_off
@@ -5058,10 +4824,7 @@ Sfx_Fanfare_Ch5:
 	note C#, 4
 	note D#, 4
 	note C_, 4
-	note_type 4, 11, 6
-	note C#, 12
-	sfx_priority_off
-	sound_ret
+	sound_jump Sfx_Fanfare2_Ch5.shared37
 
 Sfx_Fanfare_Ch6:
 	toggle_sfx
@@ -5153,14 +4916,7 @@ Sfx_Elevator_Ch5:
 	square_note 2, 15, 1, 768
 	sound_loop 48, .loop
 	pitch_sweep 0, 8
-	duty_cycle 2
-	square_note 15, 15, 3, 1840
-	square_note 8, 6, 5, 1840
-	square_note 15, 15, 4, 1792
-	square_note 15, 7, 4, 1792
-	square_note 15, 4, 4, 1792
-	square_note 15, 2, 4, 1792
-	sound_ret
+	sound_jump Sfx_ElevatorEnd_Ch5.shared31
 
 Sfx_Elevator_Ch6:
 Sfx_Elevator_Ch7:
@@ -5181,4 +4937,147 @@ Sfx_StopSlot_Ch5:
 	duty_cycle 2
 	square_note 1, 15, 8, 1888
 	square_note 4, 8, 2, 1888
+	sound_ret
+
+Sfx_Shared1: ; (tools/musiccalls.py)
+	toggle_sfx
+	tempo 120
+	volume 7, 7
+	sound_ret
+
+Sfx_Shared2: ; (tools/musiccalls.py)
+	vibrato 8, 2, 7
+	duty_cycle 2
+	sound_ret
+
+Sfx_Shared3: ; (tools/musiccalls.py)
+	toggle_sfx
+	tempo 124
+	volume 7, 7
+	sound_ret
+
+Sfx_Shared4: ; (tools/musiccalls.py)
+	vibrato 18, 3, 4
+	duty_cycle 3
+	sound_ret
+
+Sfx_Shared5: ; (tools/musiccalls.py)
+	rest 2
+	duty_cycle 2
+	volume_envelope 8, 5
+	octave 2
+	note F_, 1
+	rest 1
+	note F_, 6
+	volume_envelope 10, 5
+	duty_cycle 3
+	octave 3
+	sound_ret
+
+Sfx_Shared6: ; (tools/musiccalls.py)
+	toggle_sfx
+	sfx_toggle_noise 4
+	drum_speed 12
+	sound_ret
+
+Sfx_Shared7: ; (tools/musiccalls.py)
+	toggle_sfx
+	note_type 8, 2, 5
+	octave 3
+	sound_ret
+
+Sfx_Shared8: ; (tools/musiccalls.py)
+	toggle_sfx
+	tempo 112
+	volume 7, 7
+	sound_ret
+
+Sfx_Shared9: ; (tools/musiccalls.py)
+	toggle_sfx
+	duty_cycle 0
+	vibrato 18, 5, 3
+	note_type 8, 10, -7
+	octave 4
+	sound_ret
+
+Sfx_Shared10: ; (tools/musiccalls.py)
+	toggle_sfx
+	note_type 12, 2, 5
+	sound_ret
+
+Sfx_Shared11: ; (tools/musiccalls.py)
+	toggle_sfx
+	sfx_toggle_noise 4
+	drum_speed 8
+	sound_ret
+
+Sfx_Shared12: ; (tools/musiccalls.py)
+	note D_, 1
+	rest 1
+	note D_, 1
+	rest 1
+	octave 2
+	sound_ret
+
+Sfx_Shared13: ; (tools/musiccalls.py)
+	toggle_sfx
+	sfx_toggle_noise 4
+	drum_speed 6
+	sound_ret
+
+Sfx_Shared14: ; (tools/musiccalls.py)
+	octave 3
+	note A_, 1
+	rest 1
+	note A_, 1
+	rest 1
+	octave 4
+	sound_ret
+
+Sfx_Shared15: ; (tools/musiccalls.py)
+	drum_note 2, 1
+	drum_note 2, 1
+.shared38: ; (tools/musiccalls.py)
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	sound_ret
+
+Sfx_Shared16: ; (tools/musiccalls.py)
+	toggle_sfx
+	tempo 116
+.shared39: ; (tools/musiccalls.py)
+	volume 7, 7
+	duty_cycle 2
+	sound_ret
+
+Sfx_Shared17: ; (tools/musiccalls.py)
+	square_note 3, 10, 1, 1920
+	square_note 3, 10, 1, 1792
+	sound_ret
+
+Sfx_Shared18: ; (tools/musiccalls.py)
+	square_note 15, 15, 0, 1280
+	square_note 15, 15, 0, 1280
+	sound_ret
+
+Sfx_Shared19: ; (tools/musiccalls.py)
+	square_note 15, 15, 0, 1154
+	square_note 15, 15, 0, 1154
+	sound_ret
+
+Sfx_Shared20: ; (tools/musiccalls.py)
+	square_note 4, 15, 7, 1952
+	square_note 4, 15, 7, 1952
+	sound_ret
+
+Sfx_Shared21: ; (tools/musiccalls.py)
+	square_note 15, 15, -7, 2016
+	square_note 15, 15, -7, 2016
+	sound_ret
+
+Sfx_Shared22: ; (tools/musiccalls.py)
+	square_note 15, 15, -7, 2018
+	square_note 15, 15, -7, 2017
 	sound_ret
