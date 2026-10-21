@@ -56,9 +56,4 @@
 	tilecoll FLOOR, WATER, FLOOR, WATER ; 37
 	tilecoll WATER, FLOOR, WATER, FLOOR ; 38
 	tilecoll WATER, WATER, FLOOR, FLOOR ; 39
-	tilecoll FLOOR, FLOOR, FLOOR, WALL ; 3a
-	tilecoll FLOOR, FLOOR, FLOOR, WALL ; 3b
-	tilecoll FLOOR, FLOOR, FLOOR, WALL ; 3c
-	tilecoll FLOOR, FLOOR, FLOOR, WALL ; 3d
-	tilecoll FLOOR, FLOOR, FLOOR, WALL ; 3e
-	tilecoll FLOOR, FLOOR, FLOOR, WALL ; 3f
+; blocks $3a-$3f were unused (tools/trim_metatiles.py)

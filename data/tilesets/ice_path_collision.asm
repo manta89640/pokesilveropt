@@ -60,5 +60,4 @@
 	tilecoll WALL, WALL, WALL, WALL ; 3b
 	tilecoll WALL, FLOOR, FLOOR, FLOOR ; 3c
 	tilecoll FLOOR, FLOOR, WARP_CARPET_DOWN, WARP_CARPET_DOWN ; 3d
-	tilecoll ICE, ICE, ICE, LADDER ; 3e
-	tilecoll ICE, ICE, ICE, LADDER ; 3f
+; blocks $3e-$3f were unused (tools/trim_metatiles.py)

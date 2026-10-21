@@ -45,20 +45,4 @@
 	tilecoll COUNTER, COUNTER, FLOOR, MART_SHELF ; 2c
 	tilecoll FLOOR, MART_SHELF, COUNTER, COUNTER ; 2d
 	tilecoll COUNTER, FLOOR, COUNTER, COUNTER ; 2e
-	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 2f
-	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 30
-	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 31
-	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 32
-	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 33
-	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 34
-	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 35
-	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 36
-	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 37
-	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 38
-	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 39
-	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 3a
-	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 3b
-	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 3c
-	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 3d
-	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 3e
-	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 3f
+; blocks $2f-$3f were unused (tools/trim_metatiles.py)

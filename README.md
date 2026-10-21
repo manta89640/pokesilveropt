@@ -5,8 +5,8 @@ This is a fork of [pret/pokegold](https://github.com/pret/pokegold), the disasse
 | | Original | This fork |
 |-|-|-|
 | ROM file | 2,097,152 bytes (128 banks) | **1,048,576 bytes (64 banks)** |
-| Content | 1,154,855 bytes | 965,296 bytes |
-| Free space | 942,297 bytes | 83,280 bytes |
+| Content | 1,154,855 bytes | 961,236 bytes |
+| Free space | 942,297 bytes | 87,340 bytes |
 
 The figures are for Silver, from the summary in rgblink's map file; Gold is within a few hundred bytes. The debug ROMs, which add the debug room, are 1 MB too.
 
@@ -25,6 +25,8 @@ To set up the repository, see [INSTALL.md](INSTALL.md). `make` builds `pokegold.
 
 **Compressed overworld sprites** (`engine/overworld/overworld.asm`). Overworld sprite tiles are LZ-compressed, except the player, rival, Mom, Poké Ball and monster, whose tiles other code loads directly (the monster is Substitute's doll). `GetSprite` decompresses them to a 384-byte SRAM buffer placed in space the save layout leaves free. Nine standing sprites have fewer tiles than `GetSprite` loads, so the original games load the start of the next sprites after them; their compressed graphics include those tiles.
 
+**Unused tileset blocks** (`tools/trim_metatiles.py`). Thirteen indoor tilesets ended with blocks that no map can show: not in any map's blocks or border, nor placed by a script, Cut, Whirlpool or a decoration in the player's room. Their metatiles and collision are removed.
+
 **Base data** (`home/pokemon.asm`). Each species' base data leaves out the 7 bytes that are the same for every species (the dex number, two unknown values and the unused beta pic pointers); `GetBaseData` fills them in, so `wCurBaseData` is the same as before.
 
 **Music subroutines** (`tools/musiccalls.py`, `audio/engine.asm`). Runs of notes and commands that a section of songs, sound effects or cries repeats, are moved into subroutines that the channels `sound_call`, or, where one copy already ends a subroutine, the others call into it. The sound engine can now call a subroutine from a subroutine, keeping the second return address in two bytes of each channel's state that were unused. Unreachable sound data and unused header bytes are removed.
@@ -35,7 +37,7 @@ To set up the repository, see [INSTALL.md](INSTALL.md). `make` builds `pokegold.
 
 **Peephole optimizations** (`tools/peephole.py`). Tail calls become jumps, jumps to `ret` become `ret cc`, near `jp`s become `jr`, and pairs of constant loads become `lb`. Every rewrite is smaller and no slower; serial, link, printer and infrared code is left alone. Scripts that only open a text box, show one text and close it use `jumptext` or `jumptextfaceplayer`, which do the same. `tools/tailmerge.py` replaces each code block that is identical to an earlier one in the same section with a jump to it, and a block that ends with the same instructions as an earlier one with a jump into those instructions.
 
-Savings by step (Silver, bytes): text dictionary 120,661; dead code 18,254; LZ 13,867; overworld sprites 10,708; map blocks 10,684; duplicate graphics 3,944; peephole 1,854; duplicate code 3,245; `jumptext` 1,357; base data 1,728; music and sound effects 3,231.
+Savings by step (Silver, bytes): text dictionary 120,661; dead code 18,254; LZ 13,867; overworld sprites 10,708; map blocks 10,684; duplicate graphics 3,944; peephole 1,854; duplicate code 3,245; `jumptext` 1,357; base data 1,728; music and sound effects 3,231; tileset blocks 4,060.
 
 
 ## What is unchanged

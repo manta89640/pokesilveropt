@@ -53,12 +53,4 @@
 	tilecoll WALL, WALL, WALL, FLOOR ; 34
 	tilecoll WALL, WALL, FLOOR, FLOOR ; 35
 	tilecoll WALL, FLOOR, FLOOR, FLOOR ; 36
-	tilecoll 04, WARP_CARPET_DOWN, 04, 63 ; 37
-	tilecoll 03, 04, 03, 03 ; 38
-	tilecoll 04, 03, 03, 03 ; 39
-	tilecoll 04, 03, 03, 03 ; 3a
-	tilecoll 03, 03, 03, 03 ; 3b
-	tilecoll 03, 03, 04, 04 ; 3c
-	tilecoll 04, 04, 04, 04 ; 3d
-	tilecoll 03, 03, 03, 03 ; 3e
-	tilecoll WARP_CARPET_DOWN, 04, 03, 03 ; 3f
+; blocks $37-$3f were unused (tools/trim_metatiles.py)

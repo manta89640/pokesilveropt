@@ -40,25 +40,4 @@
 	tilecoll WALL, WALL, DOOR, WALL ; 27
 	tilecoll WALL, FLOOR, WALL, WALL ; 28
 	tilecoll FLOOR, FLOOR, WALL, WALL ; 29
-	tilecoll WALL, WALL, FLOOR, FLOOR ; 2a
-	tilecoll WALL, WALL, BOOKSHELF, BOOKSHELF ; 2b
-	tilecoll WALL, FLOOR, WALL, FLOOR ; 2c
-	tilecoll FLOOR, FLOOR, WALL, WALL ; 2d
-	tilecoll FLOOR, FLOOR, WALL, WALL ; 2e
-	tilecoll FLOOR, WALL, FLOOR, WALL ; 2f
-	tilecoll FLOOR, FLOOR, WARP_CARPET_DOWN, WARP_CARPET_DOWN ; 30
-	tilecoll WALL, WALL, FLOOR, FLOOR ; 31
-	tilecoll WALL, WALL, FLOOR, FLOOR ; 32
-	tilecoll WALL, WALL, WALL, FLOOR ; 33
-	tilecoll WALL, FLOOR, WALL, FLOOR ; 34
-	tilecoll WALL, WALL, WALL, FLOOR ; 35
-	tilecoll WALL, WALL, FLOOR, WALL ; 36
-	tilecoll FLOOR, FLOOR, WALL, WALL ; 37
-	tilecoll WALL, FLOOR, WALL, FLOOR ; 38
-	tilecoll WALL, FLOOR, WALL, WALL ; 39
-	tilecoll FLOOR, WALL, WALL, WALL ; 3a
-	tilecoll FLOOR, FLOOR, WALL, FLOOR ; 3b
-	tilecoll FLOOR, FLOOR, FLOOR, WALL ; 3c
-	tilecoll WALL, FLOOR, FLOOR, FLOOR ; 3d
-	tilecoll FLOOR, WALL, FLOOR, FLOOR ; 3e
-	tilecoll WALL, STAIRCASE, FLOOR, FLOOR ; 3f
+; blocks $2a-$3f were unused (tools/trim_metatiles.py)
