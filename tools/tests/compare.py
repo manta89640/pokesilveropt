@@ -8,6 +8,9 @@ Reports which checkpoints differ, and writes DIR/<scenario>_diff.png with the
 differing screenshots side by side (original left, new right). Changed code
 can shift timing by a frame, so a few differences in partly printed text,
 blinking cursors or wandering NPCs are expected; look at the sheet.
+
+A crash can leave the emulator spinning without finishing a frame, so a run
+that takes longer than --timeout seconds is stopped and reported.
 """
 
 import argparse
@@ -28,6 +31,7 @@ def main():
 	ap.add_argument('scenario')
 	ap.add_argument('save', nargs='?')
 	ap.add_argument('--out', default='test_output')
+	ap.add_argument('--timeout', type=float, default=1800)
 	args = ap.parse_args()
 
 	name = os.path.splitext(os.path.basename(args.scenario))[0]
@@ -38,7 +42,14 @@ def main():
 		if args.save:
 			cmd.append(args.save)
 		procs.append(subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, text=True))
-	logs = [p.communicate()[0].splitlines() for p in procs]
+	logs = []
+	for p, rom in zip(procs, (args.original, args.new)):
+		try:
+			logs.append(p.communicate(timeout=args.timeout)[0].splitlines())
+		except subprocess.TimeoutExpired:
+			for q in procs:
+				q.kill()
+			sys.exit(f'{name}: {rom} did not finish in {args.timeout:.0f} seconds (crashed?)')
 
 	differing = []
 	state_diffs = []

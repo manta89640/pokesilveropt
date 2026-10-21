@@ -765,9 +765,40 @@ ReadMapEvents::
 
 	pop af
 	and a ; skip object events?
-	ret nz
+	jp z, ReadObjectEvents
+	; fallthrough
 
-	jp ReadObjectEvents
+ReloadObjectEventScripts:
+; Continuing a game keeps the saved map objects, but a save made by another
+; build of the game (such as the original ROM) holds that build's addresses
+; of their scripts, so reload them from the map's object events.
+	ld a, [hli]
+	and a
+	ret z
+	ld bc, MAPOBJECT_SCRIPT_POINTER - 1
+	add hl, bc
+	ld d, h
+	ld e, l
+	ld hl, wMap2Object + MAPOBJECT_SCRIPT_POINTER
+.loop
+	push af
+	ld a, [de]
+	ld [hli], a
+	inc de
+	ld a, [de]
+	ld [hld], a
+	ld a, e
+	add OBJECT_EVENT_SIZE - 1
+	ld e, a
+	adc d
+	sub e
+	ld d, a
+	ld bc, MAPOBJECT_LENGTH
+	add hl, bc
+	pop af
+	dec a
+	jr nz, .loop
+	ret
 
 ReadMapScripts::
 	ld hl, wMapScriptsPointer
