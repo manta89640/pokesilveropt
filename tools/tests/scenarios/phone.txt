@@ -1,0 +1,23 @@
+# Pokégear phone call, starting from make_save.txt's save
+wait 400
+press start 60
+press a 120
+press a 200
+press a 200
+wait 100
+press start 40
+press down 20
+press down 20
+press down 20
+press a 150
+
+# Phone: call Mom
+press right 60
+press right 60
+shot phone
+press a 60
+shot phone_mom
+mashshot a 7 60 call
+press b 60
+shot after_call
+
