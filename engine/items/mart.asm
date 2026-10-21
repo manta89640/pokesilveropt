@@ -48,8 +48,7 @@ MartDialog:
 	ld [wMartType], a
 	xor a ; STANDARDMART_HOWMAYIHELPYOU
 	ld [wMartJumptableIndex], a
-	call StandardMart
-	ret
+	jr StandardMart
 
 HerbShop:
 	call FarReadMart
@@ -58,8 +57,7 @@ HerbShop:
 	call MartTextbox
 	call BuyMenu
 	ld hl, HerbalLadyComeAgainText
-	call MartTextbox
-	ret
+	jp MartTextbox
 
 BargainShop:
 	ld b, BANK(BargainShopData)
@@ -79,8 +77,7 @@ BargainShop:
 
 .skip_set
 	ld hl, BargainShopComeAgainText
-	call MartTextbox
-	ret
+	jp MartTextbox
 
 Pharmacist:
 	call FarReadMart
@@ -89,8 +86,7 @@ Pharmacist:
 	call MartTextbox
 	call BuyMenu
 	ld hl, PharmacyComeAgainText
-	call MartTextbox
-	ret
+	jp MartTextbox
 
 LoadMartPointer:
 	ld a, b
@@ -215,7 +211,7 @@ FarReadMart:
 	ld a, [de]
 	inc de
 	cp -1
-	jr z, .done
+	ret z
 	push de
 	call GetMartItemPrice
 	pop de
@@ -324,8 +320,7 @@ BuyMenu:
 .loop
 	call BuyMenuLoop ; menu loop
 	jr nc, .loop
-	call CloseSubmenu
-	ret
+	jp CloseSubmenu
 
 LoadBuyMenuText:
 ; load text from a nested table
@@ -344,8 +339,7 @@ LoadBuyMenuText:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	call PrintText
-	ret
+	jp PrintText
 
 MartAskPurchaseQuantity:
 	call GetMartDialogGroup ; gets a pointer from GetMartDialogGroup.MartTextFunctionPointers
@@ -481,15 +475,13 @@ StandardMartAskPurchaseQuantity:
 	ld a, MARTTEXT_HOW_MANY
 	call LoadBuyMenuText
 	farcall SelectQuantityToBuy
-	call ExitMenu
-	ret
+	jp ExitMenu
 
 MartConfirmPurchase:
 	predef PartyMonItemName
 	ld a, MARTTEXT_COSTS_THIS_MUCH
 	call LoadBuyMenuText
-	call YesNoBox
-	ret
+	jp YesNoBox
 
 BargainShopAskPurchaseQuantity:
 	ld a, 1
@@ -569,8 +561,7 @@ MenuHeader_Buy:
 	ld bc, SCREEN_WIDTH
 	add hl, bc
 	ld c, PRINTNUM_LEADINGZEROS | PRINTNUM_MONEY | 3
-	call PrintBCDNumber
-	ret
+	jp PrintBCDNumber
 
 HerbShopLadyIntroText:
 	text_far _HerbShopLadyIntroText
@@ -663,7 +654,7 @@ SellMenu:
 	farcall DepositSellPack
 	ld a, [wPackUsedItem]
 	and a
-	jp z, .quit
+	jr z, .quit
 	call .TryToSellItem
 	jr .loop
 
@@ -803,11 +794,9 @@ MartBoughtText:
 PlayTransactionSound:
 	call WaitSFX
 	ld de, SFX_TRANSACTION
-	call PlaySFX
-	ret
+	jp PlaySFX
 
 MartTextbox:
 	call MenuTextbox
 	call JoyWaitAorB
-	call ExitMenu
-	ret
+	jp ExitMenu

@@ -185,12 +185,10 @@ MainMenu_PrintCurrentTimeAndDay:
 	hlcoord 0, 12
 	ld b, 4
 	ld c, 13
-	call Textbox
-	ret
+	jp Textbox
 
 .TimeFail:
-	call SpeechTextbox
-	ret
+	jp SpeechTextbox
 
 .PlaceTime:
 	ld a, [wSaveFileExists]
@@ -198,7 +196,7 @@ MainMenu_PrintCurrentTimeAndDay:
 	ret z
 	call CheckRTCStatus
 	and RTC_RESET
-	jp nz, .PrintTimeNotSet
+	jr nz, .PrintTimeNotSet
 	call UpdateTime
 	hlcoord 1, 13
 	lb bc, 4, 13
@@ -215,8 +213,7 @@ MainMenu_PrintCurrentTimeAndDay:
 	inc hl
 	ld de, hMinutes
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
-	call PrintNum
-	ret
+	jp PrintNum
 
 .minString: ; unreferenced
 	db "min.@"
@@ -224,8 +221,7 @@ MainMenu_PrintCurrentTimeAndDay:
 .PrintTimeNotSet:
 	hlcoord 1, 14
 	ld de, .TimeNotSetString
-	call PlaceString
-	ret
+	jp PlaceString
 
 .TimeNotSetString:
 	db "TIME NOT SET@"
@@ -246,8 +242,7 @@ PrintDayOfWeek:
 	ld h, b
 	ld l, c
 	ld de, .Day
-	call PlaceString
-	ret
+	jp PlaceString
 
 .Days:
 	db "SUN@"
@@ -266,8 +261,7 @@ ClearTilemapEtc:
 	call ClearTilemap
 	call LoadFontsExtra
 	call LoadStandardFont
-	call ClearWindowData
-	ret
+	jp ClearWindowData
 
 MysteryGift:
 	call UpdateTime

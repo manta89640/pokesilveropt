@@ -79,8 +79,7 @@ GameFreakPresentsInit:
 	ld a, SCREEN_HEIGHT_PX
 	ldh [hWY], a
 	lb de, %00100100, %11111000
-	call DmgToCgbObjPals
-	ret
+	jp DmgToCgbObjPals
 
 GameFreakPresentsFrame:
 ; Play one frame of GameFreakPresents sequence.
@@ -155,8 +154,7 @@ GameFreakPresents_Star:
 	ld de, SFX_GAME_FREAK_LOGO_GS
 	call PlaySFX
 
-	call GameFreakPresents_NextScene
-	ret
+	jr GameFreakPresents_NextScene
 
 GameFreakPresents_PlaceLogo:
 ; Draw the Game Freak logo (may be initially invisible due to palette)
@@ -190,20 +188,17 @@ GameFreakPresents_LogoSparkles:
 	call z, GameFreakPresents_PlaceGameFreak
 
 ; add sparkles continuously
-	call GameFreakPresents_Sparkle
-	ret
+	jr GameFreakPresents_Sparkle
 
 .done
 ; go to the next scene
 	ld [hl], 128
-	call GameFreakPresents_NextScene
-	ret
+	jr GameFreakPresents_NextScene
 
 GameFreakPresents_PlaceGameFreak:
 	hlcoord 5, 12
 	ld de, .game_freak
-	call PlaceString
-	ret
+	jp PlaceString
 
 .game_freak
 	db $80, $81, $82, $83, $8d, $84, $85, $83, $81, $86
@@ -240,8 +235,7 @@ GameFreakPresents_WaitForTimer:
 	dec [hl]
 	ret
 .done
-	call GameFreakPresents_NextScene
-	ret
+	jp GameFreakPresents_NextScene
 
 GameFreakPresents_UpdateLogoPal:
 ; called from DoSpriteAnimFrame.GameFreakLogo
@@ -263,8 +257,7 @@ GameFreakPresents_UpdateLogoPal:
 	ldh a, [rOBP1]
 	rrca
 	rrca
-	call DmgToCgbObjPal1
-	ret
+	jp DmgToCgbObjPal1
 
 GameFreakPresents_Sparkle:
 ; Initialize and configure a sparkle sprite.

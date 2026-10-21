@@ -17,8 +17,7 @@ LoadFishingGFX:
 	ld de, FishingGFX tile $06
 	ld hl, vTiles0 tile $fc
 	lb bc, BANK(FishingGFX), 2
-	call Get2bpp
-	ret
+	jp Get2bpp
 
 FishingGFX:
 INCBIN "gfx/overworld/chris_fish.2bpp"

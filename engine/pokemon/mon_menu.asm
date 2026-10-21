@@ -75,8 +75,7 @@ TossItemFromPC:
 
 .CantToss:
 	ld hl, .ItemsTooImportantText
-	call MenuTextboxBackup
-	ret
+	jp MenuTextboxBackup
 
 .ItemsTooImportantText:
 	text_far _ItemsTooImportantText
@@ -84,8 +83,7 @@ TossItemFromPC:
 
 CantUseItem:
 	ld hl, ItemsOakWarningText
-	call MenuTextboxWaitButton
-	ret
+	jp MenuTextboxWaitButton
 
 ItemsOakWarningText:
 	text_far _ItemsOakWarningText
@@ -95,8 +93,7 @@ PartyMonItemName:
 	ld a, [wCurItem]
 	ld [wNamedObjectIndex], a
 	call GetItemName
-	call CopyName1
-	ret
+	jp CopyName1
 
 CancelPokemonAction:
 	farcall InitPartyMenuWithCancel
@@ -195,8 +192,7 @@ SwitchPartyMons:
 .DontSwitch:
 	xor a
 	ld [wPartyMenuActionText], a
-	call CancelPokemonAction
-	ret
+	jp CancelPokemonAction
 
 GiveTakePartyMonItem:
 ; Eggs can't hold items!
@@ -245,7 +241,7 @@ GiveTakePartyMonItem:
 
 	ld a, [wPackUsedItem]
 	and a
-	jr z, .quit
+	ret z
 
 	ld a, [wCurPocket]
 	cp KEY_ITEM_POCKET
@@ -256,8 +252,7 @@ GiveTakePartyMonItem:
 	and a
 	jr nz, .next
 
-	call TryGiveItemToPartymon
-	jr .quit
+	jr TryGiveItemToPartymon
 
 .next
 	ld hl, ItemCantHeldText
@@ -287,20 +282,18 @@ TryGiveItemToPartymon:
 	call GiveItemToPokemon
 	ld hl, PokemonHoldItemText
 	call MenuTextboxBackup
-	call GivePartyItem
-	ret
+	jr GivePartyItem
 
 .please_remove_mail
 	ld hl, PokemonRemoveMailText
-	call MenuTextboxBackup
-	ret
+	jp MenuTextboxBackup
 
 .already_holding_item
 	ld [wNamedObjectIndex], a
 	call GetItemName
 	ld hl, PokemonAskSwapItemText
 	call StartMenuYesNo
-	jr c, .abort
+	ret c
 
 	call GiveItemToPokemon
 	ld a, [wNamedObjectIndex]
@@ -316,8 +309,7 @@ TryGiveItemToPartymon:
 	call MenuTextboxBackup
 	ld a, [wNamedObjectIndex]
 	ld [wCurItem], a
-	call GivePartyItem
-	ret
+	jr GivePartyItem
 
 .bag_full
 	ld a, [wNamedObjectIndex]
@@ -335,7 +327,7 @@ GivePartyItem:
 	ld [hl], a
 	ld d, a
 	farcall ItemIsMail
-	jr nc, .done
+	ret nc
 	call ComposeMailMessage
 
 .done
@@ -359,13 +351,11 @@ TakePartyItem:
 	ld [hl], NO_ITEM
 	call GetItemName
 	ld hl, PokemonTookItemText
-	call MenuTextboxBackup
-	jr .done
+	jp MenuTextboxBackup
 
 .not_holding_item
 	ld hl, PokemonNotHoldingText
-	call MenuTextboxBackup
-	jr .done
+	jp MenuTextboxBackup
 
 .item_storage_full
 	ld hl, ItemStorageFullText
@@ -468,8 +458,7 @@ ComposeMailMessage:
 	ld a, BANK(sPartyMail)
 	call OpenSRAM
 	call CopyBytes
-	call CloseSRAM
-	ret
+	jp CloseSRAM
 
 MonMailAction:
 ; If in the time capsule or trade center,
@@ -488,13 +477,13 @@ MonMailAction:
 	call ExitMenu
 
 ; Interpret the menu.
-	jp c, .done
+	jr c, .done
 	ld a, [wMenuCursorY]
 	cp $1
 	jr z, .read
 	cp $2
 	jr z, .take
-	jp .done
+	jr .done
 
 .read
 	farcall ReadPartyMonMail
@@ -820,14 +809,14 @@ ChooseMoveToDelete:
 .loop
 	call ScrollingMenuJoypad
 	bit B_BUTTON_F, a
-	jp nz, .b_button
+	jr nz, .b_button
 	bit A_BUTTON_F, a
-	jp nz, .a_button
+	jr nz, .a_button
 
 .enter_loop
 	call PrepareToPlaceMoveData
 	call PlaceMoveData
-	jp .loop
+	jr .loop
 
 .a_button
 	and a
@@ -889,13 +878,13 @@ MoveScreenLoop:
 .joy_loop
 	call ScrollingMenuJoypad
 	bit B_BUTTON_F, a
-	jp nz, .b_button
+	jr nz, .b_button
 	bit A_BUTTON_F, a
 	jp nz, .a_button
 	bit B_PAD_RIGHT, a
-	jp nz, .d_right
+	jr nz, .d_right
 	bit B_PAD_LEFT, a
-	jp nz, .d_left
+	jr nz, .d_left
 
 .skip_joy
 	call PrepareToPlaceMoveData
@@ -903,7 +892,7 @@ MoveScreenLoop:
 	and a
 	jr nz, .moving_move
 	call PlaceMoveData
-	jp .joy_loop
+	jr .joy_loop
 
 .moving_move
 	ld a, ' '
@@ -916,7 +905,7 @@ MoveScreenLoop:
 	hlcoord 1, 12
 	ld de, String_MoveWhere
 	call PlaceString
-	jp .joy_loop
+	jr .joy_loop
 .b_button
 	call PlayClickSFX
 	call WaitSFX
@@ -931,12 +920,12 @@ MoveScreenLoop:
 	hlcoord 1, 2
 	lb bc, 8, SCREEN_WIDTH - 2
 	call ClearBox
-	jp .loop
+	jr .loop
 
 .d_right
 	ld a, [wSwappingMove]
 	and a
-	jp nz, .joy_loop
+	jr nz, .joy_loop
 
 	ld a, [wCurPartyMon]
 	ld b, a
@@ -945,7 +934,7 @@ MoveScreenLoop:
 	pop bc
 	ld a, [wCurPartyMon]
 	cp b
-	jp z, .joy_loop
+	jr z, .joy_loop
 	jp MoveScreenLoop
 
 .d_left
@@ -1231,8 +1220,7 @@ String_MoveNoPower:
 
 PlaceMoveScreenArrows:
 	call PlaceMoveScreenLeftArrow
-	call PlaceMoveScreenRightArrow
-	ret
+	jr PlaceMoveScreenRightArrow
 
 PlaceMoveScreenLeftArrow:
 	ld a, [wCurPartyMon]

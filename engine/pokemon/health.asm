@@ -5,7 +5,7 @@ HealParty:
 .loop
 	ld a, [hli]
 	cp -1
-	jr z, .done
+	ret z
 	cp EGG
 	jr z, .next
 
@@ -106,5 +106,4 @@ ComputeHPBarPixels:
 AnimateHPBar:
 	call WaitBGMap
 	call _AnimateHPBar
-	call WaitBGMap
-	ret
+	jp WaitBGMap

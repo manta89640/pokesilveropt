@@ -211,13 +211,13 @@ _ScrollingMenuJoypad::
 	jr c, .pressed
 	ld a, [w2DMenuFlags1]
 	bit _2DMENU_DISABLE_JOYPAD_FILTER_F, a
-	jp nz, .done
+	jr nz, .done
 	jr .loopRTC
 
 .pressed
 	vc_hook Forbid_printing_photo_studio
 	call _2DMenuInterpretJoypad
-	jp c, .done
+	jr c, .done
 	ld a, [w2DMenuFlags1]
 	bit _2DMENU_DISABLE_JOYPAD_FILTER_F, a
 	jr nz, .done
@@ -225,13 +225,12 @@ _ScrollingMenuJoypad::
 	ld b, a
 	ld a, [wMenuJoypadFilter]
 	and b
-	jp z, .menu_joypad_loop
+	jr z, .menu_joypad_loop
 
 .done
 	pop af
 	ldh [hBGMapMode], a
-	call GetMenuJoypad
-	ret
+	jp GetMenuJoypad
 
 Menu_WasButtonPressed:
 	ld a, [w2DMenuFlags1]
@@ -289,7 +288,7 @@ _2DMenuInterpretJoypad:
 	bit _2DMENU_WRAP_UP_DOWN_F, a
 	jr nz, .wrap_around_down
 	bit _2DMENU_EXIT_DOWN_F, a
-	jp nz, .set_bit_7
+	jr nz, .set_bit_7
 	xor a
 	ret
 
@@ -312,7 +311,7 @@ _2DMenuInterpretJoypad:
 	bit _2DMENU_WRAP_UP_DOWN_F, a
 	jr nz, .wrap_around_up
 	bit _2DMENU_EXIT_UP_F, a
-	jp nz, .set_bit_7
+	jr nz, .set_bit_7
 	xor a
 	ret
 
@@ -336,7 +335,7 @@ _2DMenuInterpretJoypad:
 	bit _2DMENU_WRAP_LEFT_RIGHT_F, a
 	jr nz, .wrap_around_left
 	bit _2DMENU_EXIT_LEFT_F, a
-	jp nz, .set_bit_7
+	jr nz, .set_bit_7
 	xor a
 	ret
 
@@ -360,7 +359,7 @@ _2DMenuInterpretJoypad:
 	bit _2DMENU_WRAP_LEFT_RIGHT_F, a
 	jr nz, .wrap_around_right
 	bit _2DMENU_EXIT_RIGHT_F, a
-	jp nz, .set_bit_7
+	jr nz, .set_bit_7
 	xor a
 	ret
 
@@ -535,7 +534,7 @@ _ExitMenu::
 	call GetWindowStackTop
 	ld a, l
 	or h
-	jp z, Error_Cant_ExitMenu
+	jr z, Error_Cant_ExitMenu
 	ld a, l
 	ld [wWindowStackPointer], a
 	ld a, h
@@ -563,8 +562,7 @@ _ExitMenu::
 	ld a, [wSpriteUpdatesEnabled]
 	cp 0
 	ret z
-	call ReloadPalettes
-	ret
+	jp ReloadPalettes
 
 RestoreOverworldMapTiles:
 	ld a, [wStateFlags]
@@ -595,8 +593,7 @@ RestoreOverworldMapTiles:
 	ld a, c
 	or b
 	jr nz, .loop
-	call CloseSRAM
-	ret
+	jp CloseSRAM
 
 Error_Cant_ExitMenu:
 	ld hl, .WindowPoppingErrorText

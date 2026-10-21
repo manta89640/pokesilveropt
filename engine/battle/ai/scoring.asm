@@ -1354,22 +1354,22 @@ AI_Smart_Counter:
 
 	ld a, [wLastPlayerCounterMove]
 	and a
-	jr z, .done
+	ret z
 
 	call AIGetEnemyMove
 
 	ld a, [wEnemyMoveStruct + MOVE_POWER]
 	and a
-	jr z, .done
+	ret z
 
 	ld a, [wEnemyMoveStruct + MOVE_TYPE]
 	cp SPECIAL
-	jr nc, .done
+	ret nc
 
 .encourage
 	call Random
 	cp 39 percent + 1
-	jr c, .done
+	ret c
 
 	dec [hl]
 
@@ -2516,22 +2516,22 @@ AI_Smart_MirrorCoat:
 
 	ld a, [wLastPlayerCounterMove]
 	and a
-	jr z, .done
+	ret z
 
 	call AIGetEnemyMove
 
 	ld a, [wEnemyMoveStruct + MOVE_POWER]
 	and a
-	jr z, .done
+	ret z
 
 	ld a, [wEnemyMoveStruct + MOVE_TYPE]
 	cp SPECIAL
-	jr c, .done
+	ret c
 
 .encourage
 	call Random
 	cp 39 percent + 1
-	jr c, .done
+	ret c
 	dec [hl]
 
 .done
@@ -2864,12 +2864,12 @@ AI_Opportunist:
 .checkmove
 	inc hl
 	dec c
-	jr z, .done
+	ret z
 
 	ld a, [de]
 	inc de
 	and a
-	jr z, .done
+	ret z
 
 	push hl
 	push de
@@ -2949,7 +2949,7 @@ AI_Aggressive:
 ; Nothing we can do if no attacks did damage.
 	ld a, c
 	and a
-	jr z, .done
+	ret z
 
 ; Discourage moves that do less damage unless they're reckless too.
 	ld hl, wEnemyAIMoveScores - 1
@@ -2959,7 +2959,7 @@ AI_Aggressive:
 	inc b
 	ld a, b
 	cp NUM_MOVES + 1
-	jr z, .done
+	ret z
 
 ; Ignore this move if it is the highest damaging one.
 	cp c

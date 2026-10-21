@@ -50,8 +50,7 @@ DoBattleTransition:
 	pop af
 	vc_hook Stop_reducing_battle_transition_flashing
 	ldh [hVBlank], a
-	call DelayFrame
-	ret
+	jp DelayFrame
 
 .InitGFX:
 	farcall ReanchorBGMap_NoOAMUpdate
@@ -70,8 +69,7 @@ DoBattleTransition:
 	ld [hli], a
 	ld [hli], a
 	ld [hl], a
-	call WipeLYOverrides
-	ret
+	jp WipeLYOverrides
 
 LoadBattleTransitionGFX:
 	ld hl, wDecompressScratch
@@ -95,8 +93,7 @@ LoadBattleTransitionGFX:
 	ld hl, vTiles0 tile BATTLETRANSITION_SQUARE
 	ld b, BANK(BattleTransitionTiles)
 	ld c, 2
-	call Request2bpp
-	ret
+	jp Request2bpp
 
 BattleTransitionTiles:
 INCBIN "gfx/overworld/battle_transition_tiles.2bpp"
@@ -216,8 +213,7 @@ StartTrainerBattle_SetUpBGMap:
 StartTrainerBattle_Flash:
 	call .DoFlashAnimation
 	ret nc
-	call StartTrainerBattle_NextScene
-	ret
+	jr StartTrainerBattle_NextScene
 
 .DoFlashAnimation:
 	ld a, [wTimeOfDayPalset]
@@ -281,8 +277,7 @@ StartTrainerBattle_SineWave:
 	ld a, [wBattleTransitionCounter]
 	cp $60
 	jr nc, .end
-	call .DoSineWave
-	ret
+	jr .DoSineWave
 
 .end
 	ld a, BATTLETRANSITION_FINISH
@@ -610,8 +605,7 @@ StartTrainerBattle_LoadPokeBallGraphics:
 	call CGBOnly_CopyTilemapAtOnce
 
 .nextscene
-	call StartTrainerBattle_NextScene
-	ret
+	jp StartTrainerBattle_NextScene
 
 .PokeBallTransition:
 	; 16x16 overlay of a Poke Ball

@@ -34,8 +34,7 @@ SaveAfterLinkTrade:
 	call SaveBackupChecksum
 	farcall BackupPartyMonMail
 	farcall SaveRTC
-	call ResumeGameLogic
-	ret
+	jp ResumeGameLogic
 
 ChangeBoxSaveGame:
 	push de
@@ -62,7 +61,7 @@ ChangeBoxSaveGame:
 
 Link_SaveGame:
 	call AskOverwriteSaveFile
-	jr c, .refused
+	ret c
 	call PauseGameLogic
 	call SavingDontTurnOffThePower
 	call ResumeGameLogic
@@ -79,8 +78,7 @@ MoveMonWOMail_SaveGame:
 	ld a, e
 	ld [wCurBox], a
 	call LoadBox
-	call ResumeGameLogic
-	ret
+	jr ResumeGameLogic
 
 MoveMonWOMail_InsertMon_SaveGame:
 	call PauseGameLogic
@@ -110,8 +108,7 @@ MoveMonWOMail_InsertMon_SaveGame:
 	ld de, SFX_SAVE
 	call PlaySFX
 	ld c, 24
-	call DelayFrames
-	ret
+	jp DelayFrames
 
 StartMoveMonWOMail_SaveGame:
 	ld hl, MoveMonWOMailSaveText
@@ -159,12 +156,10 @@ AddHallOfFameEntry:
 	ld de, sHallOfFame
 	ld bc, wHallOfFamePokemonListEnd - wHallOfFamePokemonList + 1
 	call CopyBytes
-	call CloseSRAM
-	ret
+	jp CloseSRAM
 
 SaveGameData:
-	call _SaveGameData
-	ret
+	jp _SaveGameData
 
 AskOverwriteSaveFile:
 	ld a, [wSaveFileExists]
@@ -267,8 +262,7 @@ SavingDontTurnOffThePower:
 	call WaitSFX
 	; wait 30 frames
 	ld c, 30
-	call DelayFrames
-	ret
+	jp DelayFrames
 
 _SaveGameData:
 	ld a, TRUE
@@ -316,8 +310,7 @@ UpdateStackTop:
 	ld [sStackTop + 1], a
 
 .done
-	call CloseSRAM
-	ret
+	jp CloseSRAM
 
 FindStackTop:
 ; Find the furthest point that sp has traversed to.
@@ -413,13 +406,11 @@ SavePokemonData:
 	ld de, sPokemonData
 	ld bc, wPokemonDataEnd - wPokemonData
 	call CopyBytes
-	call CloseSRAM
-	ret
+	jp CloseSRAM
 
 SaveBox:
 	call GetBoxAddress
-	call SaveBoxAddress
-	ret
+	jp SaveBoxAddress
 
 SaveChecksum:
 	ld hl, sGameData
@@ -431,8 +422,7 @@ SaveChecksum:
 	ld [sChecksum + 0], a
 	ld a, d
 	ld [sChecksum + 1], a
-	call CloseSRAM
-	ret
+	jp CloseSRAM
 
 ValidateBackupSave:
 	ld a, BANK(sBackupCheckValue1) ; aka BANK(sBackupCheckValue2)
@@ -441,8 +431,7 @@ ValidateBackupSave:
 	ld [sBackupCheckValue1], a
 	ld a, SAVE_CHECK_VALUE_2
 	ld [sBackupCheckValue2], a
-	call CloseSRAM
-	ret
+	jp CloseSRAM
 
 SaveBackupOptions:
 	ld a, BANK(sBackupOptions)
@@ -451,8 +440,7 @@ SaveBackupOptions:
 	ld de, sBackupOptions
 	ld bc, wOptionsEnd - wOptions
 	call CopyBytes
-	call CloseSRAM
-	ret
+	jp CloseSRAM
 
 SaveBackupPlayerData:
 	ld a, BANK(sBackupPlayerData3)
@@ -479,8 +467,7 @@ SaveBackupPlayerData:
 	ld de, sBackupCurMapData
 	ld bc, wCurMapDataEnd - wCurMapData
 	call CopyBytes
-	call CloseSRAM
-	ret
+	jp CloseSRAM
 
 SaveBackupPokemonData:
 	ld a, BANK(sBackupPokemonData)
@@ -489,8 +476,7 @@ SaveBackupPokemonData:
 	ld de, sBackupPokemonData
 	ld bc, wPokemonDataEnd - wPokemonData
 	call CopyBytes
-	call CloseSRAM
-	ret
+	jp CloseSRAM
 
 SaveBackupChecksum:
 	ld a, BANK(sBackupPlayerData3)
@@ -532,8 +518,7 @@ SaveBackupChecksum:
 	ld [sBackupChecksum + 0], a
 	ld a, h
 	ld [sBackupChecksum + 1], a
-	call CloseSRAM
-	ret
+	jp CloseSRAM
 
 TryLoadSaveFile:
 	call VerifyChecksum
@@ -593,8 +578,7 @@ TryLoadSaveData:
 	ld de, wStartDay
 	ld bc, 14
 	call CopyBytes
-	call CloseSRAM
-	ret
+	jp CloseSRAM
 
 .backup
 	call CheckBackupSaveFile
@@ -608,16 +592,14 @@ TryLoadSaveData:
 	ld de, wStartDay
 	ld bc, 14
 	call CopyBytes
-	call CloseSRAM
-	ret
+	jp CloseSRAM
 
 .corrupt
 	ld hl, DefaultOptions
 	ld de, wOptions
 	ld bc, wOptionsEnd - wOptions
 	call CopyBytes
-	call ClearClock
-	ret
+	jp ClearClock
 
 INCLUDE "data/default_options.asm"
 
@@ -640,8 +622,7 @@ CheckPrimarySaveFile:
 	ld [wSaveFileExists], a
 
 .nope
-	call CloseSRAM
-	ret
+	jp CloseSRAM
 
 CheckBackupSaveFile:
 	ld a, BANK(sBackupCheckValue1) ; aka BANK(sBackupCheckValue2)
@@ -661,8 +642,7 @@ CheckBackupSaveFile:
 	ld [wSaveFileExists], a
 
 .nope
-	call CloseSRAM
-	ret
+	jp CloseSRAM
 
 CheckTextDelay:
 ; Fix options if text delay is invalid
@@ -693,8 +673,7 @@ LoadPlayerData:
 	ld de, wCurMapData
 	ld bc, wCurMapDataEnd - wCurMapData
 	call CopyBytes
-	call CloseSRAM
-	ret
+	jp CloseSRAM
 
 LoadPokemonData:
 	ld a, BANK(sPokemonData)
@@ -703,13 +682,11 @@ LoadPokemonData:
 	ld de, wPokemonData
 	ld bc, wPokemonDataEnd - wPokemonData
 	call CopyBytes
-	call CloseSRAM
-	ret
+	jp CloseSRAM
 
 LoadBox:
 	call GetBoxAddress
-	call LoadBoxAddress
-	ret
+	jp LoadBoxAddress
 
 VerifyChecksum:
 	ld hl, sGameData
@@ -756,8 +733,7 @@ LoadBackupPlayerData:
 	ld de, wCurMapData
 	ld bc, wCurMapDataEnd - wCurMapData
 	call CopyBytes
-	call CloseSRAM
-	ret
+	jp CloseSRAM
 
 LoadBackupPokemonData:
 	ld a, BANK(sBackupPokemonData)
@@ -766,8 +742,7 @@ LoadBackupPokemonData:
 	ld de, wPokemonData
 	ld bc, wPokemonDataEnd - wPokemonData
 	call CopyBytes
-	call CloseSRAM
-	ret
+	jp CloseSRAM
 
 VerifyBackupChecksum:
 	ld a, BANK(sBackupPokemonData)

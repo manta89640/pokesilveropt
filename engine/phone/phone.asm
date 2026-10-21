@@ -23,7 +23,7 @@ DelCellNum::
 	ret
 
 CheckCellNum::
-	jp _CheckCellNum ; useless
+	jr _CheckCellNum ; useless
 
 _CheckCellNum:
 	ld hl, wPhoneList
@@ -297,8 +297,7 @@ CheckSpecialPhoneCall::
 	ld b, 0
 	ld hl, SpecialPhoneCallList
 	ld a, SPECIALCALL_SIZE
-	call AddNTimes
-	ret
+	jp AddNTimes
 
 SpecialCallOnlyWhenOutside:
 	ld a, [wEnvironment]
@@ -369,8 +368,7 @@ MakePhoneCallFromPokegear:
 .OutOfArea:
 	ld b, BANK(LoadOutOfAreaScript)
 	ld de, LoadOutOfAreaScript
-	call ExecuteCallbackScript
-	ret
+	jp ExecuteCallbackScript
 
 .DoPhoneCall:
 	ld a, b
@@ -381,8 +379,7 @@ MakePhoneCallFromPokegear:
 	ld [wPhoneCaller + 1], a
 	ld b, BANK(LoadPhoneScriptBank)
 	ld de, LoadPhoneScriptBank
-	call ExecuteCallbackScript
-	ret
+	jp ExecuteCallbackScript
 
 LoadPhoneScriptBank:
 	memcall wPhoneScriptBank
@@ -412,8 +409,7 @@ LoadCallerScript:
 .proceed
 	ld de, wCallerContact
 	ld bc, PHONE_CONTACT_SIZE
-	call FarCopyBytes
-	ret
+	jp FarCopyBytes
 
 WrongNumber:
 	db TRAINER_NONE, PHONE_00
@@ -441,7 +437,7 @@ Script_SpecialBillCall::
 
 .LoadBillScript:
 	ld e, PHONE_BILL
-	jp LoadCallerScript
+	jr LoadCallerScript
 
 
 RingTwice_StartCall:
@@ -454,14 +450,12 @@ RingTwice_StartCall:
 	call Phone_Wait20Frames
 	call Phone_CallerTextbox
 	call Phone_Wait20Frames
-	call .CallerTextboxWithName
-	ret
+	jr .CallerTextboxWithName
 
 .CallerTextboxWithName:
 	ld a, [wCurCaller]
 	ld b, a
-	call Phone_TextboxWithName
-	ret
+	jp Phone_TextboxWithName
 
 PhoneCall::
 	ld a, b
@@ -479,8 +473,7 @@ PhoneCall::
 	call Phone_Wait20Frames
 	call Phone_CallerTextbox
 	call Phone_Wait20Frames
-	call .CallerTextboxWithName
-	ret
+	jr .CallerTextboxWithName
 
 .CallerTextboxWithName:
 	call Phone_CallerTextbox
@@ -495,8 +488,7 @@ PhoneCall::
 	ld e, a
 	ld a, [wPhoneCaller + 1]
 	ld d, a
-	call BrokenPlaceFarString
-	ret
+	jp BrokenPlaceFarString
 
 Phone_NoSignal:
 	ld de, SFX_NO_SIGNAL
@@ -518,16 +510,14 @@ Phone_CallEnd:
 	call HangUp_BoopOn
 	call HangUp_Wait20Frames
 	call HangUp_BoopOff
-	call HangUp_Wait20Frames
-	ret
+	jr HangUp_Wait20Frames
 
 
 HangUp_Beep:
 	ld hl, PhoneClickText
 	call PrintText
 	ld de, SFX_HANG_UP
-	call PlaySFX
-	ret
+	jp PlaySFX
 
 PhoneClickText:
 	text_far _PhoneClickText
@@ -535,16 +525,14 @@ PhoneClickText:
 
 HangUp_BoopOn:
 	ld hl, PhoneEllipseText
-	call PrintText
-	ret
+	jp PrintText
 
 PhoneEllipseText:
 	text_far _PhoneEllipseText
 	text_end
 
 HangUp_BoopOff:
-	call SpeechTextbox
-	ret
+	jp SpeechTextbox
 
 Phone_StartRinging:
 	call WaitSFX
@@ -574,23 +562,20 @@ Phone_TextboxWithName:
 	ld d, h
 	ld e, l
 	pop bc
-	call GetCallerClassAndName
-	ret
+	jr GetCallerClassAndName
 
 Phone_CallerTextbox:
 	hlcoord 0, 0
 	ld b, 2
 	ld c, SCREEN_WIDTH - 2
-	call Textbox
-	ret
+	jp Textbox
 
 GetCallerClassAndName:
 	ld h, d
 	ld l, e
 	ld a, b
 	call GetCallerTrainerClass
-	call GetCallerName
-	ret
+	jr GetCallerName
 
 CheckCanDeletePhoneNumber:
 	ld a, c
@@ -633,8 +618,7 @@ GetCallerName:
 	ld de, SCREEN_WIDTH + 3
 	add hl, de
 	call Phone_GetTrainerClassName
-	call PlaceString
-	ret
+	jp PlaceString
 
 .NotTrainer:
 	push hl

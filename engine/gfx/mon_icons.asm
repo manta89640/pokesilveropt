@@ -71,8 +71,7 @@ PartyMenu_InitAnimatedMonIcon:
 	ld [hl], a
 
 	call .SpawnItemIcon
-	call SetPartyMonIconAnimSpeed
-	ret
+	jr SetPartyMonIconAnimSpeed
 
 .SpawnItemIcon:
 	push bc
@@ -169,8 +168,7 @@ Trade_LoadMonIconGFX:
 	ld [wCurIcon], a
 	ld a, $62
 	ld [wCurIconTile], a
-	call GetMemIconGFX
-	ret
+	jr GetMemIconGFX
 
 GetSpeciesIcon:
 ; Load species icon into VRAM at tile a
@@ -180,8 +178,7 @@ GetSpeciesIcon:
 	ld [wCurIcon], a
 	pop de
 	ld a, e
-	call GetIconGFX
-	ret
+	jr GetIconGFX
 
 GetMemIconGFX:
 	ld a, [wCurIconTile]

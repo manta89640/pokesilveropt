@@ -22,8 +22,7 @@ ENDC
 ResetWRAM:
 	xor a
 	ldh [hBGMapMode], a
-	call _ResetWRAM
-	ret
+	jr _ResetWRAM
 
 _ResetWRAM:
 	ld hl, wShadowOAM
@@ -134,8 +133,7 @@ endc
 
 	farcall DeletePartyMonMail
 
-	call ResetGameTime
-	ret
+	jp ResetGameTime
 
 .InitList:
 ; Loads 0 in the count and -1 in the first item or mon slot.
@@ -184,8 +182,7 @@ InitializeMagikarpHouse:
 	ld a, $6
 	ld [hli], a
 	ld de, .Ralph
-	call CopyName2
-	ret
+	jp CopyName2
 
 .Ralph:
 	db "RALPH@"
@@ -208,8 +205,7 @@ InitializeNPCNames:
 
 .Copy:
 	ld bc, NAME_LENGTH
-	call CopyBytes
-	ret
+	jp CopyBytes
 
 .Rival:  db "???@"
 .Red:    db "RED@"
@@ -250,7 +246,7 @@ LoadOrRegenerateLuckyIDNumber:
 
 Continue:
 	farcall TryLoadSaveFile
-	jr c, .FailToLoad
+	ret c
 	call LoadStandardMenuHeader
 	call DisplaySaveInfoOnContinue
 	ld a, $1
@@ -259,14 +255,12 @@ Continue:
 	call DelayFrames
 	call ConfirmContinue
 	jr nc, .Check1Pass
-	call CloseWindow
-	jr .FailToLoad
+	jp CloseWindow
 
 .Check1Pass:
 	call Continue_CheckRTC_RestartClock
 	jr nc, .Check2Pass
-	call CloseWindow
-	jr .FailToLoad
+	jp CloseWindow
 
 .Check2Pass:
 	ld a, $8
@@ -288,7 +282,7 @@ Continue:
 	jr z, .SpawnAfterE4
 	ld a, MAPSETUP_CONTINUE
 	ldh [hMapEntryMethod], a
-	jp FinishContinueFunction
+	jr FinishContinueFunction
 
 .FailToLoad:
 	ret
@@ -297,7 +291,7 @@ Continue:
 	ld a, SPAWN_NEW_BARK
 	ld [wDefaultSpawnpoint], a
 	call PostCreditsSpawn
-	jp FinishContinueFunction
+	jr FinishContinueFunction
 
 SpawnAfterRed:
 	ld a, SPAWN_MT_SILVER
@@ -316,7 +310,7 @@ ConfirmContinue:
 	call GetJoypad
 	ld hl, hJoyPressed
 	bit A_BUTTON_F, [hl]
-	jr nz, .PressA
+	ret nz
 	bit B_BUTTON_F, [hl]
 	jr z, .loop
 	scf
@@ -361,29 +355,25 @@ DisplaySaveInfoOnContinue:
 	and RTC_RESET
 	jr z, .clock_ok
 	lb de, 4, 8
-	call DisplayContinueDataWithRTCError
-	ret
+	jr DisplayContinueDataWithRTCError
 
 .clock_ok
 	lb de, 4, 8
-	call DisplayNormalContinueData
-	ret
+	jr DisplayNormalContinueData
 
 DisplayNormalContinueData:
 	call Continue_LoadMenuHeader
 	call Continue_DisplayBadgesDex
 	call Continue_PrintGameTime
 	call LoadFontsExtra
-	call UpdateSprites
-	ret
+	jp UpdateSprites
 
 DisplayContinueDataWithRTCError:
 	call Continue_LoadMenuHeader
 	call Continue_DisplayBadgesDex
 	call Continue_UnknownGameTime
 	call LoadFontsExtra
-	call UpdateSprites
-	ret
+	jp UpdateSprites
 
 Continue_LoadMenuHeader:
 	xor a
@@ -397,8 +387,7 @@ Continue_LoadMenuHeader:
 .show_menu
 	call _OffsetMenuHeader
 	call MenuBox
-	call PlaceVerticalMenuItems
-	ret
+	jp PlaceVerticalMenuItems
 
 .MenuHeader_Dex:
 	db MENU_BACKUP_TILES ; flags
@@ -445,15 +434,13 @@ Continue_DisplayBadgesDex:
 Continue_PrintGameTime:
 	decoord 9, 8, 0
 	add hl, de
-	call Continue_DisplayGameTime
-	ret
+	jr Continue_DisplayGameTime
 
 Continue_UnknownGameTime:
 	decoord 9, 8, 0
 	add hl, de
 	ld de, .three_question_marks
-	call PlaceString
-	ret
+	jp PlaceString
 
 .three_question_marks
 	db " ???@"
@@ -569,8 +556,7 @@ OakSpeech:
 	call PrintText
 	call NamePlayer
 	ld hl, OakText7
-	call PrintText
-	ret
+	jp PrintText
 
 OakText1:
 	text_far _OakText1
@@ -615,8 +601,7 @@ NamePlayer:
 	ld de, wPlayerName
 	call StorePlayerName
 	farcall ApplyMonOrTrainerPals
-	call MovePlayerPicLeft
-	ret
+	jp MovePlayerPicLeft
 
 .NewName:
 	ld b, NAME_PLAYER
@@ -641,8 +626,7 @@ NamePlayer:
 
 	ld hl, wPlayerName
 	ld de, PlayerNameArray
-	call InitName
-	ret
+	jp InitName
 
 INCLUDE "data/player_names.asm"
 
@@ -652,14 +636,12 @@ ShowPlayerNamingChoices:
 	ld a, [wMenuCursorY]
 	dec a
 	call CopyNameFromMenu
-	call CloseWindow
-	ret
+	jp CloseWindow
 
 StorePlayerName:
 	ld hl, wStringBuffer2
 	ld bc, NAME_LENGTH
-	call CopyBytes
-	ret
+	jp CopyBytes
 
 ShrinkPlayer:
 	ldh a, [hROMBank]
@@ -710,8 +692,7 @@ ShrinkPlayer:
 	call DelayFrames
 
 	call RotateThreePalettesRight
-	call ClearTilemap
-	ret
+	jp ClearTilemap
 
 MovePlayerPicRight:
 	hlcoord 6, 4
@@ -924,8 +905,7 @@ ENDC
 	ld a, [hl]
 	dec a
 	ld bc, $28
-	call ByteFill
-	ret
+	jp ByteFill
 
 TitleScreenScene:
 	ld e, a
@@ -1095,8 +1075,7 @@ ELIF DEF(_SILVER)
 	depixel 15, 11, 4, 0
 ENDC
 	ld a, SPRITE_ANIM_OBJ_GS_TITLE_TRAIL
-	call InitSpriteAnimStruct
-	ret
+	jp InitSpriteAnimStruct
 
 IF DEF(_GOLD)
 .TitleTrailCoords:

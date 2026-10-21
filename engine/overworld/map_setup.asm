@@ -10,8 +10,7 @@ RunMapSetupScript::
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	call ReadMapSetupScript
-	ret
+	jp ReadMapSetupScript
 
 INCLUDE "data/maps/setup_scripts.asm"
 
@@ -95,8 +94,7 @@ CheckUpdatePlayerSprite::
 	ret
 
 .ok
-	call UpdatePlayerSprite
-	ret
+	jp UpdatePlayerSprite
 
 .CheckForcedBiking:
 	and a
@@ -160,8 +158,7 @@ CheckUpdatePlayerSprite::
 
 FadeOutMapMusic:
 	ld a, 6
-	call SkipMusic
-	ret
+	jp SkipMusic
 
 ActivateMapAnims:
 	ld a, TRUE
@@ -184,8 +181,7 @@ FadeMapMusicAndPalettes:
 	ld a, [wMusicFadeID + 1]
 	ld a, $4
 	ld [wMusicFade], a
-	call RotateThreePalettesRight
-	ret
+	jp RotateThreePalettesRight
 
 ForceMapMusic:
 	ld a, [wPlayerState]
@@ -195,5 +191,4 @@ ForceMapMusic:
 	ld a, $88
 	ld [wMusicFade], a
 .notbiking
-	call TryRestartMapMusic
-	ret
+	jp TryRestartMapMusic

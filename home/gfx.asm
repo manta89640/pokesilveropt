@@ -33,8 +33,7 @@ DecompressRequest2bpp::
 
 	ld de, sScratch
 	call Request2bpp
-	call CloseSRAM
-	ret
+	jp CloseSRAM
 
 FarCopyBytes::
 ; copy bc bytes from a:hl to de
@@ -182,7 +181,7 @@ Get2bpp::
 ; copy c 2bpp tiles from b:de to hl
 	ldh a, [rLCDC]
 	bit B_LCDC_ENABLE, a
-	jp nz, Request2bpp
+	jr nz, Request2bpp
 
 	push hl
 	ld h, d
@@ -209,7 +208,7 @@ Get1bpp::
 ; copy c 1bpp tiles from b:de to hl
 	ldh a, [rLCDC]
 	bit B_LCDC_ENABLE, a
-	jp nz, Request1bpp
+	jr nz, Request1bpp
 
 	push de
 	ld d, h

@@ -40,8 +40,7 @@ LoadFrame:
 	ld hl, vTiles2 tile ' ' ; $7f
 	ld de, TextboxSpaceGFX
 	lb bc, BANK(TextboxSpaceGFX), 1
-	call Get1bpp
-	ret
+	jp Get1bpp
 
 LoadBattleFontsHPBar:
 	ld de, FontBattleExtra
@@ -66,8 +65,7 @@ LoadHPBar:
 	ld de, ExpBarGFX
 	ld hl, vTiles2 tile $55
 	lb bc, BANK(ExpBarGFX), 9
-	call Get2bpp
-	ret
+	jp Get2bpp
 
 StatsScreen_LoadFont::
 	call _LoadFontsBattleExtra
@@ -91,8 +89,7 @@ LoadStatsScreenPageTilesGFX:
 	ld de, StatsScreenPageTilesGFX
 	ld hl, vTiles2 tile $31
 	lb bc, BANK(StatsScreenPageTilesGFX), 17
-	call Get2bpp
-	ret
+	jp Get2bpp
 
 
 INCLUDE "gfx/font.asm"

@@ -271,7 +271,7 @@ PokeBallEffect:
 	ld a, [wCurItem]
 	cp LEVEL_BALL
 	ld a, b
-	jp z, .skip_hp_calc
+	jr z, .skip_hp_calc
 
 	ld a, b
 	ldh [hMultiplicand + 2], a
@@ -912,7 +912,7 @@ MoonBallMultiplier:
 	sla b
 	jr c, .max
 	sla b
-	jr nc, .done
+	ret nc
 .max
 	ld b, $ff
 .done
@@ -1112,7 +1112,7 @@ EvoStoneEffect:
 	ld b, PARTYMENUACTION_EVO_STONE
 	call UseItem_SelectMon
 
-	jp c, .DecidedNotToUse
+	jr c, .DecidedNotToUse
 
 	ld a, MON_ITEM
 	call GetPartyParamLocation
@@ -1143,7 +1143,7 @@ VitaminEffect:
 	ld b, PARTYMENUACTION_HEALING_ITEM
 	call UseItem_SelectMon
 
-	jp c, RareCandy_StatBooster_ExitMenu
+	jr c, RareCandy_StatBooster_ExitMenu
 
 	call RareCandy_StatBooster_GetParameters
 
@@ -1253,14 +1253,13 @@ RareCandy_StatBooster_GetParameters:
 	call GetBaseData
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMonNicknames
-	call GetNickname
-	ret
+	jp GetNickname
 
 RareCandyEffect:
 	ld b, PARTYMENUACTION_HEALING_ITEM
 	call UseItem_SelectMon
 
-	jp c, RareCandy_StatBooster_ExitMenu
+	jr c, RareCandy_StatBooster_ExitMenu
 
 	call RareCandy_StatBooster_GetParameters
 
@@ -1498,7 +1497,7 @@ RevivalHerbEffect:
 	ld a, $0
 
 .not_used
-	jp StatusHealer_Jumptable
+	jr StatusHealer_Jumptable
 
 ReviveEffect:
 	ld b, PARTYMENUACTION_HEALING_ITEM
@@ -1506,7 +1505,7 @@ ReviveEffect:
 	jp c, StatusHealer_ExitMenu
 
 	call RevivePokemon
-	jp StatusHealer_Jumptable
+	jr StatusHealer_Jumptable
 
 RevivePokemon:
 	call IsMonFainted
@@ -1761,8 +1760,7 @@ StatusHealer_ExitMenu:
 	xor a
 	ld [wItemEffectSucceeded], a
 StatusHealer_ClearPalettes:
-	call ClearPalettes
-	ret
+	jp ClearPalettes
 
 IsItemUsedOnBattleMon:
 	ld a, [wBattleMode]
@@ -1795,7 +1793,7 @@ ContinueRevive:
 	ld [hl], d
 	inc hl
 	ld [hl], e
-	jp LoadCurHPIntoBuffer3
+	jr LoadCurHPIntoBuffer3
 
 RestoreHealth:
 	ld a, MON_HP + 1
@@ -1820,7 +1818,7 @@ RestoreHealth:
 	dec hl
 	ld a, [de]
 	sbc [hl]
-	jr c, .finish
+	ret c
 .full_hp
 	call ReviveFullHP
 .finish
@@ -1840,8 +1838,7 @@ RemoveHP:
 	ld [hld], a
 	ld [hl], a
 .okay
-	call LoadCurHPIntoBuffer3
-	ret
+	jr LoadCurHPIntoBuffer3
 
 IsMonFainted:
 	push de
@@ -2362,7 +2359,7 @@ BattleRestorePP:
 .loop
 	ld a, [de]
 	and a
-	jr z, .done
+	ret z
 	cp [hl]
 	jr nz, .next
 	push hl
@@ -2391,7 +2388,7 @@ endr
 Not_PP_Up:
 	call RestorePP
 	jr nz, BattleRestorePP
-	jp PPRestoreItem_NoEffect
+	jr PPRestoreItem_NoEffect
 
 Elixer_RestorePPofAllMoves:
 	xor a
@@ -2514,8 +2511,7 @@ SacredAshEffect:
 	ld a, [wItemEffectSucceeded]
 	cp $1
 	ret nz
-	call UseDisposableItem
-	ret
+	jr UseDisposableItem
 
 NormalBoxEffect:
 	ld c, DECOFLAG_SILVER_TROPHY_DOLL
@@ -2529,14 +2525,14 @@ OpenBox:
 	ld hl, .SentTrophyHomeText
 	call PrintText
 
-	jp UseDisposableItem
+	jr UseDisposableItem
 
 .SentTrophyHomeText:
 	text_far _SentTrophyHomeText
 	text_end
 
 NoEffect:
-	jp IsntTheTimeMessage
+	jr IsntTheTimeMessage
 
 Play_SFX_FULL_HEAL:
 	push de

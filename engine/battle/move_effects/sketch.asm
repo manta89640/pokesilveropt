@@ -16,7 +16,7 @@ BattleCommand_Sketch:
 	ld a, BATTLE_VARS_SUBSTATUS5_OPP
 	call GetBattleVarAddr
 	bit SUBSTATUS_TRANSFORMED, [hl]
-	jp nz, .fail
+	jr nz, .fail
 ; Get the user's moveset in its party struct.
 ; This move replacement shall be permanent.
 ; Pointer will be in de.

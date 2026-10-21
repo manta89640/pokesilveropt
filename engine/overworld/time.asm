@@ -1,6 +1,5 @@
 _InitializeStartDay:
-	call InitializeStartDay
-	ret
+	jp InitializeStartDay
 
 ClearDailyTimers:
 	xor a
@@ -25,7 +24,7 @@ NextCallReceiveDelay:
 	ld hl, .ReceiveCallDelays
 	add hl, de
 	ld a, [hl]
-	jp RestartReceiveCallDelay
+	jr RestartReceiveCallDelay
 
 .ReceiveCallDelays:
 	db 20, 10, 5, 3
@@ -53,8 +52,7 @@ InitNDaysCountdown:
 	call UpdateTime
 	pop hl
 	inc hl
-	call CopyDayToHL
-	ret
+	jp CopyDayToHL
 
 CheckDayDependentEventHL:
 	inc hl
@@ -63,28 +61,25 @@ CheckDayDependentEventHL:
 	call GetDaysSince
 	pop hl
 	dec hl
-	call UpdateTimeRemaining
-	ret
+	jp UpdateTimeRemaining
 
 RestartReceiveCallDelay:
 	ld hl, wReceiveCallDelay_MinsRemaining
 	ld [hl], a
 	call UpdateTime
 	ld hl, wReceiveCallDelay_StartTime
-	call CopyDayHourMinToHL
-	ret
+	jp CopyDayHourMinToHL
 
 CheckReceiveCallDelay:
 	ld hl, wReceiveCallDelay_StartTime
 	call CalcMinsHoursDaysSince
 	call GetMinutesSinceIfLessThan60
 	ld hl, wReceiveCallDelay_MinsRemaining
-	call UpdateTimeRemaining
-	ret
+	jp UpdateTimeRemaining
 
 RestartDailyResetTimer:
 	ld hl, wDailyResetTimer
-	jp InitOneDayCountdown
+	jr InitOneDayCountdown
 
 CheckDailyResetTimer::
 	ld hl, wDailyResetTimer
@@ -103,8 +98,7 @@ StartBugContestTimer:
 	ld [wBugContestSecsRemaining], a
 	call UpdateTime
 	ld hl, wBugContestStartTime
-	call CopyDayHourMinSecToHL
-	ret
+	jp CopyDayHourMinSecToHL
 
 CheckBugContestTimer::
 	ld hl, wBugContestStartTime
@@ -143,8 +137,7 @@ CheckBugContestTimer::
 InitializeStartDay:
 	call UpdateTime
 	ld hl, wTimerEventStartDay
-	call CopyDayToHL
-	ret
+	jp CopyDayToHL
 
 CheckPokerusTick::
 	ld hl, wTimerEventStartDay
@@ -164,8 +157,7 @@ CheckUnusedTwoDayTimer:
 	call CalcDaysSince
 	call GetDaysSince
 	ld hl, wUnusedTwoDayTimer
-	call UpdateTimeRemaining
-	ret
+	jr UpdateTimeRemaining
 
 
 RestartLuckyNumberCountdown:
@@ -179,7 +171,7 @@ RestartLuckyNumberCountdown:
 	ld a, FRIDAY
 	sub c
 	jr z, .friday_saturday
-	jr nc, .earlier ; could have done "ret nc"
+	ret nc ; could have done "ret nc"
 
 .friday_saturday
 	add 7
@@ -217,8 +209,7 @@ DoMysteryGiftIfDayHasPassed:
 	ld [sMysteryGiftTimer], a
 	ld a, [hl]
 	ld [sMysteryGiftTimer + 1], a
-	call CloseSRAM
-	ret
+	jp CloseSRAM
 
 UpdateTimeRemaining:
 ; If the amount of time elapsed exceeds the capacity of its

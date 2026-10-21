@@ -123,7 +123,7 @@ SpeechTextbox::
 	hlcoord TEXTBOX_X, TEXTBOX_Y
 	ld b, TEXTBOX_INNERH
 	ld c, TEXTBOX_INNERW
-	jp Textbox
+	jr Textbox
 
 
 RadioTerminator::
@@ -139,8 +139,7 @@ PrintText::
 
 PrintTextboxText::
 	bccoord TEXTBOX_INNERX, TEXTBOX_INNERY
-	call PrintTextboxTextAt
-	ret
+	jp PrintTextboxTextAt
 
 SetUpTextbox::
 	push hl
@@ -167,7 +166,7 @@ PlaceNextChar::
 
 NextChar::
 	inc de
-	jp PlaceNextChar
+	jr PlaceNextChar
 
 CheckDict::
 MACRO dict
@@ -587,8 +586,7 @@ TextScroll::
 	ld bc, TEXTBOX_INNERW
 	call ByteFill
 	ld c, 5
-	call DelayFrames
-	ret
+	jp DelayFrames
 
 Text_WaitBGMap::
 	push bc

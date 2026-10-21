@@ -36,7 +36,7 @@ StatsScreenMain:
 	call CopyMonToTempMon
 	ld a, [wCurPartySpecies]
 	cp EGG
-	jp z, .got_stats
+	jr z, .got_stats
 	ld a, [wMonType]
 	cp BOXMON
 	jr c, .got_stats
@@ -209,12 +209,11 @@ EggStats_JoypadLoop:
 	bit B_PAD_UP, a
 	jr nz, EggStats_UpAction
 	bit B_PAD_DOWN, a
-	jp EggStats_DownAction
+	jr EggStats_DownAction
 
 StatsScreen_Exit:
 	call ClearBGPalettes
-	call ClearTilemap
-	ret
+	jp ClearTilemap
 
 EggStats_DownAction:
 	ld a, [wMonType]
@@ -639,7 +638,7 @@ LoadBluePage:
 	pop bc
 	ld a, b
 	and a
-	jp z, StatsScreen_PlaceFrontpic
+	jr z, StatsScreen_PlaceFrontpic
 	ret
 
 .PlaceOTInfo:
@@ -692,8 +691,7 @@ LoadBluePage:
 	add hl, bc
 ; that's finally over ... place string, quit forever
 	pop de
-	call PlaceString
-	ret
+	jp PlaceString
 
 .OTNamePointers:
 	dw wPartyMonOTs
@@ -778,8 +776,7 @@ EggStatsScreen:
 	ret nc
 	ld de, SFX_2_BOOPS
 	call PlaySFX
-	call WaitSFX
-	ret
+	jp WaitSFX
 
 EggString:
 	db "EGG@"

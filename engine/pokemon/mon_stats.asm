@@ -28,7 +28,7 @@ DrawHP:
 	ld e, a
 	ld a, 6
 	ld d, a
-	jp .fainted
+	jr .fainted
 
 .at_least_1_hp
 	ld a, [wTempMonMaxHP]
@@ -268,7 +268,7 @@ ListMovePP:
 .loop
 	ld a, [hli]
 	and a
-	jr z, .done
+	ret z
 	push bc
 	push hl
 	push de
@@ -337,7 +337,7 @@ Unused_PlaceEnemyHPLevel:
 	pop hl
 	ld a, [wCurPartySpecies]
 	cp EGG
-	jr z, .egg
+	ret z
 	push hl
 	ld bc, -12
 	add hl, bc
@@ -455,7 +455,7 @@ ListMoves:
 	pop de
 	ld a, b
 	cp NUM_MOVES
-	jr z, .done
+	ret z
 	jr .moves_loop
 
 .no_more_moves

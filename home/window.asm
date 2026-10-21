@@ -40,8 +40,7 @@ CloseText::
 	call UpdatePlayerSprite
 	ld hl, wUnusedReanchorBGMapFlags
 	res UNUSED_REANCHOR_BG_MAP_7, [hl]
-	call ResetBGWindow
-	ret
+	jp ResetBGWindow
 
 OpenText::
 	call ClearWindowData

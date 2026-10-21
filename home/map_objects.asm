@@ -341,8 +341,7 @@ ApplyDeletionToMapObject::
 
 DeleteObjectStruct::
 	call ApplyDeletionToMapObject
-	call MaskObject
-	ret
+	jp MaskObject
 
 CopyPlayerObjectTemplate::
 	push hl
@@ -354,8 +353,7 @@ CopyPlayerObjectTemplate::
 	inc de
 	pop hl
 	ld bc, MAPOBJECT_LENGTH - 1
-	call CopyBytes
-	ret
+	jp CopyBytes
 
 
 LoadMovementDataPointer::

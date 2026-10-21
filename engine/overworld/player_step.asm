@@ -122,26 +122,22 @@ UpdateOverworldMap:
 .step_down
 	call .ScrollOverworldMapDown
 	call LoadOverworldTilemap
-	call ScrollMapDown
-	ret
+	jp ScrollMapDown
 
 .step_up
 	call .ScrollOverworldMapUp
 	call LoadOverworldTilemap
-	call ScrollMapUp
-	ret
+	jp ScrollMapUp
 
 .step_left
 	call .ScrollOverworldMapLeft
 	call LoadOverworldTilemap
-	call ScrollMapLeft
-	ret
+	jp ScrollMapLeft
 
 .step_right
 	call .ScrollOverworldMapRight
 	call LoadOverworldTilemap
-	call ScrollMapRight
-	ret
+	jp ScrollMapRight
 
 .ScrollOverworldMapDown:
 	ld a, [wBGMapAnchor]
@@ -158,7 +154,7 @@ UpdateOverworldMap:
 	inc [hl]
 	ld a, [hl]
 	cp 2 ; was 1
-	jr nz, .done_down
+	ret nz
 	ld [hl], 0
 	call .ScrollMapDataDown
 .done_down
@@ -189,7 +185,7 @@ UpdateOverworldMap:
 	dec [hl]
 	ld a, [hl]
 	cp -1 ; was 0
-	jr nz, .done_up
+	ret nz
 	ld [hl], $1
 	call .ScrollMapDataUp
 .done_up
@@ -221,7 +217,7 @@ UpdateOverworldMap:
 	dec [hl]
 	ld a, [hl]
 	cp -1
-	jr nz, .done_left
+	ret nz
 	ld [hl], 1
 	call .ScrollMapDataLeft
 .done_left
@@ -250,7 +246,7 @@ UpdateOverworldMap:
 	inc [hl]
 	ld a, [hl]
 	cp 2
-	jr nz, .done_right
+	ret nz
 	ld [hl], 0
 	call .ScrollMapDataRight
 .done_right

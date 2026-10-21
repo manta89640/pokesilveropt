@@ -224,20 +224,20 @@ TMHM_JoypadLoop:
 	ldh [hBGMapMode], a
 	ld a, [w2DMenuFlags2]
 	bit _2DMENU_EXITING_F, a
-	jp nz, TMHM_ScrollPocket
+	jr nz, TMHM_ScrollPocket
 	ld a, b
 	ld [wMenuJoypad], a
 	bit A_BUTTON_F, a
-	jp nz, TMHM_ChooseTMorHM
+	jr nz, TMHM_ChooseTMorHM
 	bit B_BUTTON_F, a
-	jp nz, TMHM_ExitPack
+	jr nz, TMHM_ExitPack
 	bit B_PAD_RIGHT, a
-	jp nz, TMHM_ExitPocket
+	jr nz, TMHM_ExitPocket
 	bit B_PAD_LEFT, a
-	jp nz, TMHM_ExitPocket
+	jr nz, TMHM_ExitPocket
 TMHM_ShowTMMoveDescription:
 	call TMHM_CheckHoveringOverCancel
-	jp nc, TMHM_ExitPocket
+	jr nc, TMHM_ExitPocket
 	hlcoord 0, 12
 	ld b, 4
 	ld c, SCREEN_WIDTH - 2
@@ -251,7 +251,7 @@ TMHM_ShowTMMoveDescription:
 	ld [wCurSpecies], a
 	hlcoord 1, 14
 	call PrintMoveDescription
-	jp TMHM_JoypadLoop
+	jr TMHM_JoypadLoop
 
 TMHM_ChooseTMorHM:
 	call TMHM_PlaySFX_ReadText2
@@ -307,7 +307,7 @@ TMHM_ScrollPocket:
 	jp z, TMHM_JoypadLoop
 	dec [hl]
 	call TMHM_DisplayPocketItems
-	jp TMHM_ShowTMMoveDescription
+	jr TMHM_ShowTMMoveDescription
 
 .down
 	call TMHM_GetCurrentPocketPosition
@@ -407,7 +407,7 @@ TMHM_DisplayPocketItems:
 	pop hl
 	dec d
 	jr nz, .loop2
-	jr .done
+	ret
 
 .NotTMHM:
 	call TMHMPocket_GetCurrentLineCoord

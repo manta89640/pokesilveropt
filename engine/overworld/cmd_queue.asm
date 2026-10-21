@@ -146,8 +146,7 @@ CmdQueue_Null:
 	ret
 
 CmdQueue_Type1:
-	call SetXYCompareFlags
-	ret
+	jp SetXYCompareFlags
 
 CmdQueue_Type4:
 	call CmdQueues_AnonJumptable
@@ -190,8 +189,7 @@ CmdQueue_Type4:
 	add hl, bc
 	ld a, [hl]
 	ldh [hSCY], a
-	call _DelCmdQueue
-	ret
+	jr _DelCmdQueue
 
 CmdQueue_Type3:
 	ret

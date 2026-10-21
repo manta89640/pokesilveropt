@@ -156,8 +156,7 @@ ClearVRAM::
 	ld hl, STARTOF(VRAM)
 	ld bc, SIZEOF(VRAM)
 	xor a
-	call ByteFill
-	ret
+	jp ByteFill
 
 BlankBGMap::
 	ld a, ' '

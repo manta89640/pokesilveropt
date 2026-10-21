@@ -55,7 +55,7 @@ CheckBreedmonCompatibility:
 .compute
 	call .CheckDVs
 	ld c, 255
-	jp z, .done
+	jr z, .done
 	ld a, [wBreedMon2Species]
 	ld b, a
 	ld a, [wBreedMon1Species]
@@ -213,7 +213,7 @@ HatchEggs:
 	ld a, [de]
 	inc de
 	cp -1
-	jp z, .done
+	ret z
 	push de
 	push hl
 	cp EGG
@@ -394,7 +394,7 @@ InitEggMoves:
 .loop
 	ld a, [de]
 	and a
-	jr z, .done
+	ret z
 	ld hl, wEggMonMoves
 	ld c, NUM_MOVES
 .next
@@ -817,8 +817,7 @@ Hatch_InitShellFragments:
 .done
 	ld de, SFX_EGG_HATCH
 	call PlaySFX
-	call EggHatch_DoAnimFrame
-	ret
+	jp EggHatch_DoAnimFrame
 
 MACRO shell_fragment
 ; y tile, y pxl, x tile, x pxl, frameset, angle
@@ -896,16 +895,16 @@ DayCareMonCompatibilityText:
 	ld a, [wBreedingCompatibility]
 	ld hl, .BreedBrimmingWithEnergyText
 	cp -1
-	jr z, .done
+	ret z
 	ld hl, .BreedNoInterestText
 	and a
-	jr z, .done
+	ret z
 	ld hl, .BreedAppearsToCareForText
 	cp 230
-	jr nc, .done
+	ret nc
 	cp 70
 	ld hl, .BreedFriendlyText
-	jr nc, .done
+	ret nc
 	ld hl, .BreedShowsInterestText
 
 .done

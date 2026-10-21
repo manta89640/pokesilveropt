@@ -16,7 +16,7 @@ _InitScrollingMenu::
 _ScrollingMenu::
 .loop
 	call ScrollingMenuJoyAction
-	jp c, .exit
+	jr c, .exit
 	call z, .zero
 	jr .loop
 
@@ -61,17 +61,17 @@ ScrollingMenuJoyAction:
 	and PAD_BUTTONS
 	or b
 	bit A_BUTTON_F, a
-	jp nz, .a_button
+	jr nz, .a_button
 	bit B_BUTTON_F, a
-	jp nz, .b_button
+	jr nz, .b_button
 	bit B_PAD_SELECT, a
-	jp nz, .select
+	jr nz, .select
 	bit B_PAD_START, a
-	jp nz, .start
+	jr nz, .start
 	bit B_PAD_RIGHT, a
 	jp nz, .d_right
 	bit B_PAD_LEFT, a
-	jp nz, .d_left
+	jr nz, .d_left
 	bit B_PAD_UP, a
 	jp nz, .d_up
 	bit B_PAD_DOWN, a
@@ -245,7 +245,7 @@ InitScrollingMenuCursor:
 	inc a
 	cp b
 	jr c, .wrap
-	jr nc, .done
+	ret nc
 
 .wrap
 	xor a
@@ -332,10 +332,10 @@ ScrollingMenu_ValidateSwitchItem:
 	ld c, a
 	ld a, [wSwitchItem]
 	and a
-	jr z, .done
+	ret z
 	dec a
 	cp c
-	jr c, .done
+	ret c
 	xor a
 	ld [wSwitchItem], a
 
@@ -386,7 +386,7 @@ ScrollingMenu_UpdateDisplay:
 	jr nz, .loop
 	ld a, [wMenuDataFlags]
 	bit SCROLLINGMENU_DISPLAY_ARROWS_F, a
-	jr z, .done
+	ret z
 	ld a, [wMenuBorderBottomCoord]
 	ld b, a
 	ld a, [wMenuBorderRightCoord]
@@ -402,8 +402,7 @@ ScrollingMenu_UpdateDisplay:
 	bit SCROLLINGMENU_CALL_FUNCTION1_CANCEL_F, a
 	jr nz, .call_function
 	ld de, .CancelString
-	call PlaceString
-	ret
+	jp PlaceString
 
 .CancelString
 	db "CANCEL@"
@@ -423,7 +422,7 @@ ScrollingMenu_CallFunctions1and2:
 	pop hl
 	ld a, [wMenuData_ScrollingMenuWidth]
 	and a
-	jr z, .done
+	ret z
 	ld e, a
 	ld d, 0
 	add hl, de
@@ -438,16 +437,16 @@ ScrollingMenu_CallFunctions1and2:
 ScrollingMenu_PlaceCursor:
 	ld a, [wSwitchItem]
 	and a
-	jr z, .done
+	ret z
 	ld b, a
 	ld a, [wMenuScrollPosition]
 	cp b
-	jr nc, .done
+	ret nc
 	ld c, a
 	ld a, [wMenuData_ScrollingMenuHeight]
 	add c
 	cp b
-	jr c, .done
+	ret c
 	ld a, b
 	sub c
 	dec a
@@ -481,8 +480,7 @@ ScrollingMenu_CheckCallFunction3:
 	dec a
 	call ScrollingMenu_GetListItemCoordAndFunctionArgs
 	ld hl, wMenuData_ScrollingMenuFunction3
-	call CallPointerAt
-	ret
+	jp CallPointerAt
 
 ScrollingMenu_GetListItemCoordAndFunctionArgs:
 	push de

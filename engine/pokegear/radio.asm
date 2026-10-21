@@ -532,7 +532,7 @@ OaksPKMNTalk11:
 	hlcoord 9, 14
 	ld de, .pokemon_string
 	ld a, OAKS_POKEMON_TALK_12
-	jp PlaceRadioString
+	jr PlaceRadioString
 
 .pokemon_string
 	db "#MON@"
@@ -544,7 +544,7 @@ OaksPKMNTalk12:
 	hlcoord 1, 16
 	ld de, .pokemon_channel_string
 	ld a, OAKS_POKEMON_TALK_13
-	jp PlaceRadioString
+	jr PlaceRadioString
 
 .pokemon_channel_string
 	db "#MON Channel@"
@@ -556,7 +556,7 @@ OaksPKMNTalk13:
 	hlcoord 12, 16
 	ld de, .terminator
 	ld a, OAKS_POKEMON_TALK_14
-	jp PlaceRadioString
+	jr PlaceRadioString
 
 .terminator
 	db "@"
@@ -706,8 +706,7 @@ CopyDexEntry:
 	call CopyRadioTextToRAM
 	pop hl
 	pop af
-	call CopyDexEntryPart2
-	ret
+	jr CopyDexEntryPart2
 
 CopyDexEntryPart1:
 	ld de, wPokedexShowPointerBank

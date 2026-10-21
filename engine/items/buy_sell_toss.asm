@@ -1,8 +1,7 @@
 SelectQuantityToToss:
 	ld hl, TossItem_MenuHeader
 	call LoadMenuHeader
-	call Toss_Sell_Loop
-	ret
+	jr Toss_Sell_Loop
 
 SelectQuantityToBuy:
 	farcall GetItemPrice
@@ -12,8 +11,7 @@ SelectQuantityToBuy:
 	ld [wBuySellItemPrice + 1], a
 	ld hl, BuyItem_MenuHeader
 	call LoadMenuHeader
-	call Toss_Sell_Loop
-	ret
+	jr Toss_Sell_Loop
 
 SelectQuantityToSell:
 	farcall GetItemPrice
@@ -23,8 +21,7 @@ SelectQuantityToSell:
 	ld [wBuySellItemPrice + 1], a
 	ld hl, SellItem_MenuHeader
 	call LoadMenuHeader
-	call Toss_Sell_Loop
-	ret
+	jr Toss_Sell_Loop
 
 Toss_Sell_Loop:
 	ld a, 1
@@ -145,14 +142,12 @@ NoPriceToDisplay:
 
 DisplayPurchasePrice:
 	call BuySell_MultiplyPrice
-	call BuySell_DisplaySubtotal
-	ret
+	jr BuySell_DisplaySubtotal
 
 DisplaySellingPrice:
 	call BuySell_MultiplyPrice
 	call Sell_HalvePrice
-	call BuySell_DisplaySubtotal
-	ret
+	jr BuySell_DisplaySubtotal
 
 BuySell_MultiplyPrice:
 	xor a
@@ -197,8 +192,7 @@ BuySell_DisplaySubtotal:
 	ld de, hMoneyTemp
 	lb bc, PRINTNUM_MONEY | 3, 6
 	call PrintNum
-	call WaitBGMap
-	ret
+	jp WaitBGMap
 
 TossItem_MenuHeader:
 	db MENU_BACKUP_TILES ; flags

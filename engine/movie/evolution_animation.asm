@@ -276,8 +276,7 @@ endr
 	dec c
 	jr nz, .loop6
 	pop bc
-	call DelayFrame
-	ret
+	jp DelayFrame
 
 .GFX:
 INCBIN "gfx/evo/bubble_large.2bpp"

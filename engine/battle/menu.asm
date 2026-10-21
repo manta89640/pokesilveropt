@@ -15,8 +15,7 @@ CommonBattleMenu:
 	call _2DMenu
 	ld a, [wMenuCursorPosition]
 	ld [wBattleMenuCursorPosition], a
-	call ExitMenu
-	ret
+	jp ExitMenu
 
 BattleMenuHeader:
 	db MENU_BACKUP_TILES ; flags
@@ -61,5 +60,4 @@ ContestBattleMenuHeader:
 	hlcoord 13, 16
 	ld de, wParkBallsRemaining
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
-	call PrintNum
-	ret
+	jp PrintNum

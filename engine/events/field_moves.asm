@@ -6,8 +6,7 @@ PlayWhirlpoolSound:
 	call WaitSFX
 	ld de, SFX_SURF
 	call PlaySFX
-	call WaitSFX
-	ret
+	jp WaitSFX
 
 BlindingFlash:
 	farcall FadeOutToWhite
@@ -67,8 +66,7 @@ ShakeHeadbuttTree:
 	ld bc, wShadowOAMEnd - wShadowOAMSprite36
 	xor a
 	call ByteFill
-	call UpdatePlayerSprite
-	ret
+	jp UpdatePlayerSprite
 
 HeadbuttTreeGFX:
 INCBIN "gfx/overworld/headbutt_tree.2bpp"
@@ -121,7 +119,7 @@ OWCutAnimation:
 .loop
 	ld a, [wJumptableIndex]
 	bit JUMPTABLE_EXIT_F, a
-	jr nz, .finish
+	ret nz
 	ld a, 36 * OBJ_SIZE
 	ld [wCurSpriteOAMAddr], a
 	callfar DoNextFrameForAllSprites
@@ -141,8 +139,7 @@ OWCutAnimation:
 	ld de, CutTreeGFX
 	ld hl, vTiles0 tile FIELDMOVE_TREE
 	lb bc, BANK(CutTreeGFX), 4
-	call Request2bpp
-	ret
+	jp Request2bpp
 
 CutTreeGFX:
 INCBIN "gfx/overworld/cut_tree.2bpp"
@@ -366,8 +363,7 @@ FlyToAnim:
 .exit
 	pop af
 	ld [wStateFlags], a
-	call .RestorePlayerSprite_DespawnLeaves
-	ret
+	jr .RestorePlayerSprite_DespawnLeaves
 
 .RestorePlayerSprite_DespawnLeaves:
 	ld hl, wShadowOAMSprite00TileID
@@ -384,8 +380,7 @@ endr
 	ld hl, wShadowOAMSprite04
 	ld bc, wShadowOAMEnd - wShadowOAMSprite04
 	xor a
-	call ByteFill
-	ret
+	jp ByteFill
 
 FlyFunction_InitGFX:
 	callfar ClearSpriteAnims
@@ -418,8 +413,7 @@ FlyFunction_FrameTimer:
 	and $7
 	ret nz
 	ld de, SFX_FLY
-	call PlaySFX
-	ret
+	jp PlaySFX
 
 .exit
 	ld hl, wJumptableIndex

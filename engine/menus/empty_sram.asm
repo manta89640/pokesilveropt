@@ -6,8 +6,7 @@ EmptyAllSRAMBanks:
 	ld a, 2
 	call .EmptyBank
 	ld a, 3
-	call .EmptyBank
-	ret
+	jr .EmptyBank
 
 .EmptyBank:
 	call OpenSRAM
@@ -15,5 +14,4 @@ EmptyAllSRAMBanks:
 	ld bc, SIZEOF(SRAM)
 	xor a
 	call ByteFill
-	call CloseSRAM
-	ret
+	jp CloseSRAM

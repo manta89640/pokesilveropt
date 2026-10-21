@@ -6,13 +6,13 @@ BattleStart_TrainerHuds:
 	ld a, [wBattleMode]
 	dec a
 	ret z
-	jp ShowOTTrainerMonsRemaining
+	jr ShowOTTrainerMonsRemaining
 
 EnemySwitch_TrainerHud:
 	ld a, $e4
 	ldh [rOBP0], a
 	call LoadBallIconGFX
-	jp ShowOTTrainerMonsRemaining
+	jr ShowOTTrainerMonsRemaining
 
 ShowPlayerMonsRemaining:
 	call DrawPlayerPartyIconHUDBorder
@@ -198,7 +198,7 @@ LinkBattle_TrainerHuds:
 	ld [hli], a
 	ld [hl], 13 * TILE_WIDTH
 	ld hl, wShadowOAMSprite00 + PARTY_LENGTH * OBJ_SIZE
-	jp LoadTrainerHudOAM
+	jr LoadTrainerHudOAM
 
 LoadTrainerHudOAM:
 	ld de, wBattleHUDTiles

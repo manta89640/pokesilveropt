@@ -79,8 +79,7 @@ _PlayerDecorationMenu:
 	ld hl, wStringBuffer2
 	ld de, wDecoNameBuffer
 	ld bc, ITEM_NAME_LENGTH
-	call CopyBytes
-	ret
+	jp CopyBytes
 
 .ClearStringBuffer2:
 	ld hl, wStringBuffer2
@@ -88,8 +87,7 @@ _PlayerDecorationMenu:
 	ld [hli], a
 	ld bc, ITEM_NAME_LENGTH - 1
 	ld a, -1
-	call ByteFill
-	ret
+	jp ByteFill
 
 .AppendToStringBuffer2:
 	ld hl, wStringBuffer2
@@ -108,7 +106,7 @@ _PlayerDecorationMenu:
 	ld a, [hli]
 	ld d, a
 	or e
-	jr z, .done
+	ret z
 	push hl
 	call _de_
 	pop hl
@@ -142,14 +140,13 @@ Deco_FillTempWithMinusOne:
 	assert wNumOwnedDecoCategories + 1 == wOwnedDecoCategories
 	ld a, -1
 	ld bc, 16
-	call ByteFill
-	ret
+	jp ByteFill
 
 CheckAllDecorationFlags:
 .loop
 	ld a, [hli]
 	cp -1
-	jr z, .done
+	ret z
 	push hl
 	push af
 	ld b, CHECK_FLAG
@@ -202,7 +199,7 @@ DecoBedMenu:
 FindOwnedBeds:
 	ld hl, .beds
 	ld c, BEDS
-	jp FindOwnedDecosInCategory
+	jr FindOwnedDecosInCategory
 
 .beds:
 	db DECO_FEATHERY_BED ; 2
@@ -220,7 +217,7 @@ DecoCarpetMenu:
 FindOwnedCarpets:
 	ld hl, .carpets
 	ld c, CARPETS
-	jp FindOwnedDecosInCategory
+	jr FindOwnedDecosInCategory
 
 .carpets:
 	db DECO_RED_CARPET ; 7
@@ -238,7 +235,7 @@ DecoPlantMenu:
 FindOwnedPlants:
 	ld hl, .plants
 	ld c, PLANTS
-	jp FindOwnedDecosInCategory
+	jr FindOwnedDecosInCategory
 
 .plants:
 	db DECO_MAGNAPLANT ; c
@@ -255,7 +252,7 @@ DecoPosterMenu:
 FindOwnedPosters:
 	ld hl, .posters
 	ld c, POSTERS
-	jp FindOwnedDecosInCategory
+	jr FindOwnedDecosInCategory
 
 .posters:
 	db DECO_TOWN_MAP ; 10
@@ -273,7 +270,7 @@ DecoConsoleMenu:
 FindOwnedConsoles:
 	ld hl, .consoles
 	ld c, CONSOLES
-	jp FindOwnedDecosInCategory
+	jr FindOwnedDecosInCategory
 
 .consoles:
 	db DECO_FAMICOM ; 15
@@ -355,8 +352,7 @@ PopulateDecoCategoryMenu:
 	call DoDecorationAction2
 
 .no_action_1
-	call ExitMenu
-	ret
+	jp ExitMenu
 
 .beyond_eight
 	ld hl, wNumOwnedDecoCategories
@@ -381,13 +377,11 @@ PopulateDecoCategoryMenu:
 	call DoDecorationAction2
 
 .no_action_2
-	call ExitMenu
-	ret
+	jp ExitMenu
 
 .empty
 	ld hl, .NothingToChooseText
-	call MenuTextboxBackup
-	ret
+	jp MenuTextboxBackup
 
 .NothingToChooseText:
 	text_far _NothingToChooseText
@@ -424,16 +418,14 @@ PopulateDecoCategoryMenu:
 GetDecorationData:
 	ld hl, DecorationAttributes
 	ld bc, DECOATTR_STRUCT_LENGTH
-	call AddNTimes
-	ret
+	jp AddNTimes
 
 GetDecorationName:
 	push hl
 	call GetDecorationData
 	call GetDecoName
 	pop hl
-	call CopyName2
-	ret
+	jp CopyName2
 
 DecorationMenuFunction:
 	ld a, [wMenuSelection]
@@ -441,8 +433,7 @@ DecorationMenuFunction:
 	call GetDecorationData
 	call GetDecoName
 	pop hl
-	call PlaceString
-	ret
+	jp PlaceString
 
 DoDecorationAction2:
 	ld a, [wMenuSelection]
@@ -486,8 +477,7 @@ DecorationFlagAction:
 	push bc
 	call GetDecorationFlag
 	pop bc
-	call EventFlagAction
-	ret
+	jp EventFlagAction
 
 GetDecorationSprite:
 	ld a, c
@@ -595,7 +585,7 @@ DecoAction_nothing:
 
 DecoAction_setupbed:
 	ld hl, wDecoBed
-	jp DecoAction_TrySetItUp
+	jr DecoAction_TrySetItUp
 
 DecoAction_putawaybed:
 	ld hl, wDecoBed
@@ -603,7 +593,7 @@ DecoAction_putawaybed:
 
 DecoAction_setupcarpet:
 	ld hl, wDecoCarpet
-	jp DecoAction_TrySetItUp
+	jr DecoAction_TrySetItUp
 
 DecoAction_putawaycarpet:
 	ld hl, wDecoCarpet
@@ -611,35 +601,35 @@ DecoAction_putawaycarpet:
 
 DecoAction_setupplant:
 	ld hl, wDecoPlant
-	jp DecoAction_TrySetItUp
+	jr DecoAction_TrySetItUp
 
 DecoAction_putawayplant:
 	ld hl, wDecoPlant
-	jp DecoAction_TryPutItAway
+	jr DecoAction_TryPutItAway
 
 DecoAction_setupposter:
 	ld hl, wDecoPoster
-	jp DecoAction_TrySetItUp
+	jr DecoAction_TrySetItUp
 
 DecoAction_putawayposter:
 	ld hl, wDecoPoster
-	jp DecoAction_TryPutItAway
+	jr DecoAction_TryPutItAway
 
 DecoAction_setupconsole:
 	ld hl, wDecoConsole
-	jp DecoAction_TrySetItUp
+	jr DecoAction_TrySetItUp
 
 DecoAction_putawayconsole:
 	ld hl, wDecoConsole
-	jp DecoAction_TryPutItAway
+	jr DecoAction_TryPutItAway
 
 DecoAction_setupbigdoll:
 	ld hl, wDecoBigDoll
-	jp DecoAction_TrySetItUp
+	jr DecoAction_TrySetItUp
 
 DecoAction_putawaybigdoll:
 	ld hl, wDecoBigDoll
-	jp DecoAction_TryPutItAway
+	jr DecoAction_TryPutItAway
 
 DecoAction_TrySetItUp:
 	ld a, [hl]
@@ -909,8 +899,7 @@ GetDecorationName_c_de:
 	ld a, c
 	ld h, d
 	ld l, e
-	call GetDecorationName
-	ret
+	jp GetDecorationName
 
 DecorationFlagAction_c:
 	ld a, c
@@ -929,8 +918,7 @@ SetSpecificDecorationFlag:
 	ld a, c
 	call GetDecorationID
 	ld b, SET_FLAG
-	call DecorationFlagAction
-	ret
+	jp DecorationFlagAction
 
 GetDecorationID:
 	push hl
@@ -1131,8 +1119,7 @@ ToggleDecorationsVisibility:
 	ld de, EVENT_PLAYERS_HOUSE_2F_BIG_DOLL
 	ld hl, wVariableSprites + SPRITE_BIG_DOLL - SPRITE_VARS
 	ld a, [wDecoBigDoll]
-	call ToggleDecorationVisibility
-	ret
+	jr ToggleDecorationVisibility
 
 ToggleDecorationVisibility:
 	and a
@@ -1164,5 +1151,4 @@ PadCoords_de:
 	ld a, e
 	add 4
 	ld e, a
-	call GetBlockLocation
-	ret
+	jp GetBlockLocation

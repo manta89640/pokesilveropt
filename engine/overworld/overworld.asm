@@ -4,8 +4,7 @@ _UpdatePlayerSprite::
 	ld c, a
 	ld a, [wUsedSprites + 1]
 	ld b, a
-	call GetUsedSprite
-	ret
+	jp GetUsedSprite
 
 LoadStandingSpritesGFX::
 	ld hl, wSpriteFlags
@@ -31,8 +30,7 @@ LoadWalkingSpritesGFX::
 
 RefreshSprites::
 	call .Refresh
-	call LoadUsedSpritesGFX
-	ret
+	jp LoadUsedSpritesGFX
 
 .Refresh:
 	xor a
@@ -40,8 +38,7 @@ RefreshSprites::
 	ld hl, wUsedSprites
 	call ByteFill
 	call GetPlayerSprite
-	call AddMapSprites
-	ret
+	jr AddMapSprites
 
 GetPlayerSprite:
 ; Get Chris's sprite.
@@ -77,12 +74,10 @@ AddMapSprites:
 	call GetMapEnvironment
 	call CheckOutdoorMap
 	jr z, .outdoor
-	call AddIndoorSprites
-	ret
+	jr AddIndoorSprites
 
 .outdoor
-	call AddOutdoorSprites
-	ret
+	jr AddOutdoorSprites
 
 AddIndoorSprites:
 	ld hl, wMap2ObjectSprite
@@ -132,12 +127,11 @@ AddSpriteGFX:
 	ld de, wUsedSprites + (SPRITE_GFX_LIST_CAPACITY - 2) * 2
 	ld b, 2
 	call .Loop
-	jr nc, .ok
+	ret nc
 .nope
 	ld de, wUsedSprites + 2
 	ld b, SPRITE_GFX_LIST_CAPACITY - 3
-	call .Loop
-	jr .ok
+	jr .Loop
 .ok:
 	ret
 
@@ -169,8 +163,7 @@ LoadUsedSpritesGFX:
 	ret c
 
 	call LoadStillSpriteTiles
-	call LoadMiscTiles
-	ret
+	jr LoadMiscTiles
 
 GetUsedSprites:
 	xor a
@@ -333,7 +326,7 @@ GetMonSprite:
 	ld a, [hl]
 	pop hl
 	and a
-	jp nz, GetMonSprite
+	jr nz, GetMonSprite
 
 .NoBreedmon:
 	ld a, 1
@@ -422,11 +415,11 @@ endr
 	ld h, a
 	ldh a, [hUsedSpriteIndex]
 	call _DoesSpriteHaveFacings
-	jr c, .done
+	ret c
 
 	ld a, [wSpriteFlags]
 	bit SPRITES_SKIP_WALKING_GFX_F, a
-	jr nz, .done
+	ret nz
 
 	call Get2bpp
 
@@ -441,8 +434,7 @@ GetUsedSprite:
 	ldh [hUsedSpriteIndex], a
 	call GetSprite
 	pop af
-	call CopyToVram
-	ret
+	jr CopyToVram
 
 LoadEmote::
 ; Get the address of the pointer to emote c.
@@ -470,8 +462,7 @@ LoadEmote::
 	ld a, c
 	and a
 	ret z
-	call Get2bpp
-	ret
+	jp Get2bpp
 
 INCLUDE "data/sprites/emotes.asm"
 

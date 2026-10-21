@@ -50,14 +50,14 @@ GetUnownLetter:
 
 GetMonFrontpic:
 	call GetFrontpic
-	jp Load2bppToSRAM
+	jr Load2bppToSRAM
 
 UnusedFrontpicPredef:
 	call GetFrontpic
 	push hl
 	farcall StubbedGetFrontpic
 	pop hl
-	jp Load2bppToSRAM
+	jr Load2bppToSRAM
 
 GetFrontpic:
 	ld a, [wCurPartySpecies]
@@ -179,8 +179,7 @@ GetMonBackpic:
 	ldh a, [hROMBank]
 	ld b, a
 	call Get2bpp
-	call CloseSRAM
-	ret
+	jp CloseSRAM
 
 FixPicBank:
 ; Precondition:  a = defined bank for pic
@@ -234,8 +233,7 @@ Intro_GetMonFrontpic:
 	call GetFarWord
 	pop af
 	pop de
-	call FarDecompress
-	ret
+	jp FarDecompress
 
 GetTrainerPic:
 	ld a, [wTrainerClass]
@@ -300,8 +298,7 @@ DecompressGet2bpp:
 	ldh a, [hROMBank]
 	ld b, a
 	call Get2bpp
-	call CloseSRAM
-	ret
+	jp CloseSRAM
 
 FixBackpicAlignment:
 	push de
@@ -382,8 +379,7 @@ PadFrontpic:
 	jr nz, .five_loop
 	ld c, 7 << 4
 	xor a
-	call .Fill
-	ret
+	jr .Fill
 
 .Fill:
 rept 4

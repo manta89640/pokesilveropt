@@ -27,8 +27,7 @@ PlayBattleAnim:
 	call BattleAnimDelayFrame
 	call BattleAnimDelayFrame
 	call BattleAnimDelayFrame
-	call WaitSFX
-	ret
+	jp WaitSFX
 
 BattleAnimRunScript:
 	ld a, [wFXAnimID + 1]
@@ -72,8 +71,7 @@ BattleAnimRunScript:
 	call RunBattleAnimScript
 
 .done
-	call BattleAnim_RevertPals
-	ret
+	jp BattleAnim_RevertPals
 
 RunBattleAnimScript:
 	call ClearBattleAnims
@@ -113,8 +111,7 @@ RunBattleAnimScript:
 	bit BATTLEANIM_STOP_F, a
 	jr z, .playframe
 
-	call BattleAnim_ClearOAM
-	ret
+	jr BattleAnim_ClearOAM
 
 BattleAnimClearHud:
 	call BattleAnimDelayFrame
@@ -125,8 +122,7 @@ BattleAnimClearHud:
 	call BattleAnimDelayFrame
 	call BattleAnimDelayFrame
 	call BattleAnimDelayFrame
-	call WaitTop
-	ret
+	jp WaitTop
 
 BattleAnimRestoreHuds:
 	call BattleAnimDelayFrame
@@ -182,14 +178,12 @@ ClearActorHud:
 
 	hlcoord 1, 0
 	lb bc, 4, 10
-	call ClearBox
-	ret
+	jp ClearBox
 
 .player
 	hlcoord 9, 7
 	lb bc, 5, 11
-	call ClearBox
-	ret
+	jp ClearBox
 
 
 BattleAnim_ClearOAM:
@@ -225,8 +219,7 @@ endr
 RunBattleAnimCommand:
 	call .CheckTimer
 	ret nc
-	call .RunScript
-	ret
+	jr .RunScript
 
 .CheckTimer:
 	ld a, [wBattleAnimDelay]
@@ -567,8 +560,7 @@ BattleAnimCmd_Obj:
 	ld [wBattleObjectTempYCoord], a
 	call GetBattleAnimByte
 	ld [wBattleObjectTempParam], a
-	call QueueBattleAnimation
-	ret
+	jp QueueBattleAnimation
 
 BattleAnimCmd_BGEffect:
 	call GetBattleAnimByte
@@ -579,8 +571,7 @@ BattleAnimCmd_BGEffect:
 	ld [wBattleBGEffectTempTurn], a
 	call GetBattleAnimByte
 	ld [wBattleBGEffectTempParam], a
-	call _QueueBGEffect
-	ret
+	jp _QueueBGEffect
 
 BattleAnimCmd_BGP:
 	call GetBattleAnimByte
@@ -764,8 +755,7 @@ BattleAnimCmd_BattlerGFX_1Row:
 	ld a, 6 tiles ; Player pic height
 	ld [wBattleAnimGFXTempPicHeight], a
 	ld a, 6 ; Copy 6x1 tiles
-	call .LoadFeet
-	ret
+	jr .LoadFeet
 
 .LoadFeet:
 	push af
@@ -818,8 +808,7 @@ BattleAnimCmd_BattlerGFX_2Row:
 	ld a, 6 tiles ; Player pic height
 	ld [wBattleAnimGFXTempPicHeight], a
 	ld a, 6 ; Copy 6x2 tiles
-	call .LoadHead
-	ret
+	jr .LoadHead
 
 .LoadHead:
 	push af
@@ -938,14 +927,12 @@ GetSubstitutePic: ; used only for BANK(GetSubstitutePic)
 	call Request2bpp
 
 .done
-	call CloseSRAM
-	ret
+	jp CloseSRAM
 
 .CopyTile:
 	ld bc, 1 tiles
 	ld a, BANK(MonsterSpriteGFX)
-	call FarCopyBytes
-	ret
+	jp FarCopyBytes
 
 BattleAnimCmd_MinimizeOpp:
 	xor a
@@ -983,15 +970,13 @@ GetMinimizePic:
 	call Request2bpp
 
 .done
-	call CloseSRAM
-	ret
+	jp CloseSRAM
 
 CopyMinimizePic:
 	ld hl, MinimizePic
 	ld bc, $10
 	ld a, BANK(MinimizePic)
-	call FarCopyBytes
-	ret
+	jp FarCopyBytes
 
 MinimizePic:
 INCBIN "gfx/battle/minimize.2bpp"
@@ -1041,8 +1026,7 @@ BattleAnimCmd_BeatUp:
 	pop af
 	ld [wCurPartySpecies], a
 	ld b, SCGB_BATTLE_COLORS
-	call GetSGBLayout
-	ret
+	jp GetSGBLayout
 
 BattleAnimCmd_OAMOn:
 	ret
@@ -1132,7 +1116,7 @@ endr
 	push hl
 	call LoadCry
 	pop hl
-	jr c, .done
+	ret c
 
 	ld a, [hli]
 	ld c, a
@@ -1201,8 +1185,7 @@ PlayHitSound:
 	ld de, SFX_NOT_VERY_EFFECTIVE
 
 .play
-	call PlaySFX
-	ret
+	jp PlaySFX
 
 BattleAnimAssignPals:
 	ldh a, [hCGB]
@@ -1228,8 +1211,7 @@ BattleAnimAssignPals:
 	ld [wOBP1], a
 	call DmgToCgbBGPals
 	lb de, %11100100, %11100100
-	call DmgToCgbObjPals
-	ret
+	jp DmgToCgbObjPals
 
 ClearBattleAnims::
 ; Clear animation block
@@ -1252,8 +1234,7 @@ ClearBattleAnims::
 	add hl, de
 	call GetBattleAnimPointer
 	call BattleAnimAssignPals
-	call BattleAnimDelayFrame
-	ret
+	jp BattleAnimDelayFrame
 
 BattleAnim_RevertPals:
 	call WaitTop
@@ -1325,7 +1306,7 @@ BattleAnim_UpdateOAM_All:
 	call BattleAnimOAMUpdate
 	pop de
 	pop hl
-	jr c, .done
+	ret c
 
 .next
 	ld bc, BATTLEANIMSTRUCT_LENGTH
@@ -1338,7 +1319,7 @@ BattleAnim_UpdateOAM_All:
 .loop2
 	ld a, l
 	cp LOW(wShadowOAMEnd)
-	jr nc, .done
+	ret nc
 	xor a
 	ld [hli], a
 	jr .loop2

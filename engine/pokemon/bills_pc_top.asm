@@ -3,7 +3,7 @@ _BillsPC:
 	ret c
 	call .LogIn
 	call .UseBillsPC
-	jp .LogOut
+	jr .LogOut
 
 .CheckCanUsePC:
 	ld a, [wPartyCount]
@@ -31,16 +31,14 @@ _BillsPC:
 	call PrintText
 	pop af
 	ld [wOptions], a
-	call LoadFontsBattleExtra
-	ret
+	jp LoadFontsBattleExtra
 
 .PCWhatText:
 	text_far _PCWhatText
 	text_end
 
 .LogOut:
-	call CloseSubmenu
-	ret
+	jp CloseSubmenu
 
 .UseBillsPC:
 	ld hl, .MenuHeader
@@ -63,8 +61,7 @@ _BillsPC:
 	ld a, b
 	jr nc, .loop
 .cancel
-	call CloseWindow
-	ret
+	jp CloseWindow
 
 .MenuHeader:
 	db MENU_BACKUP_TILES ; flags
@@ -201,8 +198,7 @@ ClearPCItemScreen:
 	lb bc, 4, 18
 	call Textbox
 	call WaitBGMap2
-	call SetDefaultBGPAndOBP
-	ret
+	jp SetDefaultBGPAndOBP
 
 CopyBoxmonToTempMon:
 	ld a, [wCurPartyMon]
@@ -214,6 +210,5 @@ CopyBoxmonToTempMon:
 	ld a, BANK(sBoxMon1Species)
 	call OpenSRAM
 	call CopyBytes
-	call CloseSRAM
-	ret
+	jp CloseSRAM
 

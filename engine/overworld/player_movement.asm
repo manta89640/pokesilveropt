@@ -446,7 +446,7 @@ DoPlayerMovement::
 	ld a, [wWalkingDirection]
 	ld e, a
 	cp STANDING
-	jp z, .StandInPlace
+	jr z, .StandInPlace
 
 	add hl, de
 	ld a, [hl]
@@ -772,8 +772,7 @@ ENDM
 	call CheckSFX
 	ret c
 	ld de, SFX_BUMP
-	call PlaySFX
-	ret
+	jp PlaySFX
 
 .GetOutOfWater:
 	push bc

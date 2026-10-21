@@ -1,7 +1,7 @@
 PlaySlowCry:
 	ld a, [wScriptVar]
 	call LoadCry
-	jr c, .done
+	ret c
 
 	ld hl, wCryPitch
 	ld a, [hli]

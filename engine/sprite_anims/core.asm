@@ -12,8 +12,7 @@ ClearSpriteAnims:
 
 PlaySpriteAnimationsAndDelayFrame:
 	call PlaySpriteAnimations
-	call DelayFrame
-	ret
+	jp DelayFrame
 
 PlaySpriteAnimations:
 	push hl
@@ -47,7 +46,7 @@ DoNextFrameForAllSprites:
 	call UpdateAnimFrame
 	pop de
 	pop hl
-	jr c, .done
+	ret c
 
 .next
 	ld bc, SPRITEANIMSTRUCT_LENGTH
@@ -62,7 +61,7 @@ DoNextFrameForAllSprites:
 .loop2 ; Clear (wShadowOAM + [wCurSpriteOAMAddr] --> wShadowOAMEnd)
 	ld a, l
 	cp LOW(wShadowOAMEnd)
-	jr nc, .done
+	ret nc
 	xor a
 	ld [hli], a
 	jr .loop2
@@ -86,7 +85,7 @@ DoNextFrameForFirst16Sprites:
 	call UpdateAnimFrame
 	pop de
 	pop hl
-	jr c, .done
+	ret c
 
 .next
 	ld bc, SPRITEANIMSTRUCT_LENGTH
@@ -101,7 +100,7 @@ DoNextFrameForFirst16Sprites:
 .loop2 ; Clear (wShadowOAM + [wCurSpriteOAMAddr] --> Sprites + $40)
 	ld a, l
 	cp LOW(wShadowOAMSprite16)
-	jr nc, .done
+	ret nc
 	xor a
 	ld [hli], a
 	jr .loop2
@@ -533,8 +532,7 @@ AnimateEndOfExpBar:
 	inc d
 	dec c
 	jr nz, .loop
-	call ClearSprites
-	ret
+	jp ClearSprites
 
 .AnimateFrame:
 	ld hl, wShadowOAMSprite00

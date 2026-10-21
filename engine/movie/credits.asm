@@ -177,7 +177,7 @@ Credits_LoopBack:
 Credits_PrepBGMapUpdate:
 	xor a
 	ldh [hBGMapMode], a
-	jp Credits_Next
+	jr Credits_Next
 
 Credits_UpdateGFXRequestPath:
 	call Credits_LoadBorderGFX
@@ -196,7 +196,7 @@ Credits_RequestGFX:
 	ldh [hBGMapMode], a
 	ld a, 8
 	ld [wRequested2bppSize], a
-	jp Credits_Next
+	jr Credits_Next
 
 Credits_LYOverride:
 	ldh a, [rLY]
@@ -210,7 +210,7 @@ Credits_LYOverride:
 	call .Fill
 	ld hl, wLYOverrides + $67
 	call .Fill
-	jp Credits_Next
+	jr Credits_Next
 
 .Fill:
 	ld c, 8
@@ -434,8 +434,7 @@ ConstructCreditsTilemap:
 	call .InitTopPortion
 	hlcoord 0, 14
 	call .InitTopPortion
-	call WaitBGMap2
-	ret
+	jp WaitBGMap2
 
 .InitTopPortion:
 	ld b, 5
@@ -551,8 +550,7 @@ GetCreditsPalette:
 	adc HIGH(wBGPals2)
 	ld d, a
 	ld bc, 8
-	call CopyBytes
-	ret
+	jp CopyBytes
 
 CreditsPalettes:
 INCLUDE "gfx/credits/credits.pal"

@@ -7,8 +7,7 @@ DEF NAMINGSCREEN_UNDERLINE  EQU '<DOT>' ; $f2
 _NamingScreen:
 	call DisableSpriteUpdates
 	call NamingScreen
-	call ReturnToMapWithSpeechTextbox
-	ret
+	jp ReturnToMapWithSpeechTextbox
 
 NamingScreen:
 	ld hl, wNamingScreenDestinationPointer
@@ -40,8 +39,7 @@ NamingScreen:
 	ldh [hMapAnims], a
 	pop af
 	ld [wOptions], a
-	call ClearJoypad
-	ret
+	jp ClearJoypad
 
 .SetUpNamingScreen:
 	call ClearBGPalettes
@@ -56,8 +54,7 @@ NamingScreen:
 	call WaitBGMap
 	call WaitTop
 	call SetDefaultBGPAndOBP
-	call NamingScreen_InitNameEntry
-	ret
+	jp NamingScreen_InitNameEntry
 
 .GetNamingScreenSetup:
 	ld a, [wNamingScreenType]
@@ -113,8 +110,7 @@ NamingScreenJumptable:
 	hlcoord 1, 2
 	ld [hl], a
 .genderless
-	call .StoreMonIconParams
-	ret
+	jp .StoreMonIconParams
 
 .NicknameStrings:
 	db "'S@"
@@ -126,8 +122,7 @@ NamingScreenJumptable:
 	hlcoord 5, 2
 	ld de, .PlayerNameString
 	call PlaceString
-	call .StoreSpriteIconParams
-	ret
+	jp .StoreSpriteIconParams
 
 .PlayerNameString:
 	db "YOUR NAME?@"
@@ -138,8 +133,7 @@ NamingScreenJumptable:
 	hlcoord 5, 2
 	ld de, .RivalNameString
 	call PlaceString
-	call .StoreSpriteIconParams
-	ret
+	jp .StoreSpriteIconParams
 
 .RivalNameString:
 	db "RIVAL'S NAME?@"
@@ -150,8 +144,7 @@ NamingScreenJumptable:
 	hlcoord 5, 2
 	ld de, .MomNameString
 	call PlaceString
-	call .StoreSpriteIconParams
-	ret
+	jr .StoreSpriteIconParams
 
 .MomNameString:
 	db "MOTHER'S NAME?@"
@@ -174,8 +167,7 @@ NamingScreenJumptable:
 	hlcoord 5, 2
 	ld de, .BoxNameString
 	call PlaceString
-	call .StoreBoxIconParams
-	ret
+	jr .StoreBoxIconParams
 
 .BoxNameString:
 	db "BOX NAME?@"
@@ -199,8 +191,7 @@ NamingScreenJumptable:
 	ld [hl], a
 	depixel 4, 4, 4, 0
 	ld a, SPRITE_ANIM_OBJ_RED_WALK
-	call InitSpriteAnimStruct
-	ret
+	jp InitSpriteAnimStruct
 
 .StoreMonIconParams:
 	ld a, MON_NAME_LENGTH - 1
@@ -418,8 +409,7 @@ NamingScreenJoypadLoop:
 	ret
 
 .b
-	call NamingScreen_DeleteCharacter
-	ret
+	jp NamingScreen_DeleteCharacter
 
 .end
 	call NamingScreen_StoreEntry
@@ -434,13 +424,11 @@ NamingScreenJoypadLoop:
 	ld [hl], a
 	jr z, .upper
 	ld de, NameInputLower
-	call NamingScreen_ApplyTextInputMode
-	ret
+	jp NamingScreen_ApplyTextInputMode
 
 .upper
 	ld de, NameInputUpper
-	call NamingScreen_ApplyTextInputMode
-	ret
+	jp NamingScreen_ApplyTextInputMode
 
 .GetCursorPosition:
 	ld hl, wNamingScreenCursorObjectPointer
@@ -1129,13 +1117,11 @@ INCBIN "gfx/naming_screen/mail.2bpp"
 	ld [hl], a
 	jr nz, .switch_to_lowercase
 	ld de, MailEntry_Uppercase
-	call .PlaceMailCharset
-	ret
+	jp .PlaceMailCharset
 
 .switch_to_lowercase
 	ld de, MailEntry_Lowercase
-	call .PlaceMailCharset
-	ret
+	jp .PlaceMailCharset
 
 ; called from engine/sprite_anims/functions.asm
 
