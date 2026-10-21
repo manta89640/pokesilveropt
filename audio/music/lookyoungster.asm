@@ -133,9 +133,9 @@ Music_LookYoungster_Ch3:
 	rest 1
 	sound_loop 0, .mainloop
 
-Music_LookYoungster_Shared1: ; (tools/musiccalls.py)
+Music_LookYoungster_Shared1: ; (tools/scriptcalls.py)
 	sound_call Music_LookYoungster_Shared1.shared5
-.shared5: ; (tools/musiccalls.py)
+.shared5: ; (tools/scriptcalls.py)
 	octave 2
 	note G_, 1
 	rest 1
@@ -144,7 +144,7 @@ Music_LookYoungster_Shared1: ; (tools/musiccalls.py)
 	rest 1
 	sound_ret
 
-Music_LookYoungster_Shared2: ; (tools/musiccalls.py)
+Music_LookYoungster_Shared2: ; (tools/scriptcalls.py)
 	rest 2
 	octave 3
 	note G_, 1
@@ -163,7 +163,7 @@ Music_LookYoungster_Shared2: ; (tools/musiccalls.py)
 	rest 16
 	sound_ret
 
-Music_LookYoungster_Shared3: ; (tools/musiccalls.py)
+Music_LookYoungster_Shared3: ; (tools/scriptcalls.py)
 	note B_, 1
 	rest 1
 	octave 4
@@ -181,10 +181,10 @@ Music_LookYoungster_Shared3: ; (tools/musiccalls.py)
 	rest 1
 	sound_ret
 
-Music_LookYoungster_Shared4: ; (tools/musiccalls.py)
+Music_LookYoungster_Shared4: ; (tools/scriptcalls.py)
 	octave 2
 	note F_, 1
-.shared6: ; (tools/musiccalls.py)
+.shared6: ; (tools/scriptcalls.py)
 	rest 1
 	octave 3
 	note D#, 1

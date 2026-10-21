@@ -242,7 +242,7 @@ Music_Route29_Ch2:
 	note G_, 2
 	note C_, 1
 	note D_, 1
-.shared5: ; (tools/musiccalls.py)
+.shared5: ; (tools/scriptcalls.py)
 	note E_, 2
 	note E_, 2
 	note G_, 2
@@ -418,7 +418,7 @@ Music_Route29_Ch4:
 	drum_note 6, 4
 	sound_loop 0, .mainloop
 
-Music_Route29_Shared1: ; (tools/musiccalls.py)
+Music_Route29_Shared1: ; (tools/scriptcalls.py)
 	note A_, 2
 	note A_, 2
 	octave 4
@@ -440,7 +440,7 @@ Music_Route29_Shared1: ; (tools/musiccalls.py)
 	note E_, 2
 	sound_ret
 
-Music_Route29_Shared2: ; (tools/musiccalls.py)
+Music_Route29_Shared2: ; (tools/scriptcalls.py)
 	note C_, 2
 	octave 3
 	note G_, 2
@@ -450,22 +450,22 @@ Music_Route29_Shared2: ; (tools/musiccalls.py)
 	note G_, 2
 	sound_ret
 
-Music_Route29_Shared3: ; (tools/musiccalls.py)
+Music_Route29_Shared3: ; (tools/scriptcalls.py)
 	note G_, 1
-.shared6: ; (tools/musiccalls.py)
+.shared6: ; (tools/scriptcalls.py)
 	rest 1
 	octave 4
 	note C_, 1
 	rest 1
 	sound_ret
 
-Music_Route29_Shared4: ; (tools/musiccalls.py)
+Music_Route29_Shared4: ; (tools/scriptcalls.py)
 	octave 4
 	note C_, 2
 	note E_, 2
 	note C_, 4
 	octave 3
-.shared7: ; (tools/musiccalls.py)
+.shared7: ; (tools/scriptcalls.py)
 	note A_, 2
 	octave 4
 	note C_, 2

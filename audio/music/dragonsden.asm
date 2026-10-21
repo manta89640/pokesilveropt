@@ -142,7 +142,7 @@ Music_DragonsDen_Ch4:
 	drum_note 7, 4
 	sound_loop 0, .mainloop
 
-Music_DragonsDen_Shared1: ; (tools/musiccalls.py)
+Music_DragonsDen_Shared1: ; (tools/scriptcalls.py)
 	octave 4
 	note C#, 2
 	octave 3
@@ -151,7 +151,7 @@ Music_DragonsDen_Shared1: ; (tools/musiccalls.py)
 	note C#, 1
 	sound_ret
 
-Music_DragonsDen_Shared2: ; (tools/musiccalls.py)
+Music_DragonsDen_Shared2: ; (tools/scriptcalls.py)
 	octave 3
 	note C#, 4
 	octave 2

@@ -179,10 +179,10 @@ Music_SproutTower_Ch4:
 	drum_note 7, 4
 	sound_loop 0, .mainloop
 
-Music_SproutTower_Shared1: ; (tools/musiccalls.py)
+Music_SproutTower_Shared1: ; (tools/scriptcalls.py)
 	note F_, 2
 	rest 2
-.shared3: ; (tools/musiccalls.py)
+.shared3: ; (tools/scriptcalls.py)
 	note C_, 2
 	note F_, 2
 	note F#, 2
@@ -190,7 +190,7 @@ Music_SproutTower_Shared1: ; (tools/musiccalls.py)
 	rest 2
 	sound_ret
 
-Music_SproutTower_Shared2: ; (tools/musiccalls.py)
+Music_SproutTower_Shared2: ; (tools/scriptcalls.py)
 	note F_, 4
 	note F_, 4
 	note F#, 4

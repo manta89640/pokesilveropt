@@ -786,7 +786,7 @@ Music_JohtoGymBattle_Ch3:
 	octave 3
 	note C_, 2
 	sound_call Music_JohtoGymBattle_Ch3.shared8
-.shared8: ; (tools/musiccalls.py)
+.shared8: ; (tools/scriptcalls.py)
 	note G_, 2
 	octave 4
 	note C_, 2
@@ -799,7 +799,7 @@ Music_JohtoGymBattle_Ch3:
 	note G#, 2
 	sound_call Music_JohtoGymBattle_Ch3.shared9
 	note G#, 2
-.shared9: ; (tools/musiccalls.py)
+.shared9: ; (tools/scriptcalls.py)
 	octave 4
 	note C#, 2
 	octave 3
@@ -812,7 +812,7 @@ Music_JohtoGymBattle_Ch3:
 	note A_, 2
 	sound_call Music_JohtoGymBattle_Ch3.shared10
 	note A_, 2
-.shared10: ; (tools/musiccalls.py)
+.shared10: ; (tools/scriptcalls.py)
 	octave 4
 	note D_, 2
 	octave 3
@@ -845,7 +845,7 @@ Music_JohtoGymBattle_Ch3:
 	note D#, 2
 	sound_ret
 
-Music_JohtoGymBattle_Shared1: ; (tools/musiccalls.py)
+Music_JohtoGymBattle_Shared1: ; (tools/scriptcalls.py)
 	note A#, 8
 	volume_envelope 12, 4
 	octave 4
@@ -862,7 +862,7 @@ Music_JohtoGymBattle_Shared1: ; (tools/musiccalls.py)
 	volume_envelope 11, 0
 	sound_ret
 
-Music_JohtoGymBattle_Shared2: ; (tools/musiccalls.py)
+Music_JohtoGymBattle_Shared2: ; (tools/scriptcalls.py)
 	note G_, 2
 	note D_, 2
 	note F_, 2
@@ -877,7 +877,7 @@ Music_JohtoGymBattle_Shared2: ; (tools/musiccalls.py)
 	note G_, 2
 	sound_ret
 
-Music_JohtoGymBattle_Shared3: ; (tools/musiccalls.py)
+Music_JohtoGymBattle_Shared3: ; (tools/scriptcalls.py)
 	volume_envelope 12, 2
 	octave 4
 	note D_, 2
@@ -886,16 +886,16 @@ Music_JohtoGymBattle_Shared3: ; (tools/musiccalls.py)
 	note D_, 2
 	sound_call Music_JohtoGymBattle_Shared3.shared12
 	note D#, 4
-.shared11: ; (tools/musiccalls.py)
+.shared11: ; (tools/scriptcalls.py)
 	volume_envelope 9, 2
 	octave 3
-.shared12: ; (tools/musiccalls.py)
+.shared12: ; (tools/scriptcalls.py)
 	note D_, 2
 	volume_envelope 12, 2
 	octave 4
 	sound_ret
 
-Music_JohtoGymBattle_Shared4: ; (tools/musiccalls.py)
+Music_JohtoGymBattle_Shared4: ; (tools/scriptcalls.py)
 	note D_, 6
 	note G_, 6
 	note F_, 2
@@ -907,14 +907,14 @@ Music_JohtoGymBattle_Shared4: ; (tools/musiccalls.py)
 	volume_envelope 11, 7
 	sound_ret
 
-Music_JohtoGymBattle_Shared5: ; (tools/musiccalls.py)
+Music_JohtoGymBattle_Shared5: ; (tools/scriptcalls.py)
 	volume_envelope 10, 0
 	note C_, 8
 	volume_envelope 10, 7
 	note C_, 8
 	sound_ret
 
-Music_JohtoGymBattle_Shared6: ; (tools/musiccalls.py)
+Music_JohtoGymBattle_Shared6: ; (tools/scriptcalls.py)
 	note D#, 2
 	note G#, 2
 	note D#, 2
@@ -926,7 +926,7 @@ Music_JohtoGymBattle_Shared6: ; (tools/musiccalls.py)
 	note D#, 2
 	sound_ret
 
-Music_JohtoGymBattle_Shared7: ; (tools/musiccalls.py)
+Music_JohtoGymBattle_Shared7: ; (tools/scriptcalls.py)
 	volume_envelope 9, 2
 	octave 3
 	note F_, 2

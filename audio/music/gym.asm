@@ -250,7 +250,7 @@ Music_Gym_Ch2:
 	note E_, 2
 	note C_, 1
 	note C#, 1
-.shared6: ; (tools/musiccalls.py)
+.shared6: ; (tools/scriptcalls.py)
 	note D_, 3
 	octave 2
 	note D_, 3
@@ -421,7 +421,7 @@ Music_Gym_Ch3:
 	note A_, 4
 	note G_, 4
 	note F#, 1
-.shared7: ; (tools/musiccalls.py)
+.shared7: ; (tools/scriptcalls.py)
 	rest 1
 	note F#, 1
 	note G_, 1
@@ -482,25 +482,25 @@ Music_Gym_Ch4:
 	sound_loop 8, .loop2
 	sound_loop 0, .mainloop
 
-Music_Gym_Shared1: ; (tools/musiccalls.py)
+Music_Gym_Shared1: ; (tools/scriptcalls.py)
 	sound_call Music_Gym_Shared1.shared8
-.shared8: ; (tools/musiccalls.py)
+.shared8: ; (tools/scriptcalls.py)
 	drum_note 2, 1
 	drum_note 2, 1
 	drum_note 2, 1
 	drum_note 2, 1
 	sound_ret
 
-Music_Gym_Shared2: ; (tools/musiccalls.py)
+Music_Gym_Shared2: ; (tools/scriptcalls.py)
 	octave 4
-.shared9: ; (tools/musiccalls.py)
+.shared9: ; (tools/scriptcalls.py)
 	note C_, 2
 	octave 3
 	note B_, 2
 	note A_, 2
 	sound_ret
 
-Music_Gym_Shared3: ; (tools/musiccalls.py)
+Music_Gym_Shared3: ; (tools/scriptcalls.py)
 	note D_, 4
 	note D_, 2
 	octave 1
@@ -514,7 +514,7 @@ Music_Gym_Shared3: ; (tools/musiccalls.py)
 	octave 2
 	sound_ret
 
-Music_Gym_Shared4: ; (tools/musiccalls.py)
+Music_Gym_Shared4: ; (tools/scriptcalls.py)
 	note G_, 1
 	octave 2
 	note C_, 1
@@ -523,7 +523,7 @@ Music_Gym_Shared4: ; (tools/musiccalls.py)
 	octave 2
 	sound_ret
 
-Music_Gym_Shared5: ; (tools/musiccalls.py)
+Music_Gym_Shared5: ; (tools/scriptcalls.py)
 	octave 3
 	note A_, 1
 	rest 3

@@ -515,7 +515,7 @@ Music_RocketBattle_Ch2:
 .sub1:
 	volume_envelope 12, 6
 	octave 4
-.shared8: ; (tools/musiccalls.py)
+.shared8: ; (tools/scriptcalls.py)
 	note A_, 6
 	note G#, 6
 	note E_, 4
@@ -751,7 +751,7 @@ Music_RocketBattle_Ch3:
 	note F_, 2
 	note A#, 2
 	note F_, 2
-.shared9: ; (tools/musiccalls.py)
+.shared9: ; (tools/scriptcalls.py)
 	octave 2
 	note A#, 2
 	octave 3
@@ -773,14 +773,14 @@ Music_RocketBattle_Ch3:
 	note A_, 2
 	sound_ret
 
-Music_RocketBattle_Shared1: ; (tools/musiccalls.py)
+Music_RocketBattle_Shared1: ; (tools/scriptcalls.py)
 	octave 2
 	note A_, 2
 	octave 3
 	note E_, 2
 	sound_ret
 
-Music_RocketBattle_Shared2: ; (tools/musiccalls.py)
+Music_RocketBattle_Shared2: ; (tools/scriptcalls.py)
 	octave 4
 	note G#, 1
 	note A_, 1
@@ -789,7 +789,7 @@ Music_RocketBattle_Shared2: ; (tools/musiccalls.py)
 	octave 5
 	sound_ret
 
-Music_RocketBattle_Shared3: ; (tools/musiccalls.py)
+Music_RocketBattle_Shared3: ; (tools/scriptcalls.py)
 	note E_, 2
 	note D_, 2
 	note E_, 2
@@ -803,7 +803,7 @@ Music_RocketBattle_Shared3: ; (tools/musiccalls.py)
 	note F_, 2
 	sound_ret
 
-Music_RocketBattle_Shared4: ; (tools/musiccalls.py)
+Music_RocketBattle_Shared4: ; (tools/scriptcalls.py)
 	note D_, 2
 	note C#, 2
 	note D_, 2
@@ -815,7 +815,7 @@ Music_RocketBattle_Shared4: ; (tools/musiccalls.py)
 	note F_, 2
 	sound_ret
 
-Music_RocketBattle_Shared5: ; (tools/musiccalls.py)
+Music_RocketBattle_Shared5: ; (tools/scriptcalls.py)
 	note A_, 6
 	note A_, 4
 	volume_envelope 12, 7
@@ -826,7 +826,7 @@ Music_RocketBattle_Shared5: ; (tools/musiccalls.py)
 	volume_envelope 12, 2
 	sound_ret
 
-Music_RocketBattle_Shared6: ; (tools/musiccalls.py)
+Music_RocketBattle_Shared6: ; (tools/scriptcalls.py)
 	note E_, 6
 	note E_, 4
 	volume_envelope 11, 7
@@ -835,7 +835,7 @@ Music_RocketBattle_Shared6: ; (tools/musiccalls.py)
 	volume_envelope 11, 2
 	sound_ret
 
-Music_RocketBattle_Shared7: ; (tools/musiccalls.py)
+Music_RocketBattle_Shared7: ; (tools/scriptcalls.py)
 	duty_cycle 3
 	vibrato 8, 3, 6
 	pitch_offset 1

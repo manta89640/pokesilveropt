@@ -286,7 +286,7 @@ Music_ProfOaksPokemonTalk_Ch3:
 	rest 1
 	sound_loop 0, .mainloop
 
-Music_ProfOaksPokemonTalk_Shared1: ; (tools/musiccalls.py)
+Music_ProfOaksPokemonTalk_Shared1: ; (tools/scriptcalls.py)
 	octave 3
 	note B_, 1
 	octave 4

@@ -187,7 +187,7 @@ Music_VictoryRoad_Ch4:
 	drum_note 4, 1
 	sound_loop 0, .mainloop
 
-Music_VictoryRoad_Shared1: ; (tools/musiccalls.py)
+Music_VictoryRoad_Shared1: ; (tools/scriptcalls.py)
 	note_type 12, 11, 0
 	note E_, 8
 	octave 5

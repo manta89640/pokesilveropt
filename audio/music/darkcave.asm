@@ -131,7 +131,7 @@ Music_DarkCave_Ch1:
 	octave 3
 	note G_, 2
 	note A#, 2
-.shared7: ; (tools/musiccalls.py)
+.shared7: ; (tools/scriptcalls.py)
 	octave 4
 	note C_, 2
 	octave 3
@@ -290,7 +290,7 @@ Music_DarkCave_Ch3:
 	octave 3
 	note C_, 2
 	note C#, 4
-.shared8: ; (tools/musiccalls.py)
+.shared8: ; (tools/scriptcalls.py)
 	sound_call Music_DarkCave_Shared4
 	octave 2
 	note A#, 4
@@ -351,7 +351,7 @@ Music_DarkCave_Ch4:
 	drum_note 2, 2
 	sound_loop 0, .mainloop
 
-Music_DarkCave_Shared1: ; (tools/musiccalls.py)
+Music_DarkCave_Shared1: ; (tools/scriptcalls.py)
 	note F_, 4
 	note D#, 2
 	note D_, 2
@@ -362,14 +362,14 @@ Music_DarkCave_Shared1: ; (tools/musiccalls.py)
 	sound_call Music_DarkCave_Shared1.shared9
 	note C_, 2
 	note D_, 4
-.shared9: ; (tools/musiccalls.py)
+.shared9: ; (tools/scriptcalls.py)
 	note C_, 2
 	octave 3
 	note A#, 2
 	octave 4
 	sound_ret
 
-Music_DarkCave_Shared2: ; (tools/musiccalls.py)
+Music_DarkCave_Shared2: ; (tools/scriptcalls.py)
 	note C_, 8
 	rest 8
 	volume_envelope 12, 7
@@ -386,7 +386,7 @@ Music_DarkCave_Shared2: ; (tools/musiccalls.py)
 	note D_, 4
 	sound_ret
 
-Music_DarkCave_Shared3: ; (tools/musiccalls.py)
+Music_DarkCave_Shared3: ; (tools/scriptcalls.py)
 	octave 5
 	note C_, 8
 	volume_envelope 12, 4
@@ -400,7 +400,7 @@ Music_DarkCave_Shared3: ; (tools/musiccalls.py)
 	note D_, 4
 	sound_ret
 
-Music_DarkCave_Shared4: ; (tools/musiccalls.py)
+Music_DarkCave_Shared4: ; (tools/scriptcalls.py)
 	note C_, 4
 	note G_, 2
 	note D#, 4
@@ -410,7 +410,7 @@ Music_DarkCave_Shared4: ; (tools/musiccalls.py)
 	rest 2
 	sound_ret
 
-Music_DarkCave_Shared5: ; (tools/musiccalls.py)
+Music_DarkCave_Shared5: ; (tools/scriptcalls.py)
 	note C_, 4
 	note G_, 2
 	note D#, 4
@@ -420,7 +420,7 @@ Music_DarkCave_Shared5: ; (tools/musiccalls.py)
 	rest 2
 	sound_ret
 
-Music_DarkCave_Shared6: ; (tools/musiccalls.py)
+Music_DarkCave_Shared6: ; (tools/scriptcalls.py)
 	volume_envelope 11, 0
 	note C_, 8
 	volume_envelope 11, 7

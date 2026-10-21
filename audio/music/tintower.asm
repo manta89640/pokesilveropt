@@ -266,7 +266,7 @@ Music_TinTower_Ch4:
 	drum_note 6, 2
 	sound_loop 0, .mainloop
 
-Music_TinTower_Shared1: ; (tools/musiccalls.py)
+Music_TinTower_Shared1: ; (tools/scriptcalls.py)
 	note C_, 1
 	rest 3
 	note C_, 1

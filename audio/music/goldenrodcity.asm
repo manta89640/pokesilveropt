@@ -155,7 +155,7 @@ Music_GoldenrodCity_Ch1:
 	note C#, 1
 	note D#, 1
 	note C_, 1
-.shared2: ; (tools/musiccalls.py)
+.shared2: ; (tools/scriptcalls.py)
 	octave 3
 	note G#, 1
 	octave 4
@@ -442,14 +442,14 @@ Music_GoldenrodCity_Ch4:
 	drum_note 3, 1
 	drum_note 4, 3
 	drum_note 4, 2
-.shared3: ; (tools/musiccalls.py)
+.shared3: ; (tools/scriptcalls.py)
 	drum_note 8, 1
 	drum_note 8, 1
 	drum_note 8, 1
 	drum_note 8, 1
 	sound_ret
 
-Music_GoldenrodCity_Shared1: ; (tools/musiccalls.py)
+Music_GoldenrodCity_Shared1: ; (tools/scriptcalls.py)
 	drum_note 4, 2
 	drum_note 7, 2
 	drum_note 3, 2

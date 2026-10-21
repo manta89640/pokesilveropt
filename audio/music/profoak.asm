@@ -245,7 +245,7 @@ Music_ProfOak_Ch3:
 	rest 1
 	octave 3
 	note G#, 2
-.shared1: ; (tools/musiccalls.py)
+.shared1: ; (tools/scriptcalls.py)
 	rest 2
 	octave 2
 	note B_, 2

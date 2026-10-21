@@ -595,7 +595,7 @@ Music_EcruteakCity_Ch3:
 	note B_, 1
 	sound_ret
 
-Music_EcruteakCity_Shared1: ; (tools/musiccalls.py)
+Music_EcruteakCity_Shared1: ; (tools/scriptcalls.py)
 	note B_, 2
 	octave 5
 	note D_, 2
@@ -607,18 +607,18 @@ Music_EcruteakCity_Shared1: ; (tools/musiccalls.py)
 	note B_, 2
 	sound_ret
 
-Music_EcruteakCity_Shared2: ; (tools/musiccalls.py)
+Music_EcruteakCity_Shared2: ; (tools/scriptcalls.py)
 	note D_, 2
 	note C_, 2
 	sound_call Music_EcruteakCity_Shared2.shared4
-.shared4: ; (tools/musiccalls.py)
+.shared4: ; (tools/scriptcalls.py)
 	octave 4
 	note G#, 2
 	octave 5
 	note C_, 2
 	sound_ret
 
-Music_EcruteakCity_Shared3: ; (tools/musiccalls.py)
+Music_EcruteakCity_Shared3: ; (tools/scriptcalls.py)
 	note C_, 2
 	octave 4
 	note A_, 2

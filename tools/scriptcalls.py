@@ -1,23 +1,25 @@
 #!/usr/bin/env python3
 """
-Move repeated phrases of music into subroutines.
+Move repeated runs of music and battle animation scripts into subroutines.
 
-Usage: tools/musiccalls.py [--apply]
+Usage: tools/scriptcalls.py [--apply]
 
-Within each section of songs, sound effects or cries in audio.asm, this looks
-for runs of notes and commands that appear more than once, and replaces them
-with a sound_call to one copy of the run, which it adds at the end of a file
-with a sound_ret. If a copy is followed by a sound_ret already, it stays where it is
-instead, with a label for the others to call. It picks the run that saves the
-most bytes, and repeats until no run saves any. A run doesn't include labels
-or sound_call, sound_ret, sound_loop or sound_jump. Then a sound_call
-followed by a sound_ret becomes a sound_jump, or the subroutine moves to
-right after it. The sound engine can call a subroutine from a subroutine but
-no deeper, so it follows each channel to find where its data is played, and
-doesn't add calls where they would be too deep. Without --apply, only
-reports how much it would save.
+Within each section of songs, sound effects or cries in audio.asm, and in
+the battle animations, this looks for runs of commands that appear more than
+once, and replaces them with a call (sound_call or anim_call) to one copy of
+the run, which it adds at the end of a file with a return. If a copy is
+followed by a return already, it stays where it is instead, with a label for
+the others to call. It picks the run that saves the most bytes, and repeats
+until no run saves any. A run doesn't include labels, or commands that jump,
+loop, call or return. Then a call followed by a return becomes a jump, or
+the subroutine moves to right after it. The sound engine can call a
+subroutine from a subroutine but no deeper, and the battle animation engine
+can't at all, so it follows each script from its entry points to find how
+deep its commands run, and doesn't add calls where they would be too deep.
+Without --apply, only reports how much it would save.
 
-tools/tests/verify_music.py checks the result against the original ROMs.
+tools/tests/verify_music.py and tools/tests/verify_anims.py check the result
+against the original ROMs.
 """
 
 import argparse
@@ -26,50 +28,96 @@ import os
 import re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-MAX_DEPTH = 2  # how deep a channel can be in subroutines
 MAX_RUN = 100  # longest run to look for, in commands
 CALL_SIZE = 3
 RET_SIZE = 1
 
-SIZES = {'note': 1, 'rest': 1, 'drum_note': 1, 'octave': 1, 'transpose': 2, 'tempo': 3,
-	'duty_cycle': 2, 'volume_envelope': 2, 'pitch_sweep': 2, 'duty_cycle_pattern': 2,
-	'toggle_sfx': 1, 'pitch_slide': 3, 'vibrato': 3, 'force_stereo_panning': 2, 'volume': 2,
-	'pitch_offset': 3, 'tempo_relative': 2, 'sfx_priority_on': 1, 'sfx_priority_off': 1,
-	'stereo_panning': 2, 'set_condition': 2, 'sound_jump_if': 4, 'sound_jump': 3,
-	'sound_loop': 4, 'sound_call': 3, 'sound_ret': 1, 'square_note': 4, 'noise_note': 3}
-FLOW = ('sound_jump_if', 'sound_jump', 'sound_loop', 'sound_call', 'sound_ret')
+
+class Music:
+	call, ret, jump = 'sound_call', 'sound_ret', 'sound_jump'
+	# command: index of the argument it can jump to
+	branches = {'sound_loop': 1, 'sound_jump_if': 1}
+	loop = 'sound_loop'
+	headers = ('channel_count', 'channel', 'db', 'assert')
+	max_depth = 2  # how deep a channel can be in subroutines
+	sizes = {'note': 1, 'rest': 1, 'drum_note': 1, 'octave': 1, 'transpose': 2, 'tempo': 3,
+		'duty_cycle': 2, 'volume_envelope': 2, 'pitch_sweep': 2, 'duty_cycle_pattern': 2,
+		'toggle_sfx': 1, 'pitch_slide': 3, 'vibrato': 3, 'force_stereo_panning': 2, 'volume': 2,
+		'pitch_offset': 3, 'tempo_relative': 2, 'sfx_priority_on': 1, 'sfx_priority_off': 1,
+		'stereo_panning': 2, 'set_condition': 2, 'sound_jump_if': 4, 'sound_jump': 3,
+		'sound_loop': 4, 'sound_call': 3, 'sound_ret': 1, 'square_note': 4, 'noise_note': 3}
+
+	@classmethod
+	def size(cls, op, args):
+		if op in ('note_type', 'drum_speed'):
+			return 2 if len(args) == 1 else 3
+		if op in ('toggle_noise', 'sfx_toggle_noise'):
+			return 2 if args else 1
+		return cls.sizes[op]
+
+	@staticmethod
+	def entry(op, args):
+		return args[1] if op == 'channel' else None
+
+	@staticmethod
+	def sections():
+		"""Returns {section: [files of songs, sound effects or cries]}."""
+		sections = {}
+		section = None
+		for line in open(os.path.join(ROOT, 'audio.asm')):
+			m = re.match(r'SECTION "(.*)"', line)
+			if m:
+				section = m.group(1)
+			m = re.match(r'INCLUDE "(audio/(music/.*|sfx.asm|cries.asm))"', line)
+			if m:
+				sections.setdefault(section, []).append(m.group(1))
+		return sections
+
+	@staticmethod
+	def prefix(path, label):
+		# Name new labels after the song, or Sfx_ or Cry_ for the sound effects
+		# and cries, which are all in one file
+		return label if '/music/' in path else label.split('_')[0]
 
 
-def command_size(op, args):
-	if op in ('note_type', 'drum_speed'):
-		return 2 if len(args) == 1 else 3
-	if op in ('toggle_noise', 'sfx_toggle_noise'):
-		return 2 if args else 1
-	return SIZES[op]
+class BattleAnims:
+	call, ret, jump = 'anim_call', 'anim_ret', 'anim_jump'
+	branches = {'anim_loop': 1, 'anim_if_param_equal': 1, 'anim_if_var_equal': 1,
+		'anim_if_param_and': 1, 'anim_jumpuntil': 0}
+	loop = 'anim_loop'
+	headers = ('table_width', 'dw', 'assert_table_length')
+	max_depth = 1
+	sizes = {'anim_obj': 5, 'anim_1gfx': 2, 'anim_2gfx': 3, 'anim_3gfx': 4, 'anim_4gfx': 5,
+		'anim_5gfx': 6, 'anim_incobj': 2, 'anim_setobj': 3, 'anim_incbgeffect': 2, 'anim_sound': 3,
+		'anim_cry': 2, 'anim_if_param_and': 4, 'anim_jumpuntil': 3, 'anim_bgeffect': 5,
+		'anim_bgp': 2, 'anim_obp0': 2, 'anim_obp1': 2, 'anim_if_param_equal': 4, 'anim_setvar': 2,
+		'anim_if_var_equal': 4, 'anim_jump': 3, 'anim_loop': 4, 'anim_call': 3}
 
+	@classmethod
+	def size(cls, op, args):
+		# anim_wait and the commands without parameters are one byte
+		return cls.sizes.get(op, 1)
 
-def song_sections():
-	"""Returns {section: [files of songs, sound effects or cries]}."""
-	sections = {}
-	section = None
-	for line in open(os.path.join(ROOT, 'audio.asm')):
-		m = re.match(r'SECTION "(.*)"', line)
-		if m:
-			section = m.group(1)
-		m = re.match(r'INCLUDE "(audio/(music/.*|sfx.asm|cries.asm))"', line)
-		if m:
-			sections.setdefault(section, []).append(m.group(1))
-	return sections
+	@staticmethod
+	def entry(op, args):
+		return args[0] if op == 'dw' else None
+
+	@staticmethod
+	def sections():
+		return {'Battle animations': ['data/moves/animations.asm']}
+
+	@staticmethod
+	def prefix(path, label):
+		return 'BattleAnim'
 
 
 class Item:
-	def __init__(self, path, line, kind, name=None, op=None, args=(), code=None):
+	def __init__(self, path, line, kind, name=None, op=None, args=(), code=None, size=0):
 		self.path, self.line, self.kind = path, line, kind
-		self.name, self.op, self.args, self.code = name, op, args, code
-		self.size = command_size(op, args) if kind == 'command' else 0
+		self.name, self.op, self.args, self.code, self.size = name, op, args, code, size
 
 
-def parse(path):
+def parse(lang, path):
 	items = []
 	scope = None
 	for i, raw in enumerate(open(os.path.join(ROOT, path)).read().split('\n')):
@@ -86,19 +134,21 @@ def parse(path):
 			continue
 		op, _, rest = code.strip().partition(' ')
 		args = [a.strip() for a in rest.split(',')] if rest.strip() else []
-		if op in ('channel_count', 'channel', 'db', 'assert'):
+		if op in lang.headers:
 			items.append(Item(path, i, 'header', op=op, args=args))
 			continue
 		args = [scope + a if a.startswith('.') else a for a in args]
-		items.append(Item(path, i, 'command', op=op, args=args, code=code.strip()))
+		items.append(Item(path, i, 'command', op=op, args=args, code=code.strip(),
+			size=lang.size(op, args)))
 	return items
 
 
-def depths(items):
-	"""Returns {item index: set of subroutine depths it is played at}."""
+def depths(lang, items):
+	"""Returns {item index: set of subroutine depths it runs at}."""
 	labels = {item.name: i for i, item in enumerate(items) if item.kind == 'label'}
 	played = collections.defaultdict(set)
-	todo = [(labels[item.args[1]], 0) for item in items if item.op == 'channel']
+	todo = [(labels[lang.entry(item.op, item.args)], 0) for item in items
+		if item.kind == 'header' and lang.entry(item.op, item.args)]
 	seen = set()
 	while todo:
 		i, depth = todo.pop()
@@ -109,15 +159,15 @@ def depths(items):
 			if item.kind != 'command':
 				continue
 			played[i - 1].add(depth)
-			if item.op == 'sound_ret':
+			if item.op == lang.ret:
 				break
-			if item.op == 'sound_call':
+			if item.op == lang.call:
 				todo.append((labels[item.args[0]], depth + 1))
-			elif item.op == 'sound_jump':
+			elif item.op == lang.jump:
 				i = labels[item.args[0]]
-			elif item.op in ('sound_loop', 'sound_jump_if'):
-				todo.append((labels[item.args[1]], depth))
-				if item.op == 'sound_loop' and item.args[0] == '0':
+			elif item.op in lang.branches:
+				todo.append((labels[item.args[lang.branches[item.op]]], depth))
+				if item.op == lang.loop and item.args[0] == '0':
 					break
 	return played
 
@@ -125,12 +175,12 @@ def depths(items):
 class Run:
 	"""Commands that can hold calls: a list of elements, which are item indices,
 	Subs (calls) or Jumps, with a string of one character each to search. A run
-	may be followed by a sound_ret (ret_after), or by the body of a Sub (tail)."""
+	may be followed by a return (ret_after), or by the body of a Sub (tail)."""
 	def __init__(self, elements, chars, depth, path, scope, ret_after):
 		self.elements, self.chars, self.depth = elements, chars, depth
 		self.path, self.scope, self.ret_after = path, scope, ret_after
 		self.tail = None
-		self.lines = None  # (first line, last line, sound_ret line) for runs of the source
+		self.lines = None  # (first line, last line, return line) for runs of the source
 
 
 class Sub:
@@ -147,7 +197,7 @@ class Jump:
 		self.sub = sub
 
 
-def factor(runs, sizes):
+def factor(runs, sizes, max_depth):
 	"""Greedily moves repeated phrases of the runs into new Subs. A phrase at the
 	end of a run that returns can stay there, with a label for the other copies
 	to call."""
@@ -156,7 +206,7 @@ def factor(runs, sizes):
 	while True:
 		counts = collections.Counter()
 		for run in runs:
-			if run.depth >= MAX_DEPTH:
+			if run.depth >= max_depth:
 				continue
 			for piece in re.split('[\U000f0000-\U000fffff]', run.chars):
 				n = len(piece)
@@ -170,7 +220,7 @@ def factor(runs, sizes):
 			size = sum(sizes[c] for c in phrase)
 			if (count - 1) * (size - CALL_SIZE) <= (best[0] if best else 0):
 				continue
-			hosts = [run for run in runs if run.depth < MAX_DEPTH and phrase in run.chars]
+			hosts = [run for run in runs if run.depth < max_depth and phrase in run.chars]
 			n = sum(run.chars.count(phrase) for run in hosts)
 			saved = (n - 1) * size - CALL_SIZE * n - RET_SIZE
 			if saved > (best[0] if best else 0):
@@ -242,9 +292,9 @@ def tail_calls(runs):
 	return saved
 
 
-def plan_section(files):
-	items = [item for path in files for item in parse(path)]
-	played = depths(items)
+def plan_section(lang, files):
+	items = [item for path in files for item in parse(lang, path)]
+	played = depths(lang, items)
 	runs = []
 	current = None
 	char_of = {}
@@ -254,8 +304,9 @@ def plan_section(files):
 		if item.kind == 'label' and '.' not in item.name:
 			scope = item.name
 		depth = max(played[i]) if i in played else None
-		if item.kind != 'command' or item.op in FLOW or depth is None or depth >= MAX_DEPTH:
-			if current and item.op == 'sound_ret':
+		flow = item.op in (lang.call, lang.ret, lang.jump) or item.op in lang.branches
+		if item.kind != 'command' or flow or depth is None or depth >= lang.max_depth:
+			if current and item.op == lang.ret:
 				current.ret_after = True
 				current.lines = current.lines[:2] + (item.line,)
 			current = None
@@ -274,21 +325,18 @@ def plan_section(files):
 	source = list(runs)
 	for run in source:
 		run.original = (list(run.elements), run.ret_after)
-	subs = factor(runs, sizes)
+	subs = factor(runs, sizes, lang.max_depth)
 	saved = before - sum(sizes[c] for run in runs for c in run.chars)
 	saved -= RET_SIZE * sum(1 for sub in subs if not sub.inplace)
 	saved += tail_calls(runs)
 	return items, source, subs, saved
 
 
-def apply(items, source, subs):
-	# Name new labels after the song, or Sfx_ or Cry_ for the sound effects and
-	# cries, which are all in one file
+def apply(lang, items, source, subs):
 	songs = {}
 	for item in items:
 		if item.kind == 'label':
-			songs.setdefault(item.path, item.name if '/music/' in item.path else
-				item.name.split('_')[0])
+			songs.setdefault(item.path, lang.prefix(item.path, item.name))
 	counters = collections.Counter()
 
 	def name(sub, path):
@@ -314,13 +362,13 @@ def apply(items, source, subs):
 		lines = []
 		for e in run.elements:
 			if isinstance(e, Sub):
-				lines.append(f'\tsound_call {e.label}')
+				lines.append(f'\t{lang.call} {e.label}')
 			elif isinstance(e, Jump):
-				lines.append(f'\tsound_jump {e.sub.label}')
+				lines.append(f'\t{lang.jump} {e.sub.label}')
 			else:
 				lines.append(f'\t{items[e].code}')
 		if run.tail:
-			lines.append(f'{run.tail.local}: ; (tools/musiccalls.py)')
+			lines.append(f'{run.tail.local}: ; (tools/scriptcalls.py)')
 			lines += render(run.tail.run)
 		return lines
 
@@ -338,10 +386,10 @@ def apply(items, source, subs):
 	appends = collections.defaultdict(list)
 	for sub in subs:
 		if not sub.inplace:
-			appends[sub.run.path] += ['', f'{sub.label}: ; (tools/musiccalls.py)']
+			appends[sub.run.path] += ['', f'{sub.label}: ; (tools/scriptcalls.py)']
 			appends[sub.run.path] += render(sub.run)
 			if returns(sub.run):
-				appends[sub.run.path].append('\tsound_ret')
+				appends[sub.run.path].append(f'\t{lang.ret}')
 	for path in set(edits) | set(appends):
 		full = os.path.join(ROOT, path)
 		lines = open(full).read().split('\n')
@@ -360,12 +408,13 @@ def main():
 	ap.add_argument('--apply', action='store_true')
 	args = ap.parse_args()
 	total = 0
-	for section, files in song_sections().items():
-		items, source, subs, saved = plan_section(files)
-		print(f'{section}: {len(subs)} subroutines, {saved} bytes')
-		total += saved
-		if args.apply:
-			apply(items, source, subs)
+	for lang in (Music, BattleAnims):
+		for section, files in lang.sections().items():
+			items, source, subs, saved = plan_section(lang, files)
+			print(f'{section}: {len(subs)} subroutines, {saved} bytes')
+			total += saved
+			if args.apply:
+				apply(lang, items, source, subs)
 	print(f'{total} bytes')
 
 

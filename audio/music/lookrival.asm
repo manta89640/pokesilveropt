@@ -291,7 +291,7 @@ Music_LookRival_Ch3:
 	note F_, 2
 	note C_, 2
 	note D_, 2
-.shared1: ; (tools/musiccalls.py)
+.shared1: ; (tools/scriptcalls.py)
 	note D#, 4
 	note C_, 2
 	note D_, 2
@@ -302,7 +302,7 @@ Music_LookRival_Ch3:
 	note A#, 2
 	note F_, 2
 	note G_, 2
-.shared2: ; (tools/musiccalls.py)
+.shared2: ; (tools/scriptcalls.py)
 	note G#, 4
 	note F_, 2
 	note G_, 2

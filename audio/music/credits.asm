@@ -461,7 +461,7 @@ Music_Credits_Ch1:
 	note G_, 2
 	note D_, 2
 	note G_, 2
-.shared8: ; (tools/musiccalls.py)
+.shared8: ; (tools/scriptcalls.py)
 	octave 3
 	note B_, 12
 	note A#, 2
@@ -1154,7 +1154,7 @@ Music_Credits_Ch3:
 	note E_, 4
 	note B_, 12
 	note A_, 8
-.shared9: ; (tools/musiccalls.py)
+.shared9: ; (tools/scriptcalls.py)
 	note_type 12, 1, 4
 	note D_, 16
 	sound_ret
@@ -1238,7 +1238,7 @@ Music_Credits_Ch3:
 	note G#, 2
 	octave 4
 	note C_, 2
-.shared10: ; (tools/musiccalls.py)
+.shared10: ; (tools/scriptcalls.py)
 	note E_, 2
 	note C_, 2
 	octave 3
@@ -1478,7 +1478,7 @@ Music_Credits_Ch4:
 	drum_note 3, 1
 	sound_ret
 
-Music_Credits_Shared1: ; (tools/musiccalls.py)
+Music_Credits_Shared1: ; (tools/scriptcalls.py)
 	drum_note 9, 1
 	drum_note 8, 1
 	drum_note 8, 1
@@ -1487,14 +1487,14 @@ Music_Credits_Shared1: ; (tools/musiccalls.py)
 	drum_note 8, 1
 	drum_note 8, 1
 	drum_note 8, 1
-.shared11: ; (tools/musiccalls.py)
+.shared11: ; (tools/scriptcalls.py)
 	drum_note 8, 1
 	drum_note 8, 1
 	drum_note 8, 1
 	drum_note 8, 1
 	sound_ret
 
-Music_Credits_Shared2: ; (tools/musiccalls.py)
+Music_Credits_Shared2: ; (tools/scriptcalls.py)
 	drum_note 11, 2
 	drum_note 8, 1
 	drum_note 8, 1
@@ -1508,7 +1508,7 @@ Music_Credits_Shared2: ; (tools/musiccalls.py)
 	drum_note 7, 2
 	sound_ret
 
-Music_Credits_Shared3: ; (tools/musiccalls.py)
+Music_Credits_Shared3: ; (tools/scriptcalls.py)
 	octave 5
 	note D_, 1
 	rest 1
@@ -1521,19 +1521,19 @@ Music_Credits_Shared3: ; (tools/musiccalls.py)
 	rest 1
 	sound_ret
 
-Music_Credits_Shared4: ; (tools/musiccalls.py)
+Music_Credits_Shared4: ; (tools/scriptcalls.py)
 	octave 3
 	note G_, 2
 	octave 4
 	note D_, 2
-.shared12: ; (tools/musiccalls.py)
+.shared12: ; (tools/scriptcalls.py)
 	octave 3
 	note B_, 2
 	octave 4
 	note D_, 2
 	sound_ret
 
-Music_Credits_Shared5: ; (tools/musiccalls.py)
+Music_Credits_Shared5: ; (tools/scriptcalls.py)
 	note C_, 1
 	rest 1
 	note C_, 1
@@ -1542,7 +1542,7 @@ Music_Credits_Shared5: ; (tools/musiccalls.py)
 	rest 1
 	sound_ret
 
-Music_Credits_Shared6: ; (tools/musiccalls.py)
+Music_Credits_Shared6: ; (tools/scriptcalls.py)
 	octave 6
 	note G_, 1
 	note D_, 1
@@ -1551,7 +1551,7 @@ Music_Credits_Shared6: ; (tools/musiccalls.py)
 	note G_, 1
 	sound_ret
 
-Music_Credits_Shared7: ; (tools/musiccalls.py)
+Music_Credits_Shared7: ; (tools/scriptcalls.py)
 	octave 3
 	note B_, 2
 	octave 4

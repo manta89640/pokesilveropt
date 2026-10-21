@@ -447,7 +447,7 @@ Music_Route36_Ch4:
 	drum_speed 12
 	sound_ret
 
-Music_Route36_Shared1: ; (tools/musiccalls.py)
+Music_Route36_Shared1: ; (tools/scriptcalls.py)
 	sound_call Music_Route36_Shared1.shared4
 	note F#, 2
 	note D_, 2
@@ -460,14 +460,14 @@ Music_Route36_Shared1: ; (tools/musiccalls.py)
 	sound_call Music_Route36_Shared1.shared4
 	note F#, 2
 	note D_, 2
-.shared4: ; (tools/musiccalls.py)
+.shared4: ; (tools/scriptcalls.py)
 	note F#, 4
 	note D_, 2
 	note F#, 4
 	note D_, 2
 	sound_ret
 
-Music_Route36_Shared2: ; (tools/musiccalls.py)
+Music_Route36_Shared2: ; (tools/scriptcalls.py)
 	tempo 144
 	volume 7, 7
 	duty_cycle 3
@@ -475,7 +475,7 @@ Music_Route36_Shared2: ; (tools/musiccalls.py)
 	vibrato 16, 1, 5
 	sound_ret
 
-Music_Route36_Shared3: ; (tools/musiccalls.py)
+Music_Route36_Shared3: ; (tools/scriptcalls.py)
 	note F_, 4
 	note C_, 2
 	note F_, 4

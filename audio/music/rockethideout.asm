@@ -205,7 +205,7 @@ Music_RocketHideout_Ch4:
 	drum_note 10, 4
 	sound_ret
 
-Music_RocketHideout_Shared1: ; (tools/musiccalls.py)
+Music_RocketHideout_Shared1: ; (tools/scriptcalls.py)
 	note D#, 2
 	rest 2
 	note A#, 4
@@ -217,7 +217,7 @@ Music_RocketHideout_Shared1: ; (tools/musiccalls.py)
 	rest 8
 	sound_ret
 
-Music_RocketHideout_Shared2: ; (tools/musiccalls.py)
+Music_RocketHideout_Shared2: ; (tools/scriptcalls.py)
 	note C#, 2
 	rest 2
 	note G#, 4
@@ -229,7 +229,7 @@ Music_RocketHideout_Shared2: ; (tools/musiccalls.py)
 	rest 8
 	sound_ret
 
-Music_RocketHideout_Shared3: ; (tools/musiccalls.py)
+Music_RocketHideout_Shared3: ; (tools/scriptcalls.py)
 	octave 2
 	note C#, 2
 	rest 2
@@ -242,7 +242,7 @@ Music_RocketHideout_Shared3: ; (tools/musiccalls.py)
 	volume_envelope 12, 4
 	sound_ret
 
-Music_RocketHideout_Shared4: ; (tools/musiccalls.py)
+Music_RocketHideout_Shared4: ; (tools/scriptcalls.py)
 	octave 3
 	note A#, 2
 	note A_, 2
@@ -253,7 +253,7 @@ Music_RocketHideout_Shared4: ; (tools/musiccalls.py)
 	note C_, 2
 	sound_ret
 
-Music_RocketHideout_Shared5: ; (tools/musiccalls.py)
+Music_RocketHideout_Shared5: ; (tools/scriptcalls.py)
 	note C_, 2
 	octave 3
 	note B_, 2

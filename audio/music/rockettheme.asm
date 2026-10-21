@@ -291,7 +291,7 @@ Music_RocketTheme_Ch2:
 	rest 2
 	note D#, 2
 	rest 2
-.shared2: ; (tools/musiccalls.py)
+.shared2: ; (tools/scriptcalls.py)
 	octave 3
 	note D#, 2
 	rest 2
@@ -434,7 +434,7 @@ Music_RocketTheme_Ch4:
 	sound_call Music_LookRocket_Ch4.sub1
 	sound_loop 0, .mainloop
 
-Music_RocketTheme_Shared1: ; (tools/musiccalls.py)
+Music_RocketTheme_Shared1: ; (tools/scriptcalls.py)
 	note F_, 2
 	rest 2
 	note D#, 2

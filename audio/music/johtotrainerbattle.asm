@@ -675,7 +675,7 @@ Music_JohtoTrainerBattle_Ch2:
 	sound_ret
 
 .sub2:
-.shared10: ; (tools/musiccalls.py)
+.shared10: ; (tools/scriptcalls.py)
 	volume_envelope 12, 7
 	octave 3
 	note A_, 6
@@ -687,7 +687,7 @@ Music_JohtoTrainerBattle_Ch2:
 	note F#, 4
 	note E_, 4
 	note D_, 4
-.shared11: ; (tools/musiccalls.py)
+.shared11: ; (tools/scriptcalls.py)
 	volume_envelope 11, 0
 	note F_, 8
 	volume_envelope 11, 7
@@ -997,7 +997,7 @@ Music_JohtoTrainerBattle_Ch3:
 	sound_loop 0, .mainloop
 
 .sub1:
-.shared12: ; (tools/musiccalls.py)
+.shared12: ; (tools/scriptcalls.py)
 	octave 4
 	note C_, 2
 	octave 3
@@ -1014,11 +1014,11 @@ Music_JohtoTrainerBattle_Ch3:
 	octave 3
 	sound_call Music_JohtoTrainerBattle_Ch3.shared13
 	note A_, 2
-.shared13: ; (tools/musiccalls.py)
+.shared13: ; (tools/scriptcalls.py)
 	note E_, 2
 	note A_, 2
 	note E_, 2
-.shared14: ; (tools/musiccalls.py)
+.shared14: ; (tools/scriptcalls.py)
 	note A_, 2
 	note E_, 2
 	note F#, 2
@@ -1032,7 +1032,7 @@ Music_JohtoTrainerBattle_Ch3:
 	note F_, 2
 	note A#, 2
 	note F_, 2
-.shared15: ; (tools/musiccalls.py)
+.shared15: ; (tools/scriptcalls.py)
 	note A_, 2
 	note A#, 2
 	octave 4
@@ -1076,10 +1076,10 @@ Music_JohtoTrainerBattle_Ch3:
 	note A#, 2
 	sound_ret
 
-Music_JohtoTrainerBattle_Shared1: ; (tools/musiccalls.py)
+Music_JohtoTrainerBattle_Shared1: ; (tools/scriptcalls.py)
 	octave 4
 	note C_, 2
-.shared16: ; (tools/musiccalls.py)
+.shared16: ; (tools/scriptcalls.py)
 	octave 3
 	note A#, 2
 	note G#, 2
@@ -1087,31 +1087,31 @@ Music_JohtoTrainerBattle_Shared1: ; (tools/musiccalls.py)
 	note F_, 2
 	sound_ret
 
-Music_JohtoTrainerBattle_Shared2: ; (tools/musiccalls.py)
+Music_JohtoTrainerBattle_Shared2: ; (tools/scriptcalls.py)
 	volume_envelope 12, 2
 	octave 5
-.shared17: ; (tools/musiccalls.py)
+.shared17: ; (tools/scriptcalls.py)
 	note C_, 2
 	volume_envelope 10, 4
 	octave 3
 	note E_, 2
 	sound_ret
 
-Music_JohtoTrainerBattle_Shared3: ; (tools/musiccalls.py)
+Music_JohtoTrainerBattle_Shared3: ; (tools/scriptcalls.py)
 	note D#, 2
 	note A#, 2
 	note D#, 2
 	sound_call Music_JohtoTrainerBattle_Shared3.shared18
 	note C#, 2
 	octave 3
-.shared18: ; (tools/musiccalls.py)
+.shared18: ; (tools/scriptcalls.py)
 	note A#, 2
 	note D#, 2
 	note A#, 2
 	octave 4
 	sound_ret
 
-Music_JohtoTrainerBattle_Shared4: ; (tools/musiccalls.py)
+Music_JohtoTrainerBattle_Shared4: ; (tools/scriptcalls.py)
 	note F_, 4
 	note E_, 2
 	note F_, 2
@@ -1125,7 +1125,7 @@ Music_JohtoTrainerBattle_Shared4: ; (tools/musiccalls.py)
 	octave 3
 	sound_ret
 
-Music_JohtoTrainerBattle_Shared5: ; (tools/musiccalls.py)
+Music_JohtoTrainerBattle_Shared5: ; (tools/scriptcalls.py)
 	note E_, 4
 	note E_, 2
 	note D_, 2
@@ -1134,12 +1134,12 @@ Music_JohtoTrainerBattle_Shared5: ; (tools/musiccalls.py)
 	volume_envelope 11, 7
 	sound_ret
 
-Music_JohtoTrainerBattle_Shared6: ; (tools/musiccalls.py)
+Music_JohtoTrainerBattle_Shared6: ; (tools/scriptcalls.py)
 	volume_envelope 11, 7
 	note F_, 8
 	note F_, 8
 	volume_envelope 11, 5
-.shared19: ; (tools/musiccalls.py)
+.shared19: ; (tools/scriptcalls.py)
 	note G_, 4
 	note D#, 4
 	note F_, 4
@@ -1147,31 +1147,31 @@ Music_JohtoTrainerBattle_Shared6: ; (tools/musiccalls.py)
 	note D#, 2
 	sound_ret
 
-Music_JohtoTrainerBattle_Shared7: ; (tools/musiccalls.py)
+Music_JohtoTrainerBattle_Shared7: ; (tools/scriptcalls.py)
 	note D_, 4
 	octave 3
 	note A#, 2
 	octave 4
 	note D_, 2
-.shared20: ; (tools/musiccalls.py)
+.shared20: ; (tools/scriptcalls.py)
 	note F_, 2
 	note E_, 2
 	note D_, 2
 	note F_, 2
 	sound_ret
 
-Music_JohtoTrainerBattle_Shared8: ; (tools/musiccalls.py)
+Music_JohtoTrainerBattle_Shared8: ; (tools/scriptcalls.py)
 	note A#, 6
 	note G#, 2
 	note G_, 2
 	volume_envelope 11, 0
-.shared21: ; (tools/musiccalls.py)
+.shared21: ; (tools/scriptcalls.py)
 	note D#, 8
 	volume_envelope 11, 7
 	note D#, 8
 	sound_ret
 
-Music_JohtoTrainerBattle_Shared9: ; (tools/musiccalls.py)
+Music_JohtoTrainerBattle_Shared9: ; (tools/scriptcalls.py)
 	octave 4
 	note D#, 2
 	octave 3

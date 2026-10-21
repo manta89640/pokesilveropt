@@ -148,7 +148,7 @@ Music_MagnetTrain_Ch4:
 
 .sub2:
 	sound_call Music_MagnetTrain_Ch4.shared3
-.shared3: ; (tools/musiccalls.py)
+.shared3: ; (tools/scriptcalls.py)
 	drum_note 9, 2
 	drum_note 8, 2
 	drum_note 8, 2
@@ -159,9 +159,9 @@ Music_MagnetTrain_Ch4:
 	drum_note 8, 2
 	sound_ret
 
-Music_MagnetTrain_Shared1: ; (tools/musiccalls.py)
+Music_MagnetTrain_Shared1: ; (tools/scriptcalls.py)
 	sound_call Music_MagnetTrain_Shared1.shared4
-.shared4: ; (tools/musiccalls.py)
+.shared4: ; (tools/scriptcalls.py)
 	octave 2
 	note D_, 1
 	octave 3
@@ -172,7 +172,7 @@ Music_MagnetTrain_Shared1: ; (tools/musiccalls.py)
 	note D_, 1
 	sound_ret
 
-Music_MagnetTrain_Shared2: ; (tools/musiccalls.py)
+Music_MagnetTrain_Shared2: ; (tools/scriptcalls.py)
 	note E_, 1
 	note C_, 1
 	octave 3

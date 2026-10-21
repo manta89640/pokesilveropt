@@ -170,7 +170,7 @@ Music_AzaleaTown_Ch1:
 	note A#, 2
 	volume_envelope 10, 1
 	octave 3
-.shared7: ; (tools/musiccalls.py)
+.shared7: ; (tools/scriptcalls.py)
 	note C#, 2
 	volume_envelope 6, 1
 	note C#, 2
@@ -528,7 +528,7 @@ Music_AzaleaTown_Ch3:
 	octave 3
 	sound_call Music_AzaleaTown_Ch3.shared8
 	volume_envelope 2, 5
-.shared8: ; (tools/musiccalls.py)
+.shared8: ; (tools/scriptcalls.py)
 	note F_, 1
 	rest 1
 	note F_, 1
@@ -550,7 +550,7 @@ Music_AzaleaTown_Ch4:
 	drum_note 7, 2
 	sound_loop 0, .mainloop
 
-Music_AzaleaTown_Shared1: ; (tools/musiccalls.py)
+Music_AzaleaTown_Shared1: ; (tools/scriptcalls.py)
 	note F_, 2
 	volume_envelope 6, 1
 	note F_, 2
@@ -558,7 +558,7 @@ Music_AzaleaTown_Shared1: ; (tools/musiccalls.py)
 	volume_envelope 10, 1
 	sound_ret
 
-Music_AzaleaTown_Shared2: ; (tools/musiccalls.py)
+Music_AzaleaTown_Shared2: ; (tools/scriptcalls.py)
 	rest 2
 	octave 2
 	note F#, 1
@@ -573,7 +573,7 @@ Music_AzaleaTown_Shared2: ; (tools/musiccalls.py)
 	note D#, 2
 	sound_ret
 
-Music_AzaleaTown_Shared3: ; (tools/musiccalls.py)
+Music_AzaleaTown_Shared3: ; (tools/scriptcalls.py)
 	note D#, 2
 	volume_envelope 6, 1
 	note D#, 2
@@ -581,7 +581,7 @@ Music_AzaleaTown_Shared3: ; (tools/musiccalls.py)
 	volume_envelope 10, 1
 	sound_ret
 
-Music_AzaleaTown_Shared4: ; (tools/musiccalls.py)
+Music_AzaleaTown_Shared4: ; (tools/scriptcalls.py)
 	volume_envelope 10, 1
 	note C_, 2
 	volume_envelope 6, 1
@@ -590,7 +590,7 @@ Music_AzaleaTown_Shared4: ; (tools/musiccalls.py)
 	volume_envelope 10, 1
 	sound_ret
 
-Music_AzaleaTown_Shared5: ; (tools/musiccalls.py)
+Music_AzaleaTown_Shared5: ; (tools/scriptcalls.py)
 	note C#, 1
 	rest 5
 	note C#, 1
@@ -599,7 +599,7 @@ Music_AzaleaTown_Shared5: ; (tools/musiccalls.py)
 	rest 1
 	sound_ret
 
-Music_AzaleaTown_Shared6: ; (tools/musiccalls.py)
+Music_AzaleaTown_Shared6: ; (tools/scriptcalls.py)
 	drum_note 4, 2
 	drum_note 7, 2
 	drum_note 3, 2

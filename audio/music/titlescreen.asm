@@ -237,7 +237,7 @@ Music_TitleScreen_Ch1:
 	note A_, 2
 	note F#, 2
 	note_type 12, 11, 7
-.shared12: ; (tools/musiccalls.py)
+.shared12: ; (tools/scriptcalls.py)
 	note G_, 1
 	rest 3
 	octave 1
@@ -260,7 +260,7 @@ Music_TitleScreen_Ch1:
 	rest 1
 	note D_, 1
 	octave 1
-.shared13: ; (tools/musiccalls.py)
+.shared13: ; (tools/scriptcalls.py)
 	note A_, 1
 	note_type 8, 11, 7
 	sound_ret
@@ -915,7 +915,7 @@ Music_TitleScreen_Ch4:
 	drum_note 1, 4
 	sound_ret
 
-Music_TitleScreen_Shared1: ; (tools/musiccalls.py)
+Music_TitleScreen_Shared1: ; (tools/scriptcalls.py)
 	note G_, 4
 	note D_, 2
 	note G_, 4
@@ -927,7 +927,7 @@ Music_TitleScreen_Shared1: ; (tools/musiccalls.py)
 	note A_, 4
 	note F_, 2
 	note A_, 2
-.shared14: ; (tools/musiccalls.py)
+.shared14: ; (tools/scriptcalls.py)
 	octave 3
 	note C_, 2
 	octave 2
@@ -937,21 +937,21 @@ Music_TitleScreen_Shared1: ; (tools/musiccalls.py)
 	note G_, 2
 	sound_ret
 
-Music_TitleScreen_Shared2: ; (tools/musiccalls.py)
+Music_TitleScreen_Shared2: ; (tools/scriptcalls.py)
 	note G_, 1
 	rest 3
 	note G_, 1
 	rest 5
 	note G_, 1
 	note G_, 1
-.shared15: ; (tools/musiccalls.py)
+.shared15: ; (tools/scriptcalls.py)
 	note G_, 1
 	rest 3
 	note G_, 1
 	rest 3
 	sound_ret
 
-Music_TitleScreen_Shared3: ; (tools/musiccalls.py)
+Music_TitleScreen_Shared3: ; (tools/scriptcalls.py)
 	note D#, 1
 	note E_, 1
 	note F_, 6
@@ -964,18 +964,18 @@ Music_TitleScreen_Shared3: ; (tools/musiccalls.py)
 	note B_, 4
 	octave 3
 	note C_, 4
-.shared16: ; (tools/musiccalls.py)
+.shared16: ; (tools/scriptcalls.py)
 	note D_, 9
 	octave 2
 	note B_, 3
 	octave 3
 	sound_ret
 
-Music_TitleScreen_Shared4: ; (tools/musiccalls.py)
+Music_TitleScreen_Shared4: ; (tools/scriptcalls.py)
 	drum_note 1, 2
 	drum_note 1, 1
 	drum_note 1, 1
-.shared17: ; (tools/musiccalls.py)
+.shared17: ; (tools/scriptcalls.py)
 	drum_note 1, 2
 	drum_note 1, 1
 	drum_note 1, 1
@@ -983,7 +983,7 @@ Music_TitleScreen_Shared4: ; (tools/musiccalls.py)
 	drum_note 1, 1
 	sound_ret
 
-Music_TitleScreen_Shared5: ; (tools/musiccalls.py)
+Music_TitleScreen_Shared5: ; (tools/scriptcalls.py)
 	drum_note 1, 2
 	drum_note 4, 2
 	drum_note 1, 2
@@ -994,7 +994,7 @@ Music_TitleScreen_Shared5: ; (tools/musiccalls.py)
 	drum_note 1, 2
 	sound_ret
 
-Music_TitleScreen_Shared6: ; (tools/musiccalls.py)
+Music_TitleScreen_Shared6: ; (tools/scriptcalls.py)
 	octave 3
 	note G_, 6
 	note B_, 2
@@ -1003,20 +1003,20 @@ Music_TitleScreen_Shared6: ; (tools/musiccalls.py)
 	octave 2
 	sound_ret
 
-Music_TitleScreen_Shared7: ; (tools/musiccalls.py)
+Music_TitleScreen_Shared7: ; (tools/scriptcalls.py)
 	stereo_panning TRUE, TRUE
 	volume_envelope 12, 7
 	octave 4
 	note F_, 6
 	note E_, 1
 	note D#, 1
-.shared18: ; (tools/musiccalls.py)
+.shared18: ; (tools/scriptcalls.py)
 	note D_, 8
 	stereo_panning TRUE, FALSE
 	volume_envelope 9, 7
 	sound_ret
 
-Music_TitleScreen_Shared8: ; (tools/musiccalls.py)
+Music_TitleScreen_Shared8: ; (tools/scriptcalls.py)
 	drum_note 1, 2
 	drum_note 4, 2
 	drum_note 1, 2
@@ -1027,7 +1027,7 @@ Music_TitleScreen_Shared8: ; (tools/musiccalls.py)
 	drum_note 1, 2
 	sound_ret
 
-Music_TitleScreen_Shared9: ; (tools/musiccalls.py)
+Music_TitleScreen_Shared9: ; (tools/scriptcalls.py)
 	note_type 8, 1, 6
 	octave 3
 	note C_, 4
@@ -1038,7 +1038,7 @@ Music_TitleScreen_Shared9: ; (tools/musiccalls.py)
 	rest 1
 	sound_ret
 
-Music_TitleScreen_Shared10: ; (tools/musiccalls.py)
+Music_TitleScreen_Shared10: ; (tools/scriptcalls.py)
 	note G_, 2
 	note D_, 1
 	note C#, 1
@@ -1052,7 +1052,7 @@ Music_TitleScreen_Shared10: ; (tools/musiccalls.py)
 	note D_, 2
 	sound_ret
 
-Music_TitleScreen_Shared11: ; (tools/musiccalls.py)
+Music_TitleScreen_Shared11: ; (tools/scriptcalls.py)
 	drum_note 2, 1
 	drum_note 1, 1
 	drum_note 1, 1

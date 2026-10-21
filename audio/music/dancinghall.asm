@@ -76,7 +76,7 @@ Music_DancingHall_Ch1:
 	rest 1
 	octave 3
 	note B_, 1
-.shared2: ; (tools/musiccalls.py)
+.shared2: ; (tools/scriptcalls.py)
 	rest 1
 	octave 4
 	note D_, 1
@@ -203,7 +203,7 @@ Music_DancingHall_Ch2:
 	octave 4
 	note D_, 1
 	volume_envelope 15, 3
-.shared3: ; (tools/musiccalls.py)
+.shared3: ; (tools/scriptcalls.py)
 	octave 3
 	note A_, 1
 	octave 4
@@ -281,7 +281,7 @@ Music_DancingHall_Ch3:
 	note D_, 1
 	sound_loop 0, .mainloop
 
-Music_DancingHall_Shared1: ; (tools/musiccalls.py)
+Music_DancingHall_Shared1: ; (tools/scriptcalls.py)
 	note E_, 13
 	note D_, 1
 	note E_, 1

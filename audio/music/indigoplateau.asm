@@ -136,7 +136,7 @@ Music_IndigoPlateau_Ch3:
 	octave 3
 	note C_, 1
 	rest 3
-.shared1: ; (tools/musiccalls.py)
+.shared1: ; (tools/scriptcalls.py)
 	note D_, 1
 	rest 3
 	octave 2

@@ -218,14 +218,14 @@ Music_BurnedTower_Ch4:
 	drum_note 8, 4
 	sound_loop 0, .mainloop
 
-Music_BurnedTower_Shared1: ; (tools/musiccalls.py)
+Music_BurnedTower_Shared1: ; (tools/scriptcalls.py)
 	octave 2
 	note A_, 4
 	note A_, 4
 	note A_, 2
 	sound_ret
 
-Music_BurnedTower_Shared2: ; (tools/musiccalls.py)
+Music_BurnedTower_Shared2: ; (tools/scriptcalls.py)
 	octave 2
 	note B_, 2
 	octave 3

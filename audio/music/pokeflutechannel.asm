@@ -203,7 +203,7 @@ Music_PokeFluteChannel_Ch3:
 	note G_, 4
 	sound_ret
 
-Music_PokeFluteChannel_Shared1: ; (tools/musiccalls.py)
+Music_PokeFluteChannel_Shared1: ; (tools/scriptcalls.py)
 	note E_, 2
 	octave 3
 	note C_, 2

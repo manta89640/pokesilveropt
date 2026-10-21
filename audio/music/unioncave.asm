@@ -66,7 +66,7 @@ Music_UnionCave_Ch1:
 	sound_loop 0, .mainloop
 
 .sub1:
-.shared1: ; (tools/musiccalls.py)
+.shared1: ; (tools/scriptcalls.py)
 	octave 2
 	note G#, 2
 	octave 3

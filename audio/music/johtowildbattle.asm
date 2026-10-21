@@ -298,7 +298,7 @@ Music_JohtoWildBattle_Ch2:
 	sound_call Music_JohtoWildBattle_Ch2.shared7
 	sound_call Music_JohtoWildBattle_Ch2.shared7
 	sound_call Music_JohtoWildBattle_Ch2.shared7
-.shared7: ; (tools/musiccalls.py)
+.shared7: ; (tools/scriptcalls.py)
 	octave 4
 	note F_, 1
 	note F#, 1
@@ -483,14 +483,14 @@ Music_JohtoWildBattle_Ch3:
 	sound_loop 4, .sub1loop1
 	sound_ret
 
-Music_JohtoWildBattle_Shared1: ; (tools/musiccalls.py)
+Music_JohtoWildBattle_Shared1: ; (tools/scriptcalls.py)
 	volume 7, 7
-.shared8: ; (tools/musiccalls.py)
+.shared8: ; (tools/scriptcalls.py)
 	duty_cycle 3
 	pitch_offset 2
 	sound_ret
 
-Music_JohtoWildBattle_Shared2: ; (tools/musiccalls.py)
+Music_JohtoWildBattle_Shared2: ; (tools/scriptcalls.py)
 	octave 4
 	note C_, 1
 	octave 3
@@ -505,21 +505,21 @@ Music_JohtoWildBattle_Shared2: ; (tools/musiccalls.py)
 	note G_, 1
 	note F#, 1
 	note F_, 1
-.shared9: ; (tools/musiccalls.py)
+.shared9: ; (tools/scriptcalls.py)
 	note F#, 1
 	note F_, 1
 	note E_, 1
 	note D#, 1
 	sound_ret
 
-Music_JohtoWildBattle_Shared3: ; (tools/musiccalls.py)
+Music_JohtoWildBattle_Shared3: ; (tools/scriptcalls.py)
 	note C#, 2
 	note C_, 2
 	octave 3
 	note A#, 2
 	sound_ret
 
-Music_JohtoWildBattle_Shared4: ; (tools/musiccalls.py)
+Music_JohtoWildBattle_Shared4: ; (tools/scriptcalls.py)
 	note D_, 6
 	note G_, 4
 	note F_, 4
@@ -532,19 +532,19 @@ Music_JohtoWildBattle_Shared4: ; (tools/musiccalls.py)
 	note G_, 4
 	sound_ret
 
-Music_JohtoWildBattle_Shared5: ; (tools/musiccalls.py)
+Music_JohtoWildBattle_Shared5: ; (tools/scriptcalls.py)
 	note B_, 1
 	note A#, 1
 	note G#, 1
 	note G_, 1
-.shared10: ; (tools/musiccalls.py)
+.shared10: ; (tools/scriptcalls.py)
 	note G#, 1
 	note A_, 1
 	note A#, 1
 	note B_, 1
 	sound_ret
 
-Music_JohtoWildBattle_Shared6: ; (tools/musiccalls.py)
+Music_JohtoWildBattle_Shared6: ; (tools/scriptcalls.py)
 	duty_cycle 3
 	vibrato 8, 3, 6
 	pitch_offset 1

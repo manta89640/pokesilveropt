@@ -36,7 +36,7 @@ Music_LookRocket_Ch1:
 	note F_, 1
 	note G#, 1
 	note B_, 1
-.shared6: ; (tools/musiccalls.py)
+.shared6: ; (tools/scriptcalls.py)
 	octave 3
 	note D_, 1
 	note F_, 1
@@ -220,7 +220,7 @@ Music_LookRocket_Ch3:
 	rest 1
 	sound_call Music_BugCatchingContest_Shared1.shared7
 	note B_, 1
-.shared7: ; (tools/musiccalls.py)
+.shared7: ; (tools/scriptcalls.py)
 	rest 1
 	octave 3
 	note G#, 1
@@ -254,7 +254,7 @@ Music_LookRocket_Ch3:
 	rest 1
 	note C_, 1
 	rest 1
-.shared8: ; (tools/musiccalls.py)
+.shared8: ; (tools/scriptcalls.py)
 	note F#, 1
 	rest 1
 	note A_, 1
@@ -288,7 +288,7 @@ Music_LookRocket_Ch4:
 	drum_note 1, 8
 	drum_note 3, 2
 	drum_note 4, 2
-.shared9: ; (tools/musiccalls.py)
+.shared9: ; (tools/scriptcalls.py)
 	drum_note 2, 1
 	drum_note 2, 1
 	drum_note 3, 1
@@ -297,14 +297,14 @@ Music_LookRocket_Ch4:
 
 .sub2:
 	sound_call Music_LookRocket_Ch4.shared10
-.shared10: ; (tools/musiccalls.py)
+.shared10: ; (tools/scriptcalls.py)
 	drum_note 4, 2
 	drum_note 7, 2
 	drum_note 3, 2
 	drum_note 7, 2
 	sound_ret
 
-Music_LookRocket_Shared1: ; (tools/musiccalls.py)
+Music_LookRocket_Shared1: ; (tools/scriptcalls.py)
 	octave 2
 	note G#, 1
 	rest 1
@@ -323,7 +323,7 @@ Music_LookRocket_Shared1: ; (tools/musiccalls.py)
 	rest 1
 	sound_ret
 
-Music_LookRocket_Shared2: ; (tools/musiccalls.py)
+Music_LookRocket_Shared2: ; (tools/scriptcalls.py)
 	vibrato 5, 6, 4
 	note_type 12, 10, 8
 	octave 4
@@ -331,7 +331,7 @@ Music_LookRocket_Shared2: ; (tools/musiccalls.py)
 	note D_, 1
 	sound_ret
 
-Music_LookRocket_Shared3: ; (tools/musiccalls.py)
+Music_LookRocket_Shared3: ; (tools/scriptcalls.py)
 	note D#, 1
 	note F_, 1
 	note F#, 6
@@ -343,7 +343,7 @@ Music_LookRocket_Shared3: ; (tools/musiccalls.py)
 	rest 1
 	sound_ret
 
-Music_LookRocket_Shared4: ; (tools/musiccalls.py)
+Music_LookRocket_Shared4: ; (tools/scriptcalls.py)
 	note D#, 1
 	rest 1
 	note D_, 1
@@ -354,7 +354,7 @@ Music_LookRocket_Shared4: ; (tools/musiccalls.py)
 	rest 3
 	sound_ret
 
-Music_LookRocket_Shared5: ; (tools/musiccalls.py)
+Music_LookRocket_Shared5: ; (tools/scriptcalls.py)
 	vibrato 4, 6, 4
 	duty_cycle 3
 	note_type 12, 11, 7

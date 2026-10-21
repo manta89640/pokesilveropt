@@ -106,7 +106,7 @@ Music_Printer_Ch3:
 	rest 1
 	sound_loop 0, .mainloop
 
-Music_Printer_Shared1: ; (tools/musiccalls.py)
+Music_Printer_Shared1: ; (tools/scriptcalls.py)
 	sound_call Music_Printer_Shared3
 	note C#, 1
 	rest 1
@@ -137,10 +137,10 @@ Music_Printer_Shared1: ; (tools/musiccalls.py)
 	note G#, 1
 	sound_call Music_Printer_Shared1.shared6
 	note C#, 1
-.shared5: ; (tools/musiccalls.py)
+.shared5: ; (tools/scriptcalls.py)
 	rest 1
 	note A_, 1
-.shared6: ; (tools/musiccalls.py)
+.shared6: ; (tools/scriptcalls.py)
 	rest 1
 	note F#, 1
 	rest 1
@@ -148,16 +148,16 @@ Music_Printer_Shared1: ; (tools/musiccalls.py)
 	rest 1
 	sound_ret
 
-Music_Printer_Shared2: ; (tools/musiccalls.py)
+Music_Printer_Shared2: ; (tools/scriptcalls.py)
 	sound_call Music_Printer_Shared2.shared7
-.shared7: ; (tools/musiccalls.py)
+.shared7: ; (tools/scriptcalls.py)
 	note E_, 1
 	rest 1
 	note B_, 1
 	rest 1
 	sound_ret
 
-Music_Printer_Shared3: ; (tools/musiccalls.py)
+Music_Printer_Shared3: ; (tools/scriptcalls.py)
 	rest 1
 	octave 3
 	note B_, 1
@@ -165,7 +165,7 @@ Music_Printer_Shared3: ; (tools/musiccalls.py)
 	octave 4
 	sound_ret
 
-Music_Printer_Shared4: ; (tools/musiccalls.py)
+Music_Printer_Shared4: ; (tools/scriptcalls.py)
 	note B_, 1
 	rest 1
 	note A_, 1

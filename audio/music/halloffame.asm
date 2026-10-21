@@ -146,10 +146,10 @@ Music_HallOfFame_Ch4:
 	drum_note 11, 1
 	sound_loop 0, .mainloop
 
-Music_HallOfFame_Shared1: ; (tools/musiccalls.py)
+Music_HallOfFame_Shared1: ; (tools/scriptcalls.py)
 	octave 3
 	sound_call Music_HallOfFame_Shared1.shared2
-.shared2: ; (tools/musiccalls.py)
+.shared2: ; (tools/scriptcalls.py)
 	note D_, 2
 	note G_, 2
 	note D_, 2

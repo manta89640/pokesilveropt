@@ -116,7 +116,7 @@ Music_GameCorner_Ch1:
 	sound_ret
 
 .sub2:
-.shared8: ; (tools/musiccalls.py)
+.shared8: ; (tools/scriptcalls.py)
 	rest 2
 	octave 4
 	note A#, 3
@@ -208,7 +208,7 @@ Music_GameCorner_Ch2:
 	note A#, 1
 	octave 5
 	note C_, 3
-.shared9: ; (tools/musiccalls.py)
+.shared9: ; (tools/scriptcalls.py)
 	octave 1
 	note C_, 2
 	octave 5
@@ -385,7 +385,7 @@ Music_GameCorner_Ch3:
 	sound_call Music_GameCorner_Shared4
 	note G_, 1
 	sound_call Music_GameCorner_Shared4.shared13
-.shared10: ; (tools/musiccalls.py)
+.shared10: ; (tools/scriptcalls.py)
 	note A#, 1
 	rest 1
 	note A_, 1
@@ -486,11 +486,11 @@ Music_GameCorner_Ch4:
 
 .sub1:
 	drum_note 1, 2
-.shared11: ; (tools/musiccalls.py)
+.shared11: ; (tools/scriptcalls.py)
 	drum_note 7, 2
 	drum_note 3, 2
 	drum_note 7, 2
-.shared12: ; (tools/musiccalls.py)
+.shared12: ; (tools/scriptcalls.py)
 	drum_note 11, 2
 	drum_note 7, 2
 	drum_note 3, 2
@@ -506,7 +506,7 @@ Music_GameCorner_Ch4:
 	drum_note 7, 2
 	sound_ret
 
-Music_GameCorner_Shared1: ; (tools/musiccalls.py)
+Music_GameCorner_Shared1: ; (tools/scriptcalls.py)
 	octave 2
 	note F_, 1
 	octave 3
@@ -531,7 +531,7 @@ Music_GameCorner_Shared1: ; (tools/musiccalls.py)
 	note C_, 1
 	sound_ret
 
-Music_GameCorner_Shared2: ; (tools/musiccalls.py)
+Music_GameCorner_Shared2: ; (tools/scriptcalls.py)
 	octave 2
 	note F_, 2
 	rest 1
@@ -556,7 +556,7 @@ Music_GameCorner_Shared2: ; (tools/musiccalls.py)
 	note F_, 1
 	sound_ret
 
-Music_GameCorner_Shared3: ; (tools/musiccalls.py)
+Music_GameCorner_Shared3: ; (tools/scriptcalls.py)
 	drum_note 11, 2
 	drum_note 7, 1
 	drum_note 4, 1
@@ -571,20 +571,20 @@ Music_GameCorner_Shared3: ; (tools/musiccalls.py)
 	drum_note 3, 2
 	sound_ret
 
-Music_GameCorner_Shared4: ; (tools/musiccalls.py)
+Music_GameCorner_Shared4: ; (tools/scriptcalls.py)
 	note C_, 1
 	octave 3
 	note C_, 1
 	octave 4
 	note G_, 1
-.shared13: ; (tools/musiccalls.py)
+.shared13: ; (tools/scriptcalls.py)
 	note C_, 1
 	octave 3
 	note C_, 1
 	octave 4
 	sound_ret
 
-Music_GameCorner_Shared5: ; (tools/musiccalls.py)
+Music_GameCorner_Shared5: ; (tools/scriptcalls.py)
 	octave 1
 	note C_, 2
 	octave 3
@@ -601,7 +601,7 @@ Music_GameCorner_Shared5: ; (tools/musiccalls.py)
 	note F_, 2
 	sound_ret
 
-Music_GameCorner_Shared6: ; (tools/musiccalls.py)
+Music_GameCorner_Shared6: ; (tools/scriptcalls.py)
 	octave 2
 	note G_, 2
 	rest 1
@@ -618,7 +618,7 @@ Music_GameCorner_Shared6: ; (tools/musiccalls.py)
 	octave 2
 	sound_ret
 
-Music_GameCorner_Shared7: ; (tools/musiccalls.py)
+Music_GameCorner_Shared7: ; (tools/scriptcalls.py)
 	octave 3
 	note D#, 1
 	note F_, 1

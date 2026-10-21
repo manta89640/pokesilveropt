@@ -290,7 +290,7 @@ Music_LookBeauty_Ch4:
 	drum_note 8, 2
 	drum_note 7, 2
 	drum_note 3, 2
-.shared2: ; (tools/musiccalls.py)
+.shared2: ; (tools/scriptcalls.py)
 	drum_note 8, 2
 	drum_note 3, 2
 	drum_note 8, 2
@@ -299,12 +299,12 @@ Music_LookBeauty_Ch4:
 	drum_note 8, 2
 	sound_ret
 
-Music_LookBeauty_Shared1: ; (tools/musiccalls.py)
+Music_LookBeauty_Shared1: ; (tools/scriptcalls.py)
 	note D_, 1
 	rest 5
 	note D_, 1
 	rest 5
-.shared3: ; (tools/musiccalls.py)
+.shared3: ; (tools/scriptcalls.py)
 	rest 2
 	note D_, 1
 	rest 3

@@ -251,7 +251,7 @@ Music_NewBarkTown_Ch3:
 	note E_, 1
 	sound_loop 0, .mainloop
 
-Music_NewBarkTown_Shared1: ; (tools/musiccalls.py)
+Music_NewBarkTown_Shared1: ; (tools/scriptcalls.py)
 	octave 2
 	note G_, 2
 	note B_, 2
@@ -269,7 +269,7 @@ Music_NewBarkTown_Shared1: ; (tools/musiccalls.py)
 	note A_, 4
 	sound_ret
 
-Music_NewBarkTown_Shared2: ; (tools/musiccalls.py)
+Music_NewBarkTown_Shared2: ; (tools/scriptcalls.py)
 	volume_envelope 8, 7
 	octave 5
 	note B_, 6
@@ -279,7 +279,7 @@ Music_NewBarkTown_Shared2: ; (tools/musiccalls.py)
 	note D_, 4
 	sound_ret
 
-Music_NewBarkTown_Shared3: ; (tools/musiccalls.py)
+Music_NewBarkTown_Shared3: ; (tools/scriptcalls.py)
 	note D_, 4
 	rest 8
 	note D_, 1

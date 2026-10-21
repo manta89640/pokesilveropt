@@ -348,32 +348,32 @@ Music_PokemonMarch_Ch4:
 	drum_note 2, 2
 	sound_ret
 
-Music_PokemonMarch_Shared1: ; (tools/musiccalls.py)
+Music_PokemonMarch_Shared1: ; (tools/scriptcalls.py)
 	note G#, 2
 	rest 2
 	octave 4
 	note D#, 2
 	octave 3
 	note D#, 2
-.shared6: ; (tools/musiccalls.py)
+.shared6: ; (tools/scriptcalls.py)
 	rest 2
 	octave 4
 	note D#, 2
 	octave 3
 	sound_ret
 
-Music_PokemonMarch_Shared2: ; (tools/musiccalls.py)
+Music_PokemonMarch_Shared2: ; (tools/scriptcalls.py)
 	note A#, 2
 	sound_call Music_PokemonMarch_Shared2.shared7
 	note F_, 2
-.shared7: ; (tools/musiccalls.py)
+.shared7: ; (tools/scriptcalls.py)
 	rest 2
 	octave 4
 	note F_, 2
 	octave 3
 	sound_ret
 
-Music_PokemonMarch_Shared3: ; (tools/musiccalls.py)
+Music_PokemonMarch_Shared3: ; (tools/scriptcalls.py)
 	note D#, 2
 	note D#, 2
 	note F_, 2
@@ -382,14 +382,14 @@ Music_PokemonMarch_Shared3: ; (tools/musiccalls.py)
 	note F_, 2
 	sound_ret
 
-Music_PokemonMarch_Shared4: ; (tools/musiccalls.py)
+Music_PokemonMarch_Shared4: ; (tools/scriptcalls.py)
 	note_type 8, 11, 7
 	octave 3
 	note G#, 16
 	note_type 8, 11, 3
 	sound_ret
 
-Music_PokemonMarch_Shared5: ; (tools/musiccalls.py)
+Music_PokemonMarch_Shared5: ; (tools/scriptcalls.py)
 	note G_, 2
 	note G_, 2
 	note G#, 2

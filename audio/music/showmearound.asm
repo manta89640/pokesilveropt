@@ -291,7 +291,7 @@ Music_ShowMeAround_Ch4:
 	drum_note 7, 2
 	sound_ret
 
-Music_ShowMeAround_Shared1: ; (tools/musiccalls.py)
+Music_ShowMeAround_Shared1: ; (tools/scriptcalls.py)
 	octave 2
 	note A_, 2
 	rest 6
@@ -311,7 +311,7 @@ Music_ShowMeAround_Shared1: ; (tools/musiccalls.py)
 	octave 2
 	sound_ret
 
-Music_ShowMeAround_Shared2: ; (tools/musiccalls.py)
+Music_ShowMeAround_Shared2: ; (tools/scriptcalls.py)
 	drum_note 4, 2
 	drum_note 7, 2
 	drum_note 3, 2

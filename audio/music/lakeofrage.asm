@@ -279,7 +279,7 @@ Music_LakeOfRage_Ch4:
 	drum_note 3, 1
 	sound_loop 0, .mainloop
 
-Music_LakeOfRage_Shared1: ; (tools/musiccalls.py)
+Music_LakeOfRage_Shared1: ; (tools/scriptcalls.py)
 	note C_, 2
 	note G_, 4
 	note C_, 2
@@ -295,13 +295,13 @@ Music_LakeOfRage_Shared1: ; (tools/musiccalls.py)
 	note D_, 2
 	sound_ret
 
-Music_LakeOfRage_Shared2: ; (tools/musiccalls.py)
+Music_LakeOfRage_Shared2: ; (tools/scriptcalls.py)
 	note D_, 4
 	octave 2
 	note A_, 2
 	octave 3
 	note D_, 4
-.shared3: ; (tools/musiccalls.py)
+.shared3: ; (tools/scriptcalls.py)
 	octave 2
 	note A_, 2
 	octave 3

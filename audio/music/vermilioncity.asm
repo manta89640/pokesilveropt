@@ -208,7 +208,7 @@ Music_VermilionCity_Ch2:
 
 .sub2:
 	note F#, 8
-.shared1: ; (tools/musiccalls.py)
+.shared1: ; (tools/scriptcalls.py)
 	note B_, 8
 	note A_, 4
 	note G#, 4

@@ -724,7 +724,7 @@ Music_VioletCity_Ch4:
 	drum_note 4, 2
 	sound_ret
 
-Music_VioletCity_Shared1: ; (tools/musiccalls.py)
+Music_VioletCity_Shared1: ; (tools/scriptcalls.py)
 	octave 3
 	note B_, 1
 	rest 1
@@ -738,7 +738,7 @@ Music_VioletCity_Shared1: ; (tools/musiccalls.py)
 	note C#, 2
 	sound_ret
 
-Music_VioletCity_Shared2: ; (tools/musiccalls.py)
+Music_VioletCity_Shared2: ; (tools/scriptcalls.py)
 	note F#, 2
 	rest 10
 	note B_, 2
@@ -750,7 +750,7 @@ Music_VioletCity_Shared2: ; (tools/musiccalls.py)
 	rest 2
 	sound_ret
 
-Music_VioletCity_Shared3: ; (tools/musiccalls.py)
+Music_VioletCity_Shared3: ; (tools/scriptcalls.py)
 	note B_, 1
 	rest 5
 	note B_, 1

@@ -468,16 +468,16 @@ Music_ElmsLab_Ch4:
 	drum_note 8, 4
 	sound_loop 0, .mainloop
 
-Music_ElmsLab_Shared1: ; (tools/musiccalls.py)
+Music_ElmsLab_Shared1: ; (tools/scriptcalls.py)
 	sound_call Music_ElmsLab_Shared1.shared3
-.shared3: ; (tools/musiccalls.py)
+.shared3: ; (tools/scriptcalls.py)
 	note F_, 2
 	note A_, 2
 	note C_, 2
 	note A_, 2
 	sound_ret
 
-Music_ElmsLab_Shared2: ; (tools/musiccalls.py)
+Music_ElmsLab_Shared2: ; (tools/scriptcalls.py)
 	note A_, 2
 	note F_, 2
 	octave 4

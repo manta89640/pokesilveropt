@@ -84,7 +84,7 @@ Music_LookOfficer_Ch2:
 	note A_, 2
 	sound_call Music_LookOfficer_Ch2.shared1
 	note E_, 2
-.shared1: ; (tools/musiccalls.py)
+.shared1: ; (tools/scriptcalls.py)
 	octave 1
 	note A_, 2
 	octave 2

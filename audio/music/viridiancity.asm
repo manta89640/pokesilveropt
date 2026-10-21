@@ -191,7 +191,7 @@ Music_ViridianCity_Ch1:
 	rest 1
 	octave 3
 	note A_, 1
-.shared9: ; (tools/musiccalls.py)
+.shared9: ; (tools/scriptcalls.py)
 	rest 3
 	note F#, 2
 	rest 4
@@ -384,7 +384,7 @@ Music_ViridianCity_Ch2:
 	note E_, 1
 	rest 1
 	octave 2
-.shared10: ; (tools/musiccalls.py)
+.shared10: ; (tools/scriptcalls.py)
 	sound_call Music_ViridianCity_Shared5
 	rest 2
 	note E_, 1
@@ -584,7 +584,7 @@ Music_ViridianCity_Ch3:
 	note F#, 2
 	note D_, 2
 	octave 4
-.shared11: ; (tools/musiccalls.py)
+.shared11: ; (tools/scriptcalls.py)
 	note A_, 2
 	rest 4
 	note A_, 2
@@ -651,19 +651,19 @@ Music_ViridianCity_Ch4:
 	drum_note 7, 2
 	sound_ret
 
-Music_ViridianCity_Shared1: ; (tools/musiccalls.py)
+Music_ViridianCity_Shared1: ; (tools/scriptcalls.py)
 	rest 1
 	octave 4
 	note C_, 1
 	rest 1
 	sound_ret
 
-Music_ViridianCity_Shared2: ; (tools/musiccalls.py)
+Music_ViridianCity_Shared2: ; (tools/scriptcalls.py)
 	toggle_noise 3
 	drum_speed 12
 	sound_ret
 
-Music_ViridianCity_Shared3: ; (tools/musiccalls.py)
+Music_ViridianCity_Shared3: ; (tools/scriptcalls.py)
 	drum_note 4, 2
 	drum_note 7, 2
 	drum_note 3, 2
@@ -678,12 +678,12 @@ Music_ViridianCity_Shared3: ; (tools/musiccalls.py)
 	drum_note 4, 2
 	sound_ret
 
-Music_ViridianCity_Shared4: ; (tools/musiccalls.py)
+Music_ViridianCity_Shared4: ; (tools/scriptcalls.py)
 	volume 7, 7
 	stereo_panning FALSE, TRUE
 	sound_ret
 
-Music_ViridianCity_Shared5: ; (tools/musiccalls.py)
+Music_ViridianCity_Shared5: ; (tools/scriptcalls.py)
 	note D_, 4
 	rest 2
 	note A_, 1
@@ -691,7 +691,7 @@ Music_ViridianCity_Shared5: ; (tools/musiccalls.py)
 	note A_, 4
 	sound_ret
 
-Music_ViridianCity_Shared6: ; (tools/musiccalls.py)
+Music_ViridianCity_Shared6: ; (tools/scriptcalls.py)
 	drum_note 5, 2
 	drum_note 5, 2
 	drum_note 3, 2
@@ -703,7 +703,7 @@ Music_ViridianCity_Shared6: ; (tools/musiccalls.py)
 	drum_note 5, 2
 	sound_ret
 
-Music_ViridianCity_Shared7: ; (tools/musiccalls.py)
+Music_ViridianCity_Shared7: ; (tools/scriptcalls.py)
 	note F#, 2
 	note E_, 2
 	note F#, 1
@@ -714,7 +714,7 @@ Music_ViridianCity_Shared7: ; (tools/musiccalls.py)
 	note A_, 1
 	sound_ret
 
-Music_ViridianCity_Shared8: ; (tools/musiccalls.py)
+Music_ViridianCity_Shared8: ; (tools/scriptcalls.py)
 	note A_, 1
 	rest 3
 	note A_, 2

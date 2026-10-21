@@ -372,7 +372,7 @@ Music_Route12_Ch3:
 	note E_, 1
 	note F#, 4
 	note D_, 4
-.shared1: ; (tools/musiccalls.py)
+.shared1: ; (tools/scriptcalls.py)
 	note E_, 1
 	rest 1
 	note E_, 1
@@ -435,7 +435,7 @@ Music_Route12_Ch4:
 	sound_loop 0, .mainloop
 
 .sub1:
-.shared2: ; (tools/musiccalls.py)
+.shared2: ; (tools/scriptcalls.py)
 	drum_note 2, 1
 	drum_note 2, 1
 	drum_note 2, 1

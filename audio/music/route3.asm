@@ -138,9 +138,9 @@ Music_Route3_Ch1:
 	octave 2
 	note B_, 1
 	octave 3
-.shared4: ; (tools/musiccalls.py)
+.shared4: ; (tools/scriptcalls.py)
 	note D_, 1
-.shared5: ; (tools/musiccalls.py)
+.shared5: ; (tools/scriptcalls.py)
 	octave 2
 	note B_, 1
 	octave 3
@@ -376,7 +376,7 @@ Music_Route3_Ch4:
 	sound_call Music_Route12_Ch4.shared2
 	sound_loop 0, .mainloop
 
-Music_Route3_Shared1: ; (tools/musiccalls.py)
+Music_Route3_Shared1: ; (tools/scriptcalls.py)
 	note E_, 1
 	note C#, 1
 	note E_, 1
@@ -388,28 +388,28 @@ Music_Route3_Shared1: ; (tools/musiccalls.py)
 	note E_, 1
 	note C#, 1
 	note E_, 1
-.shared6: ; (tools/musiccalls.py)
+.shared6: ; (tools/scriptcalls.py)
 	note C#, 1
 	note E_, 1
 	note C#, 1
 	note E_, 1
 	sound_ret
 
-Music_Route3_Shared2: ; (tools/musiccalls.py)
+Music_Route3_Shared2: ; (tools/scriptcalls.py)
 	rest 1
 	octave 2
 	note A_, 2
 	rest 2
 	note A_, 1
 	note A_, 1
-.shared7: ; (tools/musiccalls.py)
+.shared7: ; (tools/scriptcalls.py)
 	note A_, 1
 	rest 1
 	note A_, 1
 	rest 1
 	sound_ret
 
-Music_Route3_Shared3: ; (tools/musiccalls.py)
+Music_Route3_Shared3: ; (tools/scriptcalls.py)
 	tempo 160
 	volume 7, 7
 	sound_ret

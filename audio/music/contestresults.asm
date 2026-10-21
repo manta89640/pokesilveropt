@@ -142,7 +142,7 @@ Music_ContestResults_Ch4:
 	drum_note 8, 1
 	sound_loop 0, .mainloop
 
-Music_ContestResults_Shared1: ; (tools/musiccalls.py)
+Music_ContestResults_Shared1: ; (tools/scriptcalls.py)
 	octave 2
 	note D_, 2
 	octave 3

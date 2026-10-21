@@ -194,7 +194,7 @@ Music_PostCredits_Ch2:
 	note F_, 2
 	sound_loop 0, .mainloop
 
-Music_PostCredits_Shared1: ; (tools/musiccalls.py)
+Music_PostCredits_Shared1: ; (tools/scriptcalls.py)
 	note G_, 2
 	volume_envelope 7, 3
 	note G_, 2
@@ -202,7 +202,7 @@ Music_PostCredits_Shared1: ; (tools/musiccalls.py)
 	note G_, 2
 	sound_ret
 
-Music_PostCredits_Shared2: ; (tools/musiccalls.py)
+Music_PostCredits_Shared2: ; (tools/scriptcalls.py)
 	note D_, 2
 	volume_envelope 7, 3
 	note D_, 2
@@ -212,13 +212,13 @@ Music_PostCredits_Shared2: ; (tools/musiccalls.py)
 	note D_, 2
 	sound_ret
 
-Music_PostCredits_Shared3: ; (tools/musiccalls.py)
+Music_PostCredits_Shared3: ; (tools/scriptcalls.py)
 	octave 4
 	note C_, 2
 	volume_envelope 7, 3
 	note C_, 2
 	volume_envelope 5, 3
-.shared5: ; (tools/musiccalls.py)
+.shared5: ; (tools/scriptcalls.py)
 	note C_, 2
 	volume_envelope 4, 3
 	note C_, 2
@@ -226,7 +226,7 @@ Music_PostCredits_Shared3: ; (tools/musiccalls.py)
 	octave 2
 	sound_ret
 
-Music_PostCredits_Shared4: ; (tools/musiccalls.py)
+Music_PostCredits_Shared4: ; (tools/scriptcalls.py)
 	volume_envelope 4, 3
 	note G_, 2
 	volume_envelope 3, 3

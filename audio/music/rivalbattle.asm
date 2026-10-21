@@ -488,7 +488,7 @@ Music_RivalBattle_Ch2:
 	note C#, 2
 	volume_envelope 12, 7
 	note D#, 6
-.shared7: ; (tools/musiccalls.py)
+.shared7: ; (tools/scriptcalls.py)
 	volume_envelope 11, 0
 	note F_, 8
 	volume_envelope 11, 7
@@ -774,7 +774,7 @@ Music_RivalBattle_Ch3:
 	sound_loop 2, .sub4loop1
 	sound_ret
 
-Music_RivalBattle_Shared1: ; (tools/musiccalls.py)
+Music_RivalBattle_Shared1: ; (tools/scriptcalls.py)
 	octave 4
 	note E_, 1
 	note D#, 1
@@ -811,37 +811,37 @@ Music_RivalBattle_Shared1: ; (tools/musiccalls.py)
 	note B_, 1
 	sound_ret
 
-Music_RivalBattle_Shared2: ; (tools/musiccalls.py)
+Music_RivalBattle_Shared2: ; (tools/scriptcalls.py)
 	volume 7, 7
 	duty_cycle 3
 	pitch_offset 2
 	sound_ret
 
-Music_RivalBattle_Shared3: ; (tools/musiccalls.py)
+Music_RivalBattle_Shared3: ; (tools/scriptcalls.py)
 	sound_call Music_RocketBattle_Shared7
 	note_type 12, 12, 2
 	sound_ret
 
-Music_RivalBattle_Shared4: ; (tools/musiccalls.py)
+Music_RivalBattle_Shared4: ; (tools/scriptcalls.py)
 	octave 4
 	note E_, 2
 	octave 3
 	note E_, 2
 	sound_ret
 
-Music_RivalBattle_Shared5: ; (tools/musiccalls.py)
+Music_RivalBattle_Shared5: ; (tools/scriptcalls.py)
 	octave 2
 	note A#, 2
 	octave 3
 	note A#, 2
-.shared8: ; (tools/musiccalls.py)
+.shared8: ; (tools/scriptcalls.py)
 	octave 2
 	note A#, 2
 	octave 3
 	note G#, 2
 	sound_ret
 
-Music_RivalBattle_Shared6: ; (tools/musiccalls.py)
+Music_RivalBattle_Shared6: ; (tools/scriptcalls.py)
 	note D#, 2
 	note G_, 2
 	note A#, 2

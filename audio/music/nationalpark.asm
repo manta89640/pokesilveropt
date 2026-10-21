@@ -251,7 +251,7 @@ Music_NationalPark_Ch2:
 	sound_call Music_NationalPark_Ch2.shared5
 	octave 3
 	note D_, 8
-.shared5: ; (tools/musiccalls.py)
+.shared5: ; (tools/scriptcalls.py)
 	octave 1
 	note F#, 6
 	octave 2
@@ -478,7 +478,7 @@ Music_NationalPark_Ch4:
 	drum_note 4, 1
 	sound_loop 0, .mainloop
 
-Music_NationalPark_Shared1: ; (tools/musiccalls.py)
+Music_NationalPark_Shared1: ; (tools/scriptcalls.py)
 	volume_envelope 7, 7
 	note C#, 2
 	octave 3
@@ -529,7 +529,7 @@ Music_NationalPark_Shared1: ; (tools/musiccalls.py)
 	note C_, 2
 	note D#, 2
 	note C_, 2
-.shared6: ; (tools/musiccalls.py)
+.shared6: ; (tools/scriptcalls.py)
 	note D_, 2
 	octave 3
 	note A#, 2
@@ -539,7 +539,7 @@ Music_NationalPark_Shared1: ; (tools/musiccalls.py)
 	note A#, 2
 	sound_ret
 
-Music_NationalPark_Shared2: ; (tools/musiccalls.py)
+Music_NationalPark_Shared2: ; (tools/scriptcalls.py)
 	note F_, 2
 	note D#, 2
 	note C#, 2
@@ -552,17 +552,17 @@ Music_NationalPark_Shared2: ; (tools/musiccalls.py)
 	octave 5
 	sound_ret
 
-Music_NationalPark_Shared3: ; (tools/musiccalls.py)
+Music_NationalPark_Shared3: ; (tools/scriptcalls.py)
 	note A_, 1
 	rest 1
-.shared7: ; (tools/musiccalls.py)
+.shared7: ; (tools/scriptcalls.py)
 	note A_, 1
 	rest 1
 	note A_, 1
 	rest 1
 	sound_ret
 
-Music_NationalPark_Shared4: ; (tools/musiccalls.py)
+Music_NationalPark_Shared4: ; (tools/scriptcalls.py)
 	octave 2
 	note C#, 6
 	note G#, 2

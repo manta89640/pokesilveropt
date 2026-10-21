@@ -133,7 +133,7 @@ Music_GoldSilverOpening2_Ch4:
 	drum_note 1, 16
 	sound_ret
 
-Music_GoldSilverOpening2_Shared1: ; (tools/musiccalls.py)
+Music_GoldSilverOpening2_Shared1: ; (tools/scriptcalls.py)
 	note D_, 2
 	note A_, 2
 	note D_, 2
@@ -152,7 +152,7 @@ Music_GoldSilverOpening2_Shared1: ; (tools/musiccalls.py)
 	note D#, 2
 	sound_ret
 
-Music_GoldSilverOpening2_Shared2: ; (tools/musiccalls.py)
+Music_GoldSilverOpening2_Shared2: ; (tools/scriptcalls.py)
 	note A_, 2
 	note A_, 2
 	note A_, 2
@@ -167,7 +167,7 @@ Music_GoldSilverOpening2_Shared2: ; (tools/musiccalls.py)
 	note C_, 4
 	sound_ret
 
-Music_GoldSilverOpening2_Shared3: ; (tools/musiccalls.py)
+Music_GoldSilverOpening2_Shared3: ; (tools/scriptcalls.py)
 	note D_, 2
 	note D_, 2
 	note D_, 2

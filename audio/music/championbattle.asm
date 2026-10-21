@@ -207,7 +207,7 @@ Music_ChampionBattle_Ch1:
 	note A#, 4
 	note A#, 4
 	note A#, 4
-.shared7: ; (tools/musiccalls.py)
+.shared7: ; (tools/scriptcalls.py)
 	note A#, 4
 	note A#, 2
 	volume_envelope 11, 7
@@ -546,13 +546,13 @@ Music_ChampionBattle_Ch3:
 .sub2:
 	sound_call Music_ChampionBattle_Ch3.shared8
 	note B_, 4
-.shared8: ; (tools/musiccalls.py)
+.shared8: ; (tools/scriptcalls.py)
 	note D#, 1
 	rest 1
 	note D#, 1
 	rest 1
 	note A#, 4
-.shared9: ; (tools/musiccalls.py)
+.shared9: ; (tools/scriptcalls.py)
 	note D#, 1
 	rest 1
 	note D#, 1
@@ -565,7 +565,7 @@ Music_ChampionBattle_Ch3:
 	note F#, 2
 	note D#, 2
 	note F#, 2
-.shared10: ; (tools/musiccalls.py)
+.shared10: ; (tools/scriptcalls.py)
 	note D#, 2
 	octave 4
 	note D_, 2
@@ -580,14 +580,14 @@ Music_ChampionBattle_Ch3:
 	note E_, 2
 	note B_, 2
 	note E_, 2
-.shared11: ; (tools/musiccalls.py)
+.shared11: ; (tools/scriptcalls.py)
 	note B_, 2
 	octave 4
 	note D#, 2
 	note E_, 2
 	sound_ret
 
-Music_ChampionBattle_Shared1: ; (tools/musiccalls.py)
+Music_ChampionBattle_Shared1: ; (tools/scriptcalls.py)
 	note D#, 2
 	note D#, 2
 	volume_envelope 12, 7
@@ -598,30 +598,30 @@ Music_ChampionBattle_Shared1: ; (tools/musiccalls.py)
 	volume_envelope 12, 7
 	note B_, 4
 	volume_envelope 12, 2
-.shared12: ; (tools/musiccalls.py)
+.shared12: ; (tools/scriptcalls.py)
 	note D#, 2
 	note D#, 2
 	volume_envelope 12, 7
 	sound_ret
 
-Music_ChampionBattle_Shared2: ; (tools/musiccalls.py)
+Music_ChampionBattle_Shared2: ; (tools/scriptcalls.py)
 	volume_envelope 11, 2
 	octave 2
-.shared13: ; (tools/musiccalls.py)
+.shared13: ; (tools/scriptcalls.py)
 	note A#, 2
 	note A#, 2
 	volume_envelope 11, 7
 	sound_ret
 
-Music_ChampionBattle_Shared3: ; (tools/musiccalls.py)
+Music_ChampionBattle_Shared3: ; (tools/scriptcalls.py)
 	volume_envelope 11, 2
-.shared14: ; (tools/musiccalls.py)
+.shared14: ; (tools/scriptcalls.py)
 	note E_, 2
 	note E_, 2
 	volume_envelope 11, 7
 	sound_ret
 
-Music_ChampionBattle_Shared4: ; (tools/musiccalls.py)
+Music_ChampionBattle_Shared4: ; (tools/scriptcalls.py)
 	volume_envelope 12, 5
 	note D#, 6
 	octave 3
@@ -635,16 +635,16 @@ Music_ChampionBattle_Shared4: ; (tools/musiccalls.py)
 	note B_, 4
 	sound_ret
 
-Music_ChampionBattle_Shared5: ; (tools/musiccalls.py)
+Music_ChampionBattle_Shared5: ; (tools/scriptcalls.py)
 	volume_envelope 11, 2
 	note C_, 2
 	note C_, 2
 	volume_envelope 11, 7
 	sound_ret
 
-Music_ChampionBattle_Shared6: ; (tools/musiccalls.py)
+Music_ChampionBattle_Shared6: ; (tools/scriptcalls.py)
 	volume_envelope 11, 2
-.shared15: ; (tools/musiccalls.py)
+.shared15: ; (tools/scriptcalls.py)
 	note D#, 2
 	note D#, 2
 	volume_envelope 11, 7

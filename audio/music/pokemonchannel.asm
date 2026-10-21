@@ -185,7 +185,7 @@ Music_PokemonChannel_Ch3:
 	note G_, 1
 	sound_call Music_Route3_Ch1.shared4
 	octave 2
-.shared1: ; (tools/musiccalls.py)
+.shared1: ; (tools/scriptcalls.py)
 	note G_, 1
 	rest 3
 	note G_, 1

@@ -240,7 +240,7 @@ Music_CherrygroveCity_Ch4:
 	drum_note 8, 2
 	sound_loop 0, .mainloop
 
-Music_CherrygroveCity_Shared1: ; (tools/musiccalls.py)
+Music_CherrygroveCity_Shared1: ; (tools/scriptcalls.py)
 	note D_, 2
 	sound_call Music_CherrygroveCity_Shared4
 	note F_, 2
@@ -252,7 +252,7 @@ Music_CherrygroveCity_Shared1: ; (tools/musiccalls.py)
 	note D#, 2
 	sound_ret
 
-Music_CherrygroveCity_Shared2: ; (tools/musiccalls.py)
+Music_CherrygroveCity_Shared2: ; (tools/scriptcalls.py)
 	note C_, 2
 	octave 3
 	note A#, 2
@@ -260,7 +260,7 @@ Music_CherrygroveCity_Shared2: ; (tools/musiccalls.py)
 	note G_, 2
 	sound_ret
 
-Music_CherrygroveCity_Shared3: ; (tools/musiccalls.py)
+Music_CherrygroveCity_Shared3: ; (tools/scriptcalls.py)
 	octave 4
 	note C_, 4
 	octave 3
@@ -269,7 +269,7 @@ Music_CherrygroveCity_Shared3: ; (tools/musiccalls.py)
 	note A_, 2
 	sound_ret
 
-Music_CherrygroveCity_Shared4: ; (tools/musiccalls.py)
+Music_CherrygroveCity_Shared4: ; (tools/scriptcalls.py)
 	note F_, 4
 	note A#, 2
 	note F_, 2

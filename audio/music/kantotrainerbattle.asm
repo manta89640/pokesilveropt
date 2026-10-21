@@ -848,7 +848,7 @@ Music_KantoTrainerBattle_Ch3:
 	note G_, 4
 	sound_loop 0, .mainloop
 
-Music_KantoTrainerBattle_Shared1: ; (tools/musiccalls.py)
+Music_KantoTrainerBattle_Shared1: ; (tools/scriptcalls.py)
 	octave 1
 	note F_, 2
 	octave 2
@@ -899,7 +899,7 @@ Music_KantoTrainerBattle_Shared1: ; (tools/musiccalls.py)
 	note G#, 4
 	sound_ret
 
-Music_KantoTrainerBattle_Shared2: ; (tools/musiccalls.py)
+Music_KantoTrainerBattle_Shared2: ; (tools/scriptcalls.py)
 	sound_call Music_KantoWildBattle_Shared5.shared17
 	octave 3
 	note D#, 1
@@ -911,9 +911,9 @@ Music_KantoTrainerBattle_Shared2: ; (tools/musiccalls.py)
 	note C_, 1
 	sound_ret
 
-Music_KantoTrainerBattle_Shared3: ; (tools/musiccalls.py)
+Music_KantoTrainerBattle_Shared3: ; (tools/scriptcalls.py)
 	sound_call Music_KantoTrainerBattle_Shared3.shared17
-.shared17: ; (tools/musiccalls.py)
+.shared17: ; (tools/scriptcalls.py)
 	octave 3
 	note G#, 1
 	octave 4
@@ -924,9 +924,9 @@ Music_KantoTrainerBattle_Shared3: ; (tools/musiccalls.py)
 	note C#, 1
 	sound_ret
 
-Music_KantoTrainerBattle_Shared4: ; (tools/musiccalls.py)
+Music_KantoTrainerBattle_Shared4: ; (tools/scriptcalls.py)
 	sound_call Music_KantoTrainerBattle_Shared4.shared18
-.shared18: ; (tools/musiccalls.py)
+.shared18: ; (tools/scriptcalls.py)
 	octave 3
 	note A_, 1
 	octave 4
@@ -937,7 +937,7 @@ Music_KantoTrainerBattle_Shared4: ; (tools/musiccalls.py)
 	note D_, 1
 	sound_ret
 
-Music_KantoTrainerBattle_Shared5: ; (tools/musiccalls.py)
+Music_KantoTrainerBattle_Shared5: ; (tools/scriptcalls.py)
 	octave 6
 	note C_, 4
 	note_type 6, 1, 4
@@ -966,7 +966,7 @@ Music_KantoTrainerBattle_Shared5: ; (tools/musiccalls.py)
 	note B_, 1
 	sound_ret
 
-Music_KantoTrainerBattle_Shared6: ; (tools/musiccalls.py)
+Music_KantoTrainerBattle_Shared6: ; (tools/scriptcalls.py)
 	octave 2
 	note C_, 1
 	note C_, 1
@@ -999,14 +999,14 @@ Music_KantoTrainerBattle_Shared6: ; (tools/musiccalls.py)
 	rest 1
 	sound_ret
 
-Music_KantoTrainerBattle_Shared7: ; (tools/musiccalls.py)
+Music_KantoTrainerBattle_Shared7: ; (tools/scriptcalls.py)
 	note G_, 1
 	rest 1
 	note G_, 1
 	rest 1
 	sound_ret
 
-Music_KantoTrainerBattle_Shared8: ; (tools/musiccalls.py)
+Music_KantoTrainerBattle_Shared8: ; (tools/scriptcalls.py)
 	note G#, 1
 	note F_, 1
 	note C_, 1
@@ -1035,7 +1035,7 @@ Music_KantoTrainerBattle_Shared8: ; (tools/musiccalls.py)
 	note D_, 4
 	sound_ret
 
-Music_KantoTrainerBattle_Shared9: ; (tools/musiccalls.py)
+Music_KantoTrainerBattle_Shared9: ; (tools/scriptcalls.py)
 	octave 3
 	sound_call Music_KantoTrainerBattle_Shared15
 	octave 5
@@ -1049,14 +1049,14 @@ Music_KantoTrainerBattle_Shared9: ; (tools/musiccalls.py)
 	note D#, 1
 	octave 5
 	note D#, 2
-.shared19: ; (tools/musiccalls.py)
+.shared19: ; (tools/scriptcalls.py)
 	note F_, 2
 	rest 2
 	note F#, 2
 	rest 2
 	sound_ret
 
-Music_KantoTrainerBattle_Shared10: ; (tools/musiccalls.py)
+Music_KantoTrainerBattle_Shared10: ; (tools/scriptcalls.py)
 	octave 2
 	sound_call Music_KantoTrainerBattle_Shared15
 	octave 4
@@ -1069,14 +1069,14 @@ Music_KantoTrainerBattle_Shared10: ; (tools/musiccalls.py)
 	octave 3
 	note A#, 2
 	octave 4
-.shared20: ; (tools/musiccalls.py)
+.shared20: ; (tools/scriptcalls.py)
 	note C_, 2
 	rest 2
 	note D#, 2
 	rest 2
 	sound_ret
 
-Music_KantoTrainerBattle_Shared11: ; (tools/musiccalls.py)
+Music_KantoTrainerBattle_Shared11: ; (tools/scriptcalls.py)
 	octave 3
 	note A#, 1
 	octave 4
@@ -1087,7 +1087,7 @@ Music_KantoTrainerBattle_Shared11: ; (tools/musiccalls.py)
 	note D#, 1
 	sound_ret
 
-Music_KantoTrainerBattle_Shared12: ; (tools/musiccalls.py)
+Music_KantoTrainerBattle_Shared12: ; (tools/scriptcalls.py)
 	octave 4
 	note A#, 2
 	note F#, 2
@@ -1103,7 +1103,7 @@ Music_KantoTrainerBattle_Shared12: ; (tools/musiccalls.py)
 	octave 4
 	sound_ret
 
-Music_KantoTrainerBattle_Shared13: ; (tools/musiccalls.py)
+Music_KantoTrainerBattle_Shared13: ; (tools/scriptcalls.py)
 	note D#, 4
 	rest 2
 	note C_, 10
@@ -1115,7 +1115,7 @@ Music_KantoTrainerBattle_Shared13: ; (tools/musiccalls.py)
 	rest 1
 	sound_ret
 
-Music_KantoTrainerBattle_Shared14: ; (tools/musiccalls.py)
+Music_KantoTrainerBattle_Shared14: ; (tools/scriptcalls.py)
 	note G#, 11
 	volume_envelope 1, 4
 	note C_, 1
@@ -1127,14 +1127,14 @@ Music_KantoTrainerBattle_Shared14: ; (tools/musiccalls.py)
 	octave 6
 	sound_ret
 
-Music_KantoTrainerBattle_Shared15: ; (tools/musiccalls.py)
+Music_KantoTrainerBattle_Shared15: ; (tools/scriptcalls.py)
 	note C_, 1
 	rest 1
 	note C_, 1
 	rest 1
 	sound_ret
 
-Music_KantoTrainerBattle_Shared16: ; (tools/musiccalls.py)
+Music_KantoTrainerBattle_Shared16: ; (tools/scriptcalls.py)
 	note A#, 1
 	rest 1
 	note A#, 1

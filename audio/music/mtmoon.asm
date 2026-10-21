@@ -95,7 +95,7 @@ Music_MtMoon_Ch4:
 	drum_note 11, 8
 	sound_loop 0, .mainloop
 
-Music_MtMoon_Shared1: ; (tools/musiccalls.py)
+Music_MtMoon_Shared1: ; (tools/scriptcalls.py)
 	note C#, 6
 	octave 3
 	note B_, 2
@@ -106,7 +106,7 @@ Music_MtMoon_Shared1: ; (tools/musiccalls.py)
 	note D#, 2
 	sound_ret
 
-Music_MtMoon_Shared2: ; (tools/musiccalls.py)
+Music_MtMoon_Shared2: ; (tools/scriptcalls.py)
 	note F#, 6
 	note E_, 2
 	note F#, 2

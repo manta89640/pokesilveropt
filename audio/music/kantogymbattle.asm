@@ -445,7 +445,7 @@ Music_KantoGymBattle_Ch3:
 	note F_, 2
 	sound_loop 0, .mainloop
 
-Music_KantoGymBattle_Shared1: ; (tools/musiccalls.py)
+Music_KantoGymBattle_Shared1: ; (tools/scriptcalls.py)
 	volume_envelope 11, 2
 	note D#, 2
 	note D#, 2
@@ -458,7 +458,7 @@ Music_KantoGymBattle_Shared1: ; (tools/musiccalls.py)
 	note A#, 1
 	note G#, 1
 	note E_, 1
-.shared8: ; (tools/musiccalls.py)
+.shared8: ; (tools/scriptcalls.py)
 	note A#, 1
 	note D#, 2
 	note D#, 2
@@ -468,7 +468,7 @@ Music_KantoGymBattle_Shared1: ; (tools/musiccalls.py)
 	note B_, 1
 	sound_ret
 
-Music_KantoGymBattle_Shared2: ; (tools/musiccalls.py)
+Music_KantoGymBattle_Shared2: ; (tools/scriptcalls.py)
 	volume_envelope 12, 2
 	note D#, 2
 	note D#, 2
@@ -483,20 +483,20 @@ Music_KantoGymBattle_Shared2: ; (tools/musiccalls.py)
 	note F#, 1
 	sound_jump Music_KantoGymBattle_Shared1.shared8
 
-Music_KantoGymBattle_Shared3: ; (tools/musiccalls.py)
+Music_KantoGymBattle_Shared3: ; (tools/scriptcalls.py)
 	sound_call Music_KantoGymBattle_Shared6
 	note A#, 4
 	sound_call Music_KantoGymBattle_Shared6
 	note B_, 4
 	sound_ret
 
-Music_KantoGymBattle_Shared4: ; (tools/musiccalls.py)
+Music_KantoGymBattle_Shared4: ; (tools/scriptcalls.py)
 	sound_call Music_KantoGymBattle_Shared4.shared9
 	note A#, 8
 	volume_envelope 11, 7
 	note B_, 2
 	volume_envelope 11, 2
-.shared9: ; (tools/musiccalls.py)
+.shared9: ; (tools/scriptcalls.py)
 	note A#, 2
 	note A#, 6
 	note A#, 2
@@ -504,7 +504,7 @@ Music_KantoGymBattle_Shared4: ; (tools/musiccalls.py)
 	note A#, 2
 	sound_ret
 
-Music_KantoGymBattle_Shared5: ; (tools/musiccalls.py)
+Music_KantoGymBattle_Shared5: ; (tools/scriptcalls.py)
 	note D#, 2
 	note C#, 2
 	octave 2
@@ -521,17 +521,17 @@ Music_KantoGymBattle_Shared5: ; (tools/musiccalls.py)
 	note A#, 2
 	sound_ret
 
-Music_KantoGymBattle_Shared6: ; (tools/musiccalls.py)
+Music_KantoGymBattle_Shared6: ; (tools/scriptcalls.py)
 	note D#, 1
 	rest 1
 	note D#, 1
 	rest 1
 	sound_ret
 
-Music_KantoGymBattle_Shared7: ; (tools/musiccalls.py)
+Music_KantoGymBattle_Shared7: ; (tools/scriptcalls.py)
 	note A_, 1
 	note G#, 1
-.shared10: ; (tools/musiccalls.py)
+.shared10: ; (tools/scriptcalls.py)
 	note G_, 1
 	note G#, 1
 	note G_, 1

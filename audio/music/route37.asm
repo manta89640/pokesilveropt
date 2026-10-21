@@ -277,7 +277,7 @@ Music_Route37_Ch3:
 .sub1:
 	octave 2
 	sound_call Music_Route37_Ch3.shared6
-.shared6: ; (tools/musiccalls.py)
+.shared6: ; (tools/scriptcalls.py)
 	note F#, 2
 	note B_, 2
 	note F#, 2
@@ -288,7 +288,7 @@ Music_Route37_Ch3:
 	sound_call Music_Route37_Ch3.shared7
 	sound_call Music_Route37_Ch3.shared7
 	sound_call Music_Route37_Ch3.shared7
-.shared7: ; (tools/musiccalls.py)
+.shared7: ; (tools/scriptcalls.py)
 	octave 2
 	note B_, 2
 	octave 3
@@ -329,19 +329,19 @@ Music_Route37_Ch4:
 	drum_note 4, 1
 	sound_ret
 
-Music_Route37_Shared1: ; (tools/musiccalls.py)
+Music_Route37_Shared1: ; (tools/scriptcalls.py)
 	sound_call Music_Route37_Shared1.shared8
 	note B_, 2
 	volume_envelope 12, 1
 	note B_, 1
 	note B_, 1
-.shared8: ; (tools/musiccalls.py)
+.shared8: ; (tools/scriptcalls.py)
 	note B_, 1
 	note B_, 1
 	volume_envelope 12, 2
 	sound_ret
 
-Music_Route37_Shared2: ; (tools/musiccalls.py)
+Music_Route37_Shared2: ; (tools/scriptcalls.py)
 	note F#, 2
 	note F#, 1
 	note F#, 1
@@ -354,7 +354,7 @@ Music_Route37_Shared2: ; (tools/musiccalls.py)
 	volume_envelope 12, 2
 	sound_ret
 
-Music_Route37_Shared3: ; (tools/musiccalls.py)
+Music_Route37_Shared3: ; (tools/scriptcalls.py)
 	volume_envelope 11, 3
 	rest 2
 	octave 2
@@ -366,7 +366,7 @@ Music_Route37_Shared3: ; (tools/musiccalls.py)
 	note D#, 10
 	sound_ret
 
-Music_Route37_Shared4: ; (tools/musiccalls.py)
+Music_Route37_Shared4: ; (tools/scriptcalls.py)
 	volume_envelope 12, 4
 	rest 4
 	octave 3
@@ -377,7 +377,7 @@ Music_Route37_Shared4: ; (tools/musiccalls.py)
 	note G#, 4
 	sound_ret
 
-Music_Route37_Shared5: ; (tools/musiccalls.py)
+Music_Route37_Shared5: ; (tools/scriptcalls.py)
 	note A_, 2
 	octave 3
 	note C#, 2

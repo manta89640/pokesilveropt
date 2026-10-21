@@ -514,7 +514,7 @@ Music_BugCatchingContest_Ch4:
 
 .sub1:
 	sound_call Music_BugCatchingContest_Ch4.shared6
-.shared6: ; (tools/musiccalls.py)
+.shared6: ; (tools/scriptcalls.py)
 	drum_note 3, 4
 	drum_note 12, 8
 	drum_note 3, 2
@@ -525,7 +525,7 @@ Music_BugCatchingContest_Ch4:
 	drum_note 3, 2
 	sound_ret
 
-Music_BugCatchingContest_Shared1: ; (tools/musiccalls.py)
+Music_BugCatchingContest_Shared1: ; (tools/scriptcalls.py)
 	octave 2
 	note E_, 2
 	octave 3
@@ -533,14 +533,14 @@ Music_BugCatchingContest_Shared1: ; (tools/musiccalls.py)
 	rest 1
 	octave 1
 	note B_, 2
-.shared7: ; (tools/musiccalls.py)
+.shared7: ; (tools/scriptcalls.py)
 	octave 3
 	note G_, 1
 	rest 1
 	octave 2
 	sound_ret
 
-Music_BugCatchingContest_Shared2: ; (tools/musiccalls.py)
+Music_BugCatchingContest_Shared2: ; (tools/scriptcalls.py)
 	octave 2
 	note D_, 2
 	octave 3
@@ -559,7 +559,7 @@ Music_BugCatchingContest_Shared2: ; (tools/musiccalls.py)
 	octave 2
 	sound_ret
 
-Music_BugCatchingContest_Shared3: ; (tools/musiccalls.py)
+Music_BugCatchingContest_Shared3: ; (tools/scriptcalls.py)
 	note G_, 2
 	rest 2
 	note B_, 2
@@ -568,7 +568,7 @@ Music_BugCatchingContest_Shared3: ; (tools/musiccalls.py)
 	rest 2
 	sound_ret
 
-Music_BugCatchingContest_Shared4: ; (tools/musiccalls.py)
+Music_BugCatchingContest_Shared4: ; (tools/scriptcalls.py)
 	drum_note 3, 4
 	drum_note 3, 4
 	drum_note 3, 2
@@ -577,7 +577,7 @@ Music_BugCatchingContest_Shared4: ; (tools/musiccalls.py)
 	drum_note 2, 2
 	sound_ret
 
-Music_BugCatchingContest_Shared5: ; (tools/musiccalls.py)
+Music_BugCatchingContest_Shared5: ; (tools/scriptcalls.py)
 	rest 2
 	octave 5
 	note D_, 1

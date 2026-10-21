@@ -240,26 +240,26 @@ Music_Lighthouse_Ch4:
 	drum_note 10, 2
 	sound_loop 0, .mainloop
 
-Music_Lighthouse_Shared1: ; (tools/musiccalls.py)
+Music_Lighthouse_Shared1: ; (tools/scriptcalls.py)
 	tempo 144
-.shared5: ; (tools/musiccalls.py)
+.shared5: ; (tools/scriptcalls.py)
 	volume 7, 7
 	duty_cycle 3
 	sound_ret
 
-Music_Lighthouse_Shared2: ; (tools/musiccalls.py)
+Music_Lighthouse_Shared2: ; (tools/scriptcalls.py)
 	note C#, 2
 	rest 2
 	octave 2
 	note G#, 2
-.shared6: ; (tools/musiccalls.py)
+.shared6: ; (tools/scriptcalls.py)
 	rest 2
 	note A_, 2
 	rest 2
 	octave 3
 	sound_ret
 
-Music_Lighthouse_Shared3: ; (tools/musiccalls.py)
+Music_Lighthouse_Shared3: ; (tools/scriptcalls.py)
 	note G#, 2
 	rest 2
 	note D#, 2
@@ -268,7 +268,7 @@ Music_Lighthouse_Shared3: ; (tools/musiccalls.py)
 	rest 2
 	sound_ret
 
-Music_Lighthouse_Shared4: ; (tools/musiccalls.py)
+Music_Lighthouse_Shared4: ; (tools/scriptcalls.py)
 	note G#, 12
 	note F#, 2
 	note G#, 2

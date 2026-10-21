@@ -54,7 +54,7 @@ Music_LookKimonoGirl_Ch1:
 	volume_envelope 7, 4
 	octave 3
 	note F_, 1
-.shared2: ; (tools/musiccalls.py)
+.shared2: ; (tools/scriptcalls.py)
 	volume_envelope 11, 4
 	octave 2
 	note A_, 1
@@ -217,7 +217,7 @@ Music_LookKimonoGirl_Ch3:
 	note E_, 8
 	sound_loop 0, .mainloop
 
-Music_LookKimonoGirl_Shared1: ; (tools/musiccalls.py)
+Music_LookKimonoGirl_Shared1: ; (tools/scriptcalls.py)
 	note E_, 1
 	note D_, 1
 	octave 4

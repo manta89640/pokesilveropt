@@ -45,7 +45,7 @@ Music_LookSage_Ch1:
 	note E_, 2
 	sound_call Music_LookSage_Shared1.shared5
 	volume_envelope 11, 3
-.shared4: ; (tools/musiccalls.py)
+.shared4: ; (tools/scriptcalls.py)
 	note A_, 2
 	volume_envelope 9, 3
 	note A_, 2
@@ -107,10 +107,10 @@ Music_LookSage_Ch3:
 	note G#, 1
 	sound_loop 0, .mainloop
 
-Music_LookSage_Shared1: ; (tools/musiccalls.py)
+Music_LookSage_Shared1: ; (tools/scriptcalls.py)
 	volume_envelope 11, 3
 	sound_call Music_LookSage_Shared3
-.shared5: ; (tools/musiccalls.py)
+.shared5: ; (tools/scriptcalls.py)
 	volume_envelope 11, 3
 	note A_, 2
 	volume_envelope 9, 3
@@ -121,7 +121,7 @@ Music_LookSage_Shared1: ; (tools/musiccalls.py)
 	note B_, 2
 	sound_ret
 
-Music_LookSage_Shared2: ; (tools/musiccalls.py)
+Music_LookSage_Shared2: ; (tools/scriptcalls.py)
 	note D_, 2
 	volume_envelope 9, 3
 	note D_, 2
@@ -132,7 +132,7 @@ Music_LookSage_Shared2: ; (tools/musiccalls.py)
 	volume_envelope 11, 3
 	sound_ret
 
-Music_LookSage_Shared3: ; (tools/musiccalls.py)
+Music_LookSage_Shared3: ; (tools/scriptcalls.py)
 	note D_, 2
 	volume_envelope 9, 3
 	note D_, 2

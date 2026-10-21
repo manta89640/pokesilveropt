@@ -147,7 +147,7 @@ Music_LookPokemaniac_Ch3:
 	rest 1
 	octave 5
 	note D#, 1
-.shared1: ; (tools/musiccalls.py)
+.shared1: ; (tools/scriptcalls.py)
 	rest 1
 	note F#, 1
 	rest 1

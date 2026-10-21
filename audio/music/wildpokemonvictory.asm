@@ -181,7 +181,7 @@ Music_WildPokemonVictory_Ch3:
 	note C#, 2
 	sound_ret
 
-Music_WildPokemonVictory_Shared1: ; (tools/musiccalls.py)
+Music_WildPokemonVictory_Shared1: ; (tools/scriptcalls.py)
 	duty_cycle 3
 	pitch_offset 1
 	sound_ret

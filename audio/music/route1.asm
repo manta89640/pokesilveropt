@@ -532,13 +532,13 @@ Music_Route1_Ch3:
 	rest 3
 	sound_loop 0, .mainloop
 
-Music_Route1_Shared1: ; (tools/musiccalls.py)
+Music_Route1_Shared1: ; (tools/scriptcalls.py)
 	octave 2
 	note B_, 1
 	rest 1
 	octave 3
 	note B_, 2
-.shared7: ; (tools/musiccalls.py)
+.shared7: ; (tools/scriptcalls.py)
 	octave 2
 	note A_, 1
 	rest 1
@@ -546,7 +546,7 @@ Music_Route1_Shared1: ; (tools/musiccalls.py)
 	note A_, 2
 	sound_ret
 
-Music_Route1_Shared2: ; (tools/musiccalls.py)
+Music_Route1_Shared2: ; (tools/scriptcalls.py)
 	octave 4
 	note D_, 1
 	note E_, 1
@@ -560,7 +560,7 @@ Music_Route1_Shared2: ; (tools/musiccalls.py)
 	note A_, 2
 	sound_ret
 
-Music_Route1_Shared3: ; (tools/musiccalls.py)
+Music_Route1_Shared3: ; (tools/scriptcalls.py)
 	note D_, 2
 	volume_envelope 8, 1
 	note F#, 2
@@ -571,7 +571,7 @@ Music_Route1_Shared3: ; (tools/musiccalls.py)
 	note E_, 1
 	sound_ret
 
-Music_Route1_Shared4: ; (tools/musiccalls.py)
+Music_Route1_Shared4: ; (tools/scriptcalls.py)
 	note_type 8, 9, 2
 	note C#, 1
 	note D_, 1
@@ -579,14 +579,14 @@ Music_Route1_Shared4: ; (tools/musiccalls.py)
 	note_type 12, 9, 2
 	sound_ret
 
-Music_Route1_Shared5: ; (tools/musiccalls.py)
+Music_Route1_Shared5: ; (tools/scriptcalls.py)
 	note E_, 1
 	rest 1
 	note E_, 1
 	rest 1
 	sound_ret
 
-Music_Route1_Shared6: ; (tools/musiccalls.py)
+Music_Route1_Shared6: ; (tools/scriptcalls.py)
 	note A_, 2
 	note A_, 2
 	note F#, 2

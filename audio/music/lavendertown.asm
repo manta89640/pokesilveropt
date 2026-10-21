@@ -165,7 +165,7 @@ Music_LavenderTown_Ch1:
 	volume_envelope 8, 3
 	sound_call Music_LavenderTown_Ch1.shared8
 	sound_call Music_LavenderTown_Shared5
-.shared8: ; (tools/musiccalls.py)
+.shared8: ; (tools/scriptcalls.py)
 	note F_, 2
 	volume_envelope 4, 3
 	note F_, 2
@@ -183,9 +183,9 @@ Music_LavenderTown_Ch1:
 	note D_, 2
 	volume_envelope 4, 3
 	note D_, 2
-.shared9: ; (tools/musiccalls.py)
+.shared9: ; (tools/scriptcalls.py)
 	volume_envelope 8, 3
-.shared10: ; (tools/musiccalls.py)
+.shared10: ; (tools/scriptcalls.py)
 	note G_, 2
 	volume_envelope 4, 3
 	note G_, 2
@@ -360,7 +360,7 @@ Music_LavenderTown_Ch3:
 	note F_, 2
 	sound_loop 0, .mainloop
 
-Music_LavenderTown_Shared1: ; (tools/musiccalls.py)
+Music_LavenderTown_Shared1: ; (tools/scriptcalls.py)
 	note G_, 4
 	rest 4
 	note G_, 4
@@ -378,14 +378,14 @@ Music_LavenderTown_Shared1: ; (tools/musiccalls.py)
 	note C#, 2
 	note D_, 2
 	note E_, 2
-.shared11: ; (tools/musiccalls.py)
+.shared11: ; (tools/scriptcalls.py)
 	note F_, 10
 	note G_, 2
 	note F_, 2
 	note E_, 2
 	sound_ret
 
-Music_LavenderTown_Shared2: ; (tools/musiccalls.py)
+Music_LavenderTown_Shared2: ; (tools/scriptcalls.py)
 	note C_, 2
 	volume_envelope 6, 3
 	note C_, 2
@@ -400,7 +400,7 @@ Music_LavenderTown_Shared2: ; (tools/musiccalls.py)
 	volume_envelope 10, 3
 	sound_ret
 
-Music_LavenderTown_Shared3: ; (tools/musiccalls.py)
+Music_LavenderTown_Shared3: ; (tools/scriptcalls.py)
 	note A_, 2
 	note G_, 2
 	note A_, 2
@@ -411,21 +411,21 @@ Music_LavenderTown_Shared3: ; (tools/musiccalls.py)
 	note G_, 4
 	sound_ret
 
-Music_LavenderTown_Shared4: ; (tools/musiccalls.py)
+Music_LavenderTown_Shared4: ; (tools/scriptcalls.py)
 	note F_, 2
 	note A_, 2
 	octave 4
 	note C_, 2
 	note E_, 2
 	note F_, 2
-.shared12: ; (tools/musiccalls.py)
+.shared12: ; (tools/scriptcalls.py)
 	note C_, 2
 	octave 3
 	note A_, 2
 	note F_, 2
 	sound_ret
 
-Music_LavenderTown_Shared5: ; (tools/musiccalls.py)
+Music_LavenderTown_Shared5: ; (tools/scriptcalls.py)
 	volume_envelope 8, 3
 	octave 6
 	note C_, 2
@@ -435,14 +435,14 @@ Music_LavenderTown_Shared5: ; (tools/musiccalls.py)
 	octave 5
 	sound_ret
 
-Music_LavenderTown_Shared6: ; (tools/musiccalls.py)
+Music_LavenderTown_Shared6: ; (tools/scriptcalls.py)
 	note D_, 2
 	volume_envelope 4, 3
 	note D_, 2
 	volume_envelope 9, 3
 	sound_ret
 
-Music_LavenderTown_Shared7: ; (tools/musiccalls.py)
+Music_LavenderTown_Shared7: ; (tools/scriptcalls.py)
 	note B_, 2
 	volume_envelope 4, 3
 	note B_, 2

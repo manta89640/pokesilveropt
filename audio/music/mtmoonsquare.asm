@@ -51,7 +51,7 @@ Music_MtMoonSquare_Ch2:
 	sound_loop 2, .loop4
 	sound_loop 0, .mainloop
 
-Music_MtMoonSquare_Shared1: ; (tools/musiccalls.py)
+Music_MtMoonSquare_Shared1: ; (tools/scriptcalls.py)
 	octave 4
 	note D_, 2
 	note E_, 2
@@ -62,7 +62,7 @@ Music_MtMoonSquare_Shared1: ; (tools/musiccalls.py)
 	note D_, 4
 	sound_ret
 
-Music_MtMoonSquare_Shared2: ; (tools/musiccalls.py)
+Music_MtMoonSquare_Shared2: ; (tools/scriptcalls.py)
 	octave 4
 	note E_, 2
 	note F#, 2
@@ -73,7 +73,7 @@ Music_MtMoonSquare_Shared2: ; (tools/musiccalls.py)
 	note E_, 4
 	sound_ret
 
-Music_MtMoonSquare_Shared3: ; (tools/musiccalls.py)
+Music_MtMoonSquare_Shared3: ; (tools/scriptcalls.py)
 	octave 4
 	note C#, 2
 	note D_, 2

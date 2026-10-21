@@ -342,7 +342,7 @@ Music_PalletTown_Ch3:
 	note A_, 8
 	sound_loop 0, .mainloop
 
-Music_PalletTown_Shared1: ; (tools/musiccalls.py)
+Music_PalletTown_Shared1: ; (tools/scriptcalls.py)
 	octave 1
 	note G_, 2
 	note B_, 2

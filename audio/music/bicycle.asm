@@ -313,7 +313,7 @@ Music_Bicycle_Ch3:
 .sub1:
 	octave 3
 	sound_call Music_Bicycle_Ch3.shared5
-.shared5: ; (tools/musiccalls.py)
+.shared5: ; (tools/scriptcalls.py)
 	note G_, 1
 	rest 1
 	note B_, 1
@@ -343,7 +343,7 @@ Music_Bicycle_Ch4:
 	drum_note 6, 2
 	sound_loop 0, .mainloop
 
-Music_Bicycle_Shared1: ; (tools/musiccalls.py)
+Music_Bicycle_Shared1: ; (tools/scriptcalls.py)
 	rest 1
 	note E_, 1
 	rest 1
@@ -354,16 +354,16 @@ Music_Bicycle_Shared1: ; (tools/musiccalls.py)
 	note C_, 1
 	sound_call Music_PokemonCenter_Shared4
 	note A_, 1
-.shared6: ; (tools/musiccalls.py)
+.shared6: ; (tools/scriptcalls.py)
 	rest 1
-.shared7: ; (tools/musiccalls.py)
+.shared7: ; (tools/scriptcalls.py)
 	note D_, 1
 	rest 1
 	note A_, 1
 	rest 1
 	sound_ret
 
-Music_Bicycle_Shared2: ; (tools/musiccalls.py)
+Music_Bicycle_Shared2: ; (tools/scriptcalls.py)
 	note B_, 4
 	note G_, 4
 	note A_, 4
@@ -382,7 +382,7 @@ Music_Bicycle_Shared2: ; (tools/musiccalls.py)
 	note E_, 2
 	sound_ret
 
-Music_Bicycle_Shared3: ; (tools/musiccalls.py)
+Music_Bicycle_Shared3: ; (tools/scriptcalls.py)
 	note G_, 2
 	note G_, 2
 	note E_, 2
@@ -400,7 +400,7 @@ Music_Bicycle_Shared3: ; (tools/musiccalls.py)
 	note B_, 2
 	sound_ret
 
-Music_Bicycle_Shared4: ; (tools/musiccalls.py)
+Music_Bicycle_Shared4: ; (tools/scriptcalls.py)
 	rest 1
 	note G_, 1
 	rest 1

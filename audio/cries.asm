@@ -2082,7 +2082,7 @@ Cry_Rattata_Ch8:
 	noise_note 8, 9, 1, 73
 	sound_ret
 
-Cry_Shared1: ; (tools/musiccalls.py)
+Cry_Shared1: ; (tools/scriptcalls.py)
 	square_note 5, 14, 2, 1556
 	square_note 8, 12, 1, 1572
 	square_note 5, 15, 2, 1553

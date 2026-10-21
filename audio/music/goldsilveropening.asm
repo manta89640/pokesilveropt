@@ -462,7 +462,7 @@ Music_GoldSilverOpening_Ch3:
 	rest 13
 	sound_ret
 
-Music_GoldSilverOpening_Shared1: ; (tools/musiccalls.py)
+Music_GoldSilverOpening_Shared1: ; (tools/scriptcalls.py)
 	octave 2
 	note D#, 1
 	sound_call Music_GoldSilverOpening_Shared3
@@ -486,19 +486,19 @@ Music_GoldSilverOpening_Shared1: ; (tools/musiccalls.py)
 	rest 1
 	sound_ret
 
-Music_GoldSilverOpening_Shared2: ; (tools/musiccalls.py)
+Music_GoldSilverOpening_Shared2: ; (tools/scriptcalls.py)
 	sound_call Music_GoldSilverOpening_Shared2.shared7
 	note D_, 1
-.shared6: ; (tools/musiccalls.py)
+.shared6: ; (tools/scriptcalls.py)
 	rest 1
-.shared7: ; (tools/musiccalls.py)
+.shared7: ; (tools/scriptcalls.py)
 	octave 4
 	note A#, 1
 	rest 1
 	octave 5
 	sound_ret
 
-Music_GoldSilverOpening_Shared3: ; (tools/musiccalls.py)
+Music_GoldSilverOpening_Shared3: ; (tools/scriptcalls.py)
 	rest 1
 	note G_, 1
 	rest 1
@@ -506,7 +506,7 @@ Music_GoldSilverOpening_Shared3: ; (tools/musiccalls.py)
 	rest 1
 	sound_ret
 
-Music_GoldSilverOpening_Shared4: ; (tools/musiccalls.py)
+Music_GoldSilverOpening_Shared4: ; (tools/scriptcalls.py)
 	note B_, 1
 	note A_, 1
 	note B_, 1
@@ -514,7 +514,7 @@ Music_GoldSilverOpening_Shared4: ; (tools/musiccalls.py)
 	note F_, 1
 	sound_ret
 
-Music_GoldSilverOpening_Shared5: ; (tools/musiccalls.py)
+Music_GoldSilverOpening_Shared5: ; (tools/scriptcalls.py)
 	octave 1
 	note A#, 4
 	octave 3

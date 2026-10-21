@@ -681,7 +681,7 @@ Sfx_DexFanfare2049_Ch7:
 	sound_ret
 
 Sfx_DexFanfare2049_Ch8:
-.shared23: ; (tools/musiccalls.py)
+.shared23: ; (tools/scriptcalls.py)
 	sound_call Sfx_Shared6
 	drum_note 1, 16
 	rest 16
@@ -1813,7 +1813,7 @@ Sfx_GetBadge_Ch5:
 	note G#, 2
 	octave 4
 	note C#, 2
-.shared24: ; (tools/musiccalls.py)
+.shared24: ; (tools/scriptcalls.py)
 	octave 3
 	note F_, 2
 	note G#, 2
@@ -3658,7 +3658,7 @@ Sfx_Pokeflute_Ch7:
 	sound_ret
 
 Sfx_PlacePuzzlePieceDown_Ch8:
-.shared25: ; (tools/musiccalls.py)
+.shared25: ; (tools/scriptcalls.py)
 	noise_note 2, 15, 7, 36
 	noise_note 2, 15, 7, 52
 	noise_note 4, 15, 7, 68
@@ -3672,13 +3672,13 @@ Sfx_EnterDoor_Ch8:
 	sound_ret
 
 Sfx_SwitchPokemon_Ch5:
-.shared26: ; (tools/musiccalls.py)
+.shared26: ; (tools/scriptcalls.py)
 	duty_cycle 2
 	square_note 8, 14, 1, 1856
 	sound_ret
 
 Sfx_SwitchPokemon_Ch6:
-.shared27: ; (tools/musiccalls.py)
+.shared27: ; (tools/scriptcalls.py)
 	duty_cycle 2
 	square_note 2, 0, 8, 0
 	square_note 8, 11, 1, 1857
@@ -3686,7 +3686,7 @@ Sfx_SwitchPokemon_Ch6:
 
 Sfx_PokeballsPlacedOnTable_Ch5:
 	duty_cycle 2
-.shared28: ; (tools/musiccalls.py)
+.shared28: ; (tools/scriptcalls.py)
 	pitch_sweep 3, -2
 	square_note 4, 15, 2, 512
 	pitch_sweep 2, 2
@@ -3754,7 +3754,7 @@ Sfx_ReadText2_Ch5:
 Sfx_Potion_Ch5:
 	duty_cycle 2
 	pitch_sweep 1, 7
-.shared29: ; (tools/musiccalls.py)
+.shared29: ; (tools/scriptcalls.py)
 	square_note 15, 15, 0, 1264
 	sound_jump Sfx_SlotMachineStart_Ch5.shared33
 
@@ -3872,7 +3872,7 @@ Sfx_ChangeDexMode_Ch5:
 Sfx_JumpOverLedge_Ch5:
 	duty_cycle 2
 	pitch_sweep 9, 5
-.shared30: ; (tools/musiccalls.py)
+.shared30: ; (tools/scriptcalls.py)
 	square_note 15, 15, 2, 1024
 	pitch_sweep 0, 8
 	sound_ret
@@ -3965,7 +3965,7 @@ Sfx_WallOpen_Ch5:
 	sound_ret
 
 Sfx_ElevatorEnd_Ch5:
-.shared31: ; (tools/musiccalls.py)
+.shared31: ; (tools/scriptcalls.py)
 	duty_cycle 2
 	square_note 15, 15, 3, 1840
 	square_note 8, 6, 5, 1840
@@ -4012,7 +4012,7 @@ Sfx_Faint_Ch5:
 
 Sfx_Faint_Ch8:
 	noise_note 4, 15, 5, 51
-.shared32: ; (tools/musiccalls.py)
+.shared32: ; (tools/scriptcalls.py)
 	noise_note 8, 15, 4, 34
 	noise_note 15, 15, 2, 33
 	sound_ret
@@ -4036,7 +4036,7 @@ Sfx_SlotMachineStart_Ch5:
 	pitch_sweep 4, 4
 	square_note 15, 15, 0, 1264
 	pitch_sweep 1, 7
-.shared33: ; (tools/musiccalls.py)
+.shared33: ; (tools/scriptcalls.py)
 	square_note 15, 15, 2, 1616
 	pitch_sweep 0, 8
 	sound_ret
@@ -4052,7 +4052,7 @@ Sfx_Call_Ch5:
 	sound_call Sfx_Shared20
 	sound_call Sfx_Shared20
 	square_note 4, 15, 7, 1952
-.shared34: ; (tools/musiccalls.py)
+.shared34: ; (tools/scriptcalls.py)
 	pitch_sweep 0, 8
 	square_note 4, 0, 0, 0
 	sound_ret
@@ -4227,7 +4227,7 @@ Sfx_TailWhip_Ch8:
 	sound_ret
 
 Sfx_KarateChop_Ch8:
-.shared35: ; (tools/musiccalls.py)
+.shared35: ; (tools/scriptcalls.py)
 	noise_note 2, 13, 2, 50
 	noise_note 15, 15, 2, 67
 	sound_ret
@@ -4577,7 +4577,7 @@ Sfx_Sing_Ch5:
 	note_type 10, 8, 7
 	octave 5
 	note G_, 8
-.shared36: ; (tools/musiccalls.py)
+.shared36: ; (tools/scriptcalls.py)
 	octave 6
 	note F_, 4
 	note D#, 4
@@ -4753,7 +4753,7 @@ Sfx_Fanfare2_Ch5:
 	octave 4
 	note C_, 4
 	note C_, 2
-.shared37: ; (tools/musiccalls.py)
+.shared37: ; (tools/scriptcalls.py)
 	note_type 4, 11, 6
 	note C#, 12
 	sfx_priority_off
@@ -4939,29 +4939,29 @@ Sfx_StopSlot_Ch5:
 	square_note 4, 8, 2, 1888
 	sound_ret
 
-Sfx_Shared1: ; (tools/musiccalls.py)
+Sfx_Shared1: ; (tools/scriptcalls.py)
 	toggle_sfx
 	tempo 120
 	volume 7, 7
 	sound_ret
 
-Sfx_Shared2: ; (tools/musiccalls.py)
+Sfx_Shared2: ; (tools/scriptcalls.py)
 	vibrato 8, 2, 7
 	duty_cycle 2
 	sound_ret
 
-Sfx_Shared3: ; (tools/musiccalls.py)
+Sfx_Shared3: ; (tools/scriptcalls.py)
 	toggle_sfx
 	tempo 124
 	volume 7, 7
 	sound_ret
 
-Sfx_Shared4: ; (tools/musiccalls.py)
+Sfx_Shared4: ; (tools/scriptcalls.py)
 	vibrato 18, 3, 4
 	duty_cycle 3
 	sound_ret
 
-Sfx_Shared5: ; (tools/musiccalls.py)
+Sfx_Shared5: ; (tools/scriptcalls.py)
 	rest 2
 	duty_cycle 2
 	volume_envelope 8, 5
@@ -4974,25 +4974,25 @@ Sfx_Shared5: ; (tools/musiccalls.py)
 	octave 3
 	sound_ret
 
-Sfx_Shared6: ; (tools/musiccalls.py)
+Sfx_Shared6: ; (tools/scriptcalls.py)
 	toggle_sfx
 	sfx_toggle_noise 4
 	drum_speed 12
 	sound_ret
 
-Sfx_Shared7: ; (tools/musiccalls.py)
+Sfx_Shared7: ; (tools/scriptcalls.py)
 	toggle_sfx
 	note_type 8, 2, 5
 	octave 3
 	sound_ret
 
-Sfx_Shared8: ; (tools/musiccalls.py)
+Sfx_Shared8: ; (tools/scriptcalls.py)
 	toggle_sfx
 	tempo 112
 	volume 7, 7
 	sound_ret
 
-Sfx_Shared9: ; (tools/musiccalls.py)
+Sfx_Shared9: ; (tools/scriptcalls.py)
 	toggle_sfx
 	duty_cycle 0
 	vibrato 18, 5, 3
@@ -5000,18 +5000,18 @@ Sfx_Shared9: ; (tools/musiccalls.py)
 	octave 4
 	sound_ret
 
-Sfx_Shared10: ; (tools/musiccalls.py)
+Sfx_Shared10: ; (tools/scriptcalls.py)
 	toggle_sfx
 	note_type 12, 2, 5
 	sound_ret
 
-Sfx_Shared11: ; (tools/musiccalls.py)
+Sfx_Shared11: ; (tools/scriptcalls.py)
 	toggle_sfx
 	sfx_toggle_noise 4
 	drum_speed 8
 	sound_ret
 
-Sfx_Shared12: ; (tools/musiccalls.py)
+Sfx_Shared12: ; (tools/scriptcalls.py)
 	note D_, 1
 	rest 1
 	note D_, 1
@@ -5019,13 +5019,13 @@ Sfx_Shared12: ; (tools/musiccalls.py)
 	octave 2
 	sound_ret
 
-Sfx_Shared13: ; (tools/musiccalls.py)
+Sfx_Shared13: ; (tools/scriptcalls.py)
 	toggle_sfx
 	sfx_toggle_noise 4
 	drum_speed 6
 	sound_ret
 
-Sfx_Shared14: ; (tools/musiccalls.py)
+Sfx_Shared14: ; (tools/scriptcalls.py)
 	octave 3
 	note A_, 1
 	rest 1
@@ -5034,50 +5034,50 @@ Sfx_Shared14: ; (tools/musiccalls.py)
 	octave 4
 	sound_ret
 
-Sfx_Shared15: ; (tools/musiccalls.py)
+Sfx_Shared15: ; (tools/scriptcalls.py)
 	drum_note 2, 1
 	drum_note 2, 1
-.shared38: ; (tools/musiccalls.py)
+.shared38: ; (tools/scriptcalls.py)
 	drum_note 2, 1
 	drum_note 2, 1
 	drum_note 2, 1
 	drum_note 2, 1
 	sound_ret
 
-Sfx_Shared16: ; (tools/musiccalls.py)
+Sfx_Shared16: ; (tools/scriptcalls.py)
 	toggle_sfx
 	tempo 116
-.shared39: ; (tools/musiccalls.py)
+.shared39: ; (tools/scriptcalls.py)
 	volume 7, 7
 	duty_cycle 2
 	sound_ret
 
-Sfx_Shared17: ; (tools/musiccalls.py)
+Sfx_Shared17: ; (tools/scriptcalls.py)
 	square_note 3, 10, 1, 1920
 	square_note 3, 10, 1, 1792
 	sound_ret
 
-Sfx_Shared18: ; (tools/musiccalls.py)
+Sfx_Shared18: ; (tools/scriptcalls.py)
 	square_note 15, 15, 0, 1280
 	square_note 15, 15, 0, 1280
 	sound_ret
 
-Sfx_Shared19: ; (tools/musiccalls.py)
+Sfx_Shared19: ; (tools/scriptcalls.py)
 	square_note 15, 15, 0, 1154
 	square_note 15, 15, 0, 1154
 	sound_ret
 
-Sfx_Shared20: ; (tools/musiccalls.py)
+Sfx_Shared20: ; (tools/scriptcalls.py)
 	square_note 4, 15, 7, 1952
 	square_note 4, 15, 7, 1952
 	sound_ret
 
-Sfx_Shared21: ; (tools/musiccalls.py)
+Sfx_Shared21: ; (tools/scriptcalls.py)
 	square_note 15, 15, -7, 2016
 	square_note 15, 15, -7, 2016
 	sound_ret
 
-Sfx_Shared22: ; (tools/musiccalls.py)
+Sfx_Shared22: ; (tools/scriptcalls.py)
 	square_note 15, 15, -7, 2018
 	square_note 15, 15, -7, 2017
 	sound_ret

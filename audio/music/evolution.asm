@@ -96,7 +96,7 @@ Music_Evolution_Ch2:
 	note G_, 4
 	note D_, 4
 	note G_, 4
-.shared3: ; (tools/musiccalls.py)
+.shared3: ; (tools/scriptcalls.py)
 	note D_, 4
 	note G_, 4
 	note D_, 4
@@ -141,7 +141,7 @@ Music_Evolution_Ch3:
 	rest 2
 	sound_call Music_Evolution_Ch3.shared4
 	sound_call Music_Evolution_Ch3.shared4
-.shared4: ; (tools/musiccalls.py)
+.shared4: ; (tools/scriptcalls.py)
 	octave 3
 	note D_, 2
 	rest 2
@@ -173,7 +173,7 @@ Music_Evolution_Ch4:
 	drum_note 5, 2
 	sound_loop 0, .mainloop
 
-Music_Evolution_Shared1: ; (tools/musiccalls.py)
+Music_Evolution_Shared1: ; (tools/scriptcalls.py)
 	octave 2
 	note B_, 2
 	rest 2
@@ -182,7 +182,7 @@ Music_Evolution_Shared1: ; (tools/musiccalls.py)
 	rest 2
 	sound_ret
 
-Music_Evolution_Shared2: ; (tools/musiccalls.py)
+Music_Evolution_Shared2: ; (tools/scriptcalls.py)
 	pitch_slide 1, 4, A_
 	note C_, 1
 	pitch_slide 1, 4, A_

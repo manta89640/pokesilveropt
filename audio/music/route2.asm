@@ -127,7 +127,7 @@ Music_Route2_Ch1:
 	octave 3
 	note B_, 2
 	sound_call Music_Route2_Ch1.shared4
-.shared4: ; (tools/musiccalls.py)
+.shared4: ; (tools/scriptcalls.py)
 	octave 4
 	note C_, 2
 	octave 3
@@ -229,7 +229,7 @@ Music_Route2_Ch2:
 	note G_, 4
 	rest 2
 	sound_call Music_KantoTrainerBattle_Shared7
-.shared5: ; (tools/musiccalls.py)
+.shared5: ; (tools/scriptcalls.py)
 	note G_, 2
 	rest 2
 	note G_, 1
@@ -312,7 +312,7 @@ Music_Route2_Ch3:
 
 .sub1:
 	octave 3
-.shared6: ; (tools/musiccalls.py)
+.shared6: ; (tools/scriptcalls.py)
 	note F_, 4
 	rest 2
 	note F_, 1
@@ -442,7 +442,7 @@ Music_Route2_Ch4:
 	drum_note 4, 4
 	sound_loop 0, .mainloop
 
-Music_Route2_Shared1: ; (tools/musiccalls.py)
+Music_Route2_Shared1: ; (tools/scriptcalls.py)
 	note C_, 4
 	rest 2
 	note C_, 1
@@ -457,12 +457,12 @@ Music_Route2_Shared1: ; (tools/musiccalls.py)
 	rest 2
 	sound_ret
 
-Music_Route2_Shared2: ; (tools/musiccalls.py)
+Music_Route2_Shared2: ; (tools/scriptcalls.py)
 	volume 7, 7
 	stereo_panning FALSE, TRUE
 	sound_ret
 
-Music_Route2_Shared3: ; (tools/musiccalls.py)
+Music_Route2_Shared3: ; (tools/scriptcalls.py)
 	octave 2
 	note B_, 2
 	octave 3
