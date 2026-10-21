@@ -1,3 +1,5 @@
+	pushc dict ; compress text (see constants/text_dict_charmap.asm)
+
 SECTION "Pokedex Entries 001-064", ROMX
 
 BulbasaurPokedexEntry::  INCLUDE "data/pokemon/dex_entries/gold/bulbasaur.asm"
@@ -263,3 +265,5 @@ TyranitarPokedexEntry::  INCLUDE "data/pokemon/dex_entries/gold/tyranitar.asm"
 LugiaPokedexEntry::      INCLUDE "data/pokemon/dex_entries/gold/lugia.asm"
 HoOhPokedexEntry::       INCLUDE "data/pokemon/dex_entries/gold/ho_oh.asm"
 CelebiPokedexEntry::     INCLUDE "data/pokemon/dex_entries/gold/celebi.asm"
+
+	popc

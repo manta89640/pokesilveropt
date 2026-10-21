@@ -382,6 +382,13 @@ SECTION "Credits Strings", ROMX
 INCLUDE "data/credits_strings.asm"
 
 
+if !DEF(_DEBUG)
+SECTION "Text Dictionary", ROMX
+
+INCLUDE "data/text/dictionary.asm"
+endc
+
+
 SECTION "Stadium 2 Checksums", ROMX[$7DF8], BANK[$7F]
 
 ; The end of the ROM is taken up by checksums of the content, apparently used

@@ -1,3 +1,5 @@
+	pushc dict ; compress text (see constants/text_dict_charmap.asm)
+
 MoveDescriptions::
 ; entries correspond to move ids (see constants/move_constants.asm)
 	table_width 2
@@ -1270,3 +1272,5 @@ WhirlpoolDescription:
 BeatUpDescription:
 	db   "Party #MON join"
 	next "in the attack.@"
+
+	popc

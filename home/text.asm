@@ -203,9 +203,11 @@ ENDM
 	dict '<MOM>',     PrintMomsName
 	dict '<PLAYER>',  PrintPlayerName
 	dict '<RIVAL>',   PrintRivalName
+if DEF(_DEBUG)
 	dict '<ROUTE>',   PlaceJPRoute
 	dict '<WATASHI>', PlaceWatashi
 	dict '<KOKO_WA>', PlaceKokoWa
+endc
 	dict '<RED>',     PrintRedsName
 	dict '<GREEN>',   PrintGreensName
 	dict '#',         PlacePOKe
@@ -213,7 +215,9 @@ ENDM
 	dict '<ROCKET>',  RocketChar
 	dict '<TM>',      TMChar
 	dict '<TRAINER>', TrainerChar
+if DEF(_DEBUG)
 	dict '<KOUGEKI>', PlaceKougeki
+endc
 	dict '<LF>',      LineFeedChar
 	dict '<CONT>',    ContText
 	dict '<……>',      SixDotsChar
@@ -239,6 +243,9 @@ ENDM
 .not_diacritic
 	cp FIRST_REGULAR_TEXT_CHAR
 	jr nc, .place
+if !DEF(_DEBUG)
+	jp PlaceDictEntry
+else
 ; dakuten or handakuten
 	cp 'パ'
 	jr nc, .handakuten
@@ -268,6 +275,7 @@ ENDM
 .place_handakuten
 	ld b, 'ﾟ' ; handakuten
 	call Diacritic
+endc
 
 .place
 	ld [hli], a
@@ -291,13 +299,15 @@ TMChar:       print_name TMCharText
 PCChar:       print_name PCCharText
 RocketChar:   print_name RocketCharText
 PlacePOKe:    print_name PlacePOKeText
-PlaceKougeki: print_name KougekiText
 SixDotsChar:  print_name SixDotsCharText
 PlacePKMN:    print_name PlacePKMNText
 PlacePOKE:    print_name PlacePOKEText
+if DEF(_DEBUG)
+PlaceKougeki: print_name KougekiText
 PlaceJPRoute: print_name PlaceJPRouteText
 PlaceWatashi: print_name PlaceWatashiText
 PlaceKokoWa:  print_name PlaceKokoWaText
+endc
 
 PlaceMoveTargetsName::
 	ldh a, [hBattleTurn]
@@ -364,21 +374,86 @@ PlaceCommandCharacter::
 	pop de
 	jp NextChar
 
+if !DEF(_DEBUG)
+PlaceDictEntry:
+; Print the text dictionary entry for code a (see data/text/dictionary.asm).
+; Codes 1 to NUM_DICT_PREFIXES are followed by a second byte from $60 to $ff.
+	ld b, h
+	ld c, l
+	ld h, 0
+	cp NUM_DICT_PREFIXES + 1
+	jr nc, .got_code
+	dec a
+	ld h, a
+	add a
+	add a
+	add h
+	add a
+	ld h, a ; (prefix - 1) * 10 groups
+	inc de
+	ld a, [de]
+.got_code
+	push de
+	push bc
+	ld l, a
+	ldh a, [hROMBank]
+	push af
+	ld a, BANK(TextDictGroups)
+	rst Bankswitch
+	ld a, l
+	and $f
+	ld c, a
+	ld a, l
+	swap a
+	and $f
+	add h
+	ld l, a
+	ld h, 0
+	add hl, hl
+	ld de, TextDictGroups
+	add hl, de
+	ld a, [hli]
+	ld d, [hl]
+	ld e, a
+	inc c
+	jr .next
+.skip
+	ld a, [de]
+	inc de
+	cp '@'
+	jr nz, .skip
+.next
+	dec c
+	jr nz, .skip
+	pop af
+	pop hl
+	push af
+	call PlaceString
+	pop af
+	rst Bankswitch
+	ld h, b
+	ld l, c
+	pop de
+	jp NextChar
+endc
+
 TMCharText::      db "TM@"
 TrainerCharText:: db "TRAINER@"
 PCCharText::      db "PC@"
 RocketCharText::  db "ROCKET@"
 PlacePOKeText::   db "POKé@"
-KougekiText::     db "こうげき@"
 SixDotsCharText:: db "……@"
 EnemyText::       db "Enemy @"
 PlacePKMNText::   db "<PK><MN>@"
 PlacePOKEText::   db "<PO><KE>@"
 String_Space::    db " @"
+if DEF(_DEBUG)
+KougekiText::     db "こうげき@"
 ; These strings have been dummied out.
 PlaceJPRouteText::
 PlaceWatashiText::
 PlaceKokoWaText:: db "@"
+endc
 
 NextLineChar::
 	pop hl

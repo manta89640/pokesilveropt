@@ -1,3 +1,5 @@
+	pushc dict ; compress text (see constants/text_dict_charmap.asm)
+
 ItemDescriptions:
 ; entries correspond to item ids (see constants/item_constants.asm)
 	table_width 2
@@ -1008,3 +1010,5 @@ TeruSama36Desc:
 
 TeruSama37Desc:
 	db   "?@"
+
+	popc

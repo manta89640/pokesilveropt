@@ -1,25 +1,39 @@
+; Text is encoded with the "dict" charmap (see constants/text_dict_charmap.asm).
+
 MACRO text
+	pushc dict
 	db TX_START, \# ; Start writing text
+	popc
 ENDM
 
 MACRO next
+	pushc dict
 	db "<NEXT>", \# ; Move a line down
+	popc
 ENDM
 
 MACRO line
+	pushc dict
 	db "<LINE>", \# ; Start writing at the bottom line
+	popc
 ENDM
 
 MACRO page
+	pushc dict
 	db "@", \# ; Start a new Pokédex page
+	popc
 ENDM
 
 MACRO para
+	pushc dict
 	db "<PARA>", \# ; Start a new paragraph
+	popc
 ENDM
 
 MACRO cont
+	pushc dict
 	db "<CONT>", \# ; Scroll to the next line
+	popc
 ENDM
 
 MACRO done

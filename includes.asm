@@ -1,4 +1,5 @@
 INCLUDE "constants/charmap.asm"
+INCLUDE "constants/text_dict_charmap.asm"
 
 INCLUDE "macros/asserts.asm"
 INCLUDE "macros/const.asm"
