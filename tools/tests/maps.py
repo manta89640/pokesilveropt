@@ -7,8 +7,9 @@ Usage: tools/tests/maps.py rom.gbc save.ram > maps.txt
 Starting from a save, each map is entered like the warp script command does,
 then wOverworldMapBlocks (the map's blocks plus the strips of connected
 maps), the tilemap, the sprite tiles in VRAM (those of the player and every
-NPC on the map), the graphics of the background tiles on the screen and the
-map objects (without their script addresses) are hashed. Run it on two ROMs and diff the output.
+NPC on the map), the graphics of the background tiles on the screen, the
+map objects (without their script addresses) and the connections to other
+maps are hashed. Run it on two ROMs and diff the output.
 """
 
 import hashlib
@@ -31,6 +32,7 @@ MAPSTATUS_HANDLE = 2
 MAPOBJECT_LENGTH = 16
 MAPOBJECT_SCRIPT_POINTER = 10
 NUM_OBJECTS = 16
+CONNECTION_LENGTH = 12  # map_connection_struct
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -111,6 +113,8 @@ def main():
 		for o in range(NUM_OBJECTS):
 			objects[o * MAPOBJECT_LENGTH + MAPOBJECT_SCRIPT_POINTER] = 0
 			objects[o * MAPOBJECT_LENGTH + MAPOBJECT_SCRIPT_POINTER + 1] = 0
+		# The connections to other maps
+		connections = bytes(mem[sym['wNorthMapConnection'] + i] for i in range(CONNECTION_LENGTH * 4))
 		# The graphics of the background tiles on the screen
 		bgtiles = b''.join(bytes(mem[(0x9000 + t * 16 if t < 0x80 else 0x8800 + (t - 0x80) * 16) + i]
 			for i in range(16)) for t in sorted(set(screen)))
@@ -121,7 +125,8 @@ def main():
 			f'tilemap={hashlib.md5(screen).hexdigest()[:12]} '
 			f'sprites={hashlib.md5(sprites).hexdigest()[:12]} '
 			f'bgtiles={hashlib.md5(bgtiles).hexdigest()[:12]} '
-			f'objects={hashlib.md5(objects).hexdigest()[:12]}', flush=True)
+			f'objects={hashlib.md5(objects).hexdigest()[:12]} '
+			f'connections={hashlib.md5(connections).hexdigest()[:12]}', flush=True)
 	pb.stop(save=False)
 	shutil.rmtree(tmp)
 
