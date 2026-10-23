@@ -1,0 +1,22 @@
+# Open the first Pokémon's summary from the party menu and go through its pages
+wait 400
+press start 60
+press a 120
+press a 200
+press a 200
+wait 100
+press start 60
+press down 30
+press a 120
+press a 60
+press a 300
+shot page1
+press right 120
+shot page2
+press right 120
+shot page3
+press down 300
+shot next_mon
+press b 120
+shot party
+state

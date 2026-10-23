@@ -683,7 +683,7 @@ StatsScreen_PlaceFrontpic:
 	push bc
 	call SetDefaultBGPAndOBP
 	ld hl, wTempMonDVs
-	call GetUnownLetter
+	predef GetUnownLetter
 	hlcoord 0, 0
 	ld a, [wCurPartySpecies]
 	cp UNOWN

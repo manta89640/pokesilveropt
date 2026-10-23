@@ -13,7 +13,7 @@ tools/tests/compare.py original/pokesilver.gbc pokesilver.gbc tools/tests/scenar
 # so loading it also checks that the original games' saves work),
 # then run the scenarios that start from it
 tools/tests/play.py original/pokesilver.gbc test_output/save tools/tests/scenarios/make_save.txt
-for s in continue connections pokedex pack pokegear phone radio trainer_card battle trainer substitute services npc_text hall_of_fame; do
+for s in continue connections pokedex stats_screen pack pokegear phone radio trainer_card battle trainer substitute services npc_text hall_of_fame; do
 	tools/tests/compare.py original/pokesilver.gbc pokesilver.gbc tools/tests/scenarios/$s.txt test_output/save/save.ram
 done
 ```
