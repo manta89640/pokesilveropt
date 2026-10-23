@@ -1889,153 +1889,145 @@ Pokedex_UpdateCursorOAM:
 	jp Pokedex_PutScrollbarOAM
 
 Pokedex_PutOldModeCursorOAM:
-	ld hl, .CursorOAM
+	ld hl, Pokedex_OldModeCursor
+	ld b, 0
 	ld a, [wDexListingCursor]
-	or a
-	jr nz, .okay
-	ld hl, .CursorAtTopOAM
-.okay
-	jp Pokedex_LoadCursorOAM
-
-.CursorOAM:
-	dbsprite  9,  3, -1,  0, $30, 7
-	dbsprite  9,  2, -1,  0, $31, 7
-	dbsprite 10,  2, -1,  0, $32, 7
-	dbsprite 11,  2, -1,  0, $32, 7
-	dbsprite 12,  2, -1,  0, $32, 7
-	dbsprite 13,  2, -1,  0, $33, 7
-	dbsprite 16,  2, -2,  0, $33, 7 | OAM_XFLIP
-	dbsprite 17,  2, -2,  0, $32, 7 | OAM_XFLIP
-	dbsprite 18,  2, -2,  0, $32, 7 | OAM_XFLIP
-	dbsprite 19,  2, -2,  0, $32, 7 | OAM_XFLIP
-	dbsprite 20,  2, -2,  0, $31, 7 | OAM_XFLIP
-	dbsprite 20,  3, -2,  0, $30, 7 | OAM_XFLIP
-	dbsprite  9,  4, -1,  0, $30, 7 | OAM_YFLIP
-	dbsprite  9,  5, -1,  0, $31, 7 | OAM_YFLIP
-	dbsprite 10,  5, -1,  0, $32, 7 | OAM_YFLIP
-	dbsprite 11,  5, -1,  0, $32, 7 | OAM_YFLIP
-	dbsprite 12,  5, -1,  0, $32, 7 | OAM_YFLIP
-	dbsprite 13,  5, -1,  0, $33, 7 | OAM_YFLIP
-	dbsprite 16,  5, -2,  0, $33, 7 | OAM_XFLIP | OAM_YFLIP
-	dbsprite 17,  5, -2,  0, $32, 7 | OAM_XFLIP | OAM_YFLIP
-	dbsprite 18,  5, -2,  0, $32, 7 | OAM_XFLIP | OAM_YFLIP
-	dbsprite 19,  5, -2,  0, $32, 7 | OAM_XFLIP | OAM_YFLIP
-	dbsprite 20,  5, -2,  0, $31, 7 | OAM_XFLIP | OAM_YFLIP
-	dbsprite 20,  4, -2,  0, $30, 7 | OAM_XFLIP | OAM_YFLIP
-	db -1
-
-.CursorAtTopOAM:
-; OAM data for when the cursor is at the top of the list. The tiles at the top
-; are cut off so they don't show up outside the list area.
-	dbsprite  9,  3, -1,  0, $30, 7
-	dbsprite  9,  2, -1,  0, $34, 7
-	dbsprite 10,  2, -1,  0, $35, 7
-	dbsprite 11,  2, -1,  0, $35, 7
-	dbsprite 12,  2, -1,  0, $35, 7
-	dbsprite 13,  2, -1,  0, $36, 7
-	dbsprite 16,  2, -2,  0, $36, 7 | OAM_XFLIP
-	dbsprite 17,  2, -2,  0, $35, 7 | OAM_XFLIP
-	dbsprite 18,  2, -2,  0, $35, 7 | OAM_XFLIP
-	dbsprite 19,  2, -2,  0, $35, 7 | OAM_XFLIP
-	dbsprite 20,  2, -2,  0, $34, 7 | OAM_XFLIP
-	dbsprite 20,  3, -2,  0, $30, 7 | OAM_XFLIP
-	dbsprite  9,  4, -1,  0, $30, 7 | OAM_YFLIP
-	dbsprite  9,  5, -1,  0, $31, 7 | OAM_YFLIP
-	dbsprite 10,  5, -1,  0, $32, 7 | OAM_YFLIP
-	dbsprite 11,  5, -1,  0, $32, 7 | OAM_YFLIP
-	dbsprite 12,  5, -1,  0, $32, 7 | OAM_YFLIP
-	dbsprite 13,  5, -1,  0, $33, 7 | OAM_YFLIP
-	dbsprite 16,  5, -2,  0, $33, 7 | OAM_XFLIP | OAM_YFLIP
-	dbsprite 17,  5, -2,  0, $32, 7 | OAM_XFLIP | OAM_YFLIP
-	dbsprite 18,  5, -2,  0, $32, 7 | OAM_XFLIP | OAM_YFLIP
-	dbsprite 19,  5, -2,  0, $32, 7 | OAM_XFLIP | OAM_YFLIP
-	dbsprite 20,  5, -2,  0, $31, 7 | OAM_XFLIP | OAM_YFLIP
-	dbsprite 20,  4, -2,  0, $30, 7 | OAM_XFLIP | OAM_YFLIP
-	db -1
+	and a
+	jr nz, Pokedex_PutCursorOAM
+	; at the top of the list, the top edge's tiles are cut off so they don't
+	; show up outside the list area
+	ld b, $34 - $31
+	jr Pokedex_PutCursorOAM
 
 Pokedex_PutNewModeABCModeCursorOAM:
-	ld hl, .CursorOAM
-	jp Pokedex_LoadCursorOAM
-
-.CursorOAM:
-	dbsprite  9,  3, -1,  3, $30, 7
-	dbsprite  9,  2, -1,  3, $31, 7
-	dbsprite 10,  2, -1,  3, $32, 7
-	dbsprite 11,  2, -1,  3, $32, 7
-	dbsprite 12,  2, -1,  3, $33, 7
-	dbsprite 16,  2,  0,  3, $33, 7 | OAM_XFLIP
-	dbsprite 17,  2,  0,  3, $32, 7 | OAM_XFLIP
-	dbsprite 18,  2,  0,  3, $32, 7 | OAM_XFLIP
-	dbsprite 19,  2,  0,  3, $31, 7 | OAM_XFLIP
-	dbsprite 19,  3,  0,  3, $30, 7 | OAM_XFLIP
-	dbsprite  9,  4, -1,  3, $30, 7 | OAM_YFLIP
-	dbsprite  9,  5, -1,  3, $31, 7 | OAM_YFLIP
-	dbsprite 10,  5, -1,  3, $32, 7 | OAM_YFLIP
-	dbsprite 11,  5, -1,  3, $32, 7 | OAM_YFLIP
-	dbsprite 12,  5, -1,  3, $33, 7 | OAM_YFLIP
-	dbsprite 16,  5,  0,  3, $33, 7 | OAM_XFLIP | OAM_YFLIP
-	dbsprite 17,  5,  0,  3, $32, 7 | OAM_XFLIP | OAM_YFLIP
-	dbsprite 18,  5,  0,  3, $32, 7 | OAM_XFLIP | OAM_YFLIP
-	dbsprite 19,  5,  0,  3, $31, 7 | OAM_XFLIP | OAM_YFLIP
-	dbsprite 19,  4,  0,  3, $30, 7 | OAM_XFLIP | OAM_YFLIP
-	db -1
+	ld hl, Pokedex_NewModeABCModeCursor
+	ld b, 0
+	jr Pokedex_PutCursorOAM
 
 Pokedex_UpdateSearchResultsCursorOAM:
 	call Pokedex_InitMainScreen_Shared ; ld a, [wCurDexMode] / cp DEXMODE_OLD
-	jp z, Pokedex_PutOldModeCursorOAM
-	ld hl, .CursorOAM
-	jr Pokedex_LoadCursorOAM
+	jr z, Pokedex_PutOldModeCursorOAM
+	ld hl, Pokedex_SearchResultsCursor
+	ld b, 0
+	; fallthrough
 
-.CursorOAM:
-	dbsprite  9,  3, -1,  3, $30, 7
-	dbsprite  9,  2, -1,  3, $31, 7
-	dbsprite 10,  2, -1,  3, $32, 7
-	dbsprite 11,  2, -1,  3, $32, 7
-	dbsprite 12,  2, -1,  3, $32, 7
-	dbsprite 13,  2, -1,  3, $33, 7
-	dbsprite 16,  2, -2,  3, $33, 7 | OAM_XFLIP
-	dbsprite 17,  2, -2,  3, $32, 7 | OAM_XFLIP
-	dbsprite 18,  2, -2,  3, $32, 7 | OAM_XFLIP
-	dbsprite 19,  2, -2,  3, $32, 7 | OAM_XFLIP
-	dbsprite 20,  2, -2,  3, $31, 7 | OAM_XFLIP
-	dbsprite 20,  3, -2,  3, $30, 7 | OAM_XFLIP
-	dbsprite  9,  4, -1,  3, $30, 7 | OAM_YFLIP
-	dbsprite  9,  5, -1,  3, $31, 7 | OAM_YFLIP
-	dbsprite 10,  5, -1,  3, $32, 7 | OAM_YFLIP
-	dbsprite 11,  5, -1,  3, $32, 7 | OAM_YFLIP
-	dbsprite 12,  5, -1,  3, $32, 7 | OAM_YFLIP
-	dbsprite 13,  5, -1,  3, $33, 7 | OAM_YFLIP
-	dbsprite 16,  5, -2,  3, $33, 7 | OAM_XFLIP | OAM_YFLIP
-	dbsprite 17,  5, -2,  3, $32, 7 | OAM_XFLIP | OAM_YFLIP
-	dbsprite 18,  5, -2,  3, $32, 7 | OAM_XFLIP | OAM_YFLIP
-	dbsprite 19,  5, -2,  3, $32, 7 | OAM_XFLIP | OAM_YFLIP
-	dbsprite 20,  5, -2,  3, $31, 7 | OAM_XFLIP | OAM_YFLIP
-	dbsprite 20,  4, -2,  3, $30, 7 | OAM_XFLIP | OAM_YFLIP
-	db -1
+; Values for Pokedex_PutCursorOAM, in otherwise unused HRAM
+DEF hDexCursorEdgeTiles EQUS "hPrintNumBuffer + 0"
+DEF hDexCursorLeftX     EQUS "hPrintNumBuffer + 1"
+DEF hDexCursorRightX    EQUS "hPrintNumBuffer + 2"
+DEF hDexCursorX         EQUS "hPrintNumBuffer + 3"
 
-Pokedex_LoadCursorOAM:
-	ld de, wShadowOAMSprite00
-.loop
-	ld a, [hl]
-	cp -1
-	ret z
+Pokedex_PutCursorOAM:
+; Put the frame around the selected row of the list, with the shape at hl, in
+; the sprites from wShadowOAMSprite00; b = what to add to the top edge's tiles.
+; Each edge is a corner, edge tiles, and an end, on the left and mirrored on the
+; right, with the tiles next to the corners above or below them; the bottom
+; edge is the top one flipped.
+	ld a, [hli]
+	ldh [hDexCursorEdgeTiles], a
+	ld a, [hli]
+	ldh [hDexCursorLeftX], a
+	ld a, [hli]
+	ldh [hDexCursorRightX], a
 	ld a, [wDexListingCursor]
 	and $7
 	swap a
-	add [hl] ; y
-	inc hl
-	ld [de], a
+	add [hl]
+	add 2 * TILE_WIDTH
+	ld h, a ; y of the top edge
+	add TILE_WIDTH
+	ld l, a ; y of the tiles below its corners
+	ld de, wShadowOAMSprite00
+	ld c, 7 ; attributes
+	call .Edge
+	ld a, h
+	add 3 * TILE_WIDTH
+	ld h, a ; y of the bottom edge
+	ld a, l
+	add TILE_WIDTH
+	ld l, a ; y of the tiles above its corners
+	ld b, 0
+	ld c, 7 | OAM_YFLIP
+
+.Edge:
+	; left side, from the corner
+	ldh a, [hDexCursorLeftX]
+	ldh [hDexCursorX], a
+	call .PutCornerTile
+	ld a, $31
+	call .PutEdgeTile
+	call .PutEdgeTiles
+	ld a, $33
+	call .PutEdgeTile
+	; right side, flipped, to the corner
+	set B_OAM_XFLIP, c
+	ldh a, [hDexCursorRightX]
+	ldh [hDexCursorX], a
+	ld a, $33
+	call .PutEdgeTile
+	call .PutEdgeTiles
+	ld a, $31
+	call .PutEdgeTile
+	call .PutCornerTile
+	res B_OAM_XFLIP, c
+	ret
+
+.PutEdgeTiles:
+	ldh a, [hDexCursorEdgeTiles]
+.edge_loop
+	push af
+	call .NextX
+	ld a, $32
+	call .PutEdgeTile
+	pop af
+	dec a
+	jr nz, .edge_loop
+.NextX:
+	ldh a, [hDexCursorX]
+	add TILE_WIDTH
+	ldh [hDexCursorX], a
+	ret
+
+.PutCornerTile:
+; Put tile $30 at y l.
+	ld a, $30
+	push af
+	ld a, l
+	jr .put
+
+.PutEdgeTile:
+; Put tile a + b at y h.
+	add b
+	push af
+	ld a, h
+.put
+	ld [de], a ; y
 	inc de
-	ld a, [hli] ; x
-	ld [de], a
+	ldh a, [hDexCursorX]
+	ld [de], a ; x
 	inc de
-	ld a, [hli] ; tile id
-	ld [de], a
+	pop af
+	ld [de], a ; tile id
 	inc de
-	ld a, [hli] ; attributes
-	ld [de], a
+	ld a, c
+	ld [de], a ; attributes
 	inc de
-	jr .loop
+	ret
+
+MACRO dex_cursor
+; edge tiles between each side's corner and end; x of the left corner,
+; x of the right side's end; y offset (each as tile and pixel)
+	db \1, (\2) * TILE_WIDTH + (\3), (\4) * TILE_WIDTH + (\5), \6
+ENDM
+
+Pokedex_OldModeCursor:
+	dex_cursor 3,  9, -1, 16, -2, 0
+
+Pokedex_NewModeABCModeCursor:
+	dex_cursor 2,  9, -1, 16,  0, 3
+
+Pokedex_SearchResultsCursor:
+	dex_cursor 3,  9, -1, 16, -2, 3
 
 Pokedex_PutScrollbarOAM:
 ; Writes the OAM data for the scrollbar in the new mode and ABC mode.
