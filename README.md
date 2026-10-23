@@ -5,8 +5,8 @@ This is a fork of [pret/pokegold](https://github.com/pret/pokegold), the disasse
 | | Original | This fork |
 |-|-|-|
 | ROM file | 2,097,152 bytes (128 banks) | **1,048,576 bytes (64 banks)** |
-| Content | 1,154,855 bytes | 898,060 bytes |
-| Free space | 942,297 bytes | 150,516 bytes |
+| Content | 1,154,855 bytes | 897,633 bytes |
+| Free space | 942,297 bytes | 150,943 bytes |
 
 The figures are for Silver, from the summary in rgblink's map file; Gold is within a few hundred bytes. The debug ROMs, which add the debug room, are 1 MB too.
 
@@ -45,14 +45,14 @@ To set up the repository, see [INSTALL.md](INSTALL.md). `make` builds `pokegold.
 
 **Indexed far calls** (`tools/farcall_targets.py`, `home/farcall.asm`, `home/predef.asm`). A `farcall` or `callfar` is 6 bytes. To one of the 146 functions that are far-called more than once, it is now `rst FarCallIndexed` and an index into a table in ROM0, 2 bytes, which calls the function with the same registers and flags. Likewise `predef` is `rst PredefIndexed` and the predef's id, 2 bytes instead of 5. These used the two `rst` vectors that were free.
 
-Savings by step (Silver, bytes): text dictionary 121,811; dead code 18,254; LZ 13,867; overworld sprites 10,708; map blocks 10,684; duplicate graphics 3,944; peephole 1,899; duplicate code 3,245; `jumptext` 1,357; base data 1,728; music and sound effects 3,231; battle animations 925; indexed far calls 2,207; outlined code 1,595; tileset blocks 7,911; unused tileset tiles 1,659; map events 7,107; Huffman-coded pictures 42,840; map connections 1,312; new game's events 238; card flip bets 247.
+Savings by step (Silver, bytes): text dictionary 121,811; dead code 18,254; LZ 13,867; overworld sprites 10,708; map blocks 10,684; duplicate graphics 3,944; peephole 1,899; duplicate code 3,245; `jumptext` 1,357; base data 1,728; music and sound effects 3,231; battle animations 925; indexed far calls 2,207; outlined code 1,595; tileset blocks 7,911; unused tileset tiles 1,659; map events 7,107; Huffman-coded pictures 42,840; map connections 1,312; new game's events 238; card flip bets 247; Pokédex list cursor 257; Pokédex screens 163; Unown mode positions 44.
 
 
 ## What is unchanged
 
 - RAM, SRAM and link data layouts, so trades and battles with the original games still work, and their saves load in this fork. (The sprite buffer uses SRAM that the save layout leaves free.) A save holds the script addresses of the people and items on the current map, and those moved, so Continue reloads them from the map. The original games don't, so moving a save the other way is not safe.
 - All text, as printed on screen. `tools/verify_text.py` decodes every text in a build and compares it with the original ROM.
-- Gameplay timing, except loading pictures. Text prints at the same speed; some code runs slightly faster, far calls and outlined code run slightly slower, and loading compressed graphics can take a frame longer. Loading a Pokémon's or trainer's picture takes about 5 frames longer (a twelfth of a second), at the start of a battle, in the Pokédex and on the stats screen. (The games' random numbers mix in the CPU's cycle counter, so code that runs at a different speed draws different random numbers, as in any changed ROM.)
+- Gameplay timing, except loading pictures. Text prints at the same speed; some code runs slightly faster, far calls and outlined code run slightly slower, and loading compressed graphics can take a frame longer. Loading a Pokémon's or trainer's picture takes about 4 frames longer, at the start of a battle, in the Pokédex and on the stats screen. On the other hand, everything that takes more than a frame runs about a quarter faster: the LCD STAT interrupt, which applies raster effects such as the battle transitions' waves, came on every line even when no effect was on, and took about a fifth of the CPU; it is now only on while an effect is (`home/vblank.asm`), so an effect starts at the next frame instead of partway down the screen. (The games' random numbers mix in the CPU's cycle counter, so code that runs at a different speed draws different random numbers, as in any changed ROM.)
 
 
 ## Verification

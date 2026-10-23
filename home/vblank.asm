@@ -31,6 +31,27 @@ VBlank::
 .return:
 	call GameTimer
 
+	; LCD only does something while hLCDCPointer is set, but the LCD STAT
+	; interrupt comes every line, so only let it interrupt while it's set.
+	ldh a, [hLCDCPointer]
+	and a
+	ldh a, [rIE]
+	jr nz, .lcd_stat_on
+	res B_IE_STAT, a
+	jr .set_ie
+.lcd_stat_on
+	bit B_IE_STAT, a
+	jr nz, .set_ie
+	; forget the requests made while it was off
+	ld b, a
+	ldh a, [rIF]
+	res B_IF_STAT, a
+	ldh [rIF], a
+	ld a, b
+	set B_IE_STAT, a
+.set_ie
+	ldh [rIE], a
+
 	pop hl
 	pop de
 	pop bc
