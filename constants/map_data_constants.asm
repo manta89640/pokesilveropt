@@ -17,6 +17,19 @@ DEF MAP_PALETTE            rb ; 7
 DEF MAP_FISHGROUP          rb ; 8
 DEF MAP_LENGTH EQU _RS
 
+; map_connection_struct members (see macros/ram.asm)
+rsreset
+DEF MAP_CONNECTION_GROUP          rb ; 0
+DEF MAP_CONNECTION_NUMBER         rb ; 1
+DEF MAP_CONNECTION_STRIP_POINTER  rw ; 2
+DEF MAP_CONNECTION_STRIP_LOCATION rw ; 4
+DEF MAP_CONNECTION_STRIP_LENGTH   rb ; 6
+DEF MAP_CONNECTION_WIDTH          rb ; 7
+DEF MAP_CONNECTION_Y_OFFSET       rb ; 8
+DEF MAP_CONNECTION_X_OFFSET       rb ; 9
+DEF MAP_CONNECTION_WINDOW         rw ; 10
+DEF MAP_CONNECTION_LENGTH EQU _RS
+
 ; map environments (wEnvironment)
 ; EnvironmentColorsPointers indexes (see data/maps/environment_colors.asm)
 	const_def 1

@@ -1930,7 +1930,7 @@ Script_changemapblocks:
 	ld [wMapBlocksPointer], a
 	call GetScriptByte
 	ld [wMapBlocksPointer + 1], a
-	call ChangeMap
+	farcall ChangeMap
 	jp BufferScreen
 
 Script_changeblock:

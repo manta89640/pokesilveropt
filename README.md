@@ -5,8 +5,8 @@ This is a fork of [pret/pokegold](https://github.com/pret/pokegold), the disasse
 | | Original | This fork |
 |-|-|-|
 | ROM file | 2,097,152 bytes (128 banks) | **1,048,576 bytes (64 banks)** |
-| Content | 1,154,855 bytes | 899,674 bytes |
-| Free space | 942,297 bytes | 148,902 bytes |
+| Content | 1,154,855 bytes | 898,362 bytes |
+| Free space | 942,297 bytes | 150,214 bytes |
 
 The figures are for Silver, from the summary in rgblink's map file; Gold is within a few hundred bytes. The debug ROMs, which add the debug room, are 1 MB too.
 
@@ -31,6 +31,8 @@ To set up the repository, see [INSTALL.md](INSTALL.md). `make` builds `pokegold.
 
 **Compact map events** (`macros/scripts/maps.asm`, `home/map.asm`). Each map object's `object_event` leaves out the fields that have their usual value (no movement radius, no hour limits, the sprite's own palette, a plain script, no sight range, no event flag), and starts with a byte that says which are there; 1,343 objects take 13 bytes each in the original. `CopyMapObjectEvents` fills in the rest, so the map objects in RAM are the same as before. Coordinate events leave out their three filler bytes, trainer headers their loss text, which is always 0, and background events that are just read (621 of 761) their function.
 
+**Map connections** (`engine/overworld/map_connections.asm`). Each of the 142 connections between maps is 3 bytes, the connected map and its offset, instead of 12. When a map loads, `_GetMapConnections` works out the rest of each connection's struct in RAM from the two maps' sizes, as the `connection` macro did, so the structs are the same as before. The code that fills the strips of connected maps' blocks, and the code that moves the player across, handled each of the four directions with its own copy; one loop now does all four, and they moved out of the home bank, which has 687 more bytes free.
+
 **Base data** (`home/pokemon.asm`). Each species' base data leaves out the 7 bytes that are the same for every species (the dex number, two unknown values and the unused beta pic pointers); `GetBaseData` fills them in, so `wCurBaseData` is the same as before.
 
 **Script subroutines** (`tools/scriptcalls.py`, `audio/engine.asm`). Runs of commands that a section of songs, sound effects or cries repeats, or that the battle animations repeat, are moved into subroutines that the scripts call (`sound_call`, `anim_call`), or, where one copy already ends a subroutine, the others call into it. The sound engine can now call a subroutine from a subroutine, keeping the second return address in two bytes of each channel's state that were unused. Unreachable sound data and unused header bytes are removed.
@@ -43,7 +45,7 @@ To set up the repository, see [INSTALL.md](INSTALL.md). `make` builds `pokegold.
 
 **Indexed far calls** (`tools/farcall_targets.py`, `home/farcall.asm`, `home/predef.asm`). A `farcall` or `callfar` is 6 bytes. To one of the 146 functions that are far-called more than once, it is now `rst FarCallIndexed` and an index into a table in ROM0, 2 bytes, which calls the function with the same registers and flags. Likewise `predef` is `rst PredefIndexed` and the predef's id, 2 bytes instead of 5. These used the two `rst` vectors that were free.
 
-Savings by step (Silver, bytes): text dictionary 121,811; dead code 18,254; LZ 13,867; overworld sprites 10,708; map blocks 10,684; duplicate graphics 3,944; peephole 1,899; duplicate code 3,245; `jumptext` 1,357; base data 1,728; music and sound effects 3,231; battle animations 925; indexed far calls 2,207; outlined code 1,595; tileset blocks 7,911; unused tileset tiles 1,659; map events 7,107; Huffman-coded pictures 43,023.
+Savings by step (Silver, bytes): text dictionary 121,811; dead code 18,254; LZ 13,867; overworld sprites 10,708; map blocks 10,684; duplicate graphics 3,944; peephole 1,899; duplicate code 3,245; `jumptext` 1,357; base data 1,728; music and sound effects 3,231; battle animations 925; indexed far calls 2,207; outlined code 1,595; tileset blocks 7,911; unused tileset tiles 1,659; map events 7,107; Huffman-coded pictures 43,023; map connections 1,312.
 
 
 ## What is unchanged
@@ -58,7 +60,7 @@ Savings by step (Silver, bytes): text dictionary 121,811; dead code 18,254; LZ 1
 - `tools/verify_text.py original.gbc pokesilver.gbc` checks every compressed string, 5,276 in all: texts, Pokédex entries, move and item descriptions, item, move and trainer class names, trainer names and parties, landmark names, and the credits.
 - `tools/tests/verify_music.py` follows every channel of every song, sound effect and cry in a build and in the original ROM, through calls, loops and jumps, and checks that they play the same notes and commands. `tools/tests/verify_anims.py` does the same for every battle animation, with every value of its parameter. `tools/tests/music.py` plays them all in an emulator and hashes the sound engine's channel state at each update, to compare with the original ROM.
 - `tools/tests/pics.py` loads every Pokémon's front and back picture (and each Unown's), the egg, every trainer's picture and the player's back through the game's own routines, and checks that they match the original ROM.
-- `tools/tests/maps.py` loads all 368 maps and checks that the screen, the graphics of its tiles and the sprite tiles match the original ROM, and outdoor maps' blocks, with the strips of connected maps. (Indoor tilesets' blocks are renumbered.) `tools/tests/verify_sprites.py` checks the tiles of every overworld sprite.
+- `tools/tests/maps.py` loads all 368 maps and checks that the screen, the graphics of its tiles, the sprite tiles and the connections to other maps match the original ROM, and outdoor maps' blocks, with the strips of connected maps. The `connections.txt` scenario walks across connections in all four directions and back. (Indoor tilesets' blocks are renumbered.) `tools/tests/verify_sprites.py` checks the tiles of every overworld sprite.
 - The changes were also played in an emulator (PyBoy) next to the original ROMs with the scenarios in `tools/tests`: the intro and new game, Elm's lab, menus, every Pokédex entry, the Pack, the Pokégear phone and radio, a Pokémon Center, a Mart, wild and trainer battles, Substitute, the Hall of Fame and credits, and the debug room. Apart from timing, the screens match. See [tools/tests/README.md](tools/tests/README.md).
 
 

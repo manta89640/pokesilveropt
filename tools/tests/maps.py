@@ -9,7 +9,7 @@ then wOverworldMapBlocks (the map's blocks plus the strips of connected
 maps), the tilemap, the sprite tiles in VRAM (those of the player and every
 NPC on the map), the graphics of the background tiles on the screen, the
 map objects (without their script addresses) and the connections to other
-maps are hashed. Run it on two ROMs and diff the output.
+maps (without the address of the strip of blocks) are hashed. Run it on two ROMs and diff the output.
 """
 
 import hashlib
@@ -33,6 +33,7 @@ MAPOBJECT_LENGTH = 16
 MAPOBJECT_SCRIPT_POINTER = 10
 NUM_OBJECTS = 16
 CONNECTION_LENGTH = 12  # map_connection_struct
+CONNECTION_STRIP_POINTER = 2
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -113,8 +114,14 @@ def main():
 		for o in range(NUM_OBJECTS):
 			objects[o * MAPOBJECT_LENGTH + MAPOBJECT_SCRIPT_POINTER] = 0
 			objects[o * MAPOBJECT_LENGTH + MAPOBJECT_SCRIPT_POINTER + 1] = 0
-		# The connections to other maps
-		connections = bytes(mem[sym['wNorthMapConnection'] + i] for i in range(CONNECTION_LENGTH * 4))
+		# The connections to other maps, without the address of the strip of
+		# blocks next to this map (in ROM in the original games; this fork
+		# decompresses the connected map's blocks to SRAM first). The blocks
+		# column checks the strips.
+		connections = bytearray(mem[sym['wNorthMapConnection'] + i] for i in range(CONNECTION_LENGTH * 4))
+		for c in range(4):
+			connections[c * CONNECTION_LENGTH + CONNECTION_STRIP_POINTER] = 0
+			connections[c * CONNECTION_LENGTH + CONNECTION_STRIP_POINTER + 1] = 0
 		# The graphics of the background tiles on the screen
 		bgtiles = b''.join(bytes(mem[(0x9000 + t * 16 if t < 0x80 else 0x8800 + (t - 0x80) * 16) + i]
 			for i in range(16)) for t in sorted(set(screen)))

@@ -1,0 +1,35 @@
+# Walk across map connections in each direction and back
+wait 400
+press start 60
+press a 120
+press a 200
+press a 300
+poke wRepelEffect ff
+teleport NEW_BARK_TOWN 1 8
+walk left 4
+state
+shot west
+walk right 4
+state
+shot east
+teleport CHERRYGROVE_CITY 16 1
+walk up 4
+state
+shot north
+walk down 4
+state
+shot south
+teleport VIOLET_CITY 8 34
+walk down 4
+state
+shot south2
+walk up 4
+state
+shot north2
+teleport VIOLET_CITY 38 24
+walk right 4
+state
+shot east2
+walk left 4
+state
+shot west2

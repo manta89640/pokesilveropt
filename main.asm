@@ -397,6 +397,11 @@ SECTION "Stadium 2 Checksums", ROMX
 	ds 6 + 2 + NUM_ROM_BANKS * 2 * 2 ; "N64PS3" header, CRC, half-bank checksums
 
 
+SECTION "Map Connections", ROMX
+
+INCLUDE "engine/overworld/map_connections.asm"
+
+
 SECTION "Pic Decompression", ROMX, ALIGN[8]
 
 INCLUDE "engine/gfx/decompress_pic.asm"
