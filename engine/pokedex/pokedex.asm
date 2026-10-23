@@ -844,16 +844,11 @@ Pokedex_UnownModePlaceCursor:
 	ld c, FIRST_UNOWN_CHAR + NUM_UNOWN ; diamond cursor
 
 Pokedex_UnownModeUpdateCursorGfx:
-	ld e, a
-	ld d, 0
-	ld hl, UnownModeLetterAndCursorCoords + 2
-rept 4
-	add hl, de
-endr
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	ld [hl], c
+	push bc
+	call Pokedex_GetUnownModeCoords
+	pop bc
+	ld a, c
+	ld [de], a
 	ret
 
 Pokedex_NextOrPreviousDexEntry:
@@ -1257,17 +1252,16 @@ Pokedex_DrawUnownModeBG:
 	ld a, [hl]
 	and a
 	jr z, .done
+	push bc
+	push de
 	push af
-	ld hl, UnownModeLetterAndCursorCoords
-rept 4
-	add hl, de
-endr
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
+	ld a, e
+	call Pokedex_GetUnownModeCoords
 	pop af
 	add FIRST_UNOWN_CHAR - 1 ; Unown A
 	ld [hl], a
+	pop de
+	pop bc
 	inc de
 	inc b
 	dec c
@@ -1277,35 +1271,63 @@ endr
 	ld [wDexUnownCount], a
 	ret
 
-UnownModeLetterAndCursorCoords:
-; entries correspond to Unown forms
-;           letter, cursor
-	dwcoord   4,11,   3,11 ; A
-	dwcoord   4,10,   3,10 ; B
-	dwcoord   4, 9,   3, 9 ; C
-	dwcoord   4, 8,   3, 8 ; D
-	dwcoord   4, 7,   3, 7 ; E
-	dwcoord   4, 6,   3, 6 ; F
-	dwcoord   4, 5,   3, 5 ; G
-	dwcoord   4, 4,   3, 4 ; H
-	dwcoord   4, 3,   3, 2 ; I
-	dwcoord   5, 3,   5, 2 ; J
-	dwcoord   6, 3,   6, 2 ; K
-	dwcoord   7, 3,   7, 2 ; L
-	dwcoord   8, 3,   8, 2 ; M
-	dwcoord   9, 3,   9, 2 ; N
-	dwcoord  10, 3,  10, 2 ; O
-	dwcoord  11, 3,  11, 2 ; P
-	dwcoord  12, 3,  12, 2 ; Q
-	dwcoord  13, 3,  13, 2 ; R
-	dwcoord  14, 3,  15, 2 ; S
-	dwcoord  14, 4,  15, 4 ; T
-	dwcoord  14, 5,  15, 5 ; U
-	dwcoord  14, 6,  15, 6 ; V
-	dwcoord  14, 7,  15, 7 ; W
-	dwcoord  14, 8,  15, 8 ; X
-	dwcoord  14, 9,  15, 9 ; Y
-	dwcoord  14,10,  15,10 ; Z
+Pokedex_GetUnownModeCoords:
+; For Unown a (0 is A), return where its letter goes in hl, and where the
+; cursor next to it goes in de. The letters go up the left of the picture,
+; along the top and down the right.
+	ld b, 4 ; x
+	ld c, 3 ; y
+	cp 8
+	jr c, .left
+	ld de, -SCREEN_WIDTH - 1
+	jr z, .got_coords ; I is at the top left corner
+	cp 18
+	jr nc, .right
+	; J to R go along the top
+	sub 4
+	ld b, a
+	ld de, -SCREEN_WIDTH
+	jr .got_coords
+
+.right
+	ld b, 14
+	ld de, -SCREEN_WIDTH + 1
+	jr z, .got_coords ; S is at the top right corner
+	; T to Z go down the right
+	sub 15
+	ld c, a
+	ld de, 1
+	jr .got_coords
+
+.left
+	; A to H go up the left
+	cpl
+	add 11 + 1
+	ld c, a
+	ld de, -1
+
+.got_coords
+	; c * SCREEN_WIDTH + b, which fits in a byte
+	assert SCREEN_WIDTH == 20
+	ld a, c
+	add a
+	add a
+	add c
+	add a
+	add a
+	add b
+	push de
+	ld e, a
+	ld d, 0
+	ld hl, wTilemap
+	add hl, de
+	pop de
+	push hl
+	add hl, de
+	ld d, h
+	ld e, l
+	pop hl
+	ret
 
 Pokedex_FillBackgroundColor2:
 	hlcoord 0, 0
