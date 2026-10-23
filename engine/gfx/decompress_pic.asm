@@ -25,16 +25,28 @@ PicLiteralSymbols:
 PicArgumentSymbols:
 	INCBIN "gfx/pic_codes.bin", 2 * PIC_CODE_SIZE + 2 * PIC_CODE_MAX_BITS, 256
 	assert LOW(PicHeaderSymbols) == 0
+
+; Each code's counts take 32 bytes: the counts of codes of each length, then
+; at +16 the counts up to each length, so set 4, l goes from one to the other.
+MACRO pic_code_counts
+	INCBIN "gfx/pic_codes.bin", (\1) * PIC_CODE_SIZE, PIC_CODE_MAX_BITS
+	db 0
+	INCBIN "gfx/pic_codes.bin", (\1) * PIC_CODE_SIZE + PIC_CODE_MAX_BITS, PIC_CODE_MAX_BITS
+	db 0
+ENDM
+	assert PIC_CODE_MAX_BITS < 16
 PicHeaderCounts:
-	INCBIN "gfx/pic_codes.bin", 0, 2 * PIC_CODE_MAX_BITS
+	pic_code_counts 0
 PicLiteralCounts:
-	INCBIN "gfx/pic_codes.bin", PIC_CODE_SIZE, 2 * PIC_CODE_MAX_BITS
+	pic_code_counts 1
 PicArgumentCounts:
-	INCBIN "gfx/pic_codes.bin", 2 * PIC_CODE_SIZE, 2 * PIC_CODE_MAX_BITS
-	assert HIGH(PicHeaderCounts) == HIGH(@ - 1)
+	pic_code_counts 2
+	assert LOW(PicHeaderCounts) % 32 == 0 && HIGH(PicHeaderCounts) == HIGH(@ - 1)
 
 DecompressPic:
 ; Decompress a picture from a:hl to de.
+; c holds the bits of the current byte not read yet, then a 1 that marks their
+; end; it is kept in wLZBits while other commands run.
 	ld [wLZBank], a
 	ld a, l
 	ld [wLZSource], a
@@ -44,19 +56,30 @@ DecompressPic:
 	ld [wLZAddress], a
 	ld a, d
 	ld [wLZAddress + 1], a
-	ld a, %10000000 ; no bits left
-	ld [wLZBits], a
-	ld a, LOW(hLZBufferEnd) ; no bytes left
+	ld a, LOW(hLZBufferEnd) ; no bytes read yet
 	ldh [hLZBufferPosition], a
+	ld c, %10000000 ; no bits left
 
-.Main:
-	call .DecodeHeader
-	cp $ff ; end
+.NextCommand:
+	ld hl, PicHeaderCounts
+	ld b, HIGH(PicHeaderSymbols)
+	call .Decode
+	inc a ; $ff ends the data
 	ret z
+	dec a
 	ld b, a
 	and %11100000
 	cp %11100000
-	jr nz, .short
+	jr z, .long
+	; xxxyyyyy: command x, length y + 1
+	xor b
+	ld l, a
+	ld h, 0
+	ld a, b
+	and %11100000
+	jr .command
+
+.long
 	; 111xxxyy yyyyyyyy: command x, length y + 1
 	ld a, b
 	add a
@@ -66,95 +89,78 @@ DecompressPic:
 	push af
 	ld a, b
 	and %00000011
-	push af
+	ld h, a
+	push hl
 	call .GetArgument
-	ld c, a
+	pop hl
+	ld l, a
 	pop af
-	ld b, a
-	jr .command
-
-.short
-	; xxxyyyyy: command x, length y + 1
-	push af
-	ld a, b
-	and %00011111
-	ld c, a
-	ld b, 0
 
 .command
-	inc bc
-	pop af
+	inc hl
 	bit 7, a
-	jr nz, .Lookback
+	jp nz, .Lookback
 	cp 1 << 5
-	jr z, .Iterate
+	jp z, .Iterate
 	cp 2 << 5
-	jr z, .Alternate
+	jp z, .Alternate
 	cp 3 << 5
-	jr z, .Zero
+	jp z, .Zero
 
-; Literal: bc bytes, each XORed with the byte output two bytes before it
+; Literal: hl bytes, each XORed with the byte output two bytes before it.
+; b counts them, and hLZLiteralRounds the rounds of 256 after b's.
+	ld b, l
+	ld a, l
+	and a
+	ld a, h
+	jr nz, .got_rounds
+	dec a
+.got_rounds
+	ldh [hLZLiteralRounds], a
 .literal_loop
-	push bc
-	push de
 	ld hl, PicLiteralCounts
-	ld d, HIGH(PicLiteralSymbols)
-	call .Decode
-	pop de
-	ld h, d
-	ld l, e
-	dec hl
-	dec hl
-	xor [hl]
-	ld [de], a
-	inc de
-	pop bc
-	dec bc
-	ld a, b
-	or c
-	jr nz, .literal_loop
-	jr .Main
-
-.Iterate:
-; Write the same byte for bc bytes.
-	call .GetArgument
-	jr .fill
-
-.Zero:
-; Write 0 for bc bytes.
-	xor a
-.fill
-	ld [de], a
-	inc de
-	ld h, a
-	dec bc
-	ld a, b
-	or c
-	ld a, h
-	jr nz, .fill
-	jr .Main
-
-.Alternate:
-; Alternate two bytes for bc bytes.
-	call .GetArgument
-	ld h, a
-	call .GetArgument
-	ld l, a
-.alternate_loop
-	ld a, h
-	ld [de], a
-	inc de
-	ld h, l
-	ld l, a
-	dec bc
-	ld a, b
-	or c
-	jr nz, .alternate_loop
-	jr .Main
+	xor a ; how far the bits read are into the codes of this length
+for n, 1, PIC_CODE_MAX_BITS + 1
+	if n == 13
+		jr .literal_length_13
+.literal_found
+		; the literal's index is the number of codes up to this length, plus a
+		set 4, l
+		add [hl]
+		ld l, a
+		ld h, HIGH(PicLiteralSymbols)
+		ld a, [hl]
+		ld h, d
+		ld l, e
+		dec hl
+		dec hl
+		xor [hl]
+		ld [de], a
+		inc de
+		dec b
+		jp nz, .literal_loop
+		ldh a, [hLZLiteralRounds]
+		and a
+		jr z, .literals_done
+		dec a
+		ldh [hLZLiteralRounds], a
+		jp .literal_loop
+.literal_length_13
+	endc
+	sla c
+	call z, .NextBits
+	rla
+	sub [hl]
+	jr c, .literal_found
+	inc l
+endr
+.literals_done
+	jp .NextCommand
 
 .Lookback:
-; Copy bc bytes from earlier in the output.
+; Copy hl bytes from earlier in the output.
 	push af
+	push hl
 	call .GetArgument
 	bit 7, a
 	jr z, .absolute
@@ -168,9 +174,11 @@ DecompressPic:
 
 .absolute
 	; %0nnnnnnn nnnnnnnn: n bytes after the start
-	ld h, a
+	push af
 	call .GetArgument
 	ld l, a
+	pop af
+	ld h, a
 	push de
 	ld a, [wLZAddress]
 	ld e, a
@@ -180,6 +188,8 @@ DecompressPic:
 	pop de
 
 .copy
+	call .SaveBits
+	pop bc
 	pop af
 	cp 5 << 5
 	jr z, .Flip
@@ -194,7 +204,7 @@ DecompressPic:
 	ld a, b
 	or c
 	jr nz, .Repeat
-	jp .Main
+	jr .LoadBits
 
 .Reverse:
 	ld a, [hld]
@@ -204,7 +214,7 @@ DecompressPic:
 	ld a, b
 	or c
 	jr nz, .Reverse
-	jp .Main
+	jr .LoadBits
 
 .Flip:
 ; Copy with the bits of each byte reversed.
@@ -224,34 +234,74 @@ DecompressPic:
 	ld a, b
 	or c
 	jr nz, .Flip
-	jp .Main
+	jr .LoadBits
 
-.GetArgument:
-; Return in a the next argument byte. Preserves bc and hl.
-	push bc
-	push de
+.Iterate:
+; Write the same byte for hl bytes.
 	push hl
-	ld hl, PicArgumentCounts
-	ld d, HIGH(PicArgumentSymbols)
-	call .Decode
+	call .GetArgument
 	pop hl
-	pop de
+	jr .fill
+
+.Zero:
+; Write 0 for hl bytes.
+	xor a
+.fill
+	call .SaveBits
+	ld b, h
+	ld c, l
+	ld h, a
+.fill_loop
+	ld a, h
+	ld [de], a
+	inc de
+	dec bc
+	ld a, b
+	or c
+	jr nz, .fill_loop
+	jr .LoadBits
+
+.Alternate:
+; Alternate two bytes for hl bytes.
+	push hl
+	call .GetArgument
+	push af
+	call .GetArgument
+	ld l, a
+	pop af
+	ld h, a
+	call .SaveBits
 	pop bc
-	ret
-
-.DecodeHeader:
-	push de
-	ld hl, PicHeaderCounts
-	ld d, HIGH(PicHeaderSymbols)
-	call .Decode
-	pop de
-	ret
-
-.Decode:
-; Return in a the symbol of the next code, with hl = the code's counts and
-; d = the page of its symbols.
+.alternate_loop
+	ld a, h
+	ld [de], a
+	inc de
+	ld h, l
+	ld l, a
+	dec bc
+	ld a, b
+	or c
+	jr nz, .alternate_loop
+.LoadBits:
 	ld a, [wLZBits]
 	ld c, a
+	jp .NextCommand
+
+.SaveBits:
+; Keep c in wLZBits. Preserves a.
+	push af
+	ld a, c
+	ld [wLZBits], a
+	pop af
+	ret
+
+.GetArgument:
+; Return in a the next argument byte.
+	ld hl, PicArgumentCounts
+	ld b, HIGH(PicArgumentSymbols)
+.Decode:
+; Return in a the symbol of the next code, with hl = the code's counts and
+; b = the page of its symbols. Preserves de.
 	xor a ; how far the bits read are into the codes of this length
 .decode_loop
 	sla c
@@ -259,27 +309,22 @@ DecompressPic:
 	rla
 	sub [hl]
 	jr c, .found
-	inc hl
+	inc l
 	jr .decode_loop
 
 .found
 	; the symbol's index is the number of codes up to this length, plus a
-	ld b, a
-	ld a, l
-	add PIC_CODE_MAX_BITS
-	ld l, a
-	ld a, b
+	set 4, l
 	add [hl]
-	ld e, a
-	ld a, c
-	ld [wLZBits], a
-	ld a, [de]
+	ld l, a
+	ld h, b
+	ld a, [hl]
 	ret
 
 .NextBits:
 ; Read the next byte into c, followed by a 1 that marks the end of its bits,
-; and return its first bit in carry. Preserves a.
-	ld b, a
+; and return its first bit in carry. Preserves a, b, de and hl.
+	ldh [hLZSavedA], a
 	ldh a, [hLZBufferPosition]
 	cp LOW(hLZBufferEnd)
 	call z, .FillBuffer
@@ -290,7 +335,7 @@ DecompressPic:
 	scf
 	rla
 	ld c, a
-	ld a, b
+	ldh a, [hLZSavedA]
 	ret
 
 .FillBuffer:

@@ -174,7 +174,9 @@ ENDC
 hLZBufferPosition:: db
 hLZBuffer:: ds 16
 hLZBufferEnd::
+hLZSavedA:: db
+hLZLiteralRounds:: db
 
-	ds 3
+	ds 1
 
 ENDSECTION
