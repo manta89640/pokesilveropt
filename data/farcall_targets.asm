@@ -12,8 +12,6 @@
 	farcall_target BackupPartyMonMail
 	farcall_target BattleAnim_Sine_e
 	farcall_target BattleCheckTypeMatchup
-	farcall_target BattleCommand_DamageCalc
-	farcall_target BattleCommand_Stab
 	farcall_target BattleCommand_StatUpMessage
 	farcall_target Battle_GetTrainerName
 	farcall_target BlankScreen
@@ -21,7 +19,6 @@
 	farcall_target CalcExpAtLevel
 	farcall_target CalcLevel
 	farcall_target ChangeHappiness
-	farcall_target CheckAbleToSwitch
 	farcall_target CheckBadge
 	farcall_target CheckBreedmonCompatibility
 	farcall_target CheckCurPartyMonFainted
@@ -47,11 +44,7 @@
 	farcall_target DepositSellPack
 	farcall_target DisplayDexEntry
 	farcall_target DoNextFrameForAllSprites
-	farcall_target DrawDexEntryScreenRightEdge
-	farcall_target DrawPokedexListWindow
-	farcall_target DrawPokedexSearchResultsWindow
 	farcall_target EnableScriptMode
-	farcall_target EnemyAttackDamage
 	farcall_target EngineFlagAction
 	farcall_target EvolvePokemon
 	farcall_target FadeInFromWhite
@@ -81,7 +74,6 @@
 	farcall_target HangUp
 	farcall_target HiddenPowerDamage
 	farcall_target InitList
-	farcall_target InitNickname
 	farcall_target InitPartyMenuGFX
 	farcall_target InitPartyMenuWithCancel
 	farcall_target InsertPokemonIntoBox
@@ -125,7 +117,6 @@
 	farcall_target SelectQuantityToToss
 	farcall_target SelectTradeOrDayCareMon
 	farcall_target SetSpecificDecorationFlag
-	farcall_target StagePartyDataForMysteryGift
 	farcall_target StageRTCTimeForSave
 	farcall_target StatsScreenDPad
 	farcall_target StopFollow

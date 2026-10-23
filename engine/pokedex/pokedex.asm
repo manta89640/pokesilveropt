@@ -17,6 +17,23 @@
 
 EXPORT DEF POKEDEX_SCX EQU 5
 
+; Pokedex_Draw commands
+	const_def 1
+	const DEXDRAW_TILE   ; db tile
+	const DEXDRAW_ROW    ; db tile, length
+	const DEXDRAW_COLUMN ; db tile, height
+	const DEXDRAW_TILES  ; db tiles..., -1
+	const DEXDRAW_TEXT   ; text, "@" (with PlaceString)
+	const DEXDRAW_BORDER ; db height, width (with Pokedex_PlaceBorder)
+	const DEXDRAW_CLEAR  ; db height, width (with ClearBox)
+
+MACRO dexdraw
+; command, x, y; the command's arguments follow
+	DEF _pos = (\3) * SCREEN_WIDTH + (\2)
+	assert _pos < $200
+	db DEXDRAW_\1 << 1 | HIGH(_pos), LOW(_pos)
+ENDM
+
 Pokedex:
 	ldh a, [hWX]
 	ld l, a
@@ -100,7 +117,7 @@ InitPokedex:
 	call Pokedex_OrderMonsByMode
 	call Pokedex_InitCursorPosition
 	call Pokedex_GetLandmark
-	farcall DrawDexEntryScreenRightEdge
+	call DrawDexEntryScreenRightEdge
 	jp Pokedex_ResetBGMapMode
 
 Pokedex_CheckUnlockedUnownMode:
@@ -220,7 +237,7 @@ Pokedex_InitMainScreen:
 	hlcoord 0, 0, wAttrmap
 	ld bc, SCREEN_AREA
 	call ByteFill
-	farcall DrawPokedexListWindow
+	call DrawPokedexListWindow
 	call Pokedex_InitMainScreen_Shared3 ; hlcoord 0, 17 / ld de, String_START_SEARCH
 	call Pokedex_PlaceString
 	ld a, 7
@@ -247,7 +264,7 @@ Pokedex_InitMainScreen:
 	call Pokedex_InitMainScreen_Shared2 ; ld [wCurPartySpecies], a / ld a, SCGB_POKEDEX
 	call Pokedex_GetSGBLayout
 	call Pokedex_UpdateCursorOAM
-	farcall DrawPokedexListWindow
+	call DrawPokedexListWindow
 	call Pokedex_InitMainScreen_Shared3 ; hlcoord 0, 17 / ld de, String_START_SEARCH
 	call Pokedex_PlaceString
 	ld a, 7
@@ -684,7 +701,7 @@ Pokedex_InitSearchResultsScreen:
 	call ByteFill
 	call Pokedex_SetBGMapMode4
 	call Pokedex_ResetBGMapMode
-	farcall DrawPokedexSearchResultsWindow
+	call DrawPokedexSearchResultsWindow
 	call Pokedex_PlaceSearchResultsTypeStrings
 	ld a, 4
 	ld [wDexListingHeight], a
@@ -700,7 +717,7 @@ Pokedex_InitSearchResultsScreen:
 	ldh [hWY], a
 	call WaitBGMap
 	call Pokedex_ResetBGMapMode
-	farcall DrawPokedexSearchResultsWindow
+	call DrawPokedexSearchResultsWindow
 	call Pokedex_PlaceSearchResultsTypeStrings
 	call Pokedex_UpdateSearchResultsCursorOAM
 	ld a, -1
@@ -779,7 +796,7 @@ Pokedex_UpdateUnownMode:
 	call DelayFrame
 	call Pokedex_CheckSGB
 	jr nz, .decompress
-	farcall LoadSGBPokedexGFX2
+	call LoadSGBPokedexGFX2
 	ret
 
 .decompress
@@ -1009,21 +1026,9 @@ Pokedex_FillColumn:
 
 Pokedex_DrawMainScreenBG:
 ; Draws the left sidebar and the bottom bar on the main screen.
-	call Pokedex_InitMainScreen_Shared3 ; hlcoord 0, 17 / ld de, String_START_SEARCH
-	call Pokedex_PlaceString
-	ld a, $32
-	hlcoord 0, 0
-	ld bc, SCREEN_AREA
-	call ByteFill
-	hlcoord 0, 0
-	lb bc, 7, 7
-	call Pokedex_PlaceBorder
-	hlcoord 0, 9
-	lb bc, 6, 7
-	call Pokedex_PlaceBorder
-	hlcoord 1, 11
-	ld de, String_SEEN
-	call Pokedex_PlaceString
+	call Pokedex_FillBackgroundColor2
+	ld hl, .Draw
+	call Pokedex_Draw
 	ld hl, wPokedexSeen
 	ld b, wEndPokedexSeen - wPokedexSeen
 	call CountSetBits
@@ -1031,9 +1036,6 @@ Pokedex_DrawMainScreenBG:
 	hlcoord 5, 12
 	lb bc, 1, 3
 	call PrintNum
-	hlcoord 1, 14
-	ld de, String_OWN
-	call Pokedex_PlaceString
 	ld hl, wPokedexCaught
 	ld b, wEndPokedexCaught - wPokedexCaught
 	call CountSetBits
@@ -1044,26 +1046,31 @@ Pokedex_DrawMainScreenBG:
 	hlcoord 1, 17
 	ld de, String_SELECT_OPTION
 	call Pokedex_PlaceString
-	hlcoord 8, 1
-	ld b, 7
-	ld a, $5a
-	call Pokedex_FillColumn
-	hlcoord 8, 10
-	ld b, 6
-	ld a, $5a
-	call Pokedex_FillColumn
-	hlcoord 8, 0
-	ld [hl], $59
-	call Pokedex_DrawMainScreenBG_Shared ; hlcoord 8, 8 / ld [hl], $53 / hlcoord 8, 9
-	ld [hl], $54
-	hlcoord 8, 16
-	ld [hl], $5b
 	jp Pokedex_PlaceFrontpicTopLeftCorner
 
-String_SEEN:
+.Draw:
+	dexdraw BORDER, 0, 0
+	db 7, 7
+	dexdraw BORDER, 0, 9
+	db 6, 7
+	dexdraw TILES, 1, 11
 	db "SEEN", -1
-String_OWN:
+	dexdraw TILES, 1, 14
 	db "OWN", -1
+	dexdraw COLUMN, 8, 1
+	db $5a, 7
+	dexdraw COLUMN, 8, 10
+	db $5a, 6
+	dexdraw TILE, 8, 0
+	db $59
+	dexdraw TILE, 8, 8
+	db $53
+	dexdraw TILE, 8, 9
+	db $54
+	dexdraw TILE, 8, 16
+	db $5b
+	db 0
+
 String_SELECT_OPTION:
 	db $3b, $48, $49, $4a, $44, $45, $46, $47 ; SELECT > OPTION
 	; fallthrough
@@ -1072,57 +1079,35 @@ String_START_SEARCH:
 
 Pokedex_DrawDexEntryScreenBG:
 	call Pokedex_FillBackgroundColor2
-	hlcoord 0, 0
-	lb bc, 15, 18
-	call Pokedex_PlaceBorder
-	hlcoord 19, 0
-	ld [hl], $34
-	hlcoord 19, 1
-	ld a, ' '
-	ld b, 15
-	call Pokedex_FillColumn
-	ld [hl], $39
-	hlcoord 1, 10
-	ld bc, 19
-	ld a, $61
-	call ByteFill
-	hlcoord 1, 17
-	ld bc, 18
-	ld a, ' '
-	call ByteFill
-	hlcoord 9, 7
-	ld de, .Height
-	call Pokedex_PlaceString
-	hlcoord 9, 9
-	ld de, .Weight
-	call Pokedex_PlaceString
-	hlcoord 0, 17
-	ld de, .MenuItems
-	call Pokedex_PlaceString
+	ld hl, .Draw
+	call Pokedex_Draw
 	jp Pokedex_PlaceFrontpicTopLeftCorner
 
-.Number: ; unreferenced
-	db $5c, $5d, -1 ; No.
-.Height:
+.Draw:
+	dexdraw BORDER, 0, 0
+	db 15, 18
+	dexdraw TILE, 19, 0
+	db $34
+	dexdraw COLUMN, 19, 1
+	db ' ', 15
+	dexdraw TILE, 19, 16
+	db $39
+	dexdraw ROW, 1, 10
+	db $61, 19
+	dexdraw ROW, 1, 17
+	db ' ', 18
+	dexdraw TILES, 9, 7
 	db "HT  ?", $5e, "??", $5f, -1 ; HT  ?'??"
-.Weight:
+	dexdraw TILES, 9, 9
 	db "WT   ???lb", -1
-.MenuItems:
+	dexdraw TILES, 0, 17
 	db $3b, " PAGE AREA CRY PRNT", -1
+	db 0
 
 Pokedex_DrawOptionScreenBG:
 	call Pokedex_FillBackgroundColor2
-	hlcoord 0, 2
-	lb bc, 8, 18
-	call Pokedex_PlaceBorder
-	call Pokedex_DisplayModeDescription_Shared.shared1 ; hlcoord 0, 12 / lb bc, 4, 18
-	call Pokedex_PlaceBorder
-	hlcoord 0, 1
-	ld de, .Title
-	call Pokedex_PlaceString
-	hlcoord 3, 4
-	ld de, .Modes
-	call PlaceString
+	ld hl, .Draw
+	call Pokedex_Draw
 	ld a, [wUnlockedUnownMode]
 	and a
 	ret z
@@ -1130,87 +1115,83 @@ Pokedex_DrawOptionScreenBG:
 	ld de, .UnownMode
 	jp PlaceString
 
-.Title:
+.Draw:
+	dexdraw BORDER, 0, 2
+	db 8, 18
+	dexdraw BORDER, 0, 12
+	db 4, 18
+	dexdraw TILES, 0, 1
 	db $3b, " OPTION ", $3c, -1
-
-.Modes:
+	dexdraw TEXT, 3, 4
 	db   "NEW #DEX MODE"
 	next "OLD #DEX MODE"
 	next "A to Z MODE"
 	db   "@"
+	db 0
 
 .UnownMode:
 	db "UNOWN MODE@"
 
 Pokedex_DrawSearchScreenBG:
 	call Pokedex_FillBackgroundColor2
-	hlcoord 0, 2
-	lb bc, 14, 18
-	call Pokedex_PlaceBorder
-	hlcoord 0, 1
-	ld de, .Title
-	call Pokedex_PlaceString
-	hlcoord 8, 4
-	ld de, .TypeLeftRightArrows
-	call Pokedex_PlaceString
-	hlcoord 8, 6
-	ld de, .TypeLeftRightArrows
-	call Pokedex_PlaceString
-	hlcoord 3, 4
-	ld de, .Types
-	call PlaceString
-	hlcoord 3, 13
-	ld de, .Menu
-	jp PlaceString
+	ld hl, .Draw
+	jp Pokedex_Draw
 
-.Title:
+.Draw:
+	dexdraw BORDER, 0, 2
+	db 14, 18
+	dexdraw TILES, 0, 1
 	db $3b, " SEARCH ", $3c, -1
-
-.TypeLeftRightArrows:
-	db $3d, "        ", $3e, -1
-
-.Types:
+	; arrows on each side of the types, which the border leaves blank
+	dexdraw TILE, 8, 4
+	db $3d
+	dexdraw TILE, 17, 4
+	db $3e
+	dexdraw TILE, 8, 6
+	db $3d
+	dexdraw TILE, 17, 6
+	db $3e
+	dexdraw TEXT, 3, 4
 	db   "TYPE1"
 	next "TYPE2"
 	db   "@"
-
-.Menu:
+	dexdraw TEXT, 3, 13
 	db   "BEGIN SEARCH!!"
 	next "CANCEL"
 	db   "@"
+	db 0
 
 Pokedex_DrawSearchResultsScreenBG:
 	call Pokedex_FillBackgroundColor2
-	hlcoord 0, 0
-	lb bc, 7, 7
-	call Pokedex_PlaceBorder
-	hlcoord 0, 11
-	lb bc, 5, 18
-	call Pokedex_PlaceBorder
-	hlcoord 1, 12
-	ld de, .BottomWindowText
-	call PlaceString
+	ld hl, .Draw
+	call Pokedex_Draw
 	ld de, wDexSearchResultCount
 	hlcoord 1, 16
 	lb bc, 1, 3
 	call PrintNum
-	hlcoord 8, 0
-	ld [hl], $59
-	hlcoord 8, 1
-	ld b, 7
-	ld a, $5a
-	call Pokedex_FillColumn
-	call Pokedex_DrawMainScreenBG_Shared ; hlcoord 8, 8 / ld [hl], $53 / hlcoord 8, 9
-	ld [hl], $69
-	hlcoord 8, 10
-	ld [hl], $6a
 	jp Pokedex_PlaceFrontpicTopLeftCorner
 
-.BottomWindowText:
+.Draw:
+	dexdraw BORDER, 0, 0
+	db 7, 7
+	dexdraw BORDER, 0, 11
+	db 5, 18
+	dexdraw TEXT, 1, 12
 	db   "SEARCH RESULTS"
 	next "  TYPE"
 	next "    FOUND!"
 	db   "@"
+	dexdraw TILE, 8, 0
+	db $59
+	dexdraw COLUMN, 8, 1
+	db $5a, 7
+	dexdraw TILE, 8, 8
+	db $53
+	dexdraw TILE, 8, 9
+	db $69
+	dexdraw TILE, 8, 10
+	db $6a
+	db 0
 
 Pokedex_PlaceSearchResultsTypeStrings:
 	ld a, [wDexSearchMonType1]
@@ -1232,16 +1213,8 @@ Pokedex_PlaceSearchResultsTypeStrings:
 
 Pokedex_DrawUnownModeBG:
 	call Pokedex_FillBackgroundColor2
-	hlcoord 2, 1
-	lb bc, 10, 13
-	call Pokedex_PlaceBorder
-	hlcoord 2, 14
-	lb bc, 1, 13
-	call Pokedex_PlaceBorder
-	hlcoord 2, 15
-	ld [hl], $3d
-	hlcoord 16, 15
-	ld [hl], $3e
+	ld hl, .Draw
+	call Pokedex_Draw
 	hlcoord 6, 5
 	call Pokedex_PlaceFrontpicAtHL
 	ld de, 0
@@ -1270,6 +1243,17 @@ Pokedex_DrawUnownModeBG:
 	ld a, b
 	ld [wDexUnownCount], a
 	ret
+
+.Draw:
+	dexdraw BORDER, 2, 1
+	db 10, 13
+	dexdraw BORDER, 2, 14
+	db 1, 13
+	dexdraw TILE, 2, 15
+	db $3d
+	dexdraw TILE, 16, 15
+	db $3e
+	db 0
 
 Pokedex_GetUnownModeCoords:
 ; For Unown a (0 is A), return where its letter goes in hl, and where the
@@ -1365,6 +1349,100 @@ Pokedex_PlaceString:
 	ret z
 	inc de
 	ld [hli], a
+	jr .loop
+
+Pokedex_Draw:
+; Draw the list of dexdraw commands at hl, which ends with 0.
+.loop
+	ld a, [hli]
+	and a
+	ret z
+	; each command starts with its position in the tilemap
+	ld b, a
+	and 1
+	ld d, a
+	ld e, [hl]
+	inc hl
+	push hl
+	ld hl, wTilemap
+	add hl, de
+	ld d, h
+	ld e, l
+	pop hl
+	ld a, b
+	srl a
+	dec a
+	jr z, .Tile
+	dec a
+	jr z, .Row
+	dec a
+	jr z, .Column
+	dec a
+	jr z, .Tiles
+	dec a
+	jr z, .Text
+	; border or clear
+	ld b, [hl]
+	inc hl
+	ld c, [hl]
+	inc hl
+	push hl
+	ld h, d
+	ld l, e
+	dec a
+	jr nz, .clear
+	call Pokedex_PlaceBorder
+	jr .next
+
+.clear
+	call ClearBox
+.next
+	pop hl
+	jr .loop
+
+.Tile:
+	ld a, [hli]
+	ld [de], a
+	jr .loop
+
+.Row:
+	ld a, [hli]
+	ld c, [hl]
+	inc hl
+.row_loop
+	ld [de], a
+	inc de
+	dec c
+	jr nz, .row_loop
+	jr .loop
+
+.Column:
+	ld a, [hli]
+	ld b, [hl]
+	inc hl
+	push hl
+	ld h, d
+	ld l, e
+	call Pokedex_FillColumn
+	jr .next
+
+.Tiles:
+	ld a, [hli]
+	cp -1
+	jr z, .loop
+	ld [de], a
+	inc de
+	jr .Tiles
+
+.Text:
+	push hl
+	ld h, d
+	ld l, e
+	pop de
+	call PlaceString
+	ld h, d
+	ld l, e
+	inc hl ; past the "@"
 	jr .loop
 
 Pokedex_PlaceBorder:
@@ -2303,7 +2381,7 @@ Pokedex_LoadSelectedMonTiles:
 .QuestionMark:
 	ld a, BANK(sScratch)
 	call OpenSRAM
-	farcall LoadQuestionMarkPic
+	call LoadQuestionMarkPic
 	ld hl, vTiles2
 	ld de, sScratch
 	ld c, 7 * 7
@@ -2365,7 +2443,7 @@ Pokedex_LoadGFX:
 	call Pokedex_InvertTiles
 	call Pokedex_CheckSGB
 	jr nz, .LoadPokedexLZ
-	farcall LoadSGBPokedexGFX
+	call LoadSGBPokedexGFX
 	jr .LoadPokedexSlowpokeLZ
 
 .LoadPokedexLZ:
@@ -2450,7 +2528,7 @@ Pokedex_LoadUnownFrontpicTiles:
 _NewPokedexEntry:
 	xor a
 	ldh [hBGMapMode], a
-	farcall DrawDexEntryScreenRightEdge
+	call DrawDexEntryScreenRightEdge
 	call Pokedex_ResetBGMapMode
 	call DisableLCD
 	call LoadStandardFont
@@ -2532,8 +2610,3 @@ Pokedex_InitMainScreen_Shared3: ; (tools/outline.py)
 	ld de, String_START_SEARCH
 	ret
 
-Pokedex_DrawMainScreenBG_Shared: ; (tools/outline.py)
-	hlcoord 8, 8
-	ld [hl], $53
-	hlcoord 8, 9
-	ret
