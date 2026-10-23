@@ -723,294 +723,19 @@ CardFlip_BlankDiscardedCardSlot:
 
 CardFlip_CheckWinCondition:
 	call CollapseCursorPosition
+	ld e, l
+	ld d, h
 	add hl, hl
-	ld de, .Jumptable
 	add hl, de
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	jp hl
-
-.Jumptable:
-	dw .Impossible
-	dw .Impossible
-	dw .PikaJiggly
-	dw .PikaJiggly
-	dw .PoliOddish
-	dw .PoliOddish
-
-	dw .Impossible
-	dw .Impossible
-	dw .Pikachu
-	dw .Jigglypuff
-	dw .Poliwag
-	dw .Oddish
-
-	dw .OneTwo
-	dw .One
-	dw .PikaOne
-	dw .JigglyOne
-	dw .PoliOne
-	dw .OddOne
-
-	dw .OneTwo
-	dw .Two
-	dw .PikaTwo
-	dw .JigglyTwo
-	dw .PoliTwo
-	dw .OddTwo
-
-	dw .ThreeFour
-	dw .Three
-	dw .PikaThree
-	dw .JigglyThree
-	dw .PoliThree
-	dw .OddThree
-
-	dw .ThreeFour
-	dw .Four
-	dw .PikaFour
-	dw .JigglyFour
-	dw .PoliFour
-	dw .OddFour
-
-	dw .FiveSix
-	dw .Five
-	dw .PikaFive
-	dw .JigglyFive
-	dw .PoliFive
-	dw .OddFive
-
-	dw .FiveSix
-	dw .Six
-	dw .PikaSix
-	dw .JigglySix
-	dw .PoliSix
-	dw .OddSix
-
-.Impossible:
-	jp .Lose
-
-.PikaJiggly:
+	ld de, .Bets
+	add hl, de
 	ld a, [wCardFlipFaceUpCard]
-	and $2
-	jp nz, .Lose
-	jr .WinSix
-
-.PoliOddish:
-	ld a, [wCardFlipFaceUpCard]
-	and $2
-	jr nz, .WinSix
-	jp .Lose
-
-.WinSix:
-	ld c, $6
-	ld de, SFX_2ND_PLACE
-	jp .Payout
-
-.OneTwo:
-	ld a, [wCardFlipFaceUpCard]
-	and $18
-	jr z, .WinNine
-	jp .Lose
-
-.ThreeFour:
-	ld a, [wCardFlipFaceUpCard]
-	and $18
-	cp $8
-	jr z, .WinNine
-	jp .Lose
-
-.FiveSix:
-	ld a, [wCardFlipFaceUpCard]
-	and $18
-	cp $10
-	jr z, .WinNine
-	jp .Lose
-
-.WinNine:
-	ld c, $9
-	ld de, SFX_2ND_PLACE
-	jp .Payout
-
-.Pikachu:
-	ld a, [wCardFlipFaceUpCard]
-	and $3
-	jr z, .WinTwelve
-	jp .Lose
-
-.Jigglypuff:
-	ld a, [wCardFlipFaceUpCard]
-	and $3
-	cp $1
-	jr z, .WinTwelve
-	jp .Lose
-
-.Poliwag:
-	ld a, [wCardFlipFaceUpCard]
-	and $3
-	cp $2
-	jr z, .WinTwelve
-	jp .Lose
-
-.Oddish:
-	ld a, [wCardFlipFaceUpCard]
-	and $3
-	cp $3
-	jr z, .WinTwelve
-	jp .Lose
-
-.WinTwelve:
-	ld c, $c
-	ld de, SFX_2ND_PLACE
-	jp .Payout
-
-.One:
-	ld a, [wCardFlipFaceUpCard]
-	and $1c
-	jr z, .WinEighteen
-	jp .Lose
-
-.Two:
-	ld a, [wCardFlipFaceUpCard]
-	and $1c
-	cp $4
-	jr z, .WinEighteen
-	jp .Lose
-
-.Three:
-	ld a, [wCardFlipFaceUpCard]
-	and $1c
-	cp $8
-	jr z, .WinEighteen
-	jp .Lose
-
-.Four:
-	ld a, [wCardFlipFaceUpCard]
-	and $1c
-	cp $c
-	jr z, .WinEighteen
-	jp .Lose
-
-.Five:
-	ld a, [wCardFlipFaceUpCard]
-	and $1c
-	cp $10
-	jr z, .WinEighteen
-	jr .Lose
-
-.Six:
-	ld a, [wCardFlipFaceUpCard]
-	and $1c
-	cp $14
-	jr z, .WinEighteen
-	jr .Lose
-
-.WinEighteen:
-	ld c, $12
-	ld de, SFX_2ND_PLACE
-	jr .Payout
-
-.PikaOne:
-	ld e, $0
-	jr .CheckWin72
-
-.JigglyOne:
-	ld e, $1
-	jr .CheckWin72
-
-.PoliOne:
-	ld e, $2
-	jr .CheckWin72
-
-.OddOne:
-	ld e, $3
-	jr .CheckWin72
-
-.PikaTwo:
-	ld e, $4
-	jr .CheckWin72
-
-.JigglyTwo:
-	ld e, $5
-	jr .CheckWin72
-
-.PoliTwo:
-	ld e, $6
-	jr .CheckWin72
-
-.OddTwo:
-	ld e, $7
-	jr .CheckWin72
-
-.PikaThree:
-	ld e, $8
-	jr .CheckWin72
-
-.JigglyThree:
-	ld e, $9
-	jr .CheckWin72
-
-.PoliThree:
-	ld e, $a
-	jr .CheckWin72
-
-.OddThree:
-	ld e, $b
-	jr .CheckWin72
-
-.PikaFour:
-	ld e, $c
-	jr .CheckWin72
-
-.JigglyFour:
-	ld e, $d
-	jr .CheckWin72
-
-.PoliFour:
-	ld e, $e
-	jr .CheckWin72
-
-.OddFour:
-	ld e, $f
-	jr .CheckWin72
-
-.PikaFive:
-	ld e, $10
-	jr .CheckWin72
-
-.JigglyFive:
-	ld e, $11
-	jr .CheckWin72
-
-.PoliFive:
-	ld e, $12
-	jr .CheckWin72
-
-.OddFive:
-	ld e, $13
-	jr .CheckWin72
-
-.PikaSix:
-	ld e, $14
-	jr .CheckWin72
-
-.JigglySix:
-	ld e, $15
-	jr .CheckWin72
-
-.PoliSix:
-	ld e, $16
-	jr .CheckWin72
-
-.OddSix:
-	ld e, $17
-
-.CheckWin72:
-	ld a, [wCardFlipFaceUpCard]
-	cp e
+	and [hl]
+	inc hl
+	cp [hl]
 	jr nz, .Lose
-	ld c, 72
+	inc hl
+	ld c, [hl]
 	ld de, SFX_2ND_PLACE
 	jr .Payout
 
@@ -1085,6 +810,62 @@ CardFlip_CheckWinCondition:
 .less
 	and a
 	ret
+
+MACRO bet
+; the bits of the card to check, what they must be, and the payout
+	db \1, \2, \3
+ENDM
+
+.Bets:
+; for each place to bet on, in rows of 6
+	bet $00, $01,  0 ; impossible
+	bet $00, $01,  0 ; impossible
+	bet $02, $00,  6 ; Pikachu or Jigglypuff
+	bet $02, $00,  6 ; Pikachu or Jigglypuff
+	bet $02, $02,  6 ; Poliwag or Oddish
+	bet $02, $02,  6 ; Poliwag or Oddish
+	bet $00, $01,  0 ; impossible
+	bet $00, $01,  0 ; impossible
+	bet $03, $00, 12 ; Pikachu
+	bet $03, $01, 12 ; Jigglypuff
+	bet $03, $02, 12 ; Poliwag
+	bet $03, $03, 12 ; Oddish
+	bet $18, $00,  9 ; 1 or 2
+	bet $1c, $00, 18 ; 1
+	bet $ff, $00, 72 ; Pikachu 1
+	bet $ff, $01, 72 ; Jigglypuff 1
+	bet $ff, $02, 72 ; Poliwag 1
+	bet $ff, $03, 72 ; Oddish 1
+	bet $18, $00,  9 ; 1 or 2
+	bet $1c, $04, 18 ; 2
+	bet $ff, $04, 72 ; Pikachu 2
+	bet $ff, $05, 72 ; Jigglypuff 2
+	bet $ff, $06, 72 ; Poliwag 2
+	bet $ff, $07, 72 ; Oddish 2
+	bet $18, $08,  9 ; 3 or 4
+	bet $1c, $08, 18 ; 3
+	bet $ff, $08, 72 ; Pikachu 3
+	bet $ff, $09, 72 ; Jigglypuff 3
+	bet $ff, $0a, 72 ; Poliwag 3
+	bet $ff, $0b, 72 ; Oddish 3
+	bet $18, $08,  9 ; 3 or 4
+	bet $1c, $0c, 18 ; 4
+	bet $ff, $0c, 72 ; Pikachu 4
+	bet $ff, $0d, 72 ; Jigglypuff 4
+	bet $ff, $0e, 72 ; Poliwag 4
+	bet $ff, $0f, 72 ; Oddish 4
+	bet $18, $10,  9 ; 5 or 6
+	bet $1c, $10, 18 ; 5
+	bet $ff, $10, 72 ; Pikachu 5
+	bet $ff, $11, 72 ; Jigglypuff 5
+	bet $ff, $12, 72 ; Poliwag 5
+	bet $ff, $13, 72 ; Oddish 5
+	bet $18, $10,  9 ; 5 or 6
+	bet $1c, $14, 18 ; 6
+	bet $ff, $14, 72 ; Pikachu 6
+	bet $ff, $15, 72 ; Jigglypuff 6
+	bet $ff, $16, 72 ; Poliwag 6
+	bet $ff, $17, 72 ; Oddish 6
 
 PlaceOAMCardBorder:
 	call GetCoordsOfChosenCard
