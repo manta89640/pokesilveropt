@@ -5,8 +5,8 @@ This is a fork of [pret/pokegold](https://github.com/pret/pokegold), the disasse
 | | Original | This fork |
 |-|-|-|
 | ROM file | 2,097,152 bytes (128 banks) | **1,048,576 bytes (64 banks)** |
-| Content | 1,154,855 bytes | 942,697 bytes |
-| Free space | 942,297 bytes | 105,879 bytes |
+| Content | 1,154,855 bytes | 899,674 bytes |
+| Free space | 942,297 bytes | 148,902 bytes |
 
 The figures are for Silver, from the summary in rgblink's map file; Gold is within a few hundred bytes. The debug ROMs, which add the debug room, are 1 MB too.
 
@@ -20,6 +20,8 @@ To set up the repository, see [INSTALL.md](INSTALL.md). `make` builds `pokegold.
 **1 MB layout** (`layout.link`). Sections that lived in banks `$40`–`$7f` now float, and rgblink packs them into free space in banks `$01`–`$3f`. Each map's scripts are their own section so they can fill small gaps. `tools/section_xref.py` reads the object files and reports code that uses another section's addresses without asking for its bank. It found which sections must share a bank: three pairs of maps, glued with `SECTION FRAGMENT`. The Pokédex entries stay in four consecutive banks because their bank is computed from the species. The Stadium 2 checksums move to the end of the 1 MB ROM, and `tools/stadium` handles any ROM size.
 
 **Optimal LZ compression.** Graphics are compressed with `tools/lzcompress`'s optimal mode instead of byte-for-byte matching settings. The Pack's and the trainer card's graphics, which were stored uncompressed, are compressed too.
+
+**Huffman-coded pictures** (`tools/lzhuff.c`, `engine/gfx/decompress_pic.asm`). The pictures of Pokémon, trainers, the egg and the player's back, a quarter of the ROM, use the same LZ commands read from a stream of bits: command bytes, literal bytes and the other bytes each have their own Huffman code, shared by all pictures (`gfx/pic_codes.bin`, 858 bytes), and each literal is XORed with the byte two before it, which is the same bitplane one row of pixels up (pictures are stored a column of tiles at a time). `tools/lzhuff` picks the commands that take the fewest bits, and its `train` command makes the codes from all the pictures, picking commands and codes in turn until neither changes. Silver's pictures go from 211,672 to 167,673 bytes. Reading bits is slower: a front picture takes about 7 frames to load instead of 1, a back picture 6.
 
 **Compressed map blocks** (`home/map.asm`). Map block data is LZ-compressed like graphics. When a map loads, its blocks and those of each connected map are decompressed in turn to the SRAM scratch buffer, and copied from there.
 
@@ -41,20 +43,21 @@ To set up the repository, see [INSTALL.md](INSTALL.md). `make` builds `pokegold.
 
 **Indexed far calls** (`tools/farcall_targets.py`, `home/farcall.asm`, `home/predef.asm`). A `farcall` or `callfar` is 6 bytes. To one of the 146 functions that are far-called more than once, it is now `rst FarCallIndexed` and an index into a table in ROM0, 2 bytes, which calls the function with the same registers and flags. Likewise `predef` is `rst PredefIndexed` and the predef's id, 2 bytes instead of 5. These used the two `rst` vectors that were free.
 
-Savings by step (Silver, bytes): text dictionary 121,811; dead code 18,254; LZ 13,867; overworld sprites 10,708; map blocks 10,684; duplicate graphics 3,944; peephole 1,899; duplicate code 3,245; `jumptext` 1,357; base data 1,728; music and sound effects 3,231; battle animations 925; indexed far calls 2,207; outlined code 1,595; tileset blocks 7,911.
+Savings by step (Silver, bytes): text dictionary 121,811; dead code 18,254; LZ 13,867; overworld sprites 10,708; map blocks 10,684; duplicate graphics 3,944; peephole 1,899; duplicate code 3,245; `jumptext` 1,357; base data 1,728; music and sound effects 3,231; battle animations 925; indexed far calls 2,207; outlined code 1,595; tileset blocks 7,911; unused tileset tiles 1,659; map events 7,107; Huffman-coded pictures 43,023.
 
 
 ## What is unchanged
 
 - RAM, SRAM and link data layouts, so trades and battles with the original games still work, and their saves load in this fork. (The sprite buffer uses SRAM that the save layout leaves free.) A save holds the script addresses of the people and items on the current map, and those moved, so Continue reloads them from the map. The original games don't, so moving a save the other way is not safe.
 - All text, as printed on screen. `tools/verify_text.py` decodes every text in a build and compares it with the original ROM.
-- Gameplay timing. Text prints at the same speed; some code runs slightly faster, far calls and outlined code run slightly slower, and loading compressed graphics can take a frame longer. (The games' random numbers mix in the CPU's cycle counter, so code that runs at a different speed draws different random numbers, as in any changed ROM.)
+- Gameplay timing, except loading pictures. Text prints at the same speed; some code runs slightly faster, far calls and outlined code run slightly slower, and loading compressed graphics can take a frame longer. Loading a Pokémon's or trainer's picture takes about 6 frames longer (a tenth of a second), at the start of a battle, in the Pokédex and on the stats screen. (The games' random numbers mix in the CPU's cycle counter, so code that runs at a different speed draws different random numbers, as in any changed ROM.)
 
 
 ## Verification
 
 - `tools/verify_text.py original.gbc pokesilver.gbc` checks every compressed string, 5,276 in all: texts, Pokédex entries, move and item descriptions, item, move and trainer class names, trainer names and parties, landmark names, and the credits.
 - `tools/tests/verify_music.py` follows every channel of every song, sound effect and cry in a build and in the original ROM, through calls, loops and jumps, and checks that they play the same notes and commands. `tools/tests/verify_anims.py` does the same for every battle animation, with every value of its parameter. `tools/tests/music.py` plays them all in an emulator and hashes the sound engine's channel state at each update, to compare with the original ROM.
+- `tools/tests/pics.py` loads every Pokémon's front and back picture (and each Unown's), the egg, every trainer's picture and the player's back through the game's own routines, and checks that they match the original ROM.
 - `tools/tests/maps.py` loads all 368 maps and checks that the screen, the graphics of its tiles and the sprite tiles match the original ROM, and outdoor maps' blocks, with the strips of connected maps. (Indoor tilesets' blocks are renumbered.) `tools/tests/verify_sprites.py` checks the tiles of every overworld sprite.
 - The changes were also played in an emulator (PyBoy) next to the original ROMs with the scenarios in `tools/tests`: the intro and new game, Elm's lab, menus, every Pokédex entry, the Pack, the Pokégear phone and radio, a Pokémon Center, a Mart, wild and trainer battles, Substitute, the Hall of Fame and credits, and the debug room. Apart from timing, the screens match. See [tools/tests/README.md](tools/tests/README.md).
 

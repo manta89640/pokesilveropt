@@ -105,8 +105,7 @@ SECTION "WRAM", WRAM0
 
 wLZAddress:: dw
 wLZBank::    db
-
-	ds 1
+wLZBits::    db ; DecompressPic
 
 wInputType::        db
 wAutoInputAddress:: dw
@@ -121,7 +120,9 @@ wUnusedScriptByte:: db
 
 wMapTimeOfDay:: db
 
-	ds 3
+wLZSource:: dw ; DecompressPic
+
+	ds 1
 
 wPrinterConnectionOpen:: db
 wPrinterOpcode:: db

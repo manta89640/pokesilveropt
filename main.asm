@@ -206,7 +206,6 @@ INCLUDE "engine/pokemon/mon_stats.asm"
 INCLUDE "engine/link/init_list.asm"
 INCLUDE "engine/pokemon/experience.asm"
 INCLUDE "engine/pokemon/switchpartymons.asm"
-INCLUDE "engine/gfx/load_pics.asm"
 INCLUDE "engine/pokemon/move_mon_wo_mail.asm"
 INCLUDE "data/pokemon/base_stats.asm"
 INCLUDE "data/pokemon/unused_pic_banks.asm"
@@ -398,6 +397,12 @@ SECTION "Stadium 2 Checksums", ROMX
 	ds 6 + 2 + NUM_ROM_BANKS * 2 * 2 ; "N64PS3" header, CRC, half-bank checksums
 
 
+SECTION "Pic Decompression", ROMX, ALIGN[8]
+
+INCLUDE "engine/gfx/decompress_pic.asm"
+INCLUDE "engine/gfx/load_pics.asm"
+
+
 SECTION "Far Call Targets", ROM0
 
 ; Each farcall or callfar to one of these is "rst FarCallIndexed" and its index
@@ -408,3 +413,4 @@ MACRO farcall_target
 	dba \1
 ENDM
 INCLUDE "data/farcall_targets.asm"
+

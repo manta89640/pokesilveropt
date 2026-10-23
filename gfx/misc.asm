@@ -1,7 +1,7 @@
 SECTION "Egg Pic", ROMX
 
 EggPic::
-INCBIN "gfx/pokemon/egg/egg.2bpp.lz"
+INCBIN "gfx/pokemon/egg/egg.2bpp.lzh"
 
 
 SECTION "Title Screen", ROMX
@@ -60,9 +60,9 @@ ENDC
 SECTION "Shrink Pics", ROMX
 
 Shrink1Pic::
-INCBIN "gfx/new_game/shrink1.2bpp.lz"
+INCBIN "gfx/new_game/shrink1.2bpp.lzh"
 Shrink2Pic::
-INCBIN "gfx/new_game/shrink2.2bpp.lz"
+INCBIN "gfx/new_game/shrink2.2bpp.lzh"
 
 
 SECTION "Pokégear GFX", ROMX

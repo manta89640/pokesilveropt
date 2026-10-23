@@ -28,6 +28,14 @@ tools/tests/maps.py pokesilver.gbc test_output/save/save.ram | cut -d' ' -f1,2,4
 diff original.txt new.txt
 ```
 
+`pics.py` loads every picture from the save with the game's own routines and prints a hash of each; the output should match the original ROM's exactly (set `PIC_TIMING=1` to also print how many frames each took):
+
+```sh
+tools/tests/pics.py original/pokesilver.gbc test_output/save/save.ram > original.txt
+tools/tests/pics.py pokesilver.gbc test_output/save/save.ram > new.txt
+diff original.txt new.txt
+```
+
 `compare.py` writes the differing screenshots side by side to `test_output/<scenario>_diff.png`, and reports a run that does not finish within `--timeout` seconds, which is how a crash usually shows up. Changed code can shift timing by a frame, so expect some differences in partly printed text, blinking cursors, wandering NPCs and random battles; look at the sheet. `intro.txt` matches exactly.
 
 Separately, `tools/verify_text.py original.gbc new.gbc` checks every text in the ROM without an emulator, `tools/tests/verify_sprites.py original.gbc new.gbc` checks the tiles every overworld sprite loads, `tools/tests/verify_music.py original.gbc new.gbc` checks the notes and commands every song, sound effect and cry plays, and `tools/tests/verify_anims.py original.gbc new.gbc` the commands every battle animation runs.

@@ -4,7 +4,8 @@ press a 120
 press a 60
 press a 60
 mash a 100 40
-wait 120
+# loading pictures takes longer in this fork, so let both catch up
+wait 600
 state
 shot w0
 walk right 3

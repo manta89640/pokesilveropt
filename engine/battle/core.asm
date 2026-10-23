@@ -8202,10 +8202,10 @@ CopyBackpic:
 	ret
 
 ChrisBackpic:
-INCBIN "gfx/player/chris_back.2bpp.lz"
+INCBIN "gfx/player/chris_back.2bpp.lzh"
 
 DudeBackpic:
-INCBIN "gfx/battle/dude.2bpp.lz"
+INCBIN "gfx/battle/dude.2bpp.lzh"
 
 BattleStartMessage:
 	ld a, [wBattleMode]

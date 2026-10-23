@@ -170,6 +170,11 @@ ELSE
 	ds 1
 ENDC
 
-	ds 20
+; DecompressPic reads the picture through this buffer
+hLZBufferPosition:: db
+hLZBuffer:: ds 16
+hLZBufferEnd::
+
+	ds 3
 
 ENDSECTION

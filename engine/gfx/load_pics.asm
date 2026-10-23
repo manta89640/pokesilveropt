@@ -107,7 +107,7 @@ GetFrontpic:
 
 .ok
 	ld de, sDecompressBuffer
-	call FarDecompress
+	call DecompressPic
 	pop bc
 	ld hl, sDecompressScratch
 	ld de, sDecompressBuffer
@@ -165,7 +165,7 @@ GetMonBackpic:
 	ld l, a
 	ld de, sDecompressBuffer
 	pop af
-	call FarDecompress
+	call DecompressPic
 	ld hl, sDecompressBuffer
 	ld c, 6 * 6
 	call FixBackpicAlignment
@@ -225,7 +225,7 @@ Intro_GetMonFrontpic:
 	call GetFarWord
 	pop af
 	pop de
-	jp FarDecompress
+	jp DecompressPic
 
 GetTrainerPic:
 	ld a, [wTrainerClass]
@@ -261,7 +261,7 @@ GetTrainerPic:
 	ld l, a
 	ld de, sDecompressBuffer
 	pop af
-	call FarDecompress
+	call DecompressPic
 	pop hl
 	ld de, sDecompressBuffer
 	ld c, 7 * 7
@@ -275,7 +275,7 @@ GetTrainerPic:
 	ret
 
 DecompressGet2bpp:
-; Decompress lz data from b:hl to sDecompressBuffer, then copy it to address de.
+; Decompress a picture from b:hl to sDecompressBuffer, then copy it to address de.
 
 	push de
 	push bc
@@ -283,7 +283,7 @@ DecompressGet2bpp:
 	call OpenSRAM
 	ld a, b
 	ld de, sDecompressBuffer
-	call FarDecompress
+	call DecompressPic
 	pop bc
 	ld de, sDecompressBuffer
 	pop hl

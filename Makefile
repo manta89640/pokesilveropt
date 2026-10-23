@@ -94,6 +94,7 @@ clean: tidy
 	find gfx \
 	     \( -iname "*.[12]bpp" \
 	        -o -iname "*.lz" \
+	        -o -iname "*.lzh" \
 	        -o -iname "*.gbcpal" \
 	        -o -iname "*.dimensions" \
 	        -o -iname "*.sgb.tilemap" \) \
@@ -208,6 +209,10 @@ pokesilver_vc.gbc:    RGBFIXFLAGS += -t POKEMON_SLV -i AAXE
 
 %.lz: %
 	tools/lzcompress $(LZFLAGS) -- $< $@
+
+# Pictures use LZ with Huffman codes (see engine/gfx/decompress_pic.asm)
+%.lzh: % gfx/pic_codes.bin
+	tools/lzhuff compress gfx/pic_codes.bin $< $@
 
 
 ### Pokemon and trainer sprite rules
