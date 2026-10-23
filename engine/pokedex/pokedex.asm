@@ -1845,16 +1845,31 @@ Pokedex_SearchForMons:
 	jr z, .next_mon
 	push hl
 	push de
-	call GetBaseData
+	; read the two types from the species' base data, instead of all of it
+	ld a, [wTempSpecies]
+	dec a
+	ld l, a
+	ld h, 0
+	ld d, h
+	ld e, l
+	add hl, hl
+	add hl, de
+	add hl, hl
+	add hl, hl
+	add hl, hl
+	add hl, de
+	assert BASE_ROM_DATA_SIZE == 25
+	ld de, BaseData + BASE_ROM_TYPES
+	add hl, de
+	ld a, BANK(BaseData)
+	call GetFarWord
+	ld a, [wDexConvertedMonType]
+	cp l
+	jr z, .got_match
+	cp h
+.got_match
 	pop de
 	pop hl
-	ld a, [wDexConvertedMonType]
-	ld b, a
-	ld a, [wBaseType1]
-	cp b
-	jr z, .match_found
-	ld a, [wBaseType2]
-	cp b
 	jr nz, .next_mon
 
 .match_found
